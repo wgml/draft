@@ -13530,19 +13530,19 @@ public:
 
    template<class... Args>
      auto operator()(Args&&...) &
-       -> decltype(!declval<result_of_t<FD&(Args...)>>());
+       -> decltype(!declval<result_of_t<FD&(Args&&...)>>());
 
    template<class... Args>
      auto operator()(Args&&...) const&
-       -> decltype(!declval<result_of_t<FD const&(Args...)>>());
+       -> decltype(!declval<result_of_t<FD const&(Args&&...)>>());
 
    template<class... Args>
      auto operator()(Args&&...) &&
-       -> decltype(!declval<result_of_t<FD(Args...)>>());
+       -> decltype(!declval<result_of_t<FD(Args&&...)>>());
 
    template<class... Args>
      auto operator()(Args&&...) const&&
-       -> decltype(!declval<result_of_t<FD const(Args...)>>());
+       -> decltype(!declval<result_of_t<FD const(Args&&...)>>());
 
 private:
   FD fd;
@@ -13573,10 +13573,10 @@ Any exception thrown by construction of \tcode{fd}.
 \begin{itemdecl}
 template<class... Args>
   auto operator()(Args&&... args) &
-    -> decltype(!declval<result_of_t<FD&(Args...)>>());
+    -> decltype(!declval<result_of_t<FD&(Args&&...)>>());
 template<class... Args>
   auto operator()(Args&&... args) const&
-    -> decltype(!declval<result_of_t<FD const&(Args...)>>());
+    -> decltype(!declval<result_of_t<FD const&(Args&&...)>>());
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13589,10 +13589,10 @@ Equivalent to:
 \begin{itemdecl}
 template<class... Args>
   auto operator()(Args&&... args) &&
-    -> decltype(!declval<result_of_t<FD(Args...)>>());
+    -> decltype(!declval<result_of_t<FD(Args&&...)>>());
 template<class... Args>
   auto operator()(Args&&... args) const&&
-    -> decltype(!declval<result_of_t<FD const(Args...)>>());
+    -> decltype(!declval<result_of_t<FD const(Args&&...)>>());
 \end{itemdecl}
 
 \begin{itemdescr}
