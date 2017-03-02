@@ -14431,7 +14431,7 @@ function(const function& f);
 
 \pnum
 \throws shall not throw exceptions if \tcode{f}'s target is
-a callable object passed via \tcode{reference_wrapper} or
+a specialization of \tcode{reference_wrapper} or
 a function pointer. Otherwise, may throw \tcode{bad_alloc}
 or any exception thrown by the copy constructor of the stored callable object.
 \begin{note} Implementations are encouraged to avoid the use of
@@ -14454,7 +14454,7 @@ the target of \tcode{f} before the construction, and
 
 \pnum
 \throws shall not throw exceptions if \tcode{f}'s target is
-a callable object passed via \tcode{reference_wrapper} or
+a specialization of \tcode{reference_wrapper} or
 a function pointer. Otherwise, may throw \tcode{bad_alloc} or
 any exception thrown by the copy or move constructor
 of the stored callable object.
