@@ -2025,9 +2025,14 @@ namespace std {
 
 \pnum
 \effects
-\tcode{is_literal_type} has a base-characteristic of \tcode{true_type} if
-\tcode{T} is a literal type~(\ref{basic.types}), and a base-characteristic of
+\tcode{is_literal_type<T>} is a \tcode{UnaryTypeTrait}~(\ref{meta.rqmts})
+with a \tcode{BaseCharacteristic} of \tcode{true_type}
+if \tcode{T} is a literal type~(\ref{basic.types}), and
 \tcode{false_type} otherwise.
+
+\pnum
+The behavior of a program that adds specializations for
+\tcode{is_literal_type} or \tcode{is_literal_type_v} is undefined.
 
 \rSec1[depr.iterator.primitives]{Deprecated iterator primitives}
 
