@@ -4966,6 +4966,12 @@ it is applied to
 \end{itemize}
 
 \item
+an invocation of an implicitly-defined copy/move constructor or
+copy/move assignment operator
+for a union whose active member (if any) is mutable,
+unless the lifetime of the union object begain within the evaluation of \tcode{e};
+
+\item
 an lvalue-to-rvalue conversion~(\ref{conv.lval})
 that is applied to a glvalue
 that refers to a non-active member of a union or a subobject thereof;
