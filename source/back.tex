@@ -22,7 +22,7 @@ corresponding section number and page number, in alphabetical order by label.\\}
 \renewcommand{\preglossaryhook}{All section labels from
 ISO \CppXIV (ISO/IEC 14882:2014, \doccite{Programming Languages --- \Cpp})
 are present in this document, with the exceptions described below.\\}
-\renewcommand{\leftmark}{\glossaryname}
+\renewcommand{\leftmark}{Cross references from \CppXIV}
 {
 \raggedright
 \printglossary[xrefdelta]
@@ -40,7 +40,7 @@ are present in this document, with the exceptions described below.\\}
 \renewcommand{\preindexhook}{The first page number for each entry is the page in the
 general text where the grammar production is defined. The second page number is the
 corresponding page in the Grammar summary (Annex~\ref{gram}).\\}
-\renewcommand{\leftmark}{\indexname}
+\renewcommand{\leftmark}{Grammar productions}
 {
 \raggedright
 \printindex[grammarindex]
@@ -49,7 +49,7 @@ corresponding page in the Grammar summary (Annex~\ref{gram}).\\}
 \clearpage
 \renewcommand{\preindexhook}{}
 \renewcommand{\indexname}{Index of library names}
-\renewcommand{\leftmark}{\indexname}
+\renewcommand{\leftmark}{Library names}
 {
 \raggedright
 \printindex[libraryindex]
@@ -59,7 +59,7 @@ corresponding page in the Grammar summary (Annex~\ref{gram}).\\}
 \renewcommand{\preindexhook}{The entries in this section are rough descriptions; exact
 specifications are at the indicated page in the general text.\\}
 \renewcommand{\indexname}{Index of implementation-defined behavior}
-\renewcommand{\leftmark}{\indexname}
+\renewcommand{\leftmark}{Implementation-defined behavior}
 {
 \raggedright
 \printindex[impldefindex]
