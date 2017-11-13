@@ -10618,7 +10618,7 @@ template<class T>
 \requires \tcode{p} shall not be null.
 
 \pnum
-\returns \tcode{atomic_load_explicit(p, memory_order_seq_cst)}.
+\returns \tcode{atomic_load_explicit(p, memory_order::seq_cst)}.
 
 \pnum
 \throws Nothing.
@@ -10635,7 +10635,7 @@ template<class T>
 \requires \tcode{p} shall not be null.
 
 \pnum
-\requires \tcode{mo} shall not be \tcode{memory_order_release} or \tcode{memory_order_acq_rel}.
+\requires \tcode{mo} shall not be \tcode{memory_order::release} or \tcode{memory_order::acq_rel}.
 
 \pnum
 \returns \tcode{*p}.
@@ -10655,7 +10655,7 @@ template<class T>
 \requires \tcode{p} shall not be null.
 
 \pnum
-\effects As if by \tcode{atomic_store_explicit(p, r, memory_order_seq_cst)}.
+\effects As if by \tcode{atomic_store_explicit(p, r, memory_order::seq_cst)}.
 
 \pnum
 \throws Nothing.
@@ -10672,7 +10672,7 @@ template<class T>
 \requires \tcode{p} shall not be null.
 
 \pnum
-\requires \tcode{mo} shall not be \tcode{memory_order_acquire} or \tcode{memory_order_acq_rel}.
+\requires \tcode{mo} shall not be \tcode{memory_order::acquire} or \tcode{memory_order::acq_rel}.
 
 \pnum
 \effects As if by \tcode{p->swap(r)}.
@@ -10692,7 +10692,7 @@ template<class T>
 \requires \tcode{p} shall not be null.
 
 \pnum
-\returns \tcode{atomic_exchange_explicit(p, r, memory_order_seq_cst)}.
+\returns \tcode{atomic_exchange_explicit(p, r, memory_order::seq_cst)}.
 
 \pnum
 \throws Nothing.
@@ -10731,7 +10731,7 @@ template<class T>
 \pnum
 \returns
 \begin{codeblock}
-atomic_compare_exchange_weak_explicit(p, v, w, memory_order_seq_cst, memory_order_seq_cst)
+atomic_compare_exchange_weak_explicit(p, v, w, memory_order::seq_cst, memory_order::seq_cst)
 \end{codeblock}
 
 \pnum
@@ -10748,7 +10748,7 @@ template<class T>
 \pnum
 \returns
 \begin{codeblock}
-atomic_compare_exchange_strong_explicit(p, v, w, memory_order_seq_cst, memory_order_seq_cst)
+atomic_compare_exchange_strong_explicit(p, v, w, memory_order::seq_cst, memory_order::seq_cst)
 \end{codeblock}
 \end{itemdescr}
 
@@ -10768,8 +10768,8 @@ template<class T>
 \begin{itemdescr}
 \pnum
 \requires \tcode{p} shall not be null and \tcode{v} shall not be null.
-The \tcode{failure} argument shall not be \tcode{memory_order_release} nor
-\tcode{memory_order_acq_rel}.
+The \tcode{failure} argument shall not be \tcode{memory_order::release} nor
+\tcode{memory_order::acq_rel}.
 
 \pnum
 \effects If \tcode{*p} is equivalent to \tcode{*v}, assigns \tcode{w} to
