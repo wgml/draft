@@ -1829,17 +1829,18 @@ namespace std {
   new_handler set_new_handler(new_handler new_p) noexcept;
 
   // \ref{ptr.launder}, pointer optimization barrier
-  template <class T> constexpr T* launder(T* p) noexcept;
+  template <class T> [[nodiscard]] constexpr T* launder(T* p) noexcept;
 
   // \ref{hardware.interference}, hardware interference size
   inline constexpr size_t hardware_destructive_interference_size = @\impdef{}@;
   inline constexpr size_t hardware_constructive_interference_size = @\impdef{}@;
 }
 
-void* operator new(std::size_t size);
-void* operator new(std::size_t size, std::align_val_t alignment);
-void* operator new(std::size_t size, const std::nothrow_t&) noexcept;
-void* operator new(std::size_t size, std::align_val_t alignment, const std::nothrow_t&) noexcept;
+[[nodiscard]] void* operator new(std::size_t size);
+[[nodiscard]] void* operator new(std::size_t size, std::align_val_t alignment);
+[[nodiscard]] void* operator new(std::size_t size, const std::nothrow_t&) noexcept;
+[[nodiscard]] void* operator new(std::size_t size, std::align_val_t alignment,
+                                 const std::nothrow_t&) noexcept;
 
 void  operator delete(void* ptr) noexcept;
 void  operator delete(void* ptr, std::size_t size) noexcept;
@@ -1848,11 +1849,11 @@ void  operator delete(void* ptr, std::size_t size, std::align_val_t alignment) n
 void  operator delete(void* ptr, const std::nothrow_t&) noexcept;
 void  operator delete(void* ptr, std::align_val_t alignment, const std::nothrow_t&) noexcept;
 
-void* operator new[](std::size_t size);
-void* operator new[](std::size_t size, std::align_val_t alignment);
-void* operator new[](std::size_t size, const std::nothrow_t&) noexcept;
-void* operator new[](std::size_t size, std::align_val_t alignment,
-                     const std::nothrow_t&) noexcept;
+[[nodiscard]] void* operator new[](std::size_t size);
+[[nodiscard]] void* operator new[](std::size_t size, std::align_val_t alignment);
+[[nodiscard]] void* operator new[](std::size_t size, const std::nothrow_t&) noexcept;
+[[nodiscard]] void* operator new[](std::size_t size, std::align_val_t alignment,
+                                   const std::nothrow_t&) noexcept;
 
 void  operator delete[](void* ptr) noexcept;
 void  operator delete[](void* ptr, std::size_t size) noexcept;
@@ -1861,8 +1862,8 @@ void  operator delete[](void* ptr, std::size_t size, std::align_val_t alignment)
 void  operator delete[](void* ptr, const std::nothrow_t&) noexcept;
 void  operator delete[](void* ptr, std::align_val_t alignment, const std::nothrow_t&) noexcept;
 
-void* operator new  (std::size_t size, void* ptr) noexcept;
-void* operator new[](std::size_t size, void* ptr) noexcept;
+[[nodiscard]] void* operator new  (std::size_t size, void* ptr) noexcept;
+[[nodiscard]] void* operator new[](std::size_t size, void* ptr) noexcept;
 void  operator delete  (void* ptr, void*) noexcept;
 void  operator delete[](void* ptr, void*) noexcept;
 \end{codeblock}
@@ -1888,8 +1889,8 @@ and thereby displace the default versions defined by the
 
 \indexlibrary{\idxcode{new}!\idxcode{operator}}%
 \begin{itemdecl}
-void* operator new(std::size_t size);
-void* operator new(std::size_t size, std::align_val_t alignment);
+[[nodiscard]] void* operator new(std::size_t size);
+[[nodiscard]] void* operator new(std::size_t size, std::align_val_t alignment);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1953,8 +1954,9 @@ function does not return.
 
 \indexlibrary{\idxcode{new}!\idxcode{operator}}%
 \begin{itemdecl}
-void* operator new(std::size_t size, const std::nothrow_t&) noexcept;
-void* operator new(std::size_t size, std::align_val_t alignment, const std::nothrow_t&) noexcept;
+[[nodiscard]] void* operator new(std::size_t size, const std::nothrow_t&) noexcept;
+[[nodiscard]] void* operator new(std::size_t size, std::align_val_t alignment,
+                                 const std::nothrow_t&) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2158,8 +2160,8 @@ respectively.
 
 \indexlibrary{\idxcode{new}!\idxcode{operator}}%
 \begin{itemdecl}
-void* operator new[](std::size_t size);
-void* operator new[](std::size_t size, std::align_val_t alignment);
+[[nodiscard]] void* operator new[](std::size_t size);
+[[nodiscard]] void* operator new[](std::size_t size, std::align_val_t alignment);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2215,8 +2217,9 @@ respectively.
 
 \indexlibrary{\idxcode{new}!\idxcode{operator}}%
 \begin{itemdecl}
-void* operator new[](std::size_t size, const std::nothrow_t&) noexcept;
-void* operator new[](std::size_t size, std::align_val_t alignment, const std::nothrow_t&) noexcept;
+[[nodiscard]] void* operator new[](std::size_t size, const std::nothrow_t&) noexcept;
+[[nodiscard]] void* operator new[](std::size_t size, std::align_val_t alignment,
+                                   const std::nothrow_t&) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2399,7 +2402,7 @@ placement forms of \tcode{operator new} and \tcode{operator delete}.
 
 \indexlibrary{\idxcode{new}!\idxcode{operator}}%
 \begin{itemdecl}
-void* operator new(std::size_t size, void* ptr) noexcept;
+[[nodiscard]] void* operator new(std::size_t size, void* ptr) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2424,7 +2427,7 @@ Something* p = new (place) Something();
 
 \indexlibrary{\idxcode{new}!\idxcode{operator}}%
 \begin{itemdecl}
-void* operator new[](std::size_t size, void* ptr) noexcept;
+[[nodiscard]] void* operator new[](std::size_t size, void* ptr) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2687,7 +2690,7 @@ new_handler get_new_handler() noexcept;
 
 \indexlibrary{\idxcode{launder}}%
 \begin{itemdecl}
-template <class T> constexpr T* launder(T* p) noexcept;
+template <class T> [[nodiscard]] constexpr T* launder(T* p) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}

@@ -3668,11 +3668,11 @@ namespace std {
     struct uses_allocator<packaged_task<R>, Alloc>;
 
   template <class F, class... Args>
-    future<invoke_result_t<decay_t<F>, decay_t<Args>...>>
-    async(F&& f, Args&&... args);
+    [[nodiscard]] future<invoke_result_t<decay_t<F>, decay_t<Args>...>>
+      async(F&& f, Args&&... args);
   template <class F, class... Args>
-    future<invoke_result_t<decay_t<F>, decay_t<Args>...>>
-    async(launch policy, F&& f, Args&&... args);
+    [[nodiscard]] future<invoke_result_t<decay_t<F>, decay_t<Args>...>>
+      async(launch policy, F&& f, Args&&... args);
 }
 \end{codeblock}
 
@@ -4788,10 +4788,10 @@ it shares a shared state.
 \indexlibrary{\idxcode{async}}%
 \begin{itemdecl}
 template <class F, class... Args>
-  future<invoke_result_t<decay_t<F>, decay_t<Args>...>>
+  [[nodiscard]] future<invoke_result_t<decay_t<F>, decay_t<Args>...>>
     async(F&& f, Args&&... args);
 template <class F, class... Args>
-  future<invoke_result_t<decay_t<F>, decay_t<Args>...>>
+  [[nodiscard]] future<invoke_result_t<decay_t<F>, decay_t<Args>...>>
     async(launch policy, F&& f, Args&&... args);
 \end{itemdecl}
 
