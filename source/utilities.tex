@@ -62,7 +62,7 @@ namespace std {
 
   // \ref{utility.exchange}, exchange
   template <class T, class U = T>
-    T exchange(T& obj, U&& new_val);
+    constexpr T exchange(T& obj, U&& new_val);
 
   // \ref{forward}, forward/move
   template <class T>
@@ -329,7 +329,8 @@ for all \tcode{i} in the range \range{0}{N}.
 
 \indexlibrary{\idxcode{exchange}}%
 \begin{itemdecl}
-template <class T, class U = T> T exchange(T& obj, U&& new_val);
+template <class T, class U = T>
+  constexpr T exchange(T& obj, U&& new_val);
 \end{itemdecl}
 
 \begin{itemdescr}
