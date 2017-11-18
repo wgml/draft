@@ -1116,7 +1116,7 @@ T operator @\placeholder{op}@=(T operand) noexcept;
 There are specializations of the \tcode{atomic}
 template for the floating-point types
 \tcode{float},
-\tcode{double},
+\tcode{double}, and
 \tcode{long double}.
 For each such floating-point type \tcode{\placeholder{floating-point}},
 the specialization \tcode{atomic<\placeholder{floating-point}>}
@@ -1223,7 +1223,7 @@ Atomically, the value pointed to by \tcode{this} immediately before the effects.
 If the result is not a representable value for its type\iref{expr.pre}
 the result is unspecified, but the operations otherwise have no undefined
 behavior. Atomic arithmetic operations on \tcode{\placeholder{floating-point}}
-should conform to \tcode{std::numeric_limits<\placeholder{floating-point}>}
+should conform to the \tcode{std::numeric_limits<\placeholder{floating-point}>}
 traits associated with the floating-point type\iref{limits.syn}.
 The floating-point environment\iref{cfenv} for atomic arithmetic operations
 on \tcode{\placeholder{floating-point}} may be different than the
@@ -1249,7 +1249,7 @@ Equivalent to: \tcode{return fetch_\placeholder{key}(operand) \placeholder{op} o
 If the result is not a representable value for its type\iref{expr.pre}
 the result is unspecified, but the operations otherwise have no undefined
 behavior. Atomic arithmetic operations on \tcode{\placeholder{floating-point}}
-should conform to \tcode{std::numeric_limits<\placeholder{floating-point}>}
+should conform to the \tcode{std::numeric_limits<\placeholder{floating-point}>}
 traits associated with the floating-point type\iref{limits.syn}.
 The floating-point environment\iref{cfenv} for atomic arithmetic operations
 on \tcode{\placeholder{floating-point}} may be different than the
