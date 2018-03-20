@@ -11499,6 +11499,11 @@ and constructor arguments \tcode{std::forward<Args>(args)...}.
 \pnum
 \throws
 Nothing unless the constructor for \tcode{T} throws.
+
+\pnum
+\remarks
+This function shall not participate in overload resolution if
+\tcode{T} is a specialization of \tcode{pair}.
 \end{itemdescr}
 
 \indexlibrarymember{construct}{polymorphic_allocator}%
@@ -11585,6 +11590,11 @@ Then, using \tcode{piecewise_construct}, \tcode{xprime}, and \tcode{yprime}
 as the constructor arguments,
 this function constructs a \tcode{pair<T1, T2>} object
 in the storage whose address is represented by \tcode{p}.
+
+\pnum
+\remarks
+This function shall not participate in overload resolution if
+\tcode{T} is a specialization of \tcode{pair}.
 \end{itemdescr}
 
 \indexlibrarymember{construct}{polymorphic_allocator}%
