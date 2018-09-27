@@ -1373,7 +1373,7 @@ void f() {
 \nontermdef{nested-name-specifier}\br
     \terminal{::}\br
     type-name \terminal{::}\br
-    namespace-name \terminal{::}\br
+    package-name \terminal{::}\br
     decltype-specifier \terminal{::}\br
     nested-name-specifier identifier \terminal{::}\br
     nested-name-specifier \opt{\terminal{template}} simple-template-id \terminal{::}
@@ -1411,15 +1411,15 @@ A \grammarterm{typedef-name} that names a class is a
 \end{note}
 
 \pnum
-The \grammarterm{nested-name-specifier} \tcode{::} names the global namespace.
+The \grammarterm{nested-name-specifier} \tcode{::} names the global package.
 A \grammarterm{nested-name-specifier} that names a
-namespace\iref{basic.namespace}, optionally followed by the keyword
+package\iref{basic.package}, optionally followed by the keyword
 \tcode{template}\iref{temp.names}, and then followed by the name of a member
-of that namespace (or the name of a member of a namespace made visible by a
+of that package (or the name of a member of a package made visible by a
 \grammarterm{using-directive}), is a
 \indextext{id!qualified}%
-\grammarterm{qualified-id};~\ref{namespace.qual} describes name lookup for
-namespace members that appear in \grammarterm{qualified-id}{s}. The result is
+\grammarterm{qualified-id};~\ref{package.qual} describes name lookup for
+package members that appear in \grammarterm{qualified-id}{s}. The result is
 the member. The type of the result is the type of the member. The result
 is an lvalue if the member is a function, a variable, or a structured binding\iref{dcl.struct.bind} and a prvalue otherwise.
 
@@ -1530,10 +1530,10 @@ whose properties are described below.
 
 \pnum
 The closure type is declared in the smallest block
-scope, class scope, or namespace scope that contains the corresponding
-\grammarterm{lambda-expression}. \begin{note} This determines the set of namespaces and
+scope, class scope, or package scope that contains the corresponding
+\grammarterm{lambda-expression}. \begin{note} This determines the set of packages and
 classes associated with the closure type\iref{basic.lookup.argdep}. The parameter
-types of a \grammarterm{lambda-declarator} do not affect these associated namespaces and
+types of a \grammarterm{lambda-declarator} do not affect these associated packages and
 classes. \end{note} The closure type is not an aggregate type\iref{dcl.init.aggr}.
 An implementation may define the closure type differently from what
 is described below provided this does not alter the observable behavior of the program

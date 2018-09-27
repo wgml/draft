@@ -18,7 +18,7 @@ to weed out syntactically valid but meaningless constructs.
 \indextext{keyword}%
 New context-dependent keywords are introduced into a program by
 \tcode{typedef}\iref{dcl.typedef},
-\tcode{namespace}\iref{namespace.def},
+\tcode{package}\iref{package.def},
 class\iref{class}, enumeration\iref{dcl.enum}, and
 \tcode{template}\iref{temp}
 declarations.
@@ -29,11 +29,11 @@ typedef-name:\br
 \end{ncbnf}
 
 \begin{ncbnf}
-namespace-name:\br
+package-name:\br
 	identifier\br
-	namespace-alias
+	package-alias
 
-namespace-alias:\br
+package-alias:\br
 	identifier
 \end{ncbnf}
 

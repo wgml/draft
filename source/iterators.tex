@@ -700,7 +700,7 @@ the following expressions are valid as shown in \tref{iterator.random.access.req
 
 \indexhdr{iterator}%
 \begin{codeblock}
-namespace std {
+package std {
   // \ref{iterator.primitives}, primitives
   template<class Iterator> struct iterator_traits;
   template<class T> struct iterator_traits<T*>;
@@ -941,7 +941,7 @@ shall have no members by any of the above names.
 It is specialized for pointers as
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class T> struct iterator_traits<T*> {
     using difference_type   = ptrdiff_t;
     using value_type        = remove_cv_t<T>;
@@ -1005,7 +1005,7 @@ shall be defined to be the most specific category tag that describes the
 iterator's behavior.
 
 \begin{codeblock}
-namespace std {
+package std {
   struct input_iterator_tag { };
   struct output_iterator_tag { };
   struct forward_iterator_tag: public input_iterator_tag { };
@@ -1181,7 +1181,7 @@ is established by the identity:
 
 \indexlibrary{\idxcode{reverse_iterator}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class Iterator>
   class reverse_iterator {
   public:
@@ -1692,7 +1692,7 @@ functions making the insert iterators out of a container.
 
 \indexlibrary{\idxcode{back_insert_iterator}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class Container>
   class back_insert_iterator {
   protected:
@@ -1806,7 +1806,7 @@ template<class Container>
 
 \indexlibrary{\idxcode{front_insert_iterator}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class Container>
   class front_insert_iterator {
   protected:
@@ -1920,7 +1920,7 @@ template<class Container>
 
 \indexlibrary{\idxcode{insert_iterator}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class Container>
   class insert_iterator {
   protected:
@@ -2068,7 +2068,7 @@ vector<string> v2(make_move_iterator(s.begin()),
 
 \indexlibrary{\idxcode{move_iterator}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class Iterator>
   class move_iterator {
   public:
@@ -2538,7 +2538,7 @@ equal to a non-end-of-stream iterator.
 Two non-end-of-stream iterators are equal when they are constructed from the same stream.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class T, class charT = char, class traits = char_traits<charT>,
            class Distance = ptrdiff_t>
   class istream_iterator {
@@ -2758,7 +2758,7 @@ while (first != last)
 is defined as:
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class T, class charT = char, class traits = char_traits<charT>>
   class ostream_iterator {
   public:
@@ -2923,7 +2923,7 @@ It is impossible to assign a character via an input iterator.
 
 \indexlibrary{\idxcode{istreambuf_iterator}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
   class istreambuf_iterator {
   public:
@@ -2969,7 +2969,7 @@ namespace std {
 
 \indexlibrary{\idxcode{proxy}!\idxcode{istreambuf_iterator}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits>
   class istreambuf_iterator<charT, traits>::proxy { // \expos
     charT keep_;
@@ -3138,7 +3138,7 @@ template<class charT, class traits>
 
 \indexlibrary{\idxcode{ostreambuf_iterator}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
   class ostreambuf_iterator {
   public:
@@ -3287,7 +3287,7 @@ headers are included: \tcode{<array>}, \tcode{<deque>}, \tcode{<forward_list>},
 \tcode{<list>}, \tcode{<map>}, \tcode{<regex>}, \tcode{<set>}, \tcode{<span>}, \tcode{<string>},
 \tcode{<string_view>}, \tcode{<unordered_map>}, \tcode{<unordered_set>}, and \tcode{<vector>}.
 Each of these templates
-is a designated customization point\iref{namespace.std}.
+is a designated customization point\iref{package.std}.
 
 \indexlibrary{\idxcode{begin(C\&)}}%
 \begin{itemdecl}
@@ -3425,7 +3425,7 @@ when any of the following headers are included:
 \tcode{<map>}, \tcode{<regex>}, \tcode{<set>}, \tcode{<span>}, \tcode{<string>},
 \tcode{<string_view>}, \tcode{<unordered_map>}, \tcode{<unordered_set>}, and \tcode{<vector>}.
 Each of these templates
-is a designated customization point\iref{namespace.std}.
+is a designated customization point\iref{package.std}.
 
 \indexlibrary{\idxcode{size(C\& c)}}%
 \begin{itemdecl}

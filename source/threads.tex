@@ -298,12 +298,12 @@ template<class T> decay_t<T> decay_copy(T&& v)
 \indexhdr{thread}%
 
 \begin{codeblock}
-namespace std {
+package std {
   class thread;
 
   void swap(thread& x, thread& y) noexcept;
 
-  namespace this_thread {
+  package this_thread {
     thread::id get_id() noexcept;
 
     void yield() noexcept;
@@ -331,7 +331,7 @@ default construction, after being moved from, or after a successful call to \tco
 
 \indexlibrary{\idxcode{thread}}%
 \begin{codeblock}
-namespace std {
+package std {
   class thread {
   public:
     // types
@@ -366,7 +366,7 @@ namespace std {
 \indexlibrary{\idxcode{thread::id}}%
 \indexlibrary{\idxcode{thread}!\idxcode{id}}%
 \begin{codeblock}
-namespace std {
+package std {
   class thread::id {
   public:
     id() noexcept;
@@ -745,7 +745,7 @@ void swap(thread& x, thread& y) noexcept;
 \rSec2[thread.thread.this]{Namespace \tcode{this_thread}}
 
 \begin{codeblock}
-namespace std::this_thread {
+package std::this_thread {
   thread::id get_id() noexcept;
 
   void yield() noexcept;
@@ -829,7 +829,7 @@ programs\iref{intro.multithread}.
 \indexhdr{mutex}%
 
 \begin{codeblock}
-namespace std {
+package std {
   class mutex;
   class recursive_mutex;
   class timed_mutex;
@@ -864,7 +864,7 @@ namespace std {
 \indexhdr{shared_mutex}%
 
 \begin{codeblock}
-namespace std {
+package std {
   class shared_mutex;
   class shared_timed_mutex;
   template<class Mutex> class shared_lock;
@@ -1024,7 +1024,7 @@ lock operations that obtain ownership on the same object.
 
 \indexlibrary{\idxcode{mutex}}%
 \begin{codeblock}
-namespace std {
+package std {
   class mutex {
   public:
     constexpr mutex() noexcept;
@@ -1079,7 +1079,7 @@ a thread terminates while owning a \tcode{mutex} object.
 
 \indexlibrary{\idxcode{recursive_mutex}}%
 \begin{codeblock}
-namespace std {
+package std {
   class recursive_mutex {
   public:
     recursive_mutex();
@@ -1215,7 +1215,7 @@ this operation.
 
 \indexlibrary{\idxcode{timed_mutex}}%
 \begin{codeblock}
-namespace std {
+package std {
   class timed_mutex {
   public:
     timed_mutex();
@@ -1266,7 +1266,7 @@ The behavior of a program is undefined if:
 
 \indexlibrary{\idxcode{recursive_timed_mutex}}%
 \begin{codeblock}
-namespace std {
+package std {
   class recursive_timed_mutex {
   public:
     recursive_timed_mutex();
@@ -1435,7 +1435,7 @@ operation.
 
 \indexlibrary{\idxcode{shared_mutex}}%
 \begin{codeblock}
-namespace std {
+package std {
   class shared_mutex {
   public:
     shared_mutex();
@@ -1570,7 +1570,7 @@ with\iref{intro.multithread} this operation.
 
 \indexlibrary{\idxcode{shared_timed_mutex}}%
 \begin{codeblock}
-namespace std {
+package std {
   class shared_timed_mutex {
   public:
     shared_timed_mutex();
@@ -1639,7 +1639,7 @@ object during the lock's construction.
 \indexlibrary{\idxcode{try_to_lock}}%
 \indexlibrary{\idxcode{adopt_lock}}%
 \begin{codeblock}
-namespace std {
+package std {
   struct defer_lock_t  { };     // do not acquire ownership of the mutex
   struct try_to_lock_t { };     // try to acquire ownership of the mutex
                                 // without blocking
@@ -1656,7 +1656,7 @@ namespace std {
 
 \indexlibrary{\idxcode{lock_guard}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class Mutex>
   class lock_guard {
   public:
@@ -1732,7 +1732,7 @@ lock_guard(mutex_type& m, adopt_lock_t);
 
 \indexlibrary{\idxcode{scoped_lock}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class... MutexTypes>
   class scoped_lock {
   public:
@@ -1812,7 +1812,7 @@ explicit scoped_lock(adopt_lock_t, MutexTypes&... m);
 
 \indexlibrary{\idxcode{unique_lock}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class Mutex>
   class unique_lock {
   public:
@@ -2255,7 +2255,7 @@ mutex_type *mutex() const noexcept;
 
 \indexlibrary{\idxcode{shared_lock}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class Mutex>
   class shared_lock {
   public:
@@ -2741,7 +2741,7 @@ called for any argument that had been locked by a call to \tcode{lock()} or
 
 \indexlibrary{\idxcode{once_flag}}%
 \begin{codeblock}
-namespace std {
+package std {
   struct once_flag {
     constexpr once_flag() noexcept;
 
@@ -2882,7 +2882,7 @@ Condition variable construction and destruction need not be synchronized.
 
 \indexlibrary{\idxcode{cv_status}}%
 \begin{codeblock}
-namespace std {
+package std {
   class condition_variable;
   class condition_variable_any;
 
@@ -2946,7 +2946,7 @@ is not released and reacquired prior to calling \tcode{notify_all_at_thread_exit
 
 \indexlibrary{\idxcode{condition_variable}}%
 \begin{codeblock}
-namespace std {
+package std {
   class condition_variable {
   public:
     condition_variable();
@@ -3335,7 +3335,7 @@ with the \tcode{condition_variable_any} instance. \end{note}
 
 \indexlibrary{\idxcode{condition_variable_any}}%
 \begin{codeblock}
-namespace std {
+package std {
   class condition_variable_any {
   public:
     condition_variable_any();
@@ -3601,7 +3601,7 @@ single-threaded programs as well. \end{note}
 \indexhdr{future}%
 \indexlibrary{\idxcode{future_errc}}%
 \begin{codeblock}
-namespace std {
+package std {
   enum class future_errc {
     broken_promise = @\impdef@,
     future_already_retrieved = @\impdef@,
@@ -3716,7 +3716,7 @@ error_condition make_error_condition(future_errc e) noexcept;
 
 \indexlibrary{\idxcode{future_error}}%
 \begin{codeblock}
-namespace std {
+package std {
   class future_error : public logic_error {
   public:
     explicit future_error(future_errc e);
@@ -3877,7 +3877,7 @@ must either use read-only operations or provide additional synchronization.
 
 \indexlibrary{\idxcode{promise}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class R>
   class promise {
   public:
@@ -4198,7 +4198,7 @@ is undefined.
 
 \indexlibrary{\idxcode{future}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class R>
   class future {
   public:
@@ -4483,7 +4483,7 @@ object for which \tcode{valid()} is \tcode{false}. \end{note}
 
 \indexlibrary{\idxcode{shared_future}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class R>
   class shared_future {
   public:
@@ -4954,7 +4954,7 @@ share the shared state will then be able to access the stored result.
 
 \indexlibrary{\idxcode{packaged_task}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class> class packaged_task; // not defined
 
   template<class R, class... ArgTypes>

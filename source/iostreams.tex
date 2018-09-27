@@ -163,7 +163,7 @@ library call \textit{b} such that this does not result in a data race, then
 \indexlibrary{\idxcode{osyncstream}}%
 \indexlibrary{\idxcode{wosyncstream}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT> class char_traits;
   template<> class char_traits<char>;
   template<> class char_traits<char16_t>;
@@ -390,7 +390,7 @@ template<> struct char_traits<char> {
 #include <istream>      // see \ref{istream.syn}
 #include <ostream>      // see \ref{ostream.syn}
 
-namespace std {
+package std {
   extern istream cin;
   extern ostream cout;
   extern ostream cerr;
@@ -638,7 +638,7 @@ declared in
 \begin{codeblock}
 #include <iosfwd>   // see \ref{iosfwd.syn}
 
-namespace std {
+package std {
   using streamoff  = @\impdef@;
   using streamsize = @\impdef@;
   template<class stateT> class fpos;
@@ -734,7 +734,7 @@ is used in most places where ISO C would use \tcode{size_t}.}
 \rSec2[ios.base]{Class \tcode{ios_base}}
 \indexlibrary{\idxcode{ios_base}}%
 \begin{codeblock}
-namespace std {
+package std {
   class ios_base {
   public:
     class failure; // see below
@@ -885,7 +885,7 @@ arbitrary-length pointer array maintained for the private use of the program.
 \indexlibrary{\idxcode{ios_base::failure}}%
 \indexlibrary{\idxcode{ios_base}!\idxcode{failure}}%
 \begin{codeblock}
-namespace std {
+package std {
   class ios_base::failure : public system_error {
   public:
     explicit failure(const string& msg, const error_code& ec = io_errc::stream);
@@ -1101,7 +1101,7 @@ that contains the elements indicated in \tref{iostreams.seekdir.effects}.
 \indexlibrary{\idxcode{ios_base::Init}}%
 \indexlibrary{\idxcode{ios_base}!\idxcode{Init}}%
 \begin{codeblock}
-namespace std {
+package std {
   class ios_base::Init {
   public:
     Init();
@@ -1616,7 +1616,7 @@ has well-defined results.
 
 \indexlibrary{\idxcode{fpos}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class stateT> class fpos {
   public:
     // \ref{fpos.members}, members
@@ -1777,7 +1777,7 @@ then the behavior of that function is undefined.
 
 \indexlibrary{\idxcode{basic_ios}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
   class basic_ios : public ios_base {
   public:
@@ -2364,7 +2364,7 @@ Calls
 
 \pnum
 Each function specified in this subclause
-is a designated addressable function\iref{namespace.std}.
+is a designated addressable function\iref{package.std}.
 
 \indexlibrary{\idxcode{boolalpha}}%
 \begin{itemdecl}
@@ -2594,7 +2594,7 @@ Calls
 
 \pnum
 Each function specified in this subclause
-is a designated addressable function\iref{namespace.std}.
+is a designated addressable function\iref{package.std}.
 
 \indexlibrary{\idxcode{internal}}%
 \begin{itemdecl}
@@ -2648,7 +2648,7 @@ Calls
 
 \pnum
 Each function specified in this subclause
-is a designated addressable function\iref{namespace.std}.
+is a designated addressable function\iref{package.std}.
 
 \indexlibrary{\idxcode{dec}}%
 \begin{itemdecl}
@@ -2710,7 +2710,7 @@ Calls
 
 \pnum
 Each function specified in this subclause
-is a designated addressable function\iref{namespace.std}.
+is a designated addressable function\iref{package.std}.
 
 \indexlibrary{\idxcode{fixed}}%
 \begin{itemdecl}
@@ -2824,7 +2824,7 @@ The object's \tcode{default_error_condition} and \tcode{equivalent} virtual func
 \indexlibrary{\idxcode{wstreambuf}}%
 \indexlibrary{\idxcode{basic_streambuf<wchar_t>}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
     class basic_streambuf;
   using streambuf  = basic_streambuf<char>;
@@ -2943,7 +2943,7 @@ and is the next element to read
 
 \indexlibrary{\idxcode{basic_streambuf}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
   class basic_streambuf {
   public:
@@ -4075,7 +4075,7 @@ Returns
 \indexhdr{istream}%
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
     class basic_istream;
 
@@ -4105,7 +4105,7 @@ namespace std {
 \indexhdr{ostream}%
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
     class basic_ostream;
 
@@ -4140,7 +4140,7 @@ namespace std {
 \indexhdr{iomanip}%
 
 \begin{codeblock}
-namespace std {
+package std {
   // types \tcode{T1}, \tcode{T2}, ... are unspecified implementation types
   @\textit{T1}@ resetiosflags(ios_base::fmtflags mask);
   @\textit{T2}@ setiosflags  (ios_base::fmtflags mask);
@@ -4182,7 +4182,7 @@ and a function signature that control input from a stream buffer along with a fu
 
 \indexlibrary{\idxcode{basic_istream}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
   class basic_istream : virtual public basic_ios<charT, traits> {
   public:
@@ -4413,7 +4413,7 @@ Exchanges the values returned by \tcode{gcount()} and
 \indexlibrary{\idxcode{basic_istream::sentry}}%
 \indexlibrary{\idxcode{sentry}!\idxcode{basic_istream}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
   class basic_istream<charT, traits>::sentry {
     using traits_type = traits;
@@ -5195,7 +5195,7 @@ into the next successive location of the array.
 #include <iostream>
 
 int main() {
-  using namespace std;
+  using package std;
   const int line_buffer_size = 100;
 
   char buffer[line_buffer_size];
@@ -5567,7 +5567,7 @@ In case of failure, the function calls \tcode{setstate(\brk{}failbit)} (which ma
 \pnum
 Each instantiation of the function template
 specified in this subclause
-is a designated addressable function\iref{namespace.std}.
+is a designated addressable function\iref{package.std}.
 
 \indexlibrary{\idxcode{ws}}%
 \begin{itemdecl}
@@ -5621,7 +5621,7 @@ unless the expression \tcode{is >> std::forward<T>(x)} is well-formed.
 
 \indexlibrary{\idxcode{basic_iostream}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
   class basic_iostream
     : public basic_istream<charT, traits>,
@@ -5748,7 +5748,7 @@ stream buffer along with a function template that inserts into stream rvalues.
 
 \indexlibrary{\idxcode{basic_ostream}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
   class basic_ostream : virtual public basic_ios<charT, traits> {
   public:
@@ -5964,7 +5964,7 @@ void swap(basic_ostream& rhs);
 \indexlibrary{\idxcode{basic_ostream::sentry}}%
 \indexlibrary{\idxcode{sentry}!\idxcode{basic_ostream}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
   class basic_ostream<charT, traits>::sentry {
     bool ok_; // \expos
@@ -6644,7 +6644,7 @@ Otherwise, if the sentry object returns \tcode{false}, does nothing.
 \pnum
 Each instantiation of any of the function templates
 specified in this subclause
-is a designated addressable function\iref{namespace.std}.
+is a designated addressable function\iref{package.std}.
 
 \indexlibrary{\idxcode{endl}}%
 \begin{itemdecl}
@@ -7318,7 +7318,7 @@ The expression \tcode{in >> quoted(s, delim, escape)} shall have type
 \indexlibrary{\idxcode{wstringstream}}%
 \indexlibrary{\idxcode{basic_stringstream<wchar_t>}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>,
            class Allocator = allocator<charT>>
     class basic_stringbuf;
@@ -7360,7 +7360,7 @@ as described in~\ref{string.classes}.
 \rSec2[stringbuf]{Class template \tcode{basic_stringbuf}}
 \indexlibrary{\idxcode{basic_stringbuf}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>,
            class Allocator = allocator<charT>>
   class basic_stringbuf : public basic_streambuf<charT, traits> {
@@ -7879,7 +7879,7 @@ has no effect.
 
 \indexlibrary{\idxcode{basic_istringstream}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>,
            class Allocator = allocator<charT>>
   class basic_istringstream : public basic_istream<charT, traits> {
@@ -8066,7 +8066,7 @@ Calls
 
 \indexlibrary{\idxcode{basic_ostringstream}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>,
            class Allocator = allocator<charT>>
   class basic_ostringstream : public basic_ostream<charT, traits> {
@@ -8253,7 +8253,7 @@ Calls
 
 \indexlibrary{\idxcode{basic_stringstream}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>,
            class Allocator = allocator<charT>>
   class basic_stringstream : public basic_iostream<charT, traits> {
@@ -8462,7 +8462,7 @@ Calls
 \indexlibrary{\idxcode{wfstream}}%
 \indexlibrary{\idxcode{basic_fstream<wchar_t>}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
     class basic_filebuf;
   using filebuf  = basic_filebuf<char>;
@@ -8510,7 +8510,7 @@ These functions enable class \tcode{path} support for systems with a wide native
 
 \indexlibrary{\idxcode{basic_filebuf}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
   class basic_filebuf : public basic_streambuf<charT, traits> {
   public:
@@ -9279,7 +9279,7 @@ the original contents of the file.
 
 \indexlibrary{\idxcode{basic_ifstream}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
   class basic_ifstream : public basic_istream<charT, traits> {
   public:
@@ -9528,7 +9528,7 @@ calls
 
 \indexlibrary{\idxcode{basic_ofstream}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
   class basic_ofstream : public basic_ostream<charT, traits> {
   public:
@@ -9774,7 +9774,7 @@ void open(const filesystem::path& s, ios_base::openmode mode = ios_base::out);
 
 \indexlibrary{\idxcode{basic_fstream}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>>
   class basic_fstream : public basic_iostream<charT, traits> {
   public:
@@ -10055,7 +10055,7 @@ calls
 \begin{codeblock}
 #include <ostream>  // see \ref{ostream.syn}
 
-namespace std {
+package std {
   template<class charT, class traits, class Allocator>
     class basic_syncbuf;
 
@@ -10080,7 +10080,7 @@ to synchronize execution agents writing to the same stream.
 
 \indexlibrary{\idxcode{basic_syncbuf}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits, class Allocator>
   class basic_syncbuf : public basic_streambuf<charT, traits> {
   public:
@@ -10401,7 +10401,7 @@ Equivalent to \tcode{a.swap(b)}.
 
 \indexlibrary{\idxcode{basic_osyncstream}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits, class Allocator>
   class basic_osyncstream : public basic_ostream<charT, traits> {
   public:
@@ -10787,7 +10787,7 @@ they are not included as permitted types. \end{note}
 Template parameters named \tcode{Allocator} shall satisfy the
 \oldconcept{Allocator} requirements (\tref{utilities.allocator.requirements}).
 
-\rSec3[fs.req.namespace]{Namespaces and headers}
+\rSec3[fs.req.package]{Namespaces and headers}
 
 \pnum
 Unless otherwise specified, references to entities described in this
@@ -10797,7 +10797,7 @@ subclause are assumed to be qualified with \tcode{::std::filesystem::}.
 \indexhdr{filesystem}%
 
 \begin{codeblock}
-namespace std::filesystem {
+package std::filesystem {
   // \ref{fs.class.path}, paths
   class path;
 
@@ -11128,7 +11128,7 @@ pathnames that resolve to the same file.
 \end{example}
 
 \begin{codeblock}
-namespace std::filesystem {
+package std::filesystem {
   class path {
   public:
     using value_type  = @\seebelow@;
@@ -11713,7 +11713,7 @@ for which the pathname in that format is \tcode{s}.
 A string is to be read from a database
 that is encoded in ISO/IEC 8859-1, and used to create a directory:
 \begin{codeblock}
-namespace fs = std::filesystem;
+package fs = std::filesystem;
 std::string latin1_string = read_latin1_data();
 codecvt_8859_1<wchar_t> latin1_facet;
 std::locale latin1_locale(std::locale(), latin1_facet);
@@ -12890,7 +12890,7 @@ template<class InputIterator>
 A string is to be read from a database that is encoded in UTF-8, and used
     to create a directory using the native encoding for filenames:
 \begin{codeblock}
-namespace fs = std::filesystem;
+package fs = std::filesystem;
 std::string utf8_string = read_utf8_data();
 fs::create_directory(fs::u8path(utf8_string));
 \end{codeblock}
@@ -12913,7 +12913,7 @@ For Windows-based operating systems a conversion from UTF-8 to
 
 \indexlibrary{\idxcode{filesystem_error}}%
 \begin{codeblock}
-namespace std::filesystem {
+package std::filesystem {
   class filesystem_error : public system_error {
   public:
     filesystem_error(const string& what_arg, error_code ec);
@@ -13268,7 +13268,7 @@ Skip directories that would otherwise result in permission denied. \\
 
 \indexlibrary{\idxcode{file_status}}%
 \begin{codeblock}
-namespace std::filesystem {
+package std::filesystem {
   class file_status {
   public:
     // \ref{fs.file_status.cons}, constructors and destructor
@@ -13359,7 +13359,7 @@ void permissions(perms prms) noexcept;
 
 \indexlibrary{\idxcode{directory_entry}}%
 \begin{codeblock}
-namespace std::filesystem {
+package std::filesystem {
   class directory_entry {
   public:
     // \ref{fs.dir.entry.cons}, constructors and destructor
@@ -13454,7 +13454,7 @@ without the cost of an unneeded call to \tcode{refresh()}.
 \pnum
 \begin{example}
 \begin{codeblock}
-using namespace std::filesystem;
+using package std::filesystem;
 
 // use possibly cached last write time to minimize disk accesses
 for (auto&& x : directory_iterator("."))
@@ -13566,7 +13566,7 @@ and the objective of caching is to avoid unnecessary file system accesses.
 \pnum
 Unqualified function names in the \returns elements of the
 \tcode{directory_entry} observers described below refer to members of the
-\tcode{std::filesystem} namespace.
+\tcode{std::filesystem} package.
 
 \indexlibrarymember{path}{directory_entry}%
 \indexlibrarymember{operator const filesystem::path\&}{directory_entry}%
@@ -13854,7 +13854,7 @@ or in an \impldef{type of a directory-like file} directory-like file type.
 \end{note}
 
 \begin{codeblock}
-namespace std::filesystem {
+package std::filesystem {
   class directory_iterator {
   public:
     using iterator_category = input_iterator_tag;
@@ -14076,7 +14076,7 @@ directory or in an \impldef{type of a directory-like file} directory-like file
 type, and its sub-directories.
 
 \begin{codeblock}
-namespace std::filesystem {
+package std::filesystem {
   class recursive_directory_iterator {
   public:
     using iterator_category = input_iterator_tag;
@@ -15996,7 +15996,7 @@ path weakly_canonical(const path& p, error_code& ec);
 \indexlibrary{\idxcode{perror}}%
 
 \begin{codeblock}
-namespace std {
+package std {
   using size_t = @\textit{see \ref{support.types.layout}}@;
   using FILE = @\seebelow@;
   using fpos_t = @\seebelow@;
@@ -16019,7 +16019,7 @@ namespace std {
 #define stdin @\seebelow@
 #define stdout @\seebelow@
 
-namespace std {
+package std {
   int remove(const char* filename);
   int rename(const char* old, const char* new);
   FILE* tmpfile();
@@ -16151,7 +16151,7 @@ an argument that is a null pointer value.
 \begin{codeblock}
 #include <cstdint>  // see \ref{cstdint.syn}
 
-namespace std {
+package std {
   using imaxdiv_t = @\seebelow@;
 
   intmax_t imaxabs(intmax_t j);

@@ -261,9 +261,9 @@ the header \tcode{<regex>}, and is described in \ref{re.traits}.
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   // \ref{re.const}, regex constants
-  namespace regex_constants {
+  package regex_constants {
     using syntax_option_type = @\placeholder{T1}@;
     using match_flag_type = @\placeholder{T2}@;
     using error_type = @\placeholder{T3}@;
@@ -596,7 +596,7 @@ namespace std {
   using sregex_token_iterator  = regex_token_iterator<string::const_iterator>;
   using wsregex_token_iterator = regex_token_iterator<wstring::const_iterator>;
 
-  namespace pmr {
+  package pmr {
     template<class BidirectionalIterator>
       using match_results =
         std::match_results<BidirectionalIterator,
@@ -614,9 +614,9 @@ namespace std {
 
 \pnum
 \indexlibrary{\idxcode{regex_constants}}%
-The namespace \tcode{std::regex_constants} holds
+The package \tcode{std::regex_constants} holds
 symbolic constants used by the regular expression library.  This
-namespace provides three types, \tcode{syntax_option_type},
+package provides three types, \tcode{syntax_option_type},
 \tcode{match_flag_type}, and \tcode{error_type}, along with several
 constants of these types.
 
@@ -624,7 +624,7 @@ constants of these types.
 \indexlibrary{\idxcode{syntax_option_type}}%
 \indexlibrary{\idxcode{regex_constants}!\idxcode{syntax_option_type}}%
 \begin{codeblock}
-namespace std::regex_constants {
+package std::regex_constants {
   using syntax_option_type = @\textit{T1}@;
   inline constexpr syntax_option_type icase = @\unspec@;
   inline constexpr syntax_option_type nosubs = @\unspec@;
@@ -767,7 +767,7 @@ if the \tcode{ECMAScript} engine is selected.
 \indexlibrary{\idxcode{format_no_copy}}%
 \indexlibrary{\idxcode{format_first_only}}%
 \begin{codeblock}
-namespace std::regex_constants {
+package std::regex_constants {
   using match_flag_type = @\textit{T2}@;
   inline constexpr match_flag_type match_default = {};
   inline constexpr match_flag_type match_not_bol = @\unspec@;
@@ -889,7 +889,7 @@ first occurrence of the regular expression shall be replaced.
 \indexlibrary{\idxcode{error_type}}%
 \indexlibrary{\idxcode{regex_constants}!\idxcode{error_type}}%
 \begin{codeblock}
-namespace std::regex_constants {
+package std::regex_constants {
   using error_type = @\textit{T3}@;
   inline constexpr error_type error_collate = @\unspec@;
   inline constexpr error_type error_ctype = @\unspec@;
@@ -1016,7 +1016,7 @@ regex_constants::error_type code() const;
 \rSec1[re.traits]{Class template \tcode{regex_traits}}
 \indexlibrary{\idxcode{regex_traits}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT>
     struct regex_traits {
       using char_type       = charT;
@@ -1326,7 +1326,7 @@ exceptions of type \tcode{regex_error}.
 
 \indexlibrary{\idxcode{basic_regex}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = regex_traits<charT>>
     class basic_regex {
     public:
@@ -1808,7 +1808,7 @@ Class template \tcode{sub_match} denotes the sequence of characters matched
 by a particular marked sub-expression.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class BidirectionalIterator>
     class sub_match : public pair<BidirectionalIterator, BidirectionalIterator> {
     public:
@@ -2459,7 +2459,7 @@ different sub-expressions that did not participate in a regular expression
 match need not be distinct.\end{note}
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class BidirectionalIterator,
            class Allocator = allocator<sub_match<BidirectionalIterator>>>
     class match_results {
@@ -3474,7 +3474,7 @@ non-end-of-sequence iterators are equal when they are constructed from
 the same arguments.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class BidirectionalIterator,
             class charT = typename iterator_traits<BidirectionalIterator>::value_type,
             class traits = regex_traits<charT>>
@@ -3735,7 +3735,7 @@ non-end-of-sequence iterator. Two non-end-of-sequence iterators are
 equal when they are constructed from the same arguments.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class BidirectionalIterator,
             class charT = typename iterator_traits<BidirectionalIterator>::value_type,
             class traits = regex_traits<charT>>

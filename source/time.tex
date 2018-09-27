@@ -56,8 +56,8 @@ utilities, as summarized in \tref{time.lib.summary}.
 \indexlibrarymember{earliest}{choose}%
 \indexlibrarymember{latest}{choose}%
 \begin{codeblock}
-namespace std {
-  namespace chrono {
+package std {
+  package chrono {
     // \ref{time.duration}, class template \tcode{duration}
     template<class Rep, class Period = ratio<1>> class duration;
 
@@ -74,7 +74,7 @@ namespace std {
     struct common_type<chrono::time_point<Clock, Duration1>,
                        chrono::time_point<Clock, Duration2>>;
 
-  namespace chrono {
+  package chrono {
     // \ref{time.traits}, customization traits
     template<class Rep> struct treat_as_floating_point;
     template<class Rep> struct duration_values;
@@ -983,8 +983,8 @@ namespace std {
     inline constexpr month December{12};
   }
 
-  inline namespace literals {
-  inline namespace chrono_literals {
+  inline package literals {
+  inline package chrono_literals {
     // \ref{time.duration.literals}, suffixes for duration literals
     constexpr chrono::hours                                 operator""h(unsigned long long);
     constexpr chrono::duration<@\unspec,@ ratio<3600, 1>> operator""h(long double);
@@ -1012,8 +1012,8 @@ namespace std {
   }
   }
 
-  namespace chrono {
-    using namespace literals::chrono_literals;
+  package chrono {
+    using package literals::chrono_literals;
   }
 }
 \end{codeblock}
@@ -1273,7 +1273,7 @@ of seconds. It is expressed as a rational constant using the template \tcode{rat
 
 \indexlibrary{\idxcode{duration}}%
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   template<class Rep, class Period = ratio<1>>
   class duration {
   public:
@@ -1931,7 +1931,7 @@ of overflow, the program is ill-formed.
 \begin{example}
 The following code shows some duration literals.
 \begin{codeblock}
-using namespace std::chrono_literals;
+using package std::chrono_literals;
 auto constexpr aday=24h;
 auto constexpr lesson=45min;
 auto constexpr halfanhour=0.5h;
@@ -2155,7 +2155,7 @@ that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 
 \indexlibrary{\idxcode{time_point}}%
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   template<class Clock, class Duration = typename Clock::duration>
   class time_point {
   public:
@@ -2560,7 +2560,7 @@ unless otherwise specified.
 \indexlibrary{\idxcode{system_clock}}%
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class system_clock {
   public:
     using rep        = @\seebelow@;
@@ -2745,7 +2745,7 @@ prior to assigning that difference to \tcode{tp}.
 \indexlibrary{\idxcode{utc_clock}}%
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class utc_clock {
   public:
     using rep                       = @\textit{a signed arithmetic type}@;
@@ -2952,7 +2952,7 @@ prior to assigning that difference to \tcode{tp}.
 \indexlibrary{\idxcode{tai_clock}}%
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class tai_clock {
   public:
     using rep                       = @\textit{a signed arithmetic type}@;
@@ -3142,7 +3142,7 @@ the successfully parsed timestamp prior to assigning that difference to \tcode{t
 \indexlibrary{\idxcode{gps_clock}}%
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class gps_clock {
   public:
     using rep                       = @\textit{a signed arithmetic type}@;
@@ -3329,7 +3329,7 @@ the successfully parsed timestamp prior to assigning that difference to \tcode{t
 \indexlibrary{\idxcode{file_clock}}%
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class file_clock {
   public:
     using rep                       = @\textit{a signed arithmetic type}@;
@@ -3470,7 +3470,7 @@ the successfully parsed timestamp prior to assigning that difference to \tcode{t
 \indexlibrary{\idxcode{steady_clock}}%
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class steady_clock {
   public:
     using rep        = @\unspec@;
@@ -3493,7 +3493,7 @@ a steady rate relative to real time. That is, the clock may not be adjusted.
 \indexlibrary{\idxcode{high_resolution_clock}}%
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class high_resolution_clock {
   public:
     using rep        = @\unspec@;
@@ -3608,7 +3608,7 @@ that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 \indexlibrary{\idxcode{clock_time_conversion}}%
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   template<class DestClock, class SourceClock>
   struct clock_time_conversion {};
 }
@@ -3948,7 +3948,7 @@ and its relationship to \tcode{sys_days} and \tcode{local_days}.
 \indexlibrary{\idxcode{last_spec}}%
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   struct last_spec {
     explicit last_spec() = default;
   };
@@ -3969,7 +3969,7 @@ or the last day of the week of a month.
 \indexlibrary{\idxcode{day}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class day {
     unsigned char d_;           // \expos
   public:
@@ -4259,7 +4259,7 @@ constexpr day operator""d(unsigned long long d) noexcept;
 \indexlibrary{\idxcode{month}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class month {
     unsigned char m_;           // \expos
   public:
@@ -4562,7 +4562,7 @@ that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 \indexlibrary{\idxcode{year}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class year {
     short y_;                   // \expos
   public:
@@ -4909,7 +4909,7 @@ constexpr year operator""y(unsigned long long y) noexcept;
 \indexlibrary{\idxcode{weekday}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class weekday {
     unsigned char wd_;          // \expos
   public:
@@ -5270,7 +5270,7 @@ that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 \indexlibrary{\idxcode{weekday_indexed}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class weekday_indexed {
     chrono::weekday  wd_;       // \expos
     unsigned char    index_;    // \expos
@@ -5392,7 +5392,7 @@ appends with \tcode{" is not a valid index]"}.
 \indexlibrary{\idxcode{weekday_last}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class weekday_last {
     chrono::weekday wd_;                // \expos
 
@@ -5487,7 +5487,7 @@ template<class charT, class traits>
 \indexlibrary{\idxcode{month_day}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class month_day {
     chrono::month m_;           // \expos
     chrono::day   d_;           // \expos
@@ -5650,7 +5650,7 @@ that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 \indexlibrary{\idxcode{month_day_last}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class month_day_last {
     chrono::month m_;                   // \expos
 
@@ -5752,7 +5752,7 @@ template<class charT, class traits>
 \indexlibrary{\idxcode{month_weekday}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class month_weekday {
     chrono::month           m_;         // \expos
     chrono::weekday_indexed wdi_;       // \expos
@@ -5858,7 +5858,7 @@ template<class charT, class traits>
 \indexlibrary{\idxcode{month_weekday_last}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class month_weekday_last {
     chrono::month        m_;    // \expos
     chrono::weekday_last wdl_;  // \expos
@@ -5966,7 +5966,7 @@ template<class charT, class traits>
 \indexlibrary{\idxcode{year_month}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class year_month {
     chrono::year  y_;           // \expos
     chrono::month m_;           // \expos
@@ -6260,7 +6260,7 @@ that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 \indexlibrary{\idxcode{year_month_day}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class year_month_day {
     chrono::year  y_;           // \expos
     chrono::month m_;           // \expos
@@ -6690,7 +6690,7 @@ that value will be assigned to \tcode{*offset} if \tcode{offset} is non-null.
 \indexlibrary{\idxcode{year_month_day_last}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class year_month_day_last {
     chrono::year           y_;          // \expos
     chrono::month_day_last mdl_;        // \expos
@@ -6985,7 +6985,7 @@ template<class charT, class traits>
 \indexlibrary{\idxcode{year_month_weekday}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class year_month_weekday {
     chrono::year            y_;         // \expos
     chrono::month           m_;         // \expos
@@ -7322,7 +7322,7 @@ template<class charT, class traits>
 \indexlibrary{\idxcode{year_month_weekday_last}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class year_month_weekday_last {
     chrono::year         y_;    // \expos
     chrono::month        m_;    // \expos
@@ -8057,7 +8057,7 @@ constexpr year_month_weekday_last
 \indexlibrary{\idxcode{time_of_day}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   template<class Duration> class time_of_day;
 
   template<> class time_of_day<hours>;
@@ -8095,7 +8095,7 @@ and standard-layout class type.
 \indexlibrary{\idxcode{time_of_day<hours>}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   template<>
   class time_of_day<hours> {
   public:
@@ -8196,7 +8196,7 @@ Otherwise, no effects.
 \indexlibrary{\idxcode{time_of_day<minutes>}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   template<>
   class time_of_day<minutes> {
   public:
@@ -8312,7 +8312,7 @@ Otherwise, no effects.
 \indexlibrary{\idxcode{time_of_day<seconds>}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   template<>
   class time_of_day<seconds> {
   public:
@@ -8445,7 +8445,7 @@ Otherwise, no effects.
 \indexlibrary{\idxcode{time_of_day<\placeholder{sub-second duration}>}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   template<class Rep, class Period>
   class time_of_day<duration<Rep, Period>> {
   public:
@@ -8778,7 +8778,7 @@ and to user-defined calendars.
 \indexlibrary{\idxcode{tzdb}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   struct tzdb {
     string            version;
     vector<time_zone> zones;
@@ -8839,7 +8839,7 @@ A pointer to the time zone which the computer has set as its local time zone.
 \indexlibrary{\idxcode{tzdb_list}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class tzdb_list {
   public:
     tzdb_list(const tzdb_list&) = delete;
@@ -8871,7 +8871,7 @@ This access is only needed for those applications
 that need to have long uptimes and
 have a need to update the time zone database while running.
 Other applications can implicitly access the \tcode{front()} of this list
-via the read-only namespace scope functions
+via the read-only package scope functions
 \tcode{get_tzdb()},
 \tcode{locate_zone()}, and
 \tcode{current_zone()}.
@@ -9112,7 +9112,7 @@ to discover if the local and remote databases are equivalent.
 \indexlibrary{\idxcode{nonexistent_local_time}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class nonexistent_local_time : public runtime_error {
   public:
     template<class Duration>
@@ -9162,7 +9162,7 @@ os << tp << " is in a gap between\n"
 #include <iostream>
 
 int main() {
-  using namespace std::chrono;
+  using package std::chrono;
   try {
     auto zt = zoned_time{"America/New_York",
                          local_days{Sunday[2]/March/2016} + 2h + 30min};
@@ -9187,7 +9187,7 @@ Produces the output:
 \indexlibrary{\idxcode{ambiguous_local_time}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class ambiguous_local_time : public runtime_error {
   public:
     template<class Duration>
@@ -9235,7 +9235,7 @@ os << tp << " is ambiguous.  It could be\n"
 #include <iostream>
 
 int main() {
-  using namespace std::chrono;
+  using package std::chrono;
   try {
     auto zt = zoned_time{"America/New_York",
                          local_days{Sunday[1]/November/2016} + 1h + 30min};
@@ -9261,7 +9261,7 @@ Produces the output:
 \indexlibrary{\idxcode{sys_info}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   struct sys_info {
     sys_seconds   begin;
     sys_seconds   end;
@@ -9350,7 +9350,7 @@ Streams out the \tcode{sys_info} object \tcode{r} in an unspecified format.
 \indexlibrarymember{first}{local_info}%
 \indexlibrarymember{second}{local_info}%
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   struct local_info {
     static constexpr int unique      = 0;
     static constexpr int nonexistent = 1;
@@ -9418,7 +9418,7 @@ Streams out the \tcode{local_info} object \tcode{r} in an unspecified format.
 \indexlibrary{\idxcode{time_zone}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class time_zone {
   public:
     time_zone(time_zone&&) = default;
@@ -9582,7 +9582,7 @@ bool operator<(const time_zone& x, const time_zone& y) noexcept;
 \indexlibrary{\idxcode{zoned_traits}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   template<class T> struct zoned_traits {};
 }
 \end{codeblock}
@@ -9595,7 +9595,7 @@ and constructors taking \tcode{string_view}.
 A specialization for \tcode{const time_zone*} is provided by the implementation:
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   template<> struct zoned_traits<const time_zone*> {
     static const time_zone* default_zone();
     static const time_zone* locate_zone(string_view name);
@@ -9629,7 +9629,7 @@ static const time_zone* locate_zone(string_view name);
 \indexlibrary{\idxcode{zoned_time}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   template<class Duration, class TimeZonePtr = const time_zone*>
   class zoned_time {
   public:
@@ -10159,7 +10159,7 @@ Then calls \tcode{to_stream(os, fmt, tp.get_local_time(), \&info.abbrev, \&info.
 \indexlibrary{\idxcode{leap}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class leap {
   public:
     leap(const leap&)            = default;
@@ -10402,7 +10402,7 @@ template<class Duration>
 \indexlibrary{\idxcode{link}}
 
 \begin{codeblock}
-namespace std::chrono {
+package std::chrono {
   class link {
   public:
     link(link&&)            = default;
@@ -11239,7 +11239,7 @@ A \tcode{\%} character is extracted.
 #define CLOCKS_PER_SEC @\seebelow@
 #define TIME_UTC @\seebelow@
 
-namespace std {
+package std {
   using size_t = @\textit{see \ref{support.types.layout}}@;
   using clock_t = @\seebelow@;
   using time_t = @\seebelow@;

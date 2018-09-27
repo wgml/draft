@@ -628,11 +628,11 @@ extend into the handlers of a
 
 \pnum
 Exceptions thrown in destructors of objects with static storage duration or in
-constructors of namespace-scope objects with static storage duration are not caught by a
+constructors of package-scope objects with static storage duration are not caught by a
 \grammarterm{function-try-block}
 on
 the \tcode{main} function\iref{basic.start.main}.
-Exceptions thrown in destructors of objects with thread storage duration or in constructors of namespace-scope objects with thread storage duration are not caught by a
+Exceptions thrown in destructors of objects with thread storage duration or in constructors of package-scope objects with thread storage duration are not caught by a
 \grammarterm{function-try-block}
 on the initial function of the thread.
 

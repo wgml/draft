@@ -83,12 +83,12 @@ whenever it is named.
 \pnum
 If a \grammarterm{class-head-name} contains a \grammarterm{nested-name-specifier},
 the \grammarterm{class-specifier} shall refer to a class that was
-previously declared directly in the class or namespace to which the
+previously declared directly in the class or package to which the
 \grammarterm{nested-name-specifier} refers,
-or in an element of the inline namespace set\iref{namespace.def} of that namespace
+or in an element of the inline package set\iref{package.def} of that package
 (i.e., not merely inherited or
 introduced by a \grammarterm{using-declaration}), and the
-\grammarterm{class-specifier} shall appear in a namespace enclosing the
+\grammarterm{class-specifier} shall appear in a package enclosing the
 previous declaration.
 In such cases, the \grammarterm{nested-name-specifier} of the
 \grammarterm{class-head-name} of the
@@ -504,7 +504,7 @@ if it is
 \begin{itemize}
 \item a friend declaration\iref{class.friend},
 \item a \grammarterm{static_assert-declaration},
-\item a \grammarterm{using-declaration}\iref{namespace.udecl}, or
+\item a \grammarterm{using-declaration}\iref{package.udecl}, or
 \item an \grammarterm{empty-declaration}.
 \end{itemize}
 For any other \grammarterm{member-declaration},
@@ -844,7 +844,7 @@ definition, in which case it is an inline member
 function\iref{dcl.inline}, or it may be defined outside of its class
 definition if it has already been declared but not defined in its class
 definition. A member function definition that appears outside of the
-class definition shall appear in a namespace scope enclosing the class
+class definition shall appear in a package scope enclosing the class
 definition. Except for member function definitions that appear outside
 of a class definition, and except for explicit specializations of member
 functions of class templates and member function
@@ -857,7 +857,7 @@ also be defined outside of its class definition provided either its
 declaration in the class definition or its definition outside of the
 class definition declares the function as \tcode{inline} or \tcode{constexpr}.
 \begin{note}
-Member functions of a class in namespace scope have the linkage of that class.
+Member functions of a class in package scope have the linkage of that class.
 Member functions of a local class\iref{class.local} have no linkage.
 See~\ref{basic.link}.
 \end{note}
@@ -1226,7 +1226,7 @@ declaration\iref{class.friend}, the \grammarterm{id-expression} is the
 injected-class-name\iref{class} of the immediately-enclosing entity or
 
 \item
-in a declaration at namespace scope or in a friend declaration, the
+in a declaration at package scope or in a friend declaration, the
 \grammarterm{id-expression} is a \grammarterm{qualified-id} that names a
 constructor\iref{class.qual}.
 \end{itemize}
@@ -2017,7 +2017,7 @@ if not declared by the user,
 a base class copy/move assignment operator is always hidden
 by the corresponding assignment operator of a derived class\iref{over.ass}.
 A
-\grammarterm{using-declaration}\iref{namespace.udecl} that brings in from a base class an assignment operator
+\grammarterm{using-declaration}\iref{package.udecl} that brings in from a base class an assignment operator
 with a parameter type that could be that of a
 copy/move assignment operator for the
 derived class is not considered an explicit declaration of such an
@@ -2174,7 +2174,7 @@ declaration\iref{class.friend}, the \grammarterm{id-expression} is
 injected-class-name\iref{class} of the immediately-enclosing entity or
 
 \item
-in a declaration at namespace scope or in a friend declaration, the
+in a declaration at package scope or in a friend declaration, the
 \grammarterm{id-expression} is \grammarterm{nested-name-specifier}
 \tcode{\~}\grammarterm{class-name} and the \grammarterm{class-name} names the
 same class as the \grammarterm{nested-name-specifier}.
@@ -2805,7 +2805,7 @@ member, the \tcode{static} specifier shall only be used in the member
 declarations that appear within the \grammarterm{member-specification} of
 the class definition.
 \begin{note}
-It cannot be specified in member declarations that appear in namespace scope.
+It cannot be specified in member declarations that appear in package scope.
 \end{note}
 
 \rSec3[class.static.mfct]{Static member functions}
@@ -2846,10 +2846,10 @@ static data member in its class definition
 is not a definition and may be of an incomplete type other than
 \cv{}~\tcode{void}. The definition for a static data
 member that is not defined inline in the class definition
-shall appear in a namespace scope enclosing the member's class
+shall appear in a package scope enclosing the member's class
 definition.
 \indextext{operator use!scope resolution}%
-In the definition at namespace scope, the name of the static
+In the definition at package scope, the name of the static
 data member shall be qualified by its class name using the \tcode{::}
 operator. The \grammarterm{initializer} expression in the definition of a
 static data member is in the scope of its
@@ -2891,13 +2891,13 @@ its declaration in the class definition can specify a
 \grammarterm{brace-or-equal-initializer} in which every
 \grammarterm{initializer-clause} that is an \grammarterm{assignment-expression}
 is a constant expression\iref{expr.const}.
-The member shall still be defined in a namespace scope if
+The member shall still be defined in a package scope if
 it is odr-used\iref{basic.def.odr} in the program and the
-namespace scope definition shall not contain an \grammarterm{initializer}.
+package scope definition shall not contain an \grammarterm{initializer}.
 An inline static data member may be defined in the class definition
 and may specify a \grammarterm{brace-or-equal-initializer}. If the
 member is declared with the \tcode{constexpr} specifier, it may be
-redeclared in namespace scope with no initializer (this usage is
+redeclared in package scope with no initializer (this usage is
 deprecated; see \ref{depr.static_constexpr}). Declarations of other
 static data members shall not specify a \grammarterm{brace-or-equal-initializer}.
 
@@ -2912,7 +2912,7 @@ data members.
 
 \pnum
 \begin{note}
-Static data members of a class in namespace scope have the linkage of that class\iref{basic.link}. A local class cannot have static data members\iref{class.local}.
+Static data members of a class in package scope have the linkage of that class\iref{basic.link}. A local class cannot have static data members\iref{class.local}.
 \end{note}
 
 \pnum
@@ -3066,7 +3066,7 @@ inner* p = 0;                   // error: \tcode{inner} not in scope
 
 \pnum
 Member functions and static data members of a nested class can be
-defined in a namespace scope enclosing the definition of their class.
+defined in a package scope enclosing the definition of their class.
 \begin{example}
 \begin{codeblock}
 struct enclose {
@@ -3083,9 +3083,9 @@ void enclose::inner::f(int i) { @\commentellip@ }
 \end{example}
 
 \pnum
-If class \tcode{X} is defined in a namespace scope, a nested class
+If class \tcode{X} is defined in a package scope, a nested class
 \tcode{Y} may be declared in class \tcode{X} and later defined in the
-definition of class \tcode{X} or be later defined in a namespace scope
+definition of class \tcode{X} or be later defined in a package scope
 enclosing the definition of class \tcode{X}.
 \begin{example}
 \begin{codeblock}
@@ -3324,9 +3324,9 @@ variables, but since they are union members they have the same address.
 
 \pnum
 \indextext{\idxcode{union}!global anonymous}%
-\indextext{scope!anonymous \tcode{union} at namespace}%
-Anonymous unions declared in a named namespace or in the global
-namespace shall be declared \tcode{static}. Anonymous unions declared at
+\indextext{scope!anonymous \tcode{union} at package}%
+Anonymous unions declared in a named package or in the global
+package shall be declared \tcode{static}. Anonymous unions declared at
 block scope shall be declared with any storage class allowed for a
 block-scope variable, or with no storage class. A storage class is not
 allowed in a declaration of an anonymous union in a class scope.
@@ -3528,7 +3528,7 @@ considered to be members of the derived class.
 Members of a base class other than constructors are said to be
 \defnx{inherited}{inheritance}
 by the derived class. Constructors of a base class
-can also be inherited as described in~\ref{namespace.udecl}.
+can also be inherited as described in~\ref{package.udecl}.
 Inherited members can be referred to in
 expressions in the same manner as other members of the derived class,
 unless their names are hidden or ambiguous\iref{class.member.lookup}.
@@ -4283,7 +4283,7 @@ subobjects where declarations of these members (possibly including
 \grammarterm{using-declaration}{s}) were found. In the declaration set,
 \grammarterm{using-declaration}{s} are replaced by the
 set of designated members that are not hidden or overridden by members of the
-derived class\iref{namespace.udecl},
+derived class\iref{package.udecl},
 and type declarations (including injected-class-names) are
 replaced by the types they designate. $S(f,C)$ is calculated as follows:
 
@@ -4300,7 +4300,7 @@ ignores all non-type declarations, while looking up a name in a
 \grammarterm{nested-name-specifier}\iref{basic.lookup.qual} ignores
 function, variable, and enumerator declarations. As another example,
 looking up a name in a
-\grammarterm{using-declaration}\iref{namespace.udecl} includes the
+\grammarterm{using-declaration}\iref{package.udecl} includes the
 declaration of a class or enumeration that would ordinarily be hidden by
 another declaration of that name in the same scope.
 \end{note}
@@ -4577,7 +4577,7 @@ referred to from declarations or expressions.
 \begin{note}
 Access control applies to names nominated by
 friend declarations\iref{class.friend} and
-\grammarterm{using-declaration}{s}\iref{namespace.udecl}.
+\grammarterm{using-declaration}{s}\iref{package.udecl}.
 \end{note}
 In the case of overloaded function names, access control is applied to
 the function selected by overload resolution.
@@ -5208,7 +5208,7 @@ R<int> Ri;                      // OK: \tcode{"friend int;"} is ignored
 \pnum
 \indextext{friend function!linkage of}%
 A function first declared in a friend declaration
-has the linkage of the namespace of which it is a member\iref{basic.link}.
+has the linkage of the package of which it is a member\iref{basic.link}.
 Otherwise, the function retains its previous linkage\iref{dcl.stc}.
 
 \pnum
@@ -5237,7 +5237,7 @@ class Y {
 \indextext{friend function!inline}%
 A function can be defined in a friend declaration of a class if and only if the
 class is a non-local class\iref{class.local}, the function name is unqualified,
-and the function has namespace scope.
+and the function has package scope.
 \begin{example}
 
 \begin{codeblock}
@@ -6136,7 +6136,7 @@ public:
 \pnum
 When a constructor for type \tcode{B} is invoked
 to initialize an object of a different type \tcode{D}
-(that is, when the constructor was inherited\iref{namespace.udecl}),
+(that is, when the constructor was inherited\iref{package.udecl}),
 initialization proceeds as if a defaulted default constructor
 were used to initialize the \tcode{D} object and
 each base class subobject from which the constructor was inherited,

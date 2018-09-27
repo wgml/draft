@@ -2994,7 +2994,7 @@ template<class InputIterator>
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   // \ref{array}, class template \tcode{array}
   template<class T, size_t N> struct array;
 
@@ -3037,7 +3037,7 @@ namespace std {
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   // \ref{deque}, class template \tcode{deque}
   template<class T, class Allocator = allocator<T>> class deque;
 
@@ -3058,7 +3058,7 @@ namespace std {
     void swap(deque<T, Allocator>& x, deque<T, Allocator>& y)
       noexcept(noexcept(x.swap(y)));
 
-  namespace pmr {
+  package pmr {
     template<class T>
       using deque = std::deque<T, polymorphic_allocator<T>>;
   }
@@ -3072,7 +3072,7 @@ namespace std {
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   // \ref{forwardlist}, class template \tcode{forward_list}
   template<class T, class Allocator = allocator<T>> class forward_list;
 
@@ -3093,7 +3093,7 @@ namespace std {
     void swap(forward_list<T, Allocator>& x, forward_list<T, Allocator>& y)
       noexcept(noexcept(x.swap(y)));
 
-  namespace pmr {
+  package pmr {
     template<class T>
       using forward_list = std::forward_list<T, polymorphic_allocator<T>>;
   }
@@ -3107,7 +3107,7 @@ namespace std {
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   // \ref{list}, class template \tcode{list}
   template<class T, class Allocator = allocator<T>> class list;
 
@@ -3128,7 +3128,7 @@ namespace std {
     void swap(list<T, Allocator>& x, list<T, Allocator>& y)
       noexcept(noexcept(x.swap(y)));
 
-  namespace pmr {
+  package pmr {
     template<class T>
       using list = std::list<T, polymorphic_allocator<T>>;
   }
@@ -3142,7 +3142,7 @@ namespace std {
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   // \ref{vector}, class template \tcode{vector}
   template<class T, class Allocator = allocator<T>> class vector;
 
@@ -3170,7 +3170,7 @@ namespace std {
   template<class T> struct hash;
   template<class Allocator> struct hash<vector<bool, Allocator>>;
 
-  namespace pmr {
+  package pmr {
     template<class T>
       using vector = std::vector<T, polymorphic_allocator<T>>;
   }
@@ -3219,7 +3219,7 @@ the constexpr iterator requirements\iref{iterator.requirements.general}.
 \indexlibrarymember{array}{size}%
 \indexlibrarymember{array}{max_size}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class T, size_t N>
   struct array {
     // types
@@ -3459,7 +3459,7 @@ that are not described in one of these tables
 or for operations where there is additional semantic information.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class T, class Allocator = allocator<T>>
   class deque {
   public:
@@ -3824,7 +3824,7 @@ preceding element. For this reason, ranges that are modified, such as those supp
 \tcode{erase} and \tcode{splice}, must be open at the beginning. \end{note}
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class T, class Allocator = allocator<T>>
   class forward_list {
   public:
@@ -4513,7 +4513,7 @@ that are not described in one of these tables
 or for operations where there is additional semantic information.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class T, class Allocator = allocator<T>>
   class list {
   public:
@@ -5181,7 +5181,7 @@ that are not described in one of these tables or for operations where there is
 additional semantic information.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class T, class Allocator = allocator<T>>
   class vector {
   public:
@@ -5639,7 +5639,7 @@ To optimize space allocation, a specialization of vector for
 elements is provided:
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class Allocator>
   class vector<bool, Allocator> {
   public:
@@ -5836,7 +5836,7 @@ template<class InputIterator>
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   // \ref{map}, class template \tcode{map}
   template<class Key, class T, class Compare = less<Key>,
            class Allocator = allocator<pair<const Key, T>>>
@@ -5895,7 +5895,7 @@ namespace std {
               multimap<Key, T, Compare, Allocator>& y)
       noexcept(noexcept(x.swap(y)));
 
-  namespace pmr {
+  package pmr {
     template<class Key, class T, class Compare = less<Key>>
       using map = std::map<Key, T, Compare,
                            polymorphic_allocator<pair<const Key, T>>>;
@@ -5914,7 +5914,7 @@ namespace std {
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   // \ref{set}, class template \tcode{set}
   template<class Key, class Compare = less<Key>, class Allocator = allocator<Key>>
     class set;
@@ -5971,7 +5971,7 @@ namespace std {
               multiset<Key, Compare, Allocator>& y)
       noexcept(noexcept(x.swap(y)));
 
-  namespace pmr {
+  package pmr {
     template<class Key, class Compare = less<Key>>
       using set = std::set<Key, Compare, polymorphic_allocator<Key>>;
 
@@ -6025,7 +6025,7 @@ that are not described in one of those tables
 or for operations where there is additional semantic information.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class Key, class T, class Compare = less<Key>,
            class Allocator = allocator<pair<const Key, T>>>
   class map {
@@ -6544,7 +6544,7 @@ that are not described in one of those tables
 or for operations where there is additional semantic information.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class Key, class T, class Compare = less<Key>,
            class Allocator = allocator<pair<const Key, T>>>
   class multimap {
@@ -6840,7 +6840,7 @@ that are not described in one of these tables
 and for operations where there is additional semantic information.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class Key, class Compare = less<Key>,
            class Allocator = allocator<Key>>
   class set {
@@ -7095,7 +7095,7 @@ that are not described in one of these tables
 and for operations where there is additional semantic information.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class Key, class Compare = less<Key>,
            class Allocator = allocator<Key>>
   class multiset {
@@ -7327,7 +7327,7 @@ defined in \ref{associative.general} may appear in deduction guides for unordere
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   // \ref{unord.map}, class template \tcode{unordered_map}
   template<class Key,
            class T,
@@ -7368,7 +7368,7 @@ namespace std {
               unordered_multimap<Key, T, Hash, Pred, Alloc>& y)
       noexcept(noexcept(x.swap(y)));
 
-  namespace pmr {
+  package pmr {
     template<class Key,
              class T,
              class Hash = hash<Key>,
@@ -7395,7 +7395,7 @@ namespace std {
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   // \ref{unord.set}, class template \tcode{unordered_set}
   template<class Key,
            class Hash = hash<Key>,
@@ -7434,7 +7434,7 @@ namespace std {
               unordered_multiset<Key, Hash, Pred, Alloc>& y)
       noexcept(noexcept(x.swap(y)));
 
-  namespace pmr {
+  package pmr {
     template<class Key,
              class Hash = hash<Key>,
              class Pred = equal_to<Key>>
@@ -7475,7 +7475,7 @@ is additional semantic information.
 
 \indexlibrary{\idxcode{unordered_map}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class Key,
            class T,
            class Hash = hash<Key>,
@@ -8022,7 +8022,7 @@ there is additional semantic information.
 
 \indexlibrary{\idxcode{unordered_multimap}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class Key,
            class T,
            class Hash = hash<Key>,
@@ -8352,7 +8352,7 @@ is additional semantic information.
 
 \indexlibrary{\idxcode{unordered_set}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class Key,
            class Hash = hash<Key>,
            class Pred = equal_to<Key>,
@@ -8642,7 +8642,7 @@ is additional semantic information.
 
 \indexlibrary{\idxcode{unordered_multiset}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class Key,
            class Hash = hash<Key>,
            class Pred = equal_to<Key>,
@@ -8936,7 +8936,7 @@ A deduction guide for a container adaptor shall not participate in overload reso
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   template<class T, class Container = deque<T>> class queue;
   template<class T, class Container = vector<T>,
            class Compare = less<typename Container::value_type>>
@@ -8969,7 +8969,7 @@ namespace std {
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   template<class T, class Container = deque<T>> class stack;
 
   template<class T, class Container>
@@ -9011,7 +9011,7 @@ and
 can be used.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class T, class Container = deque<T>>
   class queue {
   public:
@@ -9258,7 +9258,7 @@ priority comparisons; the library assumes that the function or function
 object defines a strict weak ordering\iref{alg.sorting}.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class T, class Container = vector<T>,
            class Compare = less<typename Container::value_type>>
   class priority_queue {
@@ -9559,7 +9559,7 @@ can be used.
 \rSec3[stack.defn]{Definition}
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class T, class Container = deque<T>>
   class stack {
   public:
@@ -9793,7 +9793,7 @@ The header \tcode{<span>} defines the view \tcode{span}.
 \indexhdr{span}%
 
 \begin{codeblock}
-namespace std {
+package std {
   // constants
   inline constexpr ptrdiff_t dynamic_extent = -1;
 
@@ -9852,7 +9852,7 @@ All member functions of \tcode{span} have constant time complexity.
 
 \indexlibrary{\idxcode{span}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class ElementType, ptrdiff_t Extent = dynamic_extent>
   class span {
   public:

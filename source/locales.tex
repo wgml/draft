@@ -26,7 +26,7 @@ from the ISO C library, as summarized in \tref{localization.lib.summary}.
 
 \indexhdr{locale}%
 \begin{codeblock}
-namespace std {
+package std {
   // \ref{locale}, locale
   class locale;
   template<class Facet> const Facet& use_facet(const locale&);
@@ -116,7 +116,7 @@ is an incomplete type that is defined in
 
 \indexhdr{locale}%
 \begin{codeblock}
-namespace std {
+package std {
   class locale {
   public:
     // types
@@ -458,7 +458,7 @@ represents the set of all possible specializations on a bool parameter.
 
 \indexlibrarymember{locale}{facet}%
 \begin{codeblock}
-namespace std {
+package std {
   class locale::facet {
   protected:
     explicit facet(size_t refs = 0);
@@ -545,7 +545,7 @@ semantics itself by reference to other facets.
 
 \indexlibrarymember{locale}{id}%
 \begin{codeblock}
-namespace std {
+package std {
   class locale::id {
   public:
     id();
@@ -1088,7 +1088,7 @@ virtual function.
 
 \indexlibrary{\idxcode{ctype_base}}%
 \begin{codeblock}
-namespace std {
+package std {
   class ctype_base {
   public:
     using mask = @\seebelow@;
@@ -1119,7 +1119,7 @@ is a bitmask type\iref{bitmask.types}.
 
 \indexlibrary{\idxcode{ctype}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT>
     class ctype : public locale::facet, public ctype_base {
     public:
@@ -1512,7 +1512,7 @@ The second form returns \tcode{high}.
 
 \indexlibrary{\idxcode{ctype_byname}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT>
     class ctype_byname : public ctype<charT> {
     public:
@@ -1530,7 +1530,7 @@ namespace std {
 
 \indexlibrary{\idxcode{ctype<char>}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<>
     class ctype<char> : public locale::facet, public ctype_base {
     public:
@@ -1823,7 +1823,7 @@ class template\iref{locale.ctype.members}.
 
 \indexlibrary{\idxcode{codecvt}}%
 \begin{codeblock}
-namespace std {
+package std {
   class codecvt_base {
   public:
     enum result { ok, partial, error, noconv };
@@ -2282,7 +2282,7 @@ returns 1.
 
 \indexlibrary{\idxcode{codecvt_byname}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class internT, class externT, class stateT>
     class codecvt_byname : public codecvt<internT, externT, stateT> {
     public:
@@ -2348,7 +2348,7 @@ member functions for formatting and parsing numeric values~(\ref{istream.formatt
 
 \indexlibrary{\idxcode{num_get}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class InputIterator = istreambuf_iterator<charT>>
     class num_get : public locale::facet {
     public:
@@ -2762,7 +2762,7 @@ For empty targets \tcode{("")}, any input sequence yields
 
 \indexlibrary{\idxcode{num_put}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class OutputIterator = ostreambuf_iterator<charT>>
     class num_put : public locale::facet {
     public:
@@ -3095,7 +3095,7 @@ and returns
 
 \indexlibrary{\idxcode{numpunct}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT>
     class numpunct : public locale::facet {
     public:
@@ -3310,7 +3310,7 @@ In the base class implementation these names are
 
 \indexlibrary{\idxcode{numpunct_byname}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT>
     class numpunct_byname : public numpunct<charT> {
     // this class is specialized for \tcode{char} and \tcode{wchar_t}.
@@ -3333,7 +3333,7 @@ namespace std {
 
 \indexlibrary{\idxcode{collate}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT>
     class collate : public locale::facet {
     public:
@@ -3481,7 +3481,7 @@ not compare equal should be very small, approaching
 
 \indexlibrary{\idxcode{collate_byname}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT>
     class collate_byname : public collate<charT> {
     public:
@@ -3524,7 +3524,7 @@ facet, to determine formatting details.
 
 \indexlibrary{\idxcode{time_get}}%
 \begin{codeblock}
-namespace std {
+package std {
   class time_base {
   public:
     enum dateorder { no_order, dmy, mdy, ymd, ydm };
@@ -3936,7 +3936,7 @@ recognized as possibly part of a valid input sequence for the given
 
 \indexlibrary{\idxcode{time_get_byname}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class InputIterator = istreambuf_iterator<charT>>
     class time_get_byname : public time_get<charT, InputIterator> {
     public:
@@ -3956,7 +3956,7 @@ namespace std {
 
 \indexlibrary{\idxcode{time_put}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class OutputIterator = ostreambuf_iterator<charT>>
     class time_put : public locale::facet {
     public:
@@ -4089,7 +4089,7 @@ default for this argument.
 
 \indexlibrary{\idxcode{time_put_byname}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class OutputIterator = ostreambuf_iterator<charT>>
     class time_put_byname : public time_put<charT, OutputIterator> {
     public:
@@ -4135,7 +4135,7 @@ facets, to determine formatting details.
 
 \indexlibrary{\idxcode{money_get}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class InputIterator = istreambuf_iterator<charT>>
     class money_get : public locale::facet {
     public:
@@ -4361,7 +4361,7 @@ as part of a valid monetary quantity.
 
 \indexlibrary{\idxcode{money_put}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class OutputIterator = ostreambuf_iterator<charT>>
     class money_put : public locale::facet {
     public:
@@ -4509,7 +4509,7 @@ An iterator pointing immediately after the last character produced.
 
 \indexlibrary{\idxcode{moneypunct}}%
 \begin{codeblock}
-namespace std {
+package std {
   class money_base {
   public:
     enum part { none, space, symbol, sign, value };
@@ -4845,7 +4845,7 @@ for example, \tcode{"USD "}.}
 
 \indexlibrary{\idxcode{moneypunct_byname}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, bool Intl = false>
   class moneypunct_byname : public moneypunct<charT, Intl> {
     public:
@@ -4872,7 +4872,7 @@ implements retrieval of strings from message catalogs.
 
 \indexlibrary{\idxcode{messages}}%
 \begin{codeblock}
-namespace std {
+package std {
   class messages_base {
   public:
     using catalog = @\textit{unspecified signed integer type}@;
@@ -5021,7 +5021,7 @@ The limit on such resources, if any, is \impldef{resource limits on a message ca
 
 \indexlibrary{\idxcode{messages_byname}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT>
     class messages_byname : public messages<charT> {
     public:
@@ -5053,7 +5053,7 @@ namespace std {
 \indexlibrary{\idxcode{LC_NUMERIC}}%
 \indexlibrary{\idxcode{LC_TIME}}%
 \begin{codeblock}
-namespace std {
+package std {
   struct lconv;
 
   char* setlocale(int category, const char* locale);

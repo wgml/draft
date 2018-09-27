@@ -34,7 +34,7 @@ and operations, as summarized below.
 
 \indexhdr{atomic}%
 \begin{codeblock}
-namespace std {
+package std {
   // \ref{atomics.order}, order and consistency
   enum class memory_order : @\unspec@;
   template<class T>
@@ -329,7 +329,7 @@ are defined, respectively.
 \indexlibrary{\idxcode{memory_order_seq_cst}}%
 
 \begin{codeblock}
-namespace std {
+package std {
   enum class memory_order : @\unspec@ {
     relaxed, consume, acquire, release, acq_rel, seq_cst
   };
@@ -573,7 +573,7 @@ processes. \end{note}
 \indexlibrary{\idxcode{atomic_ref}}%
 \indexlibrarymember{value_type}{atomic_ref}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class T> struct atomic_ref {
   private:
     T* ptr;             // \expos
@@ -924,7 +924,7 @@ For the specialization \tcode{atomic_ref<bool>}, see \ref{atomics.ref.generic}.
 \end{note}
 
 \begin{codeblock}
-namespace std {
+package std {
   template<> struct atomic_ref<@\placeholder{integral}@> {
   private:
     @\placeholder{integral}@* ptr;        // \expos
@@ -1047,7 +1047,7 @@ the specialization \tcode{atomic_ref<\placeholder{floating-\-point}>} provides
 additional atomic operations appropriate to floating-point types.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<> struct atomic_ref<@\placeholder{floating-point}@> {
   private:
     @\placeholder{floating-point}@* ptr;  // \expos
@@ -1146,7 +1146,7 @@ may be different than the calling thread's floating-point environment.
 \indexlibrary{\idxcode{atomic_ref<T*>}}%
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class T> struct atomic_ref<T*> {
   private:
     T** ptr;              // \expos
@@ -1291,7 +1291,7 @@ T* operator--(int) const noexcept;
 \indexlibrary{\idxcode{atomic}}%
 \indexlibrarymember{value_type}{atomic}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class T> struct atomic {
     using value_type = T;
     static constexpr bool is_always_lock_free = @\impdefx{whether a given \tcode{atomic} type's operations are always lock free}@;
@@ -1736,7 +1736,7 @@ For the specialization \tcode{atomic<bool>}, see \ref{atomics.types.generic}.
 \end{note}
 
 \begin{codeblock}
-namespace std {
+package std {
   template<> struct atomic<@\placeholder{integral}@> {
     using value_type = @\placeholder{integral}@;
     using difference_type = value_type;
@@ -1914,7 +1914,7 @@ the specialization \tcode{atomic<\placeholder{floating-point}>}
 provides additional atomic operations appropriate to floating-point types.
 
 \begin{codeblock}
-namespace std {
+package std {
   template<> struct atomic<@\placeholder{floating-point}@> {
     using value_type = @\placeholdernc{floating-point}@;
     using difference_type = value_type;
@@ -2053,7 +2053,7 @@ calling thread's floating-point environment.
 \indexlibrary{\idxcode{atomic<T*>}}%
 
 \begin{codeblock}
-namespace std {
+package std {
   template<class T> struct atomic<T*> {
     using value_type = T*;
     using difference_type = ptrdiff_t;
@@ -2276,7 +2276,7 @@ compiled as either C or Java, for example in a shared header file.
 \rSec1[atomics.flag]{Flag type and operations}
 
 \begin{codeblock}
-namespace std {
+package std {
   struct atomic_flag {
     bool test_and_set(memory_order = memory_order::seq_cst) volatile noexcept;
     bool test_and_set(memory_order = memory_order::seq_cst) noexcept;

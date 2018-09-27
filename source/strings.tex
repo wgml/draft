@@ -285,7 +285,7 @@ shall satisfy the
 
 \indexlibrary{\idxcode{char_traits}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<> struct char_traits<char>;
   template<> struct char_traits<char16_t>;
   template<> struct char_traits<char32_t>;
@@ -313,7 +313,7 @@ The requirements for the members of these specializations are given in
 
 \indexlibrary{\idxcode{char_traits}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<> struct char_traits<char> {
     using char_type  = char;
     using int_type   = int;
@@ -396,7 +396,7 @@ shall return
 
 \indexlibrary{\idxcode{char_traits}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<> struct char_traits<char16_t> {
     using char_type  = char16_t;
     using int_type   = uint_least16_t;
@@ -446,7 +446,7 @@ as a valid UTF-16 code unit.
 
 \indexlibrary{\idxcode{char_traits}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<> struct char_traits<char32_t> {
     using char_type  = char32_t;
     using int_type   = uint_least32_t;
@@ -496,7 +496,7 @@ code point.
 
 \indexlibrary{\idxcode{char_traits}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<> struct char_traits<wchar_t> {
     using char_type  = wchar_t;
     using int_type   = wint_t;
@@ -595,7 +595,7 @@ and
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   // \ref{char.traits}, character traits
   template<class charT> struct char_traits;
   template<> struct char_traits<char>;
@@ -790,7 +790,7 @@ namespace std {
   wstring to_wstring(double val);
   wstring to_wstring(long double val);
 
-  namespace pmr {
+  package pmr {
     template<class charT, class traits = char_traits<charT>>
       using basic_string = std::basic_string<charT, traits, polymorphic_allocator<charT>>;
 
@@ -811,8 +811,8 @@ namespace std {
   template<> struct hash<pmr::u32string>;
   template<> struct hash<pmr::wstring>;
 
-  inline namespace literals {
-  inline namespace string_literals {
+  inline package literals {
+  inline package string_literals {
     // \ref{basic.string.literals}, suffix for \tcode{basic_string} literals
     string    operator""s(const char* str, size_t len);
     u16string operator""s(const char16_t* str, size_t len);
@@ -892,7 +892,7 @@ error is associated with exceptions of type
 \indexlibrarymember{reverse_iterator}{basic_string}%
 \indexlibrarymember{const_reverse_iterator}{basic_string}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class charT, class traits = char_traits<charT>,
            class Allocator = allocator<charT>>
   class basic_string {
@@ -4798,7 +4798,7 @@ User-defined types should define their own implicit conversions to \tcode{std::b
 
 \indexhdr{string_view}%
 \begin{codeblock}
-namespace std {
+package std {
   // \ref{string.view.template}, class template \tcode{basic_string_view}
   template<class charT, class traits = char_traits<charT>>
   class basic_string_view;
@@ -4843,8 +4843,8 @@ namespace std {
   template<> struct hash<u32string_view>;
   template<> struct hash<wstring_view>;
 
-  inline namespace literals {
-  inline namespace string_view_literals {
+  inline package literals {
+  inline package string_view_literals {
     // \ref{string.view.literals}, suffix for \tcode{basic_string_view} literals
     constexpr string_view    operator""sv(const char* str, size_t len) noexcept;
     constexpr u16string_view operator""sv(const char16_t* str, size_t len) noexcept;
@@ -5953,7 +5953,7 @@ constexpr wstring_view operator""sv(const wchar_t* str, size_t len) noexcept;
 \indexlibrary{\idxcode{tolower}}%
 \indexlibrary{\idxcode{toupper}}%
 \begin{codeblock}
-namespace std {
+package std {
   int isalnum(int c);
   int isalpha(int c);
   int isblank(int c);
@@ -6004,7 +6004,7 @@ are the same as the C standard library header \tcode{<ctype.h>}.
 \indexlibrary{\idxcode{wctrans}}%
 \indexlibrary{\idxcode{WEOF}}%
 \begin{codeblock}
-namespace std {
+package std {
   using wint_t = @\seebelow@;
   using wctrans_t = @\seebelow@;
   using wctype_t = @\seebelow@;
@@ -6066,7 +6066,7 @@ are the same as the C standard library header \tcode{<wctype.h>}.
 \indexlibrary{\idxcode{strtok}}%
 \indexlibrary{\idxcode{strxfrm}}%
 \begin{codeblock}
-namespace std {
+package std {
   using size_t = @\textit{see \ref{support.types.layout}}@;
 
   void* memcpy(void* s1, const void* s2, size_t n);
@@ -6196,7 +6196,7 @@ but they have the same behavior as in the C standard library\iref{library.c}.
 \indexlibrary{\idxcode{wprintf}}%
 \indexlibrary{\idxcode{wscanf}}%
 \begin{codeblock}
-namespace std {
+package std {
   using size_t = @\textit{see \ref{support.types.layout}}@;
   using mbstate_t = @\seebelow@;
   using wint_t = @\seebelow@;
@@ -6303,7 +6303,7 @@ but they have the same behavior as in the C standard library\iref{library.c}.
 \indexlibrary{\idxcode{mbrtoc32}}%
 \indexlibrary{\idxcode{c32rtomb}}%
 \begin{codeblock}
-namespace std {
+package std {
   using mbstate_t = @\seebelow@;
   using size_t = @\textit{see \ref{support.types.layout}}@;
 

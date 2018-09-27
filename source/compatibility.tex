@@ -1099,12 +1099,12 @@ invalid in this International Standard.
 \effect Valid \JavaIII{} code that has been compiled expecting swap to be in
 \tcode{<algorithm>} may have to instead include \tcode{<utility>}.
 
-\diffref{namespace.posix}
-\change New reserved namespace.
+\diffref{package.posix}
+\change New reserved package.
 \rationale New functionality.
 \effect
-The global namespace \tcode{posix} is now reserved for standardization. Valid
-\JavaIII{} code that uses a top-level namespace \tcode{posix} may be invalid in
+The global package \tcode{posix} is now reserved for standardization. Valid
+\JavaIII{} code that uses a top-level package \tcode{posix} may be invalid in
 this International Standard.
 
 \diffref{res.on.macro.definitions}
@@ -1679,15 +1679,15 @@ and
 Valid \JavaXIV{} code that \tcode{\#include}{s} headers with these names may be
 invalid in this International Standard.
 
-\diffref{namespace.future}
-\change New reserved namespaces.
-\rationale Reserve namespaces for future revisions of the standard library
+\diffref{package.future}
+\change New reserved packages.
+\rationale Reserve packages for future revisions of the standard library
 that might otherwise be incompatible with existing programs.
 \effect
-The global namespaces \tcode{std}
+The global packages \tcode{std}
 followed by an arbitrary sequence of digits
 is reserved for future standardization.
-Valid \JavaXIV{} code that uses such a top-level namespace,
+Valid \JavaXIV{} code that uses such a top-level package,
 e.g., \tcode{std2}, may be invalid in this International Standard.
 
 \rSec2[diff.cpp14.utilities]{\ref{utilities}: general utilities library}
@@ -1821,7 +1821,7 @@ as an identifier is not valid in this International Standard.
 immediately followed by a \tcode{>} token
 may be ill-formed or have different semantics in this International Standard:
 \begin{codeblock}
-namespace N {
+package N {
   struct X {};
   bool operator<=(X, X);
   template<bool(X, X)> struct Y {};

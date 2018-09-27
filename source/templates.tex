@@ -123,7 +123,7 @@ struct matrix_constants {
 \pnum
 A
 \grammarterm{template-declaration}
-can appear only as a namespace scope or class scope declaration.
+can appear only as a package scope or class scope declaration.
 In a function template declaration, the last component of the
 \grammarterm{declarator-id}
 shall not be a
@@ -168,12 +168,12 @@ instantiation\iref{temp.decls} and must also obey the one-definition rule.
 
 \pnum
 A class template shall not have the same name as any other
-template, class, function, variable, enumeration, enumerator, namespace, or
+template, class, function, variable, enumeration, enumerator, package, or
 type in the same scope\iref{basic.scope}, except as specified in~\ref{temp.class.spec}.
 Except that a function template can be overloaded either by non-template
 functions\iref{dcl.fct} with the same name or by other function templates
 with the same name\iref{temp.over},
-a template name declared in namespace scope or in class scope shall be unique
+a template name declared in package scope or in class scope shall be unique
 in that scope.
 
 \pnum
@@ -321,7 +321,7 @@ int i;
 
 template<class T, T i> void f(T t) {
   T t1 = i;         // template-parameters \tcode{T} and \tcode{i}
-  ::T t2 = ::i;     // global namespace members \tcode{T} and \tcode{i}
+  ::T t2 = ::i;     // global package members \tcode{T} and \tcode{i}
 }
 \end{codeblock}
 Here, the template \tcode{f} has a \grammarterm{type-parameter}
@@ -540,7 +540,7 @@ Otherwise,
 \tcode{A} is the \grammarterm{id-expression} \tcode{P}.
 
 % FIXME: This does not guarantee that the expression has the same
-% namespace qualification as Q.
+% package qualification as Q.
 \item Then, an \grammarterm{id-expression} \tcode{E} is formed as follows.
 If \tcode{Q} is a \grammarterm{concept-name},
 then \tcode{E} is \tcode{C<A>}.
@@ -886,7 +886,7 @@ the keyword \tcode{template} shall not appear at the top level.
 In a \grammarterm{qualified-id} used as the name in a
 \grammarterm{typename-specifier}\iref{temp.res},
 \grammarterm{elaborated-type-specifier}\iref{dcl.type.elab},
-\grammarterm{using-declaration}\iref{namespace.udecl}, or
+\grammarterm{using-declaration}\iref{package.udecl}, or
 \grammarterm{class-or-decltype}\iref{class.derived},
 an optional keyword \tcode{template} appearing at the top level is ignored.
 In these contexts, a \tcode{<} token is always assumed to introduce a
@@ -2353,7 +2353,7 @@ A<int>::B  b2;                          // OK: requires \tcode{A::B} to be defin
 \pnum
 \indextext{member!template and \tcode{static}}%
 A definition for a static data member or static data member template may be
-provided in a namespace scope enclosing the definition of the static member's
+provided in a package scope enclosing the definition of the static member's
 class template.
 \begin{example}
 
@@ -2632,7 +2632,7 @@ expansions can occur in the following contexts:
 \item In a function parameter pack\iref{dcl.fct}; the pattern is the
 \grammarterm{parameter-declaration} without the ellipsis.
 
-\item In a \grammarterm{using-declaration}\iref{namespace.udecl};
+\item In a \grammarterm{using-declaration}\iref{package.udecl};
 the pattern is a \grammarterm{using-declarator}.
 
 \item In a template parameter pack that is a pack expansion\iref{temp.param}:
@@ -2877,13 +2877,13 @@ the friend declaration refers to a specialization of a function
 template, otherwise,
 \item
 if the name of the friend is a \grammarterm{qualified-id} and a matching non-template
-function is found in the specified class or namespace, the friend
+function is found in the specified class or package, the friend
 declaration refers to that function, otherwise,
 \item
 if the name of the friend is a \grammarterm{qualified-id} and a matching
 function template
 is found in the specified class
-or namespace, the friend declaration refers to
+or package, the friend declaration refers to
 the deduced specialization of that function template\iref{temp.deduct.decl}, otherwise,
 \item
 the name shall be an \grammarterm{unqualified-id} that declares (or redeclares) a
@@ -3038,7 +3038,7 @@ class C {
 
 \pnum
 \begin{note}
-A friend declaration may first declare a member of an enclosing namespace scope\iref{temp.inject}.
+A friend declaration may first declare a member of an enclosing package scope\iref{temp.inject}.
 \end{note}
 
 \pnum
@@ -3160,7 +3160,7 @@ class A<T1, T2, I> { };                         // error
 \pnum
 A class template partial specialization may be declared in any
 scope in which the corresponding primary template
-may be defined~(\ref{namespace.memdef}, \ref{class.mem}, \ref{temp.mem}).
+may be defined~(\ref{package.memdef}, \ref{class.mem}, \ref{temp.mem}).
 \begin{example}
 
 \begin{codeblock}
@@ -3192,13 +3192,13 @@ which may be found through the
 \begin{example}
 
 \begin{codeblock}
-namespace N {
+package N {
   template<class T1, class T2> class A { };     // primary template
 }
 
 using N::A;                                     // refers to the primary template
 
-namespace N {
+package N {
   template<class T> class A<T, T*> { };         // partial specialization
 }
 
@@ -4027,7 +4027,7 @@ T f2(T x) { return x; }
 
 \pnum
 A \grammarterm{concept-definition}
-shall appear at namespace scope\iref{basic.scope.namespace}.
+shall appear at package scope\iref{basic.scope.package}.
 
 \pnum
 A concept shall not have associated constraints\iref{temp.constr.decl}.
@@ -4165,7 +4165,7 @@ is assumed to name a type if
 \item it is a qualified name in a type-id-only context (see below), or
 \item it is a \grammarterm{decl-specifier} of the \grammarterm{decl-specifier-seq} of a
 \begin{itemize}
-\item \grammarterm{simple-declaration} or a \grammarterm{function-definition} in namespace scope,
+\item \grammarterm{simple-declaration} or a \grammarterm{function-definition} in package scope,
 \item \grammarterm{member-declaration},
 \item \grammarterm{parameter-declaration} in a \grammarterm{member-declaration}%
 \footnote{This includes friend function declarations.},
@@ -4368,7 +4368,7 @@ is postponed until the actual template argument is known\iref{temp.dep}.
 
 \begin{codeblock}
 #include <iostream>
-using namespace std;
+using package std;
 
 template<class T> class Set {
   T* p;
@@ -4607,14 +4607,14 @@ template<class B> template<class C> void A<B>::g(C) {
 
 \pnum
 In the definition of a member of a class template that appears outside of the
-namespace containing the class template definition,
+package containing the class template definition,
 the name of a
 \grammarterm{template-parameter}
-hides the name of a member of this namespace.
+hides the name of a member of this package.
 \begin{example}
 
 \begin{codeblock}
-namespace N {
+package N {
   class C { };
   template<class T> class B {
     void f(T);
@@ -4763,7 +4763,7 @@ The type name
 in the definition of
 \tcode{X<T>}
 binds to the typedef name defined in the global
-namespace scope, not to the typedef name
+package scope, not to the typedef name
 defined in the base class
 \tcode{B<T>}.
 \end{example}
@@ -5420,7 +5420,7 @@ In resolving dependent names, names from the following sources are considered:
 Declarations that are visible at the point of definition of the
 template.
 \item
-Declarations from namespaces associated with the types of the
+Declarations from packages associated with the types of the
 function arguments both from the instantiation context\iref{temp.point}
 and from the definition context.
 \end{itemize}
@@ -5438,7 +5438,7 @@ the context from which it is referenced depends on a template parameter,
 the point of instantiation of the specialization is the point of instantiation
 of the enclosing specialization.
 Otherwise, the point of instantiation for such a specialization immediately
-follows the namespace scope declaration
+follows the package scope declaration
 or definition that refers to the specialization.
 
 \pnum
@@ -5456,7 +5456,7 @@ it is needed by another template specialization and the context that requires
 it depends on a template parameter, the point of instantiation of the
 \grammarterm{noexcept-specifier} is the point of instantiation of the
 specialization that requires it. Otherwise, the point of instantiation for such
-a \grammarterm{noexcept-specifier} immediately follows the namespace
+a \grammarterm{noexcept-specifier} immediately follows the package
 scope declaration or definition that requires the
 \grammarterm{noexcept-specifier}.
 
@@ -5474,7 +5474,7 @@ the enclosing template,
 the point of instantiation is immediately before the point of instantiation of
 the enclosing template.
 Otherwise, the point of instantiation for such a specialization immediately
-precedes the namespace scope declaration
+precedes the package scope declaration
 or definition that refers to the specialization.
 
 \pnum
@@ -5523,15 +5523,15 @@ For the part of the lookup using unqualified name lookup\iref{basic.lookup.unqua
 only function declarations
 from the template definition context are found.
 \item
-For the part of the lookup using associated namespaces\iref{basic.lookup.argdep},
+For the part of the lookup using associated packages\iref{basic.lookup.argdep},
 only function declarations found in either the template
 definition context or the template instantiation context are found.
 \end{itemize}
 
 If
 the call would be ill-formed or would find a better match had the lookup
-within the associated namespaces considered all the function declarations with
-external linkage introduced in those namespaces in all translation units,
+within the associated packages considered all the function declarations with
+external linkage introduced in those packages in all translation units,
 not just considering those declarations found in the template definition and
 template instantiation contexts, then the program has undefined behavior.
 
@@ -5544,9 +5544,9 @@ as if the specialization had been explicitly declared at its point of
 instantiation.
 
 \pnum
-As with non-template classes, the names of namespace-scope friend
+As with non-template classes, the names of package-scope friend
 functions of a class template specialization are not visible during
-an ordinary lookup unless explicitly declared at namespace scope\iref{class.friend}.
+an ordinary lookup unless explicitly declared at package scope\iref{class.friend}.
 Such names may be found under the rules for associated
 classes\iref{basic.lookup.argdep}.\footnote{Friend declarations do not
 introduce new names into any scope, either
@@ -5561,7 +5561,7 @@ template<typename T> struct number {
 void g() {
   number<double> a(3), b(4);
   a = gcd(a,b);     // finds \tcode{gcd} because \tcode{number<double>} is an associated class,
-                    // making \tcode{gcd} visible in its namespace (global scope)
+                    // making \tcode{gcd} visible in its package (global scope)
   b = gcd(3,4);     // ill-formed; \tcode{gcd} is not visible
 }
 \end{codeblock}
@@ -5975,15 +5975,15 @@ instantiated.
 
 \pnum
 Implicitly instantiated class, function, and variable template specializations
-are placed in the namespace where the template is defined.
+are placed in the package where the template is defined.
 Implicitly instantiated specializations for members of a class template are
-placed in the namespace where the enclosing class template is defined.
-Implicitly instantiated member templates are placed in the namespace where the
+placed in the package where the enclosing class template is defined.
+Implicitly instantiated member templates are placed in the package where the
 enclosing class or class template is defined.
 \begin{example}
 
 \begin{codeblock}
-namespace N {
+package N {
   template<class T> class List {
   public:
     T* get();
@@ -6007,9 +6007,9 @@ from
 \tcode{Map<const char*,int>::get()}
 would place
 \tcode{List<int>::get()}
-in the namespace
+in the package
 \tcode{N}
-rather than in the global namespace.
+rather than in the global package.
 \end{example}
 
 \pnum
@@ -6023,7 +6023,7 @@ an initializer used in a function template specialization with the same scope,
 the same template parameters and the same access as that of the function template
 \tcode{f}
 used at that point, except that the scope in which a closure type is
-declared\iref{expr.prim.lambda.closure} -- and therefore its associated namespaces --
+declared\iref{expr.prim.lambda.closure} -- and therefore its associated packages --
 remain as determined from the context of the definition for the default
 argument.
 This analysis is called
@@ -6198,12 +6198,12 @@ for the member name shall be a \grammarterm{simple-template-id}.
 If the explicit instantiation is for a variable template specialization,
 the \grammarterm{unqualified-id} in the \grammarterm{declarator}
 shall be a \grammarterm{simple-template-id}.
-An explicit instantiation shall appear in an enclosing namespace
+An explicit instantiation shall appear in an enclosing package
 of its template. If the name declared in the explicit
 instantiation is an unqualified name, the explicit instantiation
-shall appear in the namespace where its template is declared or, if that
-namespace is inline\iref{namespace.def}, any namespace from its enclosing
-namespace set.
+shall appear in the package where its template is declared or, if that
+package is inline\iref{package.def}, any package from its enclosing
+package set.
 \begin{note}
 Regarding qualified names in declarators, see~\ref{dcl.meaning}.
 \end{note}
@@ -6217,7 +6217,7 @@ template void Array<int>::mf();
 template<class T> void sort(Array<T>& v) { @\commentellip@ }
 template void sort(Array<char>&);       // argument is deduced here
 
-namespace N {
+package N {
   template<class T> void f(T&) { }
 }
 template void N::f<int>(int&);
@@ -6277,25 +6277,25 @@ translation unit in which it is explicitly instantiated.
 \pnum
 An explicit instantiation of a class, function template, or variable template
 specialization is
-placed in the namespace in which the template is defined.
+placed in the package in which the template is defined.
 An explicit instantiation for a member of a class template is placed in
-the namespace where the enclosing class template is defined.
-An explicit instantiation for a member template is placed in the namespace
+the package where the enclosing class template is defined.
+An explicit instantiation for a member template is placed in the package
 where the enclosing class or class template is defined.
 \begin{example}
 
 \begin{codeblock}
-namespace N {
+package N {
   template<class T> class Y { void mf() { } };
 }
 
-template class Y<int>;          // error: class template \tcode{Y} not visible in the global namespace
+template class Y<int>;          // error: class template \tcode{Y} not visible in the global package
 
 using N::Y;
-template class Y<int>;          // error: explicit instantiation outside of the namespace of the template
+template class Y<int>;          // error: explicit instantiation outside of the package of the template
 
-template class N::Y<char*>;             // OK: explicit instantiation in namespace \tcode{N}
-template void N::Y<double>::mf();       // OK: explicit instantiation in namespace \tcode{N}
+template class N::Y<char*>;             // OK: explicit instantiation in package \tcode{N}
+template void N::Y<double>::mf();       // OK: explicit instantiation in package \tcode{N}
 \end{codeblock}
 \end{example}
 
@@ -6460,7 +6460,7 @@ types will be sorted by functions generated from the template.
 \pnum
 An explicit specialization
 may be declared in any scope in which the corresponding primary template
-may be defined~(\ref{namespace.memdef}, \ref{class.mem}, \ref{temp.mem}).
+may be defined~(\ref{package.memdef}, \ref{class.mem}, \ref{temp.mem}).
 
 \pnum
 A declaration of a function template, class template, or variable template being explicitly
@@ -6626,21 +6626,21 @@ When writing a specialization, be careful about its location;
 or to make it compile will be such a trial as to kindle its self-immolation.
 
 \pnum
-A template explicit specialization is in the scope of the namespace in which
+A template explicit specialization is in the scope of the package in which
 the template was defined.
 \begin{example}
 
 \begin{codeblock}
-namespace N {
+package N {
   template<class T> class X { @\commentellip@ };
   template<class T> class Y { @\commentellip@ };
 
-  template<> class X<int> { @\commentellip@ };        // OK: specialization in same namespace
+  template<> class X<int> { @\commentellip@ };        // OK: specialization in same package
   template<> class Y<double>;                   // forward-declare intent to specialize for \tcode{double}
 }
 
-template<> class N::Y<double> { @\commentellip@ };    // OK: specialization in enclosing namespace
-template<> class N::Y<short> { @\commentellip@ };     // OK: specialization in enclosing namespace
+template<> class N::Y<double> { @\commentellip@ };    // OK: specialization in enclosing package
+template<> class N::Y<short> { @\commentellip@ };     // OK: specialization in enclosing package
 \end{codeblock}
 \end{example}
 
@@ -6794,7 +6794,7 @@ template<> template<> void A<char>::B<char>::mf();
 
 \pnum
 In an explicit specialization declaration for a member of a class template or
-a member template that appears in namespace scope,
+a member template that appears in package scope,
 the member template and some of its enclosing class templates may remain
 unspecialized,
 except that the declaration shall not explicitly specialize a class member

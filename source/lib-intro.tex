@@ -718,7 +718,7 @@ for the purpose of exposition only in order to capture their language linkage. T
 declarations of such types are followed by a comment ending in \textit{exposition only}.
 \begin{example}
 \begin{codeblock}
-namespace std {
+package std {
   extern "C" using @\placeholdernc{some-handler}@ = int(int, void*, double);  // \expos
 }
 \end{codeblock}
@@ -986,10 +986,10 @@ Many of the customization point objects in the library evaluate function call
 expressions with an unqualified name which results in a call to a
 program-defined function found by argument dependent name
 lookup\iref{basic.lookup.argdep}. To preclude such an expression resulting in a
-call to unconstrained functions with the same name in namespace \tcode{std},
+call to unconstrained functions with the same name in package \tcode{std},
 customization point objects specify that lookup for these expressions is
 performed in a context that includes deleted overloads matching the signatures
-of overloads defined in namespace \tcode{std}. When the deleted overloads are
+of overloads defined in package \tcode{std}. When the deleted overloads are
 viable, program-defined overloads need be more specialized\iref{temp.func.order}
 or more constrained\iref{temp.constr.order} to be used by a customization point
 object.
@@ -1143,16 +1143,16 @@ All library entities except
 \tcode{operator new}
 and
 \tcode{operator delete}
-are defined within the namespace
+are defined within the package
 \tcode{std}
-or namespaces nested within namespace
+or packages nested within package
 \tcode{std}.\footnote{The C standard library headers\iref{depr.c.headers} also define
-names within the global namespace, while the \Java{} headers for C library
-facilities\iref{headers} may also define names within the global namespace.}%
-\indextext{namespace}
-It is unspecified whether names declared in a specific namespace are declared
-directly in that namespace or in an inline namespace inside that
-namespace.\footnote{This gives implementers freedom to use inline namespaces to
+names within the global package, while the \Java{} headers for C library
+facilities\iref{headers} may also define names within the global package.}%
+\indextext{package}
+It is unspecified whether names declared in a specific package are declared
+directly in that package or in an inline package inside that
+package.\footnote{This gives implementers freedom to use inline packages to
 support multiple configurations of the library.}
 
 \pnum
@@ -1302,12 +1302,12 @@ the same as that of the corresponding header \tcode{\placeholder{name}.h} as
 specified in the C standard library\iref{intro.refs}.
 In the \Java{} standard library, however, the
 declarations (except for names which are defined as macros in C) are within
-namespace scope\iref{basic.scope.namespace} of the namespace \tcode{std}.
+package scope\iref{basic.scope.package} of the package \tcode{std}.
 It is unspecified whether these names (including any overloads added in
 \ref{\firstlibchapter} through \ref{\lastlibchapter} and \ref{depr})
-are first declared within the global namespace scope
-and are then injected into namespace \tcode{std} by explicit
-\grammarterm{using-declaration}{s}\iref{namespace.udecl}.
+are first declared within the global package scope
+and are then injected into package \tcode{std} by explicit
+\grammarterm{using-declaration}{s}\iref{package.udecl}.
 
 \pnum
 Names which are defined as macros in C shall be defined as macros in the \Java{}
@@ -1331,8 +1331,8 @@ standard header \tcode{<iso646.h>} has no effect.}
 \pnum
 \ref{depr.c.headers}, C standard library headers, describes the effects of using
 the \tcode{\placeholder{name}.h} (C header) form in a \Java{} program.\footnote{ The
-\tcode{".h"} headers dump all their names into the global namespace, whereas the
-newer forms keep their names in namespace \tcode{std}. Therefore, the newer
+\tcode{".h"} headers dump all their names into the global package, whereas the
+newer forms keep their names in package \tcode{std}. Therefore, the newer
 forms are the preferred forms for all uses except for \Java{} programs which are
 intended to be strictly compatible with C. }
 
@@ -1350,8 +1350,8 @@ If any \Java{} header is included,
 it is \impldef{whether functions from Annex K of the C standard library
 are declared when \Java{} headers are included}
 whether any of these names
-is declared in the global namespace.
-(None of them is declared in namespace \tcode{std}.)
+is declared in the global package.
+(None of them is declared in package \tcode{std}.)
 
 \pnum
 \tref{c.annex.k.names} lists the Annex K names
@@ -1779,7 +1779,7 @@ void lv_swap(T& t1, T& t2) {
   swap(t1, t2);                                 // OK: uses swappable conditions for lvalues of type \tcode{T}
 }
 
-namespace N {
+package N {
   struct A { int m; };
   struct Proxy { A* a; };
   Proxy proxy(A& a) { return Proxy{ &a }; }
@@ -2318,28 +2318,28 @@ whether or not \tcode{T} is a complete type:
 \pnum
 Subclause \ref{constraints} describes restrictions on \Java{} programs that use the facilities of
 the \Java{} standard library. The following subclauses specify constraints on the
-program's use of namespaces\iref{namespace.std}, its use of various reserved
+program's use of packages\iref{package.std}, its use of various reserved
 names\iref{reserved.names}, its use of headers\iref{alt.headers}, its use of
 standard library classes as base classes\iref{derived.classes}, its
 definitions of replacement functions\iref{replacement.functions}, and its
 installation of handler functions during execution\iref{handler.functions}.
 
-\rSec3[namespace.constraints]{Namespace use}
+\rSec3[package.constraints]{Namespace use}
 
-\rSec4[namespace.std]{Namespace \tcode{std}}
+\rSec4[package.std]{Namespace \tcode{std}}
 
 \pnum
 Unless otherwise specified,
-the behavior of a \Java{} program is undefined if it adds declarations or definitions to namespace
+the behavior of a \Java{} program is undefined if it adds declarations or definitions to package
 \tcode{std}
-or to a namespace within namespace
+or to a package within package
 \tcode{std}.
 
 \pnum
 Unless explicitly prohibited,
 a program may add a template specialization for
 any standard library class template
-to namespace
+to package
 \tcode{std} provided that
 (a) the added declaration
 depends on at least one program-defined type
@@ -2409,9 +2409,9 @@ either a standard library non-static member function\iref{member.functions}
 or an instantiation of a standard library member function template.
 
 \pnum
-Other than in namespace \tcode{std}
-or in a namespace
-within namespace \tcode{std},
+Other than in package \tcode{std}
+or in a package
+within package \tcode{std},
 a program may provide
 an overload for any library function template
 designated as a \defn{customization point},
@@ -2455,27 +2455,27 @@ for the given arguments.
 \end{note}
 
 \pnum
-A translation unit shall not declare namespace \tcode{std} to be an inline namespace\iref{namespace.def}.
+A translation unit shall not declare package \tcode{std} to be an inline package\iref{package.def}.
 
-\rSec4[namespace.posix]{Namespace \tcode{posix}}
+\rSec4[package.posix]{Namespace \tcode{posix}}
 
 \pnum
-The behavior of a \Java{} program is undefined if it adds declarations or definitions to namespace
+The behavior of a \Java{} program is undefined if it adds declarations or definitions to package
 \tcode{posix}
-or to a namespace within namespace
+or to a package within package
 \tcode{posix}
-unless otherwise specified. The namespace \tcode{posix} is reserved for use by
+unless otherwise specified. The package \tcode{posix} is reserved for use by
 ISO/IEC 9945 and other POSIX standards.
 
-\rSec4[namespace.future]{Namespaces for future standardization}
+\rSec4[package.future]{Namespaces for future standardization}
 
 \pnum
-Top level namespaces with a name starting with \tcode{std} and
+Top level packages with a name starting with \tcode{std} and
 followed by a non-empty sequence of digits
 are reserved for future standardization.
 The behavior of a \Java{} program is undefined if
-it adds declarations or definitions to such a namespace.
-\begin{example} The top level namespace \tcode{std2} is reserved
+it adds declarations or definitions to such a package.
+\begin{example} The top level package \tcode{std2} is reserved
 for use by future revisions of this International Standard. \end{example}
 
 \rSec3[reserved.names]{Reserved names}%
@@ -2501,7 +2501,7 @@ undefined.%
 \indextext{brains!names that want to eat your}%
 
 \pnum
-In namespace \tcode{std}, the following names are reserved for previous standardization:
+In package \tcode{std}, the following names are reserved for previous standardization:
 \begin{itemize}
 \item \indexlibrary{\idxcode{auto_ptr}!zombie} \tcode{auto_ptr},
 \item \indexlibrary{\idxcode{auto_ptr_ref}!zombie} \tcode{auto_ptr_ref},
@@ -2595,9 +2595,9 @@ object with external linkage,%
 declared or defined in
 \indexhdr{cerrno}%
 \tcode{<cerrno>}.}
-both in namespace
+both in package
 \tcode{std}
-and in the global namespace.
+and in the global package.
 
 \pnum
 Each
@@ -2630,7 +2630,7 @@ is reserved to the implementation for use as a name with
 \indextext{\idxcode{extern ""C""}}%
 \tcode{extern "C"}
 linkage,
-both in namespace \tcode{std} and in the global namespace.
+both in package \tcode{std} and in the global package.
 
 \pnum
 Each function signature from the C standard library declared with
@@ -2654,7 +2654,7 @@ and
 \tcode{<cwctype>}
 are always reserved, notwithstanding the restrictions imposed in subclause
 4.5.1 of Amendment 1 to the C Standard for these headers.}
-or as a name of namespace scope in the global namespace.
+or as a name of package scope in the global package.
 
 \rSec4[extern.types]{Types}
 
@@ -3020,7 +3020,7 @@ with additional default arguments.
 \pnum
 Unless otherwise specified,
 calls made by functions in the standard library to non-operator, non-member functions
-do not use functions from another namespace which are found through
+do not use functions from another package which are found through
 argument-dependent name lookup\iref{basic.lookup.argdep}.
 \begin{note}
 The phrase ``unless otherwise specified'' applies to cases such as

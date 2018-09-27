@@ -26,7 +26,7 @@ the form
     explicit-instantiation\br
     explicit-specialization\br
     linkage-specification\br
-    namespace-definition\br
+    package-definition\br
     empty-declaration\br
     attribute-declaration
 \end{bnf}
@@ -35,7 +35,7 @@ the form
 \nontermdef{block-declaration}\br
     simple-declaration\br
     asm-definition\br
-    namespace-alias-definition\br
+    package-alias-definition\br
     using-declaration\br
     using-directive\br
     static_assert-declaration\br
@@ -82,9 +82,9 @@ the form
 \grammarterm{function-definition}{s} are described in~\ref{dcl.fct.def} and
 \grammarterm{template-declaration}{s} and
 \grammarterm{deduction-guide}{s} are described in \ref{temp};
-\grammarterm{namespace-definition}{s} are described in~\ref{namespace.def},
-\grammarterm{using-declaration}{s} are described in~\ref{namespace.udecl} and
-\grammarterm{using-directive}{s} are described in~\ref{namespace.udir}.
+\grammarterm{package-definition}{s} are described in~\ref{package.def},
+\grammarterm{using-declaration}{s} are described in~\ref{package.udecl} and
+\grammarterm{using-directive}{s} are described in~\ref{package.udir}.
 \end{note}
 
 \pnum
@@ -124,7 +124,7 @@ is \impldef{meaning of attribute declaration}.
 \indextext{scope}%
 A declaration occurs in a scope\iref{basic.scope}; the scope rules are
 summarized in~\ref{basic.lookup}. A declaration that declares a function
-or defines a class, namespace, template, or function also has one or
+or defines a class, package, template, or function also has one or
 more scopes nested within it. These nested scopes, in turn, can have
 declarations nested within them. Unless otherwise stated, utterances in
 \ref{dcl.dcl} about components in, of, or contained by a
@@ -344,8 +344,8 @@ appears in a \grammarterm{decl-specifier-seq}, there can be no
 \tcode{typedef} specifier in the same \grammarterm{decl-specifier-seq} and
 the \grammarterm{init-declarator-list} or \grammarterm{member-declarator-list}
 of the declaration shall not be
-empty (except for an anonymous union declared in a named namespace or in the
-global namespace, which shall be declared
+empty (except for an anonymous union declared in a named package or in the
+global package, which shall be declared
 \indextext{specifier!\idxcode{static}}%
 \tcode{static}\iref{class.union.anon}). The
 \grammarterm{storage-class-specifier} applies to the name declared by each
@@ -367,7 +367,7 @@ has automatic storage duration by default\iref{basic.stc.auto}.
 The \tcode{thread_local} specifier
 indicates that the named entity has thread storage duration\iref{basic.stc.thread}. It
 shall be applied only
-to the names of variables of namespace
+to the names of variables of package
 or block scope and to the names of static data members.
 When \tcode{thread_local} is applied to a variable of block scope the
 \grammarterm{storage-class-specifier} \tcode{static} is implied if no other
@@ -2330,13 +2330,13 @@ or partial specializations\iref{temp.spec}.
 When the
 \grammarterm{declarator-id}
 is qualified, the declaration shall refer to a previously declared member
-of the class or namespace to which the qualifier refers (or,
-in the case of a namespace,
-of an element of the inline namespace
-set of that namespace\iref{namespace.def}) or to a specialization thereof; the member
+of the class or package to which the qualifier refers (or,
+in the case of a package,
+of an element of the inline package
+set of that package\iref{package.def}) or to a specialization thereof; the member
 shall not merely have been introduced by a
 \grammarterm{using-declaration}
-in the scope of the class or namespace nominated by the
+in the scope of the class or package nominated by the
 \grammarterm{nested-name-specifier}
 of the
 \grammarterm{declarator-id}.
@@ -2347,7 +2347,7 @@ If the qualifier is the global
 \tcode{::}
 scope resolution operator, the
 \grammarterm{declarator-id}
-refers to a name declared in the global namespace scope.
+refers to a name declared in the global package scope.
 \end{note}
 The optional \grammarterm{attribute-specifier-seq} following a \grammarterm{declarator-id} appertains to the entity that is declared.
 
@@ -3778,7 +3778,7 @@ A parameter shall not appear as a potentially-evaluated expression
 in a default argument.
 \indextext{argument and name hiding!default}%
 Parameters of a function declared before a default argument
-are in scope and can hide namespace and class member names.
+are in scope and can hide package and class member names.
 \begin{example}
 \begin{codeblock}
 int a;
@@ -3829,11 +3829,11 @@ int (*p2)() = &f;                   // error: type mismatch
 \end{codeblock}
 \end{example}
 When a declaration of a function is introduced by way of a
-\grammarterm{using-declaration}\iref{namespace.udecl},
+\grammarterm{using-declaration}\iref{package.udecl},
 any default argument information associated
 with the declaration is made known as well.
 If the function is redeclared
-thereafter in the namespace with additional default arguments,
+thereafter in the package with additional default arguments,
 the additional arguments are also known at any point following
 the redeclaration where the
 \grammarterm{using-declaration}
@@ -4420,7 +4420,7 @@ this is the defining declaration\iref{basic.def} of the variable,
 but the initializing declaration
 of a non-inline static data member\iref{class.static.data}
 might be the declaration within the class definition
-and not the definition at namespace scope.
+and not the definition at package scope.
 \end{note}
 
 \rSec2[dcl.init.aggr]{Aggregates}%
@@ -5732,7 +5732,7 @@ either \tcode{void} \grammarterm{declarator} \tcode{;}
 or \grammarterm{declarator} \tcode{;}
 shall be a well-formed function declaration
 as described in~\ref{dcl.fct}.
-A function shall be defined only in namespace or class scope.
+A function shall be defined only in package or class scope.
 The type of a parameter or the return type for a function
 definition shall not be
 an incomplete or abstract (possibly cv-qualified) class type
@@ -6088,7 +6088,7 @@ that is a function template whose first template parameter
 is a non-type parameter,
 the initializer is
 \tcode{e.get<i>()}. Otherwise, the initializer is \tcode{get<i>(e)},
-where \tcode{get} is looked up in the associated namespaces\iref{basic.lookup.argdep}.
+where \tcode{get} is looked up in the associated packages\iref{basic.lookup.argdep}.
 In either case, \tcode{get<i>} is interpreted as a \grammarterm{template-id}.
 \begin{note}
 Ordinary unqualified lookup\iref{basic.lookup.unqual} is not performed.
@@ -6278,9 +6278,9 @@ underlying type as in the original declaration.
 If the \grammarterm{enum-key} is followed by a
 \grammarterm{nested-name-specifier}, the \grammarterm{enum-specifier} shall
 refer to an enumeration that was previously declared directly in the class or
-namespace to which the \grammarterm{nested-name-specifier} refers (i.e., neither
+package to which the \grammarterm{nested-name-specifier} refers (i.e., neither
 inherited nor introduced by a \grammarterm{using-declaration}), and the
-\grammarterm{enum-specifier} shall appear in a namespace enclosing the previous
+\grammarterm{enum-specifier} shall appear in a package enclosing the previous
 declaration.
 
 \pnum
@@ -6458,103 +6458,103 @@ void g(X* p) {
 \pnum
 If an \grammarterm{enum-head} contains a \grammarterm{nested-name-specifier},
 the \grammarterm{enum-specifier} shall refer to an enumeration
-that was previously declared directly in the class or namespace
+that was previously declared directly in the class or package
 to which the \grammarterm{nested-name-specifier} refers, or
-in an element of the inline namespace set\iref{namespace.def}
-of that namespace (i.e., not merely inherited or introduced by a
+in an element of the inline package set\iref{package.def}
+of that package (i.e., not merely inherited or introduced by a
 \grammarterm{using-declaration}), and
 the \grammarterm{enum-specifier} shall appear in
-a namespace enclosing the previous declaration.
+a package enclosing the previous declaration.
 In such cases, the \grammarterm{nested-name-specifier}
 of the \grammarterm{enum-head} of the definition
 shall not begin with a \grammarterm{decltype-specifier}.
 
-\rSec1[basic.namespace]{Namespaces}%
-\indextext{namespaces|(}
+\rSec1[basic.package]{Namespaces}%
+\indextext{packages|(}
 
 \pnum
-A namespace is an optionally-named declarative region. The name of a
-namespace can be used to access entities declared in that namespace;
-that is, the members of the namespace. Unlike other declarative regions,
-the definition of a namespace can be split over several parts of one or
+A package is an optionally-named declarative region. The name of a
+package can be used to access entities declared in that package;
+that is, the members of the package. Unlike other declarative regions,
+the definition of a package can be split over several parts of one or
 more translation units.
 
 \pnum
-The outermost declarative region of a translation unit is a namespace;
-see~\ref{basic.scope.namespace}.
+The outermost declarative region of a translation unit is a package;
+see~\ref{basic.scope.package}.
 
-\rSec2[namespace.def]{Namespace definition}%
-\indextext{definition!namespace}%
-\indextext{namespace!definition}
+\rSec2[package.def]{Namespace definition}%
+\indextext{definition!package}%
+\indextext{package!definition}
 
 \begin{bnf}
-\nontermdef{namespace-name}\br
+\nontermdef{package-name}\br
         identifier\br
-        namespace-alias
+        package-alias
 \end{bnf}
 
 \begin{bnf}
-\nontermdef{namespace-definition}\br
-        named-namespace-definition\br
-        unnamed-namespace-definition\br
-        nested-namespace-definition
+\nontermdef{package-definition}\br
+        named-package-definition\br
+        unnamed-package-definition\br
+        nested-package-definition
 \end{bnf}
 
 \begin{bnf}
-\nontermdef{named-namespace-definition}\br
-        \terminal{\opt{inline}} \terminal{namespace} \opt{attribute-specifier-seq} identifier \terminal{\{} namespace-body \terminal{\}}
+\nontermdef{named-package-definition}\br
+        \terminal{\opt{inline}} \terminal{package} \opt{attribute-specifier-seq} identifier \terminal{\{} package-body \terminal{\}}
 \end{bnf}
 
 \begin{bnf}
-\nontermdef{unnamed-namespace-definition}\br
-        \terminal{\opt{inline}} \terminal{namespace} \opt{attribute-specifier-seq} \terminal{\{} namespace-body \terminal{\}}
+\nontermdef{unnamed-package-definition}\br
+        \terminal{\opt{inline}} \terminal{package} \opt{attribute-specifier-seq} \terminal{\{} package-body \terminal{\}}
 \end{bnf}
 
 \begin{bnf}
-\nontermdef{nested-namespace-definition}\br
-        \terminal{namespace} enclosing-namespace-specifier \terminal{::} identifier \terminal{\{} namespace-body \terminal{\}}
+\nontermdef{nested-package-definition}\br
+        \terminal{package} enclosing-package-specifier \terminal{::} identifier \terminal{\{} package-body \terminal{\}}
 \end{bnf}
 
 \begin{bnf}
-\nontermdef{enclosing-namespace-specifier}\br
+\nontermdef{enclosing-package-specifier}\br
         identifier\br
-        enclosing-namespace-specifier \terminal{::} identifier
+        enclosing-package-specifier \terminal{::} identifier
 \end{bnf}
 
 \begin{bnf}
-\nontermdef{namespace-body}\br
+\nontermdef{package-body}\br
         \opt{declaration-seq}
 \end{bnf}
 
 \pnum
-Every \grammarterm{namespace-definition} shall appear in the global scope
-or in a namespace scope\iref{basic.scope.namespace}.
+Every \grammarterm{package-definition} shall appear in the global scope
+or in a package scope\iref{basic.scope.package}.
 
 \pnum
-In a \grammarterm{named-namespace-definition},
-the \grammarterm{identifier} is the name of the namespace.
+In a \grammarterm{named-package-definition},
+the \grammarterm{identifier} is the name of the package.
 If the \grammarterm{identifier}, when looked up\iref{basic.lookup.unqual},
-refers to a \grammarterm{namespace-name} (but not a \grammarterm{namespace-alias})
-that was introduced in the namespace
-in which the \grammarterm{named-namespace-definition} appears
-or that was introduced in a member of the inline namespace set of that namespace,
-the \grammarterm{namespace-definition}
-\indextext{extend|see{namespace, extend}}
-\defnx{extends}{namespace!extend} the previously-declared namespace.
+refers to a \grammarterm{package-name} (but not a \grammarterm{package-alias})
+that was introduced in the package
+in which the \grammarterm{named-package-definition} appears
+or that was introduced in a member of the inline package set of that package,
+the \grammarterm{package-definition}
+\indextext{extend|see{package, extend}}
+\defnx{extends}{package!extend} the previously-declared package.
 Otherwise, the \grammarterm{identifier} is introduced
-as a \grammarterm{namespace-name} into the declarative region
-in which the \grammarterm{named-namespace-definition} appears.
+as a \grammarterm{package-name} into the declarative region
+in which the \grammarterm{named-package-definition} appears.
 
 \pnum
-Because a \grammarterm{namespace-definition} contains
-\grammarterm{declaration}{s} in its \grammarterm{namespace-body} and a
-\grammarterm{namespace-definition} is itself a \grammarterm{declaration}, it
-follows that \grammarterm{namespace-definition}{s} can be nested.
+Because a \grammarterm{package-definition} contains
+\grammarterm{declaration}{s} in its \grammarterm{package-body} and a
+\grammarterm{package-definition} is itself a \grammarterm{declaration}, it
+follows that \grammarterm{package-definition}{s} can be nested.
 \begin{example}
 \begin{codeblock}
-namespace Outer {
+package Outer {
   int i;
-  namespace Inner {
+  package Inner {
     void f() { i++; }           // \tcode{Outer::i}
     int i;
     void g() { i++; }           // \tcode{Inner::i}
@@ -6564,23 +6564,23 @@ namespace Outer {
 \end{example}
 
 \pnum
-The \defnx{enclosing namespaces}{namespace!enclosing} of a declaration are those
-namespaces in which the declaration lexically appears, except for a
-redeclaration of a namespace member outside its original namespace
-(e.g., a definition as specified in~\ref{namespace.memdef}). Such a
-redeclaration has the same enclosing namespaces as the original
+The \defnx{enclosing packages}{package!enclosing} of a declaration are those
+packages in which the declaration lexically appears, except for a
+redeclaration of a package member outside its original package
+(e.g., a definition as specified in~\ref{package.memdef}). Such a
+redeclaration has the same enclosing packages as the original
 declaration.
 \begin{example}
 \begin{codeblock}
-namespace Q {
-  namespace V {
-    void f();                   // enclosing namespaces are the global namespace, \tcode{Q}, and \tcode{Q::V}
+package Q {
+  package V {
+    void f();                   // enclosing packages are the global package, \tcode{Q}, and \tcode{Q::V}
     class C { void m(); };
   }
-  void V::f() {                 // enclosing namespaces are the global namespace, \tcode{Q}, and \tcode{Q::V}
+  void V::f() {                 // enclosing packages are the global package, \tcode{Q}, and \tcode{Q::V}
     extern void h();            // ... so this declares \tcode{Q::V::h}
   }
-  void V::C::m() {              // enclosing namespaces are the global namespace, \tcode{Q}, and \tcode{Q::V}
+  void V::C::m() {              // enclosing packages are the global package, \tcode{Q}, and \tcode{Q::V}
   }
 }
 \end{codeblock}
@@ -6588,63 +6588,63 @@ namespace Q {
 
 \pnum
 If the optional initial \tcode{inline} keyword appears in a
-\grammarterm{namespace-definition} for a particular namespace, that namespace is
-declared to be an \defnx{inline namespace}{namespace!inline}. The \tcode{inline} keyword may be
-used on a \grammarterm{namespace-definition} that extends a namespace
-only if it was previously used on the \grammarterm{namespace-definition}
-that initially declared the \grammarterm{namespace-name} for that namespace.
+\grammarterm{package-definition} for a particular package, that package is
+declared to be an \defnx{inline package}{package!inline}. The \tcode{inline} keyword may be
+used on a \grammarterm{package-definition} that extends a package
+only if it was previously used on the \grammarterm{package-definition}
+that initially declared the \grammarterm{package-name} for that package.
 
 \pnum
 The optional \grammarterm{attribute-specifier-seq}
-in a \grammarterm{named-namespace-definition}
-appertains to the namespace being defined or extended.
+in a \grammarterm{named-package-definition}
+appertains to the package being defined or extended.
 
 \pnum
-Members of an inline namespace can be used in most respects as though they were members
-of the enclosing namespace. Specifically, the inline namespace and its enclosing
-namespace are both added to the set of associated namespaces used in
+Members of an inline package can be used in most respects as though they were members
+of the enclosing package. Specifically, the inline package and its enclosing
+package are both added to the set of associated packages used in
 argument-dependent lookup\iref{basic.lookup.argdep} whenever one of them is,
-and a \grammarterm{using-directive}\iref{namespace.udir} that names the inline
-namespace is implicitly inserted into the enclosing namespace as for an unnamed
-namespace\iref{namespace.unnamed}. Furthermore, each
-member of the inline namespace can subsequently be partially
+and a \grammarterm{using-directive}\iref{package.udir} that names the inline
+package is implicitly inserted into the enclosing package as for an unnamed
+package\iref{package.unnamed}. Furthermore, each
+member of the inline package can subsequently be partially
 specialized\iref{temp.class.spec}, explicitly
 instantiated\iref{temp.explicit}, or explicitly specialized\iref{temp.expl.spec} as
-though it were a member of the enclosing namespace. Finally, looking up a name in the
-enclosing namespace via explicit qualification\iref{namespace.qual} will include
-members of the inline namespace brought in by the \grammarterm{using-directive} even if
-there are declarations of that name in the enclosing namespace.
+though it were a member of the enclosing package. Finally, looking up a name in the
+enclosing package via explicit qualification\iref{package.qual} will include
+members of the inline package brought in by the \grammarterm{using-directive} even if
+there are declarations of that name in the enclosing package.
 
 \pnum
-These properties are transitive: if a namespace \tcode{N} contains an inline namespace
-\tcode{M}, which in turn contains an inline namespace \tcode{O}, then the members of
+These properties are transitive: if a package \tcode{N} contains an inline package
+\tcode{M}, which in turn contains an inline package \tcode{O}, then the members of
 \tcode{O} can be used as though they were members of \tcode{M} or \tcode{N}.
-The \defn{inline namespace set} of \tcode{N} is the transitive closure of all
-inline namespaces in \tcode{N}.
-The \defn{enclosing namespace set} of \tcode{O} is the set of namespaces
-consisting of the innermost non-inline namespace enclosing
-an inline namespace \tcode{O}, together with any intervening inline namespaces.
+The \defn{inline package set} of \tcode{N} is the transitive closure of all
+inline packages in \tcode{N}.
+The \defn{enclosing package set} of \tcode{O} is the set of packages
+consisting of the innermost non-inline package enclosing
+an inline package \tcode{O}, together with any intervening inline packages.
 
 \pnum
-A \grammarterm{nested-namespace-definition} with an
-\grammarterm{enclosing-namespace-specifier} \tcode{E},
+A \grammarterm{nested-package-definition} with an
+\grammarterm{enclosing-package-specifier} \tcode{E},
 \grammarterm{identifier} \tcode{I} and
-\grammarterm{namespace-body} \tcode{B}
+\grammarterm{package-body} \tcode{B}
 is equivalent to
 \begin{codeblock}
-namespace E { namespace I { B } }
+package E { package I { B } }
 \end{codeblock}
 \begin{example}
 \begin{codeblock}
-namespace A::B::C {
+package A::B::C {
   int i;
 }
 \end{codeblock}
 The above has the same effect as:
 \begin{codeblock}
-namespace A {
-  namespace B {
-    namespace C {
+package A {
+  package B {
+    package C {
       int i;
     }
   }
@@ -6652,42 +6652,42 @@ namespace A {
 \end{codeblock}
 \end{example}
 
-\rSec3[namespace.unnamed]{Unnamed namespaces}%
-\indextext{namespace!unnamed}
+\rSec3[package.unnamed]{Unnamed packages}%
+\indextext{package!unnamed}
 
 \pnum
-An \grammarterm{unnamed-namespace-definition} behaves as if it were
+An \grammarterm{unnamed-package-definition} behaves as if it were
 replaced by
 
 \begin{ncsimplebnf}
-\opt{\terminal{inline}} \terminal{namespace} \terminal{\uniquens} \terminal{\{ /* empty body */ \}}\br
-\terminal{using namespace} \terminal{\uniquens} \terminal{;}\br
-\terminal{namespace} \terminal{\uniquens} \terminal{\{} namespace-body \terminal{\}}
+\opt{\terminal{inline}} \terminal{package} \terminal{\uniquens} \terminal{\{ /* empty body */ \}}\br
+\terminal{using package} \terminal{\uniquens} \terminal{;}\br
+\terminal{package} \terminal{\uniquens} \terminal{\{} package-body \terminal{\}}
 \end{ncsimplebnf}
 
 where
 \tcode{inline} appears if and only if it appears in the
-\grammarterm{unnamed-namespace-definition}
+\grammarterm{unnamed-package-definition}
 and all occurrences of \tcode{\uniquens} in a translation unit are replaced by
 the same identifier, and this identifier differs from all other
 identifiers in the translation unit.
 The optional \grammarterm{attribute-specifier-seq}
-in the \grammarterm{unnamed-namespace-definition}
+in the \grammarterm{unnamed-package-definition}
 appertains to \tcode{\uniquens}.
 \begin{example}
 \begin{codeblock}
-namespace { int i; }            // \tcode{\uniquens::i}
+package { int i; }            // \tcode{\uniquens::i}
 void f() { i++; }               // \tcode{\uniquens::i++}
 
-namespace A {
-  namespace {
+package A {
+  package {
     int i;                      // \tcode{A::\uniquens::i}
     int j;                      // \tcode{A::\uniquens::j}
   }
   void g() { i++; }             // \tcode{A::\uniquens::i++}
 }
 
-using namespace A;
+using package A;
 void h() {
   i++;                          // error: \tcode{\uniquens::i} or \tcode{A::\uniquens::i}
   A::i++;                       // \tcode{A::\uniquens::i}
@@ -6696,11 +6696,11 @@ void h() {
 \end{codeblock}
 \end{example}
 
-\rSec3[namespace.memdef]{Namespace member definitions}%
-\indextext{namespace!member definition}
+\rSec3[package.memdef]{Namespace member definitions}%
+\indextext{package!member definition}
 
 \pnum
-A declaration in a namespace \tcode{N} (excluding declarations in nested scopes)
+A declaration in a package \tcode{N} (excluding declarations in nested scopes)
 whose \grammarterm{declarator-id} is an \grammarterm{unqualified-id}\iref{dcl.meaning},
 whose \grammarterm{class-head-name}\iref{class} or
 \grammarterm{enum-head-name}\iref{dcl.enum} is an \grammarterm{identifier}, or
@@ -6713,15 +6713,15 @@ declares (or redeclares) its \grammarterm{unqualified-id} or
 An explicit instantiation\iref{temp.explicit} or
 explicit specialization\iref{temp.expl.spec} of a template
 does not introduce a name and thus may be declared using an
-\grammarterm{unqualified-id} in a member of the enclosing namespace set,
-if the primary template is declared in an inline namespace.
+\grammarterm{unqualified-id} in a member of the enclosing package set,
+if the primary template is declared in an inline package.
 \end{note}
 \begin{example}
 \begin{codeblock}
-namespace X {
+package X {
   void f() { @\commentellip@ }        // OK: introduces \tcode{X::f()}
 
-  namespace M {
+  package M {
     void g();                   // OK: introduces \tcode{X::M::g()}
   }
   using M::g;
@@ -6731,26 +6731,26 @@ namespace X {
 \end{example}
 
 \pnum
-Members of a named namespace can also be
-defined outside that namespace by explicit
-qualification\iref{namespace.qual} of the name being defined, provided
-that the entity being defined was already declared in the namespace and
-the definition appears after the point of declaration in a namespace
-that encloses the declaration's namespace.
+Members of a named package can also be
+defined outside that package by explicit
+qualification\iref{package.qual} of the name being defined, provided
+that the entity being defined was already declared in the package and
+the definition appears after the point of declaration in a package
+that encloses the declaration's package.
 \begin{example}
 \begin{codeblock}
-namespace Q {
-  namespace V {
+package Q {
+  package V {
     void f();
   }
   void V::f() { @\commentellip@ }     // OK
   void V::g() { @\commentellip@ }     // error: \tcode{g()} is not yet a member of \tcode{V}
-  namespace V {
+  package V {
     void g();
   }
 }
 
-namespace R {
+package R {
   void Q::V::g() { @\commentellip@ }  // error: \tcode{R} doesn't enclose \tcode{Q}
 }
 \end{codeblock}
@@ -6760,23 +6760,23 @@ namespace R {
 If a friend declaration in a non-local class first declares a
 class, function, class template or function template\footnote{this implies that the name of the class or function is unqualified.}
 the friend is a member of the innermost enclosing
-namespace. The friend declaration does not by itself make the name
+package. The friend declaration does not by itself make the name
 visible to unqualified lookup\iref{basic.lookup.unqual} or qualified
 lookup\iref{basic.lookup.qual}. \begin{note} The name of the friend will be
-visible in its namespace if a matching declaration is provided at namespace
+visible in its package if a matching declaration is provided at package
 scope (either before or after the class definition granting friendship).
 \end{note} If a friend
 function or function template is called, its name may be found by the
-name lookup that considers functions from namespaces and classes
+name lookup that considers functions from packages and classes
 associated with the types of the function
 arguments\iref{basic.lookup.argdep}. If the
 name in a friend declaration is neither qualified nor a
 \grammarterm{template-id} and the declaration is a function or an
 \grammarterm{elaborated-type-specifier}, the lookup to determine whether
 the entity has been previously declared shall not consider any scopes
-outside the innermost enclosing namespace. \begin{note} The other forms of
+outside the innermost enclosing package. \begin{note} The other forms of
 friend declarations cannot declare a new member of the innermost
-enclosing namespace and thus follow the usual lookup rules.
+enclosing package and thus follow the usual lookup rules.
 \end{note}
 \begin{example}
 
@@ -6784,7 +6784,7 @@ enclosing namespace and thus follow the usual lookup rules.
 // Assume \tcode{f} and \tcode{g} have not yet been declared.
 void h(int);
 template <class T> void f2(T);
-namespace A {
+package A {
   class X {
     friend void f(X);           // \tcode{A::f(X)} is a friend
     class Y {
@@ -6813,83 +6813,83 @@ void h() {
 \end{codeblock}
 \end{example}
 
-\rSec2[namespace.alias]{Namespace alias}%
-\indextext{namespace!alias}%
-\indextext{alias!namespace}%
+\rSec2[package.alias]{Namespace alias}%
+\indextext{package!alias}%
+\indextext{alias!package}%
 \indextext{synonym}
 
 \pnum
-A \grammarterm{namespace-alias-definition} declares an alternate name for a
-namespace according to the following grammar:
+A \grammarterm{package-alias-definition} declares an alternate name for a
+package according to the following grammar:
 
 \begin{bnf}
-\nontermdef{namespace-alias}\br
+\nontermdef{package-alias}\br
         identifier
 \end{bnf}
 
 \begin{bnf}
-\nontermdef{namespace-alias-definition}\br
-        \terminal{namespace} identifier \terminal{=} qualified-namespace-specifier \terminal{;}
+\nontermdef{package-alias-definition}\br
+        \terminal{package} identifier \terminal{=} qualified-package-specifier \terminal{;}
 \end{bnf}
 
 \begin{bnf}
-\nontermdef{qualified-namespace-specifier}\br
-    \opt{nested-name-specifier} namespace-name
+\nontermdef{qualified-package-specifier}\br
+    \opt{nested-name-specifier} package-name
 \end{bnf}
 
 \pnum
-The \grammarterm{identifier} in a \grammarterm{namespace-alias-definition} is
-a synonym for the name of the namespace denoted by the
-\grammarterm{qualified-namespace-specifier} and becomes a
-\grammarterm{namespace-alias}.
+The \grammarterm{identifier} in a \grammarterm{package-alias-definition} is
+a synonym for the name of the package denoted by the
+\grammarterm{qualified-package-specifier} and becomes a
+\grammarterm{package-alias}.
 \begin{note}
-When looking up a \grammarterm{namespace-name} in a
-\grammarterm{namespace-alias-definition}, only namespace names are
+When looking up a \grammarterm{package-name} in a
+\grammarterm{package-alias-definition}, only package names are
 considered, see~\ref{basic.lookup.udir}.
 \end{note}
 
 \pnum
-In a declarative region, a \grammarterm{namespace-alias-definition} can be
-used to redefine a \grammarterm{namespace-alias} declared in that
-declarative region to refer only to the namespace to which it already
+In a declarative region, a \grammarterm{package-alias-definition} can be
+used to redefine a \grammarterm{package-alias} declared in that
+declarative region to refer only to the package to which it already
 refers.
 \begin{example}
 The following declarations are well-formed:
 
 \begin{codeblock}
-namespace Company_with_very_long_name { @\commentellip@ }
-namespace CWVLN = Company_with_very_long_name;
-namespace CWVLN = Company_with_very_long_name;  // OK: duplicate
-namespace CWVLN = CWVLN;
+package Company_with_very_long_name { @\commentellip@ }
+package CWVLN = Company_with_very_long_name;
+package CWVLN = Company_with_very_long_name;  // OK: duplicate
+package CWVLN = CWVLN;
 \end{codeblock}
 \end{example}
 
-\rSec2[namespace.udir]{Using directive}%
+\rSec2[package.udir]{Using directive}%
 \indextext{using-directive|(}
 
 \begin{bnf}
 \nontermdef{using-directive}\br
-    \opt{attribute-specifier-seq} \terminal{using  namespace} \opt{nested-name-specifier} namespace-name \terminal{;}
+    \opt{attribute-specifier-seq} \terminal{using  package} \opt{nested-name-specifier} package-name \terminal{;}
 \end{bnf}
 
 \pnum
 A \grammarterm{using-directive} shall not appear in class scope, but may
-appear in namespace scope or in block scope.
+appear in package scope or in block scope.
 \begin{note}
-When looking up a \grammarterm{namespace-name} in a
-\grammarterm{using-directive}, only namespace names are considered,
+When looking up a \grammarterm{package-name} in a
+\grammarterm{using-directive}, only package names are considered,
 see~\ref{basic.lookup.udir}.
 \end{note}
 The optional \grammarterm{attribute-specifier-seq} appertains to the \grammarterm{using-directive}.
 
 \pnum
 A \grammarterm{using-directive} specifies that the names in the nominated
-namespace can be used in the scope in which the
+package can be used in the scope in which the
 \grammarterm{using-directive} appears after the \grammarterm{using-directive}.
 During unqualified name lookup\iref{basic.lookup.unqual}, the names
-appear as if they were declared in the nearest enclosing namespace which
+appear as if they were declared in the nearest enclosing package which
 contains both the \grammarterm{using-directive} and the nominated
-namespace.
+package.
 \begin{note}
 In this context, ``contains'' means ``contains directly or indirectly''.
 \end{note}
@@ -6900,20 +6900,20 @@ region in which it appears.
 \begin{example}
 
 \begin{codeblock}
-namespace A {
+package A {
   int i;
-  namespace B {
-    namespace C {
+  package B {
+    package C {
       int i;
     }
-    using namespace A::B::C;
+    using package A::B::C;
     void f1() {
       i = 5;        // OK, \tcode{C::i} visible in \tcode{B} and hides \tcode{A::i}
     }
   }
-  namespace D {
-    using namespace B;
-    using namespace C;
+  package D {
+    using package B;
+    using package C;
     void f2() {
       i = 5;        // ambiguous, \tcode{B::C::i} or \tcode{A::i}?
     }
@@ -6931,25 +6931,25 @@ void f4() {
 \pnum
 For unqualified lookup\iref{basic.lookup.unqual}, the
 \grammarterm{using-directive} is transitive: if a scope contains a
-\grammarterm{using-directive} that nominates a second namespace that itself
+\grammarterm{using-directive} that nominates a second package that itself
 contains \grammarterm{using-directive}{s}, the effect is as if the
-\grammarterm{using-directive}{s} from the second namespace also appeared in
+\grammarterm{using-directive}{s} from the second package also appeared in
 the first.
-\begin{note} For qualified lookup, see~\ref{namespace.qual}. \end{note}
+\begin{note} For qualified lookup, see~\ref{package.qual}. \end{note}
 \begin{example}
 
 \begin{codeblock}
-namespace M {
+package M {
   int i;
 }
 
-namespace N {
+package N {
   int i;
-  using namespace M;
+  using package M;
 }
 
 void f() {
-  using namespace N;
+  using package N;
   i = 7;            // error: both \tcode{M::i} and \tcode{N::i} are visible
 }
 \end{codeblock}
@@ -6957,20 +6957,20 @@ void f() {
 For another example,
 
 \begin{codeblock}
-namespace A {
+package A {
   int i;
 }
-namespace B {
+package B {
   int i;
   int j;
-  namespace C {
-    namespace D {
-      using namespace A;
+  package C {
+    package D {
+      using package A;
       int j;
       int k;
       int a = i;    // \tcode{B::i} hides \tcode{A::i}
     }
-    using namespace D;
+    using package D;
     int k = 89;     // no problem yet
     int l = k;      // ambiguous: \tcode{C::k} or \tcode{D::k}
     int m = i;      // \tcode{B::i} hides \tcode{A::i}
@@ -6982,38 +6982,38 @@ namespace B {
 
 
 \pnum
-If a namespace is extended\iref{namespace.def} after a
-\grammarterm{using-directive} for that namespace is given, the additional
-members of the extended namespace and the members of namespaces
+If a package is extended\iref{package.def} after a
+\grammarterm{using-directive} for that package is given, the additional
+members of the extended package and the members of packages
 nominated by \grammarterm{using-directive}{s} in the
-extending \grammarterm{namespace-definition} can be used after the
-extending \grammarterm{namespace-definition}.
+extending \grammarterm{package-definition} can be used after the
+extending \grammarterm{package-definition}.
 
 \pnum
 \begin{note}
 If name lookup finds a declaration for a name in two different
-namespaces, and the declarations do not declare the same entity and do
+packages, and the declarations do not declare the same entity and do
 not declare functions or function templates, the use of the name is ill-formed\iref{basic.lookup}.
 In particular, the name of a variable, function or enumerator does not
 hide the name of a class or enumeration declared in a different
-namespace. For example,
+package. For example,
 
 \begin{codeblock}
-namespace A {
+package A {
   class X { };
   extern "C"   int g();
   extern "Java" int h();
 }
-namespace B {
+package B {
   void X(int);
   extern "C"   int g();
   extern "Java" int h(int);
 }
-using namespace A;
-using namespace B;
+using package A;
+using package B;
 
 void f() {
-  X(1);             // error: name \tcode{X} found in two namespaces
+  X(1);             // error: name \tcode{X} found in two packages
   g();              // OK: name \tcode{g} refers to the same entity
   h();              // OK: overload resolution selects \tcode{A::h}
 }
@@ -7026,14 +7026,14 @@ During overload resolution, all functions from the transitive search are
 considered for argument matching. The set of declarations found by the
 transitive search is unordered.
 \begin{note}
-In particular, the order in which namespaces were considered and the
-relationships among the namespaces implied by the
+In particular, the order in which packages were considered and the
+relationships among the packages implied by the
 \grammarterm{using-directive}{s} do not cause preference to be given to any
 of the declarations found by the search.
 \end{note}
 An ambiguity exists if the best match finds two functions with the same
-signature, even if one is in a namespace reachable through
-\grammarterm{using-directive}{s} in the namespace of the other.\footnote{During
+signature, even if one is in a package reachable through
+\grammarterm{using-directive}{s} in the package of the other.\footnote{During
 name lookup in a class hierarchy, some ambiguities may be
 resolved by considering whether one member hides the other along some
 paths\iref{class.member.lookup}. There is no such disambiguation when
@@ -7042,22 +7042,22 @@ considering the set of names found as a result of following
 \begin{example}
 
 \begin{codeblock}
-namespace D {
+package D {
   int d1;
   void f(char);
 }
-using namespace D;
+using package D;
 
 int d1;             // OK: no conflict with \tcode{D::d1}
 
-namespace E {
+package E {
   int e;
   void f(int);
 }
 
-namespace D {       // namespace extension
+package D {       // package extension
   int d2;
-  using namespace E;
+  using package E;
   void f(int);
 }
 
@@ -7073,9 +7073,9 @@ void f() {
 \end{codeblock}
 \end{example}%
 \indextext{using-directive|)}%
-\indextext{namespaces|)}
+\indextext{packages|)}
 
-\rSec1[namespace.udecl]{The \tcode{using} declaration}%
+\rSec1[package.udecl]{The \tcode{using} declaration}%
 \indextext{using-declaration|(}
 
 \begin{bnf}
@@ -7209,7 +7209,7 @@ struct B : A {
 \end{example}
 
 \pnum
-A \grammarterm{using-declaration} shall not name a namespace.
+A \grammarterm{using-declaration} shall not name a package.
 
 \pnum
 A \grammarterm{using-declaration} shall not name a scoped enumerator.
@@ -7234,16 +7234,16 @@ void f() {
 \pnum
 Members declared by a \grammarterm{using-declaration} can be referred to by
 explicit qualification just like other member
-names\iref{namespace.qual}.
+names\iref{package.qual}.
 \begin{example}
 \begin{codeblock}
 void f();
 
-namespace A {
+package A {
   void g();
 }
 
-namespace X {
+package X {
   using ::f;                    // global \tcode{f}
   using A::g;                   // \tcode{A}'s \tcode{g}
 }
@@ -7262,11 +7262,11 @@ therefore be used repeatedly where (and only where) multiple
 declarations are allowed.
 \begin{example}
 \begin{codeblock}
-namespace A {
+package A {
   int i;
 }
 
-namespace A1 {
+package A1 {
   using A::i, A::i;             // OK: double declaration
 }
 
@@ -7283,8 +7283,8 @@ struct X : B {
 \pnum
 \begin{note}
 For a \grammarterm{using-declaration}
-whose \grammarterm{nested-name-specifier} names a namespace,
-members added to the namespace after the \grammarterm{using-declaration}
+whose \grammarterm{nested-name-specifier} names a package,
+members added to the package after the \grammarterm{using-declaration}
 are not in the set of introduced declarations, so they are not
 considered when a use of the name is made. Thus, additional
 overloads added after the \grammarterm{using-declaration} are ignored, but
@@ -7294,12 +7294,12 @@ arguments\iref{temp.param}, and template specializations~(\ref{temp.class.spec},
 \begin{example}
 
 \begin{codeblock}
-namespace A {
+package A {
   void f(int);
 }
 
 using A::f;         // \tcode{f} is a synonym for \tcode{A::f}; that is, for \tcode{A::f(int)}.
-namespace A {
+package A {
   void f(char);
 }
 
@@ -7331,11 +7331,11 @@ region\iref{basic.scope} also apply to \grammarterm{using-declaration}{s}.
 \begin{example}
 
 \begin{codeblock}
-namespace A {
+package A {
   int x;
 }
 
-namespace B {
+package B {
   int i;
   struct g { };
   struct x { };
@@ -7362,11 +7362,11 @@ void func() {
 \end{example}
 
 \pnum
-If a function declaration in namespace scope or block scope has the same
+If a function declaration in package scope or block scope has the same
 name and the same parameter-type-list\iref{dcl.fct} as
 a function introduced by a \grammarterm{using-declaration}, and the
 declarations do not declare the same function, the program is
-ill-formed. If a function template declaration in namespace scope has
+ill-formed. If a function template declaration in package scope has
 the same name, parameter-type-list, return type, and template
 parameter list as a function template introduced by a
 \grammarterm{using-declaration}, the program is ill-formed.
@@ -7379,11 +7379,11 @@ ill-formed.
 \begin{example}
 
 \begin{codeblock}
-namespace B {
+package B {
   void f(int);
   void f(double);
 }
-namespace C {
+package C {
   void f(int);
   void f(double);
   void f(char);
@@ -7653,7 +7653,7 @@ extern "C" {
 Linkage specifications nest. When linkage specifications nest, the
 innermost one determines the language linkage. A linkage specification
 does not establish a scope. A \grammarterm{linkage-specification} shall
-occur only in namespace scope\iref{basic.scope}. In a
+occur only in package scope\iref{basic.scope}. In a
 \grammarterm{linkage-specification}, the specified language linkage applies
 to the function types of all function declarators, function names with
 external linkage, and variable names with external linkage declared
@@ -7725,8 +7725,8 @@ extern "C" {
 \pnum
 If two declarations declare functions with the same name and
 parameter-type-list\iref{dcl.fct} to be members of the same
-namespace or declare objects with the same name to be members of the same
-namespace and the declarations give the names different language linkages, the
+package or declare objects with the same name to be members of the same
+package and the declarations give the names different language linkages, the
 program is ill-formed; no diagnostic is required if the declarations appear in
 different translation units.
 \indextext{consistency!linkage specification}%
@@ -7741,16 +7741,16 @@ by such a function declaration.
 \indextext{function!linkage specification overloaded}%
 At most one function with a particular name can have C language linkage.
 Two declarations for a function with C language linkage with the same
-function name (ignoring the namespace names that qualify it) that appear
-in different namespace scopes refer to the same function. Two
+function name (ignoring the package names that qualify it) that appear
+in different package scopes refer to the same function. Two
 declarations for a variable with C language linkage with the same name
-(ignoring the namespace names that qualify it) that appear in different
-namespace scopes refer to the same variable.
+(ignoring the package names that qualify it) that appear in different
+package scopes refer to the same variable.
 An entity with C language linkage shall not be declared with the same name
 as a variable in global scope, unless both declarations denote the same entity;
 no diagnostic is required if the declarations appear in different translation units.
 A variable with C language linkage shall not be declared with the same name as a
-function with C language linkage (ignoring the namespace names that qualify the
+function with C language linkage (ignoring the package names that qualify the
 respective names); no diagnostic is required if the declarations appear in
 different translation units.
 \begin{note}
@@ -7760,19 +7760,19 @@ with C language linkage may appear in the
 program (see~\ref{basic.def.odr});
 this implies that such an entity
 must not be defined in more
-than one namespace scope.\end{note}
+than one package scope.\end{note}
 \begin{example}
 
 \begin{codeblock}
 int x;
-namespace A {
+package A {
   extern "C" int f();
   extern "C" int g() { return 1; }
   extern "C" int h();
   extern "C" int x();               // ill-formed: same name as global-space object \tcode{x}
 }
 
-namespace B {
+package B {
   extern "C" int f();               // \tcode{A::f} and \tcode{B::f} refer to the same function
   extern "C" int g() { return 1; }  // ill-formed, the function \tcode{g} with C language linkage has two definitions
 }
@@ -7851,7 +7851,7 @@ such as types, variables, names, blocks, or translation units.
 
 \begin{bnf}
 \nontermdef{attribute-using-prefix}\br
-  \terminal{using} attribute-namespace \terminal{:}
+  \terminal{using} attribute-package \terminal{:}
 \end{bnf}
 
 \begin{bnf}
@@ -7875,11 +7875,11 @@ such as types, variables, names, blocks, or translation units.
 
 \begin{bnf}
 \nontermdef{attribute-scoped-token}\br
-    attribute-namespace \terminal{::} identifier
+    attribute-package \terminal{::} identifier
 \end{bnf}
 
 \begin{bnf}
-\nontermdef{attribute-namespace}\br
+\nontermdef{attribute-package}\br
     identifier
 \end{bnf}
 
@@ -7910,7 +7910,7 @@ shall not contain an \grammarterm{attribute-scoped-token}
 and every \grammarterm{attribute-token} in that \grammarterm{attribute-list}
 is treated as if
 its \grammarterm{identifier} were prefixed with \tcode{N::},
-where \tcode{N} is the \grammarterm{attribute-namespace}
+where \tcode{N} is the \grammarterm{attribute-package}
 specified in the \grammarterm{attribute-using-prefix}.
 \begin{note}
 This rule imposes no constraints on how
@@ -7969,7 +7969,7 @@ Any \grammarterm{attribute-token} that is not recognized by the implementation
 is ignored.
 \begin{note}
 Each implementation should choose a distinctive name for the
-\grammarterm{attribute-namespace} in an \grammarterm{attribute-scoped-token}.
+\grammarterm{attribute-package} in an \grammarterm{attribute-scoped-token}.
 \end{note}
 
 \pnum
@@ -8622,7 +8622,7 @@ a \grammarterm{typedef-name},
 a variable,
 a non-static data member,
 a function,
-a namespace,
+a package,
 an enumeration,
 an enumerator, or
 a template specialization.

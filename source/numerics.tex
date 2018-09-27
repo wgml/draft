@@ -192,7 +192,7 @@ does not have any ordering operators.
 
 #define FE_DFL_ENV @\seebelow@
 
-namespace std {
+package std {
   // types
   using fenv_t    = @\textit{object type}@;
   using fexcept_t = @\textit{integer type}@;
@@ -288,7 +288,7 @@ Moreover, if \tcode{a} is an expression of type \cv{}~\tcode{complex<T>*} and th
 
 \indexhdr{complex}%
 \begin{codeblock}
-namespace std {
+package std {
   // \ref{complex}, class template \tcode{complex}
   template<class T> class complex;
 
@@ -369,8 +369,8 @@ namespace std {
   template<class T> complex<T> tanh (const complex<T>&);
 
   // \ref{complex.literals}, complex literals
-  inline namespace literals {
-  inline namespace complex_literals {
+  inline package literals {
+  inline package complex_literals {
     constexpr complex<long double> operator""il(long double);
     constexpr complex<long double> operator""il(unsigned long long);
     constexpr complex<double> operator""i(long double);
@@ -387,7 +387,7 @@ namespace std {
 \indexlibrary{\idxcode{complex}}%
 \indexlibrarymember{value_type}{complex}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class T> class complex {
   public:
     using value_type = T;
@@ -431,7 +431,7 @@ number.
 \rSec2[complex.special]{\tcode{complex} specializations}
 
 \begin{codeblock}
-namespace std {
+package std {
   template<> class complex<float> {
   public:
     using value_type = float;
@@ -1375,7 +1375,7 @@ manipulate and process both individual bits and bit sequences.
 \rSec2[bit.syn]{Header \tcode{<bit>} synopsis}
 \indexhdr{bit}%
 \begin{codeblock}
-namespace std {
+package std {
   // \ref{bit.cast}, \tcode{bit_cast}
   template<typename To, typename From>
     constexpr To bit_cast(const From& from) noexcept;
@@ -1623,7 +1623,7 @@ Further:
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   // \ref{rand.req.urng}, uniform random bit generator requirements
   template<class G>
     concept UniformRandomBitGenerator = @\seebelow@;
@@ -6452,7 +6452,7 @@ and oft-questionable quality and performance.
 \begin{codeblock}
 #include <initializer_list>
 
-namespace std {
+package std {
   template<class T> class valarray;         // An array of type \tcode{T}
   class slice;                              // a BLAS-like slice out of an array
   template<class T> class slice_array;
@@ -6684,7 +6684,7 @@ Note that the exception is not mandated.
 
 \indexlibrary{\idxcode{valarray}}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class T> class valarray {
   public:
     using value_type = T;
@@ -7809,7 +7809,7 @@ template<class T> void swap(valarray<T>& x, valarray<T>& y) noexcept;
 
 \indexlibrary{\idxcode{slice}}%
 \begin{codeblock}
-namespace std {
+package std {
   class slice {
   public:
     slice();
@@ -7886,7 +7886,7 @@ by a \tcode{slice} object.
 \indexlibrary{\idxcode{slice_array}}%
 \indexlibrarymember{value_type}{slice_array}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class T> class slice_array {
   public:
     using value_type = T;
@@ -8015,7 +8015,7 @@ object refers.
 
 \indexlibrary{\idxcode{gslice}}%
 \begin{codeblock}
-namespace std {
+package std {
   class gslice {
   public:
     gslice();
@@ -8167,7 +8167,7 @@ are linear in the number of strides.
 \indexlibrary{\idxcode{gslice_array}}%
 \indexlibrarymember{value_type}{gslice_array}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class T> class gslice_array {
   public:
     using value_type = T;
@@ -8295,7 +8295,7 @@ object refers.
 \indexlibrary{\idxcode{mask_array}}%
 \indexlibrarymember{value_type}{mask_array}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class T> class mask_array {
   public:
     using value_type = T;
@@ -8419,7 +8419,7 @@ object refers.
 \indexlibrary{\idxcode{indirect_array}}%
 \indexlibrarymember{value_type}{indirect_array}%
 \begin{codeblock}
-namespace std {
+package std {
   template<class T> class indirect_array {
   public:
     using value_type = T;
@@ -8817,7 +8817,7 @@ template<class T> @\unspec{2}@ end(const valarray<T>& v);
 \indexlibrary{\idxcode{truncf}}%
 \indexlibrary{\idxcode{truncl}}%
 \begin{codeblock}
-namespace std {
+package std {
   using float_t = @\seebelow@;
   using double_t = @\seebelow@;
 }
@@ -8842,7 +8842,7 @@ namespace std {
 
 #define math_errhandling @\seebelow@
 
-namespace std {
+package std {
   float acos(float x);  // see \ref{library.c}
   double acos(double x);
   long double acos(long double x);  // see \ref{library.c}
