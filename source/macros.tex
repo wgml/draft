@@ -120,7 +120,7 @@
 % in the key argument with a no-op for purposes of collation.
 \newcommand{\nocode}[1]{#1}
 \newcommand{\idxmname}[1]{\_\_#1\_\_}
-\newcommand{\idxCpp}{C++}
+\newcommand{\idxCpp}{Java}
 
 % \indeximpldef synthesizes a collation key from the argument; that is, an
 % invocation \indeximpldef{arg} emits an index entry `key@arg`, where `key`
@@ -135,15 +135,15 @@
 \let\grammarterm\nocode%
 \let\omname\mname%
 \let\mname\idxmname%
-\let\oCpp\Cpp%
-\let\Cpp\idxCpp%
+\let\oCpp\Java%
+\let\Java\idxCpp%
 \let\oBreakableUnderscore\BreakableUnderscore%  See the "underscore" package.
 \let\BreakableUnderscore\textunderscore%
 \edef\x{#1}%
 \let\tcode\otcode%
 \let\grammarterm\gterm%
 \let\mname\omname%
-\let\Cpp\oCpp%
+\let\Java\oCpp%
 \let\BreakableUnderscore\oBreakableUnderscore%
 \index[impldefindex]{\x@#1}%
 \let\grammarterm\ogrammarterm%
@@ -205,11 +205,11 @@
 
 %%--------------------------------------------------
 %% Macros for funky text
-\newcommand{\Cpp}{\texorpdfstring{C\kern-0.05em\protect\raisebox{.35ex}{\textsmaller[2]{+\kern-0.05em+}}}{C++}}
-\newcommand{\CppIII}{\Cpp{} 2003}
-\newcommand{\CppXI}{\Cpp{} 2011}
-\newcommand{\CppXIV}{\Cpp{} 2014}
-\newcommand{\CppXVII}{\Cpp{} 2017}
+\newcommand{\Java}{Java}
+\newcommand{\JavaIII}{\Java{} 5}
+\newcommand{\JavaXI}{\Java{} 7}
+\newcommand{\JavaXIV}{\Java{} 8}
+\newcommand{\JavaXVII}{\Java{} 11}
 \newcommand{\opt}[1]{#1\ensuremath{_\mathit{opt}}}
 \newcommand{\dcr}{-{-}}
 \newcommand{\bigoh}[1]{\ensuremath{\mathscr{O}(#1)}}
@@ -364,7 +364,7 @@
 % within comments.  Comments are set in italics, keywords and strings
 % don't get special treatment.
 
-\lstset{language=C++,
+\lstset{language=Java,
         basicstyle=\small\CodeStyle,
         keywordstyle=,
         stringstyle=,
@@ -389,7 +389,7 @@
 
 \lstnewenvironment{codeblock}{\CodeBlockSetup}{}
 
-% An environment for command / program output that is not C++ code.
+% An environment for command / program output that is not Java code.
 \lstnewenvironment{outputblock}{\lstset{language=}}{}
 
 % A code block in which single-quotes are digit separators

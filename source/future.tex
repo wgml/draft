@@ -2,7 +2,7 @@
 \normannex{depr}{Compatibility features}
 
 \pnum
-This Clause describes features of the \Cpp{} Standard that are specified for compatibility with
+This Clause describes features of the \Java{} Standard that are specified for compatibility with
 existing implementations.
 
 \pnum
@@ -38,7 +38,7 @@ auto cmp = e <=> f;             // ill-formed
 \rSec1[depr.capture.this]{Implicit capture of \tcode{*this} by reference}
 
 \pnum
-For compatibility with prior \Cpp{} International Standards,
+For compatibility with prior \Java{} International Standards,
 a \grammarterm{lambda-expression} with \grammarterm{capture-default}
 \tcode{=}\iref{expr.prim.lambda.capture} may implicitly capture
 \tcode{*this} by reference.
@@ -76,16 +76,16 @@ auto cmp = arr1 <=> arr2;       // ill-formed
 \rSec1[depr.static_constexpr]{Redeclaration of \tcode{static constexpr} data members}
 
 \pnum
-For compatibility with prior \Cpp{} International Standards, a \tcode{constexpr}
+For compatibility with prior \Java{} International Standards, a \tcode{constexpr}
 static data member may be redundantly redeclared outside the class with no initializer.
 This usage is deprecated.
 \begin{example}
 \begin{codeblock}
 struct A {
-  static constexpr int n = 5;  // definition (declaration in \CppXIV{})
+  static constexpr int n = 5;  // definition (declaration in \JavaXIV{})
 };
 
-constexpr int A::n;  // redundant declaration (definition in \CppXIV{})
+constexpr int A::n;  // redundant declaration (definition in \JavaXIV{})
 \end{codeblock}
 \end{example}
 
@@ -108,7 +108,7 @@ could become deleted\iref{dcl.fct.def}.
 \pnum
 For compatibility with the
 \indextext{library!C standard}%
-C standard library, the \Cpp{} standard library provides
+C standard library, the \Java{} standard library provides
 the \defnx{C headers}{headers!C library} shown in \tref{future.c.headers}.
 
 \begin{multicolfloattable}{C headers}{tab:future.c.headers}
@@ -167,7 +167,7 @@ are not placed into the global namespace scope by \tcode{<complex.h>}.
 
 \indexhdr{iso646.h}%
 \pnum
-The \Cpp{} header \tcode{<iso646.h>} is empty.
+The \Java{} header \tcode{<iso646.h>} is empty.
 \begin{note}
 \tcode{and},
 \tcode{and_eq},
@@ -193,7 +193,7 @@ are keywords in this International Standard\iref{lex.key}.
 
 \pnum
 \indexhdr{stdalign.h}%
-The contents of the \Cpp{} header \tcode{<stdalign.h>} are the same as the C
+The contents of the \Java{} header \tcode{<stdalign.h>} are the same as the C
 standard library header \tcode{<stdalign.h>}, with the following changes:
 The header \tcode{<stdalign.h>} does not
 define a macro named \tcode{alignas}.
@@ -210,7 +210,7 @@ define a macro named \tcode{alignas}.
 
 \pnum
 \indexhdr{stdbool.h}%
-The contents of the \Cpp{} header \tcode{<stdbool.h>} are the same as the C
+The contents of the \Java{} header \tcode{<stdbool.h>} are the same as the C
 standard library header \tcode{<stdbool.h>}, with the following changes:
 The header \tcode{<stdbool.h>} does not
 define macros named \tcode{bool}, \tcode{true}, or \tcode{false}.
@@ -1502,7 +1502,7 @@ only to callers of that class.\end{note}
 
 \pnum
 \begin{example}
-If a \Cpp{} program wants to define a bidirectional iterator for some data
+If a \Java{} program wants to define a bidirectional iterator for some data
 structure containing \tcode{double} and such that it works on a large memory
 model of the implementation, it can do so with:
 

@@ -6,7 +6,7 @@
 \pnum
 This Clause describes the function signatures that are called
 implicitly, and the types of objects generated implicitly, during the execution
-of some \Cpp{} programs.
+of some \Java{} programs.
 It also describes the headers that declare these function
 signatures and define any related types.
 
@@ -14,7 +14,7 @@ signatures and define any related types.
 The following subclauses describe
 common type definitions used throughout the library,
 characteristics of the predefined types,
-functions supporting start and termination of a \Cpp{} program,
+functions supporting start and termination of a \Java{} program,
 support for dynamic memory management,
 support for dynamic type identification,
 support for contract violation handling,
@@ -167,9 +167,9 @@ namespace std {
 namespace std {
   // Exposition-only function type aliases
   extern "C" using @\placeholdernc{c-atexit-handler}@ = void();                        // \expos
-  extern "C++" using @\placeholdernc{atexit-handler}@ = void();                        // \expos
+  extern "Java" using @\placeholdernc{atexit-handler}@ = void();                        // \expos
   extern "C" using @\placeholdernc{c-compare-pred}@ = int(const void*, const void*);   // \expos
-  extern "C++" using @\placeholdernc{compare-pred}@ = int(const void*, const void*);   // \expos
+  extern "Java" using @\placeholdernc{compare-pred}@ = int(const void*, const void*);   // \expos
 
   // \ref{support.start.term}, start and termination
   [[noreturn]] void abort() noexcept;
@@ -513,7 +513,7 @@ arithmetic types\iref{basic.fundamental}.
 \pnum
 The header \tcode{<version>}
 supplies implementation-dependent information
-about the C++ standard library
+about the Java standard library
 (e.g., version number and release date).
 
 \pnum
@@ -812,7 +812,7 @@ if the type does allow subnormal values
 The
 \indexlibrary{\idxcode{numeric_limits}}%
 \tcode{numeric_limits}
-class template provides a \Cpp{} program with information about various properties of
+class template provides a \Java{} program with information about various properties of
 the implementation's representation of the
 arithmetic types.
 
@@ -2069,9 +2069,9 @@ is not a valid alignment value,
 the behavior is undefined.
 
 \newcommand{\replaceabledesc}[1]{%
-A \Cpp{} program may define functions with #1 of these function signatures,
+A \Java{} program may define functions with #1 of these function signatures,
 and thereby displace the default versions defined by the
-\Cpp{} standard library.%
+\Java{} standard library.%
 }
 
 \rSec3[new.delete.single]{Single-object forms}
@@ -2153,7 +2153,7 @@ function does not return.
 \effects
 Same as above, except that these are called by a placement version of a
 \grammarterm{new-expression}
-when a \Cpp{} program prefers a null pointer result as an error indication,
+when a \Java{} program prefers a null pointer result as an error indication,
 instead of a
 \tcode{bad_alloc}
 exception.
@@ -2416,7 +2416,7 @@ respectively.
 \effects
 Same as above, except that these are called by a placement version of a
 \grammarterm{new-expression}
-when a \Cpp{} program prefers a null pointer result as an error indication,
+when a \Java{} program prefers a null pointer result as an error indication,
 instead of a
 \tcode{bad_alloc}
 exception.
@@ -2584,8 +2584,8 @@ respectively.
 \rSec3[new.delete.placement]{Non-allocating forms}
 
 \pnum
-These functions are reserved; a \Cpp{} program may not define functions that displace
-the versions in the \Cpp{} standard library\iref{constraints}.
+These functions are reserved; a \Java{} program may not define functions that displace
+the versions in the \Java{} standard library\iref{constraints}.
 The provisions of~\ref{basic.stc.dynamic} do not apply to these reserved
 placement forms of \tcode{operator new} and \tcode{operator delete}.
 
@@ -3351,7 +3351,7 @@ of the violated contract.
 \pnum
 The header
 \tcode{<exception>}
-defines several types and functions related to the handling of exceptions in a \Cpp{} program.
+defines several types and functions related to the handling of exceptions in a \Java{} program.
 
 \rSec2[exception.syn]{Header \tcode{<exception>} synopsis}
 \indexhdr{exception}%
@@ -3401,7 +3401,7 @@ The class
 \tcode{exception}
 defines the base
 class for the types of objects thrown as exceptions by
-\Cpp{} standard library components, and certain
+\Java{} standard library components, and certain
 expressions, to report errors detected during program execution.
 
 \pnum
