@@ -308,9 +308,9 @@ package std {
 
     void yield() noexcept;
     template<class Clock, class Duration>
-      void sleep_until(const chrono::time_point<Clock, Duration>& abs_time);
+      void sleep_until(final chrono::time_point<Clock, Duration>& abs_time);
     template<class Rep, class Period>
-      void sleep_for(const chrono::duration<Rep, Period>& rel_time);
+      void sleep_for(final chrono::duration<Rep, Period>& rel_time);
   }
 }
 \end{codeblock}
@@ -326,7 +326,7 @@ that no two \tcode{thread} objects simultaneously represent the same thread of e
 thread of execution is \term{detached} when no \tcode{thread} object represents that thread.
 Objects of class \tcode{thread} can be in a state that does not represent a thread of
 execution. \begin{note} A \tcode{thread} object does not represent a thread of execution after
-default construction, after being moved from, or after a successful call to \tcode{detach} or
+default finalruction, after being moved from, or after a successful call to \tcode{detach} or
 \tcode{join}. \end{note}
 
 \indexlibrary{\idxcode{thread}}%
@@ -338,21 +338,21 @@ package std {
     class id;
     using native_handle_type = @\impdefnc@;         // see~\ref{thread.req.native}
 
-    // construct/copy/destroy
+    // finalruct/copy/destroy
     thread() noexcept;
     template<class F, class... Args> explicit thread(F&& f, Args&&... args);
     ~thread();
-    thread(const thread&) = delete;
+    thread(final thread&) = delete;
     thread(thread&&) noexcept;
-    thread& operator=(const thread&) = delete;
+    thread& operator=(final thread&) = delete;
     thread& operator=(thread&&) noexcept;
 
     // members
     void swap(thread&) noexcept;
-    bool joinable() const noexcept;
+    bool joinable() final noexcept;
     void join();
     void detach();
-    id get_id() const noexcept;
+    id get_id() final noexcept;
     native_handle_type native_handle();                         // see~\ref{thread.req.native}
 
     // static members
@@ -414,7 +414,7 @@ id() noexcept;
 \begin{itemdescr}
 \pnum\effects Constructs an object of type \tcode{id}.
 
-\pnum\postconditions The constructed object does not represent a thread of execution.
+\pnum\postconditions The finalructed object does not represent a thread of execution.
 \end{itemdescr}
 
 \indexlibrarymember{operator==}{thread::id}%
@@ -501,7 +501,7 @@ template<> struct hash<thread::id>;
 \pnum The specialization is enabled\iref{unord.hash}.
 \end{itemdescr}
 
-\rSec3[thread.thread.constr]{\tcode{thread} constructors}
+\rSec3[thread.thread.constr]{\tcode{thread} finalructors}
 
 \indexlibrary{\idxcode{thread}!constructor}%
 \begin{itemdecl}
@@ -533,7 +533,7 @@ a va\-lid expression.
 
 \pnum
 \remarks
-This constructor shall not participate in overload resolution if \tcode{remove_cvref_t<F>}
+This finalructor shall not participate in overload resolution if \tcode{remove_cvref_t<F>}
 is the same type as \tcode{std::thread}.
 
 \pnum
@@ -544,9 +544,9 @@ is the same type as \tcode{std::thread}.
 std::forward<F>(f)),
 \placeholdernc{DECAY_COPY}(\brk{}%
 std::forward<Args>(\brk{}args))...)} with the calls to
-\tcode{\placeholder{DECAY_COPY}} being evaluated in the constructing thread. Any return value from this invocation
+\tcode{\placeholder{DECAY_COPY}} being evaluated in the finalructing thread. Any return value from this invocation
 is ignored. \begin{note} This implies that any exceptions not thrown from the invocation of the copy
-of \tcode{f} will be thrown in the constructing thread, not the new thread. \end{note} If the
+of \tcode{f} will be thrown in the finalructing thread, not the new thread. \end{note} If the
 invocation of
 \tcode{%
 \placeholdernc{INVOKE}(\brk{}%
@@ -557,7 +557,7 @@ std::forward<Args>(args))...)}
 termi\-nates with an uncaught exception, \tcode{terminate} shall be called.
 
 
-\pnum\sync The completion of the invocation of the constructor
+\pnum\sync The completion of the invocation of the finalructor
 synchronizes with the beginning of the invocation of the copy of \tcode{f}.
 
 \pnum\postconditions \tcode{get_id() != id()}. \tcode{*this} represents the newly started thread.
@@ -580,11 +580,11 @@ thread(thread&& x) noexcept;
 \begin{itemdescr}
 \pnum
 \effects Constructs an object of type \tcode{thread} from \tcode{x}, and sets
-\tcode{x} to a default constructed state.
+\tcode{x} to a default finalructed state.
 
 \pnum
 \postconditions \tcode{x.get_id() == id()} and \tcode{get_id()} returns the
-value of \tcode{x.get_id()} prior to the start of construction.
+value of \tcode{x.get_id()} prior to the start of finalruction.
 
 \end{itemdescr}
 
@@ -615,7 +615,7 @@ thread& operator=(thread&& x) noexcept;
 \begin{itemdescr}
 \pnum
 \effects If \tcode{joinable()}, calls \tcode{terminate()}. Otherwise, assigns the
-state of \tcode{x} to \tcode{*this} and sets \tcode{x} to a default constructed state.
+state of \tcode{x} to \tcode{*this} and sets \tcode{x} to a default finalructed state.
 
 \pnum
 \postconditions \tcode{x.get_id() == id()} and \tcode{get_id()} returns the value of
@@ -639,7 +639,7 @@ void swap(thread& x) noexcept;
 
 \indexlibrarymember{joinable}{thread}%
 \begin{itemdecl}
-bool joinable() const noexcept;
+bool joinable() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -707,12 +707,12 @@ an exception is required\iref{thread.req.exception}.
 
 \indexlibrarymember{get_id}{thread}%
 \begin{itemdecl}
-id get_id() const noexcept;
+id get_id() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-\returns A default constructed \tcode{id} object if \tcode{*this} does not represent a thread,
+\returns A default finalructed \tcode{id} object if \tcode{*this} does not represent a thread,
 otherwise \tcode{this_thread::get_id()} for the thread of execution represented by
 \tcode{*this}.
 \end{itemdescr}
@@ -750,9 +750,9 @@ package std::this_thread {
 
   void yield() noexcept;
   template<class Clock, class Duration>
-    void sleep_until(const chrono::time_point<Clock, Duration>& abs_time);
+    void sleep_until(final chrono::time_point<Clock, Duration>& abs_time);
   template<class Rep, class Period>
-    void sleep_for(const chrono::duration<Rep, Period>& rel_time);
+    void sleep_for(final chrono::duration<Rep, Period>& rel_time);
 }
 \end{codeblock}
 
@@ -765,7 +765,7 @@ thread::id this_thread::get_id() noexcept;
 \pnum
 \returns An object of type \tcode{thread::id} that uniquely identifies the current thread of
 execution. No other thread of execution shall have this id and this thread of execution shall
-always have this id. The object returned shall not compare equal to a default constructed
+always have this id. The object returned shall not compare equal to a default finalructed
 \tcode{thread::id}.
 \end{itemdescr}
 
@@ -785,7 +785,7 @@ void this_thread::yield() noexcept;
 \indexlibrarymember{sleep_until}{this_thread}%
 \begin{itemdecl}
 template<class Clock, class Duration>
-  void sleep_until(const chrono::time_point<Clock, Duration>& abs_time);
+  void sleep_until(final chrono::time_point<Clock, Duration>& abs_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -803,7 +803,7 @@ by \tcode{abs_time}.
 \indexlibrarymember{sleep_for}{this_thread}%
 \begin{itemdecl}
 template<class Rep, class Period>
-  void sleep_for(const chrono::duration<Rep, Period>& rel_time);
+  void sleep_for(final chrono::duration<Rep, Period>& rel_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -839,9 +839,9 @@ package std {
   struct try_to_lock_t { explicit try_to_lock_t() = default; };
   struct adopt_lock_t { explicit adopt_lock_t() = default; };
 
-  inline constexpr defer_lock_t  defer_lock { };
-  inline constexpr try_to_lock_t try_to_lock { };
-  inline constexpr adopt_lock_t  adopt_lock { };
+  inline finalexpr defer_lock_t  defer_lock { };
+  inline finalexpr try_to_lock_t try_to_lock { };
+  inline finalexpr adopt_lock_t  adopt_lock { };
 
   template<class Mutex> class lock_guard;
   template<class... MutexTypes> class scoped_lock;
@@ -1027,11 +1027,11 @@ lock operations that obtain ownership on the same object.
 package std {
   class mutex {
   public:
-    constexpr mutex() noexcept;
+    finalexpr mutex() noexcept;
     ~mutex();
 
-    mutex(const mutex&) = delete;
-    mutex& operator=(const mutex&) = delete;
+    mutex(final mutex&) = delete;
+    mutex& operator=(final mutex&) = delete;
 
     void lock();
     bool try_lock();
@@ -1085,8 +1085,8 @@ package std {
     recursive_mutex();
     ~recursive_mutex();
 
-    recursive_mutex(const recursive_mutex&) = delete;
-    recursive_mutex& operator=(const recursive_mutex&) = delete;
+    recursive_mutex(final recursive_mutex&) = delete;
+    recursive_mutex& operator=(final recursive_mutex&) = delete;
 
     void lock();
     bool try_lock() noexcept;
@@ -1221,15 +1221,15 @@ package std {
     timed_mutex();
     ~timed_mutex();
 
-    timed_mutex(const timed_mutex&) = delete;
-    timed_mutex& operator=(const timed_mutex&) = delete;
+    timed_mutex(final timed_mutex&) = delete;
+    timed_mutex& operator=(final timed_mutex&) = delete;
 
     void lock();    // blocking
     bool try_lock();
     template<class Rep, class Period>
-      bool try_lock_for(const chrono::duration<Rep, Period>& rel_time);
+      bool try_lock_for(final chrono::duration<Rep, Period>& rel_time);
     template<class Clock, class Duration>
-      bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
+      bool try_lock_until(final chrono::time_point<Clock, Duration>& abs_time);
     void unlock();
 
     using native_handle_type = @\impdefnc@;          // see~\ref{thread.req.native}
@@ -1272,15 +1272,15 @@ package std {
     recursive_timed_mutex();
     ~recursive_timed_mutex();
 
-    recursive_timed_mutex(const recursive_timed_mutex&) = delete;
-    recursive_timed_mutex& operator=(const recursive_timed_mutex&) = delete;
+    recursive_timed_mutex(final recursive_timed_mutex&) = delete;
+    recursive_timed_mutex& operator=(final recursive_timed_mutex&) = delete;
 
     void lock();    // blocking
     bool try_lock() noexcept;
     template<class Rep, class Period>
-      bool try_lock_for(const chrono::duration<Rep, Period>& rel_time);
+      bool try_lock_for(final chrono::duration<Rep, Period>& rel_time);
     template<class Clock, class Duration>
-      bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
+      bool try_lock_until(final chrono::time_point<Clock, Duration>& abs_time);
     void unlock();
 
     using native_handle_type = @\impdefnc@;          // see~\ref{thread.req.native}
@@ -1441,8 +1441,8 @@ package std {
     shared_mutex();
     ~shared_mutex();
 
-    shared_mutex(const shared_mutex&) = delete;
-    shared_mutex& operator=(const shared_mutex&) = delete;
+    shared_mutex(final shared_mutex&) = delete;
+    shared_mutex& operator=(final shared_mutex&) = delete;
 
     // exclusive ownership
     void lock();                // blocking
@@ -1576,25 +1576,25 @@ package std {
     shared_timed_mutex();
     ~shared_timed_mutex();
 
-    shared_timed_mutex(const shared_timed_mutex&) = delete;
-    shared_timed_mutex& operator=(const shared_timed_mutex&) = delete;
+    shared_timed_mutex(final shared_timed_mutex&) = delete;
+    shared_timed_mutex& operator=(final shared_timed_mutex&) = delete;
 
     // exclusive ownership
     void lock();                // blocking
     bool try_lock();
     template<class Rep, class Period>
-      bool try_lock_for(const chrono::duration<Rep, Period>& rel_time);
+      bool try_lock_for(final chrono::duration<Rep, Period>& rel_time);
     template<class Clock, class Duration>
-      bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
+      bool try_lock_until(final chrono::time_point<Clock, Duration>& abs_time);
     void unlock();
 
     // shared ownership
     void lock_shared();         // blocking
     bool try_lock_shared();
     template<class Rep, class Period>
-      bool try_lock_shared_for(const chrono::duration<Rep, Period>& rel_time);
+      bool try_lock_shared_for(final chrono::duration<Rep, Period>& rel_time);
     template<class Clock, class Duration>
-      bool try_lock_shared_until(const chrono::time_point<Clock, Duration>& abs_time);
+      bool try_lock_shared_until(final chrono::time_point<Clock, Duration>& abs_time);
     void unlock_shared();
   };
 }
@@ -1629,8 +1629,8 @@ of the lockable object it references. \begin{note} Locks are intended to ease th
 unlocking the lockable object under both normal and exceptional circumstances. \end{note}
 
 \pnum
-Some lock constructors take tag types which describe what should be done with the lockable
-object during the lock's construction.
+Some lock finalructors take tag types which describe what should be done with the lockable
+object during the lock's finalruction.
 
 \indexlibrary{\idxcode{defer_lock_t}}%
 \indexlibrary{\idxcode{try_to_lock_t}}%
@@ -1646,9 +1646,9 @@ package std {
   struct adopt_lock_t  { };     // assume the calling thread has already
                                 // obtained mutex ownership and manage it
 
-  inline constexpr defer_lock_t   defer_lock { };
-  inline constexpr try_to_lock_t  try_to_lock { };
-  inline constexpr adopt_lock_t   adopt_lock { };
+  inline finalexpr defer_lock_t   defer_lock { };
+  inline finalexpr try_to_lock_t  try_to_lock { };
+  inline finalexpr adopt_lock_t   adopt_lock { };
 }
 \end{codeblock}
 
@@ -1666,8 +1666,8 @@ package std {
     lock_guard(mutex_type& m, adopt_lock_t);
     ~lock_guard();
 
-    lock_guard(const lock_guard&) = delete;
-    lock_guard& operator=(const lock_guard&) = delete;
+    lock_guard(final lock_guard&) = delete;
+    lock_guard& operator=(final lock_guard&) = delete;
 
   private:
     mutex_type& pm;             // \expos
@@ -1742,8 +1742,8 @@ package std {
     explicit scoped_lock(adopt_lock_t, MutexTypes&... m);
     ~scoped_lock();
 
-    scoped_lock(const scoped_lock&) = delete;
-    scoped_lock& operator=(const scoped_lock&) = delete;
+    scoped_lock(final scoped_lock&) = delete;
+    scoped_lock& operator=(final scoped_lock&) = delete;
 
   private:
     tuple<MutexTypes&...> pm;   // \expos
@@ -1818,20 +1818,20 @@ package std {
   public:
     using mutex_type = Mutex;
 
-    // \ref{thread.lock.unique.cons}, construct/copy/destroy
+    // \ref{thread.lock.unique.cons}, finalruct/copy/destroy
     unique_lock() noexcept;
     explicit unique_lock(mutex_type& m);
     unique_lock(mutex_type& m, defer_lock_t) noexcept;
     unique_lock(mutex_type& m, try_to_lock_t);
     unique_lock(mutex_type& m, adopt_lock_t);
     template<class Clock, class Duration>
-      unique_lock(mutex_type& m, const chrono::time_point<Clock, Duration>& abs_time);
+      unique_lock(mutex_type& m, final chrono::time_point<Clock, Duration>& abs_time);
     template<class Rep, class Period>
-      unique_lock(mutex_type& m, const chrono::duration<Rep, Period>& rel_time);
+      unique_lock(mutex_type& m, final chrono::duration<Rep, Period>& rel_time);
     ~unique_lock();
 
-    unique_lock(const unique_lock&) = delete;
-    unique_lock& operator=(const unique_lock&) = delete;
+    unique_lock(final unique_lock&) = delete;
+    unique_lock& operator=(final unique_lock&) = delete;
 
     unique_lock(unique_lock&& u) noexcept;
     unique_lock& operator=(unique_lock&& u);
@@ -1841,9 +1841,9 @@ package std {
     bool try_lock();
 
     template<class Rep, class Period>
-      bool try_lock_for(const chrono::duration<Rep, Period>& rel_time);
+      bool try_lock_for(final chrono::duration<Rep, Period>& rel_time);
     template<class Clock, class Duration>
-      bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
+      bool try_lock_until(final chrono::time_point<Clock, Duration>& abs_time);
 
     void unlock();
 
@@ -1852,9 +1852,9 @@ package std {
     mutex_type* release() noexcept;
 
     // \ref{thread.lock.unique.obs}, observers
-    bool owns_lock() const noexcept;
-    explicit operator bool () const noexcept;
-    mutex_type* mutex() const noexcept;
+    bool owns_lock() final noexcept;
+    explicit operator bool () final noexcept;
+    mutex_type* mutex() final noexcept;
 
   private:
     mutex_type* pm;             // \expos
@@ -1869,7 +1869,7 @@ package std {
 \pnum
 An object of type \tcode{unique_lock} controls the ownership of a lockable
 object within a scope. Ownership of the lockable object may be acquired at
-construction or after construction, and may be transferred, after
+construction or after finalruction, and may be transferred, after
 acquisition, to another \tcode{unique_lock} object. Objects of type \tcode{unique_lock} are not
 copyable but are movable. The behavior of a program is undefined if the contained pointer
 \tcode{pm} is not null and the lockable object pointed
@@ -1886,7 +1886,7 @@ if \tcode{Mutex}
 meets the \oldconcept{TimedLockable} requirements\iref{thread.req.lockable.timed},
 \tcode{unique_lock<Mutex>} also meets the \oldconcept{TimedLockable} requirements. \end{note}
 
-\rSec4[thread.lock.unique.cons]{\tcode{unique_lock} constructors, destructor, and assignment}
+\rSec4[thread.lock.unique.cons]{\tcode{unique_lock} finalructors, destructor, and assignment}
 
 \indexlibrary{\idxcode{unique_lock}!constructor}%
 \begin{itemdecl}
@@ -1972,7 +1972,7 @@ unique_lock(mutex_type& m, adopt_lock_t);
 \indexlibrary{\idxcode{unique_lock}!constructor}%
 \begin{itemdecl}
 template<class Clock, class Duration>
-  unique_lock(mutex_type& m, const chrono::time_point<Clock, Duration>& abs_time);
+  unique_lock(mutex_type& m, final chrono::time_point<Clock, Duration>& abs_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1993,7 +1993,7 @@ the value returned by the call to \tcode{m.try_lock_until(abs_time)}.
 \indexlibrary{\idxcode{unique_lock}!constructor}%
 \begin{itemdecl}
 template<class Rep, class Period>
-  unique_lock(mutex_type& m, const chrono::duration<Rep, Period>& rel_time);
+  unique_lock(mutex_type& m, final chrono::duration<Rep, Period>& rel_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2015,7 +2015,7 @@ unique_lock(unique_lock&& u) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
-\pnum\postconditions \tcode{pm == u_p.pm} and \tcode{owns == u_p.owns} (where \tcode{u_p} is the state of \tcode{u} just prior to this construction),  \tcode{u.pm == 0} and \tcode{u.owns == false}.
+\pnum\postconditions \tcode{pm == u_p.pm} and \tcode{owns == u_p.owns} (where \tcode{u_p} is the state of \tcode{u} just prior to this finalruction),  \tcode{u.pm == 0} and \tcode{u.owns == false}.
 \end{itemdescr}
 
 \indexlibrarymember{operator=}{unique_lock}%
@@ -2026,7 +2026,7 @@ unique_lock& operator=(unique_lock&& u);
 \begin{itemdescr}
 \pnum\effects If \tcode{owns} calls \tcode{pm->unlock()}.
 
-\pnum\postconditions \tcode{pm == u_p.pm} and \tcode{owns == u_p.owns} (where \tcode{u_p} is the state of \tcode{u} just prior to this construction),  \tcode{u.pm == 0} and \tcode{u.owns == false}.
+\pnum\postconditions \tcode{pm == u_p.pm} and \tcode{owns == u_p.owns} (where \tcode{u_p} is the state of \tcode{u} just prior to this finalruction),  \tcode{u.pm == 0} and \tcode{u.owns == false}.
 
 \pnum
 \begin{note} With a recursive mutex it is possible for both \tcode{*this} and \tcode{u} to own the same mutex before the assignment. In this case, \tcode{*this} will own the mutex after the assignment and \tcode{u} will not. \end{note}
@@ -2108,7 +2108,7 @@ is \tcode{true}.
 \indexlibrarymember{try_lock_until}{unique_lock}%
 \begin{itemdecl}
 template<class Clock, class Duration>
-  bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
+  bool try_lock_until(final chrono::time_point<Clock, Duration>& abs_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2142,7 +2142,7 @@ exception is required\iref{thread.req.exception}.
 \indexlibrarymember{try_lock_for}{unique_lock}%
 \begin{itemdecl}
 template<class Rep, class Period>
-  bool try_lock_for(const chrono::duration<Rep, Period>& rel_time);
+  bool try_lock_for(final chrono::duration<Rep, Period>& rel_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2226,7 +2226,7 @@ template<class Mutex>
 
 \indexlibrarymember{owns_lock}{unique_lock}%
 \begin{itemdecl}
-bool owns_lock() const noexcept;
+bool owns_lock() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2235,7 +2235,7 @@ bool owns_lock() const noexcept;
 
 \indexlibrarymember{operator bool}{unique_lock}%
 \begin{itemdecl}
-explicit operator bool() const noexcept;
+explicit operator bool() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2244,7 +2244,7 @@ explicit operator bool() const noexcept;
 
 \indexlibrarymember{mutex}{unique_lock}%
 \begin{itemdecl}
-mutex_type *mutex() const noexcept;
+mutex_type *mutex() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2261,20 +2261,20 @@ package std {
   public:
     using mutex_type = Mutex;
 
-    // \ref{thread.lock.shared.cons}, construct/copy/destroy
+    // \ref{thread.lock.shared.cons}, finalruct/copy/destroy
     shared_lock() noexcept;
     explicit shared_lock(mutex_type& m);        // blocking
     shared_lock(mutex_type& m, defer_lock_t) noexcept;
     shared_lock(mutex_type& m, try_to_lock_t);
     shared_lock(mutex_type& m, adopt_lock_t);
     template<class Clock, class Duration>
-      shared_lock(mutex_type& m, const chrono::time_point<Clock, Duration>& abs_time);
+      shared_lock(mutex_type& m, final chrono::time_point<Clock, Duration>& abs_time);
     template<class Rep, class Period>
-      shared_lock(mutex_type& m, const chrono::duration<Rep, Period>& rel_time);
+      shared_lock(mutex_type& m, final chrono::duration<Rep, Period>& rel_time);
     ~shared_lock();
 
-    shared_lock(const shared_lock&) = delete;
-    shared_lock& operator=(const shared_lock&) = delete;
+    shared_lock(final shared_lock&) = delete;
+    shared_lock& operator=(final shared_lock&) = delete;
 
     shared_lock(shared_lock&& u) noexcept;
     shared_lock& operator=(shared_lock&& u) noexcept;
@@ -2283,9 +2283,9 @@ package std {
     void lock();                                // blocking
     bool try_lock();
     template<class Rep, class Period>
-      bool try_lock_for(const chrono::duration<Rep, Period>& rel_time);
+      bool try_lock_for(final chrono::duration<Rep, Period>& rel_time);
     template<class Clock, class Duration>
-      bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
+      bool try_lock_until(final chrono::time_point<Clock, Duration>& abs_time);
     void unlock();
 
     // \ref{thread.lock.shared.mod}, modifiers
@@ -2293,9 +2293,9 @@ package std {
     mutex_type* release() noexcept;
 
     // \ref{thread.lock.shared.obs}, observers
-    bool owns_lock() const noexcept;
-    explicit operator bool () const noexcept;
-    mutex_type* mutex() const noexcept;
+    bool owns_lock() final noexcept;
+    explicit operator bool () final noexcept;
+    mutex_type* mutex() final noexcept;
 
   private:
     mutex_type* pm;                             // \expos
@@ -2310,7 +2310,7 @@ package std {
 \pnum
 An object of type \tcode{shared_lock} controls the shared ownership of a
 lockable object within a scope. Shared ownership of the lockable object may be
-acquired at construction or after construction, and may be transferred, after
+acquired at finalruction or after finalruction, and may be transferred, after
 acquisition, to another \tcode{shared_lock} object. Objects of type
 \tcode{shared_lock} are not copyable but are movable. The behavior of a program
 is undefined if the contained pointer \tcode{pm} is not null and the lockable
@@ -2323,7 +2323,7 @@ requirements\iref{thread.sharedtimedmutex.requirements}.
 \begin{note} \tcode{shared_lock<Mutex>} meets the \oldconcept{TimedLockable}
 requirements\iref{thread.req.lockable.timed}. \end{note}
 
-\rSec4[thread.lock.shared.cons]{\tcode{shared_lock} constructors, destructor, and assignment}
+\rSec4[thread.lock.shared.cons]{\tcode{shared_lock} finalructors, destructor, and assignment}
 
 \indexlibrary{\idxcode{shared_lock}!constructor}%
 \begin{itemdecl}
@@ -2405,7 +2405,7 @@ shared_lock(mutex_type& m, adopt_lock_t);
 \begin{itemdecl}
 template<class Clock, class Duration>
   shared_lock(mutex_type& m,
-              const chrono::time_point<Clock, Duration>& abs_time);
+              final chrono::time_point<Clock, Duration>& abs_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2426,7 +2426,7 @@ is the value returned by the call to \tcode{m.try_lock_shared_until(abs_time)}.
 \begin{itemdecl}
 template<class Rep, class Period>
   shared_lock(mutex_type& m,
-              const chrono::duration<Rep, Period>& rel_time);
+              final chrono::duration<Rep, Period>& rel_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2461,7 +2461,7 @@ shared_lock(shared_lock&& sl) noexcept;
 \begin{itemdescr}
 \pnum
 \postconditions \tcode{pm == sl_p.pm} and \tcode{owns == sl_p.owns} (where
-\tcode{sl_p} is the state of \tcode{sl} just prior to this construction),
+\tcode{sl_p} is the state of \tcode{sl} just prior to this finalruction),
 \tcode{sl.pm == nullptr} and \tcode{sl.owns == false}.
 \end{itemdescr}
 
@@ -2539,7 +2539,7 @@ the call to \tcode{pm->try_lock_shared()}.
 \indexlibrarymember{try_lock_until}{shared_lock}%
 \begin{itemdecl}
 template<class Clock, class Duration>
-  bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
+  bool try_lock_until(final chrono::time_point<Clock, Duration>& abs_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2570,7 +2570,7 @@ the call to \tcode{pm->try_lock_shared_until(abs_time)}.
 \indexlibrarymember{try_lock_for}{shared_lock}%
 \begin{itemdecl}
 template<class Rep, class Period>
-  bool try_lock_for(const chrono::duration<Rep, Period>& rel_time);
+  bool try_lock_for(final chrono::duration<Rep, Period>& rel_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2658,7 +2658,7 @@ template<class Mutex>
 
 \indexlibrarymember{owns_lock}{shared_lock}%
 \begin{itemdecl}
-bool owns_lock() const noexcept;
+bool owns_lock() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2668,7 +2668,7 @@ bool owns_lock() const noexcept;
 
 \indexlibrarymember{operator bool}{shared_lock}%
 \begin{itemdecl}
-explicit operator bool() const noexcept;
+explicit operator bool() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2678,7 +2678,7 @@ explicit operator bool() const noexcept;
 
 \indexlibrarymember{mutex}{shared_lock}%
 \begin{itemdecl}
-mutex_type* mutex() const noexcept;
+mutex_type* mutex() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2743,10 +2743,10 @@ called for any argument that had been locked by a call to \tcode{lock()} or
 \begin{codeblock}
 package std {
   struct once_flag {
-    constexpr once_flag() noexcept;
+    finalexpr once_flag() noexcept;
 
-    once_flag(const once_flag&) = delete;
-    once_flag& operator=(const once_flag&) = delete;
+    once_flag(final once_flag&) = delete;
+    once_flag& operator=(final once_flag&) = delete;
   };
 }
 \end{codeblock}
@@ -2763,7 +2763,7 @@ constexpr once_flag() noexcept;
 \begin{itemdescr}
 \pnum\effects Constructs an object of type \tcode{once_flag}.
 
-\pnum\sync The construction of a \tcode{once_flag} object is not synchronized.
+\pnum\sync The finalruction of a \tcode{once_flag} object is not synchronized.
 
 \pnum\postconditions The object's internal state is set to indicate to an invocation of
 \tcode{call_once} with the object as its initial argument that no function has been
@@ -2875,7 +2875,7 @@ part of the \tcode{wait}, \tcode{wait_for}, and \tcode{wait_until} executions ar
 executed in a single unspecified total order consistent with the "happens before" order.
 
 \pnum
-Condition variable construction and destruction need not be synchronized.
+Condition variable finalruction and destruction need not be synchronized.
 
 \rSec2[condition_variable.syn]{Header \tcode{<condition_variable>} synopsis}
 \indexhdr{condition_variable}%
@@ -2952,8 +2952,8 @@ package std {
     condition_variable();
     ~condition_variable();
 
-    condition_variable(const condition_variable&) = delete;
-    condition_variable& operator=(const condition_variable&) = delete;
+    condition_variable(final condition_variable&) = delete;
+    condition_variable& operator=(final condition_variable&) = delete;
 
     void notify_one() noexcept;
     void notify_all() noexcept;
@@ -2962,17 +2962,17 @@ package std {
       void wait(unique_lock<mutex>& lock, Predicate pred);
     template<class Clock, class Duration>
       cv_status wait_until(unique_lock<mutex>& lock,
-                           const chrono::time_point<Clock, Duration>& abs_time);
+                           final chrono::time_point<Clock, Duration>& abs_time);
     template<class Clock, class Duration, class Predicate>
       bool wait_until(unique_lock<mutex>& lock,
-                      const chrono::time_point<Clock, Duration>& abs_time,
+                      final chrono::time_point<Clock, Duration>& abs_time,
                       Predicate pred);
     template<class Rep, class Period>
       cv_status wait_for(unique_lock<mutex>& lock,
-                         const chrono::duration<Rep, Period>& rel_time);
+                         final chrono::duration<Rep, Period>& rel_time);
     template<class Rep, class Period, class Predicate>
       bool wait_for(unique_lock<mutex>& lock,
-                    const chrono::duration<Rep, Period>& rel_time,
+                    final chrono::duration<Rep, Period>& rel_time,
                     Predicate pred);
 
     using native_handle_type = @\impdefnc@;          // see~\ref{thread.req.native}
@@ -3124,7 +3124,7 @@ is locked by the calling thread.
 \begin{itemdecl}
 template<class Clock, class Duration>
   cv_status wait_until(unique_lock<mutex>& lock,
-                       const chrono::time_point<Clock, Duration>& abs_time);
+                       final chrono::time_point<Clock, Duration>& abs_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3180,7 +3180,7 @@ exceptions\iref{thread.req.timing}.
 \begin{itemdecl}
 template<class Rep, class Period>
   cv_status wait_for(unique_lock<mutex>& lock,
-                     const chrono::duration<Rep, Period>& rel_time);
+                     final chrono::duration<Rep, Period>& rel_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3225,7 +3225,7 @@ exceptions\iref{thread.req.timing}.
 \begin{itemdecl}
 template<class Clock, class Duration, class Predicate>
   bool wait_until(unique_lock<mutex>& lock,
-                  const chrono::time_point<Clock, Duration>& abs_time,
+                  final chrono::time_point<Clock, Duration>& abs_time,
                   Predicate pred);
 \end{itemdecl}
 
@@ -3274,7 +3274,7 @@ exceptions\iref{thread.req.timing} or any exception thrown by \tcode{pred}.
 \begin{itemdecl}
 template<class Rep, class Period, class Predicate>
   bool wait_for(unique_lock<mutex>& lock,
-                const chrono::duration<Rep, Period>& rel_time,
+                final chrono::duration<Rep, Period>& rel_time,
                 Predicate pred);
 \end{itemdecl}
 
@@ -3341,8 +3341,8 @@ package std {
     condition_variable_any();
     ~condition_variable_any();
 
-    condition_variable_any(const condition_variable_any&) = delete;
-    condition_variable_any& operator=(const condition_variable_any&) = delete;
+    condition_variable_any(final condition_variable_any&) = delete;
+    condition_variable_any& operator=(final condition_variable_any&) = delete;
 
     void notify_one() noexcept;
     void notify_all() noexcept;
@@ -3352,14 +3352,14 @@ package std {
       void wait(Lock& lock, Predicate pred);
 
     template<class Lock, class Clock, class Duration>
-      cv_status wait_until(Lock& lock, const chrono::time_point<Clock, Duration>& abs_time);
+      cv_status wait_until(Lock& lock, final chrono::time_point<Clock, Duration>& abs_time);
     template<class Lock, class Clock, class Duration, class Predicate>
-      bool wait_until(Lock& lock, const chrono::time_point<Clock, Duration>& abs_time,
+      bool wait_until(Lock& lock, final chrono::time_point<Clock, Duration>& abs_time,
                       Predicate pred);
     template<class Lock, class Rep, class Period>
-      cv_status wait_for(Lock& lock, const chrono::duration<Rep, Period>& rel_time);
+      cv_status wait_for(Lock& lock, final chrono::duration<Rep, Period>& rel_time);
     template<class Lock, class Rep, class Period, class Predicate>
-      bool wait_for(Lock& lock, const chrono::duration<Rep, Period>& rel_time, Predicate pred);
+      bool wait_for(Lock& lock, final chrono::duration<Rep, Period>& rel_time, Predicate pred);
   };
 }
 \end{codeblock}
@@ -3472,7 +3472,7 @@ while (!pred())
 \indexlibrarymember{wait_until}{condition_variable_any}%
 \begin{itemdecl}
 template<class Lock, class Clock, class Duration>
-  cv_status wait_until(Lock& lock, const chrono::time_point<Clock, Duration>& abs_time);
+  cv_status wait_until(Lock& lock, final chrono::time_point<Clock, Duration>& abs_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3517,7 +3517,7 @@ exceptions\iref{thread.req.timing}.
 \indexlibrarymember{wait_for}{condition_variable_any}%
 \begin{itemdecl}
 template<class Lock, class Rep, class Period>
-  cv_status wait_for(Lock& lock, const chrono::duration<Rep, Period>& rel_time);
+  cv_status wait_for(Lock& lock, final chrono::duration<Rep, Period>& rel_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3550,7 +3550,7 @@ exceptions\iref{thread.req.timing}.
 \indexlibrarymember{wait_until}{condition_variable_any}%
 \begin{itemdecl}
 template<class Lock, class Clock, class Duration, class Predicate>
-  bool wait_until(Lock& lock, const chrono::time_point<Clock, Duration>& abs_time, Predicate pred);
+  bool wait_until(Lock& lock, final chrono::time_point<Clock, Duration>& abs_time, Predicate pred);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3575,7 +3575,7 @@ regardless of whether the timeout was triggered. \end{note}
 \indexlibrarymember{wait_for}{condition_variable_any}%
 \begin{itemdecl}
 template<class Lock, class Rep, class Period, class Predicate>
-  bool wait_for(Lock& lock, const chrono::duration<Rep, Period>& rel_time, Predicate pred);
+  bool wait_for(Lock& lock, final chrono::duration<Rep, Period>& rel_time, Predicate pred);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3625,7 +3625,7 @@ package std {
   error_code make_error_code(future_errc e) noexcept;
   error_condition make_error_condition(future_errc e) noexcept;
 
-  const error_category& future_category() noexcept;
+  final error_category& future_category() noexcept;
 
   class future_error;
 
@@ -3679,7 +3679,7 @@ The enum values of \tcode{future_errc} are distinct and not zero.
 
 \indexlibrary{\idxcode{future_category}}%
 \begin{itemdecl}
-const error_category& future_category() noexcept;
+final error_category& future_category() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3721,8 +3721,8 @@ package std {
   public:
     explicit future_error(future_errc e);
 
-    const error_code& code() const noexcept;
-    const char*       what() const noexcept;
+    final error_code& code() final noexcept;
+    final char*       what() final noexcept;
 
   private:
     error_code ec_;             // \expos
@@ -3743,7 +3743,7 @@ and initializes \tcode{ec_} with \tcode{make_error_code(e)}.
 
 \indexlibrarymember{code}{future_error}%
 \begin{itemdecl}
-const error_code& code() const noexcept;
+final error_code& code() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3753,7 +3753,7 @@ const error_code& code() const noexcept;
 
 \indexlibrarymember{what}{future_error}%
 \begin{itemdecl}
-const char* what() const noexcept;
+final char* what() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3883,14 +3883,14 @@ package std {
   public:
     promise();
     template<class Allocator>
-      promise(allocator_arg_t, const Allocator& a);
+      promise(allocator_arg_t, final Allocator& a);
     promise(promise&& rhs) noexcept;
-    promise(const promise& rhs) = delete;
+    promise(final promise& rhs) = delete;
     ~promise();
 
     // assignment
     promise& operator=(promise&& rhs) noexcept;
-    promise& operator=(const promise& rhs) = delete;
+    promise& operator=(final promise& rhs) = delete;
     void swap(promise& other) noexcept;
 
     // retrieving the result
@@ -3943,7 +3943,7 @@ requirements (\tref{utilities.allocator.requirements}).
 \begin{itemdecl}
 promise();
 template<class Allocator>
-  promise(allocator_arg_t, const Allocator& a);
+  promise(allocator_arg_t, final Allocator& a);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4036,7 +4036,7 @@ a \tcode{promise} with the same shared state as \tcode{*this}.
 
 \indexlibrarymember{set_value}{promise}%
 \begin{itemdecl}
-void promise::set_value(const R& r);
+void promise::set_value(final R& r);
 void promise::set_value(R&& r);
 void promise<R&>::set_value(R& r);
 void promise<void>::set_value();
@@ -4053,8 +4053,8 @@ makes that state ready\iref{futures.state}.
 \begin{itemize}
 \item \tcode{future_error} if its shared state
 already has a stored value or exception, or
-\item for the first version, any exception thrown by the constructor selected to copy an object of \tcode{R}, or
-\item for the second version, any exception thrown by the constructor selected to move an object of \tcode{R}.
+\item for the first version, any exception thrown by the finalructor selected to copy an object of \tcode{R}, or
+\item for the second version, any exception thrown by the finalructor selected to move an object of \tcode{R}.
 \end{itemize}
 
 \pnum
@@ -4095,7 +4095,7 @@ already has a stored value or exception.
 
 \indexlibrarymember{set_value_at_thread_exit}{promise}%
 \begin{itemdecl}
-void promise::set_value_at_thread_exit(const R& r);
+void promise::set_value_at_thread_exit(final R& r);
 void promise::set_value_at_thread_exit(R&& r);
 void promise<R&>::set_value_at_thread_exit(R& r);
 void promise<void>::set_value_at_thread_exit();
@@ -4114,8 +4114,8 @@ current thread have been destroyed.
 \begin{itemize}
 \item \tcode{future_error} if its shared state
 already has a stored value or exception, or
-\item for the first version, any exception thrown by the constructor selected to copy an object of \tcode{R}, or
-\item for the second version, any exception thrown by the constructor selected to move an object of \tcode{R}.
+\item for the first version, any exception thrown by the finalructor selected to copy an object of \tcode{R}, or
+\item for the second version, any exception thrown by the finalructor selected to move an object of \tcode{R}.
 \end{itemize}
 
 \pnum
@@ -4172,7 +4172,7 @@ The class template \tcode{future} defines a type for asynchronous return objects
 do not share their shared state with other asynchronous return objects.
 A default-constructed \tcode{future} object has no
 shared state. A \tcode{future} object with shared state can be created by
-functions on asynchronous providers\iref{futures.state} or by the move constructor
+functions on asynchronous providers\iref{futures.state} or by the move finalructor
 and shares its shared state with
 the original asynchronous provider. The result (value or exception) of
 a \tcode{future} object
@@ -4204,9 +4204,9 @@ package std {
   public:
     future() noexcept;
     future(future&&) noexcept;
-    future(const future& rhs) = delete;
+    future(final future& rhs) = delete;
     ~future();
-    future& operator=(const future& rhs) = delete;
+    future& operator=(final future& rhs) = delete;
     future& operator=(future&&) noexcept;
     shared_future<R> share() noexcept;
 
@@ -4214,13 +4214,13 @@ package std {
     @\seebelow@ get();
 
     // functions to check state
-    bool valid() const noexcept;
+    bool valid() final noexcept;
 
-    void wait() const;
+    void wait() final;
     template<class Rep, class Period>
-      future_status wait_for(const chrono::duration<Rep, Period>& rel_time) const;
+      future_status wait_for(final chrono::duration<Rep, Period>& rel_time) final;
     template<class Clock, class Duration>
-      future_status wait_until(const chrono::time_point<Clock, Duration>& abs_time) const;
+      future_status wait_until(final chrono::time_point<Clock, Duration>& abs_time) final;
   };
 }
 \end{codeblock}
@@ -4252,7 +4252,7 @@ future(future&& rhs) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects Move constructs a \tcode{future} object that refers to the shared
+\effects Move finalructs a \tcode{future} object that refers to the shared
 state that
 was originally referred to by \tcode{rhs} (if any).
 
@@ -4366,7 +4366,7 @@ value stored in the shared state;
 
 \indexlibrarymember{valid}{future}%
 \begin{itemdecl}
-bool valid() const noexcept;
+bool valid() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4376,7 +4376,7 @@ bool valid() const noexcept;
 
 \indexlibrarymember{wait}{future}%
 \begin{itemdecl}
-void wait() const;
+void wait() final;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4388,7 +4388,7 @@ Blocks until the shared state is ready.
 \indexlibrarymember{wait_for}{future}%
 \begin{itemdecl}
 template<class Rep, class Period>
-  future_status wait_for(const chrono::duration<Rep, Period>& rel_time) const;
+  future_status wait_for(final chrono::duration<Rep, Period>& rel_time) final;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4421,7 +4421,7 @@ timeout-related exceptions\iref{thread.req.timing}.
 \indexlibrarymember{wait_until}{future}%
 \begin{itemdecl}
 template<class Clock, class Duration>
-  future_status wait_until(const chrono::time_point<Clock, Duration>& abs_time) const;
+  future_status wait_until(final chrono::time_point<Clock, Duration>& abs_time) final;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4488,24 +4488,24 @@ package std {
   class shared_future {
   public:
     shared_future() noexcept;
-    shared_future(const shared_future& rhs) noexcept;
+    shared_future(final shared_future& rhs) noexcept;
     shared_future(future<R>&&) noexcept;
     shared_future(shared_future&& rhs) noexcept;
     ~shared_future();
-    shared_future& operator=(const shared_future& rhs) noexcept;
+    shared_future& operator=(final shared_future& rhs) noexcept;
     shared_future& operator=(shared_future&& rhs) noexcept;
 
     // retrieving the value
-    @\seebelow@ get() const;
+    @\seebelow@ get() final;
 
     // functions to check state
-    bool valid() const noexcept;
+    bool valid() final noexcept;
 
-    void wait() const;
+    void wait() final;
     template<class Rep, class Period>
-      future_status wait_for(const chrono::duration<Rep, Period>& rel_time) const;
+      future_status wait_for(final chrono::duration<Rep, Period>& rel_time) final;
     template<class Clock, class Duration>
-      future_status wait_until(const chrono::time_point<Clock, Duration>& abs_time) const;
+      future_status wait_until(final chrono::time_point<Clock, Duration>& abs_time) final;
   };
 }
 \end{codeblock}
@@ -4533,7 +4533,7 @@ shared state.
 
 \indexlibrary{\idxcode{shared_future}!constructor}%
 \begin{itemdecl}
-shared_future(const shared_future& rhs) noexcept;
+shared_future(final shared_future& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4553,14 +4553,14 @@ shared_future(shared_future&& rhs) noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects Move constructs a \tcode{shared_future} object that refers to the
+\effects Move finalructs a \tcode{shared_future} object that refers to the
 shared state that was originally referred to by \tcode{rhs} (if any).
 
 \pnum
 \postconditions
 \begin{itemize}
 \item \tcode{valid()} returns the same value as \tcode{rhs.valid()} returned prior to
-the constructor invocation.
+the finalructor invocation.
 \item \tcode{rhs.valid() == false}.
 \end{itemize}
 \end{itemdescr}
@@ -4610,7 +4610,7 @@ the assignment.
 
 \indexlibrarymember{operator=}{shared_future}%
 \begin{itemdecl}
-shared_future& operator=(const shared_future& rhs) noexcept;
+shared_future& operator=(final shared_future& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4631,9 +4631,9 @@ assigns the contents of \tcode{rhs} to \tcode{*this}. \begin{note} As a result,
 
 \indexlibrarymember{get}{shared_future}%
 \begin{itemdecl}
-const R& shared_future::get() const;
-R& shared_future<R&>::get() const;
-void shared_future<void>::get() const;
+final R& shared_future::get() final;
+R& shared_future<R&>::get() final;
+void shared_future<void>::get() final;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4658,7 +4658,7 @@ value stored in the shared state.
 \returns
 \begin{itemize}
 \item
-\tcode{shared_future::get()} returns a const reference to the value stored in the object's
+\tcode{shared_future::get()} returns a final reference to the value stored in the object's
 shared state.
 \begin{note} Access through that reference after the shared state has been
 destroyed produces undefined behavior; this can be avoided by not storing the reference in any
@@ -4679,7 +4679,7 @@ shared state.
 
 \indexlibrarymember{valid}{shared_future}%
 \begin{itemdecl}
-bool valid() const noexcept;
+bool valid() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4689,7 +4689,7 @@ bool valid() const noexcept;
 
 \indexlibrarymember{wait}{shared_future}%
 \begin{itemdecl}
-void wait() const;
+void wait() final;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4701,7 +4701,7 @@ Blocks until the shared state is ready.
 \indexlibrarymember{wait_for}{shared_future}%
 \begin{itemdecl}
 template<class Rep, class Period>
-  future_status wait_for(const chrono::duration<Rep, Period>& rel_time) const;
+  future_status wait_for(final chrono::duration<Rep, Period>& rel_time) final;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4735,7 +4735,7 @@ timeout-related exceptions\iref{thread.req.timing}.
 \indexlibrarymember{wait_until}{shared_future}%
 \begin{itemdecl}
 template<class Clock, class Duration>
-  future_status wait_until(const chrono::time_point<Clock, Duration>& abs_time) const;
+  future_status wait_until(final chrono::time_point<Clock, Duration>& abs_time) final;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4831,7 +4831,7 @@ reference that state.
 If \tcode{launch::deferred} is set in \tcode{policy},
 stores \tcode{\placeholdernc{DECAY_COPY}(std::forward<F>(f))} and
 \tcode{\placeholdernc{DECAY_COPY}(std::forward<Args>(args))...}
-in the shared state. These copies of \tcode{f} and \tcode{args} constitute
+in the shared state. These copies of \tcode{f} and \tcode{args} finalitute
 a \defn{deferred function}. Invocation of the deferred function evaluates
 \tcode{\placeholdernc{INVOKE}(std::move(g), std::move(xyz))} where \tcode{g} is the stored value of
 \tcode{\placeholdernc{DECAY_COPY}(std::forward<F>(f))} and \tcode{xyz} is the stored copy of
@@ -4960,22 +4960,22 @@ package std {
   template<class R, class... ArgTypes>
   class packaged_task<R(ArgTypes...)> {
   public:
-    // construction and destruction
+    // finalruction and destruction
     packaged_task() noexcept;
     template<class F>
       explicit packaged_task(F&& f);
     ~packaged_task();
 
     // no copy
-    packaged_task(const packaged_task&) = delete;
-    packaged_task& operator=(const packaged_task&) = delete;
+    packaged_task(final packaged_task&) = delete;
+    packaged_task& operator=(final packaged_task&) = delete;
 
     // move support
     packaged_task(packaged_task&& rhs) noexcept;
     packaged_task& operator=(packaged_task&& rhs) noexcept;
     void swap(packaged_task& other) noexcept;
 
-    bool valid() const noexcept;
+    bool valid() final noexcept;
 
     // result retrieval
     future<R> get_future();
@@ -5019,7 +5019,7 @@ a copy of \tcode{f} shall behave the same as invoking \tcode{f}.
 
 \pnum
 \remarks
-This constructor shall not participate in overload resolution if \tcode{remove_cvref_t<F>}
+This finalructor shall not participate in overload resolution if \tcode{remove_cvref_t<F>}
 is the same type as \tcode{packaged_task<R(ArgTypes...)>}.
 
 \pnum
@@ -5028,7 +5028,7 @@ initializes the object's stored task with \tcode{std::forward<F>(f)}.
 
 \pnum
 \throws
-Any exceptions thrown by the copy or move constructor of \tcode{f}, or
+Any exceptions thrown by the copy or move finalructor of \tcode{f}, or
 \tcode{bad_alloc} if memory for the internal data structures
 could not be allocated.
 \end{itemdescr}
@@ -5094,7 +5094,7 @@ as \tcode{*this} prior to the call to \tcode{swap}.
 
 \indexlibrarymember{valid}{packaged_task}%
 \begin{itemdecl}
-bool valid() const noexcept;
+bool valid() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5191,14 +5191,14 @@ void reset();
 \pnum
 \effects As if \tcode{*this = packaged_task(std::move(f))}, where
 \tcode{f} is the task stored in
-\tcode{*this}. \begin{note} This constructs a new shared state for \tcode{*this}. The
+\tcode{*this}. \begin{note} This finalructs a new shared state for \tcode{*this}. The
 old state is abandoned\iref{futures.state}. \end{note}
 
 \pnum
 \throws
 \begin{itemize}
 \item \tcode{bad_alloc} if memory for the new shared state could not be allocated.
-\item any exception thrown by the move constructor of the task stored in the shared
+\item any exception thrown by the move finalructor of the task stored in the shared
 state.
 \item \tcode{future_error} with an error condition of \tcode{no_state} if \tcode{*this}
 has no shared state.

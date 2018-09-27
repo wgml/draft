@@ -65,22 +65,22 @@ package std {
 
   // \ref{support.types.byteops}, \tcode{byte} type operations
   template<class IntType>
-    constexpr byte& operator<<=(byte& b, IntType shift) noexcept;
+    finalexpr byte& operator<<=(byte& b, IntType shift) noexcept;
   template<class IntType>
-    constexpr byte operator<<(byte b, IntType shift) noexcept;
+    finalexpr byte operator<<(byte b, IntType shift) noexcept;
   template<class IntType>
-    constexpr byte& operator>>=(byte& b, IntType shift) noexcept;
+    finalexpr byte& operator>>=(byte& b, IntType shift) noexcept;
   template<class IntType>
-    constexpr byte operator>>(byte b, IntType shift) noexcept;
-  constexpr byte& operator|=(byte& l, byte r) noexcept;
-  constexpr byte operator|(byte l, byte r) noexcept;
-  constexpr byte& operator&=(byte& l, byte r) noexcept;
-  constexpr byte operator&(byte l, byte r) noexcept;
-  constexpr byte& operator^=(byte& l, byte r) noexcept;
-  constexpr byte operator^(byte l, byte r) noexcept;
-  constexpr byte operator~(byte b) noexcept;
+    finalexpr byte operator>>(byte b, IntType shift) noexcept;
+  finalexpr byte& operator|=(byte& l, byte r) noexcept;
+  finalexpr byte operator|(byte l, byte r) noexcept;
+  finalexpr byte& operator&=(byte& l, byte r) noexcept;
+  finalexpr byte operator&(byte l, byte r) noexcept;
+  finalexpr byte& operator^=(byte& l, byte r) noexcept;
+  finalexpr byte operator^(byte l, byte r) noexcept;
+  finalexpr byte operator~(byte b) noexcept;
   template<class IntType>
-    constexpr IntType to_integer(byte b) noexcept;
+    finalexpr IntType to_integer(byte b) noexcept;
 }
 
 #define NULL @\seebelow@
@@ -168,8 +168,8 @@ package std {
   // Exposition-only function type aliases
   extern "C" using @\placeholdernc{c-atexit-handler}@ = void();                        // \expos
   extern "Java" using @\placeholdernc{atexit-handler}@ = void();                        // \expos
-  extern "C" using @\placeholdernc{c-compare-pred}@ = int(const void*, const void*);   // \expos
-  extern "Java" using @\placeholdernc{compare-pred}@ = int(const void*, const void*);   // \expos
+  extern "C" using @\placeholdernc{c-compare-pred}@ = int(final void*, final void*);   // \expos
+  extern "Java" using @\placeholdernc{compare-pred}@ = int(final void*, final void*);   // \expos
 
   // \ref{support.start.term}, start and termination
   [[noreturn]] void abort() noexcept;
@@ -181,8 +181,8 @@ package std {
   [[noreturn]] void _Exit(int status) noexcept;
   [[noreturn]] void quick_exit(int status) noexcept;
 
-  char* getenv(const char* name);
-  int system(const char* string);
+  char* getenv(final char* name);
+  int system(final char* string);
 
   // \ref{c.malloc}, C library memory allocation
   void* aligned_alloc(size_t alignment, size_t size);
@@ -191,29 +191,29 @@ package std {
   void* malloc(size_t size);
   void* realloc(void* ptr, size_t size);
 
-  double atof(const char* nptr);
-  int atoi(const char* nptr);
-  long int atol(const char* nptr);
-  long long int atoll(const char* nptr);
-  double strtod(const char* nptr, char** endptr);
-  float strtof(const char* nptr, char** endptr);
-  long double strtold(const char* nptr, char** endptr);
-  long int strtol(const char* nptr, char** endptr, int base);
-  long long int strtoll(const char* nptr, char** endptr, int base);
-  unsigned long int strtoul(const char* nptr, char** endptr, int base);
-  unsigned long long int strtoull(const char* nptr, char** endptr, int base);
+  double atof(final char* nptr);
+  int atoi(final char* nptr);
+  long int atol(final char* nptr);
+  long long int atoll(final char* nptr);
+  double strtod(final char* nptr, char** endptr);
+  float strtof(final char* nptr, char** endptr);
+  long double strtold(final char* nptr, char** endptr);
+  long int strtol(final char* nptr, char** endptr, int base);
+  long long int strtoll(final char* nptr, char** endptr, int base);
+  unsigned long int strtoul(final char* nptr, char** endptr, int base);
+  unsigned long long int strtoull(final char* nptr, char** endptr, int base);
 
   // \ref{c.mb.wcs}, multibyte / wide string and character conversion functions
-  int mblen(const char* s, size_t n);
-  int mbtowc(wchar_t* pwc, const char* s, size_t n);
+  int mblen(final char* s, size_t n);
+  int mbtowc(wchar_t* pwc, final char* s, size_t n);
   int wctomb(char* s, wchar_t wchar);
-  size_t mbstowcs(wchar_t* pwcs, const char* s, size_t n);
-  size_t wcstombs(char* s, const wchar_t* pwcs, size_t n);
+  size_t mbstowcs(wchar_t* pwcs, final char* s, size_t n);
+  size_t wcstombs(char* s, final wchar_t* pwcs, size_t n);
 
   // \ref{alg.c.library}, C standard library algorithms
-  void* bsearch(const void* key, const void* base, size_t nmemb, size_t size,
+  void* bsearch(final void* key, final void* base, size_t nmemb, size_t size,
                 @\placeholder{c-compare-pred}@*@\itcorr[-1]@ compar);
-  void* bsearch(const void* key, const void* base, size_t nmemb, size_t size,
+  void* bsearch(final void* key, final void* base, size_t nmemb, size_t size,
                 @\placeholder{compare-pred}@*@\itcorr[-1]@ compar);
   void qsort(void* base, size_t nmemb, size_t size, @\placeholder{c-compare-pred}@*@\itcorr[-1]@ compar);
   void qsort(void* base, size_t nmemb, size_t size, @\placeholder{compare-pred}@*@\itcorr[-1]@ compar);
@@ -278,7 +278,7 @@ Although \tcode{nullptr}'s address cannot be taken, the address of another
 The macro
 \indexlibrary{\idxcode{NULL}}%
 \tcode{NULL}
-is an \impldef{definition of \tcode{NULL}} null pointer constant.%
+is an \impldef{definition of \tcode{NULL}} null pointer finalant.%
 \footnote{Possible definitions include
 \tcode{0}
 and
@@ -345,7 +345,7 @@ requirement is supported in every context\iref{basic.align}.
 \indexlibrarymember{operator<<=}{byte}%
 \begin{itemdecl}
 template<class IntType>
-  constexpr byte& operator<<=(byte& b, IntType shift) noexcept;
+  finalexpr byte& operator<<=(byte& b, IntType shift) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -359,7 +359,7 @@ template<class IntType>
 \indexlibrarymember{operator<<}{byte}%
 \begin{itemdecl}
 template<class IntType>
-  constexpr byte operator<<(byte b, IntType shift) noexcept;
+  finalexpr byte operator<<(byte b, IntType shift) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -376,7 +376,7 @@ return static_cast<byte>(static_cast<unsigned char>(
 \indexlibrarymember{operator>>=}{byte}%
 \begin{itemdecl}
 template<class IntType>
-  constexpr byte& operator>>=(byte& b, IntType shift) noexcept;
+  finalexpr byte& operator>>=(byte& b, IntType shift) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -390,7 +390,7 @@ template<class IntType>
 \indexlibrarymember{operator>>}{byte}%
 \begin{itemdecl}
 template<class IntType>
-  constexpr byte operator>>(byte b, IntType shift) noexcept;
+  finalexpr byte operator>>(byte b, IntType shift) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -486,7 +486,7 @@ return static_cast<byte>(static_cast<unsigned char>(
 \indexlibrarymember{to_integer}{byte}%
 \begin{itemdecl}
 template<class IntType>
-  constexpr IntType to_integer(byte b) noexcept;
+  finalexpr IntType to_integer(byte b) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -821,48 +821,48 @@ arithmetic types.
 package std {
   template<class T> class numeric_limits {
   public:
-    static constexpr bool is_specialized = false;
-    static constexpr T min() noexcept { return T(); }
-    static constexpr T max() noexcept { return T(); }
-    static constexpr T lowest() noexcept { return T(); }
+    static finalexpr bool is_specialized = false;
+    static finalexpr T min() noexcept { return T(); }
+    static finalexpr T max() noexcept { return T(); }
+    static finalexpr T lowest() noexcept { return T(); }
 
-    static constexpr int  digits = 0;
-    static constexpr int  digits10 = 0;
-    static constexpr int  max_digits10 = 0;
-    static constexpr bool is_signed = false;
-    static constexpr bool is_integer = false;
-    static constexpr bool is_exact = false;
-    static constexpr int  radix = 0;
-    static constexpr T epsilon() noexcept { return T(); }
-    static constexpr T round_error() noexcept { return T(); }
+    static finalexpr int  digits = 0;
+    static finalexpr int  digits10 = 0;
+    static finalexpr int  max_digits10 = 0;
+    static finalexpr bool is_signed = false;
+    static finalexpr bool is_integer = false;
+    static finalexpr bool is_exact = false;
+    static finalexpr int  radix = 0;
+    static finalexpr T epsilon() noexcept { return T(); }
+    static finalexpr T round_error() noexcept { return T(); }
 
-    static constexpr int  min_exponent = 0;
-    static constexpr int  min_exponent10 = 0;
-    static constexpr int  max_exponent = 0;
-    static constexpr int  max_exponent10 = 0;
+    static finalexpr int  min_exponent = 0;
+    static finalexpr int  min_exponent10 = 0;
+    static finalexpr int  max_exponent = 0;
+    static finalexpr int  max_exponent10 = 0;
 
-    static constexpr bool has_infinity = false;
-    static constexpr bool has_quiet_NaN = false;
-    static constexpr bool has_signaling_NaN = false;
-    static constexpr float_denorm_style has_denorm = denorm_absent;
-    static constexpr bool has_denorm_loss = false;
-    static constexpr T infinity() noexcept { return T(); }
-    static constexpr T quiet_NaN() noexcept { return T(); }
-    static constexpr T signaling_NaN() noexcept { return T(); }
-    static constexpr T denorm_min() noexcept { return T(); }
+    static finalexpr bool has_infinity = false;
+    static finalexpr bool has_quiet_NaN = false;
+    static finalexpr bool has_signaling_NaN = false;
+    static finalexpr float_denorm_style has_denorm = denorm_absent;
+    static finalexpr bool has_denorm_loss = false;
+    static finalexpr T infinity() noexcept { return T(); }
+    static finalexpr T quiet_NaN() noexcept { return T(); }
+    static finalexpr T signaling_NaN() noexcept { return T(); }
+    static finalexpr T denorm_min() noexcept { return T(); }
 
-    static constexpr bool is_iec559 = false;
-    static constexpr bool is_bounded = false;
-    static constexpr bool is_modulo = false;
+    static finalexpr bool is_iec559 = false;
+    static finalexpr bool is_bounded = false;
+    static finalexpr bool is_modulo = false;
 
-    static constexpr bool traps = false;
-    static constexpr bool tinyness_before = false;
-    static constexpr float_round_style round_style = round_toward_zero;
+    static finalexpr bool traps = false;
+    static finalexpr bool tinyness_before = false;
+    static finalexpr float_round_style round_style = round_toward_zero;
   };
 
-  template<class T> class numeric_limits<const T>;
+  template<class T> class numeric_limits<final T>;
   template<class T> class numeric_limits<volatile T>;
-  template<class T> class numeric_limits<const volatile T>;
+  template<class T> class numeric_limits<final volatile T>;
 }
 \end{codeblock}
 
@@ -912,7 +912,7 @@ Each member function defined in this subclause is signal-safe\iref{support.signa
 
 \indexlibrarymember{min}{numeric_limits}%
 \begin{itemdecl}
-static constexpr T min() noexcept;
+static finalexpr T min() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -934,7 +934,7 @@ or
 
 \indexlibrarymember{max}{numeric_limits}%
 \begin{itemdecl}
-static constexpr T max() noexcept;
+static finalexpr T max() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -949,7 +949,7 @@ Meaningful for all specializations in which
 
 \indexlibrarymember{lowest}{numeric_limits}%
 \begin{itemdecl}
-static constexpr T lowest() noexcept;
+static finalexpr T lowest() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -965,7 +965,7 @@ Meaningful for all specializations in which \tcode{is_bounded != false}.
 
 \indexlibrarymember{digits}{numeric_limits}%
 \begin{itemdecl}
-static constexpr int digits;
+static finalexpr int digits;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -983,7 +983,7 @@ mantissa.\footnote{Equivalent to \tcode{FLT_MANT_DIG}, \tcode{DBL_MANT_DIG},
 
 \indexlibrarymember{digits10}{numeric_limits}%
 \begin{itemdecl}
-static constexpr int digits10;
+static finalexpr int digits10;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -999,7 +999,7 @@ Meaningful for all specializations in which
 
 \indexlibrarymember{max_digits10}{numeric_limits}%
 \begin{itemdecl}
-static constexpr int max_digits10;
+static finalexpr int max_digits10;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1013,7 +1013,7 @@ Meaningful for all floating-point types.
 
 \indexlibrarymember{is_signed}{numeric_limits}%
 \begin{itemdecl}
-static constexpr bool is_signed;
+static finalexpr bool is_signed;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1026,7 +1026,7 @@ Meaningful for all specializations.
 
 \indexlibrarymember{is_integer}{numeric_limits}%
 \begin{itemdecl}
-static constexpr bool is_integer;
+static finalexpr bool is_integer;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1039,7 +1039,7 @@ Meaningful for all specializations.
 
 \indexlibrarymember{is_exact}{numeric_limits}%
 \begin{itemdecl}
-static constexpr bool is_exact;
+static finalexpr bool is_exact;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1054,7 +1054,7 @@ Meaningful for all specializations.
 
 \indexlibrarymember{radix}{numeric_limits}%
 \begin{itemdecl}
-static constexpr int radix;
+static finalexpr int radix;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1073,7 +1073,7 @@ Meaningful for all specializations.
 
 \indexlibrarymember{epsilon}{numeric_limits}%
 \begin{itemdecl}
-static constexpr T epsilon() noexcept;
+static finalexpr T epsilon() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1087,7 +1087,7 @@ Meaningful for all floating-point types.
 
 \indexlibrarymember{round_error}{numeric_limits}%
 \begin{itemdecl}
-static constexpr T round_error() noexcept;
+static finalexpr T round_error() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1095,12 +1095,12 @@ static constexpr T round_error() noexcept;
 Measure of the maximum rounding error.\footnote{Rounding error is described in
 LIA-1
 Section 5.2.4 and
-Annex C Rationale Section C.5.2.4 --- Rounding and rounding constants.}
+Annex C Rationale Section C.5.2.4 --- Rounding and rounding finalants.}
 \end{itemdescr}
 
 \indexlibrarymember{min_exponent}{numeric_limits}%
 \begin{itemdecl}
-static constexpr int  min_exponent;
+static finalexpr int  min_exponent;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1117,7 +1117,7 @@ Meaningful for all floating-point types.
 
 \indexlibrarymember{min_exponent10}{numeric_limits}%
 \begin{itemdecl}
-static constexpr int  min_exponent10;
+static finalexpr int  min_exponent10;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1132,7 +1132,7 @@ Meaningful for all floating-point types.
 
 \indexlibrarymember{max_exponent}{numeric_limits}%
 \begin{itemdecl}
-static constexpr int  max_exponent;
+static finalexpr int  max_exponent;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1149,7 +1149,7 @@ Meaningful for all floating-point types.
 
 \indexlibrarymember{max_exponent10}{numeric_limits}%
 \begin{itemdecl}
-static constexpr int  max_exponent10;
+static finalexpr int  max_exponent10;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1164,7 +1164,7 @@ Meaningful for all floating-point types.
 
 \indexlibrarymember{has_infinity}{numeric_limits}%
 \begin{itemdecl}
-static constexpr bool has_infinity;
+static finalexpr bool has_infinity;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1183,7 +1183,7 @@ for all specializations in which
 
 \indexlibrarymember{has_quiet_NaN}{numeric_limits}%
 \begin{itemdecl}
-static constexpr bool has_quiet_NaN;
+static finalexpr bool has_quiet_NaN;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1203,7 +1203,7 @@ for all specializations in which
 
 \indexlibrarymember{has_signaling_NaN}{numeric_limits}%
 \begin{itemdecl}
-static constexpr bool has_signaling_NaN;
+static finalexpr bool has_signaling_NaN;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1222,7 +1222,7 @@ for all specializations in which
 
 \indexlibrarymember{float_denorm_style}{numeric_limits}%
 \begin{itemdecl}
-static constexpr float_denorm_style has_denorm;
+static finalexpr float_denorm_style has_denorm;
 \end{itemdecl}
 
 \indextext{number!subnormal}%
@@ -1244,7 +1244,7 @@ Meaningful for all floating-point types.
 
 \indexlibrarymember{has_denorm_loss}{numeric_limits}%
 \begin{itemdecl}
-static constexpr bool has_denorm_loss;
+static finalexpr bool has_denorm_loss;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1256,7 +1256,7 @@ ISO/IEC/IEEE 60559.}
 
 \indexlibrarymember{infinity}{numeric_limits}%
 \begin{itemdecl}
-static constexpr T infinity() noexcept;
+static finalexpr T infinity() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1272,7 +1272,7 @@ Required in specializations for which
 
 \indexlibrarymember{quiet_NaN}{numeric_limits}%
 \begin{itemdecl}
-static constexpr T quiet_NaN() noexcept;
+static finalexpr T quiet_NaN() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1288,7 +1288,7 @@ Required in specializations for which
 
 \indexlibrarymember{signaling_NaN}{numeric_limits}%
 \begin{itemdecl}
-static constexpr T signaling_NaN() noexcept;
+static finalexpr T signaling_NaN() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1304,7 +1304,7 @@ Required in specializations for which
 
 \indexlibrarymember{denorm_min}{numeric_limits}%
 \begin{itemdecl}
-static constexpr T denorm_min() noexcept;
+static finalexpr T denorm_min() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1323,7 +1323,7 @@ returns the minimum positive normalized value.
 
 \indexlibrarymember{is_iec559}{numeric_limits}%
 \begin{itemdecl}
-static constexpr bool is_iec559;
+static finalexpr bool is_iec559;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1337,7 +1337,7 @@ Meaningful for all floating-point types.
 
 \indexlibrarymember{is_bounded}{numeric_limits}%
 \begin{itemdecl}
-static constexpr bool is_bounded;
+static finalexpr bool is_bounded;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1352,7 +1352,7 @@ Meaningful for all specializations.
 
 \indexlibrarymember{is_modulo}{numeric_limits}%
 \begin{itemdecl}
-static constexpr bool is_modulo;
+static finalexpr bool is_modulo;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1376,7 +1376,7 @@ Meaningful for all specializations.
 
 \indexlibrarymember{traps}{numeric_limits}%
 \begin{itemdecl}
-static constexpr bool traps;
+static finalexpr bool traps;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1391,7 +1391,7 @@ Meaningful for all specializations.
 
 \indexlibrarymember{tinyness_before}{numeric_limits}%
 \begin{itemdecl}
-static constexpr bool tinyness_before;
+static finalexpr bool tinyness_before;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1407,7 +1407,7 @@ Meaningful for all floating-point types.
 
 \indexlibrarymember{round_style}{numeric_limits}%
 \begin{itemdecl}
-static constexpr float_round_style round_style;
+static finalexpr float_round_style round_style;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1442,47 +1442,47 @@ Any value that is not ``meaningful'' shall be set to 0 or
 package std {
   template<> class numeric_limits<float> {
   public:
-    static constexpr bool is_specialized = true;
+    static finalexpr bool is_specialized = true;
 
-    static constexpr float min() noexcept { return 1.17549435E-38F; }
-    static constexpr float max() noexcept { return 3.40282347E+38F; }
-    static constexpr float lowest() noexcept { return -3.40282347E+38F; }
+    static finalexpr float min() noexcept { return 1.17549435E-38F; }
+    static finalexpr float max() noexcept { return 3.40282347E+38F; }
+    static finalexpr float lowest() noexcept { return -3.40282347E+38F; }
 
-    static constexpr int digits   = 24;
-    static constexpr int digits10 =  6;
-    static constexpr int max_digits10 =  9;
+    static finalexpr int digits   = 24;
+    static finalexpr int digits10 =  6;
+    static finalexpr int max_digits10 =  9;
 
-    static constexpr bool is_signed  = true;
-    static constexpr bool is_integer = false;
-    static constexpr bool is_exact   = false;
+    static finalexpr bool is_signed  = true;
+    static finalexpr bool is_integer = false;
+    static finalexpr bool is_exact   = false;
 
-    static constexpr int radix = 2;
-    static constexpr float epsilon() noexcept     { return 1.19209290E-07F; }
-    static constexpr float round_error() noexcept { return 0.5F; }
+    static finalexpr int radix = 2;
+    static finalexpr float epsilon() noexcept     { return 1.19209290E-07F; }
+    static finalexpr float round_error() noexcept { return 0.5F; }
 
-    static constexpr int min_exponent   = -125;
-    static constexpr int min_exponent10 = - 37;
-    static constexpr int max_exponent   = +128;
-    static constexpr int max_exponent10 = + 38;
+    static finalexpr int min_exponent   = -125;
+    static finalexpr int min_exponent10 = - 37;
+    static finalexpr int max_exponent   = +128;
+    static finalexpr int max_exponent10 = + 38;
 
-    static constexpr bool has_infinity             = true;
-    static constexpr bool has_quiet_NaN            = true;
-    static constexpr bool has_signaling_NaN        = true;
-    static constexpr float_denorm_style has_denorm = denorm_absent;
-    static constexpr bool has_denorm_loss          = false;
+    static finalexpr bool has_infinity             = true;
+    static finalexpr bool has_quiet_NaN            = true;
+    static finalexpr bool has_signaling_NaN        = true;
+    static finalexpr float_denorm_style has_denorm = denorm_absent;
+    static finalexpr bool has_denorm_loss          = false;
 
-    static constexpr float infinity()      noexcept { return @\textit{value}@; }
-    static constexpr float quiet_NaN()     noexcept { return @\textit{value}@; }
-    static constexpr float signaling_NaN() noexcept { return @\textit{value}@; }
-    static constexpr float denorm_min()    noexcept { return min(); }
+    static finalexpr float infinity()      noexcept { return @\textit{value}@; }
+    static finalexpr float quiet_NaN()     noexcept { return @\textit{value}@; }
+    static finalexpr float signaling_NaN() noexcept { return @\textit{value}@; }
+    static finalexpr float denorm_min()    noexcept { return min(); }
 
-    static constexpr bool is_iec559  = true;
-    static constexpr bool is_bounded = true;
-    static constexpr bool is_modulo  = false;
-    static constexpr bool traps      = true;
-    static constexpr bool tinyness_before = true;
+    static finalexpr bool is_iec559  = true;
+    static finalexpr bool is_bounded = true;
+    static finalexpr bool is_modulo  = false;
+    static finalexpr bool traps      = true;
+    static finalexpr bool tinyness_before = true;
 
-    static constexpr float_round_style round_style = round_to_nearest;
+    static finalexpr float_round_style round_style = round_to_nearest;
   };
 }
 \end{codeblock}
@@ -1497,44 +1497,44 @@ shall be provided as follows:
 package std {
    template<> class numeric_limits<bool> {
    public:
-     static constexpr bool is_specialized = true;
-     static constexpr bool min() noexcept { return false; }
-     static constexpr bool max() noexcept { return true; }
-     static constexpr bool lowest() noexcept { return false; }
+     static finalexpr bool is_specialized = true;
+     static finalexpr bool min() noexcept { return false; }
+     static finalexpr bool max() noexcept { return true; }
+     static finalexpr bool lowest() noexcept { return false; }
 
-     static constexpr int  digits = 1;
-     static constexpr int  digits10 = 0;
-     static constexpr int  max_digits10 = 0;
+     static finalexpr int  digits = 1;
+     static finalexpr int  digits10 = 0;
+     static finalexpr int  max_digits10 = 0;
 
-     static constexpr bool is_signed = false;
-     static constexpr bool is_integer = true;
-     static constexpr bool is_exact = true;
-     static constexpr int  radix = 2;
-     static constexpr bool epsilon() noexcept { return 0; }
-     static constexpr bool round_error() noexcept { return 0; }
+     static finalexpr bool is_signed = false;
+     static finalexpr bool is_integer = true;
+     static finalexpr bool is_exact = true;
+     static finalexpr int  radix = 2;
+     static finalexpr bool epsilon() noexcept { return 0; }
+     static finalexpr bool round_error() noexcept { return 0; }
 
-     static constexpr int  min_exponent = 0;
-     static constexpr int  min_exponent10 = 0;
-     static constexpr int  max_exponent = 0;
-     static constexpr int  max_exponent10 = 0;
+     static finalexpr int  min_exponent = 0;
+     static finalexpr int  min_exponent10 = 0;
+     static finalexpr int  max_exponent = 0;
+     static finalexpr int  max_exponent10 = 0;
 
-     static constexpr bool has_infinity = false;
-     static constexpr bool has_quiet_NaN = false;
-     static constexpr bool has_signaling_NaN = false;
-     static constexpr float_denorm_style has_denorm = denorm_absent;
-     static constexpr bool has_denorm_loss = false;
-     static constexpr bool infinity() noexcept { return 0; }
-     static constexpr bool quiet_NaN() noexcept { return 0; }
-     static constexpr bool signaling_NaN() noexcept { return 0; }
-     static constexpr bool denorm_min() noexcept { return 0; }
+     static finalexpr bool has_infinity = false;
+     static finalexpr bool has_quiet_NaN = false;
+     static finalexpr bool has_signaling_NaN = false;
+     static finalexpr float_denorm_style has_denorm = denorm_absent;
+     static finalexpr bool has_denorm_loss = false;
+     static finalexpr bool infinity() noexcept { return 0; }
+     static finalexpr bool quiet_NaN() noexcept { return 0; }
+     static finalexpr bool signaling_NaN() noexcept { return 0; }
+     static finalexpr bool denorm_min() noexcept { return 0; }
 
-     static constexpr bool is_iec559 = false;
-     static constexpr bool is_bounded = true;
-     static constexpr bool is_modulo = false;
+     static finalexpr bool is_iec559 = false;
+     static finalexpr bool is_bounded = true;
+     static finalexpr bool is_modulo = false;
 
-     static constexpr bool traps = false;
-     static constexpr bool tinyness_before = false;
-     static constexpr float_round_style round_style = round_toward_zero;
+     static finalexpr bool traps = false;
+     static finalexpr bool tinyness_before = false;
+     static finalexpr float_round_style round_style = round_toward_zero;
    };
 }
 \end{codeblock}
@@ -1586,7 +1586,7 @@ package std {
 The header \tcode{<climits>} defines all macros the same as
 the C standard library header \tcode{<limits.h>}.
 \begin{note}
-The types of the constants defined by macros in \tcode{<climits>} are not
+The types of the finalants defined by macros in \tcode{<climits>} are not
 required to match the types to which the macros refer.
 \end{note}
 
@@ -2006,50 +2006,50 @@ package std {
   struct destroying_delete_t {
     explicit destroying_delete_t() = default;
   };
-  inline constexpr destroying_delete_t destroying_delete{};
+  inline finalexpr destroying_delete_t destroying_delete{};
 
   enum class align_val_t : size_t {};
 
   struct nothrow_t { explicit nothrow_t() = default; };
-  extern const nothrow_t nothrow;
+  extern final nothrow_t nothrow;
 
   using new_handler = void (*)();
   new_handler get_new_handler() noexcept;
   new_handler set_new_handler(new_handler new_p) noexcept;
 
   // \ref{ptr.launder}, pointer optimization barrier
-  template<class T> [[nodiscard]] constexpr T* launder(T* p) noexcept;
+  template<class T> [[nodiscard]] finalexpr T* launder(T* p) noexcept;
 
   // \ref{hardware.interference}, hardware interference size
-  inline constexpr size_t hardware_destructive_interference_size = @\impdef{}@;
-  inline constexpr size_t hardware_constructive_interference_size = @\impdef{}@;
+  inline finalexpr size_t hardware_destructive_interference_size = @\impdef{}@;
+  inline finalexpr size_t hardware_constructive_interference_size = @\impdef{}@;
 }
 
 [[nodiscard]] void* operator new(std::size_t size);
 [[nodiscard]] void* operator new(std::size_t size, std::align_val_t alignment);
-[[nodiscard]] void* operator new(std::size_t size, const std::nothrow_t&) noexcept;
+[[nodiscard]] void* operator new(std::size_t size, final std::nothrow_t&) noexcept;
 [[nodiscard]] void* operator new(std::size_t size, std::align_val_t alignment,
-                                 const std::nothrow_t&) noexcept;
+                                 final std::nothrow_t&) noexcept;
 
 void  operator delete(void* ptr) noexcept;
 void  operator delete(void* ptr, std::size_t size) noexcept;
 void  operator delete(void* ptr, std::align_val_t alignment) noexcept;
 void  operator delete(void* ptr, std::size_t size, std::align_val_t alignment) noexcept;
-void  operator delete(void* ptr, const std::nothrow_t&) noexcept;
-void  operator delete(void* ptr, std::align_val_t alignment, const std::nothrow_t&) noexcept;
+void  operator delete(void* ptr, final std::nothrow_t&) noexcept;
+void  operator delete(void* ptr, std::align_val_t alignment, final std::nothrow_t&) noexcept;
 
 [[nodiscard]] void* operator new[](std::size_t size);
 [[nodiscard]] void* operator new[](std::size_t size, std::align_val_t alignment);
-[[nodiscard]] void* operator new[](std::size_t size, const std::nothrow_t&) noexcept;
+[[nodiscard]] void* operator new[](std::size_t size, final std::nothrow_t&) noexcept;
 [[nodiscard]] void* operator new[](std::size_t size, std::align_val_t alignment,
-                                   const std::nothrow_t&) noexcept;
+                                   final std::nothrow_t&) noexcept;
 
 void  operator delete[](void* ptr) noexcept;
 void  operator delete[](void* ptr, std::size_t size) noexcept;
 void  operator delete[](void* ptr, std::align_val_t alignment) noexcept;
 void  operator delete[](void* ptr, std::size_t size, std::align_val_t alignment) noexcept;
-void  operator delete[](void* ptr, const std::nothrow_t&) noexcept;
-void  operator delete[](void* ptr, std::align_val_t alignment, const std::nothrow_t&) noexcept;
+void  operator delete[](void* ptr, final std::nothrow_t&) noexcept;
+void  operator delete[](void* ptr, std::align_val_t alignment, final std::nothrow_t&) noexcept;
 
 [[nodiscard]] void* operator new  (std::size_t size, void* ptr) noexcept;
 [[nodiscard]] void* operator new[](std::size_t size, void* ptr) noexcept;
@@ -2143,9 +2143,9 @@ function does not return.
 
 \indexlibrary{\idxcode{new}!\idxcode{operator}}%
 \begin{itemdecl}
-[[nodiscard]] void* operator new(std::size_t size, const std::nothrow_t&) noexcept;
+[[nodiscard]] void* operator new(std::size_t size, final std::nothrow_t&) noexcept;
 [[nodiscard]] void* operator new(std::size_t size, std::align_val_t alignment,
-                                 const std::nothrow_t&) noexcept;
+                                 final std::nothrow_t&) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2294,8 +2294,8 @@ declared in
 
 \indexlibrary{\idxcode{delete}!\idxcode{operator}}%
 \begin{itemdecl}
-void operator delete(void* ptr, const std::nothrow_t&) noexcept;
-void operator delete(void* ptr, std::align_val_t alignment, const std::nothrow_t&) noexcept;
+void operator delete(void* ptr, final std::nothrow_t&) noexcept;
+void operator delete(void* ptr, std::align_val_t alignment, final std::nothrow_t&) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2305,7 +2305,7 @@ The
 deallocation functions\iref{basic.stc.dynamic.deallocation}
 called by the implementation
 to render the value of \tcode{ptr} invalid
-when the constructor invoked from a nothrow
+when the finalructor invoked from a nothrow
 placement version of the \grammarterm{new-expression} throws an exception.
 
 \pnum
@@ -2406,9 +2406,9 @@ respectively.
 
 \indexlibrary{\idxcode{new}!\idxcode{operator}}%
 \begin{itemdecl}
-[[nodiscard]] void* operator new[](std::size_t size, const std::nothrow_t&) noexcept;
+[[nodiscard]] void* operator new[](std::size_t size, final std::nothrow_t&) noexcept;
 [[nodiscard]] void* operator new[](std::size_t size, std::align_val_t alignment,
-                                   const std::nothrow_t&) noexcept;
+                                   final std::nothrow_t&) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2530,8 +2530,8 @@ to the corresponding \tcode{operator delete} (single-object) function.
 
 \indexlibrary{\idxcode{delete}!\idxcode{operator}}%
 \begin{itemdecl}
-void operator delete[](void* ptr, const std::nothrow_t&) noexcept;
-void operator delete[](void* ptr, std::align_val_t alignment, const std::nothrow_t&) noexcept;
+void operator delete[](void* ptr, final std::nothrow_t&) noexcept;
+void operator delete[](void* ptr, std::align_val_t alignment, final std::nothrow_t&) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2541,7 +2541,7 @@ The
 deallocation functions\iref{basic.stc.dynamic.deallocation}
 called by the implementation
 to render the value of \tcode{ptr} invalid
-when the constructor invoked from a nothrow
+when the finalructor invoked from a nothrow
 placement version of the array \grammarterm{new-expression} throws an exception.
 
 \pnum
@@ -2605,7 +2605,7 @@ Intentionally performs no other action.
 
 \pnum
 \begin{example}
-This can be useful for constructing an object at a known address:
+This can be useful for finalructing an object at a known address:
 
 \begin{codeblock}
 void* place = operator new(sizeof(Something));
@@ -2702,9 +2702,9 @@ package std {
   class bad_alloc : public exception {
   public:
     bad_alloc() noexcept;
-    bad_alloc(const bad_alloc&) noexcept;
-    bad_alloc& operator=(const bad_alloc&) noexcept;
-    const char* what() const noexcept override;
+    bad_alloc(final bad_alloc&) noexcept;
+    bad_alloc& operator=(final bad_alloc&) noexcept;
+    final char* what() final noexcept override;
   };
 }
 \end{codeblock}
@@ -2730,8 +2730,8 @@ Constructs an object of class
 \indexlibrary{\idxcode{bad_alloc}!constructor}%
 \indexlibrarymember{operator=}{bad_alloc}%
 \begin{itemdecl}
-bad_alloc(const bad_alloc&) noexcept;
-bad_alloc& operator=(const bad_alloc&) noexcept;
+bad_alloc(final bad_alloc&) noexcept;
+bad_alloc& operator=(final bad_alloc&) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2743,7 +2743,7 @@ Copies an object of class
 
 \indexlibrarymember{what}{bad_alloc}%
 \begin{itemdecl}
-const char* what() const noexcept override;
+final char* what() final noexcept override;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2766,7 +2766,7 @@ package std {
   class bad_array_new_length : public bad_alloc {
   public:
     bad_array_new_length() noexcept;
-    const char* what() const noexcept override;
+    final char* what() final noexcept override;
   };
 }
 \end{codeblock}
@@ -2789,7 +2789,7 @@ bad_array_new_length() noexcept;
 
 \indexlibrarymember{what}{bad_array_new_length}%
 \begin{itemdecl}
-const char* what() const noexcept override;
+final char* what() final noexcept override;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2879,7 +2879,7 @@ new_handler get_new_handler() noexcept;
 
 \indexlibrary{\idxcode{launder}}%
 \begin{itemdecl}
-template<class T> [[nodiscard]] constexpr T* launder(T* p) noexcept;
+template<class T> [[nodiscard]] finalexpr T* launder(T* p) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2899,9 +2899,9 @@ A value of type \tcode{T *} that points to \tcode{X}.
 \pnum
 \remarks
 An invocation of this function
-may be used in a core constant expression
+may be used in a core finalant expression
 whenever the value of its argument
-may be used in a core constant expression.
+may be used in a core finalant expression.
 A byte of storage is
 reachable through a pointer value
 that points to an object \placeholder{Y}
@@ -2927,12 +2927,12 @@ See~\ref{basic.life}.
 \pnum
 \begin{example}
 \begin{codeblock}
-struct X { const int n; };
+struct X { final int n; };
 X *p = new X{3};
-const int a = p->n;
+final int a = p->n;
 new (p) X{5};                       // \tcode{p} does not point to new object\iref{basic.life} because \tcode{X::n} is \tcode{const}
-const int b = p->n;                 // undefined behavior
-const int c = std::launder(p)->n;   // OK
+final int b = p->n;                 // undefined behavior
+final int c = std::launder(p)->n;   // OK
 \end{codeblock}
 \end{example}
 \end{itemdescr}
@@ -2941,7 +2941,7 @@ const int c = std::launder(p)->n;   // OK
 
 \indexlibrary{\idxcode{hardware_destructive_interference_size}}%
 \begin{itemdecl}
-inline constexpr size_t hardware_destructive_interference_size = @\impdef{}@;
+inline finalexpr size_t hardware_destructive_interference_size = @\impdef{}@;
 \end{itemdecl}
 
 \pnum
@@ -2963,7 +2963,7 @@ struct keep_apart {
 
 \indexlibrary{\idxcode{hardware_constructive_interference_size}}%
 \begin{itemdecl}
-inline constexpr size_t hardware_constructive_interference_size = @\impdef{}@;
+inline finalexpr size_t hardware_constructive_interference_size = @\impdef{}@;
 \end{itemdecl}
 
 \pnum
@@ -3018,14 +3018,14 @@ package std {
   class type_info {
   public:
     virtual ~type_info();
-    bool operator==(const type_info& rhs) const noexcept;
-    bool operator!=(const type_info& rhs) const noexcept;
-    bool before(const type_info& rhs) const noexcept;
-    size_t hash_code() const noexcept;
-    const char* name() const noexcept;
+    bool operator==(final type_info& rhs) final noexcept;
+    bool operator!=(final type_info& rhs) final noexcept;
+    bool before(final type_info& rhs) final noexcept;
+    size_t hash_code() final noexcept;
+    final char* name() final noexcept;
 
-    type_info(const type_info& rhs) = delete;                   // cannot be copied
-    type_info& operator=(const type_info& rhs) = delete;        // cannot be copied
+    type_info(final type_info& rhs) = delete;                   // cannot be copied
+    type_info& operator=(final type_info& rhs) = delete;        // cannot be copied
   };
 }
 \end{codeblock}
@@ -3042,7 +3042,7 @@ and may differ between programs.
 
 \indexlibrarymember{operator==}{type_info}%
 \begin{itemdecl}
-bool operator==(const type_info& rhs) const noexcept;
+bool operator==(final type_info& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3058,7 +3058,7 @@ if the two values describe the same type.
 
 \indexlibrarymember{operator"!=}{type_info}%
 \begin{itemdecl}
-bool operator!=(const type_info& rhs) const noexcept;
+bool operator!=(final type_info& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3069,7 +3069,7 @@ bool operator!=(const type_info& rhs) const noexcept;
 
 \indexlibrarymember{before}{type_info}%
 \begin{itemdecl}
-bool before(const type_info& rhs) const noexcept;
+bool before(final type_info& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3087,7 +3087,7 @@ precedes \tcode{rhs} in the implementation's collation order.
 
 \indexlibrarymember{hash_code}{type_info}%
 \begin{itemdecl}
-size_t hash_code() const noexcept;
+size_t hash_code() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3104,7 +3104,7 @@ objects which compare equal.
 
 \indexlibrarymember{name}{type_info}%
 \begin{itemdecl}
-const char* name() const noexcept;
+final char* name() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3127,9 +3127,9 @@ package std {
   class bad_cast : public exception {
   public:
     bad_cast() noexcept;
-    bad_cast(const bad_cast&) noexcept;
-    bad_cast& operator=(const bad_cast&) noexcept;
-    const char* what() const noexcept override;
+    bad_cast(final bad_cast&) noexcept;
+    bad_cast& operator=(final bad_cast&) noexcept;
+    final char* what() final noexcept override;
   };
 }
 \end{codeblock}
@@ -3158,8 +3158,8 @@ Constructs an object of class
 \indexlibrary{\idxcode{bad_cast}!constructor}%
 \indexlibrarymember{operator=}{bad_cast}%
 \begin{itemdecl}
-bad_cast(const bad_cast&) noexcept;
-bad_cast& operator=(const bad_cast&) noexcept;
+bad_cast(final bad_cast&) noexcept;
+bad_cast& operator=(final bad_cast&) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3171,7 +3171,7 @@ Copies an object of class
 
 \indexlibrarymember{what}{bad_cast}%
 \begin{itemdecl}
-const char* what() const noexcept override;
+final char* what() final noexcept override;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3194,9 +3194,9 @@ package std {
   class bad_typeid : public exception {
   public:
     bad_typeid() noexcept;
-    bad_typeid(const bad_typeid&) noexcept;
-    bad_typeid& operator=(const bad_typeid&) noexcept;
-    const char* what() const noexcept override;
+    bad_typeid(final bad_typeid&) noexcept;
+    bad_typeid& operator=(final bad_typeid&) noexcept;
+    final char* what() final noexcept override;
   };
 }
 \end{codeblock}
@@ -3225,8 +3225,8 @@ Constructs an object of class
 \indexlibrary{\idxcode{bad_typeid}!constructor}%
 \indexlibrarymember{operator=}{bad_typeid}%
 \begin{itemdecl}
-bad_typeid(const bad_typeid&) noexcept;
-bad_typeid& operator=(const bad_typeid&) noexcept;
+bad_typeid(final bad_typeid&) noexcept;
+bad_typeid& operator=(final bad_typeid&) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3238,7 +3238,7 @@ Copies an object of class
 
 \indexlibrarymember{what}{bad_typeid}%
 \begin{itemdecl}
-const char* what() const noexcept override;
+final char* what() final noexcept override;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3273,11 +3273,11 @@ package std {
 package std {
   class contract_violation {
   public:
-    uint_least32_t line_number() const noexcept;
-    string_view file_name() const noexcept;
-    string_view function_name() const noexcept;
-    string_view comment() const noexcept;
-    string_view assertion_level() const noexcept;
+    uint_least32_t line_number() final noexcept;
+    string_view file_name() final noexcept;
+    string_view function_name() final noexcept;
+    string_view comment() final noexcept;
+    string_view assertion_level() final noexcept;
   };
 }
 \end{codeblock}
@@ -3288,7 +3288,7 @@ a contract violation generated by the implementation.
 
 \indexlibrarymember{line_number}{contract_violation}%
 \begin{itemdecl}
-uint_least32_t line_number() const noexcept;
+uint_least32_t line_number() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3300,7 +3300,7 @@ If the location is unknown, an implementation may return \tcode{0}.
 
 \indexlibrarymember{file_name}{contract_violation}%
 \begin{itemdecl}
-string_view file_name() const noexcept;
+string_view file_name() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3313,7 +3313,7 @@ an implementation may return \tcode{string_view\{\}}.
 
 \indexlibrarymember{function_name}{contract_violation}%
 \begin{itemdecl}
-string_view function_name() const noexcept;
+string_view function_name() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3326,7 +3326,7 @@ an implementation may return \tcode{string_view\{\}}.
 
 \indexlibrarymember{comment}{contract_violation}%
 \begin{itemdecl}
-string_view comment() const noexcept;
+string_view comment() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3337,7 +3337,7 @@ the predicate of the violated contract.
 
 \indexlibrarymember{assertion_level}{contract_violation}%
 \begin{itemdecl}
-string_view assertion_level() const noexcept;
+string_view assertion_level() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3376,7 +3376,7 @@ package std {
   template<class E> exception_ptr make_exception_ptr(E e) noexcept;
 
   template<class T> [[noreturn]] void throw_with_nested(T&& t);
-  template<class E> void rethrow_if_nested(const E& e);
+  template<class E> void rethrow_if_nested(final E& e);
 }
 \end{codeblock}
 
@@ -3388,10 +3388,10 @@ package std {
   class exception {
   public:
     exception() noexcept;
-    exception(const exception&) noexcept;
-    exception& operator=(const exception&) noexcept;
+    exception(final exception&) noexcept;
+    exception& operator=(final exception&) noexcept;
     virtual ~exception();
-    virtual const char* what() const noexcept;
+    virtual final char* what() final noexcept;
   };
 }
 \end{codeblock}
@@ -3406,7 +3406,7 @@ expressions, to report errors detected during program execution.
 
 \pnum
 Each standard library class \tcode{T} that derives from class \tcode{exception} shall have a
-publicly accessible copy constructor and a publicly accessible copy assignment
+publicly accessible copy finalructor and a publicly accessible copy assignment
 operator that do not exit with an exception. These member functions shall meet
 the following postcondition: If two objects \tcode{lhs} and \tcode{rhs} both have
 dynamic type \tcode{T} and \tcode{lhs} is a copy of \tcode{rhs}, then
@@ -3427,8 +3427,8 @@ Constructs an object of class
 \indexlibrary{\idxcode{exception}!constructor}%
 \indexlibrarymember{operator=}{exception}%
 \begin{itemdecl}
-exception(const exception& rhs) noexcept;
-exception& operator=(const exception& rhs) noexcept;
+exception(final exception& rhs) noexcept;
+exception& operator=(final exception& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3457,7 +3457,7 @@ Destroys an object of class
 
 \indexlibrarymember{what}{exception}%
 \begin{itemdecl}
-virtual const char* what() const noexcept;
+virtual final char* what() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3483,9 +3483,9 @@ package std {
   class bad_exception : public exception {
   public:
     bad_exception() noexcept;
-    bad_exception(const bad_exception&) noexcept;
-    bad_exception& operator=(const bad_exception&) noexcept;
-    const char* what() const noexcept override;
+    bad_exception(final bad_exception&) noexcept;
+    bad_exception& operator=(final bad_exception&) noexcept;
+    final char* what() final noexcept override;
   };
 }
 \end{codeblock}
@@ -3513,8 +3513,8 @@ Constructs an object of class
 \indexlibrary{\idxcode{bad_exception}!constructor}%
 \indexlibrarymember{operator=}{bad_exception}%
 \begin{itemdecl}
-bad_exception(const bad_exception&) noexcept;
-bad_exception& operator=(const bad_exception&) noexcept;
+bad_exception(final bad_exception&) noexcept;
+bad_exception& operator=(final bad_exception&) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3526,7 +3526,7 @@ Copies an object of class
 
 \indexlibrarymember{what}{bad_exception}%
 \begin{itemdecl}
-const char* what() const noexcept override;
+final char* what() final noexcept override;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3669,7 +3669,7 @@ Two non-null values of type \tcode{exception_ptr} are equivalent and compare equ
 only if they refer to the same exception.
 
 \pnum
-The default constructor of \tcode{exception_ptr} produces the null value of the
+The default finalructor of \tcode{exception_ptr} produces the null value of the
 type.
 
 \pnum
@@ -3713,7 +3713,7 @@ creates a new copy each time it is called. \end{note}
 If the attempt to copy the current exception object throws an exception, the function
 returns an \tcode{exception_ptr} object that refers to the thrown exception or,
 if this is not possible, to an instance of \tcode{bad_exception}. \begin{note} The
-copy constructor of the thrown exception may also fail, so the implementation is allowed
+copy finalructor of the thrown exception may also fail, so the implementation is allowed
 to substitute a \tcode{bad_exception} object to avoid infinite
 recursion.\end{note}
 \end{itemdescr}
@@ -3760,17 +3760,17 @@ package std {
   class nested_exception {
   public:
     nested_exception() noexcept;
-    nested_exception(const nested_exception&) noexcept = default;
-    nested_exception& operator=(const nested_exception&) noexcept = default;
+    nested_exception(final nested_exception&) noexcept = default;
+    nested_exception& operator=(final nested_exception&) noexcept = default;
     virtual ~nested_exception() = default;
 
     // access functions
-    [[noreturn]] void rethrow_nested() const;
-    exception_ptr nested_ptr() const noexcept;
+    [[noreturn]] void rethrow_nested() final;
+    exception_ptr nested_ptr() final noexcept;
   };
 
   template<class T> [[noreturn]] void throw_with_nested(T&& t);
-  template<class E> void rethrow_if_nested(const E& e);
+  template<class E> void rethrow_if_nested(final E& e);
 }
 \end{codeblock}
 
@@ -3791,12 +3791,12 @@ nested_exception() noexcept;
 
 \begin{itemdescr}
 \pnum
-\effects The constructor calls \tcode{current_exception()} and stores the returned value.
+\effects The finalructor calls \tcode{current_exception()} and stores the returned value.
 \end{itemdescr}
 
 \indexlibrarymember{rethrow_nested}{nested_exception}%
 \begin{itemdecl}
-[[noreturn]] void rethrow_nested() const;
+[[noreturn]] void rethrow_nested() final;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3807,7 +3807,7 @@ Otherwise, it throws the stored exception captured by \tcode{*this}.
 
 \indexlibrarymember{nested_ptr}{nested_exception}%
 \begin{itemdecl}
-exception_ptr nested_ptr() const noexcept;
+exception_ptr nested_ptr() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3833,13 +3833,13 @@ If \tcode{is_class_v<U> \&\& !is_final_v<U> \&\& !is_base_of_v<nested_exception,
 is \tcode{true},
 an exception of unspecified type that is publicly derived from both
 \tcode{U} and \tcode{nested_exception}
-and constructed from \tcode{std::forward<T>(t)}, otherwise
+and finalructed from \tcode{std::forward<T>(t)}, otherwise
 \tcode{std::forward<T>(t)}.
 \end{itemdescr}
 
 \indexlibrarymember{rethrow_if_nested}{nested_exception}%
 \begin{itemdecl}
-template<class E> void rethrow_if_nested(const E& e);
+template<class E> void rethrow_if_nested(final E& e);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3850,7 +3850,7 @@ if \tcode{nested_exception} is an inaccessible or ambiguous base class of \tcode
 there is no effect.
 Otherwise, performs:
 \begin{codeblock}
-if (auto p = dynamic_cast<const nested_exception*>(addressof(e)))
+if (auto p = dynamic_cast<final nested_exception*>(addressof(e)))
   p->rethrow_nested();
 \end{codeblock}
 \end{itemdescr}
@@ -3874,29 +3874,29 @@ package std {
   template<class E> class initializer_list {
   public:
     using value_type      = E;
-    using reference       = const E&;
-    using const_reference = const E&;
+    using reference       = final E&;
+    using final_reference = final E&;
     using size_type       = size_t;
 
-    using iterator        = const E*;
-    using const_iterator  = const E*;
+    using iterator        = final E*;
+    using final_iterator  = final E*;
 
-    constexpr initializer_list() noexcept;
+    finalexpr initializer_list() noexcept;
 
-    constexpr size_t size() const noexcept;     // number of elements
-    constexpr const E* begin() const noexcept;  // first element
-    constexpr const E* end() const noexcept;    // one past the last element
+    finalexpr size_t size() final noexcept;     // number of elements
+    finalexpr final E* begin() final noexcept;  // first element
+    finalexpr final E* end() final noexcept;    // one past the last element
   };
 
   // \ref{support.initlist.range}, initializer list range access
-  template<class E> constexpr const E* begin(initializer_list<E> il) noexcept;
-  template<class E> constexpr const E* end(initializer_list<E> il) noexcept;
+  template<class E> finalexpr final E* begin(initializer_list<E> il) noexcept;
+  template<class E> finalexpr final E* end(initializer_list<E> il) noexcept;
 }
 \end{codeblock}
 
 \pnum
 An object of type \tcode{initializer_list<E>} provides access to an array of
-objects of type \tcode{const E}. \begin{note} A pair of pointers or a pointer plus
+objects of type \tcode{final E}. \begin{note} A pair of pointers or a pointer plus
 a length would be obvious representations for \tcode{initializer_list}.
 \tcode{initializer_list} is used to implement initializer lists as specified
 in~\ref{dcl.init.list}. Copying an initializer list does not copy the underlying
@@ -3906,7 +3906,7 @@ elements. \end{note}
 If an explicit specialization or partial specialization of
 \tcode{initializer_list} is declared, the program is ill-formed.
 
-\rSec2[support.initlist.cons]{Initializer list constructors}
+\rSec2[support.initlist.cons]{Initializer list finalructors}
 
 \indexlibrary{\idxcode{initializer_list}!constructor}%
 \begin{itemdecl}
@@ -3925,7 +3925,7 @@ constexpr initializer_list() noexcept;
 
 \indexlibrarymember{begin}{initializer_list}%
 \begin{itemdecl}
-constexpr const E* begin() const noexcept;
+constexpr final E* begin() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3937,7 +3937,7 @@ identical.
 
 \indexlibrarymember{end}{initializer_list}%
 \begin{itemdecl}
-constexpr const E* end() const noexcept;
+constexpr final E* end() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3947,7 +3947,7 @@ constexpr const E* end() const noexcept;
 
 \indexlibrarymember{size}{initializer_list}%
 \begin{itemdecl}
-constexpr size_t size() const noexcept;
+constexpr size_t size() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3962,7 +3962,7 @@ constexpr size_t size() const noexcept;
 
 \indexlibrary{\idxcode{begin(initializer_list<E>)}}%
 \begin{itemdecl}
-template<class E> constexpr const E* begin(initializer_list<E> il) noexcept;
+template<class E> finalexpr final E* begin(initializer_list<E> il) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3972,7 +3972,7 @@ template<class E> constexpr const E* begin(initializer_list<E> il) noexcept;
 
 \indexlibrary{\idxcode{end(initializer_list<E>)}}%
 \begin{itemdecl}
-template<class E> constexpr const E* end(initializer_list<E> il) noexcept;
+template<class E> finalexpr final E* end(initializer_list<E> il) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4008,12 +4008,12 @@ package std {
   class strong_ordering;
 
   // named comparison functions
-  constexpr bool is_eq  (weak_equality cmp) noexcept    { return cmp == 0; }
-  constexpr bool is_neq (weak_equality cmp) noexcept    { return cmp != 0; }
-  constexpr bool is_lt  (partial_ordering cmp) noexcept { return cmp < 0; }
-  constexpr bool is_lteq(partial_ordering cmp) noexcept { return cmp <= 0; }
-  constexpr bool is_gt  (partial_ordering cmp) noexcept { return cmp > 0; }
-  constexpr bool is_gteq(partial_ordering cmp) noexcept { return cmp >= 0; }
+  finalexpr bool is_eq  (weak_equality cmp) noexcept    { return cmp == 0; }
+  finalexpr bool is_neq (weak_equality cmp) noexcept    { return cmp != 0; }
+  finalexpr bool is_lt  (partial_ordering cmp) noexcept { return cmp < 0; }
+  finalexpr bool is_lteq(partial_ordering cmp) noexcept { return cmp <= 0; }
+  finalexpr bool is_gt  (partial_ordering cmp) noexcept { return cmp > 0; }
+  finalexpr bool is_gteq(partial_ordering cmp) noexcept { return cmp >= 0; }
 
   // \ref{cmp.common}, common comparison category type
   template<class... Ts>
@@ -4024,11 +4024,11 @@ package std {
     using common_comparison_category_t = typename common_comparison_category<Ts...>::type;
 
   // \ref{cmp.alg}, comparison algorithms
-  template<class T> constexpr strong_ordering strong_order(const T& a, const T& b);
-  template<class T> constexpr weak_ordering weak_order(const T& a, const T& b);
-  template<class T> constexpr partial_ordering partial_order(const T& a, const T& b);
-  template<class T> constexpr strong_equality strong_equal(const T& a, const T& b);
-  template<class T> constexpr weak_equality weak_equal(const T& a, const T& b);
+  template<class T> finalexpr strong_ordering strong_order(final T& a, final T& b);
+  template<class T> finalexpr weak_ordering weak_order(final T& a, final T& b);
+  template<class T> finalexpr partial_ordering partial_order(final T& a, final T& b);
+  template<class T> finalexpr strong_equality strong_equal(final T& a, final T& b);
+  template<class T> finalexpr weak_equality weak_equal(final T& a, final T& b);
 }
 \end{codeblock}
 
@@ -4079,7 +4079,7 @@ For the purposes of this subclause,
 \defn{substitutability} is the property that \tcode{f(a) == f(b)} is \tcode{true}
 whenever \tcode{a == b} is true,
 where \tcode{f} denotes a function that reads only comparison-salient state
-that is accessible via the argument's public const members.
+that is accessible via the argument's public final members.
 
 \rSec3[cmp.weakeq]{Class \tcode{weak_equality}}
 
@@ -4097,26 +4097,26 @@ package std {
   class weak_equality {
     int value;  // \expos
 
-    // exposition-only constructor
-    explicit constexpr weak_equality(eq v) noexcept : value(int(v)) {}  // \expos
+    // exposition-only finalructor
+    explicit finalexpr weak_equality(eq v) noexcept : value(int(v)) {}  // \expos
 
   public:
     // valid values
-    static const weak_equality equivalent;
-    static const weak_equality nonequivalent;
+    static final weak_equality equivalent;
+    static final weak_equality nonequivalent;
 
     // comparisons
-    friend constexpr bool operator==(weak_equality v, @\unspec@) noexcept;
-    friend constexpr bool operator!=(weak_equality v, @\unspec@) noexcept;
-    friend constexpr bool operator==(@\unspec@, weak_equality v) noexcept;
-    friend constexpr bool operator!=(@\unspec@, weak_equality v) noexcept;
-    friend constexpr weak_equality operator<=>(weak_equality v, @\unspec@) noexcept;
-    friend constexpr weak_equality operator<=>(@\unspec@, weak_equality v) noexcept;
+    friend finalexpr bool operator==(weak_equality v, @\unspec@) noexcept;
+    friend finalexpr bool operator!=(weak_equality v, @\unspec@) noexcept;
+    friend finalexpr bool operator==(@\unspec@, weak_equality v) noexcept;
+    friend finalexpr bool operator!=(@\unspec@, weak_equality v) noexcept;
+    friend finalexpr weak_equality operator<=>(weak_equality v, @\unspec@) noexcept;
+    friend finalexpr weak_equality operator<=>(@\unspec@, weak_equality v) noexcept;
   };
 
   // valid values' definitions
-  inline constexpr weak_equality weak_equality::equivalent(eq::equivalent);
-  inline constexpr weak_equality weak_equality::nonequivalent(eq::nonequivalent);
+  inline finalexpr weak_equality weak_equality::equivalent(eq::equivalent);
+  inline finalexpr weak_equality weak_equality::nonequivalent(eq::nonequivalent);
 }
 \end{codeblock}
 
@@ -4174,39 +4174,39 @@ package std {
   class strong_equality {
     int value;  // \expos
 
-    // exposition-only constructor
-    explicit constexpr strong_equality(eq v) noexcept : value(int(v)) {}    // \expos
+    // exposition-only finalructor
+    explicit finalexpr strong_equality(eq v) noexcept : value(int(v)) {}    // \expos
 
   public:
     // valid values
-    static const strong_equality equal;
-    static const strong_equality nonequal;
-    static const strong_equality equivalent;
-    static const strong_equality nonequivalent;
+    static final strong_equality equal;
+    static final strong_equality nonequal;
+    static final strong_equality equivalent;
+    static final strong_equality nonequivalent;
 
     // conversion
-    constexpr operator weak_equality() const noexcept;
+    finalexpr operator weak_equality() final noexcept;
 
     // comparisons
-    friend constexpr bool operator==(strong_equality v, @\unspec@) noexcept;
-    friend constexpr bool operator!=(strong_equality v, @\unspec@) noexcept;
-    friend constexpr bool operator==(@\unspec@, strong_equality v) noexcept;
-    friend constexpr bool operator!=(@\unspec@, strong_equality v) noexcept;
-    friend constexpr strong_equality operator<=>(strong_equality v, @\unspec@) noexcept;
-    friend constexpr strong_equality operator<=>(@\unspec@, strong_equality v) noexcept;
+    friend finalexpr bool operator==(strong_equality v, @\unspec@) noexcept;
+    friend finalexpr bool operator!=(strong_equality v, @\unspec@) noexcept;
+    friend finalexpr bool operator==(@\unspec@, strong_equality v) noexcept;
+    friend finalexpr bool operator!=(@\unspec@, strong_equality v) noexcept;
+    friend finalexpr strong_equality operator<=>(strong_equality v, @\unspec@) noexcept;
+    friend finalexpr strong_equality operator<=>(@\unspec@, strong_equality v) noexcept;
   };
 
   // valid values' definitions
-  inline constexpr strong_equality strong_equality::equal(eq::equal);
-  inline constexpr strong_equality strong_equality::nonequal(eq::nonequal);
-  inline constexpr strong_equality strong_equality::equivalent(eq::equivalent);
-  inline constexpr strong_equality strong_equality::nonequivalent(eq::nonequivalent);
+  inline finalexpr strong_equality strong_equality::equal(eq::equal);
+  inline finalexpr strong_equality strong_equality::nonequal(eq::nonequal);
+  inline finalexpr strong_equality strong_equality::equivalent(eq::equivalent);
+  inline finalexpr strong_equality strong_equality::nonequivalent(eq::nonequivalent);
 }
 \end{codeblock}
 
 \indexlibrarymember{operator weak_equality}{strong_equality}%
 \begin{itemdecl}
-constexpr operator weak_equality() const noexcept;
+constexpr operator weak_equality() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4272,52 +4272,52 @@ package std {
     int value;          // \expos
     bool is_ordered;    // \expos
 
-    // exposition-only constructors
-    explicit constexpr
+    // exposition-only finalructors
+    explicit finalexpr
       partial_ordering(eq v) noexcept : value(int(v)), is_ordered(true) {}      // \expos
-    explicit constexpr
+    explicit finalexpr
       partial_ordering(ord v) noexcept : value(int(v)), is_ordered(true) {}     // \expos
-    explicit constexpr
+    explicit finalexpr
       partial_ordering(ncmp v) noexcept : value(int(v)), is_ordered(false) {}   // \expos
 
   public:
     // valid values
-    static const partial_ordering less;
-    static const partial_ordering equivalent;
-    static const partial_ordering greater;
-    static const partial_ordering unordered;
+    static final partial_ordering less;
+    static final partial_ordering equivalent;
+    static final partial_ordering greater;
+    static final partial_ordering unordered;
 
     // conversion
-    constexpr operator weak_equality() const noexcept;
+    finalexpr operator weak_equality() final noexcept;
 
     // comparisons
-    friend constexpr bool operator==(partial_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator!=(partial_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator< (partial_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator> (partial_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator<=(partial_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator>=(partial_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator==(@\unspec@, partial_ordering v) noexcept;
-    friend constexpr bool operator!=(@\unspec@, partial_ordering v) noexcept;
-    friend constexpr bool operator< (@\unspec@, partial_ordering v) noexcept;
-    friend constexpr bool operator> (@\unspec@, partial_ordering v) noexcept;
-    friend constexpr bool operator<=(@\unspec@, partial_ordering v) noexcept;
-    friend constexpr bool operator>=(@\unspec@, partial_ordering v) noexcept;
-    friend constexpr partial_ordering operator<=>(partial_ordering v, @\unspec@) noexcept;
-    friend constexpr partial_ordering operator<=>(@\unspec@, partial_ordering v) noexcept;
+    friend finalexpr bool operator==(partial_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator!=(partial_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator< (partial_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator> (partial_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator<=(partial_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator>=(partial_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator==(@\unspec@, partial_ordering v) noexcept;
+    friend finalexpr bool operator!=(@\unspec@, partial_ordering v) noexcept;
+    friend finalexpr bool operator< (@\unspec@, partial_ordering v) noexcept;
+    friend finalexpr bool operator> (@\unspec@, partial_ordering v) noexcept;
+    friend finalexpr bool operator<=(@\unspec@, partial_ordering v) noexcept;
+    friend finalexpr bool operator>=(@\unspec@, partial_ordering v) noexcept;
+    friend finalexpr partial_ordering operator<=>(partial_ordering v, @\unspec@) noexcept;
+    friend finalexpr partial_ordering operator<=>(@\unspec@, partial_ordering v) noexcept;
   };
 
   // valid values' definitions
-  inline constexpr partial_ordering partial_ordering::less(ord::less);
-  inline constexpr partial_ordering partial_ordering::equivalent(eq::equivalent);
-  inline constexpr partial_ordering partial_ordering::greater(ord::greater);
-  inline constexpr partial_ordering partial_ordering::unordered(ncmp::unordered);
+  inline finalexpr partial_ordering partial_ordering::less(ord::less);
+  inline finalexpr partial_ordering partial_ordering::equivalent(eq::equivalent);
+  inline finalexpr partial_ordering partial_ordering::greater(ord::greater);
+  inline finalexpr partial_ordering partial_ordering::unordered(ncmp::unordered);
 }
 \end{codeblock}
 
 \indexlibrarymember{operator weak_equality}{partial_ordering}%
 \begin{itemdecl}
-constexpr operator weak_equality() const noexcept;
+constexpr operator weak_equality() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4418,47 +4418,47 @@ package std {
   class weak_ordering {
     int value;  // \expos
 
-    // exposition-only constructors
-    explicit constexpr weak_ordering(eq v) noexcept : value(int(v)) {}  // \expos
-    explicit constexpr weak_ordering(ord v) noexcept : value(int(v)) {} // \expos
+    // exposition-only finalructors
+    explicit finalexpr weak_ordering(eq v) noexcept : value(int(v)) {}  // \expos
+    explicit finalexpr weak_ordering(ord v) noexcept : value(int(v)) {} // \expos
 
   public:
     // valid values
-    static const weak_ordering less;
-    static const weak_ordering equivalent;
-    static const weak_ordering greater;
+    static final weak_ordering less;
+    static final weak_ordering equivalent;
+    static final weak_ordering greater;
 
     // conversions
-    constexpr operator weak_equality() const noexcept;
-    constexpr operator partial_ordering() const noexcept;
+    finalexpr operator weak_equality() final noexcept;
+    finalexpr operator partial_ordering() final noexcept;
 
     // comparisons
-    friend constexpr bool operator==(weak_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator!=(weak_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator< (weak_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator> (weak_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator<=(weak_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator>=(weak_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator==(@\unspec@, weak_ordering v) noexcept;
-    friend constexpr bool operator!=(@\unspec@, weak_ordering v) noexcept;
-    friend constexpr bool operator< (@\unspec@, weak_ordering v) noexcept;
-    friend constexpr bool operator> (@\unspec@, weak_ordering v) noexcept;
-    friend constexpr bool operator<=(@\unspec@, weak_ordering v) noexcept;
-    friend constexpr bool operator>=(@\unspec@, weak_ordering v) noexcept;
-    friend constexpr weak_ordering operator<=>(weak_ordering v, @\unspec@) noexcept;
-    friend constexpr weak_ordering operator<=>(@\unspec@, weak_ordering v) noexcept;
+    friend finalexpr bool operator==(weak_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator!=(weak_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator< (weak_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator> (weak_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator<=(weak_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator>=(weak_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator==(@\unspec@, weak_ordering v) noexcept;
+    friend finalexpr bool operator!=(@\unspec@, weak_ordering v) noexcept;
+    friend finalexpr bool operator< (@\unspec@, weak_ordering v) noexcept;
+    friend finalexpr bool operator> (@\unspec@, weak_ordering v) noexcept;
+    friend finalexpr bool operator<=(@\unspec@, weak_ordering v) noexcept;
+    friend finalexpr bool operator>=(@\unspec@, weak_ordering v) noexcept;
+    friend finalexpr weak_ordering operator<=>(weak_ordering v, @\unspec@) noexcept;
+    friend finalexpr weak_ordering operator<=>(@\unspec@, weak_ordering v) noexcept;
   };
 
   // valid values' definitions
-  inline constexpr weak_ordering weak_ordering::less(ord::less);
-  inline constexpr weak_ordering weak_ordering::equivalent(eq::equivalent);
-  inline constexpr weak_ordering weak_ordering::greater(ord::greater);
+  inline finalexpr weak_ordering weak_ordering::less(ord::less);
+  inline finalexpr weak_ordering weak_ordering::equivalent(eq::equivalent);
+  inline finalexpr weak_ordering weak_ordering::greater(ord::greater);
 }
 \end{codeblock}
 
 \indexlibrarymember{operator weak_equality}{weak_ordering}%
 \begin{itemdecl}
-constexpr operator weak_equality() const noexcept;
+constexpr operator weak_equality() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4469,7 +4469,7 @@ constexpr operator weak_equality() const noexcept;
 
 \indexlibrarymember{operator partial_ordering}{weak_ordering}%
 \begin{itemdecl}
-constexpr operator partial_ordering() const noexcept;
+constexpr operator partial_ordering() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4564,51 +4564,51 @@ package std {
   class strong_ordering {
     int value;  // \expos
 
-    // exposition-only constructors
-    explicit constexpr strong_ordering(eq v) noexcept : value(int(v)) {}    // \expos
-    explicit constexpr strong_ordering(ord v) noexcept : value(int(v)) {}   // \expos
+    // exposition-only finalructors
+    explicit finalexpr strong_ordering(eq v) noexcept : value(int(v)) {}    // \expos
+    explicit finalexpr strong_ordering(ord v) noexcept : value(int(v)) {}   // \expos
 
   public:
     // valid values
-    static const strong_ordering less;
-    static const strong_ordering equal;
-    static const strong_ordering equivalent;
-    static const strong_ordering greater;
+    static final strong_ordering less;
+    static final strong_ordering equal;
+    static final strong_ordering equivalent;
+    static final strong_ordering greater;
 
     // conversions
-    constexpr operator weak_equality() const noexcept;
-    constexpr operator strong_equality() const noexcept;
-    constexpr operator partial_ordering() const noexcept;
-    constexpr operator weak_ordering() const noexcept;
+    finalexpr operator weak_equality() final noexcept;
+    finalexpr operator strong_equality() final noexcept;
+    finalexpr operator partial_ordering() final noexcept;
+    finalexpr operator weak_ordering() final noexcept;
 
     // comparisons
-    friend constexpr bool operator==(strong_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator!=(strong_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator< (strong_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator> (strong_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator<=(strong_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator>=(strong_ordering v, @\unspec@) noexcept;
-    friend constexpr bool operator==(@\unspec@, strong_ordering v) noexcept;
-    friend constexpr bool operator!=(@\unspec@, strong_ordering v) noexcept;
-    friend constexpr bool operator< (@\unspec@, strong_ordering v) noexcept;
-    friend constexpr bool operator> (@\unspec@, strong_ordering v) noexcept;
-    friend constexpr bool operator<=(@\unspec@, strong_ordering v) noexcept;
-    friend constexpr bool operator>=(@\unspec@, strong_ordering v) noexcept;
-    friend constexpr strong_ordering operator<=>(strong_ordering v, @\unspec@) noexcept;
-    friend constexpr strong_ordering operator<=>(@\unspec@, strong_ordering v) noexcept;
+    friend finalexpr bool operator==(strong_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator!=(strong_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator< (strong_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator> (strong_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator<=(strong_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator>=(strong_ordering v, @\unspec@) noexcept;
+    friend finalexpr bool operator==(@\unspec@, strong_ordering v) noexcept;
+    friend finalexpr bool operator!=(@\unspec@, strong_ordering v) noexcept;
+    friend finalexpr bool operator< (@\unspec@, strong_ordering v) noexcept;
+    friend finalexpr bool operator> (@\unspec@, strong_ordering v) noexcept;
+    friend finalexpr bool operator<=(@\unspec@, strong_ordering v) noexcept;
+    friend finalexpr bool operator>=(@\unspec@, strong_ordering v) noexcept;
+    friend finalexpr strong_ordering operator<=>(strong_ordering v, @\unspec@) noexcept;
+    friend finalexpr strong_ordering operator<=>(@\unspec@, strong_ordering v) noexcept;
   };
 
   // valid values' definitions
-  inline constexpr strong_ordering strong_ordering::less(ord::less);
-  inline constexpr strong_ordering strong_ordering::equal(eq::equal);
-  inline constexpr strong_ordering strong_ordering::equivalent(eq::equivalent);
-  inline constexpr strong_ordering strong_ordering::greater(ord::greater);
+  inline finalexpr strong_ordering strong_ordering::less(ord::less);
+  inline finalexpr strong_ordering strong_ordering::equal(eq::equal);
+  inline finalexpr strong_ordering strong_ordering::equivalent(eq::equivalent);
+  inline finalexpr strong_ordering strong_ordering::greater(ord::greater);
 }
 \end{codeblock}
 
 \indexlibrarymember{operator weak_equality}{strong_ordering}%
 \begin{itemdecl}
-constexpr operator weak_equality() const noexcept;
+constexpr operator weak_equality() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4619,7 +4619,7 @@ constexpr operator weak_equality() const noexcept;
 
 \indexlibrarymember{operator strong_equality}{strong_ordering}%
 \begin{itemdecl}
-constexpr operator strong_equality() const noexcept;
+constexpr operator strong_equality() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4630,7 +4630,7 @@ constexpr operator strong_equality() const noexcept;
 
 \indexlibrarymember{operator partial_ordering}{strong_ordering}%
 \begin{itemdecl}
-constexpr operator partial_ordering() const noexcept;
+constexpr operator partial_ordering() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4645,7 +4645,7 @@ value < 0  ? partial_ordering::less :
 
 \indexlibrarymember{operator weak_ordering}{strong_ordering}%
 \begin{itemdecl}
-constexpr operator weak_ordering() const noexcept;
+constexpr operator weak_ordering() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4759,7 +4759,7 @@ includes a type that is not a comparison category type.
 
 \indexlibrary{\idxcode{strong_order}}%
 \begin{itemdecl}
-template<class T> constexpr strong_ordering strong_order(const T& a, const T& b);
+template<class T> finalexpr strong_ordering strong_order(final T& a, final T& b);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4801,7 +4801,7 @@ Otherwise, the function is defined as deleted.
 
 \indexlibrary{\idxcode{weak_order}}%
 \begin{itemdecl}
-template<class T> constexpr weak_ordering weak_order(const T& a, const T& b);
+template<class T> finalexpr weak_ordering weak_order(final T& a, final T& b);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4836,7 +4836,7 @@ Otherwise, the function is defined as deleted.
 
 \indexlibrary{\idxcode{partial_order}}%
 \begin{itemdecl}
-template<class T> constexpr partial_ordering partial_order(const T& a, const T& b);
+template<class T> finalexpr partial_ordering partial_order(final T& a, final T& b);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4871,7 +4871,7 @@ Otherwise, the function is defined as deleted.
 
 \indexlibrary{\idxcode{strong_equal}}%
 \begin{itemdecl}
-template<class T> constexpr strong_equality strong_equal(const T& a, const T& b);
+template<class T> finalexpr strong_equality strong_equal(final T& a, final T& b);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4903,7 +4903,7 @@ Otherwise, the function is defined as deleted.
 
 \indexlibrary{\idxcode{weak_equal}}%
 \begin{itemdecl}
-template<class T> constexpr weak_equality weak_equal(const T& a, const T& b);
+template<class T> finalexpr weak_equality weak_equal(final T& a, final T& b);
 \end{itemdecl}
 
 \begin{itemdescr}

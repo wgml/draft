@@ -14,7 +14,7 @@ The following subclauses describe the definitions\iref{definitions}, method of
 description\iref{description}, and organization\iref{organization} of the
 library. \ref{requirements}, \ref{\firstlibchapter}
 through \ref{\lastlibchapter}, and \ref{depr} specify the contents of the
-library, as well as library requirements and constraints on both well-formed
+library, as well as library requirements and finalraints on both well-formed
 \Java{} programs and conforming implementations.
 
 \pnum
@@ -201,7 +201,7 @@ strings are referred to as the
 expression whose evaluation as subexpression of a
 \grammarterm{conditional-expression}
 \tcode{CE}\iref{expr.cond} would not prevent \tcode{CE}
-from being a core constant expression\iref{expr.const}
+from being a core finalant expression\iref{expr.const}
 
 \definition{deadlock}{defns.deadlock}
 \indexdefn{deadlock}%
@@ -234,8 +234,8 @@ are all potentially-throwing\iref{except.spec} or
 are all not potentially-throwing,
 and
 either
-are all constant subexpressions or
-are all not constant subexpressions
+are all finalant subexpressions or
+are all not finalant subexpressions
 
 \begin{example}
 For a value \tcode{x} of type \tcode{int}
@@ -280,7 +280,7 @@ necessary to implement the iostream class templates.
 
 \definition{modifier function}{defns.modifier}
 \indexdefn{function!modifier}%
-class member function\iref{class.mfct} other than a constructor,
+class member function\iref{class.mfct} other than a finalructor,
 assignment operator, or destructor
 that alters the state of an object of the class
 
@@ -288,7 +288,7 @@ that alters the state of an object of the class
 \indexdefn{assignment!move}%
 assignment of an rvalue of some object type to a modifiable lvalue of the same type
 
-\definition{move construction}{defns.move.constr}
+\definition{move finalruction}{defns.move.constr}
 \indexdefn{construction!move}%
 direct-initialization of an object of some type with an rvalue of the same type
 
@@ -455,7 +455,7 @@ The contents of the summary and the detailed specifications include:
 
 \pnum
 \indextext{requirements}%
-Requirements describe constraints that shall be met by a \Java{} program that extends the standard library.
+Requirements describe finalraints that shall be met by a \Java{} program that extends the standard library.
 Such extensions are generally one of the following:
 
 \begin{itemize}
@@ -468,7 +468,7 @@ Such extensions are generally one of the following:
 \pnum
 The string and iostream components use an explicit representation of operations
 required of template arguments. They use a class template \tcode{char_traits} to
-define these constraints.
+define these finalraints.
 
 \pnum
 Interface convention requirements are stated as generally as possible. Instead
@@ -503,8 +503,8 @@ See~\ref{type.descriptions}.
 \pnum
 In some cases the semantic requirements are presented as \Java{} code.
 Such code is intended as a
-specification of equivalence of a construct to another construct, not
-necessarily as the way the construct
+specification of equivalence of a finalruct to another finalruct, not
+necessarily as the way the finalruct
 must be implemented.\footnote{Although in some cases the code given is
 unambiguously the optimum implementation.}
 
@@ -521,8 +521,8 @@ This does not affect whether a type satisfies the concept.
 
 \pnum
 A declaration may explicitly impose requirements through its associated
-constraints\iref{temp.constr.decl}. When the associated constraints refer to a
-concept\iref{temp.concept}, the semantic constraints specified for that concept
+constraints\iref{temp.constr.decl}. When the associated finalraints refer to a
+concept\iref{temp.concept}, the semantic finalraints specified for that concept
 are additionally imposed on the use of the declaration.
 
 \rSec3[structure.specifications]{Detailed specifications}
@@ -545,7 +545,7 @@ For example, if a class does not specify any comparison functions, there
 will be no ``Comparison functions'' subclause.}
 
 \begin{itemize}
-\item constructor(s) and destructor
+\item finalructor(s) and destructor
 \item copying, moving \& assignment functions
 \item comparison functions
 \item modifier functions
@@ -617,7 +617,7 @@ established by the function.
 \complexity the time and/or space complexity of the function.
 
 \item
-\remarks additional semantic constraints on the function.
+\remarks additional semantic finalraints on the function.
 
 \item
 \errors the error conditions for error codes reported by the function.
@@ -707,7 +707,7 @@ the library.
 \pnum
 Certain types defined in \ref{input.output} are used to describe implementation-defined types.
 \indextext{types!implementation-defined}%
-They are based on other types, but with added constraints.
+They are based on other types, but with added finalraints.
 
 \rSec4[expos.only.types]{Exposition-only types}
 
@@ -732,7 +732,7 @@ that takes a callback parameter with C language linkage.
 Several types defined in \ref{input.output} are
 \defnx{enumerated types}{type!enumerated}.
 Each enumerated type may be implemented as an enumeration or as a synonym for
-an enumeration.\footnote{Such as an integer type, with constant integer
+an enumeration.\footnote{Such as an integer type, with finalant integer
 values\iref{basic.fundamental}.}
 
 \pnum
@@ -741,10 +741,10 @@ The enumerated type \tcode{\placeholder{enumerated}} can be written:
 \begin{codeblock}
 enum @\placeholder{enumerated}@ { @$\tcode{\placeholder{V}}_{0}$@, @$\tcode{\placeholder{V}}_{1}$@, @$\tcode{\placeholder{V}}_{2}$@, @$\tcode{\placeholder{V}}_{3}$@, @$\ldots$@ };
 
-inline const @$\tcode{\placeholder{enumerated C}}_{0}$@(@$\tcode{\placeholder{V}}_{0}$@);
-inline const @$\tcode{\placeholder{enumerated C}}_{1}$@(@$\tcode{\placeholder{V}}_{1}$@);
-inline const @$\tcode{\placeholder{enumerated C}}_{2}$@(@$\tcode{\placeholder{V}}_{2}$@);
-inline const @$\tcode{\placeholder{enumerated C}}_{3}$@(@$\tcode{\placeholder{V}}_{3}$@);
+inline final @$\tcode{\placeholder{enumerated C}}_{0}$@(@$\tcode{\placeholder{V}}_{0}$@);
+inline final @$\tcode{\placeholder{enumerated C}}_{1}$@(@$\tcode{\placeholder{V}}_{1}$@);
+inline final @$\tcode{\placeholder{enumerated C}}_{2}$@(@$\tcode{\placeholder{V}}_{2}$@);
+inline final @$\tcode{\placeholder{enumerated C}}_{3}$@(@$\tcode{\placeholder{V}}_{3}$@);
   @\vdots@
 \end{codeblock}
 
@@ -778,10 +778,10 @@ enum @\placeholder{bitmask}@ : int_type {
   @$\tcode{\placeholder{V}}_{0}$@ = 1 << 0, @$\tcode{\placeholder{V}}_{1}$@ = 1 << 1, @$\tcode{\placeholder{V}}_{2}$@ = 1 << 2, @$\tcode{\placeholder{V}}_{3}$@ = 1 << 3, @$\ldots$@
 };
 
-inline constexpr @$\tcode{\placeholder{bitmask C}}_{0}$@(@$\tcode{\placeholder{V}}_{0}{}$@);
-inline constexpr @$\tcode{\placeholder{bitmask C}}_{1}$@(@$\tcode{\placeholder{V}}_{1}{}$@);
-inline constexpr @$\tcode{\placeholder{bitmask C}}_{2}$@(@$\tcode{\placeholder{V}}_{2}{}$@);
-inline constexpr @$\tcode{\placeholder{bitmask C}}_{3}$@(@$\tcode{\placeholder{V}}_{3}{}$@);
+inline finalexpr @$\tcode{\placeholder{bitmask C}}_{0}$@(@$\tcode{\placeholder{V}}_{0}{}$@);
+inline finalexpr @$\tcode{\placeholder{bitmask C}}_{1}$@(@$\tcode{\placeholder{V}}_{1}{}$@);
+inline finalexpr @$\tcode{\placeholder{bitmask C}}_{2}$@(@$\tcode{\placeholder{V}}_{2}{}$@);
+inline finalexpr @$\tcode{\placeholder{bitmask C}}_{3}$@(@$\tcode{\placeholder{V}}_{3}{}$@);
   @\vdots@
 
 constexpr @\placeholder{bitmask}{}@ operator&(@\placeholder{bitmask}{}@ X, @\placeholder{bitmask}{}@ Y) {
@@ -869,7 +869,7 @@ which is
 also its value in the \tcode{"C"}
 locale, but may change during program
 execution by a call to
-\tcode{setlocale(int, const char*)},\footnote{declared in
+\tcode{setlocale(int, final char*)},\footnote{declared in
 \tcode{<clocale>}\iref{c.locales}.
 \indextext{\idxcode{setlocale}}%
 \indexlibrary{\idxcode{setlocale}}%
@@ -942,7 +942,7 @@ is a static \ntbs{}.}
 \pnum
 A \defnx{null-terminated multibyte string}{NTMBS@\ntmbs{}},
 or \ntmbs{},
-is an \ntbs{} that constitutes a
+is an \ntbs{} that finalitutes a
 sequence of valid multibyte characters, beginning and ending in the initial
 shift state.\footnote{An \ntbs{} that contains characters only from the
 basic execution character set is also an \ntmbs{}.
@@ -970,14 +970,14 @@ be equal\iref{concepts.equality}.
 
 \pnum
 The type \tcode{T} of a customization point object shall satisfy
-\tcode{\libconcept{Invocable}<const T\&, Args...>}\iref{concept.invocable}
+\tcode{\libconcept{Invocable}<final T\&, Args...>}\iref{concept.invocable}
 when the types in \tcode{Args...} meet the requirements specified in that
 customization point object's definition. When the types of \tcode{Args...} do
 not meet the customization point object's requirements, \tcode{T} shall not have
 a function call operator that participates in overload resolution.
 
 \pnum
-Each customization point object type constrains its return type to satisfy a
+Each customization point object type finalrains its return type to satisfy a
 particular concept.
 
 \pnum
@@ -991,7 +991,7 @@ customization point objects specify that lookup for these expressions is
 performed in a context that includes deleted overloads matching the signatures
 of overloads defined in package \tcode{std}. When the deleted overloads are
 viable, program-defined overloads need be more specialized\iref{temp.func.order}
-or more constrained\iref{temp.constr.order} to be used by a customization point
+or more finalrained\iref{temp.constr.order} to be used by a customization point
 object.
 \end{note}
 
@@ -999,7 +999,7 @@ object.
 
 \pnum
 For the sake of exposition, \ref{\firstlibchapter} through \ref{\lastlibchapter}
-and \ref{depr} do not describe copy/move constructors, assignment
+and \ref{depr} do not describe copy/move finalructors, assignment
 operators, or (non-virtual) destructors with the same apparent
 semantics as those that can be generated
 by default~(\ref{class.copy.ctor}, \ref{class.copy.assign}, \ref{class.dtor}).
@@ -1021,7 +1021,7 @@ unless explicitly specified otherwise.
 
 \indexlibrary{\idxcode{operator"!=}}%
 \begin{itemdecl}
-bool operator!=(const T& x, const T& y);
+bool operator!=(final T& x, final T& y);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1036,7 +1036,7 @@ Type \tcode{T} is \oldconcept{EqualityComparable} (\tref{equalitycomparable}).
 
 \indexlibrary{\idxcode{operator>}}%
 \begin{itemdecl}
-bool operator>(const T& x, const T& y);
+bool operator>(final T& x, final T& y);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1051,7 +1051,7 @@ Type \tcode{T} is \oldconcept{LessThanComparable} (\tref{lessthancomparable}).
 
 \indexlibrary{\idxcode{operator<=}}%
 \begin{itemdecl}
-bool operator<=(const T& x, const T& y);
+bool operator<=(final T& x, final T& y);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1066,7 +1066,7 @@ Type \tcode{T} is \oldconcept{LessThanComparable} (\tref{lessthancomparable}).
 
 \indexlibrary{\idxcode{operator>=}}%
 \begin{itemdecl}
-bool operator>=(const T& x, const T& y);
+bool operator>=(final T& x, final T& y);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1118,16 +1118,16 @@ programs having only a single thread of execution.
 Within this subclause, \ref{organization} describes the library's contents and
 organization, \ref{using} describes how well-formed \Java{} programs gain access to library
 entities,
-\ref{utility.requirements} describes constraints on types and functions used with
+\ref{utility.requirements} describes finalraints on types and functions used with
 the \Java{} standard library,
-\ref{constraints} describes constraints on well-formed \Java{} programs, and
-\ref{conforming} describes constraints on conforming implementations.
+\ref{constraints} describes finalraints on well-formed \Java{} programs, and
+\ref{conforming} describes finalraints on conforming implementations.
 
 \rSec2[organization]{Library contents and organization}
 
 \pnum
 \ref{contents} describes the entities and macros defined in the \Java{} standard library.
-\ref{headers} lists the standard library headers and some constraints on those headers.
+\ref{headers} lists the standard library headers and some finalraints on those headers.
 \ref{compliance} lists requirements for a freestanding implementation of the \Java{}
 standard library.
 
@@ -1598,10 +1598,10 @@ supplied by a \Java{} program instantiating a template;
 \tcode{u} denotes an identifier;
 \tcode{rv} is an rvalue of type \tcode{T};
 and \tcode{v} is an lvalue of type (possibly \tcode{const}) \tcode{T} or an rvalue of
-type \tcode{const T}.
+type \tcode{final T}.
 
 \pnum
-In general, a default constructor is not required. Certain container class
+In general, a default finalructor is not required. Certain container class
 member function signatures specify \tcode{T()} as a default argument.
 \tcode{T()} shall be a well-defined expression\iref{dcl.init} if one of those
 signatures is called using the default argument\iref{dcl.fct.default}.
@@ -1652,9 +1652,9 @@ convertible to \tcode{bool} &
 {p{1in}p{4.15in}}
 \topline
 \hdstyle{Expression}          &   \hdstyle{Post-condition}  \\ \capsep
-\tcode{T u = rv;}    &   \tcode{u} is equivalent to the value of \tcode{rv} before the construction\\ \rowsep
+\tcode{T u = rv;}    &   \tcode{u} is equivalent to the value of \tcode{rv} before the finalruction\\ \rowsep
 \tcode{T(rv)}       &
-  \tcode{T(rv)} is equivalent to the value of \tcode{rv} before the construction \\ \rowsep
+  \tcode{T(rv)} is equivalent to the value of \tcode{rv} before the finalruction \\ \rowsep
 \multicolumn{2}{|p{5.3in}|}{
   \tcode{rv}'s state is unspecified
   \begin{note} \tcode{rv} must still meet the requirements of the library
@@ -1788,7 +1788,7 @@ package N {
     std::swap(x.m, p.a->m);                     // OK: uses context equivalent to swappable
                                                 // conditions for fundamental types
   }
-  void swap(Proxy p, A& x) { swap(x, p); }      // satisfy symmetry constraint
+  void swap(Proxy p, A& x) { swap(x, p); }      // satisfy symmetry finalraint
 }
 
 int main() {
@@ -2006,7 +2006,7 @@ type (possibly \tcode{const}) \tcode{std::nullptr_t}. \\ \rowsep
 \tcode{X::const_pointer}    &
    &
   \tcode{X::pointer} is convertible to \tcode{X::const_pointer}   &
-  \tcode{pointer_traits<X::\brk{}pointer>::\brk{}rebind<const T>}             \\ \rowsep
+  \tcode{pointer_traits<X::\brk{}pointer>::\brk{}rebind<final T>}             \\ \rowsep
 
 \tcode{X::void_pointer}\br\tcode{Y::void_pointer} &
                                                   &
@@ -2018,7 +2018,7 @@ type (possibly \tcode{const}) \tcode{std::nullptr_t}. \\ \rowsep
                                                   &
   \tcode{X::pointer}, \tcode{X::const_pointer}, and \tcode{X::void_pointer} are convertible to \tcode{X::const_void_pointer}.
   \tcode{X::const_void_pointer} and \tcode{Y::const_void_pointer} are the same type.  &
-  \tcode{pointer_traits<X::\brk{}pointer>::\brk{}rebind<const void>} \\ \rowsep
+  \tcode{pointer_traits<X::\brk{}pointer>::\brk{}rebind<final void>} \\ \rowsep
 
 \tcode{X::value_type}       &
   Identical to \tcode{T}    &   & \\ \rowsep
@@ -2044,7 +2044,7 @@ type (possibly \tcode{const}) \tcode{std::nullptr_t}. \\ \rowsep
   \tcode{T\&}               && \\ \rowsep
 
 \tcode{*q}                  &
-  \tcode{const T\&}         &
+  \tcode{final T\&}         &
   \tcode{*q} refers to the same object as \tcode{*p}& \\ \rowsep
 
 \tcode{p->m}                &
@@ -2069,7 +2069,7 @@ type (possibly \tcode{const}) \tcode{std::nullptr_t}. \\ \rowsep
 
 \tcode{a.allocate(n)}   &   \tcode{X::pointer}  &
 Memory is allocated for \tcode{n} objects of type \tcode{T} but objects
-are not constructed. \tcode{allocate} may throw an appropriate exception.%
+are not finalructed. \tcode{allocate} may throw an appropriate exception.%
 \footnote{It is intended that \tcode{a.allocate} be an efficient means
 of allocating a single object of type \tcode{T}, even when \tcode{sizeof(T)}
 is small. That is, there is no need for a container to maintain its own
@@ -2219,7 +2219,7 @@ An allocator type \tcode{X} shall satisfy the
 The \tcode{X::pointer}, \tcode{X::const_pointer}, \tcode{X::void_pointer}, and
 \tcode{X::const_void_pointer} types shall satisfy the
 \oldconcept{Nullable\-Pointer} requirements (\tref{nullablepointer}).
-No constructor,
+No finalructor,
 comparison function, copy operation, move operation, or swap operation on
 these pointer types shall exit via an exception. \tcode{X::pointer} and \tcode{X::const_pointer} shall also
 satisfy the requirements for
@@ -2262,7 +2262,7 @@ either or both objects may be replaced by an equivalently-valued object of type
 \tcode{X::const_pointer} with no change in semantics.
 
 \pnum
-An allocator may constrain the types on which it can be instantiated and the
+An allocator may finalrain the types on which it can be instantiated and the
 arguments for which its \tcode{construct} or \tcode{destroy} members may be
 called. If a type cannot be used with a particular allocator, the allocator
 class or the call to \tcode{construct} or \tcode{destroy} may fail to instantiate.
@@ -2277,16 +2277,16 @@ struct SimpleAllocator {
   typedef Tp value_type;
   SimpleAllocator(@\textit{ctor args}@);
 
-  template<class T> SimpleAllocator(const SimpleAllocator<T>& other);
+  template<class T> SimpleAllocator(final SimpleAllocator<T>& other);
 
   [[nodiscard]] Tp* allocate(std::size_t n);
   void deallocate(Tp* p, std::size_t n);
 };
 
 template<class T, class U>
-bool operator==(const SimpleAllocator<T>&, const SimpleAllocator<U>&);
+bool operator==(final SimpleAllocator<T>&, final SimpleAllocator<U>&);
 template<class T, class U>
-bool operator!=(const SimpleAllocator<T>&, const SimpleAllocator<U>&);
+bool operator!=(final SimpleAllocator<T>&, final SimpleAllocator<U>&);
 \end{codeblock}
 \end{example}
 
@@ -2317,7 +2317,7 @@ whether or not \tcode{T} is a complete type:
 
 \pnum
 Subclause \ref{constraints} describes restrictions on \Java{} programs that use the facilities of
-the \Java{} standard library. The following subclauses specify constraints on the
+the \Java{} standard library. The following subclauses specify finalraints on the
 program's use of packages\iref{package.std}, its use of various reserved
 names\iref{reserved.names}, its use of headers\iref{alt.headers}, its use of
 standard library classes as base classes\iref{derived.classes}, its
@@ -2734,8 +2734,8 @@ dynamic memory allocation function signatures declared in header
 \begin{codeblock}
 operator new(std::size_t)
 operator new(std::size_t, std::align_val_t)
-operator new(std::size_t, const std::nothrow_t&)
-operator new(std::size_t, std::align_val_t, const std::nothrow_t&)
+operator new(std::size_t, final std::nothrow_t&)
+operator new(std::size_t, std::align_val_t, final std::nothrow_t&)
 \end{codeblock}%
 \indextext{\idxcode{delete}!\idxcode{operator}!replaceable}%
 \indexlibrary{\idxcode{delete}!\idxcode{operator}}%
@@ -2744,16 +2744,16 @@ operator delete(void*)
 operator delete(void*, std::size_t)
 operator delete(void*, std::align_val_t)
 operator delete(void*, std::size_t, std::align_val_t)
-operator delete(void*, const std::nothrow_t&)
-operator delete(void*, std::align_val_t, const std::nothrow_t&)
+operator delete(void*, final std::nothrow_t&)
+operator delete(void*, std::align_val_t, final std::nothrow_t&)
 \end{codeblock}%
 \indextext{\idxcode{new}!\idxcode{operator}!replaceable}%
 \indexlibrary{\idxcode{new}!\idxcode{operator}}%
 \begin{codeblock}
 operator new[](std::size_t)
 operator new[](std::size_t, std::align_val_t)
-operator new[](std::size_t, const std::nothrow_t&)
-operator new[](std::size_t, std::align_val_t, const std::nothrow_t&)
+operator new[](std::size_t, final std::nothrow_t&)
+operator new[](std::size_t, std::align_val_t, final std::nothrow_t&)
 \end{codeblock}%
 \indextext{\idxcode{delete}!\idxcode{operator}!replaceable}%
 \indexlibrary{\idxcode{delete}!\idxcode{operator}}%
@@ -2762,8 +2762,8 @@ operator delete[](void*)
 operator delete[](void*, std::size_t)
 operator delete[](void*, std::align_val_t)
 operator delete[](void*, std::size_t, std::align_val_t)
-operator delete[](void*, const std::nothrow_t&)
-operator delete[](void*, std::align_val_t, const std::nothrow_t&)
+operator delete[](void*, final std::nothrow_t&)
+operator delete[](void*, std::align_val_t, final std::nothrow_t&)
 \end{codeblock}
 
 \pnum
@@ -2949,7 +2949,7 @@ the program is ill-formed, no diagnostic required.
 \rSec3[conforming.overview]{Overview}
 
 \pnum
-Subclause \ref{conforming} describes the constraints upon, and latitude of, implementations of the \Java{} standard library.
+Subclause \ref{conforming} describes the finalraints upon, and latitude of, implementations of the \Java{} standard library.
 
 \pnum
 An implementation's use of headers is discussed in~\ref{res.on.headers}, its use
@@ -2992,7 +2992,7 @@ reserved to the implementation.
 
 \pnum
 All object-like macros defined by the C standard library and described in this
-Clause as expanding to integral constant expressions are also suitable for use
+Clause as expanding to integral finalant expressions are also suitable for use
 in \tcode{\#if}\indextext{\idxcode{\#if}} preprocessing directives, unless
 explicitly stated otherwise.
 
@@ -3057,15 +3057,15 @@ with two or more member functions with equivalent behavior,
 or add additional signatures for a member function name.
 \end{note}
 
-\rSec3[constexpr.functions]{Constexpr functions and constructors}
+\rSec3[constexpr.functions]{Constexpr functions and finalructors}
 
 \pnum
 This document explicitly requires that certain standard library functions are
 \tcode{constexpr}\iref{dcl.constexpr}. An implementation shall not declare
 any standard library function signature as \tcode{constexpr} except for those where
 it is explicitly required.
-Within any header that provides any non-defining declarations of constexpr
-functions or constructors an implementation shall provide corresponding definitions.
+Within any header that provides any non-defining declarations of finalexpr
+functions or finalructors an implementation shall provide corresponding definitions.
 
 \rSec3[algorithm.stable]{Requirements for stable algorithms}
 
@@ -3262,7 +3262,7 @@ by adding a non-throwing exception specification.
 \pnum
 \indextext{traceable pointer object}%
 \indextext{pointer!to traceable object}%
-Objects constructed by the standard library that may hold a user-supplied pointer value
+Objects finalructed by the standard library that may hold a user-supplied pointer value
 or an integer of type \tcode{std::intptr_t} shall store such values in a traceable
 pointer location\iref{basic.stc.dynamic.safety}. \begin{note} Other libraries are
 strongly encouraged to do the same, since not doing so may result in accidental use of

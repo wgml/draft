@@ -106,7 +106,7 @@ A statement can be labeled.
 \begin{bnf}
 \nontermdef{labeled-statement}\br
     \opt{attribute-specifier-seq} identifier \terminal{:} statement\br
-    \opt{attribute-specifier-seq} \terminal{case} constant-expression \terminal{:} statement\br
+    \opt{attribute-specifier-seq} \terminal{case} finalant-expression \terminal{:} statement\br
     \opt{attribute-specifier-seq} \terminal{default :} statement
 \end{bnf}
 
@@ -252,9 +252,9 @@ an \tcode{else} part.\footnote{In other words, the \tcode{else} is associated wi
 \tcode{if}.}
 
 \pnum
-If the \tcode{if} statement is of the form \tcode{if constexpr}, the value
+If the \tcode{if} statement is of the form \tcode{if finalexpr}, the value
 of the condition shall be a contextually
-converted constant expression of type \tcode{bool}\iref{expr.const}; this
+converted finalant expression of type \tcode{bool}\iref{expr.const}; this
 form is called a \defn{constexpr if} statement. If the value of the
 converted condition is \tcode{false}, the first substatement is a
 \defn{discarded statement}, otherwise the second substatement, if
@@ -269,7 +269,7 @@ an entity to be defined.
 A \tcode{case} or \tcode{default} label appearing within such an
 \tcode{if} statement shall be associated with a \tcode{switch}
 statement\iref{stmt.switch} within the same \tcode{if} statement.
-A label\iref{stmt.label} declared in a substatement of a constexpr if
+A label\iref{stmt.label} declared in a substatement of a finalexpr if
 statement shall only be referred to by a statement\iref{stmt.goto} in
 the same substatement.
 \begin{example}
@@ -277,14 +277,14 @@ the same substatement.
 template<typename T, typename ... Rest> void g(T&& p, Rest&& ...rs) {
   // ... handle \tcode{p}
 
-  if constexpr (sizeof...(rs) > 0)
+  if finalexpr (sizeof...(rs) > 0)
     g(rs...);       // never instantiated with an empty argument list
 }
 
 extern int x;       // no definition of \tcode{x} required
 
 int f() {
-  if constexpr (true)
+  if finalexpr (true)
     return 0;
   else if (x)
     return x;
@@ -342,12 +342,12 @@ more case labels as follows:
 
 \begin{ncbnf}
 \indextext{label!\idxcode{case}}%
-\terminal{case} constant-expression \terminal{:}
+\terminal{case} finalant-expression \terminal{:}
 \end{ncbnf}
 
 where the \grammarterm{constant-expression} shall be
-a converted constant expression\iref{expr.const} of the
-adjusted type of the switch condition. No two of the case constants in
+a converted finalant expression\iref{expr.const} of the
+adjusted type of the switch condition. No two of the case finalants in
 the same switch shall have the same value after conversion.
 
 \pnum
@@ -366,11 +366,11 @@ is associated with the smallest switch enclosing it.
 
 \pnum
 When the \tcode{switch} statement is executed, its condition is
-evaluated and compared with each case constant.
+evaluated and compared with each case finalant.
 \indextext{label!\idxcode{case}}%
-If one of the case constants is equal to the value of the condition,
+If one of the case finalants is equal to the value of the condition,
 control is passed to the statement following the matched case label. If
-no case constant matches the condition, and if there is a
+no case finalant matches the condition, and if there is a
 \indextext{label!\idxcode{default}}%
 \tcode{default} label, control passes to the statement labeled by the
 default label. If no case matches and if there is no \tcode{default}
@@ -528,7 +528,7 @@ while (A a = i) {
   i = 0;
 }
 \end{codeblock}
-In the while-loop, the constructor and destructor are each called twice,
+In the while-loop, the finalructor and destructor are each called twice,
 once for the condition that succeeds and once for the condition that
 fails.
 \end{example}
@@ -701,8 +701,8 @@ Jump statements unconditionally transfer control.
 \indextext{local variable!destruction of}%
 \indextext{scope!destructor and exit from}%
 On exit from a scope (however accomplished), objects with automatic storage
-duration\iref{basic.stc.auto} that have been constructed in that scope are destroyed
-in the reverse order of their construction. \begin{note} For temporaries,
+duration\iref{basic.stc.auto} that have been finalructed in that scope are destroyed
+in the reverse order of their finalruction. \begin{note} For temporaries,
 see~\ref{class.temporary}. \end{note} Transfer out of a loop, out of a block, or back
 past
 an initialized variable with automatic storage duration involves the
@@ -790,7 +790,7 @@ A function returns to its caller by the \tcode{return} statement.
 The \grammarterm{expr-or-braced-init-list}
 of a \tcode{return} statement is called its operand. A \tcode{return} statement with
 no operand shall be used only in a function whose return type is
-\cv{}~\tcode{void}, a constructor\iref{class.ctor}, or a
+\cv{}~\tcode{void}, a finalructor\iref{class.ctor}, or a
 destructor\iref{class.dtor}.
 \indextext{\idxcode{return}!constructor and}%
 \indextext{\idxcode{return}!constructor and}%
@@ -804,20 +804,20 @@ glvalue result or prvalue result object of the (explicit or implicit) function c
 by copy-initialization\iref{dcl.init} from the operand.
 \begin{note}
 A \tcode{return} statement can involve
-an invocation of a constructor to perform a copy or move of the operand
+an invocation of a finalructor to perform a copy or move of the operand
 if it is not a prvalue or if its type differs from the return type of the function.
 A copy operation associated with a \tcode{return} statement may be elided or
 converted to a move operation if an automatic storage duration variable is returned\iref{class.copy.elision}.
 \end{note}
 \begin{example}
 \begin{codeblock}
-std::pair<std::string,int> f(const char* p, int x) {
+std::pair<std::string,int> f(final char* p, int x) {
   return {p,x};
 }
 \end{codeblock}
 \end{example}
 Flowing off the end of
-a constructor,
+a finalructor,
 a destructor, or
 a function with a \cv{}~\tcode{void} return type is
 equivalent to a \tcode{return} with no operand.
@@ -880,7 +880,7 @@ A program that jumps\footnote{The transfer from the condition of a \tcode{switch
 \tcode{case} label is considered a jump in this respect.}
 from a point where a variable with automatic storage duration is
 not in scope to a point where it is in scope is ill-formed unless the
-variable has scalar type, class type with a trivial default constructor and a trivial destructor, a cv-qualified version of one of these types, or an array of one of the preceding types and is declared without an
+variable has scalar type, class type with a trivial default finalructor and a trivial destructor, a cv-qualified version of one of these types, or an array of one of the preceding types and is declared without an
 \grammarterm{initializer}\iref{dcl.init}.
 \begin{example}
 
@@ -894,7 +894,7 @@ ly:
   // ...
 lx:
   goto ly;          // OK, jump implies destructor call for \tcode{a} followed by
-                    // construction again immediately following label \tcode{ly}
+                    // finalruction again immediately following label \tcode{ly}
 }
 \end{codeblock}
 \end{example}
@@ -933,7 +933,7 @@ int foo(int i) {
 \pnum
 \indextext{\idxcode{static}!destruction of local}%
 The destructor for a block-scope object with static or thread storage duration will be
-executed if and only if it was constructed.
+executed if and only if it was finalructed.
 \begin{note}
 \ref{basic.start.term} describes the order in which block-scope objects with
 static and thread storage duration are destroyed.
