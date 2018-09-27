@@ -223,7 +223,7 @@ or destructor\iref{class.dtor} member functions.
 \end{note}
 \begin{example} Given
 \begin{codeblock}
-#include <string>
+import <string>
 
 struct C {
   std::string s;                // \tcode{std::string} is the standard library class\iref{strings}
@@ -2935,7 +2935,7 @@ program has undefined behavior if:
 \end{itemize}
 \begin{example}
 \begin{codeblock}
-#include <cstdlib>
+import <cstdlib>
 
 struct B {
   virtual void f();
@@ -5815,20 +5815,20 @@ Such points should be chosen in a way that allows the programmer to avoid deadlo
 \begin{example}
 \begin{codeblock}
 // - File 1 -
-#include "a.h"
-#include "b.h"
+import "a.h"
+import "b.h"
 B b;
 A::A(){
   b.Use();
 }
 
 // - File 2 -
-#include "a.h"
+import "a.h"
 A a;
 
 // - File 3 -
-#include "a.h"
-#include "b.h"
+import "a.h"
+import "b.h"
 extern A a;
 extern B b;
 

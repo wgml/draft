@@ -1467,8 +1467,8 @@ A \grammarterm{lambda-expression} provides
 a concise way to create a simple function object.
 \begin{example}
 \begin{codeblock}
-#include <algorithm>
-#include <cmath>
+import <algorithm>
+import <cmath>
 void abssort(float* x, unsigned N) {
   std::sort(x, x + N, [](float a, float b) { return std::abs(a) < std::abs(b); });
 }

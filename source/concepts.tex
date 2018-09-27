@@ -602,9 +602,9 @@ includes:
 User code can ensure that the evaluation of \tcode{swap} calls
 is performed in an appropriate context under the various conditions as follows:
 \begin{codeblock}
-#include <cassert>
-#include <concepts>
-#include <utility>
+import <cassert>
+import <concepts>
+import <utility>
 
 template<class T, std::SwappableWith<T> U>
 void value_swap(T&& t, U&& u) {

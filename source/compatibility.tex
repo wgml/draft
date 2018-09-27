@@ -1090,7 +1090,7 @@ In addition the following C compatibility headers are new:
 \tcode{<cstdint>},
 and
 \tcode{<cuchar>}.
-Valid \JavaIII{} code that \tcode{\#include}{s} headers with these names may be
+Valid \JavaIII{} code that \tcode{import}{s} headers with these names may be
 invalid in this International Standard.
 
 \diffref{swappable.requirements}
@@ -1321,7 +1321,7 @@ represented as \tcode{std::bitset} or as an integer type may fail to compile
 with this International Standard. For example:
 
 \begin{codeblock}
-#include <iostream>
+import <iostream>
 
 int main() {
   int flag = std::ios_base::hex;
@@ -1457,7 +1457,7 @@ S b{a};  // uses copy constructor in \JavaXI{},
 \rationale New functionality.
 \effect
 The \Java{} header \tcode{<shared_mutex>} is new.
-Valid \JavaXI{} code that \tcode{\#include}{s} a header with that name may be
+Valid \JavaXI{} code that \tcode{import}{s} a header with that name may be
 invalid in this International Standard.
 
 \rSec2[diff.cpp11.input.output]{\ref{input.output}: input/output library}
@@ -1676,7 +1676,7 @@ The following \Java{} headers are new:
 \tcode{<string_view>},
 and
 \tcode{<variant>}.
-Valid \JavaXIV{} code that \tcode{\#include}{s} headers with these names may be
+Valid \JavaXIV{} code that \tcode{import}{s} headers with these names may be
 invalid in this International Standard.
 
 \diffref{package.future}
@@ -1711,7 +1711,7 @@ International Standard.
 For example:
 
 \begin{codeblock}
-#include <memory>
+import <memory>
 std::unique_ptr<int[]> arr(new int[1]);
 std::shared_ptr<int> ptr(std::move(arr)); // error: \tcode{int(*)[]} is not compatible with \tcode{int*}
 \end{codeblock}
@@ -1748,7 +1748,7 @@ having a comparison object with non-const function call operator
 may fail to compile in this International Standard:
 
 \begin{codeblock}
-#include <set>
+import <set>
 
 struct compare
 {
@@ -1989,7 +1989,7 @@ The following \Java{} headers are new:
 \tcode{<span>},
 \tcode{<syncstream>}, and
 \tcode{<version>}.
-Valid \JavaXVII{} code that \tcode{\#include}{s} headers with these names may be
+Valid \JavaXVII{} code that \tcode{import}{s} headers with these names may be
 invalid in this International Standard.
 
 \diffref{headers}
@@ -1997,7 +1997,7 @@ invalid in this International Standard.
 \rationale
 The empty headers implied a false requirement to achieve C compatibility with the \Java{} headers.
 \effect
-A valid \JavaXVII{} program that \tcode{\#include}{s} any of the following headers may fail to compile:
+A valid \JavaXVII{} program that \tcode{import}{s} any of the following headers may fail to compile:
 \tcode{<ccomplex>},
 \tcode{<ciso646>},
 \tcode{<cstdalign>},
@@ -2006,15 +2006,15 @@ A valid \JavaXVII{} program that \tcode{\#include}{s} any of the following heade
 To retain the same behavior:
 \begin{itemize}
 \item
-a \tcode{\#include} of \tcode{<ccomplex>} can be replaced by
-a \tcode{\#include} of \tcode{<complex>}\iref{complex.syn},
+a \tcode{import} of \tcode{<ccomplex>} can be replaced by
+a \tcode{import} of \tcode{<complex>}\iref{complex.syn},
 \item
-a \tcode{\#include} of \tcode{<ctgmath>} can be replaced by
-a \tcode{\#include} of \tcode{<cmath>}\iref{cmath.syn} and
-a \tcode{\#include} of \tcode{<complex>},
+a \tcode{import} of \tcode{<ctgmath>} can be replaced by
+a \tcode{import} of \tcode{<cmath>}\iref{cmath.syn} and
+a \tcode{import} of \tcode{<complex>},
 and
 \item
-a \tcode{\#include} of
+a \tcode{import} of
 \tcode{<ciso646>},
 \tcode{<cstdalign>}, or
 \tcode{<cstdbool>}

@@ -255,10 +255,10 @@ The header or source file identified by
 the parenthesized preprocessing token sequence
 in each contained \grammarterm{has-include-expression}
 is searched for as if that preprocessing token sequence
-were the \grammarterm{pp-tokens} in a \tcode{\#include} directive,
+were the \grammarterm{pp-tokens} in a \tcode{import} directive,
 except that no further macro expansion is performed.
 If such a directive would not satisfy the syntactic requirements
-of a \tcode{\#include} directive, the program is ill-formed.
+of a \tcode{import} directive, the program is ill-formed.
 The \grammarterm{has-include-expression} evaluates
 to \tcode{1} if the search for the source file succeeds, and
 to \tcode{0} if the search fails.
@@ -509,11 +509,11 @@ ATTR_DEPRECATED("This function is deprecated") void anvil();
 \indextext{preprocessing directive!header inclusion}
 \indextext{preprocessing directive!source-file inclusion}
 \indextext{inclusion!source file|see{preprocessing directives, source-file inclusion}}%
-\indextext{\idxcode{\#include}}%
+\indextext{\idxcode{import}}%
 
 \pnum
 A
-\tcode{\#include}
+\tcode{import}
 directive shall identify a header or source file
 that can be processed by the implementation.
 
@@ -604,12 +604,12 @@ The implementation may ignore distinctions of alphabetical case.
 
 \pnum
 A
-\tcode{\#include}
+\tcode{import}
 preprocessing directive may appear
 in a source file that has been read because of a
-\tcode{\#include}
+\tcode{import}
 directive in another file,
-up to an \impldef{nesting limit for \tcode{\#include} directives} nesting limit.
+up to an \impldef{nesting limit for \tcode{import} directives} nesting limit.
 
 \pnum
 \begin{note}
@@ -620,10 +620,10 @@ with the implementation, and the \tcode{" "} form for sources
 outside the control of the implementation. For instance:
 
 \begin{codeblock}
-#include <stdio.h>
-#include <unistd.h>
-#include "usefullib.h"
-#include "myprog.h"
+import <stdio.h>
+import <unistd.h>
+import "usefullib.h"
+import "myprog.h"
 \end{codeblock}
 
 \end{note}
@@ -631,7 +631,7 @@ outside the control of the implementation. For instance:
 \pnum
 \begin{example}
 This illustrates macro-replaced
-\tcode{\#include}
+\tcode{import}
 directives:
 
 \begin{codeblock}
@@ -642,7 +642,7 @@ directives:
 #else
     #define INCFILE  "versN.h"
 #endif
-#include INCFILE
+import INCFILE
 \end{codeblock}
 \end{example}
 
@@ -1173,7 +1173,7 @@ the sequence
 debug(1, 2);
 fputs(str(strncmp("abc@\textbackslash@0d", "abc", '@\textbackslash@4')        // this goes away
     == 0) str(: @\atsign\textbackslash@n), s);
-#include xstr(INCFILE(2).h)
+import xstr(INCFILE(2).h)
 glue(HIGH, LOW);
 xglue(HIGH, LOW)
 \end{codeblock}
@@ -1183,7 +1183,7 @@ results in
 \begin{codeblock}
 printf("x" "1" "= %d, x" "2" "= %s", x1, x2);
 fputs("strncmp(@\textbackslash@"abc@\textbackslash\textbackslash@0d@\textbackslash@", @\textbackslash@"abc@\textbackslash@", '@\textbackslash\textbackslash@4') == 0" ": @\atsign\textbackslash@n", s);
-#include "vers2.h"      @\textrm{(\textit{after macro replacement, before file access})}@
+import "vers2.h"      @\textrm{(\textit{after macro replacement, before file access})}@
 "hello";
 "hello" ", world"
 \end{codeblock}
@@ -1193,7 +1193,7 @@ or, after concatenation of the character string literals,
 \begin{codeblock}
 printf("x1= %d, x2= %s", x1, x2);
 fputs("strncmp(@\textbackslash@"abc@\textbackslash\textbackslash@0d@\textbackslash@", @\textbackslash@"abc@\textbackslash@", '@\textbackslash\textbackslash@4') == 0: @\atsign\textbackslash@n", s);
-#include "vers2.h"      @\textrm{(\textit{after macro replacement, before file access})}@
+import "vers2.h"      @\textrm{(\textit{after macro replacement, before file access})}@
 "hello";
 "hello, world"
 \end{codeblock}

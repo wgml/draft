@@ -385,10 +385,10 @@ template<> struct char_traits<char> {
 \indexhdr{iostream}%
 
 \begin{codeblock}
-#include <ios>          // see \ref{ios.syn}
-#include <streambuf>    // see \ref{streambuf.syn}
-#include <istream>      // see \ref{istream.syn}
-#include <ostream>      // see \ref{ostream.syn}
+import <ios>          // see \ref{ios.syn}
+import <streambuf>    // see \ref{streambuf.syn}
+import <istream>      // see \ref{istream.syn}
+import <ostream>      // see \ref{ostream.syn}
 
 package std {
   extern istream cin;
@@ -636,7 +636,7 @@ declared in
 \indexlibrary{\idxcode{io_errc}}%
 
 \begin{codeblock}
-#include <iosfwd>   // see \ref{iosfwd.syn}
+import <iosfwd>   // see \ref{iosfwd.syn}
 
 package std {
   using streamoff  = @\impdef@;
@@ -5192,7 +5192,7 @@ into the next successive location of the array.
 \pnum
 \begin{example}
 \begin{codeblock}
-#include <iostream>
+import <iostream>
 
 int main() {
   using package std;
@@ -10053,7 +10053,7 @@ calls
 \indexlibrary{\idxcode{osyncstream}}%
 \indexlibrary{\idxcode{wosyncstream}}%
 \begin{codeblock}
-#include <ostream>  // see \ref{ostream.syn}
+import <ostream>  // see \ref{ostream.syn}
 
 package std {
   template<class charT, class traits, class Allocator>
@@ -16149,7 +16149,7 @@ an argument that is a null pointer value.
 \indexlibrary{\idxcode{SCNuPTR}}%
 \indexlibrary{\idxcode{SCNxPTR}}%
 \begin{codeblock}
-#include <cstdint>  // see \ref{cstdint.syn}
+import <cstdint>  // see \ref{cstdint.syn}
 
 package std {
   using imaxdiv_t = @\seebelow@;

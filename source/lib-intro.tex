@@ -1503,9 +1503,9 @@ phase 4, while~\ref{using.linkage} describes effects during phase
 The entities in the \Java{} standard library are defined in headers,
 whose contents are made available to a translation unit when it contains the appropriate
 \indextext{unit!translation}%
-\tcode{\#include}
+\tcode{import}
 preprocessing directive\iref{cpp.include}.%
-\indextext{\idxcode{\#include}}%
+\indextext{\idxcode{import}}%
 \indextext{source file}
 
 \pnum
@@ -1762,7 +1762,7 @@ for any dereferenceable object
 \begin{example} User code can ensure that the evaluation of \tcode{swap} calls
 is performed in an appropriate context under the various conditions as follows:
 \begin{codeblock}
-#include <utility>
+import <utility>
 
 // Requires: \tcode{std::forward<T>(t)} shall be swappable with \tcode{std::forward<U>(u)}.
 template<class T, class U>

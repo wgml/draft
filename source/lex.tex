@@ -32,7 +32,7 @@ The text of the program is kept in units called
 \defnx{source files}{source file} in this document.
 A source file together with all the headers\iref{headers}
 and source files included\iref{cpp.include} via the preprocessing
-directive \tcode{\#include}, less any source lines skipped by any of the
+directive \tcode{import}, less any source lines skipped by any of the
 conditional inclusion\iref{cpp.cond} preprocessing directives, is
 called a \defn{translation unit}.
 \begin{note} A \Java{} program need not all be translated at the same time.
@@ -109,7 +109,7 @@ than new-line is retained or replaced by one space character is
 unspecified. The process of dividing a source file's
 characters into preprocessing tokens is context-dependent.
 \begin{example}
-See the handling of \tcode{<} within a \tcode{\#include} preprocessing
+See the handling of \tcode{<} within a \tcode{import} preprocessing
 directive.
 \end{example}
 
@@ -118,7 +118,7 @@ expanded, and \tcode{_Pragma} unary operator expressions are executed.
 If a character sequence that matches the syntax of a
 \grammarterm{universal-character-name} is produced by token
 concatenation\iref{cpp.concat}, the behavior is undefined. A
-\tcode{\#include} preprocessing directive causes the named header or
+\tcode{import} preprocessing directive causes the named header or
 source file to be processed from phase 1 through phase 4, recursively.
 All preprocessing directives are then deleted.
 
@@ -314,7 +314,7 @@ the next preprocessing token is the longest sequence of
 characters that could constitute a preprocessing token, even if that
 would cause further lexical analysis to fail,
 except that a \grammarterm{header-name}\iref{lex.header} is only formed
-within a \tcode{\#include} directive\iref{cpp.include}.
+within a \tcode{import} directive\iref{cpp.include}.
 \end{itemize}
 
 \begin{example}
@@ -463,7 +463,7 @@ characters \tcode{//} and \tcode{/*} have no special meaning within a
 
 \pnum
 \begin{note} Header name preprocessing tokens only appear within a
-\tcode{\#include} preprocessing directive (see~\ref{lex.pptoken}). \end{note}
+\tcode{import} preprocessing directive (see~\ref{lex.pptoken}). \end{note}
 The sequences in both forms of \grammarterm{header-name}{s} are mapped in an
 \impldef{mapping header name to header or external source file} manner to headers or to
 external source file names as specified in~\ref{cpp.include}.
