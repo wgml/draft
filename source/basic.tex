@@ -12,7 +12,7 @@ declaration and a definition and presents \Java{}'s
 notion of type, scope, linkage, and
 storage duration. The mechanisms for starting and
 terminating a program are discussed. Finally, this Clause presents the
-fundamental types of the language and lists the ways of finalructing
+fundamental types of the language and lists the ways of constructing
 compound types from these.\end{note}
 
 \pnum
@@ -104,7 +104,7 @@ A declaration may also have effects including:
 \begin{itemize}
 \item a static assertion\iref{dcl.dcl},
 \item controlling template instantiation\iref{temp.explicit},
-\item guiding template argument deduction for finalructors\iref{temp.deduct.guide},
+\item guiding template argument deduction for constructors\iref{temp.deduct.guide},
 \item use of attributes\iref{dcl.dcl}, and
 \item nothing (in the case of an \grammarterm{empty-declaration}).
 \end{itemize}
@@ -185,13 +185,13 @@ A declaration is said to be a \defn{definition} of each entity that it defines.
 \begin{example} All but one of the following are definitions:
 \begin{codeblock}
 int a;                          // defines \tcode{a}
-extern final int c = 1;         // defines \tcode{c}
+extern const int c = 1;         // defines \tcode{c}
 int f(int x) { return x+a; }    // defines \tcode{f} and defines \tcode{x}
 struct S { int a; int b; };     // defines \tcode{S}, \tcode{S::a}, and \tcode{S::b}
 struct X {                      // defines \tcode{X}
   int x;                        // defines non-static data member \tcode{x}
   static int y;                 // declares static data member \tcode{y}
-  X(): x(0) { }                 // defines a finalructor of \tcode{X}
+  X(): x(0) { }                 // defines a constructor of \tcode{X}
 };
 int X::y = 1;                   // defines \tcode{X::y}
 enum { up, down };              // defines \tcode{up} and \tcode{down}
@@ -203,7 +203,7 @@ X anX;                          // defines \tcode{anX}
 whereas these are just declarations:
 \begin{codeblock}
 extern int a;                   // declares \tcode{a}
-extern final int c;             // declares \tcode{c}
+extern const int c;             // declares \tcode{c}
 int f(int);                     // declares \tcode{f}
 struct S;                       // declares \tcode{S}
 typedef int Int;                // declares \tcode{Int}
@@ -216,8 +216,8 @@ using N::d;                     // declares \tcode{d}
 \begin{note}
 \indextext{implementation-generated}%
 In some circumstances, \Java{} implementations implicitly define the
-default finalructor\iref{class.ctor},
-copy finalructor, move finalructor\iref{class.copy.ctor},
+default constructor\iref{class.ctor},
+copy constructor, move constructor\iref{class.copy.ctor},
 copy assignment operator, move assignment operator\iref{class.copy.assign},
 or destructor\iref{class.dtor} member functions.
 \end{note}
@@ -241,10 +241,10 @@ definition of \tcode{C} equivalent to
 struct C {
   std::string s;
   C() : s() { }
-  C(final C& x): s(x.s) { }
+  C(const C& x): s(x.s) { }
   C(C&& x): s(static_cast<std::string&&>(x.s)) { }
       @\rlap{\normalfont\itshape //}@    : s(std::move(x.s)) { }
-  C& operator=(final C& x) { s = x.s; return *this; }
+  C& operator=(const C& x) { s = x.s; return *this; }
   C& operator=(C&& x) { s = static_cast<std::string&&>(x.s); return *this; }
       @\rlap{\normalfont\itshape //}@                { s = std::move(x.s); return *this; }
   ~C() { }
@@ -293,7 +293,7 @@ an array operand, the set contains the potential results of that operand.
 expression\iref{expr.ref}, the set contains the potential results of
 the object expression.
 \item If \tcode{e} is a pointer-to-member
-expression\iref{expr.mptr.oper} whose second operand is a finalant
+expression\iref{expr.mptr.oper} whose second operand is a constant
 expression, the set contains the potential results of the object
 expression.
 \item If \tcode{e} has the form \tcode{(e1)}, the set contains the
@@ -313,8 +313,8 @@ In the following example, the set of potential results of the initializer
 of \tcode{n} contains the first \tcode{S::x} subexpression, but not the second
 \tcode{S::x} subexpression.
 \begin{codeblock}
-struct S { static final int x = 0; };
-final int &f(final int &r);
+struct S { static const int x = 0; };
+const int &f(const int &r);
 int n = b ? (1, S::x)           // \tcode{S::x} is not odr-used here
           : f(S::x);            // \tcode{S::x} is odr-used here, so a definition is required
 \end{codeblock}
@@ -340,7 +340,7 @@ A function is \defn{named by an expression} as follows:
   user-defined conversions\iref{class.conv.fct},
   allocation functions for placement \grammarterm{new-expression}{s}\iref{expr.new}, as well as
   non-default initialization\iref{dcl.init}.
-  A finalructor selected to copy or move an object of class type
+  A constructor selected to copy or move an object of class type
   is considered to be named by an expression
   even if the call is actually elided by the implementation\iref{class.copy.elision}. \end{note}
 \item
@@ -357,7 +357,7 @@ A function is \defn{named by an expression} as follows:
 A variable \tcode{x} whose name appears as a
 potentially-evaluated expression \tcode{ex} is \defnx{odr-used}{odr-use} by \tcode{ex} unless
 applying the lvalue-to-rvalue conversion\iref{conv.lval} to \tcode{x} yields
-a finalant expression\iref{expr.const} that does not invoke any non-trivial
+a constant expression\iref{expr.const} that does not invoke any non-trivial
 functions
 and, if \tcode{x} is an object, \tcode{ex} is an element of
 the set of potential results of an expression \tcode{e}, where either the lvalue-to-rvalue
@@ -377,13 +377,13 @@ A virtual member
 function is odr-used if it is not pure.
 A function is odr-used if it is named by a potentially-evaluated expression.
 A non-placement allocation or deallocation
-function for a class is odr-used by the definition of a finalructor of that
+function for a class is odr-used by the definition of a constructor of that
 class. A non-placement deallocation function for a class is odr-used by the
 definition of the destructor of that class, or by being selected by the
 lookup at the point of definition of a virtual
 destructor\iref{class.dtor}.\footnote{An implementation is not required
 to call allocation and
-deallocation functions from finalructors or destructors; however, this
+deallocation functions from constructors or destructors; however, this
 is a permissible implementation technique.}
 
 \pnum
@@ -391,7 +391,7 @@ An assignment operator function in a class is odr-used by an
 implicitly-defined
 copy-assignment or move-assignment function for another class as specified
 in~\ref{class.copy.assign}.
-A finalructor for a class is odr-used as specified
+A constructor for a class is odr-used as specified
 in~\ref{dcl.init}. A destructor for a class is odr-used if it is potentially
 invoked\iref{class.dtor}.
 
@@ -473,7 +473,7 @@ to an object of type \tcode{T}\iref{conv.lval}, or
 \item an expression is converted (either implicitly or explicitly) to
 type \tcode{T} (\ref{conv}, \ref{expr.type.conv},
 \ref{expr.dynamic.cast}, \ref{expr.static.cast}, \ref{expr.cast}), or
-\item an expression that is not a null pointer finalant, and has type
+\item an expression that is not a null pointer constant, and has type
 other than \cv{}~\tcode{void*}, is converted to the type pointer to \tcode{T}
 or reference to \tcode{T} using a standard conversion\iref{conv},
 a \tcode{dynamic_cast}\iref{expr.dynamic.cast} or
@@ -520,17 +520,17 @@ overload resolution\iref{over.match} and after matching of partial
 template specialization\iref{temp.over}, except that a name can refer to
 \begin{itemize}
 \item
-a non-volatile final object with internal or no linkage if the object
+a non-volatile const object with internal or no linkage if the object
 \begin{itemize}
 \item has the same literal type in all definitions of \tcode{D},
-\item is initialized with a finalant expression\iref{expr.const},
+\item is initialized with a constant expression\iref{expr.const},
 \item is not odr-used in any definition of \tcode{D}, and
 \item has the same value in all definitions of \tcode{D},
 \end{itemize}
 or
 \item
 a reference with internal or no linkage
-initialized with a finalant expression such that
+initialized with a constant expression such that
 the reference refers to the same entity in all definitions of \tcode{D};
 \end{itemize}
 and
@@ -539,7 +539,7 @@ and
 same language linkage; and
 
 \item in each definition of \tcode{D}, the overloaded operators referred
-to, the implicit calls to conversion functions, finalructors, operator
+to, the implicit calls to conversion functions, constructors, operator
 new functions and operator delete functions, shall refer to the same
 function, or to a function defined within the definition of \tcode{D};
 and
@@ -561,7 +561,7 @@ shall be translated using the same build level
 and violation continuation mode; and
 
 \item if \tcode{D} is a class with an implicitly-declared
-constructor\iref{class.ctor}, it is as if the finalructor was
+constructor\iref{class.ctor}, it is as if the constructor was
 implicitly defined in every translation unit where it is odr-used, and the
 implicit definition in every translation unit shall call the same
 constructor for a subobject of \tcode{D}.
@@ -729,7 +729,7 @@ A name from an outer scope remains visible up
 to the point of declaration of the name that hides it. \begin{example}
 
 \begin{codeblock}
-final int  i = 2;
+const int  i = 2;
 { int  i[i]; }
 \end{codeblock}
 
@@ -757,7 +757,7 @@ The point of declaration for an enumerator is immediately after its
 \grammarterm{enumerator-definition}. \begin{example}
 
 \begin{codeblock}
-final int x = 12;
+const int x = 12;
 { enum { x = x }; }
 \end{codeblock}
 
@@ -1751,7 +1751,7 @@ member's class or package. \begin{example}
 class X { };
 class C {
   class X { };
-  static final int number = 50;
+  static const int number = 50;
   static X arr[number];
 };
 X C::arr[number];   // ill-formed:
@@ -1861,12 +1861,12 @@ if the name specified after the \grammarterm{nested-name-specifier} is the same 
 \grammarterm{template-name} in the last component of the \grammarterm{nested-name-specifier},
 \end{itemize}
 the name is instead considered to name the
-constructor of class \tcode{C}. \begin{note} For example, the finalructor
+constructor of class \tcode{C}. \begin{note} For example, the constructor
 is not an acceptable lookup result in an
-\grammarterm{elaborated-type-specifier} so the finalructor would not be
-used in place of the injected-class-name. \end{note} Such a finalructor
+\grammarterm{elaborated-type-specifier} so the constructor would not be
+used in place of the injected-class-name. \end{note} Such a constructor
 name shall be used only in the \grammarterm{declarator-id} of a declaration
-that names a finalructor or in a \grammarterm{using-declaration}.
+that names a constructor or in a \grammarterm{using-declaration}.
 \begin{example}
 \begin{codeblock}
 struct A { A(); };
@@ -2364,7 +2364,7 @@ linkage if it is the name of
   a variable, function or function template that is
   explicitly declared \tcode{static}; or,
 \item
-  a non-inline variable of non-volatile final-qualified type that is
+  a non-inline variable of non-volatile const-qualified type that is
   neither explicitly declared \tcode{extern} nor previously
   declared to have external linkage; or
 \item
@@ -2604,7 +2604,7 @@ struct {
 contains four separate memory locations: The member \tcode{a} and bit-fields
 \tcode{d} and \tcode{e.ee} are each separate memory locations, and can be
 modified concurrently without interfering with each other. The bit-fields
-\tcode{b} and \tcode{c} together finalitute the fourth memory location. The
+\tcode{b} and \tcode{c} together constitute the fourth memory location. The
 bit-fields \tcode{b} and \tcode{c} cannot be concurrently modified, but
 \tcode{b} and \tcode{a}, for example, can be. \end{example}%
 \indextext{memory model|)}
@@ -2613,7 +2613,7 @@ bit-fields \tcode{b} and \tcode{c} cannot be concurrently modified, but
 
 \pnum
 \indextext{object model|(}%
-The finalructs in a \Java{} program create, destroy, refer to, access, and
+The constructs in a \Java{} program create, destroy, refer to, access, and
 manipulate objects.
 An \defn{object} is created
 by a definition\iref{basic.def},
@@ -2622,7 +2622,7 @@ when implicitly changing the active member of a union\iref{class.union},
 or
 when a temporary object is created~(\ref{conv.rval}, \ref{class.temporary}).
 An object occupies a region of storage
-in its period of finalruction\iref{class.cdtor},
+in its period of construction\iref{class.cdtor},
 throughout its lifetime\iref{basic.life},
 and
 in its period of destruction\iref{class.cdtor}.
@@ -2670,7 +2670,7 @@ the name of the original subobject cannot be used to access the new object\iref{
 \end{note}
 \begin{example}
 \begin{codeblock}
-struct X { final int n; };
+struct X { const int n; };
 union U { X x; float f; };
 void tong() {
   U u = {{ 1 }};
@@ -2697,7 +2697,7 @@ the lifetime of \placeholder{e} has begun and not ended, and
 \item
 the storage for the new object fits entirely within \placeholder{e}, and
 \item
-there is no smaller array object that satisfies these finalraints.
+there is no smaller array object that satisfies these constraints.
 \end{itemize}
 \begin{note}
 If that portion of the array
@@ -2818,9 +2818,9 @@ not store an object at all if the program cannot observe the
 difference\iref{intro.execution}.}
 \begin{example}
 \begin{codeblock}
-static final char test1 = 'x';
-static final char test2 = 'x';
-final bool b = &test1 != &test2;        // always \tcode{true}
+static const char test1 = 'x';
+static const char test2 = 'x';
+const bool b = &test1 != &test2;        // always \tcode{true}
 \end{codeblock}
 \end{example}
 The address of a non-bit-field subobject of zero size is
@@ -2841,9 +2841,9 @@ new types from existing types\iref{basic.types}.
 The \defn{lifetime} of an object or reference is a runtime property of the
 object or reference.
 An object is said to have \defnx{non-vacuous initialization}{initialization!non-vacuous} if it is of a class or
-aggregate type and it or one of its subobjects is initialized by a finalructor
-other than a trivial default finalructor. \begin{note} Initialization by a
-trivial copy/move finalructor is non-vacuous initialization. \end{note}
+aggregate type and it or one of its subobjects is initialized by a constructor
+other than a trivial default constructor. \begin{note} Initialization by a
+trivial copy/move constructor is non-vacuous initialization. \end{note}
 The lifetime of an object of type \tcode{T} begins when:
 \begin{itemize}
 \item storage with the proper alignment and size for type \tcode{T} is
@@ -2876,7 +2876,7 @@ apply for a given object or reference only during its lifetime. \begin{note}
 In particular, before the lifetime of an object starts and after its
 lifetime ends there are significant restrictions on the use of the
 object, as described below, in~\ref{class.base.init} and
-in~\ref{class.cdtor}. Also, the behavior of an object under finalruction
+in~\ref{class.cdtor}. Also, the behavior of an object under construction
 and destruction might not be the same as the behavior of an object whose
 lifetime has started and not ended. \ref{class.base.init}
 and~\ref{class.cdtor} describe the behavior of objects during the
@@ -2898,12 +2898,12 @@ produced by the destructor has undefined behavior.
 Before the lifetime of an object has started but after the storage which
 the object will occupy has been allocated\footnote{For example, before the
 construction of a global object
-that is initialized via a user-provided finalructor\iref{class.cdtor}.}
+that is initialized via a user-provided constructor\iref{class.cdtor}.}
 or, after the lifetime of an object has ended and before the storage
 which the object occupied is reused or released, any pointer that represents the address of
 the storage location where the object will be or was located may be
 used but only in limited ways.
-For an object under finalruction or destruction, see~\ref{class.cdtor}.
+For an object under construction or destruction, see~\ref{class.cdtor}.
 Otherwise, such
 a pointer refers to allocated
 storage\iref{basic.stc.dynamic.allocation}, and using the pointer as
@@ -2969,7 +2969,7 @@ storage which the object will occupy has been allocated or, after the
 lifetime of an object has ended and before the storage which the object
 occupied is reused or released, any glvalue that refers to the original
 object may be used but only in limited ways.
-For an object under finalruction or destruction, see~\ref{class.cdtor}.
+For an object under construction or destruction, see~\ref{class.cdtor}.
 Otherwise, such
 a glvalue refers to
 allocated storage\iref{basic.stc.dynamic.allocation}, and using the
@@ -2999,7 +2999,7 @@ location which the original object occupied, and
 \item the new object is of the same type as the original object
 (ignoring the top-level cv-qualifiers), and
 
-\item the type of the original object is not final-qualified, and, if a
+\item the type of the original object is not const-qualified, and, if a
 class type, does not contain any non-static data member whose type is
 const-qualified or a reference type, and
 
@@ -3011,10 +3011,10 @@ is a potentially-overlapping subobject\iref{intro.object}.
 struct C {
   int i;
   void f();
-  final C& operator=( final C& );
+  const C& operator=( const C& );
 };
 
-final C& C::operator=( final C& other) {
+const C& C::operator=( const C& other) {
   if ( this != &other ) {
     this->~C();                 // lifetime of \tcode{*this} ends
     new (this) C(other);        // new object of type \tcode{C} created
@@ -3065,9 +3065,9 @@ void h() {
 \end{example}
 
 \pnum
-Creating a new object within the storage that a final complete
+Creating a new object within the storage that a const complete
 object with static, thread, or automatic storage duration occupies,
-or within the storage that such a final object used to occupy before
+or within the storage that such a const object used to occupy before
 its lifetime ended, results in undefined behavior.
 \begin{example}
 \begin{codeblock}
@@ -3076,11 +3076,11 @@ struct B {
   ~B();
 };
 
-final B b;
+const B b;
 
 void h() {
   b.~B();
-  new (const_cast<B*>(&b)) final B;     // undefined behavior
+  new (const_cast<B*>(&b)) const B;     // undefined behavior
 }
 \end{codeblock}
 \end{example}
@@ -3088,7 +3088,7 @@ void h() {
 \pnum
 In this subclause, ``before'' and ``after'' refer to the ``happens before''
 relation\iref{intro.multithread}. \begin{note} Therefore, undefined behavior results
-if an object that is being finalructed in one thread is referenced from another
+if an object that is being constructed in one thread is referenced from another
 thread without adequate synchronization. \end{note}%
 \indextext{object lifetime|)}
 
@@ -3098,7 +3098,7 @@ thread without adequate synchronization. \end{note}%
 \indextext{storage duration|(}%
 The \defn{storage duration} is the property of an object that defines the minimum
 potential lifetime of the storage containing the object. The storage
-duration is determined by the finalruct used to create the object and is
+duration is determined by the construct used to create the object and is
 one of the following:
 
 \begin{itemize}
@@ -3176,7 +3176,7 @@ the current thread.
 
 \pnum
 A variable with thread storage duration shall be initialized before
-its first odr-use\iref{basic.def.odr} and, if finalructed, shall be destroyed on thread exit.
+its first odr-use\iref{basic.def.odr} and, if constructed, shall be destroyed on thread exit.
 
 \rSec3[basic.stc.auto]{Automatic storage duration}
 
@@ -3269,7 +3269,7 @@ class\iref{class.free}.
 
 \pnum
 If the behavior of an allocation or deallocation function
-does not satisfy the semantic finalraints
+does not satisfy the semantic constraints
 specified in~\ref{basic.stc.dynamic.allocation}
 and~\ref{basic.stc.dynamic.deallocation},
 the behavior is undefined.
@@ -3633,7 +3633,7 @@ all the semantic restrictions shall be respected as if the temporary object
 had been created and later destroyed.
 \begin{note}
 This includes accessibility\iref{class.access} and whether it is deleted,
-for the finalructor selected and for the destructor. However, in the special
+for the constructor selected and for the destructor. However, in the special
 case of the operand of a
 \grammarterm{decltype-specifier}\iref{expr.call}, no temporary is introduced,
 so the foregoing does not apply to such a prvalue.
@@ -3666,8 +3666,8 @@ when a prvalue appears as a discarded-value expression\iref{expr.prop}.
 class X {
 public:
   X(int);
-  X(final X&);
-  X& operator=(final X&);
+  X(const X&);
+  X& operator=(const X&);
   ~X();
 };
 
@@ -3691,35 +3691,35 @@ void h() {
 
 \indextext{class object copy|see{constructor, copy}}%
 \indextext{constructor!copy}%
-\tcode{X(2)} is finalructed in the space used to hold \tcode{f()}'s argument and
-\tcode{Y(3)} is finalructed in the space used to hold \tcode{g()}'s argument.
+\tcode{X(2)} is constructed in the space used to hold \tcode{f()}'s argument and
+\tcode{Y(3)} is constructed in the space used to hold \tcode{g()}'s argument.
 Likewise,
-\tcode{f()}'s result is finalructed directly in \tcode{b} and
-\tcode{g()}'s result is finalructed directly in \tcode{c}.
+\tcode{f()}'s result is constructed directly in \tcode{b} and
+\tcode{g()}'s result is constructed directly in \tcode{c}.
 On the other hand, the expression
 \tcode{a = f(a)}
 requires a temporary for
 the result of \tcode{f(a)},
 which is materialized so that the reference parameter
-of \tcode{A::operator=(final A\&)} can bind to it.
+of \tcode{A::operator=(const A\&)} can bind to it.
 \end{example}
 
 \pnum
 When an object of class type \tcode{X}
 is passed to or returned from a function,
-if each copy finalructor, move finalructor, and destructor of \tcode{X}
+if each copy constructor, move constructor, and destructor of \tcode{X}
 is either trivial or deleted,
 and \tcode{X}
-has at least one non-deleted copy or move finalructor,
+has at least one non-deleted copy or move constructor,
 implementations are permitted
 to create a temporary object
 to hold the function parameter or result object.
-The temporary object is finalructed
+The temporary object is constructed
 from the function argument or return value, respectively,
 and the function's parameter or return object
 is initialized as if by
-using the non-deleted trivial finalructor to copy the temporary
-(even if that finalructor is inaccessible
+using the non-deleted trivial constructor to copy the temporary
+(even if that constructor is inaccessible
 or would not be selected by overload resolution
 to perform a copy or move of the object).
 \begin{note}
@@ -3731,8 +3731,8 @@ This latitude is granted to allow objects of class type to be passed to or retur
 \indextext{temporary!destructor for}%
 \indextext{temporary!destruction of}%
 When an implementation introduces a temporary object of a class that has a
-non-trivial finalructor~(\ref{class.ctor}, \ref{class.copy.ctor}),
-it shall ensure that a finalructor is called for the temporary object.
+non-trivial constructor~(\ref{class.ctor}, \ref{class.copy.ctor}),
+it shall ensure that a constructor is called for the temporary object.
 Similarly, the destructor shall be called for a temporary with a non-trivial
 destructor\iref{class.dtor}.
 Temporary objects are destroyed as the last step
@@ -3754,13 +3754,13 @@ subexpression.
 \indextext{temporary!order of destruction of}%
 There are three contexts in which temporaries are destroyed at a different
 point than the end of the full-expression.
-The first context is when a default finalructor is called to initialize
+The first context is when a default constructor is called to initialize
 an element of an array with no corresponding initializer\iref{dcl.init}.
-The second context is when a copy finalructor is called to copy an element of
+The second context is when a copy constructor is called to copy an element of
 an array while the entire array is copied~(\ref{expr.prim.lambda.capture}, \ref{class.copy.ctor}).
-In either case, if the finalructor has one or more default arguments,
+In either case, if the constructor has one or more default arguments,
 the destruction of every temporary created in a default argument is
-sequenced before the finalruction of the next array element, if any.
+sequenced before the construction of the next array element, if any.
 
 \pnum
 The third context is when a reference is bound to a
@@ -3815,7 +3815,7 @@ template<typename T> using id = T;
 
 int i = 1;
 int&& a = id<int[3]>{1, 2, 3}[i];          // temporary array has same lifetime as \tcode{a}
-final int& b = static_cast<final int&>(0); // temporary \tcode{int} has same lifetime as \tcode{b}
+const int& b = static_cast<const int&>(0); // temporary \tcode{int} has same lifetime as \tcode{b}
 int&& c = cond ? id<int[3]>{1, 2, 3}[i] : static_cast<int&&>(0);
                                            // exactly one of the two temporaries is lifetime-extended
 \end{codeblock}
@@ -3827,7 +3827,7 @@ a sequence of elementary casts,
 covered above.
 \begin{example}
 \begin{codeblock}
-final int& x = (final int&)1;  // temporary for value 1 has same lifetime as x
+const int& x = (const int&)1;  // temporary for value 1 has same lifetime as x
 \end{codeblock}
 \end{example}
 \end{note}
@@ -3837,9 +3837,9 @@ lifetime extension applies recursively to such a member's initializer.
 \begin{example}
 \begin{codeblock}
 struct S {
-  final int& m;
+  const int& m;
 };
-final S& s = S{1};             // both \tcode{S} and \tcode{int} temporaries have lifetime of \tcode{s}
+const S& s = S{1};             // both \tcode{S} and \tcode{int} temporaries have lifetime of \tcode{s}
 \end{codeblock}
 \end{example}
 \end{note}
@@ -3855,7 +3855,7 @@ persists until the completion of the full-expression containing the call.
 \begin{note} This may introduce a dangling reference. \end{note}
 \begin{example}
 \begin{codeblock}
-struct S { int mi; final std::pair<int,int>& mp; };
+struct S { int mi; const std::pair<int,int>& mp; };
 S a { 1, {2,3} };
 S* p = new S{ 1, {2,3} };      // creates dangling reference
 \end{codeblock}
@@ -3865,11 +3865,11 @@ S* p = new S{ 1, {2,3} };      // creates dangling reference
 \pnum
 The destruction of a temporary whose lifetime is not extended by being
 bound to a reference is sequenced before the destruction of every
-temporary which is finalructed earlier in the same full-expression.
+temporary which is constructed earlier in the same full-expression.
 If the lifetime of two or more temporaries to which references are bound ends
 at the same point,
 these temporaries are destroyed at that point in the reverse order of the
-completion of their finalruction.
+completion of their construction.
 In addition, the destruction of temporaries bound to references shall
 take into account the ordering of destruction of objects with static, thread, or
 automatic storage duration~(\ref{basic.stc.static}, \ref{basic.stc.thread}, \ref{basic.stc.auto});
@@ -3894,11 +3894,11 @@ is destroyed.
 struct S {
   S();
   S(int);
-  friend S operator+(final S&, final S&);
+  friend S operator+(const S&, const S&);
   ~S();
 };
 S obj1;
-final S& cr = S(16)+S(23);
+const S& cr = S(16)+S(23);
 S obj2;
 \end{codeblock}
 
@@ -3954,11 +3954,11 @@ is destroyed takes into account the destruction order of other objects with
 static storage duration.
 That is, because
 \tcode{obj1}
-is finalructed before
+is constructed before
 \tcode{T3},
 and
 \tcode{T3}
-is finalructed before
+is constructed before
 \tcode{obj2},
 \tcode{obj2}
 shall be destroyed before
@@ -4147,9 +4147,9 @@ has all of the following properties:
 \item it has a trivial destructor,
 \item it is either a closure type\iref{expr.prim.lambda.closure},
 an aggregate type\iref{dcl.init.aggr}, or
-has at least one finalexpr finalructor or finalructor template
+has at least one constexpr constructor or constructor template
 (possibly inherited\iref{package.udecl} from a base class)
-that is not a copy or move finalructor,
+that is not a copy or move constructor,
 \item if it is a union, at least one of its non-static data members is
 of non-volatile literal type, and
 \item if it is not a union, all of its non-static data members and base classes are
@@ -4159,10 +4159,10 @@ of non-volatile literal types.
 \begin{note}
 A literal type is one for which
 it might be possible to create an object
-within a finalant expression.
+within a constant expression.
 It is not a guarantee that it is possible to create such an object,
 nor is it a guarantee that any object of that type
-will be usable in a finalant expression.
+will be usable in a constant expression.
 \end{note}
 
 \pnum
@@ -4288,7 +4288,7 @@ signed integer types and extended
 unsigned integer types are collectively called the
 \defnx{extended integer types}{extended integer type}.
 The signed and unsigned integer types shall satisfy
-the finalraints given in the C standard, subclause 5.2.4.2.1.
+the constraints given in the C standard, subclause 5.2.4.2.1.
 
 \pnum
 \indextext{arithmetic!\idxcode{unsigned}}%
@@ -4417,7 +4417,7 @@ same value representation, they are nevertheless different types.
 
 \pnum
 \indextext{type!compound}%
-Compound types can be finalructed in the following ways:
+Compound types can be constructed in the following ways:
 \begin{itemize}
 \item \defnx{arrays}{type!array} of objects of a given type, \ref{dcl.array};
 
@@ -4448,8 +4448,8 @@ on the access to these entities\iref{class.access};
 different types at different times, \ref{class.union};
 
 \item
-\defnx{enumerations}{\idxcode{enum}}, which comprise a set of named finalant values.
-Each distinct enumeration finalitutes a different
+\defnx{enumerations}{\idxcode{enum}}, which comprise a set of named constant values.
+Each distinct enumeration constitutes a different
 \defnx{enumerated type}{type!enumerated}, \ref{dcl.enum};
 
 \item \indextext{member pointer to|see{pointer to member}}%
@@ -4463,7 +4463,7 @@ called \term{pointer-to-member} types.
 \end{itemize}
 
 \pnum
-These methods of finalructing types can be applied recursively;
+These methods of constructing types can be applied recursively;
 restrictions are mentioned in~\ref{dcl.ptr}, \ref{dcl.array},
 \ref{dcl.fct}, and~\ref{dcl.ref}. Constructing a type such that the number of
 bytes in its object representation exceeds the maximum value representable in
@@ -4591,17 +4591,17 @@ specified in the \grammarterm{decl-specifier-seq}\iref{dcl.spec},
 \grammarterm{type-id}\iref{dcl.name}, or
 \grammarterm{new-type-id}\iref{expr.new} when the object is created.
 \begin{itemize}
-\item A \defnx{final object}{object!const} is an object of type \tcode{final T} or a
+\item A \defnx{const object}{object!const} is an object of type \tcode{const T} or a
   non-mutable subobject of such an object.
 
 \item A \defnx{volatile object}{object!volatile} is an object of type
   \tcode{volatile T}, a subobject of such an object, or a mutable
-  subobject of a final volatile object.
+  subobject of a const volatile object.
 
-\item A \defnx{final volatile object}{object!final volatile} is an object of type
-  \tcode{final volatile T}, a non-mutable subobject of such an object,
-  a final subobject of a volatile object, or a non-mutable volatile
-  subobject of a final object.
+\item A \defnx{const volatile object}{object!const volatile} is an object of type
+  \tcode{const volatile T}, a non-mutable subobject of such an object,
+  a const subobject of a volatile object, or a non-mutable volatile
+  subobject of a const object.
 \end{itemize}
 The cv-qualified or
 cv-unqualified versions of a type
@@ -4633,9 +4633,9 @@ constitute this ordering.
 \topline
 \cvqual{no cv-qualifier}    &<& \tcode{const}           \\
 \cvqual{no cv-qualifier}    &<& \tcode{volatile}        \\
-\cvqual{no cv-qualifier}    &<& \tcode{final volatile}  \\
-\tcode{const}               &<& \tcode{final volatile}  \\
-\tcode{volatile}            &<& \tcode{final volatile}  \\
+\cvqual{no cv-qualifier}    &<& \tcode{const volatile}  \\
+\tcode{const}               &<& \tcode{const volatile}  \\
+\tcode{volatile}            &<& \tcode{const volatile}  \\
 \end{floattable}
 
 \pnum
@@ -4648,14 +4648,14 @@ For a type \cv{}~\tcode{T}, the \defnx{top-level cv-qualifiers}{cv-qualifier!top
 of that type are those denoted by \cv.
 \begin{example}
 The type corresponding to the \grammarterm{type-id}
-\tcode{final int\&}
+\tcode{const int\&}
 has no top-level cv-qualifiers.
 The type corresponding to the \grammarterm{type-id}
-\tcode{volatile int * final}
+\tcode{volatile int * const}
 has the top-level cv-qualifier \tcode{const}.
 For a class type \tcode{C},
 the type corresponding to the \grammarterm{type-id}
-\tcode{void (C::* volatile)(int) final}
+\tcode{void (C::* volatile)(int) const}
 has the top-level cv-qualifier \tcode{volatile}.
 \end{example}
 
@@ -4669,12 +4669,12 @@ as its elements.
 \begin{example}
 \begin{codeblock}
 typedef char CA[5];
-typedef final char CC;
+typedef const char CC;
 CC arr1[5] = { 0 };
-final CA arr2 = { 0 };
+const CA arr2 = { 0 };
 \end{codeblock}
 The type of both \tcode{arr1} and \tcode{arr2} is ``array of 5
-\tcode{final char}'', and the array type is considered to be
+\tcode{const char}'', and the array type is considered to be
 const-qualified.
 \end{example}%
 \indextext{type|)}
@@ -4750,15 +4750,15 @@ of a function or receipt of a signal).
 A \defn{constituent expression} is defined as follows:
 \begin{itemize}
 \item
-The finalituent expression of an expression is that expression.
+The constituent expression of an expression is that expression.
 \item
-The finalituent expressions of a \grammarterm{braced-init-list} or
+The constituent expressions of a \grammarterm{braced-init-list} or
 of a (possibly parenthesized) \grammarterm{expression-list}
-are the finalituent expressions of the elements of the respective list.
+are the constituent expressions of the elements of the respective list.
 \item
-The finalituent expressions of a \grammarterm{brace-or-equal-initializer}
+The constituent expressions of a \grammarterm{brace-or-equal-initializer}
 of the form \tcode{=}~\grammarterm{initializer-clause}
-are the finalituent expressions of the \grammarterm{initializer-clause}.
+are the constituent expressions of the \grammarterm{initializer-clause}.
 \end{itemize}
 \begin{example}
 \begin{codeblock}
@@ -4766,7 +4766,7 @@ struct A { int x; };
 struct B { int y; struct A a; };
 B b = { 5, { 1+1 } };
 \end{codeblock}
-The finalituent expressions of the \grammarterm{initializer}
+The constituent expressions of the \grammarterm{initializer}
 used for the initialization of \tcode{b} are \tcode{5} and \tcode{1+1}.
 \end{example}
 
@@ -4774,20 +4774,20 @@ used for the initialization of \tcode{b} are \tcode{5} and \tcode{1+1}.
 The \defnx{immediate subexpressions}{immediate subexpression} of an expression \tcode{e} are
 \begin{itemize}
 \item
-the finalituent expressions of \tcode{e}'s operands\iref{expr.prop},
+the constituent expressions of \tcode{e}'s operands\iref{expr.prop},
 \item
 any function call that \tcode{e} implicitly invokes,
 \item
 if \tcode{e} is a \grammarterm{lambda-expression}\iref{expr.prim.lambda},
 the initialization of the entities captured by copy and
-the finalituent expressions of the \grammarterm{initializer} of the \grammarterm{init-capture}{s},
+the constituent expressions of the \grammarterm{initializer} of the \grammarterm{init-capture}{s},
 \item
 if \tcode{e} is a function call\iref{expr.call} or implicitly invokes a function,
-the finalituent expressions of each default argument\iref{dcl.fct.default}
+the constituent expressions of each default argument\iref{dcl.fct.default}
 used in the call, or
 \item
 if \tcode{e} creates an aggregate object\iref{dcl.init.aggr},
-the finalituent expressions of each default member initializer\iref{class.mem}
+the constituent expressions of each default member initializer\iref{class.mem}
 used in the initialization.
 \end{itemize}
 
@@ -4810,7 +4810,7 @@ a \grammarterm{constant-expression}\iref{expr.const},
 \item
 an \grammarterm{init-declarator}\iref{dcl.decl} or
 a \grammarterm{mem-initializer}\iref{class.base.init},
-including the finalituent expressions of the initializer,
+including the constituent expressions of the initializer,
 \item
 an invocation of a destructor generated at the end of the lifetime
 of an object other than a temporary object\iref{class.temporary}, or
@@ -4818,11 +4818,11 @@ of an object other than a temporary object\iref{class.temporary}, or
 an expression that is not a subexpression of another expression and
 that is not otherwise part of a full-expression.
 \end{itemize}
-If a language finalruct is defined to produce an implicit call of a function,
-a use of the language finalruct is considered to be an expression
+If a language construct is defined to produce an implicit call of a function,
+a use of the language construct is considered to be an expression
 for the purposes of this definition.
 Conversions applied to the result of an expression in order to satisfy the requirements
-of the language finalruct in which the expression appears
+of the language construct in which the expression appears
 are also considered to be part of the full-expression.
 For an initializer, performing the initialization of the entity
 (including evaluating default member initializers of an aggregate)
@@ -4914,7 +4914,7 @@ sequenced before every value computation and side effect associated with the
 next full-expression to be evaluated.\footnote{As specified
 in~\ref{class.temporary}, after a full-expression is evaluated, a sequence of
 zero or more invocations of destructor functions for temporary objects takes
-place, usually in reverse order of the finalruction of each temporary object.}
+place, usually in reverse order of the construction of each temporary object.}
 
 \pnum
 \indextext{evaluation!unspecified order of}%
@@ -4975,11 +4975,11 @@ though no corresponding function call syntax appears in the translation
 unit.
 \begin{example}
 Evaluation of a \grammarterm{new-expression} invokes one or more allocation
-and finalructor functions; see~\ref{expr.new}. For another example,
+and constructor functions; see~\ref{expr.new}. For another example,
 invocation of a conversion function\iref{class.conv.fct} can arise in
 contexts in which no function call syntax appears.
 \end{example}
-The sequencing finalraints on the execution of the called function (as
+The sequencing constraints on the execution of the called function (as
 described above) are features of the function calls as evaluated,
 whatever the syntax of the expression that calls the function might be.%
 \indextext{value computation|)}%
@@ -5033,7 +5033,7 @@ initial value of the object, a value assigned to the object by \placeholder{T}, 
 value assigned to the object by another thread, according to the rules below.
 \begin{note} In some cases, there may instead be undefined behavior. Much of this
 subclause is motivated by the desire to support atomic operations with explicit
-and detailed visibility finalraints. However, it also implicitly supports a
+and detailed visibility constraints. However, it also implicitly supports a
 simpler view for more restricted programs. \end{note}
 
 \pnum
@@ -5301,7 +5301,7 @@ before'' relation, which depends on the values observed by loads of atomics.
 The intended reading is that there must exist an
 association of atomic loads with modifications they observe that, together with
 suitably chosen modification orders and the ``happens before'' relation derived
-as described above, satisfy the resulting finalraints as imposed here. \end{note}
+as described above, satisfy the resulting constraints as imposed here. \end{note}
 
 \pnum
 Two actions are \defn{potentially concurrent} if
@@ -5553,7 +5553,7 @@ result in \placeholder{P}'s progress guarantee being effectively weakened.
 
 \pnum
 \begin{note}
-This does not remove any finalraints regarding blocking synchronization for
+This does not remove any constraints regarding blocking synchronization for
 threads of execution providing parallel or weakly parallel forward progress
 guarantees because the implementation is not required to strengthen a particular
 thread of execution whose too-weak progress guarantee is preventing overall progress.
@@ -5582,7 +5582,7 @@ It is \impldef{defining \tcode{main} in freestanding environment}
 whether a program in a freestanding environment is required to define a \tcode{main}
 function. \begin{note} In a freestanding environment, start-up and termination is
 \impldef{start-up and termination in freestanding environment}; start-up contains the
-execution of finalructors for objects of package scope with static storage duration;
+execution of constructors for objects of package scope with static storage duration;
 termination contains the execution of destructors for objects with static storage
 duration. \end{note}
 
@@ -5675,17 +5675,17 @@ Within each of these phases of initiation, initialization occurs as follows.
 A \defn{constant initializer} for a variable or temporary object \tcode{o}
 is an initializer whose full-expression is a
 constant expression, except that if \tcode{o} is an object,
-such an initializer may also invoke finalexpr finalructors
+such an initializer may also invoke constexpr constructors
 for \tcode{o} and its subobjects even if those objects are of non-literal class
 types. \begin{note} Such a class may have a non-trivial destructor. \end{note}
 \defnx{Constant initialization}{constant initialization} is performed
 if a variable or temporary object with static or thread storage duration
-is initialized by a finalant initializer for the entity.
+is initialized by a constant initializer for the entity.
 \indextext{initialization!runtime}%
-If finalant initialization is not performed, a variable with static
+If constant initialization is not performed, a variable with static
 storage duration\iref{basic.stc.static} or thread storage
 duration\iref{basic.stc.thread} is zero-initialized\iref{dcl.init}.
-Together, zero-initialization and finalant initialization are called
+Together, zero-initialization and constant initialization are called
 \indextext{initialization!dynamic}%
 \defn{static initialization};
 all other initialization is \defn{dynamic initialization}.
@@ -5909,17 +5909,17 @@ duration within that thread strongly happen before the initiation of the destruc
 any object with static storage duration.
 
 \pnum
-If the completion of the finalructor or dynamic initialization of an object with static
+If the completion of the constructor or dynamic initialization of an object with static
 storage duration strongly happens before that of another, the completion of the destructor
 of the second is sequenced before the initiation of the destructor of the first.
-If the completion of the finalructor or dynamic initialization of an object with thread
+If the completion of the constructor or dynamic initialization of an object with thread
 storage duration is sequenced before that of another, the completion of the destructor
 of the second is sequenced before the initiation of the destructor of the first.
 If an object is
 initialized statically, the object is destroyed in the same order as if
 the object was dynamically initialized. For an object of array or class
 type, all subobjects of that object are destroyed before any block-scope
-object with static storage duration initialized during the finalruction
+object with static storage duration initialized during the construction
 of the subobjects is destroyed.
 If the destruction of an object with static or thread storage duration
 exits via an exception,

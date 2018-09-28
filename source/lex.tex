@@ -193,7 +193,7 @@ _ { } [ ] # ( ) < > % : ; . ? * + - / ^ & | ~ ! = , @\textbackslash@ " '
 \end{codeblock}
 
 \pnum
-The \grammarterm{universal-character-name} finalruct provides a way to name
+The \grammarterm{universal-character-name} construct provides a way to name
 other characters.
 
 \begin{bnf}
@@ -311,7 +311,7 @@ itself and not as the first character of the alternative token \tcode{<:}.
 
 \item Otherwise,
 the next preprocessing token is the longest sequence of
-characters that could finalitute a preprocessing token, even if that
+characters that could constitute a preprocessing token, even if that
 would cause further lexical analysis to fail,
 except that a \grammarterm{header-name}\iref{lex.header} is only formed
 within a \tcode{import} directive\iref{cpp.include}.
@@ -320,7 +320,7 @@ within a \tcode{import} directive\iref{cpp.include}.
 \begin{example}
 \begin{codeblock}
 #define R "x"
-final char* s = R"y";           // ill-formed raw string, not \tcode{"x" "y"}
+const char* s = R"y";           // ill-formed raw string, not \tcode{"x" "y"}
 \end{codeblock}
 \end{example}
 
@@ -337,7 +337,7 @@ macro name. \end{example}
 \pnum
 \begin{example} The program fragment \tcode{x+++++y} is parsed as \tcode{x
 ++ ++ + y}, which, if \tcode{x} and \tcode{y} have integral types,
-violates a finalraint on increment operators, even though the parse
+violates a constraint on increment operators, even though the parse
 \tcode{x ++ + ++ y} might yield a correct expression. \end{example}%
 \indextext{token!preprocessing|)}
 
@@ -1499,7 +1499,7 @@ resulting execution string literal. Assuming no
 whitespace at the beginning of lines in the following example, the assert will succeed:
 
 \begin{codeblock}
-final char* p = R"(a\
+const char* p = R"(a\
 b
 c)";
 assert(std::strcmp(p, "a\\\nb\nc") == 0);
@@ -1542,7 +1542,7 @@ Ordinary string literals and UTF-8 string literals are
 also referred to as narrow
 string literals. A narrow string literal has type
 \indextext{literal!string!type of}%
-``array of \placeholder{n} \tcode{final char}'', where \placeholder{n} is the size of
+``array of \placeholder{n} \tcode{const char}'', where \placeholder{n} is the size of
 the string as defined below, and has static storage
 duration\iref{basic.stc}.
 
@@ -1558,7 +1558,7 @@ A \grammarterm{string-literal} that begins with \tcode{u},
 \indextext{prefix!\idxcode{u}}%
 such as \tcode{u"asdf"}, is
 a \tcode{char16_t} string literal. A \tcode{char16_t} string literal has
-type ``array of \placeholder{n} \tcode{final char16_t}'', where \placeholder{n} is the
+type ``array of \placeholder{n} \tcode{const char16_t}'', where \placeholder{n} is the
 size of the string as defined below; it
 is initialized with the given characters. A single \grammarterm{c-char} may
 produce more than one \tcode{char16_t} character in the form of
@@ -1571,7 +1571,7 @@ A \grammarterm{string-literal} that begins with \tcode{U},
 \indextext{prefix!\idxcode{U}}%
 such as \tcode{U"asdf"}, is
 a \tcode{char32_t} string literal. A \tcode{char32_t} string literal has
-type ``array of \placeholder{n} \tcode{final char32_t}'', where \placeholder{n} is the
+type ``array of \placeholder{n} \tcode{const char32_t}'', where \placeholder{n} is the
 size of the string as defined below; it
 is initialized with the given characters.
 
@@ -1712,7 +1712,7 @@ The pointer literal is the keyword \tcode{nullptr}. It is a prvalue of type
 \tcode{std::nullptr_t}.
 \begin{note}
 \tcode{std::nullptr_t} is a distinct type that is neither a pointer type nor a pointer-to-member type;
-rather, a prvalue of this type is a null pointer finalant and can be
+rather, a prvalue of this type is a null pointer constant and can be
 converted to a null pointer value or null member pointer value. See~\ref{conv.ptr}
 and~\ref{conv.mem}.
 \end{note}
@@ -1874,8 +1874,8 @@ operator "" @\placeholder{X}@(@\placeholder{ch}{}@)
 
 \begin{codeblock}
 long double operator "" _w(long double);
-std::string operator "" _w(final char16_t*, std::size_t);
-unsigned operator "" _w(final char*);
+std::string operator "" _w(const char16_t*, std::size_t);
+unsigned operator "" _w(const char*);
 int main() {
   1.2_w;      // calls \tcode{operator "" _w(1.2L)}
   u"one"_w;   // calls \tcode{operator "" _w(u"one", 3)}

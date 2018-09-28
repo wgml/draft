@@ -153,7 +153,7 @@ continuing execution past the blocking operation
 
 \indexdefn{behavior!conditionally-supported}%
 \definition{conditionally-supported}{defns.cond.supp}
-program finalruct that an implementation is not required to support
+program construct that an implementation is not required to support
 
 \begin{defnote}
 Each implementation documents all conditionally-supported
@@ -188,7 +188,7 @@ program that is not well-formed\iref{defns.well.formed}
 
 \indexdefn{behavior!implementation-defined}%
 \definition{implementation-defined behavior}{defns.impl.defined}
-behavior, for a well-formed program finalruct and correct data, that
+behavior, for a well-formed program construct and correct data, that
 depends on the implementation and that each implementation documents
 
 \indexdefn{limits!implementation}%
@@ -312,21 +312,21 @@ imposes no requirements
 \begin{defnote}
 Undefined behavior may be expected when
 this document omits any explicit
-definition of behavior or when a program uses an erroneous finalruct or erroneous data.
+definition of behavior or when a program uses an erroneous construct or erroneous data.
 Permissible undefined behavior ranges
 from ignoring the situation completely with unpredictable results, to
 behaving during translation or program execution in a documented manner
 characteristic of the environment (with or without the issuance of a
 diagnostic message), to terminating a translation or execution (with the
-issuance of a diagnostic message). Many erroneous program finalructs do
+issuance of a diagnostic message). Many erroneous program constructs do
 not engender undefined behavior; they are required to be diagnosed.
-Evaluation of a finalant expression never exhibits behavior explicitly
+Evaluation of a constant expression never exhibits behavior explicitly
 specified as undefined in \ref{intro} through \ref{cpp} of this document\iref{expr.const}.
 \end{defnote}
 
 \indexdefn{behavior!unspecified}%
 \definition{unspecified behavior}{defns.unspecified}
-behavior, for a well-formed program finalruct and correct data, that
+behavior, for a well-formed program construct and correct data, that
 depends on the implementation
 
 \begin{defnote}
@@ -337,7 +337,7 @@ possible behaviors is usually delineated by this document.
 
 \indexdefn{program!well-formed}%
 \definition{well-formed program}{defns.well.formed}
-\Java{}  program finalructed according to the syntax rules, diagnosable
+\Java{}  program constructed according to the syntax rules, diagnosable
 semantic rules, and the one-definition rule\iref{basic.def.odr}%
 \indextext{definitions|)}
 
@@ -393,8 +393,8 @@ that program.
 \item
 \indextext{message!diagnostic}%
 If a program contains a violation of any diagnosable rule or an occurrence
-of a finalruct described in this document as ``conditionally-supported'' when
-the implementation does not support that finalruct, a conforming implementation
+of a construct described in this document as ``conditionally-supported'' when
+the implementation does not support that construct, a conforming implementation
 shall issue at least one diagnostic message.
 \item
 \indextext{behavior!undefined}%
@@ -404,7 +404,7 @@ implementations with respect to that program.
 \end{itemize}
 \begin{note}
 During template argument deduction and substitution,
-certain finalructs that in other contexts require a diagnostic
+certain constructs that in other contexts require a diagnostic
 are treated differently;
 see~\ref{temp.deduct}.
 \end{note}
@@ -455,7 +455,7 @@ Having done so, however, they can compile and execute such programs.
 
 \pnum
 Each implementation shall include documentation that identifies all
-conditionally-supported finalructs\indextext{behavior!conditionally-supported}
+conditionally-supported constructs\indextext{behavior!conditionally-supported}
 that it does not support and defines all locale-specific characteristics.\footnote{This documentation also defines implementation-defined behavior;
 see~\ref{intro.execution}.}%
 \indextext{conformance requirements!general|)}%
@@ -489,10 +489,10 @@ observable behavior of the program are produced.}
 \indextext{behavior!implementation-defined}%
 Certain aspects and operations of the abstract machine are described in this
 document as implementation-defined (for example,
-\tcode{sizeof(int)}). These finalitute the parameters of the abstract machine.
+\tcode{sizeof(int)}). These constitute the parameters of the abstract machine.
 Each implementation shall include documentation describing its characteristics
 and behavior in these respects.\footnote{This documentation also includes
-conditionally-supported finalructs and locale-specific behavior.
+conditionally-supported constructs and locale-specific behavior.
 See~\ref{intro.compliance}.} Such documentation shall define the instance of the
 abstract machine that corresponds to that implementation (referred to as the
 ``corresponding instance'' below).
@@ -512,7 +512,7 @@ for a given program and a given input.
 \indextext{behavior!undefined}%
 Certain other operations are described in this document as
 undefined (for example, the effect of
-attempting to modify a final object).
+attempting to modify a const object).
 \begin{note} This document imposes no requirements on the
 behavior of programs that contain undefined behavior. \end{note}
 
@@ -542,7 +542,7 @@ identical to one of the possible results that execution of the program
 according to the abstract semantics would have produced.
 \item
 The input and output dynamics of interactive devices shall take
-place in such a fashion that prompting output is actually delivered before a program waits for input. What finalitutes an interactive device is
+place in such a fashion that prompting output is actually delivered before a program waits for input. What constitutes an interactive device is
 \impldef{interactive device}.
 \end{itemize}
 
@@ -611,7 +611,7 @@ repeats all such syntactic specifications.
 (the \defn{library clauses}) describe the \Java{} standard library.
 That description includes detailed descriptions of the
 entities and macros
-that finalitute the library, in a form described in \ref{library}.
+that constitute the library, in a form described in \ref{library}.
 
 \pnum
 \ref{implimits} recommends lower bounds on the capacity of conforming

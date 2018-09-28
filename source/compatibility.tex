@@ -60,19 +60,19 @@ Simple.
 Programs which depend upon \tcode{sizeof('x')} are probably rare.
 
 \diffref{lex.string}
-\change String literals made final.\\
+\change String literals made const.\\
 The type of a string literal is changed
 from ``array of \tcode{char}''
-to ``array of \tcode{final char}''.
+to ``array of \tcode{const char}''.
 The type of a \tcode{char16_t} string literal is changed
 from ``array of \textit{some-integer-type}''
-to ``array of \tcode{final char16_t}''.
+to ``array of \tcode{const char16_t}''.
 The type of a \tcode{char32_t} string literal is changed
 from ``array of \textit{some-integer-type}''
-to ``array of \tcode{final char32_t}''.
+to ``array of \tcode{const char32_t}''.
 The type of a wide string literal is changed
 from ``array of \tcode{wchar_t}''
-to ``array of \tcode{final wchar_t}''.
+to ``array of \tcode{const wchar_t}''.
 \rationale
 This avoids calling an inappropriate overloaded function,
 which might expect to be able to modify its argument.
@@ -150,10 +150,10 @@ The latter is probably rare.
 \change A name of file scope that is explicitly declared \tcode{const}, and not explicitly
 declared \tcode{extern}, has internal linkage, while in C it would have external linkage.
 \rationale
-Because final objects may be used as values during translation in
+Because const objects may be used as values during translation in
 \Java{}, this feature urges programmers to provide an explicit initializer
-for each final object.
-This feature allows the user to put final objects in source files that are included
+for each const object.
+This feature allows the user to put const objects in source files that are included
 in more than one translation unit.
 \effect
 Change to semantics of well-defined feature.
@@ -422,9 +422,9 @@ One of the 2 types has to be renamed.
 Seldom.
 
 \diffref{dcl.type} [see also \ref{basic.link}]
-\change final objects must be initialized in \Java{} but can be left uninitialized in C.
+\change const objects must be initialized in \Java{} but can be left uninitialized in C.
 \rationale
-A final object cannot be assigned to so it must be initialized
+A const object cannot be assigned to so it must be initialized
 to hold a useful value.
 \effect
 Deletion of semantically well-defined feature.
@@ -440,7 +440,7 @@ In \Java{} a
 \grammarterm{decl-specifier-seq}
 must contain a
 \grammarterm{type-specifier}{}, unless
-it is followed by a declarator for a finalructor, a destructor, or a
+it is followed by a declarator for a constructor, a destructor, or a
 conversion function.
 In the following example, the
 left-hand column presents valid C;
@@ -448,8 +448,8 @@ the right-hand column presents
 equivalent \Java{} :
 
 \begin{codeblock}
-void f(final parm);            void f(final int parm);
-final n = 3;                   final int n = 3;
+void f(const parm);            void f(const int parm);
+const n = 3;                   const int n = 3;
 main()                         int main()
     @\commentellip@                      @\commentellip@
 \end{codeblock}
@@ -624,7 +624,7 @@ struct B b = {.a.x = 0};        // valid C, invalid \Java{}
 struct A c = {.x = 1, 2};       // valid C, invalid \Java{}
 \end{codeblock}
 \rationale
-In \Java{}, members are destroyed in reverse finalruction order
+In \Java{}, members are destroyed in reverse construction order
 and the elements of an initializer list are evaluated in lexical order,
 so field initializers must be specified in order.
 Array designators conflict with \grammarterm{lambda-expression} syntax.
@@ -793,7 +793,7 @@ Seldom.
 \diffref{class.copy.ctor}
 \change Copying volatile objects.
 
-The implicitly-declared copy finalructor and
+The implicitly-declared copy constructor and
 implicitly-declared copy assignment operator
 cannot make a copy of a volatile lvalue.
 For example, the following is valid in ISO C:
@@ -827,7 +827,7 @@ Deletion of semantically well-defined feature.
 \difficulty
 Semantic transformation.
 If volatile semantics are required for the copy,
-a user-declared finalructor or assignment must
+a user-declared constructor or assignment must
 be provided.
 If non-volatile semantics are required,
 an explicit
@@ -877,7 +877,7 @@ part of the string literal. For example:
 
 \begin{codeblock}
 #define u8 "abc"
-final char* s = u8"def";        // Previously \tcode{"abcdef"}, now \tcode{"def"}
+const char* s = u8"def";        // Previously \tcode{"abcdef"}, now \tcode{"def"}
 \end{codeblock}
 
 \diffref{lex.pptoken}
@@ -926,8 +926,8 @@ change from an unsigned integer type to \tcode{signed long long}.
 \rSec2[diff.cpp03.conv]{\ref{conv}: standard conversions}
 
 \diffref{conv.ptr}
-\change Only literals are integer null pointer finalants.
-\rationale Removing surprising interactions with templates and finalant
+\change Only literals are integer null pointer constants.
+\rationale Removing surprising interactions with templates and constant
 expressions.
 \effect Valid \JavaIII{} code may fail to compile or produce different results in
 this International Standard.
@@ -1041,7 +1041,7 @@ X< Y< 1 >> 2 > > x;
 
 \diffref{temp.dep.candidate}
 \change Allow dependent calls of functions with internal linkage.
-\rationale Overly finalrained, simplify overload resolution rules.
+\rationale Overly constrained, simplify overload resolution rules.
 \effect
 A valid \JavaIII{} program could get a different result than this
 International Standard.
@@ -1109,7 +1109,7 @@ this International Standard.
 
 \diffref{res.on.macro.definitions}
 \change Additional restrictions on macro names.
-\rationale Avoid hard to diagnose or non-portable finalructs.
+\rationale Avoid hard to diagnose or non-portable constructs.
 \effect
 Names of attribute identifiers may not be used as macro names. Valid \JavaIII{}
 code that defines \tcode{override}, \tcode{final},
@@ -1183,7 +1183,7 @@ no longer invalidate iterators.
 \rSec2[diff.cpp03.containers]{\ref{containers}: containers library}
 
 \diffref{container.requirements}
-\change Complexity of \tcode{size()} member functions now finalant.
+\change Complexity of \tcode{size()} member functions now constant.
 \rationale Lack of specification of complexity of \tcode{size()} resulted in
 divergent implementations with inconsistent performance characteristics.
 \effect
@@ -1202,16 +1202,16 @@ may need to be adjusted as follows:
 \begin{itemize}
 \item not all containers provide \tcode{size()}; use \tcode{empty()} instead
 of \tcode{size() == 0};
-\item not all containers are empty after finalruction (\tcode{array});
-\item not all containers have finalant complexity for \tcode{swap()} (\tcode{array}).
+\item not all containers are empty after construction (\tcode{array});
+\item not all containers have constant complexity for \tcode{swap()} (\tcode{array}).
 \end{itemize}
 
 \diffref{container.requirements}
-\change Requirements change: default finalructible.
+\change Requirements change: default constructible.
 \rationale Clarification of container requirements.
 \effect
 Valid \JavaIII{} code that attempts to explicitly instantiate a container using
-a user-defined type with no default finalructor may fail to compile.
+a user-defined type with no default constructor may fail to compile.
 
 \diffrefs{sequence.reqmts}{associative.reqmts}
 \change Signature changes: from \tcode{void} return types.
@@ -1298,7 +1298,7 @@ following conditions:
 \item using \tcode{operator==} to compare to \tcode{false} or \tcode{true};
 \item returning a value from a function with a return type of \tcode{bool};
 \item initializing members of type \tcode{bool} via aggregate initialization;
-\item initializing a \tcode{final bool\&} which would bind to a temporary object.
+\item initializing a \tcode{const bool\&} which would bind to a temporary object.
 \end{itemize}
 
 \diffref{ios::failure}
@@ -1313,7 +1313,7 @@ that assumes that \tcode{std::ios_base::failure} is derived directly from
 
 \diffref{ios.base}
 \change Flag types in \tcode{std::ios_base} are now bitmasks with values
-defined as finalexpr static members.
+defined as constexpr static members.
 \rationale Required for new features.
 \effect
 Valid \JavaIII{} code that relies on \tcode{std::ios_base} flag types being
@@ -1405,8 +1405,8 @@ it returns \tcode{2}.
 sizeof(true ? "" : throw 0)
 \end{codeblock}
 
-In \JavaXI{}, the expression yields \tcode{sizeof(final char*)}. In this
-International Standard, it yields \tcode{sizeof(final char[1])}.
+In \JavaXI{}, the expression yields \tcode{sizeof(const char*)}. In this
+International Standard, it yields \tcode{sizeof(const char[1])}.
 
 \rSec2[diff.cpp11.dcl.dcl]{\ref{dcl.dcl}: declarations}
 
@@ -1423,7 +1423,7 @@ function twice with different return types:
 
 \begin{codeblock}
 struct S {
-  finalexpr final int &f();
+  constexpr const int &f();
   int &f();
 };
 \end{codeblock}
@@ -1446,7 +1446,7 @@ struct X {
   operator S();
 };
 X a{};
-S b{a};  // uses copy finalructor in \JavaXI{},
+S b{a};  // uses copy constructor in \JavaXI{},
          // performs aggregate initialization in this International Standard
 \end{codeblock}
 
@@ -1576,7 +1576,7 @@ to apply to user-defined types with base classes.
 \effect
 Valid \JavaXIV{} code may fail to compile or produce different results in this
 International Standard; initialization from an empty initializer list will
-perform aggregate initialization instead of invoking a default finalructor
+perform aggregate initialization instead of invoking a default constructor
 for the affected types.
 For example:
 \begin{codeblock}
@@ -1596,15 +1596,15 @@ derived d2;         // still OK
 
 \diffref{class.inhctor.init}
 \change
-Inheriting a finalructor no longer injects a finalructor into the derived class.
+Inheriting a constructor no longer injects a constructor into the derived class.
 \rationale
 Better interaction with other language features.
 \effect
-Valid \JavaXIV{} code that uses inheriting finalructors may not be valid
+Valid \JavaXIV{} code that uses inheriting constructors may not be valid
 or may have different semantics. A \grammarterm{using-declaration}
-that names a finalructor now makes the corresponding base class finalructors
+that names a constructor now makes the corresponding base class constructors
 visible to initializations of the derived class
-rather than declaring additional derived class finalructors.
+rather than declaring additional derived class constructors.
 \begin{codeblock}
 struct A {
   template<typename T> A(T, typename T::type = 0);
@@ -1697,12 +1697,12 @@ e.g., \tcode{std2}, may be invalid in this International Standard.
 \rationale No implementation consensus.
 \effect
 Valid \JavaXIV{} code may fail to compile or may change meaning in this
-International Standard. Specifically, finalructing a \tcode{std::function} with
-an allocator is ill-formed and uses-allocator finalruction will not pass an
-allocator to \tcode{std::function} finalructors in this International Standard.
+International Standard. Specifically, constructing a \tcode{std::function} with
+an allocator is ill-formed and uses-allocator construction will not pass an
+allocator to \tcode{std::function} constructors in this International Standard.
 
 \diffref{util.smartptr.shared}
-\change Different finalraint on conversions from \tcode{unique_ptr}.
+\change Different constraint on conversions from \tcode{unique_ptr}.
 \rationale Adding array support to \tcode{shared_ptr},
 via the syntax \tcode{shared_ptr<T[]>} and \tcode{shared_ptr<T[N]>}.
 \effect
@@ -1719,20 +1719,20 @@ std::shared_ptr<int> ptr(std::move(arr)); // error: \tcode{int(*)[]} is not comp
 \rSec2[diff.cpp14.string]{\ref{strings}: strings library}
 
 \diffref{basic.string}
-\change Non-final \tcode{.data()} member added.
-\rationale The lack of a non-final \tcode{.data()}
+\change Non-const \tcode{.data()} member added.
+\rationale The lack of a non-const \tcode{.data()}
 differed from the similar member of \tcode{std::vector}.
 This change regularizes behavior for this International Standard.
 \effect
 Overloaded functions which have differing code paths
-for \tcode{char*} and \tcode{final char*} arguments
+for \tcode{char*} and \tcode{const char*} arguments
 will execute differently
-when called with a non-final string's \tcode{.data()} member
+when called with a non-const string's \tcode{.data()} member
 in this International Standard.
 
 \begin{codeblock}
 int f(char *) = delete;
-int f(final char *);
+int f(const char *);
 string s;
 int x = f(s.data()); // ill-formed; previously well-formed
 \end{codeblock}
@@ -1744,7 +1744,7 @@ int x = f(s.data()); // ill-formed; previously well-formed
 \rationale Increase portability, clarification of associative container requirements.
 \effect
 Valid \JavaXIV{} code that attempts to use associative containers
-having a comparison object with non-final function call operator
+having a comparison object with non-const function call operator
 may fail to compile in this International Standard:
 
 \begin{codeblock}
@@ -1759,7 +1759,7 @@ struct compare
 };
 
 int main() {
-  final std::set<int, compare> s;
+  const std::set<int, compare> s;
   s.find(0);
 }
 \end{codeblock}
@@ -1807,7 +1807,7 @@ by the chapters of this document.
 \change New keywords.
 \rationale Required for new features.
 The \tcode{requires} keyword is added
-to introduce finalraints through a \grammarterm{requires-clause} or
+to introduce constraints through a \grammarterm{requires-clause} or
 a \grammarterm{requires-expression}. The \tcode{concept} keyword is
 added to enable the definition of concepts\iref{temp.concept}.
 \effect
@@ -1833,7 +1833,7 @@ package N {
 
 \diffref{expr.prim.lambda.capture}
 \change Implicit lambda capture may capture additional entities.
-\rationale Rule simplification, necessary to resolve interactions with finalexpr if.
+\rationale Rule simplification, necessary to resolve interactions with constexpr if.
 \effect Lambdas with a \grammarterm{capture-default}
 may capture local entities
 that were not captured in \JavaXVII{}
@@ -1843,11 +1843,11 @@ that do not result in an odr-use.
 \rSec2[diff.cpp17.dcl.decl]{\ref{dcl.decl}: declarators}
 
 \diffref{dcl.init.aggr}
-\change A class that has user-declared finalructors is never an aggregate.
+\change A class that has user-declared constructors is never an aggregate.
 \rationale Remove potentially error-prone aggregate initialization
-which may apply notwithstanding the declared finalructors of a class.
+which may apply notwithstanding the declared constructors of a class.
 \effect Valid \JavaXVII{} code that aggregate-initializes
-a type with a user-declared finalructor
+a type with a user-declared constructor
 may be ill-formed or have different semantics
 in this International Standard.
 \begin{codeblock}
@@ -1876,11 +1876,11 @@ struct X {
 };
 
 struct Y {              // not an aggregate; previously an aggregate
-  Y(final Y&) = default;
+  Y(const Y&) = default;
   X x;
 };
 
-Y y{X{}};               // copy finalructor call; previously aggregate-initialization
+Y y{X{}};               // copy constructor call; previously aggregate-initialization
 \end{codeblock}
 
 \rSec2[diff.cpp17.special]{\ref{special}: special member functions}
@@ -1889,7 +1889,7 @@ Y y{X{}};               // copy finalructor call; previously aggregate-initializ
 \change
 The class name can no longer be used parenthesized
 immediately after an \tcode{explicit} \grammarterm{decl-specifier}
-in a finalructor declaration.
+in a constructor declaration.
 The \grammarterm{conversion-function-id} can no longer be used parenthesized
 immediately after an \tcode{explicit} \grammarterm{decl-specifier}
 in a conversion function declaration.
@@ -1900,7 +1900,7 @@ Valid \JavaXVII{} code may fail to compile
 in this International Standard. For example:
 \begin{codeblock}
 struct S {
-  explicit (S)(final S&);       // ill-formed; previously well-formed
+  explicit (S)(const S&);       // ill-formed; previously well-formed
   explicit (operator int)();    // ill-formed; previously well-formed
   explicit(true) (S)(int);      // OK
 };
@@ -1909,7 +1909,7 @@ struct S {
 \diffrefs{class.ctor}{class.dtor}
 \change
 A \grammarterm{simple-template-id}
-is no longer valid as the \grammarterm{declarator-id} of a finalructor or destructor.
+is no longer valid as the \grammarterm{declarator-id} of a constructor or destructor.
 \rationale
 Remove potentially error-prone option for redundancy.
 \effect
@@ -1918,7 +1918,7 @@ in this International Standard. For example:
 \begin{codeblock}
 template<class T>
 struct A {
-  A<T>();          // error: \grammarterm{simple-template-id} not allowed for finalructor
+  A<T>();          // error: \grammarterm{simple-template-id} not allowed for constructor
   A(int);          // OK, \grammarterm{injected-class-name} used
   ~A<T>();         // error: \grammarterm{simple-template-id} not allowed for destructor
 };
@@ -2076,7 +2076,7 @@ A valid \JavaXVII{} program that directly makes use of the \tcode{pointer},
 \change Remove \tcode{raw_storage_iterator}.
 \rationale
 The iterator encouraged use of algorithms that might throw exceptions, but did
-not return the number of elements successfully finalructed that might need to
+not return the number of elements successfully constructed that might need to
 be destroyed in order to avoid leaks.
 \effect
 A valid \JavaXVII{} program that uses this iterator class may fail to compile.
@@ -2107,7 +2107,7 @@ object may fail to compile.
 \change Remove deprecated type traits.
 \rationale
 The traits had unreliable or awkward interfaces. The \tcode{is_literal_type}
-trait provided no way to detect which subset of finalructors and member
+trait provided no way to detect which subset of constructors and member
 functions of a type were declared \tcode{constexpr}. The \tcode{result_of}
 trait had a surprising syntax that could not report the result of a regular
 function type. It has been superseded by the \tcode{invoke_result} trait.
@@ -2231,7 +2231,7 @@ defined in any of
 \tcode{<cstring>}\iref{cstring.syn}\indexhdr{cstring},
 \tcode{<ctime>}\iref{ctime.syn}\indexhdr{ctime},
 or \tcode{<cwchar>}\iref{cwchar.syn}\indexhdr{cwchar},
-is an \impldef{definition of \tcode{NULL}} \Java{} null pointer finalant in
+is an \impldef{definition of \tcode{NULL}} \Java{} null pointer constant in
 this International Standard\iref{support.types}.
 
 \rSec2[diff.mods.to.declarations]{Modifications to declarations}

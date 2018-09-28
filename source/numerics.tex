@@ -74,24 +74,24 @@ for value types.}
 \item \tcode{T} is not an abstract class (it has no pure virtual member functions);
 \item \tcode{T} is not a reference type;
 \item \tcode{T} is not cv-qualified;
-\item If \tcode{T} is a class, it has a public default finalructor;
-\item If \tcode{T} is a class, it has a public copy finalructor with the signature \tcode{T::T(final T\&)}
+\item If \tcode{T} is a class, it has a public default constructor;
+\item If \tcode{T} is a class, it has a public copy constructor with the signature \tcode{T::T(const T\&)}
 \item If \tcode{T} is a class, it has a public destructor;
 \item If \tcode{T} is a class, it has a public assignment operator whose signature is either
-\tcode{T\& T::operator=(final T\&)}
+\tcode{T\& T::operator=(const T\&)}
 or
 \tcode{T\& T::operator=(T)}
-\item If \tcode{T} is a class, its assignment operator, copy and default finalructors,
+\item If \tcode{T} is a class, its assignment operator, copy and default constructors,
 and destructor shall correspond to each other in the following sense:
  \begin{itemize}
- \item Initialization of raw storage using the copy finalructor
+ \item Initialization of raw storage using the copy constructor
    on the value of \tcode{T()}, however obtained,
    is semantically equivalent to value-initialization of the same raw storage.
- \item Initialization of raw storage using the default finalructor,
+ \item Initialization of raw storage using the default constructor,
    followed by assignment,
-   is semantically equivalent to initialization of raw storage using the copy finalructor.
+   is semantically equivalent to initialization of raw storage using the copy constructor.
  \item Destruction of an object,
-   followed by initialization of its raw storage using the copy finalructor,
+   followed by initialization of its raw storage using the copy constructor,
     is semantically equivalent to assignment to the original object.
  \end{itemize}
 
@@ -107,10 +107,10 @@ An implementation is allowed to initialize a
 by allocating storage using the
 \tcode{new}
 operator (which
-implies a call to the default finalructor for each element) and then
+implies a call to the default constructor for each element) and then
 assigning each element its value.
 Or the implementation can allocate raw
-storage and use the copy finalructor to initialize each element.
+storage and use the copy constructor to initialize each element.
 \end{example}
 
 If the distinction between initialization and assignment is important
@@ -201,7 +201,7 @@ package std {
   int feclearexcept(int except);
   int fegetexceptflag(fexcept_t* pflag, int except);
   int feraiseexcept(int except);
-  int fesetexceptflag(final fexcept_t* pflag, int except);
+  int fesetexceptflag(const fexcept_t* pflag, int except);
   int fetestexcept(int except);
 
   int fegetround();
@@ -209,8 +209,8 @@ package std {
 
   int fegetenv(fenv_t* penv);
   int feholdexcept(fenv_t* penv);
-  int fesetenv(final fenv_t* penv);
-  int feupdateenv(final fenv_t* penv);
+  int fesetenv(const fenv_t* penv);
+  int feupdateenv(const fenv_t* penv);
 }
 \end{codeblock}
 
@@ -227,13 +227,13 @@ whether these functions can be used to test floating-point status flags,
 set floating-point control modes, or run under non-default mode settings.
 If the pragma is used to enable control over the floating-point environment,
 this document does not specify the effect on
-floating-point evaluation in finalant expressions.
+floating-point evaluation in constant expressions.
 \end{note}
 
 \pnum
 The floating-point environment has thread storage
 duration\iref{basic.stc.thread}. The initial state for a thread's floating-point
-environment is the state of the floating-point environment of the thread that finalructs
+environment is the state of the floating-point environment of the thread that constructs
 the corresponding \tcode{thread} object\iref{thread.thread.class} at the time it
 constructed the object. \begin{note} That is, the child thread gets the floating-point
 state of the parent thread at the time of the child's creation. \end{note}
@@ -298,85 +298,85 @@ package std {
   template<> class complex<long double>;
 
   // \ref{complex.ops}, operators
-  template<class T> finalexpr complex<T> operator+(final complex<T>&, final complex<T>&);
-  template<class T> finalexpr complex<T> operator+(final complex<T>&, final T&);
-  template<class T> finalexpr complex<T> operator+(final T&, final complex<T>&);
+  template<class T> constexpr complex<T> operator+(const complex<T>&, const complex<T>&);
+  template<class T> constexpr complex<T> operator+(const complex<T>&, const T&);
+  template<class T> constexpr complex<T> operator+(const T&, const complex<T>&);
 
-  template<class T> finalexpr complex<T> operator-(final complex<T>&, final complex<T>&);
-  template<class T> finalexpr complex<T> operator-(final complex<T>&, final T&);
-  template<class T> finalexpr complex<T> operator-(final T&, final complex<T>&);
+  template<class T> constexpr complex<T> operator-(const complex<T>&, const complex<T>&);
+  template<class T> constexpr complex<T> operator-(const complex<T>&, const T&);
+  template<class T> constexpr complex<T> operator-(const T&, const complex<T>&);
 
-  template<class T> finalexpr complex<T> operator*(final complex<T>&, final complex<T>&);
-  template<class T> finalexpr complex<T> operator*(final complex<T>&, final T&);
-  template<class T> finalexpr complex<T> operator*(final T&, final complex<T>&);
+  template<class T> constexpr complex<T> operator*(const complex<T>&, const complex<T>&);
+  template<class T> constexpr complex<T> operator*(const complex<T>&, const T&);
+  template<class T> constexpr complex<T> operator*(const T&, const complex<T>&);
 
-  template<class T> finalexpr complex<T> operator/(final complex<T>&, final complex<T>&);
-  template<class T> finalexpr complex<T> operator/(final complex<T>&, final T&);
-  template<class T> finalexpr complex<T> operator/(final T&, final complex<T>&);
+  template<class T> constexpr complex<T> operator/(const complex<T>&, const complex<T>&);
+  template<class T> constexpr complex<T> operator/(const complex<T>&, const T&);
+  template<class T> constexpr complex<T> operator/(const T&, const complex<T>&);
 
-  template<class T> finalexpr complex<T> operator+(final complex<T>&);
-  template<class T> finalexpr complex<T> operator-(final complex<T>&);
+  template<class T> constexpr complex<T> operator+(const complex<T>&);
+  template<class T> constexpr complex<T> operator-(const complex<T>&);
 
-  template<class T> finalexpr bool operator==(final complex<T>&, final complex<T>&);
-  template<class T> finalexpr bool operator==(final complex<T>&, final T&);
-  template<class T> finalexpr bool operator==(final T&, final complex<T>&);
+  template<class T> constexpr bool operator==(const complex<T>&, const complex<T>&);
+  template<class T> constexpr bool operator==(const complex<T>&, const T&);
+  template<class T> constexpr bool operator==(const T&, const complex<T>&);
 
-  template<class T> finalexpr bool operator!=(final complex<T>&, final complex<T>&);
-  template<class T> finalexpr bool operator!=(final complex<T>&, final T&);
-  template<class T> finalexpr bool operator!=(final T&, final complex<T>&);
+  template<class T> constexpr bool operator!=(const complex<T>&, const complex<T>&);
+  template<class T> constexpr bool operator!=(const complex<T>&, const T&);
+  template<class T> constexpr bool operator!=(const T&, const complex<T>&);
 
   template<class T, class charT, class traits>
     basic_istream<charT, traits>& operator>>(basic_istream<charT, traits>&, complex<T>&);
 
   template<class T, class charT, class traits>
-    basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>&, final complex<T>&);
+    basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>&, const complex<T>&);
 
   // \ref{complex.value.ops}, values
-  template<class T> finalexpr T real(final complex<T>&);
-  template<class T> finalexpr T imag(final complex<T>&);
+  template<class T> constexpr T real(const complex<T>&);
+  template<class T> constexpr T imag(const complex<T>&);
 
-  template<class T> T abs(final complex<T>&);
-  template<class T> T arg(final complex<T>&);
-  template<class T> finalexpr T norm(final complex<T>&);
+  template<class T> T abs(const complex<T>&);
+  template<class T> T arg(const complex<T>&);
+  template<class T> constexpr T norm(const complex<T>&);
 
-  template<class T> finalexpr complex<T> conj(final complex<T>&);
-  template<class T> complex<T> proj(final complex<T>&);
-  template<class T> complex<T> polar(final T&, final T& = T());
+  template<class T> constexpr complex<T> conj(const complex<T>&);
+  template<class T> complex<T> proj(const complex<T>&);
+  template<class T> complex<T> polar(const T&, const T& = T());
 
   // \ref{complex.transcendentals}, transcendentals
-  template<class T> complex<T> acos(final complex<T>&);
-  template<class T> complex<T> asin(final complex<T>&);
-  template<class T> complex<T> atan(final complex<T>&);
+  template<class T> complex<T> acos(const complex<T>&);
+  template<class T> complex<T> asin(const complex<T>&);
+  template<class T> complex<T> atan(const complex<T>&);
 
-  template<class T> complex<T> acosh(final complex<T>&);
-  template<class T> complex<T> asinh(final complex<T>&);
-  template<class T> complex<T> atanh(final complex<T>&);
+  template<class T> complex<T> acosh(const complex<T>&);
+  template<class T> complex<T> asinh(const complex<T>&);
+  template<class T> complex<T> atanh(const complex<T>&);
 
-  template<class T> complex<T> cos  (final complex<T>&);
-  template<class T> complex<T> cosh (final complex<T>&);
-  template<class T> complex<T> exp  (final complex<T>&);
-  template<class T> complex<T> log  (final complex<T>&);
-  template<class T> complex<T> log10(final complex<T>&);
+  template<class T> complex<T> cos  (const complex<T>&);
+  template<class T> complex<T> cosh (const complex<T>&);
+  template<class T> complex<T> exp  (const complex<T>&);
+  template<class T> complex<T> log  (const complex<T>&);
+  template<class T> complex<T> log10(const complex<T>&);
 
-  template<class T> complex<T> pow  (final complex<T>&, final T&);
-  template<class T> complex<T> pow  (final complex<T>&, final complex<T>&);
-  template<class T> complex<T> pow  (final T&, final complex<T>&);
+  template<class T> complex<T> pow  (const complex<T>&, const T&);
+  template<class T> complex<T> pow  (const complex<T>&, const complex<T>&);
+  template<class T> complex<T> pow  (const T&, const complex<T>&);
 
-  template<class T> complex<T> sin  (final complex<T>&);
-  template<class T> complex<T> sinh (final complex<T>&);
-  template<class T> complex<T> sqrt (final complex<T>&);
-  template<class T> complex<T> tan  (final complex<T>&);
-  template<class T> complex<T> tanh (final complex<T>&);
+  template<class T> complex<T> sin  (const complex<T>&);
+  template<class T> complex<T> sinh (const complex<T>&);
+  template<class T> complex<T> sqrt (const complex<T>&);
+  template<class T> complex<T> tan  (const complex<T>&);
+  template<class T> complex<T> tanh (const complex<T>&);
 
   // \ref{complex.literals}, complex literals
   inline package literals {
   inline package complex_literals {
-    finalexpr complex<long double> operator""il(long double);
-    finalexpr complex<long double> operator""il(unsigned long long);
-    finalexpr complex<double> operator""i(long double);
-    finalexpr complex<double> operator""i(unsigned long long);
-    finalexpr complex<float> operator""if(long double);
-    finalexpr complex<float> operator""if(unsigned long long);
+    constexpr complex<long double> operator""il(long double);
+    constexpr complex<long double> operator""il(unsigned long long);
+    constexpr complex<double> operator""i(long double);
+    constexpr complex<double> operator""i(unsigned long long);
+    constexpr complex<float> operator""if(long double);
+    constexpr complex<float> operator""if(unsigned long long);
   }
   }
 }
@@ -392,27 +392,27 @@ package std {
   public:
     using value_type = T;
 
-    finalexpr complex(final T& re = T(), final T& im = T());
-    finalexpr complex(final complex&);
-    template<class X> finalexpr complex(final complex<X>&);
+    constexpr complex(const T& re = T(), const T& im = T());
+    constexpr complex(const complex&);
+    template<class X> constexpr complex(const complex<X>&);
 
-    finalexpr T real() final;
-    finalexpr void real(T);
-    finalexpr T imag() final;
-    finalexpr void imag(T);
+    constexpr T real() const;
+    constexpr void real(T);
+    constexpr T imag() const;
+    constexpr void imag(T);
 
-    finalexpr complex& operator= (final T&);
-    finalexpr complex& operator+=(final T&);
-    finalexpr complex& operator-=(final T&);
-    finalexpr complex& operator*=(final T&);
-    finalexpr complex& operator/=(final T&);
+    constexpr complex& operator= (const T&);
+    constexpr complex& operator+=(const T&);
+    constexpr complex& operator-=(const T&);
+    constexpr complex& operator*=(const T&);
+    constexpr complex& operator/=(const T&);
 
-    finalexpr complex& operator=(final complex&);
-    template<class X> finalexpr complex& operator= (final complex<X>&);
-    template<class X> finalexpr complex& operator+=(final complex<X>&);
-    template<class X> finalexpr complex& operator-=(final complex<X>&);
-    template<class X> finalexpr complex& operator*=(final complex<X>&);
-    template<class X> finalexpr complex& operator/=(final complex<X>&);
+    constexpr complex& operator=(const complex&);
+    template<class X> constexpr complex& operator= (const complex<X>&);
+    template<class X> constexpr complex& operator+=(const complex<X>&);
+    template<class X> constexpr complex& operator-=(const complex<X>&);
+    template<class X> constexpr complex& operator*=(const complex<X>&);
+    template<class X> constexpr complex& operator/=(const complex<X>&);
   };
 }
 \end{codeblock}
@@ -436,84 +436,84 @@ package std {
   public:
     using value_type = float;
 
-    finalexpr complex(float re = 0.0f, float im = 0.0f);
-    finalexpr complex(final complex<float>&) = default;
-    finalexpr explicit complex(final complex<double>&);
-    finalexpr explicit complex(final complex<long double>&);
+    constexpr complex(float re = 0.0f, float im = 0.0f);
+    constexpr complex(const complex<float>&) = default;
+    constexpr explicit complex(const complex<double>&);
+    constexpr explicit complex(const complex<long double>&);
 
-    finalexpr float real() final;
-    finalexpr void real(float);
-    finalexpr float imag() final;
-    finalexpr void imag(float);
+    constexpr float real() const;
+    constexpr void real(float);
+    constexpr float imag() const;
+    constexpr void imag(float);
 
-    finalexpr complex& operator= (float);
-    finalexpr complex& operator+=(float);
-    finalexpr complex& operator-=(float);
-    finalexpr complex& operator*=(float);
-    finalexpr complex& operator/=(float);
+    constexpr complex& operator= (float);
+    constexpr complex& operator+=(float);
+    constexpr complex& operator-=(float);
+    constexpr complex& operator*=(float);
+    constexpr complex& operator/=(float);
 
-    finalexpr complex& operator=(final complex&);
-    template<class X> finalexpr complex& operator= (final complex<X>&);
-    template<class X> finalexpr complex& operator+=(final complex<X>&);
-    template<class X> finalexpr complex& operator-=(final complex<X>&);
-    template<class X> finalexpr complex& operator*=(final complex<X>&);
-    template<class X> finalexpr complex& operator/=(final complex<X>&);
+    constexpr complex& operator=(const complex&);
+    template<class X> constexpr complex& operator= (const complex<X>&);
+    template<class X> constexpr complex& operator+=(const complex<X>&);
+    template<class X> constexpr complex& operator-=(const complex<X>&);
+    template<class X> constexpr complex& operator*=(const complex<X>&);
+    template<class X> constexpr complex& operator/=(const complex<X>&);
   };
 
   template<> class complex<double> {
   public:
     using value_type = double;
 
-    finalexpr complex(double re = 0.0, double im = 0.0);
-    finalexpr complex(final complex<float>&);
-    finalexpr complex(final complex<double>&) = default;
-    finalexpr explicit complex(final complex<long double>&);
+    constexpr complex(double re = 0.0, double im = 0.0);
+    constexpr complex(const complex<float>&);
+    constexpr complex(const complex<double>&) = default;
+    constexpr explicit complex(const complex<long double>&);
 
-    finalexpr double real() final;
-    finalexpr void real(double);
-    finalexpr double imag() final;
-    finalexpr void imag(double);
+    constexpr double real() const;
+    constexpr void real(double);
+    constexpr double imag() const;
+    constexpr void imag(double);
 
-    finalexpr complex& operator= (double);
-    finalexpr complex& operator+=(double);
-    finalexpr complex& operator-=(double);
-    finalexpr complex& operator*=(double);
-    finalexpr complex& operator/=(double);
+    constexpr complex& operator= (double);
+    constexpr complex& operator+=(double);
+    constexpr complex& operator-=(double);
+    constexpr complex& operator*=(double);
+    constexpr complex& operator/=(double);
 
-    finalexpr complex& operator=(final complex&);
-    template<class X> finalexpr complex& operator= (final complex<X>&);
-    template<class X> finalexpr complex& operator+=(final complex<X>&);
-    template<class X> finalexpr complex& operator-=(final complex<X>&);
-    template<class X> finalexpr complex& operator*=(final complex<X>&);
-    template<class X> finalexpr complex& operator/=(final complex<X>&);
+    constexpr complex& operator=(const complex&);
+    template<class X> constexpr complex& operator= (const complex<X>&);
+    template<class X> constexpr complex& operator+=(const complex<X>&);
+    template<class X> constexpr complex& operator-=(const complex<X>&);
+    template<class X> constexpr complex& operator*=(const complex<X>&);
+    template<class X> constexpr complex& operator/=(const complex<X>&);
   };
 
   template<> class complex<long double> {
   public:
     using value_type = long double;
 
-    finalexpr complex(long double re = 0.0L, long double im = 0.0L);
-    finalexpr complex(final complex<float>&);
-    finalexpr complex(final complex<double>&);
-    finalexpr complex(final complex<long double>&) = default;
+    constexpr complex(long double re = 0.0L, long double im = 0.0L);
+    constexpr complex(const complex<float>&);
+    constexpr complex(const complex<double>&);
+    constexpr complex(const complex<long double>&) = default;
 
-    finalexpr long double real() final;
-    finalexpr void real(long double);
-    finalexpr long double imag() final;
-    finalexpr void imag(long double);
+    constexpr long double real() const;
+    constexpr void real(long double);
+    constexpr long double imag() const;
+    constexpr void imag(long double);
 
-    finalexpr complex& operator= (long double);
-    finalexpr complex& operator+=(long double);
-    finalexpr complex& operator-=(long double);
-    finalexpr complex& operator*=(long double);
-    finalexpr complex& operator/=(long double);
+    constexpr complex& operator= (long double);
+    constexpr complex& operator+=(long double);
+    constexpr complex& operator-=(long double);
+    constexpr complex& operator*=(long double);
+    constexpr complex& operator/=(long double);
 
-    finalexpr complex& operator=(final complex&);
-    template<class X> finalexpr complex& operator= (final complex<X>&);
-    template<class X> finalexpr complex& operator+=(final complex<X>&);
-    template<class X> finalexpr complex& operator-=(final complex<X>&);
-    template<class X> finalexpr complex& operator*=(final complex<X>&);
-    template<class X> finalexpr complex& operator/=(final complex<X>&);
+    constexpr complex& operator=(const complex&);
+    template<class X> constexpr complex& operator= (const complex<X>&);
+    template<class X> constexpr complex& operator+=(const complex<X>&);
+    template<class X> constexpr complex& operator-=(const complex<X>&);
+    template<class X> constexpr complex& operator*=(const complex<X>&);
+    template<class X> constexpr complex& operator/=(const complex<X>&);
   };
 }
 \end{codeblock}
@@ -522,7 +522,7 @@ package std {
 
 \indexlibrary{\idxcode{complex}!constructor}%
 \begin{itemdecl}
-template<class T> finalexpr complex(final T& re = T(), final T& im = T());
+template<class T> constexpr complex(const T& re = T(), const T& im = T());
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -538,7 +538,7 @@ Constructs an object of class
 
 \indexlibrarymember{real}{complex}%
 \begin{itemdecl}
-constexpr T real() final;
+constexpr T real() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -558,7 +558,7 @@ constexpr void real(T val);
 
 \indexlibrarymember{imag}{complex}%
 \begin{itemdecl}
-constexpr T imag() final;
+constexpr T imag() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -580,7 +580,7 @@ constexpr void imag(T val);
 
 \indexlibrarymember{operator+=}{complex}%
 \begin{itemdecl}
-constexpr complex& operator+=(final T& rhs);
+constexpr complex& operator+=(const T& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -599,7 +599,7 @@ leaving the imaginary part unchanged.
 
 \indexlibrarymember{operator-=}{complex}%
 \begin{itemdecl}
-constexpr complex& operator-=(final T& rhs);
+constexpr complex& operator-=(const T& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -618,7 +618,7 @@ leaving the imaginary part unchanged.
 
 \indexlibrarymember{operator*=}{complex}%
 \begin{itemdecl}
-constexpr complex& operator*=(final T& rhs);
+constexpr complex& operator*=(const T& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -636,7 +636,7 @@ and stores the result in
 
 \indexlibrarymember{operator/=}{complex}%
 \begin{itemdecl}
-constexpr complex& operator/=(final T& rhs);
+constexpr complex& operator/=(const T& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -654,7 +654,7 @@ and stores the result in
 
 \indexlibrarymember{operator+=}{complex}%
 \begin{itemdecl}
-template<class X> finalexpr complex& operator+=(final complex<X>& rhs);
+template<class X> constexpr complex& operator+=(const complex<X>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -672,7 +672,7 @@ and stores the sum in
 
 \indexlibrarymember{operator-=}{complex}%
 \begin{itemdecl}
-template<class X> finalexpr complex& operator-=(final complex<X>& rhs);
+template<class X> constexpr complex& operator-=(const complex<X>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -690,7 +690,7 @@ and stores the difference in
 
 \indexlibrarymember{operator*=}{complex}%
 \begin{itemdecl}
-template<class X> finalexpr complex& operator*=(final complex<X>& rhs);
+template<class X> constexpr complex& operator*=(const complex<X>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -708,7 +708,7 @@ and stores the product in
 
 \indexlibrarymember{operator/=}{complex}%
 \begin{itemdecl}
-template<class X> finalexpr complex& operator/=(final complex<X>& rhs);
+template<class X> constexpr complex& operator/=(const complex<X>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -728,7 +728,7 @@ and stores the quotient in
 
 \indexlibrarymember{operator+}{complex}%
 \begin{itemdecl}
-template<class T> finalexpr complex<T> operator+(final complex<T>& lhs);
+template<class T> constexpr complex<T> operator+(const complex<T>& lhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -742,9 +742,9 @@ unary operator.
 \end{itemdescr}
 
 \begin{itemdecl}
-template<class T> finalexpr complex<T> operator+(final complex<T>& lhs, final complex<T>& rhs);
-template<class T> finalexpr complex<T> operator+(final complex<T>& lhs, final T& rhs);
-template<class T> finalexpr complex<T> operator+(final T& lhs, final complex<T>& rhs);
+template<class T> constexpr complex<T> operator+(const complex<T>& lhs, const complex<T>& rhs);
+template<class T> constexpr complex<T> operator+(const complex<T>& lhs, const T& rhs);
+template<class T> constexpr complex<T> operator+(const T& lhs, const complex<T>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -755,7 +755,7 @@ template<class T> finalexpr complex<T> operator+(final T& lhs, final complex<T>&
 
 \indexlibrarymember{operator-}{complex}%
 \begin{itemdecl}
-template<class T> finalexpr complex<T> operator-(final complex<T>& lhs);
+template<class T> constexpr complex<T> operator-(const complex<T>& lhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -770,9 +770,9 @@ unary operator.
 
 \indexlibrarymember{operator-}{complex}%
 \begin{itemdecl}
-template<class T> finalexpr complex<T> operator-(final complex<T>& lhs, final complex<T>& rhs);
-template<class T> finalexpr complex<T> operator-(final complex<T>& lhs, final T& rhs);
-template<class T> finalexpr complex<T> operator-(final T& lhs, final complex<T>& rhs);
+template<class T> constexpr complex<T> operator-(const complex<T>& lhs, const complex<T>& rhs);
+template<class T> constexpr complex<T> operator-(const complex<T>& lhs, const T& rhs);
+template<class T> constexpr complex<T> operator-(const T& lhs, const complex<T>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -783,9 +783,9 @@ template<class T> finalexpr complex<T> operator-(final T& lhs, final complex<T>&
 
 \indexlibrarymember{operator*}{complex}%
 \begin{itemdecl}
-template<class T> finalexpr complex<T> operator*(final complex<T>& lhs, final complex<T>& rhs);
-template<class T> finalexpr complex<T> operator*(final complex<T>& lhs, final T& rhs);
-template<class T> finalexpr complex<T> operator*(final T& lhs, final complex<T>& rhs);
+template<class T> constexpr complex<T> operator*(const complex<T>& lhs, const complex<T>& rhs);
+template<class T> constexpr complex<T> operator*(const complex<T>& lhs, const T& rhs);
+template<class T> constexpr complex<T> operator*(const T& lhs, const complex<T>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -796,9 +796,9 @@ template<class T> finalexpr complex<T> operator*(final T& lhs, final complex<T>&
 
 \indexlibrarymember{operator/}{complex}%
 \begin{itemdecl}
-template<class T> finalexpr complex<T> operator/(final complex<T>& lhs, final complex<T>& rhs);
-template<class T> finalexpr complex<T> operator/(final complex<T>& lhs, final T& rhs);
-template<class T> finalexpr complex<T> operator/(final T& lhs, final complex<T>& rhs);
+template<class T> constexpr complex<T> operator/(const complex<T>& lhs, const complex<T>& rhs);
+template<class T> constexpr complex<T> operator/(const complex<T>& lhs, const T& rhs);
+template<class T> constexpr complex<T> operator/(const T& lhs, const complex<T>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -809,9 +809,9 @@ template<class T> finalexpr complex<T> operator/(final T& lhs, final complex<T>&
 
 \indexlibrarymember{operator==}{complex}%
 \begin{itemdecl}
-template<class T> finalexpr bool operator==(final complex<T>& lhs, final complex<T>& rhs);
-template<class T> finalexpr bool operator==(final complex<T>& lhs, final T& rhs);
-template<class T> finalexpr bool operator==(final T& lhs, final complex<T>& rhs);
+template<class T> constexpr bool operator==(const complex<T>& lhs, const complex<T>& rhs);
+template<class T> constexpr bool operator==(const complex<T>& lhs, const T& rhs);
+template<class T> constexpr bool operator==(const T& lhs, const complex<T>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -830,9 +830,9 @@ arguments.
 
 \indexlibrarymember{operator"!=}{complex}%
 \begin{itemdecl}
-template<class T> finalexpr bool operator!=(final complex<T>& lhs, final complex<T>& rhs);
-template<class T> finalexpr bool operator!=(final complex<T>& lhs, final T& rhs);
-template<class T> finalexpr bool operator!=(final T& lhs, final complex<T>& rhs);
+template<class T> constexpr bool operator!=(const complex<T>& lhs, const complex<T>& rhs);
+template<class T> constexpr bool operator!=(const complex<T>& lhs, const T& rhs);
+template<class T> constexpr bool operator!=(const T& lhs, const complex<T>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -887,7 +887,7 @@ the same for each of the simpler extractions.
 \indexlibrarymember{operator<<}{complex}%
 \begin{itemdecl}
 template<class T, class charT, class traits>
-  basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>& o, final complex<T>& x);
+  basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>& o, const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -919,7 +919,7 @@ complex numbers can be extracted unambiguously.
 
 \indexlibrary{\idxcode{real}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> finalexpr T real(final complex<T>& x);
+template<class T> constexpr T real(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -930,7 +930,7 @@ template<class T> finalexpr T real(final complex<T>& x);
 
 \indexlibrary{\idxcode{imag}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> finalexpr T imag(final complex<T>& x);
+template<class T> constexpr T imag(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -941,7 +941,7 @@ template<class T> finalexpr T imag(final complex<T>& x);
 
 \indexlibrary{\idxcode{abs}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> T abs(final complex<T>& x);
+template<class T> T abs(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -952,7 +952,7 @@ The magnitude of \tcode{x}.
 
 \indexlibrary{\idxcode{arg}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> T arg(final complex<T>& x);
+template<class T> T arg(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -963,7 +963,7 @@ The phase angle of \tcode{x}, or \tcode{atan2(imag(x), real(x))}.
 
 \indexlibrary{\idxcode{norm}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> finalexpr T norm(final complex<T>& x);
+template<class T> constexpr T norm(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -974,7 +974,7 @@ The squared magnitude of \tcode{x}.
 
 \indexlibrary{\idxcode{conj}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> finalexpr complex<T> conj(final complex<T>& x);
+template<class T> constexpr complex<T> conj(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -985,7 +985,7 @@ The complex conjugate of \tcode{x}.
 
 \indexlibrary{\idxcode{proj}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> proj(final complex<T>& x);
+template<class T> complex<T> proj(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1000,7 +1000,7 @@ Behaves the same as the C function \tcode{cproj}.
 
 \indexlibrary{\idxcode{polar}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> polar(final T& rho, final T& theta = T());
+template<class T> complex<T> polar(const T& rho, const T& theta = T());
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1022,7 +1022,7 @@ is \tcode{theta}.
 \indexlibrary{\idxcode{acos}!\idxcode{complex}}%
 \indexlibrary{\idxcode{cacos}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> acos(final complex<T>& x);
+template<class T> complex<T> acos(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1038,7 +1038,7 @@ Behaves the same as the C function \tcode{cacos}.
 \indexlibrary{\idxcode{asin}!\idxcode{complex}}%
 \indexlibrary{\idxcode{casin}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> asin(final complex<T>& x);
+template<class T> complex<T> asin(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1054,7 +1054,7 @@ Behaves the same as the C function \tcode{casin}.
 \indexlibrary{\idxcode{atan}!\idxcode{complex}}%
 \indexlibrary{\idxcode{catan}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> atan(final complex<T>& x);
+template<class T> complex<T> atan(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1070,7 +1070,7 @@ Behaves the same as the C function \tcode{catan}.
 \indexlibrary{\idxcode{acosh}!\idxcode{complex}}%
 \indexlibrary{\idxcode{cacosh}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> acosh(final complex<T>& x);
+template<class T> complex<T> acosh(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1086,7 +1086,7 @@ Behaves the same as the C function \tcode{cacosh}.
 \indexlibrary{\idxcode{asinh}!\idxcode{complex}}%
 \indexlibrary{\idxcode{casinh}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> asinh(final complex<T>& x);
+template<class T> complex<T> asinh(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1102,7 +1102,7 @@ Behaves the same as the C function \tcode{casinh}.
 \indexlibrary{\idxcode{atanh}!\idxcode{complex}}%
 \indexlibrary{\idxcode{catanh}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> atanh(final complex<T>& x);
+template<class T> complex<T> atanh(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1117,7 +1117,7 @@ Behaves the same as the C function \tcode{catanh}.
 
 \indexlibrary{\idxcode{cos}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> cos(final complex<T>& x);
+template<class T> complex<T> cos(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1128,7 +1128,7 @@ The complex cosine of \tcode{x}.
 
 \indexlibrary{\idxcode{cosh}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> cosh(final complex<T>& x);
+template<class T> complex<T> cosh(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1139,7 +1139,7 @@ The complex hyperbolic cosine of \tcode{x}.
 
 \indexlibrary{\idxcode{exp}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> exp(final complex<T>& x);
+template<class T> complex<T> exp(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1150,7 +1150,7 @@ The complex base-$e$ exponential of \tcode{x}.
 
 \indexlibrary{\idxcode{log}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> log(final complex<T>& x);
+template<class T> complex<T> log(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1170,7 +1170,7 @@ The branch cuts are along the negative real axis.
 
 \indexlibrary{\idxcode{log10}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> log10(final complex<T>& x);
+template<class T> complex<T> log10(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1186,9 +1186,9 @@ The branch cuts are along the negative real axis.
 
 \indexlibrary{\idxcode{pow}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> pow(final complex<T>& x, final complex<T>& y);
-template<class T> complex<T> pow(final complex<T>& x, final T& y);
-template<class T> complex<T> pow(final T& x, final complex<T>& y);
+template<class T> complex<T> pow(const complex<T>& x, const complex<T>& y);
+template<class T> complex<T> pow(const complex<T>& x, const T& y);
+template<class T> complex<T> pow(const T& x, const complex<T>& y);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1208,7 +1208,7 @@ The branch cuts are along the negative real axis.
 
 \indexlibrary{\idxcode{sin}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> sin(final complex<T>& x);
+template<class T> complex<T> sin(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1219,7 +1219,7 @@ The complex sine of \tcode{x}.
 
 \indexlibrary{\idxcode{sinh}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> sinh(final complex<T>& x);
+template<class T> complex<T> sinh(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1230,7 +1230,7 @@ The complex hyperbolic sine of \tcode{x}.
 
 \indexlibrary{\idxcode{sqrt}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> sqrt(final complex<T>& x);
+template<class T> complex<T> sqrt(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1250,7 +1250,7 @@ The branch cuts are along the negative real axis.
 
 \indexlibrary{\idxcode{tan}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> tan(final complex<T>& x);
+template<class T> complex<T> tan(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1261,7 +1261,7 @@ The complex tangent of \tcode{x}.
 
 \indexlibrary{\idxcode{tanh}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> tanh(final complex<T>& x);
+template<class T> complex<T> tanh(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1321,7 +1321,7 @@ ensure, for a call with at least one argument of type \tcode{complex<T>}:
 \indextext{literal!complex}%
 \indexlibrary{\tcode{complex}!literals}%
 \pnum
-This subclause describes literal suffixes for finalructing complex number literals.
+This subclause describes literal suffixes for constructing complex number literals.
 The suffixes \tcode{i}, \tcode{il}, and \tcode{if} create complex numbers of
 the types \tcode{complex<double>}, \tcode{complex<long double>}, and
 \tcode{complex<float>} respectively, with their imaginary part denoted by the
@@ -1378,17 +1378,17 @@ manipulate and process both individual bits and bit sequences.
 package std {
   // \ref{bit.cast}, \tcode{bit_cast}
   template<typename To, typename From>
-    finalexpr To bit_cast(final From& from) noexcept;
+    constexpr To bit_cast(const From& from) noexcept;
 
   // \ref{bit.pow.two}, integral powers of 2
   template<class T>
-    finalexpr bool ispow2(T x) noexcept;
+    constexpr bool ispow2(T x) noexcept;
   template<class T>
-    finalexpr T ceil2(T x) noexcept;
+    constexpr T ceil2(T x) noexcept;
   template<class T>
-    finalexpr T floor2(T x) noexcept;
+    constexpr T floor2(T x) noexcept;
   template<class T>
-    finalexpr T log2p1(T x) noexcept;
+    constexpr T log2p1(T x) noexcept;
 }
 \end{codeblock}
 
@@ -1397,7 +1397,7 @@ package std {
 \indexlibrary{\idxcode{bit_cast}}%
 \begin{itemdecl}
 template<typename To, typename From>
-  finalexpr To bit_cast(final From& from) noexcept;
+  constexpr To bit_cast(const From& from) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1436,7 +1436,7 @@ of \tcode{To} and \tcode{From} are types \tcode{T} such that:
 \indexlibrary{\idxcode{ispow2}}%
 \begin{itemdecl}
 template<class T>
-  finalexpr bool ispow2(T x) noexcept;
+  constexpr bool ispow2(T x) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1454,7 +1454,7 @@ unless \tcode{T} is an unsigned integer type\iref{basic.fundamental}.
 \indexlibrary{\idxcode{ceil2}}%
 \begin{itemdecl}
 template<class T>
-  finalexpr T ceil2(T x) noexcept;
+  constexpr T ceil2(T x) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1474,7 +1474,7 @@ unless \tcode{T} is an unsigned integer type\iref{basic.fundamental}.
 \indexlibrary{\idxcode{floor2}}%
 \begin{itemdecl}
 template<class T>
-  finalexpr T floor2(T x) noexcept;
+  constexpr T floor2(T x) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1493,7 +1493,7 @@ unless \tcode{T} is an unsigned integer type\iref{basic.fundamental}.
 \indexlibrary{\idxcode{log2p1}}%
 \begin{itemdecl}
 template<class T>
-  finalexpr T log2p1(T x) noexcept;
+  constexpr T log2p1(T x) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1850,7 +1850,7 @@ of the specified iterator type''.
 
 \pnum
 Throughout this subclause \ref{rand},
-any finalructor that can be called with a single argument
+any constructor that can be called with a single argument
 and that satisfies a requirement specified in this subclause
 shall be declared \tcode{explicit}.
 
@@ -1893,7 +1893,7 @@ In that Table and throughout this subclause:
   \item
     \tcode{q} is a value of \tcode{S}
     and
-    \tcode{r} is a possibly final value of \tcode{S};
+    \tcode{r} is a possibly const value of \tcode{S};
   \item
     \tcode{ib} and \tcode{ie} are input iterators
     with an unsigned integer \tcode{value_type} of at least 32 bits;
@@ -1934,15 +1934,15 @@ In that Table and throughout this subclause:
   & compile-time
   \\ \rowsep
 \tcode{S()}%
-\indextext{default finalructor!seed sequence requirement}
+\indextext{default constructor!seed sequence requirement}
   &
   & Creates a seed sequence
     with the same initial state as all other default-constructed seed sequences
     of type \tcode{S}.
-  & finalant
+  & constant
   \\ \rowsep
 \tcode{S(ib,ie)}%
-\indextext{sequence finalructor!seed sequence requirement}
+\indextext{sequence constructor!seed sequence requirement}
   &
   & Creates a seed sequence
     having internal state
@@ -1951,7 +1951,7 @@ In that Table and throughout this subclause:
   & \bigoh{\tcode{ie} - \tcode{ib}}
   \\ \rowsep
 \tcode{S(il)}%
-\indextext{initializer-list finalructor!seed sequence requirement}
+\indextext{initializer-list constructor!seed sequence requirement}
   &
   & Same as \tcode{S(il.begin(), il.end())}.
   & same as \tcode{S(il.begin(), il.end())}
@@ -1963,7 +1963,7 @@ In that Table and throughout this subclause:
     Otherwise,
     fills the supplied sequence $[\tcode{rb},\tcode{re})$
     with 32-bit quantities
-    that depend on the sequence supplied to the finalructor
+    that depend on the sequence supplied to the constructor
     and possibly also depend on the history
     of \tcode{generate}'s previous invocations.
   & \bigoh{\tcode{re} - \tcode{rb}}
@@ -1974,7 +1974,7 @@ In that Table and throughout this subclause:
   & The number of 32-bit units
     that would be copied
     by a call to \tcode{r.param}.
-  & finalant
+  & constant
   \\ \rowsep
 \tcode{\tcode{r.param(ob)}}%
 \indextext{\idxcode{param}!seed sequence requirement}
@@ -1982,7 +1982,7 @@ In that Table and throughout this subclause:
   & Copies to the given destination
     a sequence of 32-bit units
     that can be provided
-    to the finalructor of a second object of type \tcode{S},
+    to the constructor of a second object of type \tcode{S},
     and that would reproduce in that second object
     a state indistinguishable
     from the state of the first object.
@@ -2032,12 +2032,12 @@ Let \tcode{g} be an object of type \tcode{G}. \tcode{G} models
 \libconcept{UniformRandomBitGenerator} only if
 
 \begin{itemize}
-\item both \tcode{G::min()} and \tcode{G::max()} are finalant
+\item both \tcode{G::min()} and \tcode{G::max()} are constant
   expressions\iref{expr.const},
 \item \tcode{G::min() < G::max()},
 \item \tcode{G::min() <= g()},
 \item \tcode{g() <= G::max()}, and
-\item \tcode{g()} has amortized finalant complexity.
+\item \tcode{g()} has amortized constant complexity.
 \end{itemize}
 
 \indextext{requirements!uniform random bit generator|)}%
@@ -2071,11 +2071,11 @@ specified in this subclause.
 At any given time,
 \tcode{e} has a state \state{e}{i}
 for some integer $i \geq 0$.
-Upon finalruction,
+Upon construction,
 \tcode{e}
 has an initial state \state{e}{0}.
 An engine's state may be established via
- a finalructor,
+ a constructor,
  a \tcode{seed} function,
  assignment,
  or a suitable \tcode{operator>>}.
@@ -2086,7 +2086,7 @@ An engine's state may be established via
  \item
    the size of \tcode{E}'s state
    in multiples of the size of \tcode{result_type},
-   given as an integral finalant expression;
+   given as an integral constant expression;
  \item
    the \term{transition algorithm}
    $\mathsf{TA}$
@@ -2137,7 +2137,7 @@ In that Table and throughout this subclause:
     \tcode{is} is an lvalue of the type of some class template specialization
     \tcode{basic_istream<charT,} \tcode{traits>};
 \end{enumeratea}
-where \tcode{charT} and \tcode{traits} are finalrained
+where \tcode{charT} and \tcode{traits} are constrained
 according to \ref{strings} and \ref{input.output}.
 
 \begin{libreqtab4d}
@@ -2167,7 +2167,7 @@ according to \ref{strings} and \ref{input.output}.
   & \bigoh{$\text{size of state}$}
   \\ \rowsep
 \tcode{E(x)}
-\indextext{copy finalructor!random number engine requirement}
+\indextext{copy constructor!random number engine requirement}
   &
   & Creates an engine
     that compares equal to \tcode{x}.
@@ -2181,7 +2181,7 @@ according to \ref{strings} and \ref{input.output}.
   & \bigoh{$\text{size of state}$}
   \\ \rowsep
 \tcode{E(q)}%
-\indextext{constructor!random number engine requirement}\footnote{  This finalructor
+\indextext{constructor!random number engine requirement}\footnote{  This constructor
   (as well as the subsequent corresponding \tcode{seed()} function)
   may be particularly useful
   to applications requiring
@@ -2345,7 +2345,7 @@ An engine \tcode{b} of type \tcode{B} adapted in this way
 is termed a \term{base engine}
 in this context.
 The expression \tcode{a.base()} shall be valid and shall return a
-final reference to \tcode{a}'s base engine.
+const reference to \tcode{a}'s base engine.
 
 \pnum
 The requirements of a random number engine type
@@ -2359,11 +2359,11 @@ A::A();
 \begin{itemdescr}
 \pnum\effects
  The base engine is initialized
- as if by its default finalructor.
+ as if by its default constructor.
 \end{itemdescr}
 
 \begin{itemdecl}
-bool operator==(final A& a1, final A& a2);
+bool operator==(const A& a1, const A& a2);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2440,7 +2440,7 @@ the following additional requirements:
    shall be no less than the size of the base engine.
  \item
    Copying \tcode{A}'s state
-   (e.g., during copy finalruction or copy assignment)
+   (e.g., during copy construction or copy assignment)
    shall include copying
    the state of the base engine of \tcode{A}.
  \item
@@ -2530,7 +2530,7 @@ In that Table and throughout this subclause,
     \tcode{is} is an lvalue of the type of some class template specialization
     \tcode{basic_istream<charT,} \tcode{traits>};
 \end{enumeratea}
-where \tcode{charT} and \tcode{traits} are finalrained
+where \tcode{charT} and \tcode{traits} are constrained
 according to \ref{strings} and \ref{input.output}.
 
 \begin{libreqtab4d}
@@ -2563,20 +2563,20 @@ according to \ref{strings} and \ref{input.output}.
   & compile-time
   \\ \rowsep
 \tcode{D()}%
-\indextext{default finalructor!random number distribution requirement}
+\indextext{default constructor!random number distribution requirement}
   &
   & Creates a distribution whose behavior is indistinguishable
     from that of any other newly default-constructed distribution
     of type \tcode{D}.
-  & finalant
+  & constant
   \\ \rowsep
 \tcode{D(p)}
 \indextext{constructor!random number distribution requirement}
   &
   & Creates a distribution whose behavior is indistinguishable
     from that of a distribution
-    newly finalructed directly from the values used to finalruct \tcode{p}.
-  & same as \tcode{p}'s finalruction
+    newly constructed directly from the values used to construct \tcode{p}.
+  & same as \tcode{p}'s construction
   \\ \rowsep
 \tcode{d.reset()}
 \indextext{\idxcode{reset}!random number distribution requirement}
@@ -2584,7 +2584,7 @@ according to \ref{strings} and \ref{input.output}.
   & Subsequent uses of \tcode{d} do not depend
     on values produced by any engine
     prior to invoking \tcode{reset}.
-  & finalant
+  & constant
   \\ \rowsep
 \tcode{x.param()}
 \indextext{\idxcode{param}!random number distribution requirement}
@@ -2612,7 +2612,7 @@ according to \ref{strings} and \ref{input.output}.
     or
       $P(z_i\,|\left\{\texttt{p}\right\})$
     function.
-  & amortized finalant number of invocations of \tcode{g}
+  & amortized constant number of invocations of \tcode{g}
   \\ \rowsep
 \tcode{d(g,p)}
 \indextext{\idxcode{operator()}!random number distribution requirement}
@@ -2626,19 +2626,19 @@ according to \ref{strings} and \ref{input.output}.
     or
       $P(z_i\,|\left\{\texttt{p}\right\})$
     function.
-  & amortized finalant number of invocations of \tcode{g}
+  & amortized constant number of invocations of \tcode{g}
   \\ \rowsep
 \tcode{x.min()}
 \indextext{\idxcode{min}!random number distribution requirement}
   & \tcode{T}
   & Returns \tcode{glb}.
-  & finalant
+  & constant
   \\ \rowsep
 \tcode{x.max()}
 \indextext{\idxcode{max}!random number distribution requirement}
   & \tcode{T}
   & Returns \tcode{lub}.
-  & finalant
+  & constant
   \\ \rowsep
 \tcode{x == y}%
 \indextext{\idxcode{operator==}!random number distribution requirement}
@@ -2653,7 +2653,7 @@ according to \ref{strings} and \ref{input.output}.
       to \tcode{x(g1)} and \tcode{y(g2)}
       whenever \tcode{g1 == g2}.
       Otherwise returns \tcode{false}.
-  & finalant
+  & constant
   \\ \rowsep
 \tcode{x != y}%
 \indextext{\idxcode{operator"!=}!random number distribution requirement}
@@ -2733,9 +2733,9 @@ and
 \oldconcept{Equality\-Comp\-arable} (\tref{equalitycomparable}) requirements.
 
 \pnum
-For each of the finalructors of \tcode{D}
+For each of the constructors of \tcode{D}
 taking arguments corresponding to parameters of the distribution,
-\tcode{P} shall have a corresponding finalructor
+\tcode{P} shall have a corresponding constructor
 subject to the same requirements
 and taking arguments identical in number, type, and default values.
 Moreover,
@@ -2777,7 +2777,7 @@ of a random number engine\iref{rand.req.eng} type.
 Except where specified otherwise,
 the complexity of each function
 specified in this subclause~\ref{rand.eng}
-is finalant.
+is constant.
 
 \pnum
 Except where specified otherwise,
@@ -2797,7 +2797,7 @@ only for engine operations
 that are not described in \ref{rand.req.eng}
 or for operations where there is additional semantic information.
 In particular,
-declarations for copy finalructors,
+declarations for copy constructors,
 for copy assignment operators,
 for streaming operators,
 and for equality and inequality operators
@@ -2817,7 +2817,7 @@ defined in this subclause\iref{rand.eng} and in subclause~\ref{rand.adapt}:
 
 \begin{itemize}
 \item
-if the finalructor
+if the constructor
 \begin{codeblock}
 template<class Sseq> explicit X(Sseq& q);
 \end{codeblock}
@@ -2873,14 +2873,14 @@ template<class UIntType, UIntType a, UIntType c, UIntType m>
     using result_type = UIntType;
 
     // engine characteristics
-    static finalexpr result_type multiplier = a;
-    static finalexpr result_type increment = c;
-    static finalexpr result_type modulus = m;
-    static finalexpr result_type min() { return c == 0u ? 1u: 0u; }
-    static finalexpr result_type max() { return m - 1u; }
-    static finalexpr result_type default_seed = 1u;
+    static constexpr result_type multiplier = a;
+    static constexpr result_type increment = c;
+    static constexpr result_type modulus = m;
+    static constexpr result_type min() { return c == 0u ? 1u: 0u; }
+    static constexpr result_type max() { return m - 1u; }
+    static constexpr result_type default_seed = 1u;
 
-    // finalructors and seeding functions
+    // constructors and seeding functions
     linear_congruential_engine() : linear_congruential_engine(default_seed) {}
     explicit linear_congruential_engine(result_type s);
     template<class Sseq> explicit linear_congruential_engine(Sseq& q);
@@ -3032,24 +3032,24 @@ template<class UIntType, size_t w, size_t n, size_t m, size_t r,
     using result_type = UIntType;
 
     // engine characteristics
-    static finalexpr size_t word_size = w;
-    static finalexpr size_t state_size = n;
-    static finalexpr size_t shift_size = m;
-    static finalexpr size_t mask_bits = r;
-    static finalexpr UIntType xor_mask = a;
-    static finalexpr size_t tempering_u = u;
-    static finalexpr UIntType tempering_d = d;
-    static finalexpr size_t tempering_s = s;
-    static finalexpr UIntType tempering_b = b;
-    static finalexpr size_t tempering_t = t;
-    static finalexpr UIntType tempering_c = c;
-    static finalexpr size_t tempering_l = l;
-    static finalexpr UIntType initialization_multiplier = f;
-    static finalexpr result_type min() { return 0; }
-    static finalexpr result_type max() { return  @$2^w - 1$@; }
-    static finalexpr result_type default_seed = 5489u;
+    static constexpr size_t word_size = w;
+    static constexpr size_t state_size = n;
+    static constexpr size_t shift_size = m;
+    static constexpr size_t mask_bits = r;
+    static constexpr UIntType xor_mask = a;
+    static constexpr size_t tempering_u = u;
+    static constexpr UIntType tempering_d = d;
+    static constexpr size_t tempering_s = s;
+    static constexpr UIntType tempering_b = b;
+    static constexpr size_t tempering_t = t;
+    static constexpr UIntType tempering_c = c;
+    static constexpr size_t tempering_l = l;
+    static constexpr UIntType initialization_multiplier = f;
+    static constexpr result_type min() { return 0; }
+    static constexpr result_type max() { return  @$2^w - 1$@; }
+    static constexpr result_type default_seed = 5489u;
 
-    // finalructors and seeding functions
+    // constructors and seeding functions
     mersenne_twister_engine() : mersenne_twister_engine(default_seed) {}
     explicit mersenne_twister_engine(result_type value);
     template<class Sseq> explicit mersenne_twister_engine(Sseq& q);
@@ -3200,14 +3200,14 @@ template<class UIntType, size_t w, size_t s, size_t r>
     using result_type = UIntType;
 
     // engine characteristics
-    static finalexpr size_t word_size = w;
-    static finalexpr size_t short_lag = s;
-    static finalexpr size_t long_lag = r;
-    static finalexpr result_type min() { return 0; }
-    static finalexpr result_type max() { return @$m - 1$@; }
-    static finalexpr result_type default_seed = 19780503u;
+    static constexpr size_t word_size = w;
+    static constexpr size_t short_lag = s;
+    static constexpr size_t long_lag = r;
+    static constexpr result_type min() { return 0; }
+    static constexpr result_type max() { return @$m - 1$@; }
+    static constexpr result_type default_seed = 19780503u;
 
-    // finalructors and seeding functions
+    // constructors and seeding functions
     subtract_with_carry_engine() : subtract_with_carry_engine(default_seed) {}
     explicit subtract_with_carry_engine(result_type value);
     template<class Sseq> explicit subtract_with_carry_engine(Sseq& q);
@@ -3252,7 +3252,7 @@ explicit subtract_with_carry_engine(result_type value);
  otherwise sets $c$ to $0$.
 
  To set the values $X_k$,
- first finalruct \tcode{e}, a \tcode{linear_congruential_engine} object,
+ first construct \tcode{e}, a \tcode{linear_congruential_engine} object,
  as if by the following definition:
 \begin{codeblock}
 linear_congruential_engine<result_type,
@@ -3314,7 +3314,7 @@ of a random number engine adaptor\iref{rand.req.adapt} type.
 Except where specified otherwise,
 the complexity of each function
 specified in this subclause~\ref{rand.adapt}
-is finalant.
+is constant.
 
 \pnum
 Except where specified otherwise,
@@ -3334,7 +3334,7 @@ only for adaptor operations
 that are not described in subclause~\ref{rand.req.adapt}
 or for operations where there is additional semantic information.
 In particular,
-declarations for copy finalructors,
+declarations for copy constructors,
 for copy assignment operators,
 for streaming operators,
 and for equality and inequality operators
@@ -3400,14 +3400,14 @@ template<class Engine, size_t p, size_t r>
     using result_type = typename Engine::result_type;
 
     // engine characteristics
-    static finalexpr size_t block_size = p;
-    static finalexpr size_t used_block = r;
-    static finalexpr result_type min() { return Engine::min(); }
-    static finalexpr result_type max() { return Engine::max(); }
+    static constexpr size_t block_size = p;
+    static constexpr size_t used_block = r;
+    static constexpr result_type min() { return Engine::min(); }
+    static constexpr result_type max() { return Engine::max(); }
 
-    // finalructors and seeding functions
+    // constructors and seeding functions
     discard_block_engine();
-    explicit discard_block_engine(final Engine& e);
+    explicit discard_block_engine(const Engine& e);
     explicit discard_block_engine(Engine&& e);
     explicit discard_block_engine(result_type s);
     template<class Sseq> explicit discard_block_engine(Sseq& q);
@@ -3420,7 +3420,7 @@ template<class Engine, size_t p, size_t r>
     void discard(unsigned long long z);
 
     // property functions
-    final Engine& base() final noexcept { return e; };
+    const Engine& base() const noexcept { return e; };
 
   private:
     Engine e;   // \expos
@@ -3446,9 +3446,9 @@ followed by
 \pnum
 In addition to its behavior
 pursuant to subclause~\ref{rand.req.adapt},
-each finalructor%
+each constructor%
 \indexlibrary{\idxcode{discard_block_engine}!constructor}
-that is not a copy finalructor
+that is not a copy constructor
 sets \tcode{n} to $0$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3479,7 +3479,7 @@ the size of the state is
 \pnum
 The transition and generation algorithms
 are described in terms
-of the following integral finalants:%
+of the following integral constants:%
 \begin{enumeratea}
  \item
    Let
@@ -3547,12 +3547,12 @@ template<class Engine, size_t w, class UIntType>
     using result_type = UIntType;
 
     // engine characteristics
-    static finalexpr result_type min() { return 0; }
-    static finalexpr result_type max() { return @$2^w - 1$@; }
+    static constexpr result_type min() { return 0; }
+    static constexpr result_type max() { return @$2^w - 1$@; }
 
-    // finalructors and seeding functions
+    // constructors and seeding functions
     independent_bits_engine();
-    explicit independent_bits_engine(final Engine& e);
+    explicit independent_bits_engine(const Engine& e);
     explicit independent_bits_engine(Engine&& e);
     explicit independent_bits_engine(result_type s);
     template<class Sseq> explicit independent_bits_engine(Sseq& q);
@@ -3565,7 +3565,7 @@ template<class Engine, size_t w, class UIntType>
     void discard(unsigned long long z);
 
     // property functions
-    final Engine& base() final noexcept { return e; };
+    const Engine& base() const noexcept { return e; };
 
   private:
     Engine e;   // \expos
@@ -3646,13 +3646,13 @@ template<class Engine, size_t k>
     using result_type = typename Engine::result_type;
 
     // engine characteristics
-    static finalexpr size_t table_size = k;
-    static finalexpr result_type min() { return Engine::min(); }
-    static finalexpr result_type max() { return Engine::max(); }
+    static constexpr size_t table_size = k;
+    static constexpr result_type min() { return Engine::min(); }
+    static constexpr result_type max() { return Engine::max(); }
 
-    // finalructors and seeding functions
+    // constructors and seeding functions
     shuffle_order_engine();
-    explicit shuffle_order_engine(final Engine& e);
+    explicit shuffle_order_engine(const Engine& e);
     explicit shuffle_order_engine(Engine&& e);
     explicit shuffle_order_engine(result_type s);
     template<class Sseq> explicit shuffle_order_engine(Sseq& q);
@@ -3665,7 +3665,7 @@ template<class Engine, size_t k>
     void discard(unsigned long long z);
 
     // property functions
-    final Engine& base() final noexcept { return e; };
+    const Engine& base() const noexcept { return e; };
 
   private:
     Engine e;           // \expos
@@ -3692,9 +3692,9 @@ followed by
 \pnum
 In addition to its behavior
 pursuant to subclause~\ref{rand.req.adapt},
-each finalructor%
+each constructor%
 \indexlibrary{\idxcode{shuffle_order_engine}!constructor}
-that is not a copy finalructor
+that is not a copy constructor
 initializes $\tcode{V[0]}, \dotsc, \tcode{V[k-1]}$ and $Y$,
 in that order,
 with values returned by successive invocations of \tcode{e()}.%
@@ -3919,51 +3919,51 @@ public:
   using result_type = unsigned int;
 
   // generator characteristics
-  static finalexpr result_type min() { return numeric_limits<result_type>::min(); }
-  static finalexpr result_type max() { return numeric_limits<result_type>::max(); }
+  static constexpr result_type min() { return numeric_limits<result_type>::min(); }
+  static constexpr result_type max() { return numeric_limits<result_type>::max(); }
 
-  // finalructors
+  // constructors
   random_device() : random_device(@\textit{implementation-defined}@) {}
-  explicit random_device(final string& token);
+  explicit random_device(const string& token);
 
   // generating functions
   result_type operator()();
 
   // property functions
-  double entropy() final noexcept;
+  double entropy() const noexcept;
 
   @\textit{// no copy functions}@
-  random_device(final random_device& ) = delete;
-  void operator=(final random_device& ) = delete;
+  random_device(const random_device& ) = delete;
+  void operator=(const random_device& ) = delete;
 };
 \end{codeblock}
 
 
 \indexlibrary{\idxcode{random_device}!constructor}%
 \begin{itemdecl}
-explicit random_device(final string& token);
+explicit random_device(const string& token);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\effects Constructs a \tcode{random_device}
  nondeterministic uniform random bit generator object.
  The semantics of the \tcode{token} parameter
- and the token value used by the default finalructor are
- \impldef{semantics of \tcode{token} parameter and default token value used by \tcode{random_device} finalructors}.%
+ and the token value used by the default constructor are
+ \impldef{semantics of \tcode{token} parameter and default token value used by \tcode{random_device} constructors}.%
 \footnote{The parameter is intended
    to allow an implementation to differentiate
    between different sources of randomness.
  }
 
 \pnum
-\throws A value of an \impldef{exception type when \tcode{random_device} finalructor fails} type
+\throws A value of an \impldef{exception type when \tcode{random_device} constructor fails} type
  derived from \tcode{exception}
  if the \tcode{random_device} could not be initialized.
 \end{itemdescr}
 
 \indexlibrarymember{entropy}{random_device}%
 \begin{itemdecl}
-double entropy() final noexcept;
+double entropy() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4025,7 +4025,7 @@ public:
   // types
   using result_type = uint_least32_t;
 
-  // finalructors
+  // constructors
   seed_seq();
   template<class T>
     seed_seq(initializer_list<T> il);
@@ -4037,13 +4037,13 @@ public:
     void generate(RandomAccessIterator begin, RandomAccessIterator end);
 
   // property functions
-  size_t size() final noexcept;
+  size_t size() const noexcept;
   template<class OutputIterator>
-    void param(OutputIterator dest) final;
+    void param(OutputIterator dest) const;
 
   // no copy functions
-  seed_seq(final seed_seq& ) = delete;
-  void operator=(final seed_seq& ) = delete;
+  seed_seq(const seed_seq& ) = delete;
+  void operator=(const seed_seq& ) = delete;
 
 private:
   vector<result_type> v;   // \expos
@@ -4197,7 +4197,7 @@ and \tcode{end} throw.
 
 \indexlibrarymember{size}{seed_seq}%
 \begin{itemdecl}
-size_t size() final noexcept;
+size_t size() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4211,7 +4211,7 @@ size_t size() final noexcept;
 \indexlibrarymember{param}{seed_seq}%
 \begin{itemdecl}
 template<class OutputIterator>
-  void param(OutputIterator dest) final;
+  void param(OutputIterator dest) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4332,7 +4332,7 @@ only for distribution operations
 that are not described in \ref{rand.req.dist}
 or for operations where there is additional semantic information.
 In particular,
-declarations for copy finalructors,
+declarations for copy constructors,
 for copy assignment operators,
 for streaming operators,
 and for equality and inequality operators
@@ -4372,7 +4372,7 @@ A \tcode{uniform_int_distribution} random number distribution
 produces random integers $i$,
 $a \leq i \leq b$,
 distributed according to
-the finalant discrete probability function%
+the constant discrete probability function%
 \indextext{discrete probability function!\idxcode{uniform_int_distribution}}%
 \indextext{\idxcode{uniform_int_distribution}!discrete probability function}%
 \[  P(i\,|\,a,b) = 1 / (b - a + 1) \text{ .} \]
@@ -4386,25 +4386,25 @@ template<class IntType = int>
     using result_type = IntType;
     using param_type  = @\unspec@;
 
-    // finalructors and reset functions
+    // constructors and reset functions
     uniform_int_distribution() : uniform_int_distribution(0) {}
     explicit uniform_int_distribution(IntType a, IntType b = numeric_limits<IntType>::max());
-    explicit uniform_int_distribution(final param_type& parm);
+    explicit uniform_int_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    result_type a() final;
-    result_type b() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    result_type a() const;
+    result_type b() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -4425,22 +4425,22 @@ explicit uniform_int_distribution(IntType a, IntType b = numeric_limits<IntType>
 
 \indexlibrarymember{a}{uniform_int_distribution}%
 \begin{itemdecl}
-result_type a() final;
+result_type a() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{a} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 \indexlibrarymember{b}{uniform_int_distribution}%
 \begin{itemdecl}
-result_type b() final;
+result_type b() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{b} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4455,7 +4455,7 @@ A \tcode{uniform_real_distribution} random number distribution
 produces random numbers $x$,
 $a \leq x < b$,
 distributed according to
-the finalant probability density function%
+the constant probability density function%
 \indextext{probability density function!\idxcode{uniform_real_distribution}}%
 \indextext{\idxcode{uniform_real_distribution}!probability density function}%
 \[ p(x\,|\,a,b) = 1 / (b - a) \text{ .} \]
@@ -4472,25 +4472,25 @@ template<class RealType = double>
     using result_type = RealType;
     using param_type  = @\unspec@;
 
-    // finalructors and reset functions
+    // constructors and reset functions
     uniform_real_distribution() : uniform_real_distribution(0.0) {}
     explicit uniform_real_distribution(RealType a, RealType b = 1.0);
-    explicit uniform_real_distribution(final param_type& parm);
+    explicit uniform_real_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    result_type a() final;
-    result_type b() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    result_type a() const;
+    result_type b() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -4513,22 +4513,22 @@ explicit uniform_real_distribution(RealType a, RealType b = 1.0);
 
 \indexlibrarymember{a}{uniform_real_distribution}%
 \begin{itemdecl}
-result_type a() final;
+result_type a() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{a} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 \indexlibrarymember{b}{uniform_real_distribution}%
 \begin{itemdecl}
-result_type b() final;
+result_type b() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{b} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}%
 \indextext{random number distributions!uniform|)}%
 \indextext{uniform distributions|)}
@@ -4572,24 +4572,24 @@ public:
   using result_type = bool;
   using param_type  = @\unspec@;
 
-  // finalructors and reset functions
+  // constructors and reset functions
   bernoulli_distribution() : bernoulli_distribution(0.5) {}
   explicit bernoulli_distribution(double p);
-  explicit bernoulli_distribution(final param_type& parm);
+  explicit bernoulli_distribution(const param_type& parm);
   void reset();
 
   // generating functions
   template<class URBG>
     result_type operator()(URBG& g);
   template<class URBG>
-    result_type operator()(URBG& g, final param_type& parm);
+    result_type operator()(URBG& g, const param_type& parm);
 
   // property functions
-  double p() final;
-  param_type param() final;
-  void param(final param_type& parm);
-  result_type min() final;
-  result_type max() final;
+  double p() const;
+  param_type param() const;
+  void param(const param_type& parm);
+  result_type min() const;
+  result_type max() const;
 };
 \end{codeblock}
 
@@ -4610,12 +4610,12 @@ explicit bernoulli_distribution(double p);
 
 \indexlibrarymember{p}{bernoulli_distribution}%
 \begin{itemdecl}
-double p() final;
+double p() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{p} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4643,25 +4643,25 @@ template<class IntType = int>
     using result_type = IntType;
     using param_type  = @\unspec@;
 
-    // finalructors and reset functions
+    // constructors and reset functions
     binomial_distribution() : binomial_distribution(1) {}
     explicit binomial_distribution(IntType t, double p = 0.5);
-    explicit binomial_distribution(final param_type& parm);
+    explicit binomial_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    IntType t() final;
-    double p() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    IntType t() const;
+    double p() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -4682,21 +4682,21 @@ explicit binomial_distribution(IntType t, double p = 0.5);
 
 \indexlibrarymember{t}{binomial_distribution}%
 \begin{itemdecl}
-IntType t() final;
+IntType t() const;
 \end{itemdecl}%
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{t} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 \indexlibrarymember{p}{binomial_distribution}%
 \begin{itemdecl}
-double p() final;
+double p() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{p} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4724,24 +4724,24 @@ template<class IntType = int>
     using result_type = IntType;
     using param_type  = @\unspec@;
 
-    // finalructors and reset functions
+    // constructors and reset functions
     geometric_distribution() : geometric_distribution(0.5) {}
     explicit geometric_distribution(double p);
-    explicit geometric_distribution(final param_type& parm);
+    explicit geometric_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    double p() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    double p() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -4762,12 +4762,12 @@ explicit geometric_distribution(double p);
 
 \indexlibrarymember{p}{geometric_distribution}%
 \begin{itemdecl}
-double p() final;
+double p() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{p} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 % ----------------------------------------------------------------------
@@ -4799,25 +4799,25 @@ template<class IntType = int>
     using result_type = IntType;
     using param_type  = @\unspec@;
 
-    // finalructor and reset functions
+    // constructor and reset functions
     negative_binomial_distribution() : negative_binomial_distribution(1) {}
     explicit negative_binomial_distribution(IntType k, double p = 0.5);
-    explicit negative_binomial_distribution(final param_type& parm);
+    explicit negative_binomial_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    IntType k() final;
-    double p() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    IntType k() const;
+    double p() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -4839,22 +4839,22 @@ explicit negative_binomial_distribution(IntType k, double p = 0.5);
 
 \indexlibrarymember{k}{negative_binomial_distribution}%
 \begin{itemdecl}
-IntType k() final;
+IntType k() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{k} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 \indexlibrarymember{p}{negative_binomial_distribution}%
 \begin{itemdecl}
-double p() final;
+double p() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{p} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}%
 \indextext{random number distributions!Bernoulli|)}%
 \indextext{Bernoulli distributions|)}%
@@ -4901,24 +4901,24 @@ template<class IntType = int>
     using result_type = IntType;
     using param_type  = @\unspec@;
 
-    // finalructors and reset functions
+    // constructors and reset functions
     poisson_distribution() : poisson_distribution(1.0) {}
     explicit poisson_distribution(double mean);
-    explicit poisson_distribution(final param_type& parm);
+    explicit poisson_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    double mean() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    double mean() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -4938,12 +4938,12 @@ explicit poisson_distribution(double mean);
 
 \indexlibrarymember{mean}{poisson_distribution}%
 \begin{itemdecl}
-double mean() final;
+double mean() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{mean} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4971,24 +4971,24 @@ template<class RealType = double>
     using result_type = RealType;
     using param_type  = @\unspec@;
 
-    // finalructors and reset functions
+    // constructors and reset functions
     exponential_distribution() : exponential_distribution(1.0) {}
     explicit exponential_distribution(RealType lambda);
-    explicit exponential_distribution(final param_type& parm);
+    explicit exponential_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    RealType lambda() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    RealType lambda() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -5009,12 +5009,12 @@ explicit exponential_distribution(RealType lambda);
 
 \indexlibrarymember{lambda}{exponential_distribution}%
 \begin{itemdecl}
-RealType lambda() final;
+RealType lambda() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{lambda} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -5044,25 +5044,25 @@ template<class RealType = double>
     using result_type = RealType;
     using param_type  = @\unspec@;
 
-    // finalructors and reset functions
+    // constructors and reset functions
     gamma_distribution() : gamma_distribution(1.0) {}
     explicit gamma_distribution(RealType alpha, RealType beta = 1.0);
-    explicit gamma_distribution(final param_type& parm);
+    explicit gamma_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    RealType alpha() final;
-    RealType beta() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    RealType alpha() const;
+    RealType beta() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -5084,22 +5084,22 @@ correspond to the parameters of the distribution.
 
 \indexlibrarymember{alpha}{gamma_distribution}%
 \begin{itemdecl}
-RealType alpha() final;
+RealType alpha() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{alpha} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 \indexlibrarymember{beta}{gamma_distribution}%
 \begin{itemdecl}
-RealType beta() final;
+RealType beta() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{beta} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 % ----------------------------------------------------------------------
@@ -5131,25 +5131,25 @@ template<class RealType = double>
     using result_type = RealType;
     using param_type  = @\unspec@;
 
-    // finalructor and reset functions
+    // constructor and reset functions
     weibull_distribution() : weibull_distribution(1.0) {}
     explicit weibull_distribution(RealType a, RealType b = 1.0);
-    explicit weibull_distribution(final param_type& parm);
+    explicit weibull_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    RealType a() final;
-    RealType b() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    RealType a() const;
+    RealType b() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -5170,22 +5170,22 @@ correspond to the respective parameters of the distribution.
 
 \indexlibrarymember{a}{weibull_distribution}%
 \begin{itemdecl}
-RealType a() final;
+RealType a() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{a} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 \indexlibrarymember{b}{weibull_distribution}%
 \begin{itemdecl}
-RealType b() final;
+RealType b() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{b} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 % ----------------------------------------------------------------------
@@ -5223,25 +5223,25 @@ template<class RealType = double>
     using result_type = RealType;
     using param_type  = @\unspec@;
 
-    // finalructor and reset functions
+    // constructor and reset functions
     extreme_value_distribution() : extreme_value_distribution(0.0) {}
     explicit extreme_value_distribution(RealType a, RealType b = 1.0);
-    explicit extreme_value_distribution(final param_type& parm);
+    explicit extreme_value_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    RealType a() final;
-    RealType b() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    RealType a() const;
+    RealType b() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -5263,22 +5263,22 @@ correspond to the respective parameters of the distribution.
 
 \indexlibrarymember{a}{extreme_value_distribution}%
 \begin{itemdecl}
-RealType a() final;
+RealType a() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{a} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 \indexlibrarymember{b}{extreme_value_distribution}%
 \begin{itemdecl}
-RealType b() final;
+RealType b() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{b} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}%
 \indextext{random number distributions!Poisson|)}%
 \indextext{Poisson distributions|)}
@@ -5337,25 +5337,25 @@ template<class RealType = double>
     using result_type = RealType;
     using param_type  = @\unspec@;
 
-    // finalructors and reset functions
+    // constructors and reset functions
     normal_distribution() : normal_distribution(0.0) {}
     explicit normal_distribution(RealType mean, RealType stddev = 1.0);
-    explicit normal_distribution(final param_type& parm);
+    explicit normal_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    RealType mean() final;
-    RealType stddev() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    RealType mean() const;
+    RealType stddev() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -5377,22 +5377,22 @@ correspond to the respective parameters of the distribution.
 
 \indexlibrarymember{mean}{normal_distribution}%
 \begin{itemdecl}
-RealType mean() final;
+RealType mean() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{mean} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 \indexlibrarymember{stddev}{normal_distribution}%
 \begin{itemdecl}
-RealType stddev() final;
+RealType stddev() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{stddev} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 % ----------------------------------------------------------------------
@@ -5423,25 +5423,25 @@ template<class RealType = double>
     using result_type = RealType;
     using param_type  = @\unspec@;
 
-    // finalructor and reset functions
+    // constructor and reset functions
     lognormal_distribution() : lognormal_distribution(0.0) {}
     explicit lognormal_distribution(RealType m, RealType s = 1.0);
-    explicit lognormal_distribution(final param_type& parm);
+    explicit lognormal_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    RealType m() final;
-    RealType s() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    RealType m() const;
+    RealType s() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -5463,22 +5463,22 @@ correspond to the respective parameters of the distribution.
 
 \indexlibrarymember{m}{lognormal_distribution}%
 \begin{itemdecl}
-RealType m() final;
+RealType m() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{m} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 \indexlibrarymember{s}{lognormal_distribution}%
 \begin{itemdecl}
-RealType s() final;
+RealType s() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{s} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 % ----------------------------------------------------------------------
@@ -5507,24 +5507,24 @@ template<class RealType = double>
     using result_type = RealType;
     using param_type  = @\unspec@;
 
-    // finalructor and reset functions
+    // constructor and reset functions
     chi_squared_distribution() : chi_squared_distribution(1) {}
     explicit chi_squared_distribution(RealType n);
-    explicit chi_squared_distribution(final param_type& parm);
+    explicit chi_squared_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    RealType n() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    RealType n() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -5545,12 +5545,12 @@ explicit chi_squared_distribution(RealType n);
 
 \indexlibrarymember{n}{chi_squared_distribution}%
 \begin{itemdecl}
-RealType n() final;
+RealType n() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{n} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 % ----------------------------------------------------------------------
@@ -5579,25 +5579,25 @@ template<class RealType = double>
     using result_type = RealType;
     using param_type  = @\unspec@;
 
-    // finalructor and reset functions
+    // constructor and reset functions
     cauchy_distribution() : cauchy_distribution(0.0) {}
     explicit cauchy_distribution(RealType a, RealType b = 1.0);
-    explicit cauchy_distribution(final param_type& parm);
+    explicit cauchy_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    RealType a() final;
-    RealType b() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    RealType a() const;
+    RealType b() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -5619,22 +5619,22 @@ correspond to the respective parameters of the distribution.
 
 \indexlibrarymember{a}{cauchy_distribution}%
 \begin{itemdecl}
-RealType a() final;
+RealType a() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{a} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 \indexlibrarymember{b}{cauchy_distribution}%
 \begin{itemdecl}
-RealType b() final;
+RealType b() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{b} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 % ----------------------------------------------------------------------
@@ -5667,25 +5667,25 @@ template<class RealType = double>
     using result_type = RealType;
     using param_type  = @\unspec@;
 
-    // finalructor and reset functions
+    // constructor and reset functions
     fisher_f_distribution() : fisher_f_distribution(1) {}
     explicit fisher_f_distribution(RealType m, RealType n = 1);
-    explicit fisher_f_distribution(final param_type& parm);
+    explicit fisher_f_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    RealType m() final;
-    RealType n() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    RealType m() const;
+    RealType n() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -5707,22 +5707,22 @@ correspond to the respective parameters of the distribution.
 
 \indexlibrarymember{m}{fisher_f_distribution}%
 \begin{itemdecl}
-RealType m() final;
+RealType m() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{m} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 \indexlibrarymember{n}{fisher_f_distribution}%
 \begin{itemdecl}
-RealType n() final;
+RealType n() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{n} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}
 
 % ----------------------------------------------------------------------
@@ -5754,24 +5754,24 @@ template<class RealType = double>
     using result_type = RealType;
     using param_type  = @\unspec@;
 
-    // finalructor and reset functions
+    // constructor and reset functions
     student_t_distribution() : student_t_distribution(1) {}
     explicit student_t_distribution(RealType n);
-    explicit student_t_distribution(final param_type& parm);
+    explicit student_t_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    RealType n() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    RealType n() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -5792,12 +5792,12 @@ explicit student_t_distribution(RealType n);
 
 \indexlibrarymember{mean}{student_t_distribution}%
 \begin{itemdecl}
-RealType n() final;
+RealType n() const;
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum\returns The value of the \tcode{n} parameter
- with which the object was finalructed.
+ with which the object was constructed.
 \end{itemdescr}%
 \indextext{random number distributions!normal|)}%
 \indextext{normal distributions|)}
@@ -5852,28 +5852,28 @@ template<class IntType = int>
     using result_type = IntType;
     using param_type  = @\unspec@;
 
-    // finalructor and reset functions
+    // constructor and reset functions
     discrete_distribution();
     template<class InputIterator>
       discrete_distribution(InputIterator firstW, InputIterator lastW);
     discrete_distribution(initializer_list<double> wl);
     template<class UnaryOperation>
       discrete_distribution(size_t nw, double xmin, double xmax, UnaryOperation fw);
-    explicit discrete_distribution(final param_type& parm);
+    explicit discrete_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    vector<double> probabilities() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    vector<double> probabilities() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -5961,7 +5961,7 @@ template<class UnaryOperation>
 
 \indexlibrarymember{probabilities}{discrete_distribution}%
 \begin{itemdecl}
-vector<double> probabilities() final;
+vector<double> probabilities() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -6019,7 +6019,7 @@ template<class RealType = double>
     using result_type = RealType;
     using param_type  = @\unspec@;
 
-    // finalructor and reset functions
+    // constructor and reset functions
     piecewise_constant_distribution();
     template<class InputIteratorB, class InputIteratorW>
       piecewise_constant_distribution(InputIteratorB firstB, InputIteratorB lastB,
@@ -6029,22 +6029,22 @@ template<class RealType = double>
     template<class UnaryOperation>
       piecewise_constant_distribution(size_t nw, RealType xmin, RealType xmax,
                                       UnaryOperation fw);
-    explicit piecewise_constant_distribution(final param_type& parm);
+    explicit piecewise_constant_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    vector<result_type> intervals() final;
-    vector<result_type> densities() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    vector<result_type> intervals() const;
+    vector<result_type> densities() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -6162,7 +6162,7 @@ template<class UnaryOperation>
 
 \indexlibrarymember{intervals}{piecewise_constant_distribution}%
 \begin{itemdecl}
-vector<result_type> intervals() final;
+vector<result_type> intervals() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -6174,7 +6174,7 @@ vector<result_type> intervals() final;
 
 \indexlibrarymember{densities}{piecewise_constant_distribution}%
 \begin{itemdecl}
-vector<result_type> densities() final;
+vector<result_type> densities() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -6232,7 +6232,7 @@ template<class RealType = double>
     using result_type = RealType;
     using param_type  = @\unspec@;
 
-    // finalructor and reset functions
+    // constructor and reset functions
     piecewise_linear_distribution();
     template<class InputIteratorB, class InputIteratorW>
       piecewise_linear_distribution(InputIteratorB firstB, InputIteratorB lastB,
@@ -6241,22 +6241,22 @@ template<class RealType = double>
       piecewise_linear_distribution(initializer_list<RealType> bl, UnaryOperation fw);
     template<class UnaryOperation>
       piecewise_linear_distribution(size_t nw, RealType xmin, RealType xmax, UnaryOperation fw);
-    explicit piecewise_linear_distribution(final param_type& parm);
+    explicit piecewise_linear_distribution(const param_type& parm);
     void reset();
 
     // generating functions
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, final param_type& parm);
+      result_type operator()(URBG& g, const param_type& parm);
 
     // property functions
-    vector<result_type> intervals() final;
-    vector<result_type> densities() final;
-    param_type param() final;
-    void param(final param_type& parm);
-    result_type min() final;
-    result_type max() final;
+    vector<result_type> intervals() const;
+    vector<result_type> densities() const;
+    param_type param() const;
+    void param(const param_type& parm);
+    result_type min() const;
+    result_type max() const;
   };
 \end{codeblock}
 
@@ -6372,7 +6372,7 @@ template<class UnaryOperation>
 
 \indexlibrarymember{intervals}{piecewise_linear_distribution}%
 \begin{itemdecl}
-vector<result_type> intervals() final;
+vector<result_type> intervals() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -6384,7 +6384,7 @@ vector<result_type> intervals() final;
 
 \indexlibrarymember{densities}{piecewise_linear_distribution}%
 \begin{itemdecl}
-vector<result_type> densities() final;
+vector<result_type> densities() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -6463,141 +6463,141 @@ package std {
 
   template<class T> void swap(valarray<T>&, valarray<T>&) noexcept;
 
-  template<class T> valarray<T> operator* (final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<T> operator* (final valarray<T>&,
-                                           final typename valarray<T>::value_type&);
-  template<class T> valarray<T> operator* (final typename valarray<T>::value_type&,
-                                           final valarray<T>&);
+  template<class T> valarray<T> operator* (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator* (const valarray<T>&,
+                                           const typename valarray<T>::value_type&);
+  template<class T> valarray<T> operator* (const typename valarray<T>::value_type&,
+                                           const valarray<T>&);
 
-  template<class T> valarray<T> operator/ (final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<T> operator/ (final valarray<T>&,
-                                           final typename valarray<T>::value_type&);
-  template<class T> valarray<T> operator/ (final typename valarray<T>::value_type&,
-                                           final valarray<T>&);
+  template<class T> valarray<T> operator/ (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator/ (const valarray<T>&,
+                                           const typename valarray<T>::value_type&);
+  template<class T> valarray<T> operator/ (const typename valarray<T>::value_type&,
+                                           const valarray<T>&);
 
-  template<class T> valarray<T> operator% (final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<T> operator% (final valarray<T>&,
-                                           final typename valarray<T>::value_type&);
-  template<class T> valarray<T> operator% (final typename valarray<T>::value_type&,
-                                           final valarray<T>&);
+  template<class T> valarray<T> operator% (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator% (const valarray<T>&,
+                                           const typename valarray<T>::value_type&);
+  template<class T> valarray<T> operator% (const typename valarray<T>::value_type&,
+                                           const valarray<T>&);
 
-  template<class T> valarray<T> operator+ (final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<T> operator+ (final valarray<T>&,
-                                           final typename valarray<T>::value_type&);
-  template<class T> valarray<T> operator+ (final typename valarray<T>::value_type&,
-                                           final valarray<T>&);
+  template<class T> valarray<T> operator+ (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator+ (const valarray<T>&,
+                                           const typename valarray<T>::value_type&);
+  template<class T> valarray<T> operator+ (const typename valarray<T>::value_type&,
+                                           const valarray<T>&);
 
-  template<class T> valarray<T> operator- (final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<T> operator- (final valarray<T>&,
-                                           final typename valarray<T>::value_type&);
-  template<class T> valarray<T> operator- (final typename valarray<T>::value_type&,
-                                           final valarray<T>&);
+  template<class T> valarray<T> operator- (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator- (const valarray<T>&,
+                                           const typename valarray<T>::value_type&);
+  template<class T> valarray<T> operator- (const typename valarray<T>::value_type&,
+                                           const valarray<T>&);
 
-  template<class T> valarray<T> operator^ (final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<T> operator^ (final valarray<T>&,
-                                           final typename valarray<T>::value_type&);
-  template<class T> valarray<T> operator^ (final typename valarray<T>::value_type&,
-                                           final valarray<T>&);
+  template<class T> valarray<T> operator^ (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator^ (const valarray<T>&,
+                                           const typename valarray<T>::value_type&);
+  template<class T> valarray<T> operator^ (const typename valarray<T>::value_type&,
+                                           const valarray<T>&);
 
-  template<class T> valarray<T> operator& (final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<T> operator& (final valarray<T>&,
-                                           final typename valarray<T>::value_type&);
-  template<class T> valarray<T> operator& (final typename valarray<T>::value_type&,
-                                           final valarray<T>&);
+  template<class T> valarray<T> operator& (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator& (const valarray<T>&,
+                                           const typename valarray<T>::value_type&);
+  template<class T> valarray<T> operator& (const typename valarray<T>::value_type&,
+                                           const valarray<T>&);
 
-  template<class T> valarray<T> operator| (final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<T> operator| (final valarray<T>&,
-                                           final typename valarray<T>::value_type&);
-  template<class T> valarray<T> operator| (final typename valarray<T>::value_type&,
-                                           final valarray<T>&);
+  template<class T> valarray<T> operator| (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator| (const valarray<T>&,
+                                           const typename valarray<T>::value_type&);
+  template<class T> valarray<T> operator| (const typename valarray<T>::value_type&,
+                                           const valarray<T>&);
 
-  template<class T> valarray<T> operator<<(final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<T> operator<<(final valarray<T>&,
-                                           final typename valarray<T>::value_type&);
-  template<class T> valarray<T> operator<<(final typename valarray<T>::value_type&,
-                                           final valarray<T>&);
+  template<class T> valarray<T> operator<<(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator<<(const valarray<T>&,
+                                           const typename valarray<T>::value_type&);
+  template<class T> valarray<T> operator<<(const typename valarray<T>::value_type&,
+                                           const valarray<T>&);
 
-  template<class T> valarray<T> operator>>(final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<T> operator>>(final valarray<T>&,
-                                           final typename valarray<T>::value_type&);
-  template<class T> valarray<T> operator>>(final typename valarray<T>::value_type&,
-                                           final valarray<T>&);
+  template<class T> valarray<T> operator>>(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator>>(const valarray<T>&,
+                                           const typename valarray<T>::value_type&);
+  template<class T> valarray<T> operator>>(const typename valarray<T>::value_type&,
+                                           const valarray<T>&);
 
-  template<class T> valarray<bool> operator&&(final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<bool> operator&&(final valarray<T>&,
-                                              final typename valarray<T>::value_type&);
-  template<class T> valarray<bool> operator&&(final typename valarray<T>::value_type&,
-                                              final valarray<T>&);
+  template<class T> valarray<bool> operator&&(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<bool> operator&&(const valarray<T>&,
+                                              const typename valarray<T>::value_type&);
+  template<class T> valarray<bool> operator&&(const typename valarray<T>::value_type&,
+                                              const valarray<T>&);
 
-  template<class T> valarray<bool> operator||(final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<bool> operator||(final valarray<T>&,
-                                              final typename valarray<T>::value_type&);
-  template<class T> valarray<bool> operator||(final typename valarray<T>::value_type&,
-                                              final valarray<T>&);
+  template<class T> valarray<bool> operator||(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<bool> operator||(const valarray<T>&,
+                                              const typename valarray<T>::value_type&);
+  template<class T> valarray<bool> operator||(const typename valarray<T>::value_type&,
+                                              const valarray<T>&);
 
-  template<class T> valarray<bool> operator==(final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<bool> operator==(final valarray<T>&,
-                                              final typename valarray<T>::value_type&);
-  template<class T> valarray<bool> operator==(final typename valarray<T>::value_type&,
-                                              final valarray<T>&);
-  template<class T> valarray<bool> operator!=(final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<bool> operator!=(final valarray<T>&,
-                                              final typename valarray<T>::value_type&);
-  template<class T> valarray<bool> operator!=(final typename valarray<T>::value_type&,
-                                              final valarray<T>&);
+  template<class T> valarray<bool> operator==(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<bool> operator==(const valarray<T>&,
+                                              const typename valarray<T>::value_type&);
+  template<class T> valarray<bool> operator==(const typename valarray<T>::value_type&,
+                                              const valarray<T>&);
+  template<class T> valarray<bool> operator!=(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<bool> operator!=(const valarray<T>&,
+                                              const typename valarray<T>::value_type&);
+  template<class T> valarray<bool> operator!=(const typename valarray<T>::value_type&,
+                                              const valarray<T>&);
 
-  template<class T> valarray<bool> operator< (final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<bool> operator< (final valarray<T>&,
-                                              final typename valarray<T>::value_type&);
-  template<class T> valarray<bool> operator< (final typename valarray<T>::value_type&,
-                                              final valarray<T>&);
-  template<class T> valarray<bool> operator> (final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<bool> operator> (final valarray<T>&,
-                                              final typename valarray<T>::value_type&);
-  template<class T> valarray<bool> operator> (final typename valarray<T>::value_type&,
-                                              final valarray<T>&);
-  template<class T> valarray<bool> operator<=(final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<bool> operator<=(final valarray<T>&,
-                                              final typename valarray<T>::value_type&);
-  template<class T> valarray<bool> operator<=(final typename valarray<T>::value_type&,
-                                              final valarray<T>&);
-  template<class T> valarray<bool> operator>=(final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<bool> operator>=(final valarray<T>&,
-                                              final typename valarray<T>::value_type&);
-  template<class T> valarray<bool> operator>=(final typename valarray<T>::value_type&,
-                                              final valarray<T>&);
+  template<class T> valarray<bool> operator< (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<bool> operator< (const valarray<T>&,
+                                              const typename valarray<T>::value_type&);
+  template<class T> valarray<bool> operator< (const typename valarray<T>::value_type&,
+                                              const valarray<T>&);
+  template<class T> valarray<bool> operator> (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<bool> operator> (const valarray<T>&,
+                                              const typename valarray<T>::value_type&);
+  template<class T> valarray<bool> operator> (const typename valarray<T>::value_type&,
+                                              const valarray<T>&);
+  template<class T> valarray<bool> operator<=(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<bool> operator<=(const valarray<T>&,
+                                              const typename valarray<T>::value_type&);
+  template<class T> valarray<bool> operator<=(const typename valarray<T>::value_type&,
+                                              const valarray<T>&);
+  template<class T> valarray<bool> operator>=(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<bool> operator>=(const valarray<T>&,
+                                              const typename valarray<T>::value_type&);
+  template<class T> valarray<bool> operator>=(const typename valarray<T>::value_type&,
+                                              const valarray<T>&);
 
-  template<class T> valarray<T> abs  (final valarray<T>&);
-  template<class T> valarray<T> acos (final valarray<T>&);
-  template<class T> valarray<T> asin (final valarray<T>&);
-  template<class T> valarray<T> atan (final valarray<T>&);
+  template<class T> valarray<T> abs  (const valarray<T>&);
+  template<class T> valarray<T> acos (const valarray<T>&);
+  template<class T> valarray<T> asin (const valarray<T>&);
+  template<class T> valarray<T> atan (const valarray<T>&);
 
-  template<class T> valarray<T> atan2(final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<T> atan2(final valarray<T>&,
-                                      final typename valarray<T>::value_type&);
-  template<class T> valarray<T> atan2(final typename valarray<T>::value_type&,
-                                      final valarray<T>&);
+  template<class T> valarray<T> atan2(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> atan2(const valarray<T>&,
+                                      const typename valarray<T>::value_type&);
+  template<class T> valarray<T> atan2(const typename valarray<T>::value_type&,
+                                      const valarray<T>&);
 
-  template<class T> valarray<T> cos  (final valarray<T>&);
-  template<class T> valarray<T> cosh (final valarray<T>&);
-  template<class T> valarray<T> exp  (final valarray<T>&);
-  template<class T> valarray<T> log  (final valarray<T>&);
-  template<class T> valarray<T> log10(final valarray<T>&);
+  template<class T> valarray<T> cos  (const valarray<T>&);
+  template<class T> valarray<T> cosh (const valarray<T>&);
+  template<class T> valarray<T> exp  (const valarray<T>&);
+  template<class T> valarray<T> log  (const valarray<T>&);
+  template<class T> valarray<T> log10(const valarray<T>&);
 
-  template<class T> valarray<T> pow(final valarray<T>&, final valarray<T>&);
-  template<class T> valarray<T> pow(final valarray<T>&, final typename valarray<T>::value_type&);
-  template<class T> valarray<T> pow(final typename valarray<T>::value_type&, final valarray<T>&);
+  template<class T> valarray<T> pow(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> pow(const valarray<T>&, const typename valarray<T>::value_type&);
+  template<class T> valarray<T> pow(const typename valarray<T>::value_type&, const valarray<T>&);
 
-  template<class T> valarray<T> sin  (final valarray<T>&);
-  template<class T> valarray<T> sinh (final valarray<T>&);
-  template<class T> valarray<T> sqrt (final valarray<T>&);
-  template<class T> valarray<T> tan  (final valarray<T>&);
-  template<class T> valarray<T> tanh (final valarray<T>&);
+  template<class T> valarray<T> sin  (const valarray<T>&);
+  template<class T> valarray<T> sinh (const valarray<T>&);
+  template<class T> valarray<T> sqrt (const valarray<T>&);
+  template<class T> valarray<T> tan  (const valarray<T>&);
+  template<class T> valarray<T> tanh (const valarray<T>&);
 
   template<class T> @\unspec{1}@ begin(valarray<T>& v);
-  template<class T> @\unspec{2}@ begin(final valarray<T>& v);
+  template<class T> @\unspec{2}@ begin(const valarray<T>& v);
   template<class T> @\unspec{1}@ end(valarray<T>& v);
-  template<class T> @\unspec{2}@ end(final valarray<T>& v);
+  template<class T> @\unspec{2}@ end(const valarray<T>& v);
 }
 \end{codeblock}
 
@@ -6631,7 +6631,7 @@ operations on these classes to be optimized.
 Any function returning a
 \tcode{valarray<T>}
 is permitted to return an object of another type, provided all the
-final member functions of
+const member functions of
 \tcode{valarray<T>}
 are also applicable to this type.
 This return type shall not add
@@ -6648,21 +6648,21 @@ additional functions and operators as follows:
 \begin{itemize}
 \item
 for every function taking a
-\tcode{final valarray<T>\&} other than \tcode{begin} and
+\tcode{const valarray<T>\&} other than \tcode{begin} and
 \tcode{end}\iref{valarray.range},
 identical functions taking the replacement types shall be added;
 \item
 for every function taking two
-\tcode{final valarray<T>\&}
+\tcode{const valarray<T>\&}
 arguments, identical functions taking every combination of
-\tcode{final valarray<T>\&}
+\tcode{const valarray<T>\&}
 and replacement types shall be added.
 \end{itemize}
 
 \pnum
 In particular, an implementation shall allow a
 \tcode{valarray<T>}
-to be finalructed from such replacement types and shall allow assignments
+to be constructed from such replacement types and shall allow assignments
 and compound assignments of such types to
 \tcode{valarray<T>},
 \tcode{slice_array<T>},
@@ -6689,90 +6689,90 @@ package std {
   public:
     using value_type = T;
 
-    // \ref{valarray.cons}, finalruct/destroy
+    // \ref{valarray.cons}, construct/destroy
     valarray();
     explicit valarray(size_t);
-    valarray(final T&, size_t);
-    valarray(final T*, size_t);
-    valarray(final valarray&);
+    valarray(const T&, size_t);
+    valarray(const T*, size_t);
+    valarray(const valarray&);
     valarray(valarray&&) noexcept;
-    valarray(final slice_array<T>&);
-    valarray(final gslice_array<T>&);
-    valarray(final mask_array<T>&);
-    valarray(final indirect_array<T>&);
+    valarray(const slice_array<T>&);
+    valarray(const gslice_array<T>&);
+    valarray(const mask_array<T>&);
+    valarray(const indirect_array<T>&);
     valarray(initializer_list<T>);
     ~valarray();
 
     // \ref{valarray.assign}, assignment
-    valarray& operator=(final valarray&);
+    valarray& operator=(const valarray&);
     valarray& operator=(valarray&&) noexcept;
     valarray& operator=(initializer_list<T>);
-    valarray& operator=(final T&);
-    valarray& operator=(final slice_array<T>&);
-    valarray& operator=(final gslice_array<T>&);
-    valarray& operator=(final mask_array<T>&);
-    valarray& operator=(final indirect_array<T>&);
+    valarray& operator=(const T&);
+    valarray& operator=(const slice_array<T>&);
+    valarray& operator=(const gslice_array<T>&);
+    valarray& operator=(const mask_array<T>&);
+    valarray& operator=(const indirect_array<T>&);
 
     // \ref{valarray.access}, element access
-    final T&          operator[](size_t) final;
+    const T&          operator[](size_t) const;
     T&                operator[](size_t);
 
     // \ref{valarray.sub}, subset operations
-    valarray          operator[](slice) final;
+    valarray          operator[](slice) const;
     slice_array<T>    operator[](slice);
-    valarray          operator[](final gslice&) final;
-    gslice_array<T>   operator[](final gslice&);
-    valarray          operator[](final valarray<bool>&) final;
-    mask_array<T>     operator[](final valarray<bool>&);
-    valarray          operator[](final valarray<size_t>&) final;
-    indirect_array<T> operator[](final valarray<size_t>&);
+    valarray          operator[](const gslice&) const;
+    gslice_array<T>   operator[](const gslice&);
+    valarray          operator[](const valarray<bool>&) const;
+    mask_array<T>     operator[](const valarray<bool>&);
+    valarray          operator[](const valarray<size_t>&) const;
+    indirect_array<T> operator[](const valarray<size_t>&);
 
     // \ref{valarray.unary}, unary operators
-    valarray operator+() final;
-    valarray operator-() final;
-    valarray operator~() final;
-    valarray<bool> operator!() final;
+    valarray operator+() const;
+    valarray operator-() const;
+    valarray operator~() const;
+    valarray<bool> operator!() const;
 
     // \ref{valarray.cassign}, compound assignment
-    valarray& operator*= (final T&);
-    valarray& operator/= (final T&);
-    valarray& operator%= (final T&);
-    valarray& operator+= (final T&);
-    valarray& operator-= (final T&);
-    valarray& operator^= (final T&);
-    valarray& operator&= (final T&);
-    valarray& operator|= (final T&);
-    valarray& operator<<=(final T&);
-    valarray& operator>>=(final T&);
+    valarray& operator*= (const T&);
+    valarray& operator/= (const T&);
+    valarray& operator%= (const T&);
+    valarray& operator+= (const T&);
+    valarray& operator-= (const T&);
+    valarray& operator^= (const T&);
+    valarray& operator&= (const T&);
+    valarray& operator|= (const T&);
+    valarray& operator<<=(const T&);
+    valarray& operator>>=(const T&);
 
-    valarray& operator*= (final valarray&);
-    valarray& operator/= (final valarray&);
-    valarray& operator%= (final valarray&);
-    valarray& operator+= (final valarray&);
-    valarray& operator-= (final valarray&);
-    valarray& operator^= (final valarray&);
-    valarray& operator|= (final valarray&);
-    valarray& operator&= (final valarray&);
-    valarray& operator<<=(final valarray&);
-    valarray& operator>>=(final valarray&);
+    valarray& operator*= (const valarray&);
+    valarray& operator/= (const valarray&);
+    valarray& operator%= (const valarray&);
+    valarray& operator+= (const valarray&);
+    valarray& operator-= (const valarray&);
+    valarray& operator^= (const valarray&);
+    valarray& operator|= (const valarray&);
+    valarray& operator&= (const valarray&);
+    valarray& operator<<=(const valarray&);
+    valarray& operator>>=(const valarray&);
 
     // \ref{valarray.members}, member functions
     void swap(valarray&) noexcept;
 
-    size_t size() final;
+    size_t size() const;
 
-    T sum() final;
-    T min() final;
-    T max() final;
+    T sum() const;
+    T min() const;
+    T max() const;
 
-    valarray shift (int) final;
-    valarray cshift(int) final;
-    valarray apply(T func(T)) final;
-    valarray apply(T func(final T&)) final;
+    valarray shift (int) const;
+    valarray cshift(int) const;
+    valarray apply(T func(T)) const;
+    valarray apply(T func(const T&)) const;
     void resize(size_t sz, T c = T());
   };
 
-  template<class T, size_t cnt> valarray(final T(&)[cnt], size_t) -> valarray<T>;
+  template<class T, size_t cnt> valarray(const T(&)[cnt], size_t) -> valarray<T>;
 }
 \end{codeblock}
 
@@ -6799,7 +6799,7 @@ template is neither a
 matrix class nor a field class.
 However, it is a very useful building block for designing such classes.}
 
-\rSec3[valarray.cons]{\tcode{valarray} finalructors}
+\rSec3[valarray.cons]{\tcode{valarray} constructors}
 
 \indexlibrary{\idxcode{valarray}!constructor}%
 \begin{itemdecl}
@@ -6810,7 +6810,7 @@ valarray();
 \pnum
 \effects
 Constructs a \tcode{valarray}
-that has zero length.\footnote{This default finalructor is essential,
+that has zero length.\footnote{This default constructor is essential,
 since arrays of
 \tcode{valarray}
 may be useful.
@@ -6833,7 +6833,7 @@ Each element of the array is value-initialized\iref{dcl.init}.
 
 \indexlibrary{\idxcode{valarray}!constructor}%
 \begin{itemdecl}
-valarray(final T& v, size_t n);
+valarray(const T& v, size_t n);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -6845,7 +6845,7 @@ Each element of the array is initialized with \tcode{v}.
 
 \indexlibrary{\idxcode{valarray}!constructor}%
 \begin{itemdecl}
-valarray(final T* p, size_t n);
+valarray(const T* p, size_t n);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -6859,7 +6859,7 @@ Constructs a \tcode{valarray} that has length \tcode{n}.
 The values of the elements of the array are initialized with the
 first
 \tcode{n}
-values pointed to by the first argument.\footnote{This finalructor is the
+values pointed to by the first argument.\footnote{This constructor is the
 preferred method for converting a C array to a
 \tcode{valarray}
 object.}
@@ -6867,7 +6867,7 @@ object.}
 
 \indexlibrary{\idxcode{valarray}!constructor}%
 \begin{itemdecl}
-valarray(final valarray& v);
+valarray(const valarray& v);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -6875,7 +6875,7 @@ valarray(final valarray& v);
 \effects
 Constructs a \tcode{valarray} that has the same length as \tcode{v}.
 The elements are initialized with the values of the corresponding
-elements of \tcode{v}.\footnote{This copy finalructor creates
+elements of \tcode{v}.\footnote{This copy constructor creates
 a distinct array rather than an alias.
 Implementations in which arrays share storage are permitted, but they
 would need to implement a copy-on-reference mechanism to ensure that arrays are
@@ -6910,15 +6910,15 @@ valarray(initializer_list<T> il);
 
 \indexlibrary{\idxcode{valarray}!constructor}%
 \begin{itemdecl}
-valarray(final slice_array<T>&);
-valarray(final gslice_array<T>&);
-valarray(final mask_array<T>&);
-valarray(final indirect_array<T>&);
+valarray(const slice_array<T>&);
+valarray(const gslice_array<T>&);
+valarray(const mask_array<T>&);
+valarray(const indirect_array<T>&);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-These conversion finalructors convert one of the four reference templates
+These conversion constructors convert one of the four reference templates
 to a
 \tcode{valarray}.
 \end{itemdescr}
@@ -6940,7 +6940,7 @@ an implementation may return all allocated memory.
 
 \indexlibrarymember{operator=}{valarray}%
 \begin{itemdecl}
-valarray& operator=(final valarray& v);
+valarray& operator=(const valarray& v);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -6990,7 +6990,7 @@ valarray& operator=(initializer_list<T> il);
 
 \indexlibrarymember{operator=}{valarray}%
 \begin{itemdecl}
-valarray& operator=(final T& v);
+valarray& operator=(const T& v);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7004,10 +7004,10 @@ Assigns \tcode{v} to each element of \tcode{*this}.
 
 \indexlibrarymember{operator=}{valarray}%
 \begin{itemdecl}
-valarray& operator=(final slice_array<T>&);
-valarray& operator=(final gslice_array<T>&);
-valarray& operator=(final mask_array<T>&);
-valarray& operator=(final indirect_array<T>&);
+valarray& operator=(const slice_array<T>&);
+valarray& operator=(const gslice_array<T>&);
+valarray& operator=(const mask_array<T>&);
+valarray& operator=(const indirect_array<T>&);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7026,7 +7026,7 @@ to be assigned directly to a
 
 \indexlibrarymember{operator[]}{valarray}%
 \begin{itemdecl}
-final T&  operator[](size_t n) final;
+const T&  operator[](size_t n) const;
 T& operator[](size_t n);
 \end{itemdecl}
 
@@ -7060,7 +7060,7 @@ such that \tcode{i < a.size()}
 and \tcode{j < b.size()}.
 \begin{note} This property indicates an absence of aliasing and may be used to
 advantage by optimizing compilers. Compilers may take advantage
-of inlining, finalant propagation, loop fusion,
+of inlining, constant propagation, loop fusion,
 tracking of pointers obtained from
 \tcode{operator new},
 and other techniques to generate efficient
@@ -7080,8 +7080,8 @@ that array ends, whichever happens first.
 \pnum
 The member \tcode{operator[]} is overloaded to provide several ways to select
 sequences of elements from among those controlled by \tcode{*this}. Each of these
-operations returns a subset of the array. The final-qualified versions return this
-subset as a new \tcode{valarray} object. The non-final versions return a class
+operations returns a subset of the array. The const-qualified versions return this
+subset as a new \tcode{valarray} object. The non-const versions return a class
 template object which has reference semantics to the original array, working in
 conjunction with various overloads of \tcode{operator=} and other assigning
 operators to allow selective replacement (slicing) of the controlled sequence.
@@ -7089,7 +7089,7 @@ In each case the selected element(s) shall exist.
 
 \indexlibrarymember{operator[]}{valarray}%
 \begin{itemdecl}
-valarray operator[](slice slicearr) final;
+valarray operator[](slice slicearr) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7098,7 +7098,7 @@ valarray operator[](slice slicearr) final;
 elements of the controlled sequence designated by \tcode{slicearr}.
 \begin{example}
 \begin{codeblock}
-final valarray<char> v0("abcdefghijklmnop", 16);
+const valarray<char> v0("abcdefghijklmnop", 16);
 // \tcode{v0[slice(2, 5, 3)]} returns \tcode{valarray<char>("cfilo", 5)}
 \end{codeblock}
 \end{example}
@@ -7124,7 +7124,7 @@ v0[slice(2, 5, 3)] = v1;
 
 \indexlibrarymember{operator[]}{valarray}%
 \begin{itemdecl}
-valarray operator[](final gslice& gslicearr) final;
+valarray operator[](const gslice& gslicearr) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7133,10 +7133,10 @@ valarray operator[](final gslice& gslicearr) final;
 elements of the controlled sequence designated by \tcode{gslicearr}.
 \begin{example}
 \begin{codeblock}
-final valarray<char> v0("abcdefghijklmnop", 16);
-final size_t lv[] = { 2, 3 };
-final size_t dv[] = { 7, 2 };
-final valarray<size_t> len(lv, 2), str(dv, 2);
+const valarray<char> v0("abcdefghijklmnop", 16);
+const size_t lv[] = { 2, 3 };
+const size_t dv[] = { 7, 2 };
+const valarray<size_t> len(lv, 2), str(dv, 2);
 // \tcode{v0[gslice(3, len, str)]} returns
 // \tcode{valarray<char>("dfhkmo", 6)}
 \end{codeblock}
@@ -7145,7 +7145,7 @@ final valarray<size_t> len(lv, 2), str(dv, 2);
 
 \indexlibrarymember{operator[]}{valarray}%
 \begin{itemdecl}
-gslice_array<T> operator[](final gslice& gslicearr);
+gslice_array<T> operator[](const gslice& gslicearr);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7155,9 +7155,9 @@ sequence selected by \tcode{gslicearr}. \begin{example}
 \begin{codeblock}
 valarray<char> v0("abcdefghijklmnop", 16);
 valarray<char> v1("ABCDEF", 6);
-final size_t lv[] = { 2, 3 };
-final size_t dv[] = { 7, 2 };
-final valarray<size_t> len(lv, 2), str(dv, 2);
+const size_t lv[] = { 2, 3 };
+const size_t dv[] = { 7, 2 };
+const valarray<size_t> len(lv, 2), str(dv, 2);
 v0[gslice(3, len, str)] = v1;
 // \tcode{v0 == valarray<char>("abcAeBgCijDlEnFp", 16)}
 \end{codeblock}
@@ -7166,7 +7166,7 @@ v0[gslice(3, len, str)] = v1;
 
 \indexlibrarymember{operator[]}{valarray}%
 \begin{itemdecl}
-valarray operator[](final valarray<bool>& boolarr) final;
+valarray operator[](const valarray<bool>& boolarr) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7175,8 +7175,8 @@ valarray operator[](final valarray<bool>& boolarr) final;
 elements of the controlled sequence designated by \tcode{boolarr}.
 \begin{example}
 \begin{codeblock}
-final valarray<char> v0("abcdefghijklmnop", 16);
-final bool vb[] = { false, false, true, true, false, true };
+const valarray<char> v0("abcdefghijklmnop", 16);
+const bool vb[] = { false, false, true, true, false, true };
 // \tcode{v0[valarray<bool>(vb, 6)]} returns
 // \tcode{valarray<char>("cdf", 3)}
 \end{codeblock}
@@ -7185,7 +7185,7 @@ final bool vb[] = { false, false, true, true, false, true };
 
 \indexlibrarymember{operator[]}{valarray}%
 \begin{itemdecl}
-mask_array<T> operator[](final valarray<bool>& boolarr);
+mask_array<T> operator[](const valarray<bool>& boolarr);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7195,7 +7195,7 @@ sequence selected by \tcode{boolarr}. \begin{example}
 \begin{codeblock}
 valarray<char> v0("abcdefghijklmnop", 16);
 valarray<char> v1("ABC", 3);
-final bool vb[] = { false, false, true, true, false, true };
+const bool vb[] = { false, false, true, true, false, true };
 v0[valarray<bool>(vb, 6)] = v1;
 // \tcode{v0 == valarray<char>("abABeCghijklmnop", 16)}
 \end{codeblock}
@@ -7204,7 +7204,7 @@ v0[valarray<bool>(vb, 6)] = v1;
 
 \indexlibrarymember{operator[]}{valarray}%
 \begin{itemdecl}
-valarray operator[](final valarray<size_t>& indarr) final;
+valarray operator[](const valarray<size_t>& indarr) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7213,8 +7213,8 @@ valarray operator[](final valarray<size_t>& indarr) final;
 elements of the controlled sequence designated by \tcode{indarr}.
 \begin{example}
 \begin{codeblock}
-final valarray<char> v0("abcdefghijklmnop", 16);
-final size_t vi[] = { 7, 5, 2, 3, 8 };
+const valarray<char> v0("abcdefghijklmnop", 16);
+const size_t vi[] = { 7, 5, 2, 3, 8 };
 // \tcode{v0[valarray<size_t>(vi, 5)]} returns
 // \tcode{valarray<char>("hfcdi", 5)}
 \end{codeblock}
@@ -7223,7 +7223,7 @@ final size_t vi[] = { 7, 5, 2, 3, 8 };
 
 \indexlibrarymember{operator[]}{valarray}%
 \begin{itemdecl}
-indirect_array<T> operator[](final valarray<size_t>& indarr);
+indirect_array<T> operator[](const valarray<size_t>& indarr);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7233,7 +7233,7 @@ sequence selected by \tcode{indarr}. \begin{example}
 \begin{codeblock}
 valarray<char> v0("abcdefghijklmnop", 16);
 valarray<char> v1("ABCDE", 5);
-final size_t vi[] = { 7, 5, 2, 3, 8 };
+const size_t vi[] = { 7, 5, 2, 3, 8 };
 v0[valarray<size_t>(vi, 5)] = v1;
 // \tcode{v0 == valarray<char>("abCDeBgAEjklmnop", 16)}
 \end{codeblock}
@@ -7247,10 +7247,10 @@ v0[valarray<size_t>(vi, 5)] = v1;
 \indexlibrarymember{operator\~{}}{valarray}%
 \indexlibrarymember{operator"!}{valarray}%
 \begin{itemdecl}
-valarray operator+() final;
-valarray operator-() final;
-valarray operator~() final;
-valarray<bool> operator!() final;
+valarray operator+() const;
+valarray operator-() const;
+valarray operator~() const;
+valarray<bool> operator!() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7281,16 +7281,16 @@ applying the indicated operator to the corresponding element of the array.
 \indexlibrarymember{operator<<=}{valarray}%
 \indexlibrarymember{operator>>=}{valarray}%
 \begin{itemdecl}
-valarray& operator*= (final valarray& v);
-valarray& operator/= (final valarray& v);
-valarray& operator%= (final valarray& v);
-valarray& operator+= (final valarray& v);
-valarray& operator-= (final valarray& v);
-valarray& operator^= (final valarray& v);
-valarray& operator&= (final valarray& v);
-valarray& operator|= (final valarray& v);
-valarray& operator<<=(final valarray& v);
-valarray& operator>>=(final valarray& v);
+valarray& operator*= (const valarray& v);
+valarray& operator/= (const valarray& v);
+valarray& operator%= (const valarray& v);
+valarray& operator+= (const valarray& v);
+valarray& operator-= (const valarray& v);
+valarray& operator^= (const valarray& v);
+valarray& operator&= (const valarray& v);
+valarray& operator|= (const valarray& v);
+valarray& operator<<=(const valarray& v);
+valarray& operator>>=(const valarray& v);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7330,16 +7330,16 @@ does not invalidate references or pointers.
 \indexlibrarymember{operator<<=}{valarray}%
 \indexlibrarymember{operator>>=}{valarray}%
 \begin{itemdecl}
-valarray& operator*= (final T& v);
-valarray& operator/= (final T& v);
-valarray& operator%= (final T& v);
-valarray& operator+= (final T& v);
-valarray& operator-= (final T& v);
-valarray& operator^= (final T& v);
-valarray& operator&= (final T& v);
-valarray& operator|= (final T& v);
-valarray& operator<<=(final T& v);
-valarray& operator>>=(final T& v);
+valarray& operator*= (const T& v);
+valarray& operator/= (const T& v);
+valarray& operator%= (const T& v);
+valarray& operator+= (const T& v);
+valarray& operator-= (const T& v);
+valarray& operator^= (const T& v);
+valarray& operator&= (const T& v);
+valarray& operator|= (const T& v);
+valarray& operator<<=(const T& v);
+valarray& operator>>=(const T& v);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7382,7 +7382,7 @@ void swap(valarray& v) noexcept;
 
 \indexlibrarymember{size}{valarray}%
 \begin{itemdecl}
-size_t size() final;
+size_t size() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7395,7 +7395,7 @@ size_t size() final;
 
 \indexlibrarymember{sum}{valarray}%
 \begin{itemdecl}
-T sum() final;
+T sum() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7418,7 +7418,7 @@ all other elements of the array in an unspecified order.%
 
 \indexlibrarymember{min}{valarray}%
 \begin{itemdecl}
-T min() final;
+T min() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7437,7 +7437,7 @@ lengths, the determination is made using
 
 \indexlibrarymember{max}{valarray}%
 \begin{itemdecl}
-T max() final;
+T max() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7456,7 +7456,7 @@ lengths, the determination is made using
 
 \indexlibrarymember{shift}{valarray}%
 \begin{itemdecl}
-valarray shift(int n) final;
+valarray shift(int n) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7484,7 +7484,7 @@ of the first element of the argument; etc.
 
 \indexlibrarymember{cshift}{valarray}%
 \begin{itemdecl}
-valarray cshift(int n) final;
+valarray cshift(int n) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7499,8 +7499,8 @@ value of $n$ shifts the elements circularly right $-n$ places.
 
 \indexlibrarymember{apply}{valarray}%
 \begin{itemdecl}
-valarray apply(T func(T)) final;
-valarray apply(T func(final T&)) final;
+valarray apply(T func(T)) const;
+valarray apply(T func(const T&)) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7540,16 +7540,16 @@ Resizing invalidates all pointers and references to elements in the array.
 \indexlibrarymember{operator<<}{valarray}%
 \indexlibrarymember{operator>>}{valarray}%
 \begin{itemdecl}
-template<class T> valarray<T> operator* (final valarray<T>&, final valarray<T>&);
-template<class T> valarray<T> operator/ (final valarray<T>&, final valarray<T>&);
-template<class T> valarray<T> operator% (final valarray<T>&, final valarray<T>&);
-template<class T> valarray<T> operator+ (final valarray<T>&, final valarray<T>&);
-template<class T> valarray<T> operator- (final valarray<T>&, final valarray<T>&);
-template<class T> valarray<T> operator^ (final valarray<T>&, final valarray<T>&);
-template<class T> valarray<T> operator& (final valarray<T>&, final valarray<T>&);
-template<class T> valarray<T> operator| (final valarray<T>&, final valarray<T>&);
-template<class T> valarray<T> operator<<(final valarray<T>&, final valarray<T>&);
-template<class T> valarray<T> operator>>(final valarray<T>&, final valarray<T>&);
+template<class T> valarray<T> operator* (const valarray<T>&, const valarray<T>&);
+template<class T> valarray<T> operator/ (const valarray<T>&, const valarray<T>&);
+template<class T> valarray<T> operator% (const valarray<T>&, const valarray<T>&);
+template<class T> valarray<T> operator+ (const valarray<T>&, const valarray<T>&);
+template<class T> valarray<T> operator- (const valarray<T>&, const valarray<T>&);
+template<class T> valarray<T> operator^ (const valarray<T>&, const valarray<T>&);
+template<class T> valarray<T> operator& (const valarray<T>&, const valarray<T>&);
+template<class T> valarray<T> operator| (const valarray<T>&, const valarray<T>&);
+template<class T> valarray<T> operator<<(const valarray<T>&, const valarray<T>&);
+template<class T> valarray<T> operator>>(const valarray<T>&, const valarray<T>&);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7581,46 +7581,46 @@ corresponding elements of the argument arrays.
 \indexlibrarymember{operator<<}{valarray}%
 \indexlibrarymember{operator>>}{valarray}%
 \begin{itemdecl}
-template<class T> valarray<T> operator* (final valarray<T>&,
-                                         final typename valarray<T>::value_type&);
-template<class T> valarray<T> operator* (final typename valarray<T>::value_type&,
-                                         final valarray<T>&);
-template<class T> valarray<T> operator/ (final valarray<T>&,
-                                         final typename valarray<T>::value_type&);
-template<class T> valarray<T> operator/ (final typename valarray<T>::value_type&,
-                                         final valarray<T>&);
-template<class T> valarray<T> operator% (final valarray<T>&,
-                                         final typename valarray<T>::value_type&);
-template<class T> valarray<T> operator% (final typename valarray<T>::value_type&,
-                                         final valarray<T>&);
-template<class T> valarray<T> operator+ (final valarray<T>&,
-                                         final typename valarray<T>::value_type&);
-template<class T> valarray<T> operator+ (final typename valarray<T>::value_type&,
-                                         final valarray<T>&);
-template<class T> valarray<T> operator- (final valarray<T>&,
-                                         final typename valarray<T>::value_type&);
-template<class T> valarray<T> operator- (final typename valarray<T>::value_type&,
-                                         final valarray<T>&);
-template<class T> valarray<T> operator^ (final valarray<T>&,
-                                         final typename valarray<T>::value_type&);
-template<class T> valarray<T> operator^ (final typename valarray<T>::value_type&,
-                                         final valarray<T>&);
-template<class T> valarray<T> operator& (final valarray<T>&,
-                                         final typename valarray<T>::value_type&);
-template<class T> valarray<T> operator& (final typename valarray<T>::value_type&,
-                                         final valarray<T>&);
-template<class T> valarray<T> operator| (final valarray<T>&,
-                                         final typename valarray<T>::value_type&);
-template<class T> valarray<T> operator| (final typename valarray<T>::value_type&,
-                                         final valarray<T>&);
-template<class T> valarray<T> operator<<(final valarray<T>&,
-                                         final typename valarray<T>::value_type&);
-template<class T> valarray<T> operator<<(final typename valarray<T>::value_type&,
-                                         final valarray<T>&);
-template<class T> valarray<T> operator>>(final valarray<T>&,
-                                         final typename valarray<T>::value_type&);
-template<class T> valarray<T> operator>>(final typename valarray<T>::value_type&,
-                                         final valarray<T>&);
+template<class T> valarray<T> operator* (const valarray<T>&,
+                                         const typename valarray<T>::value_type&);
+template<class T> valarray<T> operator* (const typename valarray<T>::value_type&,
+                                         const valarray<T>&);
+template<class T> valarray<T> operator/ (const valarray<T>&,
+                                         const typename valarray<T>::value_type&);
+template<class T> valarray<T> operator/ (const typename valarray<T>::value_type&,
+                                         const valarray<T>&);
+template<class T> valarray<T> operator% (const valarray<T>&,
+                                         const typename valarray<T>::value_type&);
+template<class T> valarray<T> operator% (const typename valarray<T>::value_type&,
+                                         const valarray<T>&);
+template<class T> valarray<T> operator+ (const valarray<T>&,
+                                         const typename valarray<T>::value_type&);
+template<class T> valarray<T> operator+ (const typename valarray<T>::value_type&,
+                                         const valarray<T>&);
+template<class T> valarray<T> operator- (const valarray<T>&,
+                                         const typename valarray<T>::value_type&);
+template<class T> valarray<T> operator- (const typename valarray<T>::value_type&,
+                                         const valarray<T>&);
+template<class T> valarray<T> operator^ (const valarray<T>&,
+                                         const typename valarray<T>::value_type&);
+template<class T> valarray<T> operator^ (const typename valarray<T>::value_type&,
+                                         const valarray<T>&);
+template<class T> valarray<T> operator& (const valarray<T>&,
+                                         const typename valarray<T>::value_type&);
+template<class T> valarray<T> operator& (const typename valarray<T>::value_type&,
+                                         const valarray<T>&);
+template<class T> valarray<T> operator| (const valarray<T>&,
+                                         const typename valarray<T>::value_type&);
+template<class T> valarray<T> operator| (const typename valarray<T>::value_type&,
+                                         const valarray<T>&);
+template<class T> valarray<T> operator<<(const valarray<T>&,
+                                         const typename valarray<T>::value_type&);
+template<class T> valarray<T> operator<<(const typename valarray<T>::value_type&,
+                                         const valarray<T>&);
+template<class T> valarray<T> operator>>(const valarray<T>&,
+                                         const typename valarray<T>::value_type&);
+template<class T> valarray<T> operator>>(const typename valarray<T>::value_type&,
+                                         const valarray<T>&);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7651,14 +7651,14 @@ corresponding element of the array argument and the non-array argument.
 \indexlibrarymember{operator\&\&}{valarray}%
 \indexlibrarymember{operator"|"|}{valarray}%
 \begin{itemdecl}
-template<class T> valarray<bool> operator==(final valarray<T>&, final valarray<T>&);
-template<class T> valarray<bool> operator!=(final valarray<T>&, final valarray<T>&);
-template<class T> valarray<bool> operator< (final valarray<T>&, final valarray<T>&);
-template<class T> valarray<bool> operator> (final valarray<T>&, final valarray<T>&);
-template<class T> valarray<bool> operator<=(final valarray<T>&, final valarray<T>&);
-template<class T> valarray<bool> operator>=(final valarray<T>&, final valarray<T>&);
-template<class T> valarray<bool> operator&&(final valarray<T>&, final valarray<T>&);
-template<class T> valarray<bool> operator||(final valarray<T>&, final valarray<T>&);
+template<class T> valarray<bool> operator==(const valarray<T>&, const valarray<T>&);
+template<class T> valarray<bool> operator!=(const valarray<T>&, const valarray<T>&);
+template<class T> valarray<bool> operator< (const valarray<T>&, const valarray<T>&);
+template<class T> valarray<bool> operator> (const valarray<T>&, const valarray<T>&);
+template<class T> valarray<bool> operator<=(const valarray<T>&, const valarray<T>&);
+template<class T> valarray<bool> operator>=(const valarray<T>&, const valarray<T>&);
+template<class T> valarray<bool> operator&&(const valarray<T>&, const valarray<T>&);
+template<class T> valarray<bool> operator||(const valarray<T>&, const valarray<T>&);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7689,38 +7689,38 @@ operator to the corresponding elements of the argument arrays.
 \indexlibrarymember{operator\&\&}{valarray}%
 \indexlibrarymember{operator"|"|}{valarray}%
 \begin{itemdecl}
-template<class T> valarray<bool> operator==(final valarray<T>&,
-                                            final typename valarray<T>::value_type&);
-template<class T> valarray<bool> operator==(final typename valarray<T>::value_type&,
-                                            final valarray<T>&);
-template<class T> valarray<bool> operator!=(final valarray<T>&,
-                                            final typename valarray<T>::value_type&);
-template<class T> valarray<bool> operator!=(final typename valarray<T>::value_type&,
-                                            final valarray<T>&);
-template<class T> valarray<bool> operator< (final valarray<T>&,
-                                            final typename valarray<T>::value_type&);
-template<class T> valarray<bool> operator< (final typename valarray<T>::value_type&,
-                                            final valarray<T>&);
-template<class T> valarray<bool> operator> (final valarray<T>&,
-                                            final typename valarray<T>::value_type&);
-template<class T> valarray<bool> operator> (final typename valarray<T>::value_type&,
-                                            final valarray<T>&);
-template<class T> valarray<bool> operator<=(final valarray<T>&,
-                                            final typename valarray<T>::value_type&);
-template<class T> valarray<bool> operator<=(final typename valarray<T>::value_type&,
-                                            final valarray<T>&);
-template<class T> valarray<bool> operator>=(final valarray<T>&,
-                                            final typename valarray<T>::value_type&);
-template<class T> valarray<bool> operator>=(final typename valarray<T>::value_type&,
-                                            final valarray<T>&);
-template<class T> valarray<bool> operator&&(final valarray<T>&,
-                                            final typename valarray<T>::value_type&);
-template<class T> valarray<bool> operator&&(final typename valarray<T>::value_type&,
-                                            final valarray<T>&);
-template<class T> valarray<bool> operator||(final valarray<T>&,
-                                            final typename valarray<T>::value_type&);
-template<class T> valarray<bool> operator||(final typename valarray<T>::value_type&,
-                                            final valarray<T>&);
+template<class T> valarray<bool> operator==(const valarray<T>&,
+                                            const typename valarray<T>::value_type&);
+template<class T> valarray<bool> operator==(const typename valarray<T>::value_type&,
+                                            const valarray<T>&);
+template<class T> valarray<bool> operator!=(const valarray<T>&,
+                                            const typename valarray<T>::value_type&);
+template<class T> valarray<bool> operator!=(const typename valarray<T>::value_type&,
+                                            const valarray<T>&);
+template<class T> valarray<bool> operator< (const valarray<T>&,
+                                            const typename valarray<T>::value_type&);
+template<class T> valarray<bool> operator< (const typename valarray<T>::value_type&,
+                                            const valarray<T>&);
+template<class T> valarray<bool> operator> (const valarray<T>&,
+                                            const typename valarray<T>::value_type&);
+template<class T> valarray<bool> operator> (const typename valarray<T>::value_type&,
+                                            const valarray<T>&);
+template<class T> valarray<bool> operator<=(const valarray<T>&,
+                                            const typename valarray<T>::value_type&);
+template<class T> valarray<bool> operator<=(const typename valarray<T>::value_type&,
+                                            const valarray<T>&);
+template<class T> valarray<bool> operator>=(const valarray<T>&,
+                                            const typename valarray<T>::value_type&);
+template<class T> valarray<bool> operator>=(const typename valarray<T>::value_type&,
+                                            const valarray<T>&);
+template<class T> valarray<bool> operator&&(const valarray<T>&,
+                                            const typename valarray<T>::value_type&);
+template<class T> valarray<bool> operator&&(const typename valarray<T>::value_type&,
+                                            const valarray<T>&);
+template<class T> valarray<bool> operator||(const valarray<T>&,
+                                            const typename valarray<T>::value_type&);
+template<class T> valarray<bool> operator||(const typename valarray<T>::value_type&,
+                                            const valarray<T>&);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7759,26 +7759,26 @@ indicated operator to the corresponding element of the array and the non-array a
 \indexlibrary{\idxcode{tan}!\idxcode{valarray}}%
 \indexlibrary{\idxcode{tanh}!\idxcode{valarray}}%
 \begin{itemdecl}
-template<class T> valarray<T> abs  (final valarray<T>&);
-template<class T> valarray<T> acos (final valarray<T>&);
-template<class T> valarray<T> asin (final valarray<T>&);
-template<class T> valarray<T> atan (final valarray<T>&);
-template<class T> valarray<T> atan2(final valarray<T>&, final valarray<T>&);
-template<class T> valarray<T> atan2(final valarray<T>&, final typename valarray<T>::value_type&);
-template<class T> valarray<T> atan2(final typename valarray<T>::value_type&, final valarray<T>&);
-template<class T> valarray<T> cos  (final valarray<T>&);
-template<class T> valarray<T> cosh (final valarray<T>&);
-template<class T> valarray<T> exp  (final valarray<T>&);
-template<class T> valarray<T> log  (final valarray<T>&);
-template<class T> valarray<T> log10(final valarray<T>&);
-template<class T> valarray<T> pow  (final valarray<T>&, final valarray<T>&);
-template<class T> valarray<T> pow  (final valarray<T>&, final typename valarray<T>::value_type&);
-template<class T> valarray<T> pow  (final typename valarray<T>::value_type&, final valarray<T>&);
-template<class T> valarray<T> sin  (final valarray<T>&);
-template<class T> valarray<T> sinh (final valarray<T>&);
-template<class T> valarray<T> sqrt (final valarray<T>&);
-template<class T> valarray<T> tan  (final valarray<T>&);
-template<class T> valarray<T> tanh (final valarray<T>&);
+template<class T> valarray<T> abs  (const valarray<T>&);
+template<class T> valarray<T> acos (const valarray<T>&);
+template<class T> valarray<T> asin (const valarray<T>&);
+template<class T> valarray<T> atan (const valarray<T>&);
+template<class T> valarray<T> atan2(const valarray<T>&, const valarray<T>&);
+template<class T> valarray<T> atan2(const valarray<T>&, const typename valarray<T>::value_type&);
+template<class T> valarray<T> atan2(const typename valarray<T>::value_type&, const valarray<T>&);
+template<class T> valarray<T> cos  (const valarray<T>&);
+template<class T> valarray<T> cosh (const valarray<T>&);
+template<class T> valarray<T> exp  (const valarray<T>&);
+template<class T> valarray<T> log  (const valarray<T>&);
+template<class T> valarray<T> log10(const valarray<T>&);
+template<class T> valarray<T> pow  (const valarray<T>&, const valarray<T>&);
+template<class T> valarray<T> pow  (const valarray<T>&, const typename valarray<T>::value_type&);
+template<class T> valarray<T> pow  (const typename valarray<T>::value_type&, const valarray<T>&);
+template<class T> valarray<T> sin  (const valarray<T>&);
+template<class T> valarray<T> sinh (const valarray<T>&);
+template<class T> valarray<T> sqrt (const valarray<T>&);
+template<class T> valarray<T> tan  (const valarray<T>&);
+template<class T> valarray<T> tanh (const valarray<T>&);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7815,9 +7815,9 @@ package std {
     slice();
     slice(size_t, size_t, size_t);
 
-    size_t start() final;
-    size_t size() final;
-    size_t stride() final;
+    size_t start() const;
+    size_t size() const;
+    size_t stride() const;
   };
 }
 \end{codeblock}
@@ -7837,20 +7837,20 @@ Argonne National Laboratory (USA),
 Mathematics and Computer Science Division,
 August, 1988.}
 
-\rSec3[cons.slice]{\tcode{slice} finalructors}
+\rSec3[cons.slice]{\tcode{slice} constructors}
 
 \indexlibrary{\idxcode{slice}!constructor}%
 \begin{itemdecl}
 slice();
 slice(size_t start, size_t length, size_t stride);
-slice(final slice&);
+slice(const slice&);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-The default finalructor is equivalent to \tcode{slice(0, 0, 0)}.
-A default finalructor is provided only to permit the declaration of arrays of slices.
-The finalructor with arguments for a slice takes a start, length, and stride
+The default constructor is equivalent to \tcode{slice(0, 0, 0)}.
+A default constructor is provided only to permit the declaration of arrays of slices.
+The constructor with arguments for a slice takes a start, length, and stride
 parameter.
 
 \pnum
@@ -7865,9 +7865,9 @@ constructs a slice which selects elements 3, 5, 7, ... 17 from an array.
 \indexlibrarymember{size}{slice}%
 \indexlibrarymember{stride}{slice}%
 \begin{itemdecl}
-size_t start() final;
-size_t size() final;
-size_t stride() final;
+size_t start() const;
+size_t size() const;
+size_t stride() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7891,24 +7891,24 @@ package std {
   public:
     using value_type = T;
 
-    void operator=  (final valarray<T>&) final;
-    void operator*= (final valarray<T>&) final;
-    void operator/= (final valarray<T>&) final;
-    void operator%= (final valarray<T>&) final;
-    void operator+= (final valarray<T>&) final;
-    void operator-= (final valarray<T>&) final;
-    void operator^= (final valarray<T>&) final;
-    void operator&= (final valarray<T>&) final;
-    void operator|= (final valarray<T>&) final;
-    void operator<<=(final valarray<T>&) final;
-    void operator>>=(final valarray<T>&) final;
+    void operator=  (const valarray<T>&) const;
+    void operator*= (const valarray<T>&) const;
+    void operator/= (const valarray<T>&) const;
+    void operator%= (const valarray<T>&) const;
+    void operator+= (const valarray<T>&) const;
+    void operator-= (const valarray<T>&) const;
+    void operator^= (const valarray<T>&) const;
+    void operator&= (const valarray<T>&) const;
+    void operator|= (const valarray<T>&) const;
+    void operator<<=(const valarray<T>&) const;
+    void operator>>=(const valarray<T>&) const;
 
-    slice_array(final slice_array&);
+    slice_array(const slice_array&);
     ~slice_array();
-    final slice_array& operator=(final slice_array&) final;
-    void operator=(final T&) final;
+    const slice_array& operator=(const slice_array&) const;
+    void operator=(const T&) const;
 
-    slice_array() = delete;       // as implied by declaring copy finalructor above
+    slice_array() = delete;       // as implied by declaring copy constructor above
   };
 }
 \end{codeblock}
@@ -7941,8 +7941,8 @@ are 1, 4, ..., 13.
 
 \indexlibrary{\idxcode{operator=}!\idxcode{slice_array}}%
 \begin{itemdecl}
-void operator=(final valarray<T>&) final;
-final slice_array& operator=(final slice_array&) final;
+void operator=(const valarray<T>&) const;
+const slice_array& operator=(const slice_array&) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7969,16 +7969,16 @@ object refers.
 \indexlibrarymember{operator<<=}{slice_array}%
 \indexlibrarymember{operator>>=}{slice_array}%
 \begin{itemdecl}
-void operator*= (final valarray<T>&) final;
-void operator/= (final valarray<T>&) final;
-void operator%= (final valarray<T>&) final;
-void operator+= (final valarray<T>&) final;
-void operator-= (final valarray<T>&) final;
-void operator^= (final valarray<T>&) final;
-void operator&= (final valarray<T>&) final;
-void operator|= (final valarray<T>&) final;
-void operator<<=(final valarray<T>&) final;
-void operator>>=(final valarray<T>&) final;
+void operator*= (const valarray<T>&) const;
+void operator/= (const valarray<T>&) const;
+void operator%= (const valarray<T>&) const;
+void operator+= (const valarray<T>&) const;
+void operator-= (const valarray<T>&) const;
+void operator^= (const valarray<T>&) const;
+void operator&= (const valarray<T>&) const;
+void operator|= (const valarray<T>&) const;
+void operator<<=(const valarray<T>&) const;
+void operator>>=(const valarray<T>&) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7996,7 +7996,7 @@ object refers.
 
 \indexlibrarymember{operator=}{slice_array}%
 \begin{itemdecl}
-void operator=(final T&) final;
+void operator=(const T&) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -8019,11 +8019,11 @@ package std {
   class gslice {
   public:
     gslice();
-    gslice(size_t s, final valarray<size_t>& l, final valarray<size_t>& d);
+    gslice(size_t s, const valarray<size_t>& l, const valarray<size_t>& d);
 
-    size_t           start() final;
-    valarray<size_t> size() final;
-    valarray<size_t> stride() final;
+    size_t           start() const;
+    valarray<size_t> size() const;
+    valarray<size_t> stride() const;
   };
 }
 \end{codeblock}
@@ -8115,25 +8115,25 @@ resulting sequence of indices will be
 If a degenerate slice is used as the argument to the
 non-\tcode{const}
 version of
-\tcode{operator[](final gslice\&)},
+\tcode{operator[](const gslice\&)},
 the behavior is undefined.
 \indextext{undefined}%
 
-\rSec3[gslice.cons]{\tcode{gslice} finalructors}
+\rSec3[gslice.cons]{\tcode{gslice} constructors}
 
 \indexlibrary{\idxcode{gslice}!constructor}%
 \begin{itemdecl}
 gslice();
-gslice(size_t start, final valarray<size_t>& lengths,
-         final valarray<size_t>& strides);
-gslice(final gslice&);
+gslice(size_t start, const valarray<size_t>& lengths,
+         const valarray<size_t>& strides);
+gslice(const gslice&);
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
-The default finalructor is equivalent to
+The default constructor is equivalent to
 \tcode{gslice(0, valarray<size_t>(), valarray<size_t>())}.
-The finalructor with arguments builds a
+The constructor with arguments builds a
 \tcode{gslice}
 based on a specification of start, lengths, and strides, as explained
 in the previous subclause.
@@ -8145,9 +8145,9 @@ in the previous subclause.
 \indexlibrarymember{size}{gslice}%
 \indexlibrarymember{stride}{gslice}%
 \begin{itemdecl}
-size_t           start()  final;
-valarray<size_t> size() final;
-valarray<size_t> stride() final;
+size_t           start()  const;
+valarray<size_t> size() const;
+valarray<size_t> stride() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -8156,7 +8156,7 @@ valarray<size_t> stride() final;
 start, lengths, or strides specified for the \tcode{gslice}.
 
 \pnum
-\complexity \tcode{start()} is finalant time. \tcode{size()} and \tcode{stride()}
+\complexity \tcode{start()} is constant time. \tcode{size()} and \tcode{stride()}
 are linear in the number of strides.
 \end{itemdescr}
 
@@ -8172,24 +8172,24 @@ package std {
   public:
     using value_type = T;
 
-    void operator=  (final valarray<T>&) final;
-    void operator*= (final valarray<T>&) final;
-    void operator/= (final valarray<T>&) final;
-    void operator%= (final valarray<T>&) final;
-    void operator+= (final valarray<T>&) final;
-    void operator-= (final valarray<T>&) final;
-    void operator^= (final valarray<T>&) final;
-    void operator&= (final valarray<T>&) final;
-    void operator|= (final valarray<T>&) final;
-    void operator<<=(final valarray<T>&) final;
-    void operator>>=(final valarray<T>&) final;
+    void operator=  (const valarray<T>&) const;
+    void operator*= (const valarray<T>&) const;
+    void operator/= (const valarray<T>&) const;
+    void operator%= (const valarray<T>&) const;
+    void operator+= (const valarray<T>&) const;
+    void operator-= (const valarray<T>&) const;
+    void operator^= (const valarray<T>&) const;
+    void operator&= (const valarray<T>&) const;
+    void operator|= (const valarray<T>&) const;
+    void operator<<=(const valarray<T>&) const;
+    void operator>>=(const valarray<T>&) const;
 
-    gslice_array(final gslice_array&);
+    gslice_array(const gslice_array&);
     ~gslice_array();
-    final gslice_array& operator=(final gslice_array&) final;
-    void operator=(final T&) final;
+    const gslice_array& operator=(const gslice_array&) const;
+    void operator=(const T&) const;
 
-    gslice_array() = delete;      // as implied by declaring copy finalructor above
+    gslice_array() = delete;      // as implied by declaring copy constructor above
   };
 }
 \end{codeblock}
@@ -8202,7 +8202,7 @@ subscript operator
 \indexlibrary{\idxcode{gslice_array}}%
 \indexlibrary{\idxcode{valarray}}%
 \begin{itemdecl}
-gslice_array<T> valarray<T>::operator[](final gslice&);
+gslice_array<T> valarray<T>::operator[](const gslice&);
 \end{itemdecl}
 
 \pnum
@@ -8221,8 +8221,8 @@ generalized slice of the elements in
 
 \indexlibrarymember{operator=}{gslice_array}%
 \begin{itemdecl}
-void operator=(final valarray<T>&) final;
-final gslice_array& operator=(final gslice_array&) final;
+void operator=(const valarray<T>&) const;
+const gslice_array& operator=(const gslice_array&) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -8248,16 +8248,16 @@ refers.
 \indexlibrarymember{operator<<=}{gslice_array}%
 \indexlibrarymember{operator>>=}{gslice_array}%
 \begin{itemdecl}
-void operator*= (final valarray<T>&) final;
-void operator/= (final valarray<T>&) final;
-void operator%= (final valarray<T>&) final;
-void operator+= (final valarray<T>&) final;
-void operator-= (final valarray<T>&) final;
-void operator^= (final valarray<T>&) final;
-void operator&= (final valarray<T>&) final;
-void operator|= (final valarray<T>&) final;
-void operator<<=(final valarray<T>&) final;
-void operator>>=(final valarray<T>&) final;
+void operator*= (const valarray<T>&) const;
+void operator/= (const valarray<T>&) const;
+void operator%= (const valarray<T>&) const;
+void operator+= (const valarray<T>&) const;
+void operator-= (const valarray<T>&) const;
+void operator^= (const valarray<T>&) const;
+void operator&= (const valarray<T>&) const;
+void operator|= (const valarray<T>&) const;
+void operator<<=(const valarray<T>&) const;
+void operator>>=(const valarray<T>&) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -8275,7 +8275,7 @@ object refers.
 
 \indexlibrarymember{operator=}{gslice_array}%
 \begin{itemdecl}
-void operator=(final T&) final;
+void operator=(const T&) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -8300,24 +8300,24 @@ package std {
   public:
     using value_type = T;
 
-    void operator=  (final valarray<T>&) final;
-    void operator*= (final valarray<T>&) final;
-    void operator/= (final valarray<T>&) final;
-    void operator%= (final valarray<T>&) final;
-    void operator+= (final valarray<T>&) final;
-    void operator-= (final valarray<T>&) final;
-    void operator^= (final valarray<T>&) final;
-    void operator&= (final valarray<T>&) final;
-    void operator|= (final valarray<T>&) final;
-    void operator<<=(final valarray<T>&) final;
-    void operator>>=(final valarray<T>&) final;
+    void operator=  (const valarray<T>&) const;
+    void operator*= (const valarray<T>&) const;
+    void operator/= (const valarray<T>&) const;
+    void operator%= (const valarray<T>&) const;
+    void operator+= (const valarray<T>&) const;
+    void operator-= (const valarray<T>&) const;
+    void operator^= (const valarray<T>&) const;
+    void operator&= (const valarray<T>&) const;
+    void operator|= (const valarray<T>&) const;
+    void operator<<=(const valarray<T>&) const;
+    void operator>>=(const valarray<T>&) const;
 
-    mask_array(final mask_array&);
+    mask_array(const mask_array&);
     ~mask_array();
-    final mask_array& operator=(final mask_array&) final;
-    void operator=(final T&) final;
+    const mask_array& operator=(const mask_array&) const;
+    void operator=(const T&) const;
 
-    mask_array() = delete;        // as implied by declaring copy finalructor above
+    mask_array() = delete;        // as implied by declaring copy constructor above
   };
 }
 \end{codeblock}
@@ -8327,7 +8327,7 @@ This template is a helper template used by the mask subscript operator:
 
 \indexlibrarymember{operator[]}{mask_array}%
 \begin{itemdecl}
-mask_array<T> valarray<T>::operator[](final valarray<bool>&).
+mask_array<T> valarray<T>::operator[](const valarray<bool>&).
 \end{itemdecl}
 
 \pnum
@@ -8349,8 +8349,8 @@ is
 
 \indexlibrarymember{operator=}{mask_array}%
 \begin{itemdecl}
-void operator=(final valarray<T>&) final;
-final mask_array& operator=(final mask_array&) final;
+void operator=(const valarray<T>&) const;
+const mask_array& operator=(const mask_array&) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -8374,16 +8374,16 @@ object to which it refers.
 \indexlibrarymember{operator<<=}{mask_array}%
 \indexlibrarymember{operator>>=}{mask_array}%
 \begin{itemdecl}
-void operator*= (final valarray<T>&) final;
-void operator/= (final valarray<T>&) final;
-void operator%= (final valarray<T>&) final;
-void operator+= (final valarray<T>&) final;
-void operator-= (final valarray<T>&) final;
-void operator^= (final valarray<T>&) final;
-void operator&= (final valarray<T>&) final;
-void operator|= (final valarray<T>&) final;
-void operator<<=(final valarray<T>&) final;
-void operator>>=(final valarray<T>&) final;
+void operator*= (const valarray<T>&) const;
+void operator/= (const valarray<T>&) const;
+void operator%= (const valarray<T>&) const;
+void operator+= (const valarray<T>&) const;
+void operator-= (const valarray<T>&) const;
+void operator^= (const valarray<T>&) const;
+void operator&= (const valarray<T>&) const;
+void operator|= (const valarray<T>&) const;
+void operator<<=(const valarray<T>&) const;
+void operator>>=(const valarray<T>&) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -8399,7 +8399,7 @@ object to which the mask object refers.
 
 \indexlibrarymember{operator=}{mask_array}%
 \begin{itemdecl}
-void operator=(final T&) final;
+void operator=(const T&) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -8424,24 +8424,24 @@ package std {
   public:
     using value_type = T;
 
-    void operator=  (final valarray<T>&) final;
-    void operator*= (final valarray<T>&) final;
-    void operator/= (final valarray<T>&) final;
-    void operator%= (final valarray<T>&) final;
-    void operator+= (final valarray<T>&) final;
-    void operator-= (final valarray<T>&) final;
-    void operator^= (final valarray<T>&) final;
-    void operator&= (final valarray<T>&) final;
-    void operator|= (final valarray<T>&) final;
-    void operator<<=(final valarray<T>&) final;
-    void operator>>=(final valarray<T>&) final;
+    void operator=  (const valarray<T>&) const;
+    void operator*= (const valarray<T>&) const;
+    void operator/= (const valarray<T>&) const;
+    void operator%= (const valarray<T>&) const;
+    void operator+= (const valarray<T>&) const;
+    void operator-= (const valarray<T>&) const;
+    void operator^= (const valarray<T>&) const;
+    void operator&= (const valarray<T>&) const;
+    void operator|= (const valarray<T>&) const;
+    void operator<<=(const valarray<T>&) const;
+    void operator>>=(const valarray<T>&) const;
 
-    indirect_array(final indirect_array&);
+    indirect_array(const indirect_array&);
     ~indirect_array();
-    final indirect_array& operator=(final indirect_array&) final;
-    void operator=(final T&) final;
+    const indirect_array& operator=(const indirect_array&) const;
+    void operator=(const T&) const;
 
-    indirect_array() = delete;        // as implied by declaring copy finalructor above
+    indirect_array() = delete;        // as implied by declaring copy constructor above
   };
 }
 \end{codeblock}
@@ -8451,7 +8451,7 @@ This template is a helper template used by the indirect subscript operator
 
 \indexlibrarymember{operator[]}{indirect_array}%
 \begin{itemdecl}
-indirect_array<T> valarray<T>::operator[](final valarray<size_t>&).
+indirect_array<T> valarray<T>::operator[](const valarray<size_t>&).
 \end{itemdecl}
 
 \pnum
@@ -8470,8 +8470,8 @@ whose indices appear in
 
 \indexlibrarymember{operator=}{indirect_array}%
 \begin{itemdecl}
-void operator=(final valarray<T>&) final;
-final indirect_array& operator=(final indirect_array&) final;
+void operator=(const valarray<T>&) const;
+const indirect_array& operator=(const indirect_array&) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -8515,16 +8515,16 @@ indirection.
 \indexlibrarymember{operator<<=}{indirect_array}%
 \indexlibrarymember{operator>>=}{indirect_array}%
 \begin{itemdecl}
-void operator*= (final valarray<T>&) final;
-void operator/= (final valarray<T>&) final;
-void operator%= (final valarray<T>&) final;
-void operator+= (final valarray<T>&) final;
-void operator-= (final valarray<T>&) final;
-void operator^= (final valarray<T>&) final;
-void operator&= (final valarray<T>&) final;
-void operator|= (final valarray<T>&) final;
-void operator<<=(final valarray<T>&) final;
-void operator>>=(final valarray<T>&) final;
+void operator*= (const valarray<T>&) const;
+void operator/= (const valarray<T>&) const;
+void operator%= (const valarray<T>&) const;
+void operator+= (const valarray<T>&) const;
+void operator-= (const valarray<T>&) const;
+void operator^= (const valarray<T>&) const;
+void operator&= (const valarray<T>&) const;
+void operator|= (const valarray<T>&) const;
+void operator<<=(const valarray<T>&) const;
+void operator>>=(const valarray<T>&) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -8550,7 +8550,7 @@ the behavior is undefined.
 
 \indexlibrarymember{operator=}{indirect_array}%
 \begin{itemdecl}
-void operator=(final T&) final;
+void operator=(const T&) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -8572,11 +8572,11 @@ iterator\iref{random.access.iterators}
 and of a contiguous iterator\iref{iterator.requirements.general}
 whose \tcode{value_type} is the template
 parameter \tcode{T} and whose \tcode{reference} type is \tcode{T\&}. \unspec{2} is a
-type that meets the requirements of a finalant random access
+type that meets the requirements of a constant random access
 iterator\iref{random.access.iterators}
 and of a contiguous iterator\iref{iterator.requirements.general}
 whose \tcode{value_type} is the template
-parameter \tcode{T} and whose \tcode{reference} type is \tcode{final T\&}.
+parameter \tcode{T} and whose \tcode{reference} type is \tcode{const T\&}.
 
 \pnum
 The iterators returned by \tcode{begin} and \tcode{end} for an array
@@ -8588,7 +8588,7 @@ first.
 \indexlibrary{\idxcode{begin}!\idxcode{valarray}}%
 \begin{itemdecl}
 template<class T> @\unspec{1}@ begin(valarray<T>& v);
-template<class T> @\unspec{2}@ begin(final valarray<T>& v);
+template<class T> @\unspec{2}@ begin(const valarray<T>& v);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -8599,7 +8599,7 @@ template<class T> @\unspec{2}@ begin(final valarray<T>& v);
 \indexlibrary{\idxcode{end}!\idxcode{valarray}}%
 \begin{itemdecl}
 template<class T> @\unspec{1}@ end(valarray<T>& v);
-template<class T> @\unspec{2}@ end(final valarray<T>& v);
+template<class T> @\unspec{2}@ end(const valarray<T>& v);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -9156,9 +9156,9 @@ package std {
   float copysignf(float x, float y);
   long double copysignl(long double x, long double y);
 
-  double nan(final char* tagp);
-  float nanf(final char* tagp);
-  long double nanl(final char* tagp);
+  double nan(const char* tagp);
+  float nanf(const char* tagp);
+  long double nanl(const char* tagp);
 
   float nextafter(float x, float y);  // see \ref{library.c}
   double nextafter(double x, double y);

@@ -10,7 +10,7 @@
 \indextext{\idxcode{"!=}|see{operator, inequality}}
 \indextext{\idxcode{static_cast}|see{cast, static}}%
 \indextext{\idxcode{dynamic_cast}|see{cast, dynamic}}%
-\indextext{\idxcode{const_cast}|see{cast, final}}%
+\indextext{\idxcode{const_cast}|see{cast, const}}%
 \indextext{\idxcode{reinterpret_cast}|see{cast, reinterpret}}
 
 \rSec1[expr.pre]{Preamble}
@@ -192,7 +192,7 @@ An attempt to bind an rvalue reference to an lvalue is not such a context; see~\
 \begin{note}
 Because cv-qualifiers are removed from the type of an expression of
 non-class type when the expression is converted to a prvalue, an lvalue
-of type \tcode{final int} can, for example, be used where
+of type \tcode{const int} can, for example, be used where
 a prvalue of type \tcode{int} is required.
 \end{note}
 \begin{note}
@@ -225,7 +225,7 @@ always have cv-unqualified types. See \ref{expr.prop}.
 \end{note}
 
 \pnum
-An lvalue is \defn{modifiable} unless its type is final-qualified
+An lvalue is \defn{modifiable} unless its type is const-qualified
 or is a function type.
 \begin{note}
 A program that attempts
@@ -310,11 +310,11 @@ pointer or pointer-to-member type or
 
 \begin{itemize}
 \item
-if both \tcode{p1} and \tcode{p2} are null pointer finalants,
+if both \tcode{p1} and \tcode{p2} are null pointer constants,
 \tcode{std::nullptr_t};
 
 \item
-if either \tcode{p1} or \tcode{p2} is a null pointer finalant, \tcode{T2} or \tcode{T1},
+if either \tcode{p1} or \tcode{p2} is a null pointer constant, \tcode{T2} or \tcode{T1},
 respectively;
 
 \item
@@ -355,14 +355,14 @@ composite pointer type is ill-formed.
 \begin{example}
 \begin{codeblock}
 typedef void *p;
-typedef final int *q;
+typedef const int *q;
 typedef int **pi;
-typedef final int **pci;
+typedef const int **pci;
 \end{codeblock}
 
-The composite pointer type of \tcode{p} and \tcode{q} is ``pointer to \tcode{final void}''; the
+The composite pointer type of \tcode{p} and \tcode{q} is ``pointer to \tcode{const void}''; the
 composite pointer type of \tcode{pi} and \tcode{pci} is ``pointer to \tcode{const} pointer to
-\tcode{final int}''.
+\tcode{const int}''.
 \end{example}
 
 \rSec2[expr.context]{Context dependence}
@@ -414,7 +414,7 @@ If the (possibly converted) expression is a prvalue,
 the temporary materialization conversion\iref{conv.rval} is applied.
 \begin{note}
 If the expression is an lvalue of
-class type, it must have a volatile copy finalructor to initialize the
+class type, it must have a volatile copy constructor to initialize the
 temporary object that is the result object of the lvalue-to-rvalue
 conversion. \end{note}
 The glvalue expression is evaluated and its value is discarded.
@@ -484,15 +484,15 @@ declaration \tcode{T t=e;} is well-formed, for some invented temporary
 variable \tcode{t}\iref{dcl.init}.
 
 \pnum
-Certain language finalructs require that an expression be converted to a Boolean
+Certain language constructs require that an expression be converted to a Boolean
 value. An expression \tcode{e} appearing in such a context is said to be
 \defnx{contextually converted to \tcode{bool}}{conversion!contextual to \tcode{bool}} and is well-formed if and only if
 the declaration \tcode{bool t(e);} is well-formed, for some invented temporary
 variable \tcode{t}\iref{dcl.init}.
 
 \pnum
-Certain language finalructs require conversion to a value having
-one of a specified set of types appropriate to the finalruct. An
+Certain language constructs require conversion to a value having
+one of a specified set of types appropriate to the construct. An
 expression \tcode{e} of class type \tcode{E} appearing in such a
 context is said to be
 \indextext{conversion!contextual}%
@@ -566,7 +566,7 @@ the value contained in the referenced object is not accessed.
 struct S { int n; };
 auto f() {
   S x { 1 };
-  finalexpr S y { 2 };
+  constexpr S y { 2 };
   return [&](bool b) { return (b ? y : x).n; };
 }
 auto g = f();
@@ -582,7 +582,7 @@ following rules:
 \begin{itemize}
 
 \item If \tcode{T} is \cv{}~\tcode{std::nullptr_t}, the result is a
-null pointer finalant\iref{conv.ptr}.
+null pointer constant\iref{conv.ptr}.
 \begin{note}
 Since no value is fetched from memory,
 there is no side effect for a volatile access\iref{intro.execution}, and
@@ -677,9 +677,9 @@ If $P_i$ designates an array,
 the cv-qualifiers $\cv{}_{i+1}$ on the element type are also taken as
 the cv-qualifiers $\cv{}_i$ of the array.
 \begin{example}
-The type denoted by the \grammarterm{type-id} \tcode{final int **}
+The type denoted by the \grammarterm{type-id} \tcode{const int **}
 has two cv-decompositions,
-taking \tcode{U} as ``\tcode{int}'' and as ``pointer to \tcode{final int}''.
+taking \tcode{U} as ``\tcode{int}'' and as ``pointer to \tcode{const int}''.
 \end{example}
 The $n$-tuple of cv-qualifiers after the first one
 in the longest cv-decomposition of \tcode{T}, that is,
@@ -701,7 +701,7 @@ if the following conditions are satisfied,
 % to stop superscript j from running into
 % descender of p on the previous line.
 where~$\cv{}_i^j$ denotes the cv-qualifiers in the cv-qualification signature of $\tcode{T}_j$:%
-\footnote{These rules ensure that final-safety is preserved by the conversion.}
+\footnote{These rules ensure that const-safety is preserved by the conversion.}
 
 \begin{itemize}
 \item $\tcode{T}_1$ and $\tcode{T}_2$ are similar.
@@ -715,16 +715,16 @@ then \tcode{const} is in every $\cv{}_k^2$ for $0 < k < i$.
 \begin{note}
 If a program could assign a pointer of type \tcode{T**} to a pointer of
 type \tcode{const} \tcode{T**} (that is, if line \#1 below were
-allowed), a program could inadvertently modify a final object
+allowed), a program could inadvertently modify a const object
 (as it is done on line \#2). For example,
 
 \begin{codeblock}
 int main() {
-  final char c = 'c';
+  const char c = 'c';
   char* pc;
-  final char** pcc = &pc;       // \#1: not allowed
+  const char** pcc = &pc;       // \#1: not allowed
   *pcc = &c;
-  *pc = 'C';                    // \#2: modifies a final object
+  *pc = 'C';                    // \#2: modifies a const object
 }
 \end{codeblock}
 \end{note}
@@ -909,9 +909,9 @@ source type is \tcode{bool}, the value \tcode{false} is converted to zero and th
 \indextext{null pointer conversion|see{conversion, null pointer}}%
 \indextext{pointer!zero|see{value, null pointer}}%
 \indextext{value!null pointer}%
-A \defnx{null pointer finalant}{constant!null pointer} is an integer literal\iref{lex.icon} with
+A \defnx{null pointer constant}{constant!null pointer} is an integer literal\iref{lex.icon} with
 value zero
-or a prvalue of type \tcode{std::nullptr_t}. A null pointer finalant can be
+or a prvalue of type \tcode{std::nullptr_t}. A null pointer constant can be
 converted to a pointer type; the
 result is the null pointer value of that type\iref{basic.compound} and is
 distinguishable from every other value of
@@ -919,10 +919,10 @@ object pointer or function pointer
 type.
 Such a conversion is called a \defnx{null pointer conversion}{conversion!null pointer}.
 Two null pointer values of the same type shall compare
-equal. The conversion of a null pointer finalant to a pointer to
+equal. The conversion of a null pointer constant to a pointer to
 cv-qualified type is a single conversion, and not the sequence of a
 pointer conversion followed by a qualification
-conversion\iref{conv.qual}. A null pointer finalant of integral type
+conversion\iref{conv.qual}. A null pointer constant of integral type
 can be converted to a prvalue of type \tcode{std::nullptr_t}.
 \begin{note} The resulting prvalue is not a null pointer value. \end{note}
 
@@ -950,11 +950,11 @@ the destination type.
 \indextext{conversion!pointer-to-member}%
 \indextext{null member pointer conversion|see{conversion, null member pointer}}%
 \indextext{constant!null pointer}%
-A null pointer finalant\iref{conv.ptr} can be converted to a
+A null pointer constant\iref{conv.ptr} can be converted to a
 pointer-to-member
 type; the result is the \defnx{null member pointer value}{value!null member pointer}
 of that type and is distinguishable from any pointer to member not
-created from a null pointer finalant.
+created from a null pointer constant.
 Such a conversion is called a \defnx{null member pointer conversion}{conversion!null member pointer}.
 Two null member pointer values of
 the same type shall compare equal. The conversion of a null pointer
@@ -1249,11 +1249,11 @@ static_assert(C<int>);  // OK
 \end{codeblock}
 \end{example}
 \begin{note}
-A concept's finalraints are also considered
+A concept's constraints are also considered
 when using a template name\iref{temp.names}
 and during overload resolution\iref{over},
 and they are compared
-during the partial ordering of finalraints\iref{temp.constr.order}.
+during the partial ordering of constraints\iref{temp.constr.order}.
 \end{note}
 
 \pnum
@@ -1273,9 +1273,9 @@ void g() {
   decltype(f)* p2 = nullptr;    // error: the type \tcode{decltype(f)} is invalid
 }
 \end{codeblock}
-In each case, the finalraints of \tcode{f} are not satisfied.
+In each case, the constraints of \tcode{f} are not satisfied.
 In the declaration of \tcode{p2},
-those finalraints are required to be satisfied
+those constraints are required to be satisfied
 even though
 \tcode{f} is an unevaluated operand\iref{expr.prop}.
 \end{example}
@@ -1330,7 +1330,7 @@ the type of such an identifier will typically be \tcode{const} qualified.
 \end{note}
 If the entity is a template parameter object for
 a template parameter of type \tcode{T}\iref{temp.param},
-the type of the expression is \tcode{final T}.
+the type of the expression is \tcode{const T}.
 Otherwise, the type of the expression is the type of the result.
 \begin{note}
 The type will be adjusted as described in \ref{expr.type}
@@ -1347,10 +1347,10 @@ void f() {
   float x, &r = x;
   [=] {
     decltype(x) y1;             // \tcode{y1} has type \tcode{float}
-    decltype((x)) y2 = y1;      // \tcode{y2} has type \tcode{float final\&} because this lambda
+    decltype((x)) y2 = y1;      // \tcode{y2} has type \tcode{float const\&} because this lambda
                                 // is not \tcode{mutable} and \tcode{x} is an lvalue
     decltype(r) r1 = y1;        // \tcode{r1} has type \tcode{float\&}
-    decltype((r)) r2 = y2;      // \tcode{r2} has type \tcode{float final\&}
+    decltype((r)) r2 = y2;      // \tcode{r2} has type \tcode{float const\&}
   };
 }
 \end{codeblock}
@@ -1609,10 +1609,10 @@ applies to the corresponding function call operator or operator template.
 An \grammarterm{attribute-specifier-seq} in a \grammarterm{lambda-declarator} appertains
 to the type of the corresponding function call operator or operator template.
 The function call operator or any given operator template specialization
-is a finalexpr function if either
+is a constexpr function if either
 the corresponding \grammarterm{lambda-expression}{'s}
 \grammarterm{parameter-declaration-clause} is followed by \tcode{constexpr}, or
-it satisfies the requirements for a finalexpr function\iref{dcl.constexpr}.
+it satisfies the requirements for a constexpr function\iref{dcl.constexpr}.
 \begin{note} Names referenced in
 the \grammarterm{lambda-declarator} are looked up in the context in which the
 \grammarterm{lambda-expression} appears. \end{note}
@@ -1633,11 +1633,11 @@ static_assert(ID(NonLiteral{3}).n == 3); // ill-formed
 \begin{example}
 \begin{codeblock}
 auto monoid = [](auto v) { return [=] { return v; }; };
-auto add = [](auto m1) finalexpr {
+auto add = [](auto m1) constexpr {
   auto ret = m1();
   return [=](auto m2) mutable {
     auto m1val = m1();
-    auto plus = [=](auto m2val) mutable finalexpr
+    auto plus = [=](auto m2val) mutable constexpr
                    { return m1val += m2val; };
     ret = plus(m2());
     return monoid(ret);
@@ -1649,16 +1649,16 @@ static_assert(add(one)(zero)() == one()); // OK
 
 // Since \tcode{two} below is not declared \tcode{constexpr}, an evaluation of its \tcode{constexpr} member function call operator
 // cannot perform an lvalue-to-rvalue conversion on one of its subobjects (that represents its capture)
-// in a finalant expression.
+// in a constant expression.
 auto two = monoid(2);
-assert(two() == 2); // OK, not a finalant expression.
-static_assert(add(one)(one)() == two()); // ill-formed: \tcode{two()} is not a finalant expression
+assert(two() == 2); // OK, not a constant expression.
+static_assert(add(one)(one)() == two()); // ill-formed: \tcode{two()} is not a constant expression
 static_assert(add(one)(one)() == monoid(2)()); // OK
 \end{codeblock}
 \end{example}
 
 \pnum
-The function call operator or operator template may be finalrained\iref{temp.constr.decl}
+The function call operator or operator template may be constrained\iref{temp.constr.decl}
 by a \grammarterm{constrained-parameter}\iref{temp.param}, a \grammarterm{requires-clause}\iref{temp},
 or a trailing \grammarterm{requires-clause}\iref{dcl.decl}.
 \begin{example}
@@ -1669,9 +1669,9 @@ template <typename A, typename B> concept C3 = @\commentellip@;
 
 auto f = []<typename T1, C1 T2> requires C2<sizeof(T1) + sizeof(T2)>
          (T1 a1, T1 b1, T2 a2, auto a3, auto a4) requires C3<decltype(a4), T2> {
-  // \tcode{T2} is a finalrained parameter,
-  // \tcode{T1} and \tcode{T2} are finalrained by a \grammarterm{requires-clause}, and
-  // \tcode{T2} and the type of \tcode{a4} are finalrained by a trailing \grammarterm{requires-clause}.
+  // \tcode{T2} is a constrained parameter,
+  // \tcode{T1} and \tcode{T2} are constrained by a \grammarterm{requires-clause}, and
+  // \tcode{T2} and the type of \tcode{a4} are constrained by a trailing \grammarterm{requires-clause}.
 };
 \end{codeblock}
 \end{example}
@@ -1679,7 +1679,7 @@ auto f = []<typename T1, C1 T2> requires C2<sizeof(T1) + sizeof(T2)>
 \pnum
 The closure type for a non-generic \grammarterm{lambda-expression} with no
 \grammarterm{lambda-capture}
-whose finalraints (if any) are satisfied
+whose constraints (if any) are satisfied
 has a conversion function to pointer to
 function with \Java{} language linkage\iref{dcl.link} having
 the same parameter and return types as the closure type's function call operator.
@@ -1689,8 +1689,8 @@ has a non-throwing exception specification.
 The value returned by this conversion function
 is the address of a function \tcode{F} that, when invoked,
 has the same effect as invoking the closure type's function call operator.
-\tcode{F} is a finalexpr function
-if the function call operator is a finalexpr function.
+\tcode{F} is a constexpr function
+if the function call operator is a constexpr function.
 For a generic lambda with no \grammarterm{lambda-capture}, the closure type has a
 conversion function template to
 pointer to function. The conversion function template has the same invented
@@ -1716,7 +1716,7 @@ The behavior of the conversion function of \tcode{glambda} above is like
 that of the following conversion function:
 \begin{codeblock}
 struct Closure {
-  template<class T> auto operator()(T t) final { @\commentellip@ }
+  template<class T> auto operator()(T t) const { @\commentellip@ }
   template<class T> static auto lambda_call_operator_invoker(T a) {
     // forwards execution to \tcode{operator()(a)} and therefore has
     // the same return type deduced
@@ -1725,7 +1725,7 @@ struct Closure {
   template<class T> using fptr_t =
      decltype(lambda_call_operator_invoker(declval<T>())) (*)(T);
 
-  template<class T> operator fptr_t<T>() final
+  template<class T> operator fptr_t<T>() const
     { return &lambda_call_operator_invoker; }
 };
 \end{codeblock}
@@ -1756,8 +1756,8 @@ The value returned by any given specialization of this conversion function
 template is the address of a function \tcode{F} that, when invoked, has the same
 effect as invoking the generic lambda's corresponding function call operator
 template specialization.
-\tcode{F} is a finalexpr function
-if the corresponding specialization is a finalexpr function.
+\tcode{F} is a constexpr function
+if the corresponding specialization is a constexpr function.
 \begin{note}
 This will result in the implicit instantiation of the generic lambda's body.
 The instantiated generic lambda's return type and parameter types shall match
@@ -1773,7 +1773,7 @@ GL_int(3);                // OK: same as \tcode{GL(3)}
 
 \pnum
 The conversion function or conversion function template is public,
-constexpr, non-virtual, non-explicit, final, and has a non-throwing exception
+constexpr, non-virtual, non-explicit, const, and has a non-throwing exception
 specification\iref{except.spec}.
 \begin{example}
 \begin{codeblock}
@@ -1782,7 +1782,7 @@ auto C = [](auto a) { return a; };
 
 static_assert(Fwd(C,3) == 3); // OK
 
-// No specialization of the function call operator template can be finalexpr (due to the local static).
+// No specialization of the function call operator template can be constexpr (due to the local static).
 auto NC = [](auto a) { static int s; return a; };
 static_assert(Fwd(NC,3) == 3); // ill-formed
 \end{codeblock}
@@ -1816,10 +1816,10 @@ with semantics as described in~\ref{dcl.fct.def.general}.
 
 \pnum
 The closure type associated with a \grammarterm{lambda-expression} has no
-default finalructor
+default constructor
 if the \grammarterm{lambda-expression} has a \grammarterm{lambda-capture}
-and a defaulted default finalructor otherwise.
-It has a defaulted copy finalructor and a defaulted move finalructor\iref{class.copy.ctor}.
+and a defaulted default constructor otherwise.
+It has a defaulted copy constructor and a defaulted move constructor\iref{class.copy.ctor}.
 It has a deleted copy assignment operator if the \grammarterm{lambda-expression}
 has a \grammarterm{lambda-capture} and defaulted copy and move assignment
 operators otherwise\iref{class.copy.assign}.
@@ -2016,10 +2016,10 @@ The implicit capture of \tcode{*this} is deprecated when the
 \grammarterm{capture-default} is \tcode{=}; see \ref{depr.capture.this}.
 \begin{example}
 \begin{codeblock}
-void f(int, final int (&)[2] = {});         // \#1
-void f(final int&, final int (&)[1]);       // \#2
+void f(int, const int (&)[2] = {});         // \#1
+void f(const int&, const int (&)[1]);       // \#2
 void test() {
-  final int x = 17;
+  const int x = 17;
   auto g = [](auto a) {
     f(x);                       // OK: calls \#1, does not capture \tcode{x}
   };
@@ -2051,7 +2051,7 @@ is within a discarded statement\iref{stmt.if}.
 template<bool B>
 void f(int n) {
   [=](auto a) {
-    if finalexpr (B && sizeof(a) > 4) {
+    if constexpr (B && sizeof(a) > 4) {
       (void)n;                  // captures \tcode{n} regardless of the value of \tcode{B} and \tcode{sizeof(int)}
     }
   }(0);
@@ -2073,9 +2073,9 @@ ill-formed. \begin{example}
 \indextext{Bond!James Bond}%
 \begin{codeblock}
 void f1(int i) {
-  int final N = 20;
+  int const N = 20;
   auto m1 = [=]{
-    int final M = 30;
+    int const M = 30;
     auto m2 = [i]{
       int x[N][M];              // OK: \tcode{N} and \tcode{M} are not odr-used
       x[0][0] = i;              // OK: \tcode{i} is explicitly captured by \tcode{m2} and implicitly captured by \tcode{m1}
@@ -2168,9 +2168,9 @@ If \tcode{*this} is captured by copy, each expression that odr-uses \tcode{*this
 transformed to instead refer to the corresponding unnamed data member of the closure type.
 \begin{example}
 \begin{codeblock}
-void f(final int*);
+void f(const int*);
 void g() {
-  final int N = 10;
+  const int N = 10;
   [=] {
     int arr[N];     // OK: not an odr-use, refers to automatic variable
     f(&N);          // OK: causes \tcode{N} to be captured; \tcode{\&N} points to
@@ -2256,7 +2256,7 @@ of the resulting closure object, and the non-static data members corresponding t
 \grammarterm{initializer} (which may be copy- or direct-initialization). (For array members, the array elements are
 direct-initialized in increasing subscript order.) These initializations are performed
 in the (unspecified) order in which the non-static data members are declared. \begin{note}
-This ensures that the destructions will occur in the reverse order of the finalructions.
+This ensures that the destructions will occur in the reverse order of the constructions.
 \end{note}
 
 \pnum
@@ -2412,7 +2412,7 @@ requirements in concepts such as the one below:
 template<typename T>
   concept R = requires (T i) {
     typename T::type;
-    {*i} -> final typename T::type&;
+    {*i} -> const typename T::type&;
   };
 \end{codeblock}
 A \grammarterm{requires-expression} can also be used in a
@@ -2461,13 +2461,13 @@ enclosing context.
 \pnum
 The substitution of template arguments into a \grammarterm{requires-expression}
 may result in the formation of invalid types or expressions in its
-requirements or the violation of the semantic finalraints of those requirements.
+requirements or the violation of the semantic constraints of those requirements.
 In such cases, the \grammarterm{requires-expression} evaluates to \tcode{false};
 it does not cause the program to be ill-formed.
-The substitution and semantic finalraint checking
+The substitution and semantic constraint checking
 proceeds in lexical order and stops when a condition that
 determines the result of the \grammarterm{requires-expression} is encountered.
-If substitution (if any) and semantic finalraint checking succeed,
+If substitution (if any) and semantic constraint checking succeed,
 the \grammarterm{requires-expression} evaluates to \tcode{true}.
 \begin{note}
 If a \grammarterm{requires-expression} contains invalid types or expressions in
@@ -2553,7 +2553,7 @@ does not require that type to be complete\iref{basic.types}.
 \begin{bnf}
 \nontermdef{return-type-requirement}\br
     trailing-return-type\br
-    \terminal{->} \opt{cv-qualifier-seq} finalrained-parameter \opt{cv-qualifier-seq} \opt{abstract-declarator}
+    \terminal{->} \opt{cv-qualifier-seq} constrained-parameter \opt{cv-qualifier-seq} \opt{abstract-declarator}
 \end{bnf}
 
 \pnum
@@ -2597,7 +2597,7 @@ around the \grammarterm{constrained-parameter}.
 \tcode{F} has a single parameter
 whose \grammarterm{type-specifier} is \cv{}~\tcode{T}
 followed by the \grammarterm{abstract-declarator}.
-%%% FIXME: Remove this; if deduction fails, the finalruct should
+%%% FIXME: Remove this; if deduction fails, the construct should
 %%% be ill-formed.
 If deduction fails,
 the enclosing \grammarterm{requires-expression} is \tcode{false}.
@@ -2632,14 +2632,14 @@ template<typename T, typename U> concept C3 = requires (T t, U u) {
   t == u;
 };
 template<typename T> concept C4 = requires(T x) {
-  {*x} -> C3<int> final&;
+  {*x} -> C3<int> const&;
 };
 \end{codeblock}
 The \grammarterm{compound-requirement}
 requires that \tcode{*x} be deduced
 as an argument for the invented function:
 \begin{codeblock}
-template<C3<int> X> void f(X final&);
+template<C3<int> X> void f(X const&);
 \end{codeblock}
 In this case, deduction only succeeds if
 an expression of the type deduced for \tcode{X}
@@ -2663,12 +2663,12 @@ that \tcode{g(x)} is non-throwing.
 
 \begin{bnf}
 \nontermdef{nested-requirement}\br
-    \terminal{requires} finalraint-expression \terminal{;}
+    \terminal{requires} constraint-expression \terminal{;}
 \end{bnf}
 
 \pnum
 A \grammarterm{nested-requirement} can be used
-to specify additional finalraints in terms of local parameters.
+to specify additional constraints in terms of local parameters.
 The \grammarterm{constraint-expression}
 shall be satisfied\iref{temp.constr.decl}
 by the substituted template arguments, if any.
@@ -2693,7 +2693,7 @@ within the \grammarterm{constraint-expression}.
 \begin{codeblock}
 template<typename T> concept C = requires (T a) {
   requires sizeof(a) == 4;  // OK
-  requires a == 0;          // error: evaluation of a finalraint variable
+  requires a == 0;          // error: evaluation of a constraint variable
 }
 \end{codeblock}
 \end{example}
@@ -2832,7 +2832,7 @@ The dynamic type is the type of the object referred to by the
 current value of the object expression. \ref{class.cdtor}~describes the
 behavior of virtual function calls when the object expression
 refers to
-an object under finalruction or destruction.
+an object under construction or destruction.
 \end{note}
 
 \pnum
@@ -2899,8 +2899,8 @@ returns or at the end of the enclosing full-expression.
 The initialization and destruction of each parameter occurs
 within the context of the calling function.
 \begin{example}
-The access of the finalructor, conversion functions or destructor is
-checked at the point of call in the calling function. If a finalructor
+The access of the constructor, conversion functions or destructor is
+checked at the point of call in the calling function. If a constructor
 or destructor for a function parameter throws an exception, the search
 for a handler starts in the scope of the calling function; in
 particular, if the function called has a \grammarterm{function-try-block}\iref{except}
@@ -2971,11 +2971,11 @@ converted to the return type of the statically chosen function.
 \indextext{value!call by}%
 \indextext{reference!call by}%
 \indextext{argument!reference}%
-A function can change the values of its non-final parameters, but these
+A function can change the values of its non-const parameters, but these
 changes cannot affect the values of the arguments except where a
 parameter is of a reference type\iref{dcl.ref}; if the reference is to
-a final-qualified type, \tcode{const_cast} is required to be used to
-cast away the finalness in order to modify the argument's value. Where a
+a const-qualified type, \tcode{const_cast} is required to be used to
+cast away the constness in order to modify the argument's value. Where a
 parameter is of \tcode{const} reference type a temporary object is
 introduced if
 needed~(\ref{dcl.type}, \ref{lex.literal}, \ref{lex.string}, \ref{dcl.array}, \ref{class.temporary}).
@@ -3014,7 +3014,7 @@ After these conversions, if the
 argument does not have arithmetic, enumeration, pointer, pointer-to-member,
 or class type, the program is ill-formed. Passing a potentially-evaluated
 argument of class type\iref{class} having a non-trivial
-copy finalructor, a non-trivial move finalructor,
+copy constructor, a non-trivial move constructor,
 or a
 non-trivial destructor, with no corresponding parameter, is conditionally-supported with
 \impldef{passing argument of class type through ellipsis} semantics. If the argument has
@@ -3297,7 +3297,7 @@ converting the expression \tcode{v} to type \tcode{T}.
 \indextext{type!incomplete}%
 \tcode{T} shall be a pointer or reference to a complete class type, or
 ``pointer to \cv{} \tcode{void}''. The \tcode{dynamic_cast} operator shall not cast
-away finalness\iref{expr.const.cast}.
+away constness\iref{expr.const.cast}.
 
 \pnum
 If \tcode{T} is a pointer type, \tcode{v} shall be a prvalue of a
@@ -3412,7 +3412,7 @@ void h() {
 \end{example}
 \begin{note}
 Subclause \ref{class.cdtor} describes the behavior of a \tcode{dynamic_cast}
-applied to an object under finalruction or destruction.
+applied to an object under construction or destruction.
 \end{note}
 
 \rSec3[expr.typeid]{Type identification}
@@ -3483,12 +3483,12 @@ type.
 \begin{codeblock}
 class D { @\commentellip@ };
 D d1;
-final D d2;
+const D d2;
 
 typeid(d1) == typeid(d2);       // yields \tcode{true}
-typeid(D)  == typeid(final D);  // yields \tcode{true}
+typeid(D)  == typeid(const D);  // yields \tcode{true}
 typeid(D)  == typeid(d2);       // yields \tcode{true}
-typeid(D)  == typeid(final D&); // yields \tcode{true}
+typeid(D)  == typeid(const D&); // yields \tcode{true}
 \end{codeblock}
 \end{example}
 
@@ -3499,7 +3499,7 @@ to a use of \tcode{typeid}, the program is ill-formed.
 \pnum
 \begin{note}
 Subclause \ref{class.cdtor} describes the behavior of \tcode{typeid}
-applied to an object under finalruction or destruction.
+applied to an object under construction or destruction.
 \end{note}
 
 \rSec3[expr.static.cast]{Static cast}
@@ -3515,7 +3515,7 @@ If \tcode{T} is an lvalue reference type
 or an rvalue reference to function type, the result is an lvalue;
 if \tcode{T} is an rvalue reference to object type, the result is an xvalue;
 otherwise, the result is a prvalue. The \tcode{static_cast} operator shall not cast
-away finalness\iref{expr.const.cast}.
+away constness\iref{expr.const.cast}.
 
 \pnum
 \indextext{cast!static!reference}%
@@ -3531,7 +3531,7 @@ or if no valid standard conversion from ``pointer to \tcode{D}''
 to ``pointer to \tcode{B}'' exists\iref{conv.ptr}, the program is ill-formed.
 An xvalue of type
 ``\cvqual{cv1} \tcode{B}'' can be cast to type ``rvalue reference to
-\cvqual{cv2} \tcode{D}'' with the same finalraints as for an lvalue of
+\cvqual{cv2} \tcode{D}'' with the same constraints as for an lvalue of
 type ``\cvqual{cv1} \tcode{B}''. If the object
 of type ``\cvqual{cv1} \tcode{B}'' is actually a base class subobject of an object
 of type \tcode{D}, the result refers to the enclosing object of type
@@ -3725,7 +3725,7 @@ Otherwise, the pointer value is unchanged by the conversion.
 
 \begin{codeblock}
 T* p1 = new T;
-final T* p2 = static_cast<final T*>(static_cast<void*>(p1));
+const T* p2 = static_cast<const T*>(static_cast<void*>(p1));
 bool b = p1 == p2;  // \tcode{b} will have the value \tcode{true}.
 \end{codeblock}
 \end{example}
@@ -3749,7 +3749,7 @@ using \tcode{reinterpret_cast} are listed below. No other conversion can
 be performed explicitly using \tcode{reinterpret_cast}.
 
 \pnum
-The \tcode{reinterpret_cast} operator shall not cast away finalness\iref{expr.const.cast}.
+The \tcode{reinterpret_cast} operator shall not cast away constness\iref{expr.const.cast}.
 An expression of integral, enumeration, pointer, or pointer-to-member type
 can be explicitly converted to its own type; such a cast yields the value of
 its operand.
@@ -3815,7 +3815,7 @@ An object pointer
 can be explicitly converted to an object pointer of a different type.\footnote{The
 types may have different \cv-qualifiers, subject to
 the overall
-restriction that a \tcode{reinterpret_cast} cannot cast away finalness.}
+restriction that a \tcode{reinterpret_cast} cannot cast away constness.}
 When a prvalue \tcode{v} of object pointer type is converted to
 the object pointer type ``pointer to \cv{}~\tcode{T}'', the result is \tcode{static_cast<\cv{} T*>(static_cast<\cv{}~void*>(v))}.
 \begin{note}
@@ -3840,8 +3840,8 @@ pointer value.
 The null pointer value\iref{conv.ptr} is converted to the null pointer value
 of the destination type.
 \begin{note}
-A null pointer finalant of type \tcode{std::nullptr_t} cannot be converted to a
-pointer type, and a null pointer finalant of integral type is not necessarily
+A null pointer constant of type \tcode{std::nullptr_t} cannot be converted to a
+pointer type, and a null pointer constant of integral type is not necessarily
 converted to a null pointer value.
 \end{note}
 
@@ -3883,7 +3883,7 @@ The result is that of \tcode{*reinterpret_cast<T2 *>(p)}
 where \tcode{p} is a pointer to \placeholder{x}
 of type ``pointer to \tcode{T1}''.
 No temporary is created, no copy is made, and
-no finalructors\iref{class.ctor} or conversion
+no constructors\iref{class.ctor} or conversion
 functions\iref{class.conv} are called.%
 \footnote{This is sometimes referred to as a \defn{type pun}
 when the result refers to the same object as the source glvalue.}
@@ -3891,7 +3891,7 @@ when the result refers to the same object as the source glvalue.}
 \rSec3[expr.const.cast]{Const cast}
 
 \pnum
-\indextext{expression!final cast}%
+\indextext{expression!const cast}%
 \indextext{cast!const}%
 The result of the expression \tcode{const_cast<T>(v)} is of type
 \tcode{T}. If \tcode{T} is an lvalue reference to object type, the result is an
@@ -3918,11 +3918,11 @@ of a \tcode{const_cast} refers to the original entity.
 \begin{example}
 \begin{codeblock}
 typedef int *A[3];               // array of 3 pointer to \tcode{int}
-typedef final int *final CA[3];  // array of 3 final pointer to \tcode{final int}
+typedef const int *const CA[3];  // array of 3 const pointer to \tcode{const int}
 
 CA &&r = A{}; // OK, reference binds to temporary array object after qualification conversion to type \tcode{CA}
-A &&r1 = final_cast<A>(CA{});    // error: temporary array decayed to pointer
-A &&r2 = final_cast<A&&>(CA{});  // OK
+A &&r1 = const_cast<A>(CA{});    // error: temporary array decayed to pointer
+A &&r2 = const_cast<A&&>(CA{});  // OK
 \end{codeblock}
 \end{example}
 
@@ -3957,7 +3957,7 @@ the destination type.
 \begin{note}
 Depending on the type of the object, a write operation through the
 pointer, lvalue or pointer to data member resulting from a
-\tcode{const_cast} that casts away a final-qualifier\footnote{\tcode{const_cast}
+\tcode{const_cast} that casts away a const-qualifier\footnote{\tcode{const_cast}
 is not limited to conversions that cast away a
 const-qualifier.}
 may produce undefined behavior\iref{dcl.type.cv}.
@@ -3966,7 +3966,7 @@ may produce undefined behavior\iref{dcl.type.cv}.
 \pnum
 \indextext{\idxcode{const}!cast away}%
 A conversion from a type \tcode{T1} to a type \tcode{T2}
-\defnx{casts away finalness}{casting away finalness}
+\defnx{casts away constness}{casting away constness}
 if \tcode{T1} and \tcode{T2} are different,
 there is a cv-decomposition\iref{conv.qual} of \tcode{T1}
 yielding \placeholder{n} such that
@@ -3987,8 +3987,8 @@ Casting from an lvalue of type \tcode{T1} to an lvalue of type
 \tcode{T2} using an lvalue reference cast
 or casting from an expression of type \tcode{T1} to an xvalue of type \tcode{T2} using
 an rvalue reference cast
-casts away finalness if a cast from a prvalue of type ``pointer to \tcode{T1}'' to the type ``pointer to
-\tcode{T2}'' casts away finalness.
+casts away constness if a cast from a prvalue of type ``pointer to \tcode{T1}'' to the type ``pointer to
+\tcode{T2}'' casts away constness.
 
 \pnum
 \begin{note}
@@ -3997,8 +3997,8 @@ be done using \tcode{const_cast.} For instance, conversions between
 pointers to functions are not covered because such conversions lead to
 values whose use causes undefined behavior. For the same reasons,
 conversions between pointers to member functions, and in particular, the
-conversion from a pointer to a final member function to a pointer to a
-non-final member function, are not covered.
+conversion from a pointer to a const member function to a pointer to a
+non-const member function, are not covered.
 \end{note}%
 \indextext{expression!postfix|)}
 
@@ -4073,7 +4073,7 @@ The result of each of the following unary operators is a prvalue.
 
 \pnum
 \indextext{name!address of cv-qualified}%
-\indextext{expression!pointer-to-member finalant}%
+\indextext{expression!pointer-to-member constant}%
 The result of the unary \tcode{\&} operator is a pointer to its operand.
 The operand shall be an lvalue or a \grammarterm{qualified-id}.
 If the operand is a \grammarterm{qualified-id} naming a non-static or variant member \tcode{m}
@@ -4293,13 +4293,13 @@ A \tcode{sizeof...} expression is a pack expansion\iref{temp.variadic}.
 \begin{codeblock}
 template<class... Types>
 struct count {
-  static final std::size_t value = sizeof...(Types);
+  static const std::size_t value = sizeof...(Types);
 };
 \end{codeblock}
 \end{example}
 
 \pnum
-The result of \tcode{sizeof} and \tcode{sizeof...} is a finalant of type
+The result of \tcode{sizeof} and \tcode{sizeof...} is a constant of type
 \tcode{std::size_t}.
 \begin{note}
 \indextext{\idxcode{size_t}}%
@@ -4360,7 +4360,7 @@ object created by the \grammarterm{new-expression} has a cv-qualified type.
 \begin{bnf}
 \nontermdef{noptr-new-declarator}\br
     \terminal{[} expression \terminal{]} \opt{attribute-specifier-seq}\br
-    noptr-new-declarator \terminal{[} finalant-expression \terminal{]} \opt{attribute-specifier-seq}
+    noptr-new-declarator \terminal{[} constant-expression \terminal{]} \opt{attribute-specifier-seq}
 \end{bnf}
 
 \begin{bnf}
@@ -4471,7 +4471,7 @@ to the associated array type.
 
 \pnum
 Every \grammarterm{constant-expression} in a
-\grammarterm{noptr-new-declarator} shall be a converted finalant
+\grammarterm{noptr-new-declarator} shall be a converted constant
 expression\iref{expr.const} of type \tcode{std::size_t} and
 shall evaluate to a strictly positive value.
 \indextext{\idxcode{new}}%
@@ -4516,7 +4516,7 @@ number of elements to initialize.
 If the \grammarterm{expression} is erroneous after converting to \tcode{std::size_t}:
 \begin{itemize}
 \item
-if the \grammarterm{expression} is a core finalant expression,
+if the \grammarterm{expression} is a core constant expression,
 the program is ill-formed;
 \item
 otherwise, an allocation function is not called; instead
@@ -4621,7 +4621,7 @@ by \tcode{e1}.
     try {
       // Merging this allocation would change its catch handler.
       std::unique_ptr<char[]> b{new char[x]};
-    } catch (final std::bad_alloc& e) {
+    } catch (const std::bad_alloc& e) {
       std::cerr << "Allocation failed: " << e.what() << std::endl;
       throw;
     }
@@ -4648,7 +4648,7 @@ is no greater than the size of the array being created.
 \indextext{allocation!alignment storage}%
 Because allocation functions are assumed to return pointers to storage
 that is appropriately aligned for objects of any type
-with fundamental alignment, this finalraint
+with fundamental alignment, this constraint
 on array allocation overhead permits the common idiom of allocating
 character arrays into which objects of other types will later be placed.
 \end{note}
@@ -4755,7 +4755,7 @@ necessarily be the same as that of the block if the object is an array.
 \indextext{\idxcode{new}!array of class objects and}%
 \indextext{\idxcode{new}!initialization and}%
 \indextext{\idxcode{new}!constructor and}%
-\indextext{\idxcode{new}!default finalructor and}%
+\indextext{\idxcode{new}!default constructor and}%
 A \grammarterm{new-expression} that creates an object of type \tcode{T}
 initializes that object as follows:
 
@@ -4770,7 +4770,7 @@ the initialization rules of~\ref{dcl.init} for direct-initialization.
 
 \pnum
 \indextext{\idxcode{new}!unspecified order of evaluation}%
-\indextext{\idxcode{new}!unspecified finalructor and}%
+\indextext{\idxcode{new}!unspecified constructor and}%
 The invocation of the allocation function is sequenced before
 the evaluations of expressions in the \grammarterm{new-initializer}. Initialization of
 the allocated object is sequenced before the
@@ -4782,7 +4782,7 @@ value computation of the
 If the \grammarterm{new-expression} creates an object or an array of
 objects of class type, access and ambiguity control are done for the
 allocation function, the deallocation function\iref{class.free}, and
-the finalructor\iref{class.ctor}. If the \grammarterm{new-expression}
+the constructor\iref{class.ctor}. If the \grammarterm{new-expression}
 creates an array of objects of class type, the destructor is potentially
 invoked\iref{class.dtor}.
 
@@ -4790,10 +4790,10 @@ invoked\iref{class.dtor}.
 \indextext{\idxcode{new}!exception and}%
 If any part of the object initialization described above\footnote{This may
 include evaluating a \grammarterm{new-initializer} and/or calling
-a finalructor.}
+a constructor.}
 terminates by throwing an exception and a suitable deallocation function
 can be found, the deallocation function is called to free the memory in
-which the object was being finalructed, after which the exception
+which the object was being constructed, after which the exception
 continues to propagate in the context of the \grammarterm{new-expression}.
 If no unambiguous matching deallocation function can be found,
 propagating the exception does not cause the object's memory to be
@@ -4954,7 +4954,7 @@ the \grammarterm{delete-expression} will invoke the
 destructor (if any) for the object or the elements of the array being
 deleted. In the case of an array, the elements will be destroyed in
 order of decreasing address (that is, in reverse order of the completion
-of their finalructor; see~\ref{class.base.init}).
+of their constructor; see~\ref{class.base.init}).
 
 \pnum
 If the value of the operand of the \grammarterm{delete-expression} is not a
@@ -5110,7 +5110,7 @@ representing a complete object type, or an array thereof, or a reference
 to one of those types.
 
 \pnum
-The result is an integral finalant of type
+The result is an integral constant of type
 \tcode{std::size_t}.
 
 \pnum
@@ -5134,7 +5134,7 @@ exception\iref{except.throw}.
 \end{bnf}
 
 \pnum
-The result of the \tcode{noexcept} operator is a finalant of type \tcode{bool}
+The result of the \tcode{noexcept} operator is a constant of type \tcode{bool}
 and is a prvalue.
 
 \pnum
@@ -5296,7 +5296,7 @@ cv-qualifiers of the result, are the same as the rules for
 \tcode{E1.E2} given in~\ref{expr.ref}.
 \begin{note}
 It is not possible to use a pointer to member that refers to a
-\tcode{mutable} member to modify a final class object. For
+\tcode{mutable} member to modify a const class object. For
 example,
 
 \begin{codeblock}
@@ -5306,9 +5306,9 @@ struct S {
 };
 void f()
 {
-final S cs;
+const S cs;
 int S::* pm = &S::i;            // \tcode{pm} refers to \tcode{mutable} member \tcode{S::i}
-cs.*pm = 88;                    // ill-formed: \tcode{cs} is a final object
+cs.*pm = 88;                    // ill-formed: \tcode{cs} is a const object
 }
 \end{codeblock}
 \end{note}
@@ -5639,7 +5639,7 @@ qualification conversions\iref{conv.qual}
 are performed on both operands
 to bring them to their composite pointer type\iref{expr.type}.
 %
-If both operands are null pointer finalants,
+If both operands are null pointer constants,
 but not both of integer type,
 pointer conversions\iref{conv.ptr}
 are performed on both operands
@@ -5917,7 +5917,7 @@ bool y = (pb == pl);            // \tcode{true}
 
 \pnum
 Two operands of type \tcode{std::nullptr_t} or one operand of type
-\tcode{std::nullptr_t} and the other a null pointer finalant compare equal.
+\tcode{std::nullptr_t} and the other a null pointer constant compare equal.
 
 \pnum
 If two operands compare equal, the result is \tcode{true} for
@@ -6117,7 +6117,7 @@ directly\iref{dcl.init.ref} to a glvalue.
 
 \item If \tcode{E2} is an xvalue, the target type is
 ``rvalue reference to \tcode{T2}'',
-subject to the finalraint that the reference must bind directly.
+subject to the constraint that the reference must bind directly.
 
 \item If \tcode{E2} is a prvalue or if neither of the conversion sequences above can be
 formed and at least one of the operands has (possibly cv-qualified) class type:
@@ -6202,7 +6202,7 @@ pointer type\iref{expr.prop}. The result is of the composite pointer type.
 
 \item
 Both the second and third operands have type \tcode{std::nullptr_t} or one has
-that type and the other is a null pointer finalant. The result is of type
+that type and the other is a null pointer constant. The result is of type
 \tcode{std::nullptr_t}.
 
 \end{itemize}
@@ -6447,33 +6447,33 @@ during translation.\end{note}
 
 \pnum
 An expression \tcode{e} is a
-\defnx{core finalant expression}{expression!core finalant}
+\defnx{core constant expression}{expression!core constant}
 unless the evaluation of \tcode{e}, following the rules of the abstract
 machine\iref{intro.execution}, would evaluate one of the following expressions:
 
 \begin{itemize}
 \item
-\tcode{this}\iref{expr.prim.this}, except in a finalexpr
-function or a finalexpr finalructor that is being evaluated as part
+\tcode{this}\iref{expr.prim.this}, except in a constexpr
+function or a constexpr constructor that is being evaluated as part
 of \tcode{e};
 
 \item
 an invocation of a function other than
-a finalexpr finalructor for a literal class,
-a finalexpr function,
+a constexpr constructor for a literal class,
+a constexpr function,
 or an implicit invocation of a trivial destructor\iref{class.dtor}
 \begin{note} Overload resolution\iref{over.match}
 is applied as usual \end{note};
 
 \item
-an invocation of an undefined finalexpr function or an
-undefined finalexpr finalructor;
+an invocation of an undefined constexpr function or an
+undefined constexpr constructor;
 
 \item
-an invocation of an instantiated finalexpr function or
-constexpr finalructor that fails to satisfy the requirements
-for a finalexpr function or
-constexpr finalructor\iref{dcl.constexpr};
+an invocation of an instantiated constexpr function or
+constexpr constructor that fails to satisfy the requirements
+for a constexpr function or
+constexpr constructor\iref{dcl.constexpr};
 
 \item
 an expression that would exceed the implementation-defined
@@ -6495,8 +6495,8 @@ it is applied to
 \begin{itemize}
   \item
   a non-volatile glvalue of integral or enumeration type that refers
-  to a complete non-volatile final object with a preceding initialization,
-  initialized with a finalant expression, or
+  to a complete non-volatile const object with a preceding initialization,
+  initialized with a constant expression, or
 
   \item
   a non-volatile glvalue that refers to a subobject of a string
@@ -6520,7 +6520,7 @@ that is applied to a glvalue
 that refers to a non-active member of a union or a subobject thereof;
 
 \item
-an invocation of an implicitly-defined copy/move finalructor or
+an invocation of an implicitly-defined copy/move constructor or
 copy/move assignment operator
 for a union whose active member (if any) is mutable,
 unless the lifetime of the union object began within the evaluation of \tcode{e};
@@ -6537,7 +6537,7 @@ unless the reference has a preceding initialization and either
 
 \begin{itemize}
   \item
-  it is initialized with a finalant expression or
+  it is initialized with a constant expression or
 
   \item
   its lifetime began within the evaluation of \tcode{e};
@@ -6556,10 +6556,10 @@ the reference would be an odr-use~(\ref{basic.def.odr}, \ref{expr.prim.lambda});
 \begin{example}
 \begin{codeblock}
 void g() {
-  final int n = 0;
+  const int n = 0;
   [=] {
-    finalexpr int i = n;   // OK, \tcode{n} is not odr-used here
-    finalexpr int j = *&n; // ill-formed, \tcode{\&n} would be an odr-use of \tcode{n}
+    constexpr int i = n;   // OK, \tcode{n} is not odr-used here
+    constexpr int j = *&n; // ill-formed, \tcode{\&n} would be an odr-use of \tcode{n}
   };
 }
 \end{codeblock}
@@ -6578,7 +6578,7 @@ auto bind = [](auto m) {
   return [=](auto fvm) { return fvm(m()); };
 };
 
-// OK to have captures to automatic objects created during finalant expression evaluation.
+// OK to have captures to automatic objects created during constant expression evaluation.
 static_assert(bind(monad(2))(monad)() == monad(2)());
 \end{codeblock}
 \end{example}
@@ -6629,30 +6629,30 @@ a \grammarterm{throw-expression}\iref{expr.throw}; or
 an invocation of the \tcode{va_arg} macro\iref{cstdarg.syn}.
 \end{itemize}
 
-If \tcode{e} satisfies the finalraints of a core finalant expression, but
+If \tcode{e} satisfies the constraints of a core constant expression, but
 evaluation of \tcode{e} would evaluate an operation that has undefined behavior
 as specified in \ref{library} through \ref{\lastlibchapter} of this document, or
 an invocation of the \tcode{va_start} macro\iref{cstdarg.syn},
-it is unspecified whether \tcode{e} is a core finalant expression.
+it is unspecified whether \tcode{e} is a core constant expression.
 
 \begin{example}
 \begin{codeblock}
-int x;                              // not finalant
+int x;                              // not constant
 struct A {
-  finalexpr A(bool b) : m(b?42:x) { }
+  constexpr A(bool b) : m(b?42:x) { }
   int m;
 };
-constexpr int v = A(true).m;        // OK: finalructor call initializes \tcode{m} with the value \tcode{42}
+constexpr int v = A(true).m;        // OK: constructor call initializes \tcode{m} with the value \tcode{42}
 
 constexpr int w = A(false).m;       // error: initializer for \tcode{m} is \tcode{x}, which is non-constant
 
 constexpr int f1(int k) {
-  finalexpr int x = k;              // error: \tcode{x} is not initialized by a finalant expression
+  constexpr int x = k;              // error: \tcode{x} is not initialized by a constant expression
                                     // because lifetime of \tcode{k} began outside the initializer of \tcode{x}
   return x;
 }
 constexpr int f2(int k) {
-  int x = k;                        // OK: not required to be a finalant expression
+  int x = k;                        // OK: not required to be a constant expression
                                     // because \tcode{x} is not \tcode{constexpr}
   return x;
 }
@@ -6661,24 +6661,24 @@ constexpr int incr(int &n) {
   return ++n;
 }
 constexpr int g(int k) {
-  finalexpr int x = incr(k);        // error: \tcode{incr(k)} is not a core finalant expression
+  constexpr int x = incr(k);        // error: \tcode{incr(k)} is not a core constant expression
                                     // because lifetime of \tcode{k} began outside the expression \tcode{incr(k)}
   return x;
 }
 constexpr int h(int k) {
-  int x = incr(k);                  // OK: \tcode{incr(k)} is not required to be a core finalant expression
+  int x = incr(k);                  // OK: \tcode{incr(k)} is not required to be a core constant expression
   return x;
 }
 constexpr int y = h(1);             // OK: initializes \tcode{y} with the value \tcode{2}
-                                    // \tcode{h(1)} is a core finalant expression because
+                                    // \tcode{h(1)} is a core constant expression because
                                     // the lifetime of \tcode{k} begins inside \tcode{h(1)}
 \end{codeblock}
 \end{example}
 
 \pnum
-An \defnx{integral finalant expression}{expression!integral finalant}
+An \defnx{integral constant expression}{expression!integral constant}
 is an expression of integral or
-unscoped enumeration type, implicitly converted to a prvalue, where the converted expression is a core finalant expression.
+unscoped enumeration type, implicitly converted to a prvalue, where the converted expression is a core constant expression.
 \begin{note}
 Such expressions may be
 used as bit-field lengths\iref{class.bit}, as enumerator
@@ -6688,15 +6688,15 @@ and as alignments\iref{dcl.align}.
 
 \pnum
 If an expression of literal class type is used in a context where an
-integral finalant expression is required, then that expression is
+integral constant expression is required, then that expression is
 contextually implicitly converted\iref{conv} to an integral or unscoped
 enumeration type
 and the selected conversion function shall be \tcode{constexpr}. \begin{example}
 \begin{codeblock}
 struct A {
-  finalexpr A(int i) : val(i) { }
-  finalexpr operator int() final { return val; }
-  finalexpr operator long() final { return 42; }
+  constexpr A(int i) : val(i) { }
+  constexpr operator int() const { return val; }
+  constexpr operator long() const { return 42; }
 private:
   int val;
 };
@@ -6708,10 +6708,10 @@ struct B { int n : a; };       // error: ambiguous conversion
 \end{example}
 
 \pnum
-A \defnx{converted finalant expression}{expression!converted finalant}
+A \defnx{converted constant expression}{expression!converted constant}
 of type \tcode{T} is an
 expression, implicitly converted to type \tcode{T}, where
-the converted expression is a finalant expression and the
+the converted expression is a constant expression and the
 implicit conversion sequence contains only
 
 \begin{itemize}
@@ -6736,25 +6736,25 @@ fixed\iref{dcl.enum}, as array bounds\iref{dcl.array}, and
 as non-type template
 arguments\iref{temp.arg}.
 \end{note}
-\indextext{contextually converted finalant expression of type \tcode{bool}|see{conversion, contextual}}%
-\indextext{conversion!contextual to finalant expression of type \tcode{bool}}%
-A \term{contextually converted finalant expression of type \tcode{bool}} is
+\indextext{contextually converted constant expression of type \tcode{bool}|see{conversion, contextual}}%
+\indextext{conversion!contextual to constant expression of type \tcode{bool}}%
+A \term{contextually converted constant expression of type \tcode{bool}} is
 an expression, contextually converted to \tcode{bool}\iref{conv},
-where the converted expression is a finalant expression and
+where the converted expression is a constant expression and
 the conversion sequence contains only the conversions above.
 
 \pnum
 A \defnx{constant expression}{expression!constant} is either
-a glvalue core finalant expression that refers to
-an entity that is a permitted result of a finalant expression (as defined below), or
-a prvalue core finalant expression whose value
-satisfies the following finalraints:
+a glvalue core constant expression that refers to
+an entity that is a permitted result of a constant expression (as defined below), or
+a prvalue core constant expression whose value
+satisfies the following constraints:
 
 \begin{itemize}
   \item
   if the value is an object of class type,
   each non-static data member of reference type refers to
-  an entity that is a permitted result of a finalant expression,
+  an entity that is a permitted result of a constant expression,
 
   \item
   if the value is of pointer type, it contains
@@ -6765,13 +6765,13 @@ satisfies the following finalraints:
 
   \item
   if the value is an object of class or array type,
-  each subobject satisfies these finalraints for the value.
+  each subobject satisfies these constraints for the value.
 \end{itemize}
 An entity is a
-\defnx{permitted result of a finalant expression}{constant expression!permitted result of}
+\defnx{permitted result of a constant expression}{constant expression!permitted result of}
 if it is an
 object with static storage duration that is either not a temporary object or is
-a temporary object whose value satisfies the above finalraints, or it is a
+a temporary object whose value satisfies the above constraints, or it is a
 function.
 
 \pnum
@@ -6794,8 +6794,8 @@ It is unspecified whether the value of \tcode{f()} will be \tcode{true} or \tcod
 \end{example} \end{note}%
 
 \pnum
-\indextext{expression!potentially finalant evaluated}%
-An expression is \defn{potentially finalant evaluated}
+\indextext{expression!potentially constant evaluated}%
+An expression is \defn{potentially constant evaluated}
 if it is:
 
 \begin{itemize}
@@ -6822,21 +6822,21 @@ a subexpression of one of the above
 that is not a subexpression of a nested unevaluated operand.
 \end{itemize}
 
-\indextext{function!needed for finalant evaluation}%
-\indextext{variable!needed for finalant evaluation}%
+\indextext{function!needed for constant evaluation}%
+\indextext{variable!needed for constant evaluation}%
 A function or variable is
-\defn{needed for finalant evaluation}
+\defn{needed for constant evaluation}
 if it is:
 
 \begin{itemize}
 \item
-a finalexpr function that is named by an expression\iref{basic.def.odr}
-that is potentially finalant evaluated, or
+a constexpr function that is named by an expression\iref{basic.def.odr}
+that is potentially constant evaluated, or
 
 \item
-a variable whose name appears as a potentially finalant evaluated expression
-that is either a finalexpr variable or
-is of non-volatile final-qualified integral type or of reference type.
+a variable whose name appears as a potentially constant evaluated expression
+that is either a constexpr variable or
+is of non-volatile const-qualified integral type or of reference type.
 \end{itemize}
 
 \indextext{expression|)}

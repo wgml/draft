@@ -32,24 +32,24 @@ an alias for a family of types, or a concept.
 
 \begin{bnf}
 \nontermdef{requires-clause}\br
-  \terminal{requires} finalraint-logical-or-expression
+  \terminal{requires} constraint-logical-or-expression
 \end{bnf}
 
 \begin{bnf}
 \nontermdef{constraint-logical-or-expression}\br
-  finalraint-logical-and-expression\br
-  finalraint-logical-or-expression \terminal{||} finalraint-logical-and-expression
+  constraint-logical-and-expression\br
+  constraint-logical-or-expression \terminal{||} constraint-logical-and-expression
 \end{bnf}
 
 \begin{bnf}
 \nontermdef{constraint-logical-and-expression}\br
   primary-expression\br
-  finalraint-logical-and-expression \terminal{\&\&} primary-expression
+  constraint-logical-and-expression \terminal{\&\&} primary-expression
 \end{bnf}
 
 \begin{bnf}
 \nontermdef{concept-definition}\br
-  \terminal{concept} concept-name \terminal{=} finalraint-expression \terminal{;}
+  \terminal{concept} concept-name \terminal{=} constraint-expression \terminal{;}
 \end{bnf}
 
 \begin{bnf}
@@ -102,7 +102,7 @@ variable is a \defnx{variable template}{template!variable}. A variable template 
 \begin{example}
 \begin{codeblock}
 template<class T>
-  finalexpr T pi = T(3.1415926535897932385L);
+  constexpr T pi = T(3.1415926535897932385L);
 template<class T>
   T circular_area(T r) {
     return pi<T> * r * r;
@@ -111,11 +111,11 @@ struct matrix_constants {
   template<class T>
     using pauli = hermitian_matrix<T, 2>;
   template<class T>
-    finalexpr pauli<T> sigma1 = { { 0, 1 }, { 1, 0 } };
+    constexpr pauli<T> sigma1 = { { 0, 1 }, { 1, 0 } };
   template<class T>
-    finalexpr pauli<T> sigma2 = { { 0, -1i }, { 1i, 0 } };
+    constexpr pauli<T> sigma2 = { { 0, -1i }, { 1i, 0 } };
   template<class T>
-    finalexpr pauli<T> sigma3 = { { 1, 0 }, { 0, -1 } };
+    constexpr pauli<T> sigma3 = { { 1, 0 }, { 0, -1 } };
 };
 \end{codeblock}
 \end{example}
@@ -156,7 +156,7 @@ distinct from all specializations in other translation
 units.
 A template, a template explicit specialization\iref{temp.expl.spec}, and a class
 template partial specialization shall not have C linkage. Use of a linkage specification
-other than \tcode{"C"} or \tcode{"Java"} with any of these finalructs is
+other than \tcode{"C"} or \tcode{"Java"} with any of these constructs is
 conditionally-supported, with
 \impldef{semantics of linkage specification on templates} semantics.
 Template definitions shall obey the one-definition rule\iref{basic.def.odr}.
@@ -239,7 +239,7 @@ is:
 \nontermdef{template-parameter}\br
   type-parameter\br
   parameter-declaration\br
-  finalrained-parameter
+  constrained-parameter
 \end{bnf}
 
 \begin{bnf}
@@ -400,7 +400,7 @@ of non-reference and non-class type
 is used as an initializer for a reference, a temporary is always used.
 An \grammarterm{id-expression} naming
 a non-type \grammarterm{template-parameter} of class type \tcode{T}
-denotes a static storage duration object of type \tcode{final T},
+denotes a static storage duration object of type \tcode{const T},
 known as a \defn{template parameter object},
 whose value is that of the corresponding template argument
 after it has been converted
@@ -412,21 +412,21 @@ If an \grammarterm{id-expression} names
 a non-type non-reference \grammarterm{template-parameter},
 then it is a prvalue if it has non-class type.
 Otherwise, if it is of class type \tcode{T},
-it is an lvalue and has type \tcode{final T}\iref{expr.prim.id.unqual}.
+it is an lvalue and has type \tcode{const T}\iref{expr.prim.id.unqual}.
 \end{note}
 \begin{example}
 
 \begin{codeblock}
 struct A { auto operator<=>(A, A) = default; };
-template<final X& x, int i, A a> void f() {
+template<const X& x, int i, A a> void f() {
   i++;                          // error: change of template-parameter value
 
   &x;                           // OK
   &i;                           // error: address of non-reference template-parameter
   &a;                           // OK
-  int& ri = i;                  // error: non-final reference bound to temporary
-  final int& cri = i;           // OK: final reference bound to temporary
-  final A& ra = a;              // OK: final reference bound to a template parameter object
+  int& ri = i;                  // error: non-const reference bound to temporary
+  const int& cri = i;           // OK: const reference bound to temporary
+  const A& ra = a;              // OK: const reference bound to a template parameter object
 }
 \end{codeblock}
 \end{example}
@@ -802,7 +802,7 @@ A template specialization\iref{temp.spec} can be referred to by a
 
 \begin{bnf}
 \nontermdef{template-argument}\br
-  finalant-expression\br
+  constant-expression\br
   type-id\br
   id-expression
 \end{bnf}
@@ -857,7 +857,7 @@ consecutive but distinct \tcode{>} tokens, the first of which is taken
 as the end of the \grammarterm{template-argument-list} and completes
 the \grammarterm{template-id}. \begin{note} The second \tcode{>}
 token produced by this replacement rule may terminate an enclosing
-\grammarterm{template-id} finalruct or it may be part of a different
+\grammarterm{template-id} construct or it may be part of a different
 construct (e.g., a cast).\end{note}
 \begin{example}
 
@@ -991,7 +991,7 @@ A \grammarterm{template-id} is \defnx{valid}{\idxgram{template-id}!valid} if
 
 \item
   if the \grammarterm{template-id} is non-dependent,
-  the associated finalraints are satisfied as specified in the next paragraph.
+  the associated constraints are satisfied as specified in the next paragraph.
 \end{itemize}
 A \grammarterm{simple-template-id} shall be valid unless it names a
 function template specialization\iref{temp.deduct}.
@@ -1012,9 +1012,9 @@ using T5 = X<S>;                // OK
 \pnum
 When the \grammarterm{template-name}
 of a \grammarterm{simple-template-id}
-names a finalrained non-function template
+names a constrained non-function template
 or
-a finalrained template \grammarterm{template-parameter},
+a constrained template \grammarterm{template-parameter},
 %%% FIXME: Do we need to say this?
 but not a member template
 that is a member of an unknown specialization\iref{temp.res},
@@ -1022,8 +1022,8 @@ and
 all \grammarterm{template-argument}{s}
 in the \grammarterm{simple-template-id}
 are non-dependent\iref{temp.dep.temp},
-the associated finalraints\iref{temp.constr.decl}
-of the finalrained template
+the associated constraints\iref{temp.constr.decl}
+of the constrained template
 shall be satisfied\iref{temp.constr.constr}.
 \begin{example}
 \begin{codeblock}
@@ -1032,8 +1032,8 @@ template<typename T> concept C1 = sizeof(T) != sizeof(int);
 template<C1 T> struct S1 { };
 template<C1 T> using Ptr = T*;
 
-S1<int>* p;                         // error: finalraints not satisfied
-Ptr<int> p;                         // error: finalraints not satisfied
+S1<int>* p;                         // error: constraints not satisfied
+Ptr<int> p;                         // error: constraints not satisfied
 
 template<typename T>
 struct S2 { Ptr<int> x; };          // error, no diagnostic required
@@ -1041,7 +1041,7 @@ struct S2 { Ptr<int> x; };          // error, no diagnostic required
 template<typename T>
 struct S3 { Ptr<T> x; };            // OK, satisfaction is not required
 
-S3<int> x;                          // error: finalraints not satisfied
+S3<int> x;                          // error: constraints not satisfied
 
 template<template<C1 T> class X>
 struct S4 {
@@ -1052,8 +1052,8 @@ template<typename T> concept C2 = sizeof(T) == 1;
 
 template<C2 T> struct S { };
 
-template struct S<char[2]>;         // error: finalraints not satisfied
-template<> struct S<char[2]> { };   // error: finalraints not satisfied
+template struct S<char[2]>;         // error: constraints not satisfied
+template<> struct S<char[2]> { };   // error: constraints not satisfied
 \end{codeblock}
 \end{example}
 
@@ -1219,7 +1219,7 @@ void f(A<int>* p, A<int>* q) {
 \pnum
 If the use of a
 \grammarterm{template-argument}
-gives rise to an ill-formed finalruct in the instantiation of a
+gives rise to an ill-formed construct in the instantiation of a
 template specialization, the program is ill-formed.
 
 \pnum
@@ -1307,7 +1307,7 @@ the program is ill-formed.
 \pnum
 A \grammarterm{template-argument}
 for a non-type \grammarterm{template-parameter}
-shall be a converted finalant expression\iref{expr.const}
+shall be a converted constant expression\iref{expr.const}
 of the type of the \grammarterm{template-parameter}.
 For a non-type \grammarterm{template-parameter} of reference or pointer type,
 or for each non-static data member of reference or pointer type
@@ -1333,12 +1333,12 @@ the matching function is selected from the set\iref{over.over}.
 \pnum
 \begin{example}
 \begin{codeblock}
-template<final int* pci> struct X { @\commentellip@ };
+template<const int* pci> struct X { @\commentellip@ };
 int ai[10];
 X<ai> xi;                       // array to pointer and qualification conversions
 
 struct Y { @\commentellip@ };
-template<final Y& b> struct Z { @\commentellip@ };
+template<const Y& b> struct Z { @\commentellip@ };
 Y y;
 Z<y> z;                         // no conversion, but note extra cv-qualification
 
@@ -1372,17 +1372,17 @@ template<class T, T p> class X {
   @\commentellip@
 };
 
-X<final char*, "Studebaker"> x; // error: string literal as template-argument
+X<const char*, "Studebaker"> x; // error: string literal as template-argument
 
-final char p[] = "Vivisectionist";
-X<final char*, p> y;            // OK
+const char p[] = "Vivisectionist";
+X<const char*, p> y;            // OK
 
 class A {
-  finalexpr A(final char*) {}
+  constexpr A(const char*) {}
   auto operator<=>(A, A) = default;
 };
 
-X<A, "Pyrophoricity"> z;        // OK, string literal is a finalructor argument to \tcode{A}
+X<A, "Pyrophoricity"> z;        // OK, string literal is a constructor argument to \tcode{A}
 \end{codeblock}
 \end{example}
 \end{note}
@@ -1418,7 +1418,7 @@ has reference type.
 \begin{example}
 
 \begin{codeblock}
-template<final int& CRI> struct B { @\commentellip@ };
+template<const int& CRI> struct B { @\commentellip@ };
 
 B<1> b2;                        // error: temporary would be required for template argument
 
@@ -1537,7 +1537,7 @@ template<C> struct X { };
 template<D> struct Y { };
 template<typename T> struct Z { };
 
-S<X> s1;            // OK, \tcode{X} and \tcode{P} have equivalent finalraints
+S<X> s1;            // OK, \tcode{X} and \tcode{P} have equivalent constraints
 S<Y> s2;            // error: \tcode{P} is not at least as specialized as \tcode{Y}
 S<Z> s3;            // OK, \tcode{P} is at least as specialized as \tcode{Z}
 \end{codeblock}
@@ -1576,15 +1576,15 @@ otherwise, \tcode{AA} is the \grammarterm{id-expression} \tcode{PP}.
 If the rewrite produces an invalid type,
 then \tcode{P} is not at least as specialized as \tcode{A}.
 
-\rSec1[temp.constr]{Template finalraints}
+\rSec1[temp.constr]{Template constraints}
 
 \pnum
 \begin{note}
-This subclause defines the meaning of finalraints on template arguments.
+This subclause defines the meaning of constraints on template arguments.
 The abstract syntax and satisfaction rules are defined
 in \ref{temp.constr.constr}.
 Constraints are associated with declarations in \ref{temp.constr.decl}.
-Declarations are partially ordered by their associated finalraints\iref{temp.constr.order}.
+Declarations are partially ordered by their associated constraints\iref{temp.constr.order}.
 \end{note}
 
 \rSec2[temp.constr.constr]{Constraints}
@@ -1592,33 +1592,33 @@ Declarations are partially ordered by their associated finalraints\iref{temp.con
 \pnum
 A \defn{constraint} is a sequence of logical operations and
 operands that specifies requirements on template arguments.
-The operands of a logical operation are finalraints.
-There are three different kinds of finalraints:
+The operands of a logical operation are constraints.
+There are three different kinds of constraints:
 \begin{itemize}
 \item conjunctions\iref{temp.constr.op},
 \item disjunctions\iref{temp.constr.op}, and
-\item atomic finalraints\iref{temp.constr.atomic}
+\item atomic constraints\iref{temp.constr.atomic}
 \end{itemize}
 
 \pnum
-In order for a finalrained template to be instantiated\iref{temp.spec},
-its associated finalraints\iref{temp.constr.decl}
+In order for a constrained template to be instantiated\iref{temp.spec},
+its associated constraints\iref{temp.constr.decl}
 shall be satisfied as described in the following subclauses.
 \begin{note}
 Forming the name of a specialization of
 a class template,
 a variable template, or
 an alias template\iref{temp.names}
-requires the satisfaction of its finalraints.
+requires the satisfaction of its constraints.
 Overload resolution\iref{over.match.viable}
-requires the satisfaction of finalraints
+requires the satisfaction of constraints
 on functions and function templates.
 \end{note}
 
 \rSec3[temp.constr.op]{Logical operations}
 
 \pnum
-There are two binary logical operations on finalraints: conjunction
+There are two binary logical operations on constraints: conjunction
 and disjunction.
 \begin{note}
 These logical operations have no corresponding \Java{} syntax.
@@ -1626,12 +1626,12 @@ For the purpose of exposition, conjunction is spelled
 using the symbol $\land$ and disjunction is spelled using the
 symbol $\lor$.
 The operands of these operations are called the left
-and right operands. In the finalraint $A \land B$,
+and right operands. In the constraint $A \land B$,
 $A$ is the left operand, and $B$ is the right operand.
 \end{note}
 
 \pnum
-A \defn{conjunction} is a finalraint taking two
+A \defn{conjunction} is a constraint taking two
 operands.
 To determine if a conjunction is
 \defnx{satisfied}{constraint!satisfaction!conjunction},
@@ -1642,7 +1642,7 @@ Otherwise, the conjunction is satisfied if and only if the second
 operand is satisfied.
 
 \pnum
-A \defn{disjunction} is a finalraint taking two
+A \defn{disjunction} is a constraint taking two
 operands.
 %
 To determine if a disjunction is
@@ -1657,65 +1657,65 @@ operand is satisfied.
 \begin{example}
 \begin{codeblock}
 template<typename T>
-  finalexpr bool get_value() { return T::value; }
+  constexpr bool get_value() { return T::value; }
 
 template<typename T>
   requires (sizeof(T) > 1) && get_value<T>()
-    void f(T);      // has associated finalraint \tcode{sizeof(T) > 1 $\land$ get_value<T>()}
+    void f(T);      // has associated constraint \tcode{sizeof(T) > 1 $\land$ get_value<T>()}
 
 void f(int);
 
 f('a'); // OK: calls \tcode{f(int)}
 \end{codeblock}
-In the satisfaction of the associated finalraints\iref{temp.constr.decl}
-of \tcode{f}, the finalraint \tcode{sizeof(char) > 1} is not satisfied;
+In the satisfaction of the associated constraints\iref{temp.constr.decl}
+of \tcode{f}, the constraint \tcode{sizeof(char) > 1} is not satisfied;
 the second operand is not checked for satisfaction.
 \end{example}
 
-\rSec3[temp.constr.atomic]{Atomic finalraints}
+\rSec3[temp.constr.atomic]{Atomic constraints}
 
 \pnum
-An \defn{atomic finalraint} is formed from
+An \defn{atomic constraint} is formed from
 an expression \tcode{E}
 and a mapping from the template parameters
 that appear within \tcode{E} to
 template arguments involving the
-template parameters of the finalrained entity,
+template parameters of the constrained entity,
 called the \defn{parameter mapping}\iref{temp.constr.decl}.
 \begin{note}
-Atomic finalraints are formed by finalraint normalization\iref{temp.constr.normal}.
+Atomic constraints are formed by constraint normalization\iref{temp.constr.normal}.
 \tcode{E} is never a logical AND expression\iref{expr.log.and}
 nor a logical OR expression\iref{expr.log.or}.
 \end{note}
 
 \pnum
-Two atomic finalraints are
-\indextext{identical!atomic finalraints|see{atomic finalraint, identical}}%
-\defnx{identical}{atomic finalraint!identical}
+Two atomic constraints are
+\indextext{identical!atomic constraints|see{atomic constraint, identical}}%
+\defnx{identical}{atomic constraint!identical}
 if they are formed from the same
 \grammarterm{expression}
 and the targets of the parameter mappings are equivalent
 according to the rules for expressions described in \ref{temp.over.link}.
 
 \pnum
-To determine if an atomic finalraint is
+To determine if an atomic constraint is
 \defnx{satisfied}{constraint!satisfaction!atomic},
 the parameter mapping and template arguments are
 first substituted into its expression.
 If substitution results in an invalid type or expression,
-the finalraint is not satisfied.
+the constraint is not satisfied.
 Otherwise, the lvalue-to-rvalue conversion\iref{conv.lval}
 is performed if necessary,
-and \tcode{E} shall be a finalant expression of type \tcode{bool}.
-The finalraint is satisfied if and only if evaluation of \tcode{E}
+and \tcode{E} shall be a constant expression of type \tcode{bool}.
+The constraint is satisfied if and only if evaluation of \tcode{E}
 results in \tcode{true}.
 \begin{example}
 \begin{codeblock}
 template<typename T> concept C =
-  sizeof(T) == 4 && !true;      // requires atomic finalraints \tcode{sizeof(T) == 4} and \tcode{!true}
+  sizeof(T) == 4 && !true;      // requires atomic constraints \tcode{sizeof(T) == 4} and \tcode{!true}
 
 template<typename T> struct S {
-  finalexpr operator bool() final { return true; }
+  constexpr operator bool() const { return true; }
 };
 
 template<typename T> requires (S<T>{})
@@ -1734,8 +1734,8 @@ void g() {
 \pnum
 A template declaration\iref{temp}
 or function declaration\iref{dcl.fct}
-can be finalrained by the use of a \grammarterm{requires-clause}.
-This allows the specification of finalraints for that declaration as
+can be constrained by the use of a \grammarterm{requires-clause}.
+This allows the specification of constraints for that declaration as
 an expression:
 
 \begin{bnf}
@@ -1748,21 +1748,21 @@ Constraints can also be associated with a declaration through the use of
 \grammarterm{constrained-parameter}{s} in a
 \grammarterm{template-parameter-list}.
 Each of these forms introduces additional \grammarterm{constraint-expression}{s}
-that are used to finalrain the declaration.
+that are used to constrain the declaration.
 
 \pnum
-\indextext{constraint!associated|see{associated finalraints}}%
-A template's \defn{associated finalraints} are defined as follows:
+\indextext{constraint!associated|see{associated constraints}}%
+A template's \defn{associated constraints} are defined as follows:
 
 \begin{itemize}
 \item If there are no introduced \grammarterm{constraint-expression}{s},
-the declaration has no associated finalraints.
+the declaration has no associated constraints.
 
 \item Otherwise, if there is a single introduced \grammarterm{constraint-expression},
-the associated finalraints are the normal form\iref{temp.constr.normal}
+the associated constraints are the normal form\iref{temp.constr.normal}
 of that expression.
 
-\item Otherwise, the associated finalraints are the normal form of a logical
+\item Otherwise, the associated constraints are the normal form of a logical
 AND expression\iref{expr.log.and} whose operands are in the
 following order:
 
@@ -1785,8 +1785,8 @@ of a function declaration\iref{dcl.fct}.
 \end{itemize}
 \end{itemize}
 
-The formation of the associated finalraints
-establishes the order in which finalraints are instantiated when checking
+The formation of the associated constraints
+establishes the order in which constraints are instantiated when checking
 for satisfaction\iref{temp.constr.constr}.
 \begin{example}
 \begin{codeblock}
@@ -1806,14 +1806,14 @@ template<typename T> concept C2 = sizeof(T) > 0;
 template<C1 T> void f4(T) requires C2<T>;
 template<typename T> requires C1<T> && C2<T> void f5(T);
 \end{codeblock}
-The associated finalraints of \tcode{f4} and \tcode{f5}
+The associated constraints of \tcode{f4} and \tcode{f5}
 are \tcode{C1<T> $\land$ C2<T>}.
 
 \begin{codeblock}
 template<C1 T> requires C2<T> void f6();
 template<C2 T> requires C1<T> void f7();
 \end{codeblock}
-The associated finalraints of
+The associated constraints of
 \tcode{f6} are \tcode{C1<T> $\land$ C2<T>},
 and those of
 \tcode{f7} are \tcode{C2<T> $\land$ C1<T>}.
@@ -1824,7 +1824,7 @@ and those of
 
 \pnum
 The \defnx{normal form}{normal form!constraint} of an \grammarterm{expression} \tcode{E} is
-a finalraint\iref{temp.constr.constr} that is defined as follows:
+a constraint\iref{temp.constr.constr} that is defined as follows:
 %
 \begin{itemize}
 \item
@@ -1847,7 +1847,7 @@ The normal form of an \grammarterm{id-expression} of the form
 is the normal form of the \grammarterm{constraint-expression} of \tcode{C},
 after substituting \tcode{A$_1$, A$_2$, ..., A$_n$} for
 \tcode{C}{'s} respective template parameters in the
-parameter mappings in each atomic finalraint.
+parameter mappings in each atomic constraint.
 If any such substitution results in an invalid type or expression,
 the program is ill-formed; no diagnostic is required.
 \begin{example}
@@ -1871,7 +1871,7 @@ in the parameter mapping.
 
 \item
 The normal form of any other expression \tcode{E} is
-the atomic finalraint
+the atomic constraint
 whose expression is \tcode{E} and
 whose parameter mapping is the identity mapping.
 \end{itemize}
@@ -1884,7 +1884,7 @@ is called
 \begin{note}
 Normalization of \grammarterm{constraint-expression}{s}
 is performed
-when determining the associated finalraints\iref{temp.constr.constr}
+when determining the associated constraints\iref{temp.constr.constr}
 of a declaration
 and
 when evaluating the value of an \grammarterm{id-expression}
@@ -1903,28 +1903,28 @@ template<C2 U> void f1(U);      // \#1
 template<C3 U> void f2(U);      // \#2
 template<C4 U> void f3(U);      // \#3
 \end{codeblock}
-The associated finalraints of \#1 are
+The associated constraints of \#1 are
 \tcode{sizeof(T) == 1} (with mapping $\tcode{T} \mapsto \tcode{U}$) $\land$ \tcode{1 == 2}.\\
-The associated finalraints of \#2 are
+The associated constraints of \#2 are
 \tcode{requires \{ typename T::type; \}} (with mapping $\tcode{T} \mapsto \tcode{U}$).\\
-The associated finalraints of \#3 are
+The associated constraints of \#3 are
 \tcode{requires (T x) \{ ++x; \}} (with mapping $\tcode{T} \mapsto \tcode{U}$).
 \end{example}
 \indextext{constraint!normalization|)}
 
-\rSec2[temp.constr.order]{Partial ordering by finalraints}
+\rSec2[temp.constr.order]{Partial ordering by constraints}
 \indextext{subsume|see{constraint, subsumption}}
 
 \pnum
-A finalraint $P$ \defnx{subsumes}{constraint!subsumption} a finalraint $Q$
+A constraint $P$ \defnx{subsumes}{constraint!subsumption} a constraint $Q$
 if and only if,
 for every disjunctive clause $P_i$
 in the disjunctive normal form\footnote{
-A finalraint is in disjunctive normal form when it is a disjunction of
-clauses where each clause is a conjunction of atomic finalraints.
+A constraint is in disjunctive normal form when it is a disjunction of
+clauses where each clause is a conjunction of atomic constraints.
 \begin{example}
-For atomic finalraints $A$, $B$, and $C$, the disjunctive normal form
-of the finalraint
+For atomic constraints $A$, $B$, and $C$, the disjunctive normal form
+of the constraint
 $A \land (B \lor C)$
 is
 $(A \land B) \lor (A \land C)$.
@@ -1934,10 +1934,10 @@ Its disjunctive clauses are $(A \land B)$ and $(A \land C)$.
 }
 of $P$, $P_i$ subsumes every conjunctive clause $Q_j$
 in the conjunctive normal form\footnote{
-A finalraint is in conjunctive normal form when it is a conjunction
-of clauses where each clause is a disjunction of atomic finalraints.
+A constraint is in conjunctive normal form when it is a conjunction
+of clauses where each clause is a disjunction of atomic constraints.
 \begin{example}
-For atomic finalraints $A$, $B$, and $C$, the finalraint
+For atomic constraints $A$, $B$, and $C$, the constraint
 $A \land (B \lor C)$ is in conjunctive normal form.
 %
 Its conjunctive clauses are $A$ and $(B \lor C)$.
@@ -1948,27 +1948,27 @@ of $Q$, where
 \begin{itemize}
 \item
 a disjunctive clause $P_i$ subsumes a conjunctive clause $Q_j$ if and only
-if there exists an atomic finalraint $P_{ia}$ in $P_i$ for which there exists
-an atomic finalraint $Q_{jb}$ in $Q_j$ such that $P_{ia}$ subsumes $Q_{jb}$, and
+if there exists an atomic constraint $P_{ia}$ in $P_i$ for which there exists
+an atomic constraint $Q_{jb}$ in $Q_j$ such that $P_{ia}$ subsumes $Q_{jb}$, and
 
-\item an atomic finalraint $A$ subsumes another atomic finalraint
+\item an atomic constraint $A$ subsumes another atomic constraint
 $B$ if and only if the $A$ and $B$ are identical using the
 rules described in \ref{temp.constr.atomic}.
 \end{itemize}
 %
 \begin{example}
-Let $A$ and $B$ be atomic finalraints\iref{temp.constr.atomic}.
+Let $A$ and $B$ be atomic constraints\iref{temp.constr.atomic}.
 %
-The finalraint $A \land B$ subsumes $A$, but $A$ does not subsume $A \land B$.
+The constraint $A \land B$ subsumes $A$, but $A$ does not subsume $A \land B$.
 %
-The finalraint $A$ subsumes $A \lor B$, but $A \lor B$ does not subsume $A$.
+The constraint $A$ subsumes $A \lor B$, but $A \lor B$ does not subsume $A$.
 %
-Also note that every finalraint subsumes itself.
+Also note that every constraint subsumes itself.
 \end{example}
 
 \pnum
 \begin{note}
-The subsumption relation defines a partial ordering on finalraints.
+The subsumption relation defines a partial ordering on constraints.
 This partial ordering is used to determine
 
 \begin{itemize}
@@ -1981,22 +1981,22 @@ This partial ordering is used to determine
 \end{note}
 
 %%% FIXME: We need to substitute the deductions from partial ordering
-%%% into the finalraints before comparing them, otherwise they will be
+%%% into the constraints before comparing them, otherwise they will be
 %%% referring to unrelated template parameters.
 \pnum
 A declaration \tcode{D1} is
-\defn{at least as finalrained} as
+\defn{at least as constrained} as
 a declaration \tcode{D2} if
 
 \begin{itemize}
-\item \tcode{D1} and \tcode{D2} are both finalrained declarations and
-\tcode{D1}'s associated finalraints subsume those of \tcode{D2}; or
+\item \tcode{D1} and \tcode{D2} are both constrained declarations and
+\tcode{D1}'s associated constraints subsume those of \tcode{D2}; or
 
-\item \tcode{D2} has no associated finalraints.
+\item \tcode{D2} has no associated constraints.
 \end{itemize}
 
 \pnum
-A declaration \tcode{D1} is \defn{more finalrained}
+A declaration \tcode{D1} is \defn{more constrained}
 than another declaration \tcode{D2} when \tcode{D1} is at least as
 constrained as \tcode{D2}, and \tcode{D2} is not at least as
 constrained as \tcode{D1}.
@@ -2142,7 +2142,7 @@ default arguments
 \grammarterm{requires-clause}{s},
 or
 \grammarterm{noexcept-specifier}{s}.
-For the purpose of instantiation, the substatements of a finalexpr if
+For the purpose of instantiation, the substatements of a constexpr if
 statement\iref{stmt.if} are considered definitions.
 
 \pnum
@@ -2286,7 +2286,7 @@ template<class T> T& Array<T>::operator[](int i) {
 }
 \end{codeblock}
 
-A finalrained member function can be defined out of line:
+A constrained member function can be defined out of line:
 \begin{codeblock}
 template<typename T> concept C = requires {
   typename T::type;
@@ -2365,11 +2365,11 @@ template<class T> T X<T>::s = 0;
 
 struct limits {
   template<class T>
-    static final T min;                 // declaration
+    static const T min;                 // declaration
 };
 
 template<class T>
-  final T limits::min = { };            // definition
+  const T limits::min = { };            // definition
 \end{codeblock}
 \end{example}
 
@@ -2418,11 +2418,11 @@ of the member template\iref{temp.over.link}.
 \begin{example}
 \begin{codeblock}
 template<class T> struct string {
-  template<class T2> int compare(final T2&);
-  template<class T2> string(final string<T2>& s) { @\commentellip@ }
+  template<class T2> int compare(const T2&);
+  template<class T2> string(const string<T2>& s) { @\commentellip@ }
 };
 
-template<class T> template<class T2> int string<T>::compare(final T2& s) {
+template<class T> template<class T2> int string<T>::compare(const T2& s) {
 }
 \end{codeblock}
 \end{example}
@@ -2719,7 +2719,7 @@ typedef zip<short>::with<unsigned short, unsigned>::type T2;
 
 template<class ... Args>
   void g(Args ... args) {                   // OK: \tcode{Args} is expanded by the function parameter pack \tcode{args}
-    f(const_cast<final Args*>(&args)...);   // OK: ``\tcode{Args}'' and ``\tcode{args}'' are expanded
+    f(const_cast<const Args*>(&args)...);   // OK: ``\tcode{Args}'' and ``\tcode{args}'' are expanded
     f(5 ...);                               // error: pattern does not contain any packs
     f(args);                                // error: pack ``\tcode{args}'' is not expanded
     f(h(args ...) + args ...);              // OK: first ``\tcode{args}'' expanded within \tcode{h},
@@ -2774,7 +2774,7 @@ All of the $\mathtt{E}_i$ become items in the enclosing list.
 \grammarterm{template-argument-list}, etc.\end{note}
 When $N$ is zero, the instantiation of the expansion produces an empty list.
 Such an instantiation does not alter the syntactic interpretation of the
-enclosing finalruct, even in cases where omitting the list entirely would
+enclosing construct, even in cases where omitting the list entirely would
 otherwise be ill-formed or would result in an ambiguity in the grammar.
 \begin{example}
 \begin{codeblock}
@@ -2790,7 +2790,7 @@ template void f<>();    // OK: \tcode{X<>} has no base classes
 
 \pnum
 The instantiation of a \tcode{sizeof...} expression\iref{expr.sizeof} produces
-an integral finalant containing the number of elements in the pack
+an integral constant containing the number of elements in the pack
 it expands.
 
 \pnum
@@ -3112,7 +3112,7 @@ the primary template.
 \end{example}
 
 \pnum
-A class template partial specialization may be finalrained\iref{temp}.
+A class template partial specialization may be constrained\iref{temp}.
 \begin{example}
 \begin{codeblock}
 template<typename T> concept C = true;
@@ -3126,7 +3126,7 @@ Both partial specializations are more specialized than the primary template.
 from the template argument list of the class template specialization succeeds,
 while the reverse does not.
 \#2 is more specialized because the template arguments are equivalent,
-but the partial specialization is more finalrained\iref{temp.constr.order}.
+but the partial specialization is more constrained\iref{temp.constr.order}.
 \end{example}
 
 \pnum
@@ -3288,7 +3288,7 @@ primary template.
 A partial specialization matches a given actual template argument
 list if the template arguments of the partial specialization can be
 deduced from the actual template argument list\iref{temp.deduct},
-and the deduced template arguments satisfy the associated finalraints
+and the deduced template arguments satisfy the associated constraints
 of the partial specialization, if any\iref{temp.constr.decl}.
 \begin{example}
 \begin{codeblock}
@@ -3314,8 +3314,8 @@ template<C T> struct S<T> { };          // \#2
 
 struct Arg { void f(); };
 
-S<int> s1;                              // uses \#1; the finalraints of \#2 are not satisfied
-S<Arg> s2;                              // uses \#2; both finalraints are satisfied but \#2 is more specialized
+S<int> s1;                              // uses \#1; the constraints of \#2 are not satisfied
+S<Arg> s2;                              // uses \#2; both constraints are satisfied but \#2 is more specialized
 \end{codeblock}
 \end{example}
 
@@ -3358,7 +3358,7 @@ templates\iref{temp.func.order}:
 \item
 Each of the two
 function templates has the same template parameters
-and associated finalraints\iref{temp.constr.decl}
+and associated constraints\iref{temp.constr.decl}
 as the corresponding partial specialization.
 \item
 Each function template
@@ -3646,8 +3646,8 @@ int i = h<int>();                               // template argument substitutio
                                                 // was not in scope at the first declaration of \tcode{h()}
 
 // ill-formed, no diagnostic required: the two expressions are functionally equivalent but not equivalent
-template <int N> void foo(final char (*s)[([]{}, N)]);
-template <int N> void foo(final char (*s)[([]{}, N)]);
+template <int N> void foo(const char (*s)[([]{}, N)]);
+template <int N> void foo(const char (*s)[([]{}, N)]);
 
 // two different declarations because the non-dependent portions are not considered equivalent
 template <class T> void spam(decltype([]{}) (*s)[sizeof(T)]);
@@ -3718,7 +3718,7 @@ are functionally equivalent using the rules described above to
 compare expressions involving
 template parameters.
 If the validity or meaning of the program depends on
-whether two finalructs are equivalent, and they are
+whether two constructs are equivalent, and they are
 functionally equivalent but not equivalent, the program is ill-formed,
 no diagnostic required.
 
@@ -3786,7 +3786,7 @@ one of the templates is more specialized than the other. If so, the
 more specialized template is the one chosen by the partial ordering
 process.
 If both deductions succeed, the partial ordering selects
-the more finalrained template as described by the rules in
+the more constrained template as described by the rules in
 \ref{temp.constr.order}.
 
 \pnum
@@ -3844,23 +3844,23 @@ template<class T> struct A { A(); };
 
 template<class T> void f(T);
 template<class T> void f(T*);
-template<class T> void f(final T*);
+template<class T> void f(const T*);
 
 template<class T> void g(T);
 template<class T> void g(T&);
 
-template<class T> void h(final T&);
+template<class T> void h(const T&);
 template<class T> void h(A<T>&);
 
 void m() {
-  final int* p;
-  f(p);             // \tcode{f(final T*)} is more specialized than \tcode{f(T)} or \tcode{f(T*)}
+  const int* p;
+  f(p);             // \tcode{f(const T*)} is more specialized than \tcode{f(T)} or \tcode{f(T*)}
   float x;
   g(x);             // ambiguous: \tcode{g(T)} or \tcode{g(T\&)}
   A<int> z;
   h(z);             // overload resolution selects \tcode{h(A<T>\&)}
-  final A<int> z2;
-  h(z2);            // \tcode{h(final T\&)} is called because \tcode{h(A<T>\&)} is not callable
+  const A<int> z2;
+  h(z2);            // \tcode{h(const T\&)} is called because \tcode{h(A<T>\&)} is not callable
 }
 \end{codeblock}
 \end{example}
@@ -4001,7 +4001,7 @@ template <class T>
 
 \pnum
 A \defn{concept} is a template
-that defines finalraints on its template arguments.
+that defines constraints on its template arguments.
 
 \pnum
 A \grammarterm{concept-definition}
@@ -4017,10 +4017,10 @@ concept C = requires(T x) {
 };
 
 template<typename T>
-  requires C<T>     // \tcode{C} finalrains \tcode{f1(T)} in \grammarterm{constraint-expression}
+  requires C<T>     // \tcode{C} constrains \tcode{f1(T)} in \grammarterm{constraint-expression}
 T f1(T x) { return x; }
 
-template<C T>       // \tcode{C} finalrains \tcode{f2(T)} as a \grammarterm{constrained-parameter}
+template<C T>       // \tcode{C} constrains \tcode{f2(T)} as a \grammarterm{constrained-parameter}
 T f2(T x) { return x; }
 \end{codeblock}
 \end{example}
@@ -4030,7 +4030,7 @@ A \grammarterm{concept-definition}
 shall appear at package scope\iref{basic.scope.package}.
 
 \pnum
-A concept shall not have associated finalraints\iref{temp.constr.decl}.
+A concept shall not have associated constraints\iref{temp.constr.decl}.
 
 \pnum
 A concept is not instantiated\iref{temp.spec}.
@@ -4155,7 +4155,7 @@ is implicitly assumed to name a type, without the use of the \tcode{typename} ke
 \begin{note}
 The
 \tcode{typename}
-keyword is not permitted by the syntax of these finalructs.
+keyword is not permitted by the syntax of these constructs.
 \end{note}
 
 \pnum
@@ -4236,7 +4236,7 @@ struct Foo {
 };
 
 struct Bar {
-  static int final x = 5;
+  static int const x = 5;
 };
 
 int main() {
@@ -4274,7 +4274,7 @@ The program is ill-formed, no diagnostic required, if:
 \begin{itemize}
 \item
 no valid specialization can be generated for a template
-or a substatement of a finalexpr if statement\iref{stmt.if} within a template
+or a substatement of a constexpr if statement\iref{stmt.if} within a template
 and the template is not instantiated, or
 \item
 no substitution of template arguments
@@ -4287,12 +4287,12 @@ parameter pack, or
 a hypothetical instantiation of a template
 immediately following its definition
 would be ill-formed
-due to a finalruct that does not depend on a template parameter, or
+due to a construct that does not depend on a template parameter, or
 \item
-the interpretation of such a finalruct
+the interpretation of such a construct
 in the hypothetical instantiation
 is different from
-the interpretation of the corresponding finalruct
+the interpretation of the corresponding construct
 in any actual instantiation of the template.
 \begin{note}
 This can happen in situations including the following:
@@ -4309,13 +4309,13 @@ was a pack expansion and the corresponding pack is empty, or
 \item an instantiation uses a default argument or default template argument
 that had not been defined at the point at which the template was defined, or
 
-\item finalant expression evaluation\iref{expr.const} within the template
+\item constant expression evaluation\iref{expr.const} within the template
 instantiation uses
   \begin{itemize}
-  \item the value of a final object of integral or unscoped enumeration type or
+  \item the value of a const object of integral or unscoped enumeration type or
   \item the value of a \tcode{constexpr} object or
   \item the value of a reference or
-  \item the definition of a finalexpr function,
+  \item the definition of a constexpr function,
   \end{itemize}
 and that entity was not defined when the template was defined, or
 
@@ -4375,7 +4375,7 @@ template<class T> class Set {
   int cnt;
 public:
   Set();
-  Set<T>(final Set<T>&);
+  Set<T>(const Set<T>&);
   void printall() {
     for (int i = 0; i<cnt; i++)
       cout << p[i] << '@\textbackslash@n';
@@ -4657,9 +4657,9 @@ template<class B, class a> struct X : A {
 
 \pnum
 \indextext{dependent name|see{name, dependent}}%
-Inside a template, some finalructs have semantics which may differ from one
+Inside a template, some constructs have semantics which may differ from one
 instantiation to another.
-Such a finalruct
+Such a construct
 \defnx{depends}{name!dependent}
 on the template parameters.
 In particular, types and expressions may depend on the type
@@ -4671,7 +4671,7 @@ An expression may be
 \defnx{type-dependent}{expression!type-dependent}
 (that is, its type may depend on a template parameter) or
 \defnx{value-dependent}{expression!value-dependent}
-(that is, its value when evaluated as a finalant expression\iref{expr.const}
+(that is, its value when evaluated as a constant expression\iref{expr.const}
 may depend on a template parameter)
 as described in this subclause.
 In an expression of the form:
@@ -4891,11 +4891,11 @@ template <class T1, class T2, int I> struct B {
   B<T1, T2, I>* b1;             // refers to the current instantiation
   B<T2, T1, I>* b2;             // not the current instantiation
   typedef T1 my_T1;
-  static final int my_I = I;
-  static final int my_I2 = I+0;
-  static final int my_I3 = my_I;
-  static final long my_I4 = I;
-  static final int my_I5 = (I);
+  static const int my_I = I;
+  static const int my_I2 = I+0;
+  static const int my_I3 = my_I;
+  static const long my_I4 = I;
+  static const int my_I5 = (I);
   B<my_T1, T2, my_I>* b3;       // refers to the current instantiation
   B<my_T1, T2, my_I2>* b4;      // not the current instantiation
   B<my_T1, T2, my_I3>* b5;      // refers to the current instantiation
@@ -4972,7 +4972,7 @@ see below. \end{note}
 \begin{example}
 \begin{codeblock}
 template <class T> class A {
-  static final int i = 5;
+  static const int i = 5;
   int n1[i];                    // \tcode{i} refers to a member of the current instantiation
   int n2[A::i];                 // \tcode{A::i} refers to a member of the current instantiation
   int n3[A<T>::i];              // \tcode{A<T>::i} refers to a member of the current instantiation
@@ -5088,7 +5088,7 @@ instantiation,
 \item
 a cv-qualified type where the cv-unqualified type is dependent,
 \item
-a compound type finalructed from any dependent type,
+a compound type constructed from any dependent type,
 \item
 an array type whose element type is dependent or whose
 bound (if any) is value-dependent,
@@ -5296,7 +5296,7 @@ instantiation and is not initialized in a \grammarterm{member-declarator},
 it names a static member function that is a dependent member of the current
 instantiation, or
 \item
-it is a finalant with literal type and is initialized with an
+it is a constant with literal type and is initialized with an
 expression that is value-dependent.
 \end{itemize}
 
@@ -5351,7 +5351,7 @@ An expression of the form \tcode{\&}\grammarterm{qualified-id} where the
 instantiation is value-dependent.
 An expression of the form \tcode{\&}\grammarterm{cast-expression}
 is also value-dependent if evaluating \grammarterm{cast-expression}
-as a core finalant expression\iref{expr.const} succeeds and
+as a core constant expression\iref{expr.const} succeeds and
 the result of the evaluation refers to a templated entity
 that is an object with static or thread storage duration or a member function.
 
@@ -5365,7 +5365,7 @@ is dependent if the type it specifies is dependent.
 \pnum
 A non-type
 \grammarterm{template-argument}
-is dependent if its type is dependent or the finalant
+is dependent if its type is dependent or the constant
 expression it specifies is value-dependent.
 
 \pnum
@@ -5758,7 +5758,7 @@ instantiated (this includes their default arguments,
 initializers, if any,
 but not their \grammarterm{partial-concept-id}{s} or \grammarterm{requires-clause}{s}).
 As a result, the dependent names are looked up, the
-semantic finalraints are checked, and any templates used are instantiated as
+semantic constraints are checked, and any templates used are instantiated as
 part of the instantiation of the entity within which the local class or
 enumeration is declared.
 \end{note}
@@ -5903,19 +5903,19 @@ that requires the value of the default argument.
 The existence of a definition of a variable or function
 is considered to affect the semantics of the program
 if the variable or function
-is needed for finalant evaluation by an expression\iref{expr.const},
-even if finalant evaluation of the expression is not required or
-if finalant expression evaluation does not use the definition.
+is needed for constant evaluation by an expression\iref{expr.const},
+even if constant evaluation of the expression is not required or
+if constant expression evaluation does not use the definition.
 
 \begin{example}
 \begin{codeblock}
-template<typename T> finalexpr int f() { return T::value; }
+template<typename T> constexpr int f() { return T::value; }
 template<bool B, typename T> void g(decltype(B ? f<T>() : 0));
 template<bool B, typename T> void g(...);
 template<bool B, typename T> void h(decltype(int{B ? f<T>() : 0}));
 template<bool B, typename T> void h(...);
 void x() {
-  g<false, int>(0); // OK, \tcode{B ? f<T>() : 0} is not potentially finalant evaluated
+  g<false, int>(0); // OK, \tcode{B ? f<T>() : 0} is not potentially constant evaluated
   h<false, int>(0); // error, instantiates \tcode{f<int>} even though \tcode{B} evaluates to \tcode{false} and
                     // list-initialization of \tcode{int} from \tcode{int} cannot be narrowing
 }
@@ -5953,12 +5953,12 @@ a declaration of the specialization is implicitly instantiated\iref{temp.over}.
 An implementation shall not implicitly instantiate a function template,
 a variable template,
 a member template, a non-virtual member function, a member class, a
-static data member of a class template, or a substatement of a finalexpr if
+static data member of a class template, or a substatement of a constexpr if
 statement\iref{stmt.if}, unless such instantiation is required.
 \begin{note}
 The instantiation of a generic lambda
 does not require instantiation of
-substatements of a finalexpr if statement
+substatements of a constexpr if statement
 within its \grammarterm{compound-statement}
 unless the call operator template is instantiated.
 \end{note}
@@ -5996,7 +5996,7 @@ public:
   V get(K);
 };
 
-void g(Map<final char*,int>& m) {
+void g(Map<const char*,int>& m) {
   int i = m.get("Nicholas");
 }
 \end{codeblock}
@@ -6004,7 +6004,7 @@ void g(Map<final char*,int>& m) {
 A call of
 \tcode{lt.get()}
 from
-\tcode{Map<final char*,int>::get()}
+\tcode{Map<const char*,int>::get()}
 would place
 \tcode{List<int>::get()}
 in the package
@@ -6016,7 +6016,7 @@ rather than in the global package.
 If a function template
 \tcode{f}
 is called in a way that requires a default argument to be used,
-the dependent names are looked up, the semantics finalraints are checked,
+the dependent names are looked up, the semantics constraints are checked,
 and the instantiation of any template used in the default argument
 is done as if the default argument had been
 an initializer used in a function template specialization with the same scope,
@@ -6055,7 +6055,7 @@ The \grammarterm{noexcept-specifier} of a function template specialization
 is not instantiated along with the function declaration; it is instantiated
 when needed\iref{except.spec}. If such an
 \grammarterm{noexcept-specifier} is needed but has not yet been
-instantiated, the dependent names are looked up, the semantics finalraints are
+instantiated, the dependent names are looked up, the semantics constraints are
 checked, and the instantiation of any template used in the
 \grammarterm{noexcept-specifier} is done as if it were being done as part
 of instantiating the declaration of the specialization at that point.
@@ -6087,11 +6087,11 @@ The \grammarterm{partial-concept-id}{s} and \grammarterm{requires-clause}
 of a template specialization or member function
 are not instantiated along with the specialization or function itself,
 even for a member function of a local class;
-substitution into the atomic finalraints formed from them is instead performed
+substitution into the atomic constraints formed from them is instead performed
 as specified in \ref{temp.constr.decl} and \ref{temp.constr.atomic}
-when determining whether the finalraints are satisfied.
+when determining whether the constraints are satisfied.
 \begin{note}
-The satisfaction of finalraints is determined during name lookup or overload
+The satisfaction of constraints is determined during name lookup or overload
 resolution\iref{over.match}.
 \end{note}
 \begin{example}
@@ -6104,13 +6104,13 @@ template<typename T> struct S {
   S() requires D<T> { }         // \#2
 };
 
-S<char> s1;                     // error: no matching finalructor
+S<char> s1;                     // error: no matching constructor
 S<char[8]> s2;                  // OK, calls \#2
 \end{codeblock}
-When \tcode{S<char>} is instantiated, both finalructors are part of the
-specialization. Their finalraints are not satisfied, and
-they suppress the implicit declaration of a default finalructor for
-\tcode{S<char>}\iref{class.ctor}, so there is no viable finalructor
+When \tcode{S<char>} is instantiated, both constructors are part of the
+specialization. Their constraints are not satisfied, and
+they suppress the implicit declaration of a default constructor for
+\tcode{S<char>}\iref{class.ctor}, so there is no viable constructor
 for \tcode{s1}.
 \end{example}
 \begin{example}
@@ -6130,7 +6130,7 @@ template<typename T> struct S2 {
 The class \tcode{S1<T>::Inner1} is ill-formed, no diagnostic required, because
 it has no valid specializations.
 \tcode{S2} is ill-formed, no diagnostic required, since no substitution into
-the finalraints of its \tcode{Inner2} template would result in a valid
+the constraints of its \tcode{Inner2} template would result in a valid
 expression.
 \end{example}
 
@@ -6317,9 +6317,9 @@ template void sort<>(Array<int>&);
 
 \pnum
 \begin{note}
-An explicit instantiation of a finalrained template
-shall satisfy that template's associated finalraints\iref{temp.constr.decl}.
-The satisfaction of finalraints is determined
+An explicit instantiation of a constrained template
+shall satisfy that template's associated constraints\iref{temp.constr.decl}.
+The satisfaction of constraints is determined
 % FIXME: What is a "template name"? Does this mean "simple-template-id"?
 when forming the template name of an explicit instantiation
 in which all template arguments are specified\iref{temp.names},
@@ -6335,7 +6335,7 @@ instantiation of the same kind (declaration or definition) of each
 of its members (not including members inherited from base classes and members
 that are templates) that has not been previously explicitly specialized in
 the translation unit containing the explicit instantiation,
-provided that the associated finalraints, if any,
+provided that the associated constraints, if any,
 of that member are satisfied by the template arguments of the explicit
 instantiation~(\ref{temp.constr.decl}, \ref{temp.constr.constr}),
 except as described below.
@@ -6381,7 +6381,7 @@ An explicit instantiation declaration shall not name a specialization of a
 template with internal linkage.
 
 \pnum
-An explicit instantiation does not finalitute a use of a default argument,
+An explicit instantiation does not constitute a use of a default argument,
 so default argument instantiation is not done.
 \begin{example}
 
@@ -6682,9 +6682,9 @@ template<> void sort(Array<int>&);
 
 \pnum
 \begin{note}
-An explicit specialization of a finalrained template
-shall satisfy that template's associated finalraints\iref{temp.constr.decl}.
-The satisfaction of finalraints is determined
+An explicit specialization of a constrained template
+shall satisfy that template's associated constraints\iref{temp.constr.decl}.
+The satisfaction of constraints is determined
 when forming the template name of an explicit specialization
 in which all template arguments are specified\iref{temp.names},
 or, for explicit specializations of function templates,
@@ -7014,9 +7014,9 @@ parameter pack.
 template<class X, class Y, class Z> X f(Y,Z);
 template<class ... Args> void f2();
 void g() {
-  f<int,final char*,double>("aa",3.0);
-  f<int,final char*>("aa",3.0); // \tcode{Z} is deduced to be \tcode{double}
-  f<int>("aa",3.0);             // \tcode{Y} is deduced to be \tcode{final char*}, and \tcode{Z} is deduced to be \tcode{double}
+  f<int,const char*,double>("aa",3.0);
+  f<int,const char*>("aa",3.0); // \tcode{Z} is deduced to be \tcode{double}
+  f<int>("aa",3.0);             // \tcode{Y} is deduced to be \tcode{const char*}, and \tcode{Z} is deduced to be \tcode{double}
   f("aa",3.0);                  // error: \tcode{X} cannot be deduced
   f2<char, short, int, long>(); // OK
 }
@@ -7108,7 +7108,7 @@ corresponding template parameters as specified below.
 After this substitution is performed, the function parameter type
 adjustments described in~\ref{dcl.fct} are performed.
 \begin{example}
-A parameter type of ``\tcode{void (final int, int[5])}'' becomes
+A parameter type of ``\tcode{void (const int, int[5])}'' becomes
 ``\tcode{void(*)(int,int*)}''.
 \end{example}
 \begin{note}
@@ -7120,7 +7120,7 @@ variable within the function.
 
 \begin{codeblock}
 template <class T> void f(T t);
-template <class X> void g(final X x);
+template <class X> void g(const X x);
 template <class Z> void h(Z, Z*);
 
 int main() {
@@ -7128,23 +7128,23 @@ int main() {
   f<int>(1);
 
   // \#2: function type is \tcode{f(int)}, \tcode{t} is \tcode{const}
-  f<final int>(1);
+  f<const int>(1);
 
   // \#3: function type is \tcode{g(int)}, \tcode{x} is \tcode{const}
   g<int>(1);
 
   // \#4: function type is \tcode{g(int)}, \tcode{x} is \tcode{const}
-  g<final int>(1);
+  g<const int>(1);
 
-  // \#5: function type is \tcode{h(int, final int*)}
-  h<final int>(1,0);
+  // \#5: function type is \tcode{h(int, const int*)}
+  h<const int>(1,0);
 }
 \end{codeblock}
 \end{example}
 
 \pnum
 \begin{note}
-\tcode{f<int>(1)} and \tcode{f<final int>(1)} call distinct functions
+\tcode{f<int>(1)} and \tcode{f<const int>(1)} call distinct functions
 even though both of the functions called have the same function type.
 \end{note}
 
@@ -7178,9 +7178,9 @@ the template parameter list of the template and the function type
 are replaced with the corresponding deduced
 or default argument values. If the substitution results in an
 invalid type, as described above, type deduction fails.
-If the function template has associated finalraints\iref{temp.constr.decl},
-those finalraints are checked for satisfaction\iref{temp.constr.constr}.
-If the finalraints are not satisfied, type deduction fails.
+If the function template has associated constraints\iref{temp.constr.decl},
+those constraints are checked for satisfaction\iref{temp.constr.constr}.
+If the constraints are not satisfied, type deduction fails.
 
 \pnum
 At certain points in the template argument deduction process it is necessary
@@ -7453,26 +7453,26 @@ parameter to be considered a non-deduced context\iref{temp.deduct.type}.
 \begin{codeblock}
 template<class T> void f(std::initializer_list<T>);
 f({1,2,3});                     // \tcode{T} deduced to \tcode{int}
-f({1,"asdf"});                  // error: \tcode{T} deduced to both \tcode{int} and \tcode{final char*}
+f({1,"asdf"});                  // error: \tcode{T} deduced to both \tcode{int} and \tcode{const char*}
 
 template<class T> void g(T);
 g({1,2,3});                     // error: no argument deduced for \tcode{T}
 
-template<class T, int N> void h(T final(&)[N]);
+template<class T, int N> void h(T const(&)[N]);
 h({1,2,3});                     // \tcode{T} deduced to \tcode{int}, \tcode{N} deduced to \tcode{3}
 
-template<class T> void j(T final(&)[3]);
+template<class T> void j(T const(&)[3]);
 j({42});                        // \tcode{T} deduced to \tcode{int}, array bound not considered
 
 struct Aggr { int i; int j; };
-template<int N> void k(Aggr final(&)[N]);
+template<int N> void k(Aggr const(&)[N]);
 k({1,2,3});                     // error: deduction fails, no conversion from \tcode{int} to \tcode{Aggr}
 k({{1},{2},{3}});               // OK, \tcode{N} deduced to \tcode{3}
 
-template<int M, int N> void m(int final(&)[M][N]);
+template<int M, int N> void m(int const(&)[M][N]);
 m({{1,2},{3,4}});               // \tcode{M} and \tcode{N} both deduced to \tcode{2}
 
-template<class T, int N> void n(T final(&)[N], T);
+template<class T, int N> void n(T const(&)[N], T);
 n({{1},{2},{3}},Aggr());        // OK, \tcode{T} is \tcode{Aggr}, \tcode{N} is \tcode{3}
 \end{codeblock}
 \end{example}
@@ -7494,8 +7494,8 @@ template<class T1, class ... Types> void g(T1, Types ...);
 template<class T1, class ... Types> void g1(Types ..., T1);
 
 void h(int x, float& y) {
-  final int z = x;
-  f(x, y, z);                   // \tcode{Types} is deduced to \tcode{int}, \tcode{float}, \tcode{final int}
+  const int z = x;
+  f(x, y, z);                   // \tcode{Types} is deduced to \tcode{int}, \tcode{float}, \tcode{const int}
   g(x, y, z);                   // \tcode{T1} is deduced to \tcode{int}; \tcode{Types} is deduced to \tcode{float}, \tcode{int}
   g1(x, y, z);                  // error: \tcode{Types} is not deduced
   g1<int, int, int>(x, y, z);   // OK, no deduction occurs
@@ -7548,12 +7548,12 @@ referred to by
 \tcode{P}
 is used for type deduction. \begin{example}
 \begin{codeblock}
-template<class T> int f(final T&);
-int n1 = f(5);                  // calls \tcode{f<int>(final int\&)}
-final int i = 0;
-int n2 = f(i);                  // calls \tcode{f<int>(final int\&)}
+template<class T> int f(const T&);
+int n1 = f(5);                  // calls \tcode{f<int>(const int\&)}
+const int i = 0;
+int n2 = f(i);                  // calls \tcode{f<int>(const int\&)}
 template <class T> int g(volatile T&);
-int n3 = g(i);                  // calls \tcode{g<final int>(final volatile int\&)}
+int n3 = g(i);                  // calls \tcode{g<const int>(const volatile int\&)}
 \end{codeblock}
 \end{example}%
 A \defn{forwarding reference}
@@ -7565,11 +7565,11 @@ lvalue, the type ``lvalue reference to \tcode{A}'' is used in place of \tcode{A}
 deduction. \begin{example}
 \begin{codeblock}
 template <class T> int f(T&& heisenreference);
-template <class T> int g(final T&&);
+template <class T> int g(const T&&);
 int i;
 int n1 = f(i);                  // calls \tcode{f<int\&>(int\&)}
 int n2 = f(0);                  // calls \tcode{f<int>(int\&\&)}
-int n3 = g(i);                  // error: would call \tcode{g<int>(final int\&\&)}, which
+int n3 = g(i);                  // error: would call \tcode{g<int>(const int\&\&)}, which
                                 // would bind an rvalue reference to an lvalue
 
 template <class T> struct A {
@@ -7884,7 +7884,7 @@ struct A {
   template <class T> operator T***();
 };
 A a;
-final int * final * final * p1 = a;     // \tcode{T} is deduced as \tcode{int}, not \tcode{final int}
+const int * const * const * p1 = a;     // \tcode{T} is deduced as \tcode{int}, not \tcode{const int}
 \end{codeblock}
 \end{example}
 
@@ -8307,10 +8307,10 @@ Here is an example where a qualification conversion applies between the
 argument type on the function call and the deduced template argument type:
 
 \begin{codeblock}
-template<class T> void f(final T*) { }
+template<class T> void f(const T*) { }
 int* p;
 void s() {
-  f(p);             // \tcode{f(final int*)}
+  f(p);             // \tcode{f(const int*)}
 }
 \end{codeblock}
 
@@ -8424,9 +8424,9 @@ deduction fails.
 \begin{example}
 \begin{codeblock}
 template<class T1, class... Z> class S;                               // \#1
-template<class T1, class... Z> class S<T1, final Z&...> { };          // \#2
-template<class T1, class T2>   class S<T1, final T2&> { };            // \#3
-S<int, final int&> s;         // both \#2 and \#3 match; \#3 is more specialized
+template<class T1, class... Z> class S<T1, const Z&...> { };          // \#2
+template<class T1, class T2>   class S<T1, const T2&> { };            // \#3
+S<int, const int&> s;         // both \#2 and \#3 match; \#3 is more specialized
 
 template<class T, class... U>            struct A { };                // \#1
 template<class T1, class T2, class... U> struct A<T1, T2*, U...> { }; // \#2
@@ -8658,7 +8658,7 @@ void k1() {
   f<1>(a);          // OK
 }
 
-template<final short cs> class B { };
+template<const short cs> class B { };
 template<short s> void g(B<s>);
 void k2() {
   B<1> b;
@@ -8892,7 +8892,7 @@ for which a template specialization is a candidate.
 template<class T> void f(T);    // declaration
 
 void g() {
-  f("Annemarie");               // call of \tcode{f<final char*>}
+  f("Annemarie");               // call of \tcode{f<const char*>}
 }
 \end{codeblock}
 
@@ -8902,7 +8902,7 @@ is well-formed even if the template
 \tcode{f}
 is only declared and not defined at the point of the call.
 The program will be ill-formed unless a specialization for
-\tcode{f<final char*>},
+\tcode{f<const char*>},
 either implicitly or explicitly generated,
 is present in some translation unit.
 \end{example}%

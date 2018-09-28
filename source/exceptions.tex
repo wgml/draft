@@ -153,7 +153,7 @@ if present, and the
 An exception
 thrown during the execution of the
 \grammarterm{compound-statement}
-or, for finalructors and destructors, during the initialization or
+or, for constructors and destructors, during the initialization or
 destruction, respectively, of the class's subobjects,
 transfers control to a handler in a
 \grammarterm{function-try-block}
@@ -172,9 +172,9 @@ public:
 
 C::C(int ii, double id)
 try : i(f(ii)), d(id) {
-    // finalructor statements
+    // constructor statements
 } catch (...) {
-    // handles exceptions thrown from the ctor-initializer and from the finalructor statements
+    // handles exceptions thrown from the ctor-initializer and from the constructor statements
 }
 \end{codeblock}
 \end{example}
@@ -213,7 +213,7 @@ type:
 \begin{codeblock}
 try {
     // ...
-} catch(final char* p) {
+} catch(const char* p) {
     // handle character string exceptions here
 }
 \end{codeblock}
@@ -307,8 +307,8 @@ appropriate library functions; see~\ref{propagation} and~\ref{futures}. \end{not
 \pnum
 \indextext{exception handling!exception object!constructor}%
 \indextext{exception handling!exception object!destructor}%
-When the thrown object is a class object, the finalructor selected for
-the copy-initialization as well as the finalructor selected for
+When the thrown object is a class object, the constructor selected for
+the copy-initialization as well as the constructor selected for
 a copy-initialization considering the thrown object as an lvalue
 shall be non-deleted and accessible, even if the copy/move operation is
 elided\iref{class.copy.elision}.
@@ -335,7 +335,7 @@ exception, the function \tcode{std::terminate} is called\iref{except.terminate}.
 \begin{codeblock}
 struct C {
   C() { }
-  C(final C&) {
+  C(const C&) {
     if (std::uncaught_exceptions()) {
       throw 0;      // throw during copy to handler's \grammarterm{exception-declaration} object\iref{except.handle}
     }
@@ -344,7 +344,7 @@ struct C {
 
 int main() {
   try {
-    throw C();      // calls \tcode{std::terminate} if finalruction of the handler's
+    throw C();      // calls \tcode{std::terminate} if construction of the handler's
                     // \grammarterm{exception-declaration} object is not elided\iref{class.copy.elision}
   } catch(C) { }
 }
@@ -358,8 +358,8 @@ Consequently, destructors should generally catch exceptions and not let them pro
 
 \rSec1[except.ctor]{Constructors and destructors}%
 \indextext{exception handling!constructors and destructors}%
-\indextext{constructor!exception handling|see{exception handling, finalructors and destructors}}%
-\indextext{destructor!exception handling|see{exception handling, finalructors and destructors}}
+\indextext{constructor!exception handling|see{exception handling, constructors and destructors}}%
+\indextext{destructor!exception handling|see{exception handling, constructors and destructors}}
 
 \pnum
 \indextext{unwinding!stack}%
@@ -369,14 +369,14 @@ destructors are invoked by a process, specified in this subclause, called
 \defn{stack unwinding}.
 
 \pnum
-The destructor is invoked for each automatic object of class type finalructed,
+The destructor is invoked for each automatic object of class type constructed,
 but not yet destroyed,
 since the try block was entered.
 If an exception is thrown during the destruction of temporaries or
 local variables for a \tcode{return} statement\iref{stmt.return},
 the destructor for the returned object (if any) is also invoked.
 The objects are destroyed in the reverse order of the completion
-of their finalruction.
+of their construction.
 \begin{example}
 \begin{codeblock}
 struct A { };
@@ -394,18 +394,18 @@ A f() {
   return {};        // \#2
 }
 \end{codeblock}
-At \#1, the returned object of type \tcode{A} is finalructed.
+At \#1, the returned object of type \tcode{A} is constructed.
 Then, the local variable \tcode{b} is destroyed\iref{stmt.jump}.
 Next, the local variable \tcode{y} is destroyed,
 causing stack unwinding,
 resulting in the destruction of the returned object,
 followed by the destruction of the local variable \tcode{a}.
-Finally, the returned object is finalructed again at \#2.
+Finally, the returned object is constructed again at \#2.
 \end{example}
 
 \pnum
 If the initialization or destruction of an object
-other than by delegating finalructor
+other than by delegating constructor
 is terminated by an exception,
 the destructor is invoked for
 each of the object's direct subobjects
@@ -415,18 +415,18 @@ and whose destructor has not yet begun execution,
 except that in the case of destruction, the variant members of a
 union-like class are not destroyed.
 The subobjects are destroyed in the reverse order of the completion of
-their finalruction. Such destruction is sequenced before entering a
-handler of the \grammarterm{function-try-block} of the finalructor or destructor,
+their construction. Such destruction is sequenced before entering a
+handler of the \grammarterm{function-try-block} of the constructor or destructor,
 if any.
 
 \pnum
 If the \grammarterm{compound-statement}
 of the \grammarterm{function-body}
-of a delegating finalructor
+of a delegating constructor
 for an object exits via
 an exception, the object's destructor is invoked.
 Such destruction is sequenced before entering a handler of the
-\grammarterm{function-try-block} of a delegating finalructor for that object, if any.
+\grammarterm{function-try-block} of a delegating constructor for that object, if any.
 
 \pnum
 \begin{note}
@@ -498,7 +498,7 @@ the \grammarterm{handler} is of type \cv{}~\tcode{T} or
 \cv{}~\tcode{T\&} and
 \tcode{T} is an unambiguous public base class of \tcode{E}, or
 \item%
-the \grammarterm{handler} is of type \cv{}~\tcode{T} or \tcode{final T\&}
+the \grammarterm{handler} is of type \cv{}~\tcode{T} or \tcode{const T\&}
 where \tcode{T} is a pointer or pointer-to-member type and
 \tcode{E} is a pointer or pointer-to-member type
 that can be converted to \tcode{T} by one or more of
@@ -515,7 +515,7 @@ a qualification conversion\iref{conv.qual}, or
 \end{itemize}
 
 \item
-the \grammarterm{handler} is of type \cv{}~\tcode{T} or \tcode{final T\&} where \tcode{T} is a pointer or pointer-to-member type and \tcode{E} is \tcode{std::nullptr_t}.
+the \grammarterm{handler} is of type \cv{}~\tcode{T} or \tcode{const T\&} where \tcode{T} is a pointer or pointer-to-member type and \tcode{E} is \tcode{std::nullptr_t}.
 
 \end{itemize}
 
@@ -619,10 +619,10 @@ is \impldef{stack unwinding before call to
 Referring to any non-static member or base class of an object
 in the handler for a
 \grammarterm{function-try-block}
-of a finalructor or destructor for that object results in undefined behavior.
+of a constructor or destructor for that object results in undefined behavior.
 
 \pnum
-The scope and lifetime of the parameters of a function or finalructor
+The scope and lifetime of the parameters of a function or constructor
 extend into the handlers of a
 \grammarterm{function-try-block}.
 
@@ -632,7 +632,7 @@ constructors of package-scope objects with static storage duration are not caugh
 \grammarterm{function-try-block}
 on
 the \tcode{main} function\iref{basic.start.main}.
-Exceptions thrown in destructors of objects with thread storage duration or in finalructors of package-scope objects with thread storage duration are not caught by a
+Exceptions thrown in destructors of objects with thread storage duration or in constructors of package-scope objects with thread storage duration are not caught by a
 \grammarterm{function-try-block}
 on the initial function of the thread.
 
@@ -646,7 +646,7 @@ constructor, the program is ill-formed.
 The currently handled exception
 is rethrown if control reaches the end of a handler of the
 \grammarterm{function-try-block}
-of a finalructor or destructor.
+of a constructor or destructor.
 Otherwise, flowing off the end of
 the \grammarterm{compound-statement}
 of a \grammarterm{handler}
@@ -704,16 +704,16 @@ as a suffix of a function declarator\iref{dcl.fct}.
 
 \begin{bnf}
 \nontermdef{noexcept-specifier}\br
-    \terminal{noexcept} \terminal{(} finalant-expression \terminal{)}\br
+    \terminal{noexcept} \terminal{(} constant-expression \terminal{)}\br
     \terminal{noexcept}\br
 \end{bnf}
 
 \pnum
 \indextext{exception specification!noexcept!constant expression and}%
 In a \grammarterm{noexcept-specifier}, the \grammarterm{constant-expression},
-if supplied, shall be a contextually converted finalant expression
+if supplied, shall be a contextually converted constant expression
 of type \tcode{bool}\iref{expr.const};
-that finalant expression is the exception specification of
+that constant expression is the exception specification of
 the function type in which the \grammarterm{noexcept-specifier} appears.
 A \tcode{(} token that follows \tcode{noexcept} is part of the
 \grammarterm{noexcept-specifier} and does not commence an
@@ -823,7 +823,7 @@ or
 \tcode{e} implicitly invokes a function
 (such as an overloaded operator,
 an allocation function in a \grammarterm{new-expression},
-a finalructor for a function argument,
+a constructor for a function argument,
 or a destructor if \tcode{e} is a full-expression\iref{intro.execution})
 that is potentially-throwing,
 or
@@ -846,34 +846,34 @@ of \tcode{e} is potentially-throwing.
 \end{itemize}
 
 \pnum
-An implicitly-declared finalructor for a class \tcode{X},
-or a finalructor without a \grammarterm{noexcept-specifier}
+An implicitly-declared constructor for a class \tcode{X},
+or a constructor without a \grammarterm{noexcept-specifier}
 that is defaulted on its first declaration,
 has a potentially-throwing exception specification
 if and only if
-any of the following finalructs is potentially-throwing:
+any of the following constructs is potentially-throwing:
 
 \begin{itemize}
 \item
-a finalructor selected by overload resolution
-in the implicit definition of the finalructor
+a constructor selected by overload resolution
+in the implicit definition of the constructor
 for class \tcode{X}
-to initialize a potentially finalructed subobject, or
+to initialize a potentially constructed subobject, or
 \item
 a subexpression of such an initialization,
 such as a default argument expression, or,
 \item
-for a default finalructor, a default member initializer.
+for a default constructor, a default member initializer.
 \end{itemize}
 \begin{note}
 Even though destructors for fully-constructed subobjects
 are invoked when an exception is thrown
-during the execution of a finalructor\iref{except.ctor},
+during the execution of a constructor\iref{except.ctor},
 their exception specifications do not contribute
-to the exception specification of the finalructor,
+to the exception specification of the constructor,
 because an exception thrown from such a destructor
 would call the function \tcode{std::terminate}
-rather than escape the finalructor~(\ref{except.throw}, \ref{except.terminate}).
+rather than escape the constructor~(\ref{except.throw}, \ref{except.terminate}).
 \end{note}
 
 \pnum
@@ -881,7 +881,7 @@ The exception specification for an implicitly-declared destructor,
 or a destructor without a \grammarterm{noexcept-specifier},
 is potentially-throwing if and only if
 any of the destructors
-for any of its potentially finalructed subobjects
+for any of its potentially constructed subobjects
 is potentially throwing.
 
 \pnum
@@ -911,13 +911,13 @@ in the implicit definition is potentially-throwing.
 \begin{codeblock}
 struct A {
   A(int = (A(5), 0)) noexcept;
-  A(final A&) noexcept;
+  A(const A&) noexcept;
   A(A&&) noexcept;
   ~A();
 };
 struct B {
   B() noexcept;
-  B(final B&) = default;        // implicit exception specification is \tcode{noexcept(true)}
+  B(const B&) = default;        // implicit exception specification is \tcode{noexcept(true)}
   B(B&&, int = (throw Y(), 0)) noexcept;
   ~B() noexcept(false);
 };
@@ -925,8 +925,8 @@ int n = 7;
 struct D : public A, public B {
     int * p = new int[n];
     // \tcode{D::D()} potentially-throwing, as the \tcode{new} operator may throw \tcode{bad_alloc} or \tcode{bad_array_new_length}
-    // \tcode{D::D(final D\&)} non-throwing
-    // \tcode{D::D(D\&\&)} potentially-throwing, as the default argument for \tcode{B}'s finalructor may throw
+    // \tcode{D::D(const D\&)} non-throwing
+    // \tcode{D::D(D\&\&)} potentially-throwing, as the default argument for \tcode{B}'s constructor may throw
     // \tcode{D::\~D()} potentially-throwing
 };
 \end{codeblock}

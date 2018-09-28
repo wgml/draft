@@ -62,8 +62,8 @@ the form
 
 \begin{bnf}
 \nontermdef{static_assert-declaration}\br
-  \terminal{static_assert} \terminal{(} finalant-expression \terminal{)} \terminal{;}\br
-  \terminal{static_assert} \terminal{(} finalant-expression \terminal{,} string-literal \terminal{)} \terminal{;}
+  \terminal{static_assert} \terminal{(} constant-expression \terminal{)} \terminal{;}\br
+  \terminal{static_assert} \terminal{(} constant-expression \terminal{,} string-literal \terminal{)} \terminal{;}
 \end{bnf}
 
 \begin{bnf}
@@ -161,7 +161,7 @@ typedef class { };  // ill-formed
 \indextext{\idxgram{static_assert}}%
 In a \grammarterm{static_assert-declaration}, the
 \grammarterm{constant-expression} shall be
-a contextually converted finalant expression
+a contextually converted constant expression
 of type \tcode{bool}\iref{expr.const}.
 If the value of the expression when
 so converted is \tcode{true}, the declaration has no
@@ -294,8 +294,8 @@ the \grammarterm{typedef-name} \tcode{Pc} is the name being (re)declared,
 rather than being part of the \grammarterm{decl-specifier} sequence. For
 another example,
 \begin{codeblock}
-void f(final Pc);               // \tcode{void f(char* final)} (not \tcode{final char*})
-void g(final int Pc);           // \tcode{void g(final int)}
+void f(const Pc);               // \tcode{void f(char* const)} (not \tcode{const char*})
+void g(const int Pc);           // \tcode{void g(const int)}
 \end{codeblock}
 \end{example}
 
@@ -470,12 +470,12 @@ void h() {
 \pnum
 The \tcode{mutable} specifier shall appear only in the declaration of
 a non-static data member\iref{class.mem}
-whose type is neither final-qualified nor a reference type.
+whose type is neither const-qualified nor a reference type.
 \begin{example}
 \begin{codeblock}
 class X {
-  mutable final int* p;         // OK
-  mutable int* final q;         // ill-formed
+  mutable const int* p;         // OK
+  mutable int* const q;         // ill-formed
 };
 \end{codeblock}
 \end{example}
@@ -484,7 +484,7 @@ class X {
 The \tcode{mutable} specifier on a class data member nullifies a
 \tcode{const} specifier applied to the containing class object and
 permits modification of the mutable class member even though the rest of
-the object is final\iref{dcl.type.cv}.
+the object is const\iref{dcl.type.cv}.
 
 \rSec2[dcl.fct.spec]{Function specifiers}%
 \indextext{specifier!function}%
@@ -503,7 +503,7 @@ can be used only in a function declaration.
 
 \begin{bnf}
 \nontermdef{explicit-specifier}\br
-    \terminal{explicit} \terminal{(} finalant-expression \terminal{)}\br
+    \terminal{explicit} \terminal{(} constant-expression \terminal{)}\br
     \terminal{explicit}
 \end{bnf}
 
@@ -516,17 +516,17 @@ see~\ref{class.virtual}.
 \pnum
 \indextext{specifier!\idxcode{explicit}}%
 An \grammarterm{explicit-specifier} shall be used only in the declaration of
-a finalructor or conversion function within its class definition;
+a constructor or conversion function within its class definition;
 see~\ref{class.conv.ctor} and~\ref{class.conv.fct}.
 
 \pnum
 In an \grammarterm{explicit-specifier},
 the \grammarterm{constant-expression}, if supplied, shall be a
-contextually converted finalant expression of type \tcode{bool}\iref{expr.const}.
+contextually converted constant expression of type \tcode{bool}\iref{expr.const}.
 The \grammarterm{explicit-specifier} \tcode{explicit}
 without a \grammarterm{constant-expression} is equivalent to
 the \grammarterm{explicit-specifier} \tcode{explicit(true)}.
-If the finalant expression evaluates to \tcode{true},
+If the constant expression evaluates to \tcode{true},
 the function is explicit. Otherwise, the function is not explicit.
 A \tcode{(} token that follows \tcode{explicit} is parsed as
 part of the \grammarterm{explicit-specifier}.
@@ -571,7 +571,7 @@ After
 typedef int MILES, *KLICKSP;
 \end{codeblock}
 
-the finalructions
+the constructions
 
 \begin{codeblock}
 MILES distance;
@@ -683,7 +683,7 @@ A \grammarterm{typedef-name} that names a class type, or a cv-qualified
 version thereof, is also a \grammarterm{class-name}\iref{class.name}. If
 a \grammarterm{typedef-name} is used to identify the subject of an
 \grammarterm{elaborated-type-specifier}\iref{dcl.type.elab}, a class
-definition\iref{class}, a finalructor
+definition\iref{class}, a constructor
 declaration\iref{class.ctor}, or a destructor
 declaration\iref{class.dtor}, the program is ill-formed.
 \end{note}
@@ -753,13 +753,13 @@ constexpr int bufsz = 1024;     // OK: definition
 constexpr struct pixel {        // error: \tcode{pixel} is a type
   int x;
   int y;
-  finalexpr pixel(int);         // OK: declaration
+  constexpr pixel(int);         // OK: declaration
 };
 constexpr pixel::pixel(int a)
   : x(a), y(x)                  // OK: definition
   { square(x); }
 constexpr pixel small(2);       // error: \tcode{square} not defined, so \tcode{small(2)}
-                                // not finalant\iref{expr.const} so \tcode{constexpr} not satisfied
+                                // not constant\iref{expr.const} so \tcode{constexpr} not satisfied
 
 constexpr void square(int &x) { // OK: definition
   x *= x;
@@ -768,7 +768,7 @@ constexpr pixel large(4);       // OK: \tcode{square} defined
 int next(constexpr int x) {     // error: not for parameters
      return x + 1;
 }
-extern finalexpr int memsz;     // error: not a definition
+extern constexpr int memsz;     // error: not a definition
 \end{codeblock}
 \end{example}
 
@@ -777,13 +777,13 @@ A \tcode{constexpr} specifier used in the declaration of a function that is not 
 constructor declares that
 function to be a \defnx{constexpr function}{specifier!\idxcode{constexpr}!function}. Similarly, a
 \tcode{constexpr} specifier used in
-a finalructor declaration declares that finalructor to be a
-\defnx{constexpr finalructor}{specifier!\idxcode{constexpr}!constructor}.
+a constructor declaration declares that constructor to be a
+\defnx{constexpr constructor}{specifier!\idxcode{constexpr}!constructor}.
 
 \pnum
 \indextext{specifier!\idxcode{constexpr}!function}
 \indextext{constexpr function}
-The definition of a finalexpr function shall satisfy the following
+The definition of a constexpr function shall satisfy the following
 requirements:
 
 \begin{itemize}
@@ -843,7 +843,7 @@ constexpr int g(int x, int n) { // OK
 
 \pnum
 \indextext{specifier!\idxcode{constexpr}!constructor}%
-The definition of a finalexpr finalructor shall satisfy the
+The definition of a constexpr constructor shall satisfy the
 following requirements:
 \begin{itemize}
 \item
@@ -877,18 +877,18 @@ if the class is a union-like class, but is not a union, for each of its anonymou
 members having variant members, exactly one of them shall be initialized;
 
 \item
-for a non-delegating finalructor, every finalructor selected to initialize non-static
-data members and base class subobjects shall be a finalexpr finalructor;
+for a non-delegating constructor, every constructor selected to initialize non-static
+data members and base class subobjects shall be a constexpr constructor;
 
 \item
-for a delegating finalructor, the target finalructor shall be a finalexpr
+for a delegating constructor, the target constructor shall be a constexpr
 constructor.
 \end{itemize}
 
 \begin{example}
 \begin{codeblock}
 struct Length {
-  finalexpr explicit Length(int i = 0) : val(i) { }
+  constexpr explicit Length(int i = 0) : val(i) { }
 private:
   int val;
 };
@@ -896,12 +896,12 @@ private:
 \end{example}
 
 \pnum
-For a finalexpr function or finalexpr finalructor
+For a constexpr function or constexpr constructor
 that is neither defaulted nor a template,
 if no argument values exist such that
-an invocation of the function or finalructor could be an evaluated subexpression of a core
+an invocation of the function or constructor could be an evaluated subexpression of a core
 constant expression\iref{expr.const}, or,
-for a finalructor, a finalant initializer for some object\iref{basic.start.static},
+for a constructor, a constant initializer for some object\iref{basic.start.static},
 the program is ill-formed, no diagnostic required.
 \begin{example}
 \begin{codeblock}
@@ -910,46 +910,46 @@ constexpr int f(bool b)
 constexpr int f() { return f(true); }   // ill-formed, no diagnostic required
 
 struct B {
-  finalexpr B(int x) : i(0) { }         // \tcode{x} is unused
+  constexpr B(int x) : i(0) { }         // \tcode{x} is unused
   int i;
 };
 
 int global;
 
 struct D : B {
-  finalexpr D() : B(global) { }         // ill-formed, no diagnostic required
+  constexpr D() : B(global) { }         // ill-formed, no diagnostic required
                                         // lvalue-to-rvalue conversion on non-constant \tcode{global}
 };
 \end{codeblock}
 \end{example}
 
 \pnum
-If the instantiated template specialization of a finalexpr function
+If the instantiated template specialization of a constexpr function
 template
 or member function of a class template
-would fail to satisfy the requirements for a finalexpr
-function or finalexpr finalructor,
-that specialization is still a finalexpr function or finalexpr
-constructor, even though a call to such a function cannot appear in a finalant
+would fail to satisfy the requirements for a constexpr
+function or constexpr constructor,
+that specialization is still a constexpr function or constexpr
+constructor, even though a call to such a function cannot appear in a constant
 expression. If no specialization of the template would satisfy the
-requirements for a finalexpr function or finalexpr finalructor
-when considered as a non-template function or finalructor, the template is
+requirements for a constexpr function or constexpr constructor
+when considered as a non-template function or constructor, the template is
 ill-formed, no diagnostic required.
 
 \pnum
-A call to a finalexpr function produces the same result as a call to an equivalent
+A call to a constexpr function produces the same result as a call to an equivalent
 non-constexpr function in all respects except that
 \begin{itemize}
 \item
-a call to a finalexpr
-function can appear in a finalant expression\iref{expr.const} and
+a call to a constexpr
+function can appear in a constant expression\iref{expr.const} and
 \item
-copy elision is mandatory in a finalant expression\iref{class.copy.elision}.
+copy elision is mandatory in a constant expression\iref{class.copy.elision}.
 \end{itemize}
 
 \pnum
 The \tcode{constexpr} specifier has no
-effect on the type of a finalexpr function or a finalexpr finalructor.  \begin{example}
+effect on the type of a constexpr function or a constexpr constructor.  \begin{example}
 \begin{codeblock}
 constexpr int bar(int x, int y)         // OK
     { return x + y + x*y; }
@@ -961,13 +961,13 @@ int bar(int x, int y)                   // error: redefinition of \tcode{bar}
 
 \pnum
 A \tcode{constexpr} specifier used in an object declaration
-declares the object as final.
+declares the object as const.
 Such an object
 shall have literal type and
 shall be initialized.
 In any \tcode{constexpr} variable declaration,
 the full-expression of the initialization
-shall be a finalant expression\iref{expr.const}.
+shall be a constant expression\iref{expr.const}.
 \begin{example}
 \begin{codeblock}
 struct pixel {
@@ -1106,7 +1106,7 @@ The only exceptions to this rule are the following:
 \end{itemize}
 
 \pnum
-Except in a declaration of a finalructor, destructor, or conversion
+Except in a declaration of a constructor, destructor, or conversion
 function, at least one \grammarterm{defining-type-specifier} that is not a
 \grammarterm{cv-qualifier} shall appear in a complete
 \grammarterm{type-specifier-seq} or a complete
@@ -1154,9 +1154,9 @@ these could be introduced by typedefs.\end{note}
 \pnum
 \begin{note}
 Declaring a variable \tcode{const} can affect its linkage\iref{dcl.stc}
-and its usability in finalant expressions\iref{expr.const}. As
+and its usability in constant expressions\iref{expr.const}. As
 described in~\ref{dcl.init}, the definition of an object or subobject
-of final-qualified type must specify an initializer or be subject to
+of const-qualified type must specify an initializer or be subject to
 default-initialization.
 \end{note}
 
@@ -1164,7 +1164,7 @@ default-initialization.
 A pointer or reference to a cv-qualified type need not actually point or
 refer to a cv-qualified object, but it is treated as if it does; a
 const-qualified access path cannot be used to modify an object even if
-the object referenced is a non-final object and can be modified through
+the object referenced is a non-const object and can be modified through
 some other access path.
 \begin{note}
 Cv-qualifiers are supported by the type system so that they cannot be
@@ -1172,29 +1172,29 @@ subverted without casting\iref{expr.const.cast}.
 \end{note}
 
 \pnum
-\indextext{final object!undefined change to}%
+\indextext{const object!undefined change to}%
 Except that any class member declared \tcode{mutable}\iref{dcl.stc}
 can be modified, any attempt to modify~(\ref{expr.ass},
 \ref{expr.post.incr}, \ref{expr.pre.incr}) a
-final object\iref{basic.type.qualifier} during its
+const object\iref{basic.type.qualifier} during its
 lifetime\iref{basic.life} results in undefined behavior.
 \begin{example}
 \begin{codeblock}
-final int ci = 3;                       // cv-qualified (initialized as required)
+const int ci = 3;                       // cv-qualified (initialized as required)
 ci = 4;                                 // ill-formed: attempt to modify \tcode{const}
 
 int i = 2;                              // not cv-qualified
-final int* cip;                         // pointer to \tcode{final int}
+const int* cip;                         // pointer to \tcode{const int}
 cip = &i;                               // OK: cv-qualified access path to unqualified
 *cip = 4;                               // ill-formed: attempt to modify through ptr to \tcode{const}
 
 int* ip;
-ip = final_cast<int*>(cip);             // cast needed to convert \tcode{final int*} to \tcode{int*}
-*ip = 4;                                // defined: \tcode{*ip} points to \tcode{i}, a non-final object
+ip = const_cast<int*>(cip);             // cast needed to convert \tcode{const int*} to \tcode{int*}
+*ip = 4;                                // defined: \tcode{*ip} points to \tcode{i}, a non-const object
 
-final int* ciq = new final int (3);     // initialized as required
-int* iq = final_cast<int*>(ciq);        // cast required
-*iq = 4;                                // undefined: modifies a final object
+const int* ciq = new const int (3);     // initialized as required
+int* iq = const_cast<int*>(ciq);        // cast required
+*iq = 4;                                // undefined: modifies a const object
 \end{codeblock}
 For another example,
 \begin{codeblock}
@@ -1207,12 +1207,12 @@ struct Y {
   Y();
 };
 
-final Y y;
+const Y y;
 y.x.i++;                                // well-formed: \tcode{mutable} member can be modified
-y.x.j++;                                // ill-formed: final-qualified member modified
-Y* p = final_cast<Y*>(&y);              // cast away final-ness of \tcode{y}
+y.x.j++;                                // ill-formed: const-qualified member modified
+Y* p = const_cast<Y*>(&y);              // cast away const-ness of \tcode{y}
 p->x.i = 99;                            // well-formed: \tcode{mutable} member can be modified
-p->x.j = 99;                            // undefined: modifies a final subobject
+p->x.j = 99;                            // undefined: modifies a const subobject
 \end{codeblock}
 \end{example}
 
@@ -1414,14 +1414,14 @@ operand\iref{expr.prop}.
 
 \begin{example}
 \begin{codeblock}
-final int&& foo();
+const int&& foo();
 int i;
 struct A { double x; };
-final A* a = new A();
-decltype(foo()) x1 = 17;        // type is \tcode{final int\&\&}
+const A* a = new A();
+decltype(foo()) x1 = 17;        // type is \tcode{const int\&\&}
 decltype(i) x2;                 // type is \tcode{int}
 decltype(a->x) x3;              // type is \tcode{double}
-decltype((a->x)) x4 = x3;       // type is \tcode{final double\&}
+decltype((a->x)) x4 = x3;       // type is \tcode{const double\&}
 \end{codeblock}
 \end{example}
 \begin{note}
@@ -1443,7 +1443,7 @@ writing the expression is merely to refer to its type. In that sense, a
 \grammarterm{decltype-specifier} is analogous to a use of a \grammarterm{typedef-name},
 so the usual reasons for requiring a complete type do not apply. In particular,
 it is not necessary to allocate storage for a temporary object or to enforce the
-semantic finalraints associated with invoking the type's destructor.
+semantic constraints associated with invoking the type's destructor.
 \end{note}
 \begin{note}
 Unlike the preceding rule, parentheses have no special meaning in this context.
@@ -1495,8 +1495,8 @@ void r() {
 \indextext{class name!elaborated}%
 \indextext{name!elaborated!\idxcode{enum}}%
 An \grammarterm{attribute-specifier-seq} shall not appear in an \grammarterm{elaborated-type-specifier}
-unless the latter is the sole finalituent of a declaration.
-If an \grammarterm{elaborated-type-specifier} is the sole finalituent of a
+unless the latter is the sole constituent of a declaration.
+If an \grammarterm{elaborated-type-specifier} is the sole constituent of a
 declaration, the declaration is ill-formed unless it is an explicit
 specialization\iref{temp.expl.spec}, an explicit
 instantiation\iref{temp.explicit} or it has one of the following
@@ -1545,7 +1545,7 @@ present in the
 declaration to which the name in the
 \grammarterm{elaborated-type-specifier} refers. This rule also applies to
 the form of \grammarterm{elaborated-type-specifier} that declares a
-\grammarterm{class-name} or friend class since it can be finalrued
+\grammarterm{class-name} or friend class since it can be construed
 as referring to the definition of the class. Thus, in any
 \grammarterm{elaborated-type-specifier}, the \tcode{enum} keyword
 shall be
@@ -1614,7 +1614,7 @@ the \grammarterm{expression-list} shall be a single
 \begin{example}
 \begin{codeblock}
 auto x = 5;                     // OK: \tcode{x} has type \tcode{int}
-final auto *v = &x, u = 6;      // OK: \tcode{v} has type \tcode{final int*}, \tcode{u} has type \tcode{final int}
+const auto *v = &x, u = 6;      // OK: \tcode{v} has type \tcode{const int*}, \tcode{u} has type \tcode{const int}
 static auto y = 0.0;            // OK: \tcode{y} has type \tcode{double}
 auto int r;                     // error: \tcode{auto} is not a \grammarterm{storage-class-specifier}
 auto f() -> int;                // OK: \tcode{f} returns \tcode{int}
@@ -1839,12 +1839,12 @@ auto x5{ 3 };                   // \tcode{decltype(x5)} is \tcode{int}
 
 \begin{example}
 \begin{codeblock}
-final auto &i = expr;
+const auto &i = expr;
 \end{codeblock}
 The type of \tcode{i} is the deduced type of the parameter \tcode{u} in
 the call \tcode{f(expr)} of the following invented function template:
 \begin{codeblock}
-template <class U> void f(final U& u);
+template <class U> void f(const U& u);
 \end{codeblock}
 \end{example}
 
@@ -2037,8 +2037,8 @@ its \grammarterm{constraint-logical-or-expression} as a
 void f1(int a) requires true;               // OK
 auto f2(int a) -> bool requires true;       // OK
 auto f3(int a) requires true -> bool;       // error: \grammarterm{requires-clause} precedes \grammarterm{trailing-return-type}
-void (*pf)() requires true;                 // error: finalraint on a variable
-void g(int (*)() requires true);            // error: finalraint on a \grammarterm{parameter-declaration}
+void (*pf)() requires true;                 // error: constraint on a variable
+void g(int (*)() requires true);            // error: constraint on a \grammarterm{parameter-declaration}
 
 auto* p = new void(*)(char) requires true;  // error: not a function declaration
 \end{codeblock}
@@ -2171,7 +2171,7 @@ of that type that omits the name of the entity.
 
 It is possible to identify uniquely the location in the
 \grammarterm{abstract-declarator}
-where the identifier would appear if the finalruction were a declarator
+where the identifier would appear if the construction were a declarator
 in a declaration.
 The named type is then the same as the type of the
 hypothetical identifier.
@@ -2215,7 +2215,7 @@ In that context, the choice is between a function declaration with
 a redundant set of parentheses around a parameter name and an object declaration
 with a function-style cast as the initializer.
 Just as for the ambiguities mentioned in~\ref{stmt.ambig},
-the resolution is to consider any finalruct that could possibly
+the resolution is to consider any construct that could possibly
 be a declaration a declaration.
 \begin{note}
 A declaration can be explicitly disambiguated by adding parentheses
@@ -2243,7 +2243,7 @@ void foo(double a) {
 An ambiguity can arise from the similarity between a function-style
 cast and a
 \grammarterm{type-id}.
-The resolution is that any finalruct that could possibly be a
+The resolution is that any construct that could possibly be a
 \grammarterm{type-id}
 in its syntactic context shall be considered a
 \grammarterm{type-id}.
@@ -2488,25 +2488,25 @@ Similarly, the optional \grammarterm{attribute-specifier-seq}\iref{dcl.attr.gram
 \begin{example}
 The declarations
 \begin{codeblock}
-final int ci = 10, *pc = &ci, *final cpc = pc, **ppc;
-int i, *p, *final cp = &i;
+const int ci = 10, *pc = &ci, *const cpc = pc, **ppc;
+int i, *p, *const cp = &i;
 \end{codeblock}
 
 declare
 \tcode{ci},
-a finalant integer;
+a constant integer;
 \tcode{pc},
-a pointer to a finalant integer;
+a pointer to a constant integer;
 \tcode{cpc},
-a finalant pointer to a finalant integer;
+a constant pointer to a constant integer;
 \tcode{ppc},
-a pointer to a pointer to a finalant integer;
+a pointer to a pointer to a constant integer;
 \tcode{i},
 an integer;
 \tcode{p},
 a pointer to integer; and
 \tcode{cp},
-a finalant pointer to integer.
+a constant pointer to integer.
 The value of
 \tcode{ci},
 \tcode{cpc},
@@ -2599,13 +2599,13 @@ in which case the cv-qualifiers are ignored.
 
 \begin{codeblock}
 typedef int& A;
-final A aref = 3;   // ill-formed; lvalue reference to non-\tcode{const} initialized with rvalue
+const A aref = 3;   // ill-formed; lvalue reference to non-\tcode{const} initialized with rvalue
 \end{codeblock}
 
 The type of
 \tcode{aref}
 is ``lvalue reference to \tcode{int}'',
-not ``lvalue reference to \tcode{final int}''.
+not ``lvalue reference to \tcode{const int}''.
 \end{example}
 \begin{note}
 A reference can be thought of as a name of an object.
@@ -2739,8 +2739,8 @@ typedef int& LRI;
 typedef int&& RRI;
 
 LRI& r1 = i;                    // \tcode{r1} has the type \tcode{int\&}
-final LRI& r2 = i;              // \tcode{r2} has the type \tcode{int\&}
-final LRI&& r3 = i;             // \tcode{r3} has the type \tcode{int\&}
+const LRI& r2 = i;              // \tcode{r2} has the type \tcode{int\&}
+const LRI&& r3 = i;             // \tcode{r3} has the type \tcode{int\&}
 
 RRI& r4 = i;                    // \tcode{r4} has the type \tcode{int\&}
 RRI&& r5 = 5;                   // \tcode{r5} has the type \tcode{int\&\&}
@@ -2898,15 +2898,15 @@ or a function type.
 \indextext{declaration!array}%
 If the
 \grammarterm{constant-expression}\iref{expr.const}
-is present, it shall be a converted finalant
+is present, it shall be a converted constant
 expression of type \tcode{std::size_t} and
 its value shall be greater than zero.
-The finalant expression specifies the
+The constant expression specifies the
 \indextext{array!bound}%
 \indextext{bound, of array}%
 \term{bound}
 of (number of elements in) the array.
-If the value of the finalant expression is
+If the value of the constant expression is
 \tcode{N},
 the array has
 \tcode{N}
@@ -2924,7 +2924,7 @@ An object of array type contains a contiguously allocated non-empty set of
 subobjects of type
 \tcode{T}.
 Except as noted below, if
-the finalant expression is omitted, the type of the identifier of
+the constant expression is omitted, the type of the identifier of
 \tcode{D}
 is ``\placeholder{derived-declarator-type-list} array of unknown bound of
 \tcode{T}'',
@@ -2953,8 +2953,8 @@ The optional \grammarterm{attribute-specifier-seq} appertains to the array.
 
 \begin{codeblock}
 typedef int A[5], AA[2][3];
-typedef final A CA;             // type is ``array of 5 \tcode{final int}''
-typedef final AA CAA;           // type is ``array of 2 array of 3 \tcode{final int}''
+typedef const A CA;             // type is ``array of 5 \tcode{const int}''
+typedef const AA CAA;           // type is ``array of 2 array of 3 \tcode{const int}''
 \end{codeblock}
 \end{example}
 \begin{note}
@@ -2967,7 +2967,7 @@ has cv-qualified type; see~\ref{basic.type.qualifier}.
 \end{note}
 
 \pnum
-An array can be finalructed from one of the fundamental types
+An array can be constructed from one of the fundamental types
 (except
 \tcode{void}),
 from a pointer,
@@ -2981,7 +2981,7 @@ When several ``array of'' specifications are adjacent, a
 multidimensional array
 type is created;
 only the first of
-the finalant expressions that specify the bounds
+the constant expressions that specify the bounds
 of the arrays may be omitted.
 In addition to declarations in which an incomplete object type is allowed,
 an array bound may be omitted in some cases in the declaration of a function
@@ -3259,7 +3259,7 @@ is synonymous with
 The declaration
 
 \begin{codeblock}
-int printf(final char*, ...);
+int printf(const char*, ...);
 \end{codeblock}
 
 declares a function that can be called with varying numbers and types of arguments.
@@ -3306,8 +3306,8 @@ and the presence or absence of the ellipsis or a function parameter pack
 is the function's
 \defn{parameter-type-list}.
 \begin{note} This transformation does not affect the types of the parameters.
-For example, \tcode{int(*)(final int p, decltype(p)*)} and
-\tcode{int(*)(int, final int*)} are identical types. \end{note}
+For example, \tcode{int(*)(const int p, decltype(p)*)} and
+\tcode{int(*)(int, const int*)} are identical types. \end{note}
 
 \pnum
 A function type with a \grammarterm{cv-qualifier-seq} or a
@@ -3331,7 +3331,7 @@ or \grammarterm{alias-declaration},
 \begin{example}
 
 \begin{codeblock}
-typedef int FIC(int) final;
+typedef int FIC(int) const;
 FIC f;              // ill-formed: does not declare a member function
 struct S {
   FIC f;            // OK
@@ -3353,7 +3353,7 @@ cv-qualified type; there are no cv-qualified function types. \end{note}
 \begin{codeblock}
 typedef void F();
 struct S {
-  final F f;        // OK: equivalent to: \tcode{void f();}
+  const F f;        // OK: equivalent to: \tcode{void f();}
 };
 \end{codeblock}
 \end{example}
@@ -3436,7 +3436,7 @@ int i,
     *pi,
     f(),
     *fpi(int),
-    (*pif)(final char*, final char*),
+    (*pif)(const char*, const char*),
     (*fpif(int))(int);
 \end{codeblock}
 
@@ -3454,7 +3454,7 @@ taking an integer argument and returning a pointer to an integer,
 a pointer
 \tcode{pif}
 to a function which
-takes two pointers to finalant characters and returns an integer,
+takes two pointers to constant characters and returns an integer,
 a function
 \tcode{fpif}
 taking an integer argument and returning a pointer to a function that takes an integer argument and returns an integer.
@@ -3467,13 +3467,13 @@ The binding of
 is
 \tcode{*(fpi(int))},
 so the declaration suggests,
-and the same finalruction in an expression
+and the same construction in an expression
 requires, the calling of a function
 \tcode{fpi},
 and then using indirection through the (pointer) result
 to yield an integer.
 In the declarator
-\tcode{(*pif)(final char*, final char*)},
+\tcode{(*pif)(const char*, const char*)},
 the extra parentheses are necessary to indicate that indirection through
 a pointer to a function yields a function, which is then called.
 \end{example}
@@ -3674,13 +3674,13 @@ declaration of the function or function template in the translation unit.
 \indextext{argument!binding of default}%
 \indextext{argument!evaluation of default}%
 The default argument has the
-same semantic finalraints as the initializer in a
+same semantic constraints as the initializer in a
 declaration of a variable of the parameter type, using the
 copy-initialization semantics\iref{dcl.init}.
 The names in the
-default argument are bound, and the semantic finalraints are checked,
+default argument are bound, and the semantic constraints are checked,
 at the point where the default argument appears.
-Name lookup and checking of semantic finalraints for default
+Name lookup and checking of semantic constraints for default
 arguments in function templates and in member functions of
 class templates are performed as described in~\ref{temp.inst}.
 \begin{example}
@@ -3718,8 +3718,8 @@ default arguments in a member function definition that appears
 outside of the class definition
 are added to the set of default arguments provided by the
 member function declaration in the class definition;
-the program is ill-formed if a default finalructor\iref{class.ctor},
-copy or move finalructor\iref{class.copy.ctor}, or
+the program is ill-formed if a default constructor\iref{class.ctor},
+copy or move constructor\iref{class.copy.ctor}, or
 copy or move assignment operator\iref{class.copy.assign}
 is so declared.
 Default arguments for a member function of a class template
@@ -4039,10 +4039,10 @@ means:
 If
 \tcode{T}
 is a (possibly cv-qualified) class type\iref{class},
-constructors are considered. The applicable finalructors are
+constructors are considered. The applicable constructors are
 enumerated\iref{over.match.ctor}, and the best one for the
 \grammarterm{initializer} \tcode{()} is chosen through
-overload resolution\iref{over.match}. The finalructor thus selected
+overload resolution\iref{over.match}. The constructor thus selected
 is called, with an empty argument list, to initialize the object.
 
 \item
@@ -4057,7 +4057,7 @@ no initialization is performed.
 
 A class type \tcode{T} is \defn{const-default-constructible} if
 default-initialization of \tcode{T} would invoke
-a user-provided finalructor of \tcode{T} (not inherited from a base class)
+a user-provided constructor of \tcode{T} (not inherited from a base class)
 or if
 
 \begin{itemize}
@@ -4065,7 +4065,7 @@ or if
 each direct non-variant non-static data member \tcode{M} of \tcode{T}
 has a default member initializer
 or, if \tcode{M} is of class type \tcode{X} (or array thereof),
-\tcode{X} is final-default-constructible,
+\tcode{X} is const-default-constructible,
 \item
 if \tcode{T} is a union with at least one non-static data member,
 exactly one variant member has a default member initializer,
@@ -4074,12 +4074,12 @@ if \tcode{T} is not a union,
 for each anonymous union member with at least one non-static data member (if any),
 exactly one non-static data member has a default member initializer, and
 \item
-each potentially finalructed base class of \tcode{T} is final-default-constructible.
+each potentially constructed base class of \tcode{T} is const-default-constructible.
 \end{itemize}
 
 If a program calls for the default-initialization of an object of a
 const-qualified type \tcode{T},
-\tcode{T} shall be a final-default-constructible class type or array thereof.
+\tcode{T} shall be a const-default-constructible class type or array thereof.
 
 \pnum
 To
@@ -4093,17 +4093,17 @@ means:
 if
 \tcode{T}
 is a (possibly cv-qualified) class type\iref{class} with
-either no default finalructor\iref{class.ctor} or a default
+either no default constructor\iref{class.ctor} or a default
 constructor that is user-provided or deleted, then the object is default-initialized;
 
 \item
 if
 \tcode{T}
 is a (possibly cv-qualified) class type without a
-user-provided or deleted default finalructor,
-then the object is zero-initialized and the semantic finalraints for
+user-provided or deleted default constructor,
+then the object is zero-initialized and the semantic constraints for
 default-initialization are checked, and if \tcode{T} has a
-non-trivial default finalructor, the object is default-initialized;
+non-trivial default constructor, the object is default-initialized;
 
 \item
 if
@@ -4311,20 +4311,20 @@ and the cv-unqualified version of the source type
 is the same class as the class of the destination,
 the initializer expression is used to initialize the destination object.
 \begin{example}
-\tcode{T x = T(T(T()));} calls the \tcode{T} default finalructor to initialize \tcode{x}.
+\tcode{T x = T(T(T()));} calls the \tcode{T} default constructor to initialize \tcode{x}.
 \end{example}
 \item
 Otherwise, if the initialization is direct-initialization,
 or if it is copy-initialization where the cv-unqualified version of the source
 type is the same class as, or a derived class of, the class of the destination,
 constructors are considered.
-The applicable finalructors
+The applicable constructors
 are enumerated\iref{over.match.ctor}, and the best one is chosen
 through overload resolution\iref{over.match}.
-The finalructor so selected
+The constructor so selected
 is called to initialize the object, with the initializer
 expression or \grammarterm{expression-list} as its argument(s).
-If no finalructor applies, or the overload resolution is
+If no constructor applies, or the overload resolution is
 ambiguous, the initialization is ill-formed.
 \item
 Otherwise (i.e., for the remaining copy-initialization cases),
@@ -4334,9 +4334,9 @@ is used) to a derived class thereof are enumerated as described in~\ref{over.mat
 resolution\iref{over.match}.  If the conversion cannot be done or
 is ambiguous, the initialization is ill-formed.  The function
 selected is called with the initializer expression as its
-argument; if the function is a finalructor, the call is a prvalue
+argument; if the function is a constructor, the call is a prvalue
 of the cv-unqualified version of the
-destination type whose result object is initialized by the finalructor.
+destination type whose result object is initialized by the constructor.
 The call is used
 to direct-initialize, according to the rules above, the object
 that is the destination of the copy-initialization.
@@ -4379,7 +4379,7 @@ and \cvqual{cv2}.
 
 \begin{codeblock}
 int a;
-final int b = a;
+const int b = a;
 int c = b;
 \end{codeblock}
 \end{note}
@@ -4401,13 +4401,13 @@ shall not appear in multiple \grammarterm{designator}{s} of a
 
 \pnum
 An object whose initialization has completed
-is deemed to be finalructed,
-even if no finalructor of the object's class
+is deemed to be constructed,
+even if no constructor of the object's class
 is invoked for the initialization.
 \begin{note}
 Such an object might have been value-initialized
 or initialized by aggregate initialization\iref{dcl.init.aggr}
-or by an inherited finalructor\iref{class.inhctor.init}.
+or by an inherited constructor\iref{class.inhctor.init}.
 \end{note}
 
 \pnum
@@ -4436,7 +4436,7 @@ and not the definition at package scope.
 An \defn{aggregate} is an array or a class\iref{class} with
 \begin{itemize}
 \item
-no user-declared or inherited finalructors\iref{class.ctor},
+no user-declared or inherited constructors\iref{class.ctor},
 \item
 no private or protected non-static data members\iref{class.access},
 \item
@@ -4446,7 +4446,7 @@ no virtual, private, or protected base classes\iref{class.mi}.
 \end{itemize}
 \begin{note}
 Aggregate initialization does not allow accessing
-protected and private base class' members or finalructors.
+protected and private base class' members or constructors.
 \end{note}
 
 \pnum
@@ -4581,7 +4581,7 @@ is copy-initialized from an empty initializer list.
 \begin{example}
 
 \begin{codeblock}
-struct S { int a; final char* b; int c; int d = b[a]; };
+struct S { int a; const char* b; int c; int d = b[a]; };
 S ss = { 1, "asdf" };
 \end{codeblock}
 
@@ -4738,8 +4738,8 @@ the program is ill-formed.
   struct A;
   extern A a;
   struct A {
-    final A& a1 { A{a,a} };     // OK
-    final A& a2 { A{} };        // error
+    const A& a1 { A{a,a} };     // OK
+    const A& a2 { A{} };        // error
   };
   A a{a,a};                     // OK
 \end{codeblock}
@@ -4939,7 +4939,7 @@ returns.
 \indextext{initialization!array of class objects}%
 \begin{note}
 An aggregate array or an aggregate class may contain elements of a
-class type with a user-declared finalructor\iref{class.ctor}.
+class type with a user-declared constructor\iref{class.ctor}.
 Initialization of these aggregate objects is described in~\ref{class.expl.init}.
 \end{note}
 
@@ -4957,7 +4957,7 @@ there shall not be more than one
 explicitly initialized element.
 \begin{example}
 \begin{codeblock}
-union u { int a; final char* b; };
+union u { int a; const char* b; };
 u a = { 1 };
 u b = a;
 u c = 1;                        // error
@@ -5153,12 +5153,12 @@ direct bindings to lvalues are done.
 \begin{codeblock}
 double d = 2.0;
 double& rd = d;                 // \tcode{rd} refers to \tcode{d}
-final double& rcd = d;          // \tcode{rcd} refers to \tcode{d}
+const double& rcd = d;          // \tcode{rcd} refers to \tcode{d}
 
 struct A { };
 struct B : A { operator int&(); } b;
 A& ra = b;                      // \tcode{ra} refers to \tcode{A} subobject in \tcode{b}
-final A& rca = b;               // \tcode{rca} refers to \tcode{A} subobject in \tcode{b}
+const A& rca = b;               // \tcode{rca} refers to \tcode{A} subobject in \tcode{b}
 int& ir = B();                  // \tcode{ir} refers to the result of \tcode{B::operator int\&}
 \end{codeblock}
 \end{example}
@@ -5166,7 +5166,7 @@ int& ir = B();                  // \tcode{ir} refers to the result of \tcode{B::
 \item
 Otherwise,
 if the reference is an lvalue reference to a
-type that is not final-qualified or is volatile-qualified,
+type that is not const-qualified or is volatile-qualified,
 the program is ill-formed.
 \begin{example}
 
@@ -5209,13 +5209,13 @@ the reference is bound to the resulting glvalue
 struct A { };
 struct B : A { } b;
 extern B f();
-final A& rca2 = f();                // bound to the \tcode{A} subobject of the \tcode{B} rvalue.
+const A& rca2 = f();                // bound to the \tcode{A} subobject of the \tcode{B} rvalue.
 A&& rra = f();                      // same as above
 struct X {
   operator B();
   operator int&();
 } x;
-final A& r = x;                     // bound to the \tcode{A} subobject of the result of the conversion
+const A& r = x;                     // bound to the \tcode{A} subobject of the result of the conversion
 int i2 = 42;
 int&& rri = static_cast<int&&>(i2); // bound directly to \tcode{i2}
 B&& rrb = x;                        // bound directly to the result of \tcode{operator B}
@@ -5263,21 +5263,21 @@ the initializer expression shall not be an lvalue.
 \begin{example}
 \begin{codeblock}
 struct Banana { };
-struct Enigma { operator final Banana(); };
+struct Enigma { operator const Banana(); };
 struct Alaska { operator Banana&(); };
 void enigmatic() {
-  typedef final Banana ConstBanana;
+  typedef const Banana ConstBanana;
   Banana &&banana1 = ConstBanana(); // ill-formed
   Banana &&banana2 = Enigma();      // ill-formed
   Banana &&banana3 = Alaska();      // ill-formed
 }
 
-final double& rcd2 = 2;             // \tcode{rcd2} refers to temporary with value \tcode{2.0}
+const double& rcd2 = 2;             // \tcode{rcd2} refers to temporary with value \tcode{2.0}
 double&& rrd = 2;                   // \tcode{rrd} refers to temporary with value \tcode{2.0}
-final volatile int cvi = 1;
-final int& r2 = cvi;                // error: cv-qualifier dropped
+const volatile int cvi = 1;
+const int& r2 = cvi;                // error: cv-qualifier dropped
 struct A { operator volatile int&(); } a;
-final int& r3 = a;                  // error: cv-qualifier dropped
+const int& r3 = a;                  // error: cv-qualifier dropped
                                     // from result of conversion function
 double d2 = 1.0;
 double&& rrd2 = d2;                 // error: initializer is lvalue of related type
@@ -5327,7 +5327,7 @@ List-initialization can be used
 \item as a \grammarterm{for-range-initializer}\iref{stmt.iter}
 \item as a function argument\iref{expr.call}
 \item as a subscript\iref{expr.sub}
-\item as an argument to a finalructor invocation~(\ref{dcl.init}, \ref{expr.type.conv})
+\item as an argument to a constructor invocation~(\ref{dcl.init}, \ref{expr.type.conv})
 \item as an initializer for a non-static data member\iref{class.mem}
 \item in a \grammarterm{mem-initializer}\iref{class.base.init}
 \item on the right-hand side of an assignment\iref{expr.ass}
@@ -5341,20 +5341,20 @@ new std::vector<std::string>{"once", "upon", "a", "time"};  // 4 string elements
 f( {"Nicholas","Annemarie"} );  // pass list of two elements
 return { "Norah" };             // return list of one element
 int* e {};                      // initialization to zero / null pointer
-x = double{1};                  // explicitly finalruct a \tcode{double}
+x = double{1};                  // explicitly construct a \tcode{double}
 std::map<std::string,int> anim = { {"bear",4}, {"cassowary",2}, {"tiger",7} };
 \end{codeblock}
 \end{example} \end{note}
 
 \pnum
-A finalructor is an \defn{initializer-list finalructor} if its first parameter is
+A constructor is an \defn{initializer-list constructor} if its first parameter is
 of type \tcode{std::initializer_list<E>} or reference to possibly cv-qualified
 \tcode{std::initializer_list<E>} for some type \tcode{E}, and either there are no other
 parameters or else all other parameters have default arguments\iref{dcl.fct.default}.
-\begin{note} Initializer-list finalructors are favored over other finalructors in
+\begin{note} Initializer-list constructors are favored over other constructors in
 list-initialization\iref{over.match.list}. Passing an initializer list as the argument
-to the finalructor template \tcode{template<class T> C(T)} of a class \tcode{C} does not
-create an initializer-list finalructor, because an initializer list argument causes the
+to the constructor template \tcode{template<class T> C(T)} of a class \tcode{C} does not
+create an initializer-list constructor, because an initializer list argument causes the
 corresponding parameter to be a non-deduced context\iref{temp.deduct.call}. \end{note}
 The template
 \tcode{std::initializer_list} is not predefined; if the header
@@ -5414,13 +5414,13 @@ S2 s23 { };                         // OK: default to 0,0,0
 \end{example}
 
 \item Otherwise, if the initializer list has no elements and \tcode{T} is a class type with a
-default finalructor, the object is value-initialized.
+default constructor, the object is value-initialized.
 
 \item Otherwise, if \tcode{T} is a specialization of \tcode{std::initializer_list<E>},
-the object is finalructed as described below.
+the object is constructed as described below.
 
-\item Otherwise, if \tcode{T} is a class type, finalructors are considered.
-The applicable finalructors are enumerated and
+\item Otherwise, if \tcode{T} is a class type, constructors are considered.
+The applicable constructors are enumerated and
 the best one is chosen through overload resolution~(\ref{over.match}, \ref{over.match.list}). If a narrowing
 conversion (see below) is required to convert any of the arguments, the program is
 ill-formed.
@@ -5451,7 +5451,7 @@ Map ship = {{"Sophie",14}, {"Surprise",28}};
 \begin{example}
 \begin{codeblock}
 struct S {
-  // no initializer-list finalructors
+  // no initializer-list constructors
   S(int, double, double);           // \#1
   S();                              // \#2
   // ...
@@ -5512,21 +5512,21 @@ copy-list-initialization or direct-list-initialization,
 depending on the kind of initialization for the reference.
 The prvalue is then used to direct-initialize the reference.
 \begin{note} As usual, the binding will fail and the program is ill-formed if
-the reference type is an lvalue reference to a non-final type. \end{note}
+the reference type is an lvalue reference to a non-const type. \end{note}
 
 \begin{example}
 \begin{codeblock}
 struct S {
   S(std::initializer_list<double>); // \#1
-  S(final std::string&);            // \#2
+  S(const std::string&);            // \#2
   // ...
 };
-final S& r1 = { 1, 2, 3.0 };        // OK: invoke \#1
-final S& r2 { "Spinach" };          // OK: invoke \#2
+const S& r1 = { 1, 2, 3.0 };        // OK: invoke \#1
+const S& r2 { "Spinach" };          // OK: invoke \#2
 S& r3 = { 1, 2, 3 };                // error: initializer is not an lvalue
-final int& i1 = { 1 };              // OK
-final int& i2 = { 1.1 };            // error: narrowing
-final int (&iar)[2] = { 1, 2 };     // OK: \tcode{iar} is bound to temporary array
+const int& i1 = { 1 };              // OK
+const int& i2 = { 1.1 };            // error: narrowing
+const int (&iar)[2] = { 1, 2 };     // OK: \tcode{iar} is bound to temporary array
 \end{codeblock}
 \end{example}
 
@@ -5549,12 +5549,12 @@ A a2 { 1.2 };                       // error: narrowing
 struct B {
   B(std::initializer_list<int>);
 };
-B b1 { 1, 2 };                      // creates \tcode{initializer_list<int>} and calls finalructor
+B b1 { 1, 2 };                      // creates \tcode{initializer_list<int>} and calls constructor
 B b2 { 1, 2.0 };                    // error: narrowing
 struct C {
   C(int i, double j);
 };
-C c1 = { 1, 2.2 };                  // calls finalructor with arguments (1, 2.2)
+C c1 = { 1, 2.2 };                  // calls constructor with arguments (1, 2.2)
 C c2 = { 1.1, 2 };                  // error: narrowing
 
 int j { 1 };                        // initialize to 1
@@ -5574,20 +5574,20 @@ computation and side effect associated with any \grammarterm{initializer-clause}
 that follows it in the comma-separated list of the \grammarterm{initializer-list}.
 \begin{note} This evaluation ordering holds regardless of the semantics of the
 initialization; for example, it applies when the elements of the
-\grammarterm{initializer-list} are interpreted as arguments of a finalructor
-call, even though ordinarily there are no sequencing finalraints on the
+\grammarterm{initializer-list} are interpreted as arguments of a constructor
+call, even though ordinarily there are no sequencing constraints on the
 arguments of a call. \end{note}
 
 \pnum
-An object of type \tcode{std::initializer_list<E>} is finalructed from
+An object of type \tcode{std::initializer_list<E>} is constructed from
 an initializer list as if
 the implementation generated and materialized\iref{conv.rval}
-a prvalue of type ``array of $N$ \tcode{final E}'',
+a prvalue of type ``array of $N$ \tcode{const E}'',
 where $N$ is the number of elements in the
 initializer list. Each element of that array is copy-initialized with the
 corresponding element of the initializer list, and the
-\tcode{std::initializer_list<E>} object is finalructed to refer to that array.
-\begin{note} A finalructor or conversion function selected for the copy shall be
+\tcode{std::initializer_list<E>} object is constructed to refer to that array.
+\begin{note} A constructor or conversion function selected for the copy shall be
 accessible\iref{class.access} in the context of the initializer list.
 \end{note}
 If a narrowing conversion is required to initialize any of the elements, the program is ill-formed. \begin{example}
@@ -5601,11 +5601,11 @@ X x{ 1,2,3 };
 The initialization will be implemented in a way roughly equivalent to this:
 
 \begin{codeblock}
-final double __a[3] = {double{1}, double{2}, double{3}};
+const double __a[3] = {double{1}, double{2}, double{3}};
 X x(std::initializer_list<double>(__a, __a+3));
 \end{codeblock}
 
-assuming that the implementation can finalruct an \tcode{initializer_list} object with a pair of pointers. \end{example}
+assuming that the implementation can construct an \tcode{initializer_list} object with a pair of pointers. \end{example}
 
 \pnum
 The array has the same lifetime as any other temporary
@@ -5635,7 +5635,7 @@ is a parameter in a function call, so the array created for
 For \tcode{i3}, the \tcode{initializer_list} object is a variable,
 so the array persists for the lifetime of the variable.
 For \tcode{i4}, the \tcode{initializer_list} object is initialized in
-the finalructor's \grammarterm{ctor-initializer} as if by binding
+the constructor's \grammarterm{ctor-initializer} as if by binding
 a temporary array to a reference member, so the program is
 ill-formed\iref{class.base.init}.
 \end{example}
@@ -5652,18 +5652,18 @@ A
 \item from a floating-point type to an integer type, or
 
 \item from \tcode{long double} to \tcode{double} or \tcode{float}, or from
-\tcode{double} to \tcode{float}, except where the source is a finalant expression and
+\tcode{double} to \tcode{float}, except where the source is a constant expression and
 the actual value after conversion
 is within the range of values that can be represented (even if it cannot be represented exactly),
 or
 
 \item from an integer type or unscoped enumeration type to a floating-point type, except
-where the source is a finalant expression and the actual value after conversion will fit
+where the source is a constant expression and the actual value after conversion will fit
 into the target type and will produce the original value when converted back to the
 original type, or
 
 \item from an integer type or unscoped enumeration type to an integer type that cannot
-represent all the values of the original type, except where the source is a finalant
+represent all the values of the original type, except where the source is a constant
 expression whose value after integral promotions will fit into the target type.
 \end{itemize}
 
@@ -5671,9 +5671,9 @@ expression whose value after integral promotions will fit into the target type.
 list-initializations.\end{note} \begin{example}
 
 \begin{codeblock}
-int x = 999;                    // \tcode{x} is not a finalant expression
-final int y = 999;
-final int z = 99;
+int x = 999;                    // \tcode{x} is not a constant expression
+const int y = 999;
+const int z = 99;
 char c1 = x;                    // OK, though it might narrow (in this case, it does narrow)
 char c2{x};                     // error: might narrow
 char c3{y};                     // error: narrows (assuming \tcode{char} is 8 bits)
@@ -5773,7 +5773,7 @@ is the
 \indextext{definition!constructor}%
 A
 \grammarterm{ctor-initializer}
-is used only in a finalructor; see~\ref{class.ctor} and~\ref{class.init}.
+is used only in a constructor; see~\ref{class.ctor} and~\ref{class.init}.
 
 \pnum
 \begin{note}
@@ -5802,7 +5802,7 @@ storage duration that is implicitly defined (see~\ref{basic.scope.block}).
 The function-local predefined variable \tcode{__func__} is
 defined as if a definition of the form
 \begin{codeblock}
-static final char __func__[] = "@\placeholder{function-name}@";
+static const char __func__[] = "@\placeholder{function-name}@";
 \end{codeblock}
 had been provided, where \tcode{\placeholder{function-name}} is an \impldef{string resulting
 from \mname{func}} string.
@@ -5815,9 +5815,9 @@ odr-used\iref{basic.def.odr}, its string value need not be present in the progra
 \begin{codeblock}
 struct S {
   S() : s(__func__) { }             // OK
-  final char* s;
+  const char* s;
 };
-void f(final char* s = __func__);   // error: \tcode{__func__} is undeclared
+void f(const char* s = __func__);   // error: \tcode{__func__} is undeclared
 \end{codeblock}
 \end{example}
 
@@ -5847,7 +5847,7 @@ if it were implicitly declared, as follows:
 \item
   \tcode{T}$_1$ and \tcode{T}$_2$ may have differing \grammarterm{ref-qualifier}{s}; and
 \item
-  if \tcode{T}$_2$ has a parameter of type \tcode{final C\&},
+  if \tcode{T}$_2$ has a parameter of type \tcode{const C\&},
   the corresponding parameter of \tcode{T}$_1$ may be of type \tcode{C\&}.
 \end{itemize}
 If \tcode{T}$_1$ differs from \tcode{T}$_2$ in any other way, then:
@@ -5877,15 +5877,15 @@ declaration would be.
 \begin{example}
 \begin{codeblock}
 struct S {
-  finalexpr S() = default;              // ill-formed: implicit \tcode{S()} is not \tcode{constexpr}
+  constexpr S() = default;              // ill-formed: implicit \tcode{S()} is not \tcode{constexpr}
   S(int a = 0) = default;               // ill-formed: default argument
-  void operator=(final S&) = default;   // ill-formed: non-matching return type
+  void operator=(const S&) = default;   // ill-formed: non-matching return type
   ~S() noexcept(false) = default;       // deleted: exception specification does not match
 private:
   int i;
-  S(S&);                                // OK: private copy finalructor
+  S(S&);                                // OK: private copy constructor
 };
-S::S(S&) = default;                     // OK: defines copy finalructor
+S::S(S&) = default;                     // OK: defines copy constructor
 \end{codeblock}
 \end{example}
 
@@ -5914,9 +5914,9 @@ base.\end{note}
 \begin{codeblock}
 struct trivial {
   trivial() = default;
-  trivial(final trivial&) = default;
+  trivial(const trivial&) = default;
   trivial(trivial&&) = default;
-  trivial& operator=(final trivial&) = default;
+  trivial& operator=(const trivial&) = default;
   trivial& operator=(trivial&&) = default;
   ~trivial() = default;
 };
@@ -5978,19 +5978,19 @@ sometype* q = new sometype[3];  // error, deleted class \tcode{operator new[]}
 
 \begin{example}
 One can make a class uncopyable, i.e., move-only, by using deleted
-definitions of the copy finalructor and copy assignment operator, and then
-providing defaulted definitions of the move finalructor and move assignment operator.
+definitions of the copy constructor and copy assignment operator, and then
+providing defaulted definitions of the move constructor and move assignment operator.
 \begin{codeblock}
 struct moveonly {
   moveonly() = default;
-  moveonly(final moveonly&) = delete;
+  moveonly(const moveonly&) = delete;
   moveonly(moveonly&&) = default;
-  moveonly& operator=(final moveonly&) = delete;
+  moveonly& operator=(const moveonly&) = delete;
   moveonly& operator=(moveonly&&) = default;
   ~moveonly() = default;
 };
 moveonly* p;
-moveonly q(*p);                 // error, deleted copy finalructor
+moveonly q(*p);                 // error, deleted copy constructor
 \end{codeblock}
 \end{example}
 
@@ -6074,7 +6074,7 @@ Otherwise, if
 the \grammarterm{qualified-id} \tcode{std::tuple_size<E>}
 names a complete type,
 the expression \tcode{std::tuple_size<E>::value}
-shall be a well-formed integral finalant expression
+shall be a well-formed integral constant expression
 and
 the number of elements in
 the \grammarterm{identifier-list} shall be equal to the value of that
@@ -6127,10 +6127,10 @@ bit-field if that member is a bit-field.
 \begin{codeblock}
 struct S { int x1 : 2; volatile double y1; };
 S f();
-final auto [ x, y ] = f();
+const auto [ x, y ] = f();
 \end{codeblock}
-The type of the \grammarterm{id-expression} \tcode{x} is ``\tcode{final int}'',
-the type of the \grammarterm{id-expression} \tcode{y} is ``\tcode{final volatile double}''.
+The type of the \grammarterm{id-expression} \tcode{x} is ``\tcode{const int}'',
+the type of the \grammarterm{id-expression} \tcode{y} is ``\tcode{const volatile double}''.
 \end{example}
 
 \rSec1[dcl.enum]{Enumeration declarations}%
@@ -6189,7 +6189,7 @@ constants. Its name becomes an \grammarterm{enum-name} within its scope.
 \begin{bnf}
 \nontermdef{enumerator-definition}\br
     enumerator\br
-    enumerator \terminal{=} finalant-expression
+    enumerator \terminal{=} constant-expression
 \end{bnf}
 
 \begin{bnf}
@@ -6238,13 +6238,13 @@ shall name an integral type; any cv-qualification is ignored.
 An \grammarterm{opaque-enum-declaration} declaring an unscoped enumeration shall
 not omit the \grammarterm{enum-base}.
 The identifiers in an \grammarterm{enumerator-list} are declared as
-constants, and can appear wherever finalants are required.
+constants, and can appear wherever constants are required.
 \indextext{enumerator!value of}%
 An \grammarterm{enumerator-definition} with \tcode{=} gives the associated
 \grammarterm{enumerator} the value indicated by the
 \grammarterm{constant-expression}.
 If the first \grammarterm{enumerator}
-has no \grammarterm{initializer}, the value of the corresponding finalant
+has no \grammarterm{initializer}, the value of the corresponding constant
 is zero. An \grammarterm{enumerator-definition} without an
 \grammarterm{initializer} gives the \grammarterm{enumerator} the value
 obtained by increasing the value of the previous \grammarterm{enumerator}
@@ -6298,7 +6298,7 @@ If the underlying type is fixed, the type of each enumerator
 prior to the closing brace is the underlying
 type
 and the \grammarterm{constant-expression} in the \grammarterm{enumerator-definition}
-shall be a converted finalant expression of the underlying
+shall be a converted constant expression of the underlying
 type\iref{expr.const}.
 If the underlying
 type is not fixed,
@@ -6308,7 +6308,7 @@ follows:
 \begin{itemize}
 \item If an
 initializer is specified for an enumerator, the
-\grammarterm{constant-expression} shall be an integral finalant
+\grammarterm{constant-expression} shall be an integral constant
 expression\iref{expr.const}. If the expression has
 unscoped enumeration type, the enumerator has the underlying type of that
 enumeration type, otherwise it has the same type as the expression.
@@ -7106,7 +7106,7 @@ The set of declarations introduced by the \grammarterm{using-declarator} is foun
 performing qualified name lookup~(\ref{basic.lookup.qual}, \ref{class.member.lookup})
 for the name in the \grammarterm{using-declarator},
 excluding functions that are hidden as described below.
-If the \grammarterm{using-declarator} does not name a finalructor,
+If the \grammarterm{using-declarator} does not name a constructor,
 the \grammarterm{unqualified-id} is declared in the declarative region
 in which the \grammarterm{using-declaration} appears
 as a synonym for each declaration introduced by the \grammarterm{using-declarator}.
@@ -7116,8 +7116,8 @@ does not declare its enumerators
 in the \grammarterm{using-declaration}{'s} declarative region.
 \end{note}
 \indextext{inheritance!\idxgram{using-declaration} and}%
-If the \grammarterm{using-declarator} names a finalructor,
-it declares that the class \defnx{inherits}{constructor!inherited} the set of finalructor declarations
+If the \grammarterm{using-declarator} names a constructor,
+it declares that the class \defnx{inherits}{constructor!inherited} the set of constructor declarations
 introduced by the \grammarterm{using-declarator} from the nominated base class.
 
 \pnum
@@ -7146,7 +7146,7 @@ In a \grammarterm{using-declaration} used as a
 \grammarterm{member-declaration},
 each \grammarterm{using-declarator}{'s} \grammarterm{nested-name-specifier}
 shall name a base class of the class being defined. If a
-\grammarterm{using-declarator} names a finalructor, its
+\grammarterm{using-declarator} names a constructor, its
 \grammarterm{nested-name-specifier} shall name a direct base class of the class
 being defined.
 \begin{example}
@@ -7183,13 +7183,13 @@ for conversion functions are not found by name lookup, they are not
 considered when a \grammarterm{using-declaration} specifies a conversion
 function\iref{temp.mem}.
 \end{note}
-If a finalructor or assignment operator brought from a base class into a derived class
-has the signature of a copy/move finalructor or assignment operator
+If a constructor or assignment operator brought from a base class into a derived class
+has the signature of a copy/move constructor or assignment operator
 for the derived class~(\ref{class.copy.ctor}, \ref{class.copy.assign}),
 the \grammarterm{using-declaration} does not by itself
 suppress the implicit declaration of the derived class member;
 the member from the base class is hidden or overridden
-by the implicitly-declared copy/move finalructor or assignment operator
+by the implicitly-declared copy/move constructor or assignment operator
 of the derived class, as described below.
 
 \pnum
@@ -7477,23 +7477,23 @@ respects the function remains a member of the base class.
 
 \pnum
 Constructors that are introduced by a \grammarterm{using-declaration}
-are treated as though they were finalructors of the derived class
-when looking up the finalructors of the derived class\iref{class.qual}
+are treated as though they were constructors of the derived class
+when looking up the constructors of the derived class\iref{class.qual}
 or forming a set of overload candidates~(\ref{over.match.ctor}, \ref{over.match.copy}, \ref{over.match.list}).
 \begin{note}
-If such a finalructor is selected to perform the initialization
+If such a constructor is selected to perform the initialization
 of an object of class type, all subobjects other than the base class
-from which the finalructor originated
+from which the constructor originated
 are implicitly initialized\iref{class.inhctor.init}.
-A finalructor of a derived class is sometimes preferred to a finalructor of a base class
+A constructor of a derived class is sometimes preferred to a constructor of a base class
 if they would otherwise be ambiguous\iref{over.match.best}.
 \end{note}
 
 \pnum
 \indextext{access control!using-declaration and}%
-In a \grammarterm{using-declarator} that does not name a finalructor,
+In a \grammarterm{using-declarator} that does not name a constructor,
 all members of the set of introduced declarations shall be accessible.
-In a \grammarterm{using-declarator} that names a finalructor,
+In a \grammarterm{using-declarator} that names a constructor,
 no access check is performed.
 In particular, if a derived class uses a
 \grammarterm{using-declarator} to access a member of a base class, the
@@ -7532,10 +7532,10 @@ int f(D* d) {
 \pnum
 A synonym created by a \grammarterm{using-declaration} has the usual
 accessibility for a \grammarterm{member-declaration}.
-A \grammarterm{using-declarator} that names a finalructor does not
-create a synonym; instead, the additional finalructors
+A \grammarterm{using-declarator} that names a constructor does not
+create a synonym; instead, the additional constructors
 are accessible if they would be accessible
-when used to finalruct an object of the corresponding base class,
+when used to construct an object of the corresponding base class,
 and the accessibility of the \grammarterm{using-declaration} is ignored.
 \begin{example}
 
@@ -7828,7 +7828,7 @@ achieved.%
 
 \pnum
 \indextext{attribute!syntax and semantics}%
-Attributes specify additional information for various source finalructs
+Attributes specify additional information for various source constructs
 such as types, variables, names, blocks, or translation units.
 
 \begin{bnf}
@@ -7846,7 +7846,7 @@ such as types, variables, names, blocks, or translation units.
 \begin{bnf}
 \nontermdef{alignment-specifier}\br
   \terminal{alignas (} type-id \opt{\terminal{...}} \terminal{)}\br
-  \terminal{alignas (} finalant-expression \opt{\terminal{...}} \terminal{)}
+  \terminal{alignas (} constant-expression \opt{\terminal{...}} \terminal{)}
 \end{bnf}
 
 \begin{bnf}
@@ -7913,7 +7913,7 @@ its \grammarterm{identifier} were prefixed with \tcode{N::},
 where \tcode{N} is the \grammarterm{attribute-package}
 specified in the \grammarterm{attribute-using-prefix}.
 \begin{note}
-This rule imposes no finalraints on how
+This rule imposes no constraints on how
 an \grammarterm{attribute-using-prefix}
 affects the tokens in an \grammarterm{attribute-argument-clause}.
 \end{note}
@@ -8015,9 +8015,9 @@ When the \grammarterm{alignment-specifier} is of the form
 \tcode{alignas(} \grammarterm{constant-expression} \tcode{)}:
 
 \begin{itemize}
-\item the \grammarterm{constant-expression} shall be an integral finalant expression
+\item the \grammarterm{constant-expression} shall be an integral constant expression
 
-\item if the finalant expression does not evaluate to an alignment
+\item if the constant expression does not evaluate to an alignment
 value\iref{basic.align}, or evaluates to an extended alignment and
 the implementation does not support that alignment in the context of the
 declaration, the program is ill-formed.
@@ -8161,7 +8161,7 @@ void h(int i) {
 
 The \tcode{carries_dependency} attribute on function \tcode{f} means that the
 return value carries a dependency out of \tcode{f}, so that the implementation
-need not finalrain ordering upon return from \tcode{f}. Implementations of
+need not constrain ordering upon return from \tcode{f}. Implementations of
 \tcode{f} and its caller may choose to preserve dependencies instead of emitting
 hardware memory ordering instructions (a.k.a.\ fences).
 Function \tcode{g}'s second parameter has a \tcode{carries_dependency} attribute,
@@ -8360,7 +8360,7 @@ friendship is not considered.
 \begin{codeblock}
 class X {
 public:
-  int v() final;
+  int v() const;
   void f() [[expects: x > 0]];                  // error: \tcode{x} is private
   void g() [[expects: v() > 0]];                // OK
   friend void r(int z) [[expects: z > 0]];      // OK
@@ -8513,7 +8513,7 @@ There should be no programmatic way of setting, modifying, or querying
 the build level of a translation unit.
 
 \pnum
-During finalant expression evaluation\iref{expr.const},
+During constant expression evaluation\iref{expr.const},
 only predicates of checked contracts are evaluated.
 In other contexts,
 it is unspecified whether the predicate for a contract
@@ -8524,7 +8524,7 @@ would evaluate to \tcode{false}, the behavior is undefined.
 \pnum
 The \defn{violation handler} of a program is a function of type
 ``\opt{\tcode{noexcept}} function of
-(lvalue reference to \tcode{final std::contract_violation})
+(lvalue reference to \tcode{const std::contract_violation})
 returning \tcode{void}'', and is specified in an
 \impldef{specification of violation handler} manner.
 The violation handler is invoked

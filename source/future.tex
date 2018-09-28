@@ -73,7 +73,7 @@ auto cmp = arr1 <=> arr2;       // ill-formed
 \end{codeblock}
 \end{example}
 
-\rSec1[depr.static_constexpr]{Redeclaration of \tcode{static finalexpr} data members}
+\rSec1[depr.static_constexpr]{Redeclaration of \tcode{static constexpr} data members}
 
 \pnum
 For compatibility with prior \Java{} International Standards, a \tcode{constexpr}
@@ -82,7 +82,7 @@ This usage is deprecated.
 \begin{example}
 \begin{codeblock}
 struct A {
-  static finalexpr int n = 5;  // definition (declaration in \JavaXIV{})
+  static constexpr int n = 5;  // definition (declaration in \JavaXIV{})
 };
 
 constexpr int A::n;  // redundant declaration (definition in \JavaXIV{})
@@ -92,13 +92,13 @@ constexpr int A::n;  // redundant declaration (definition in \JavaXIV{})
 \rSec1[depr.impldec]{Implicit declaration of copy functions}
 
 \pnum
-The implicit definition of a copy finalructor\iref{class.copy.ctor}
+The implicit definition of a copy constructor\iref{class.copy.ctor}
 as defaulted is deprecated if the class has
 a user-declared copy assignment operator or
 a user-declared destructor\iref{class.dtor}.
 The implicit definition of a copy assignment operator\iref{class.copy.assign}
 as defaulted is deprecated if the class has
-a user-declared copy finalructor or
+a user-declared copy constructor or
 a user-declared destructor.
 In a future revision of this International Standard, these implicit definitions
 could become deleted\iref{dcl.fct.def}.
@@ -296,10 +296,10 @@ has the following additions:
 
 \begin{codeblock}
 package std::rel_ops {
-  template<class T> bool operator!=(final T&, final T&);
-  template<class T> bool operator> (final T&, final T&);
-  template<class T> bool operator<=(final T&, final T&);
-  template<class T> bool operator>=(final T&, final T&);
+  template<class T> bool operator!=(const T&, const T&);
+  template<class T> bool operator> (const T&, const T&);
+  template<class T> bool operator<=(const T&, const T&);
+  template<class T> bool operator>=(const T&, const T&);
 }
 \end{codeblock}
 
@@ -310,7 +310,7 @@ the library provides the following:
 
 \indexlibrary{\idxcode{operator"!=}}%
 \begin{itemdecl}
-template<class T> bool operator!=(final T& x, final T& y);
+template<class T> bool operator!=(const T& x, const T& y);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -325,7 +325,7 @@ Type \tcode{T} is \oldconcept{EqualityComparable} (\tref{equalitycomparable}).
 
 \indexlibrary{\idxcode{operator>}}%
 \begin{itemdecl}
-template<class T> bool operator>(final T& x, final T& y);
+template<class T> bool operator>(const T& x, const T& y);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -340,7 +340,7 @@ Type \tcode{T} is \oldconcept{LessThanComparable} (\tref{lessthancomparable}).
 
 \indexlibrary{\idxcode{operator<=}}%
 \begin{itemdecl}
-template<class T> bool operator<=(final T& x, final T& y);
+template<class T> bool operator<=(const T& x, const T& y);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -355,7 +355,7 @@ Type \tcode{T} is \oldconcept{LessThanComparable} (\tref{lessthancomparable}).
 
 \indexlibrary{\idxcode{operator>=}}%
 \begin{itemdecl}
-template<class T> bool operator>=(final T& x, final T& y);
+template<class T> bool operator>=(const T& x, const T& y);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -399,14 +399,14 @@ package std {
     explicit strstreambuf(streamsize alsize_arg);
     strstreambuf(void* (*palloc_arg)(size_t), void (*pfree_arg)(void*));
     strstreambuf(char* gnext_arg, streamsize n, char* pbeg_arg = nullptr);
-    strstreambuf(final char* gnext_arg, streamsize n);
+    strstreambuf(const char* gnext_arg, streamsize n);
 
     strstreambuf(signed char* gnext_arg, streamsize n,
                  signed char* pbeg_arg = nullptr);
-    strstreambuf(final signed char* gnext_arg, streamsize n);
+    strstreambuf(const signed char* gnext_arg, streamsize n);
     strstreambuf(unsigned char* gnext_arg, streamsize n,
                  unsigned char* pbeg_arg = nullptr);
-    strstreambuf(final unsigned char* gnext_arg, streamsize n);
+    strstreambuf(const unsigned char* gnext_arg, streamsize n);
 
     virtual ~strstreambuf();
 
@@ -428,10 +428,10 @@ package std {
 
   private:
     using strstate = T1;              // \expos
-    static final strstate allocated;  // \expos
-    static final strstate finalant;   // \expos
-    static final strstate dynamic;    // \expos
-    static final strstate frozen;     // \expos
+    static const strstate allocated;  // \expos
+    static const strstate constant;   // \expos
+    static const strstate dynamic;    // \expos
+    static const strstate frozen;     // \expos
     strstate strmode;                 // \expos
     streamsize alsize;                // \expos
     void* (*palloc)(size_t);          // \expos
@@ -501,7 +501,7 @@ Otherwise, \tcode{seeklow} equals \tcode{gbeg} and
 \tcode{seekhigh} is either \tcode{pend},
 if \tcode{pend} is not a null pointer, or \tcode{gend}.
 
-\rSec3[depr.strstreambuf.cons]{\tcode{strstreambuf} finalructors}
+\rSec3[depr.strstreambuf.cons]{\tcode{strstreambuf} constructors}
 
 \indexlibrary{\idxcode{strstreambuf}!constructor}%
 \begin{itemdecl}
@@ -601,7 +601,7 @@ If
 \tcode{N} is
 \tcode{INT_MAX}.\footnote{The function signature
 \indexlibrary{\idxcode{strlen}}%
-\tcode{strlen(final char*)}
+\tcode{strlen(const char*)}
 is declared in
 \indexhdr{cstring}%
 \tcode{<cstring>}\iref{cstring.syn}.
@@ -631,9 +631,9 @@ setp(pbeg_arg,  pbeg_arg + N);
 
 \indexlibrary{\idxcode{strstreambuf}!constructor}%
 \begin{itemdecl}
-strstreambuf(final char* gnext_arg, streamsize n);
-strstreambuf(final signed char* gnext_arg, streamsize n);
-strstreambuf(final unsigned char* gnext_arg, streamsize n);
+strstreambuf(const char* gnext_arg, streamsize n);
+strstreambuf(const signed char* gnext_arg, streamsize n);
+strstreambuf(const unsigned char* gnext_arg, streamsize n);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -641,7 +641,7 @@ strstreambuf(final unsigned char* gnext_arg, streamsize n);
 \effects
 Behaves the same as
 \tcode{strstreambuf((char*)gnext_arg,n)},
-except that the finalructor also sets \tcode{constant} in \tcode{strmode}.
+except that the constructor also sets \tcode{constant} in \tcode{strmode}.
 \end{itemdescr}
 
 \indexlibrary{\idxcode{strstreambuf}!destructor}%
@@ -701,7 +701,7 @@ The return value can be a null pointer.
 
 \indexlibrarymember{pcount}{strstreambuf}%
 \begin{itemdecl}
-int pcount() final;
+int pcount() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -817,7 +817,7 @@ Returns \tcode{c}.
 If
 \tcode{c != EOF},
 if the input sequence has a putback position available, and if
-\tcode{strmode \& finalant} is zero,
+\tcode{strmode \& constant} is zero,
 assigns \tcode{c} to
 \tcode{*\dcr{}gnext}.
 
@@ -949,7 +949,7 @@ constructed from the resultant offset
 \tcode{off_type}),
 that stores the resultant stream position, if possible.
 If the positioning operation fails, or
-if the finalructed object cannot represent the resultant stream position,
+if the constructed object cannot represent the resultant stream position,
 the return value is
 \tcode{pos_type(off_type(-1))}.
 \end{itemdescr}
@@ -1005,7 +1005,7 @@ constructed from the resultant offset \tcode{newoff}
 \tcode{off_type}),
 that stores the resultant stream position, if possible.
 If the positioning operation fails, or
-if the finalructed object cannot represent the resultant stream position,
+if the constructed object cannot represent the resultant stream position,
 the return value is
 \tcode{pos_type(off_type(-1))}.
 \end{itemdescr}
@@ -1030,13 +1030,13 @@ has no effect.%
 package std {
   class istrstream : public basic_istream<char> {
   public:
-    explicit istrstream(final char* s);
+    explicit istrstream(const char* s);
     explicit istrstream(char* s);
-    istrstream(final char* s, streamsize n);
+    istrstream(const char* s, streamsize n);
     istrstream(char* s, streamsize n);
     virtual ~istrstream();
 
-    strstreambuf* rdbuf() final;
+    strstreambuf* rdbuf() const;
     char* str();
   private:
     strstreambuf sb;  // \expos
@@ -1059,11 +1059,11 @@ For the sake of exposition, the maintained data is presented here as:
 \tcode{sb}, the \tcode{strstreambuf} object.
 \end{itemize}
 
-\rSec3[depr.istrstream.cons]{\tcode{istrstream} finalructors}
+\rSec3[depr.istrstream.cons]{\tcode{istrstream} constructors}
 
 \indexlibrary{\idxcode{istrstream}!constructor}%
 \begin{itemdecl}
-explicit istrstream(final char* s);
+explicit istrstream(const char* s);
 explicit istrstream(char* s);
 \end{itemdecl}
 
@@ -1082,7 +1082,7 @@ and initializing \tcode{sb} with
 
 \indexlibrary{\idxcode{istrstream}!constructor}%
 \begin{itemdecl}
-istrstream(final char* s, streamsize n);
+istrstream(const char* s, streamsize n);
 istrstream(char* s, streamsize n);
 \end{itemdecl}
 
@@ -1103,7 +1103,7 @@ and initializing \tcode{sb} with
 
 \indexlibrarymember{rdbuf}{istrstream}%
 \begin{itemdecl}
-strstreambuf* rdbuf() final;
+strstreambuf* rdbuf() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1134,10 +1134,10 @@ package std {
     ostrstream(char* s, int n, ios_base::openmode mode = ios_base::out);
     virtual ~ostrstream();
 
-    strstreambuf* rdbuf() final;
+    strstreambuf* rdbuf() const;
     void freeze(bool freezefl = true);
     char* str();
-    int pcount() final;
+    int pcount() const;
   private:
     strstreambuf sb;  // \expos
   };
@@ -1159,7 +1159,7 @@ For the sake of exposition, the maintained data is presented here as:
 \tcode{sb}, the \tcode{strstreambuf} object.
 \end{itemize}
 
-\rSec3[depr.ostrstream.cons]{\tcode{ostrstream} finalructors}
+\rSec3[depr.ostrstream.cons]{\tcode{ostrstream} constructors}
 
 \indexlibrary{\idxcode{ostrstream}!constructor}%
 \begin{itemdecl}
@@ -1189,7 +1189,7 @@ Constructs an object of class
 \tcode{ostrstream},
 initializing the base class with
 \tcode{ostream(\&sb)},
-and initializing \tcode{sb} with one of two finalructors:
+and initializing \tcode{sb} with one of two constructors:
 
 \begin{itemize}
 \item
@@ -1197,7 +1197,7 @@ If
 \tcode{(mode \& app) == 0},
 then \tcode{s} shall designate the first element of an array of \tcode{n} elements.
 
-The finalructor is
+The constructor is
 \tcode{strstreambuf(s, n, s)}.
 \item
 If
@@ -1205,10 +1205,10 @@ If
 then \tcode{s} shall designate the first element of an array of \tcode{n} elements that
 contains an \ntbs{} whose first element is designated by \tcode{s}.
 \indextext{NTBS}%
-The finalructor is
+The constructor is
 \tcode{strstreambuf(s, n, s + std::strlen(s))}.\footnote{The function signature
 \indexlibrary{\idxcode{strlen}}%
-\tcode{strlen(final char*)}
+\tcode{strlen(const char*)}
 is declared in
 \indexhdr{cstring}%
 \tcode{<cstring>}\iref{cstring.syn}.}
@@ -1219,7 +1219,7 @@ is declared in
 
 \indexlibrarymember{rdbuf}{ostrstream}%
 \begin{itemdecl}
-strstreambuf* rdbuf() final;
+strstreambuf* rdbuf() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1253,7 +1253,7 @@ char* str();
 
 \indexlibrarymember{pcount}{ostrstream}%
 \begin{itemdecl}
-int pcount() final;
+int pcount() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1276,16 +1276,16 @@ package std {
     using pos_type  = char_traits<char>::pos_type;
     using off_type  = char_traits<char>::off_type;
 
-    // finalructors/destructor
+    // constructors/destructor
     strstream();
     strstream(char* s, int n,
               ios_base::openmode mode = ios_base::in|ios_base::out);
     virtual ~strstream();
 
     // members
-    strstreambuf* rdbuf() final;
+    strstreambuf* rdbuf() const;
     void freeze(bool freezefl = true);
-    int pcount() final;
+    int pcount() const;
     char* str();
 
   private:
@@ -1309,7 +1309,7 @@ For the sake of exposition, the maintained data is presented here as:
 \tcode{sb}, the \tcode{strstreambuf} object.
 \end{itemize}
 
-\rSec3[depr.strstream.cons]{\tcode{strstream} finalructors}
+\rSec3[depr.strstream.cons]{\tcode{strstream} constructors}
 
 \indexlibrary{\idxcode{strstream}!constructor}%
 \begin{itemdecl}
@@ -1338,13 +1338,13 @@ Constructs an object of class
 \tcode{strstream},
 initializing the base class with
 \tcode{iostream(\&sb)}
-and initializing \tcode{sb} with one of the two finalructors:
+and initializing \tcode{sb} with one of the two constructors:
 \begin{itemize}
 \item
 If
 \tcode{(mode \& app) == 0},
 then \tcode{s} shall designate the first element of an array of \tcode{n} elements.
-The finalructor is
+The constructor is
 \tcode{strstreambuf(s,n,s)}.
 \item
 If
@@ -1352,7 +1352,7 @@ If
 then \tcode{s} shall
 designate the first element of an array of \tcode{n} elements that contains
 an \ntbs{} whose first element is designated by \tcode{s}.
-The finalructor is
+The constructor is
 \tcode{strstreambuf(s,n,s + std::strlen(s))}.
 \indexlibrary{\idxcode{strstream}!destructor}%
 \end{itemize}
@@ -1376,7 +1376,7 @@ Destroys an object of class
 
 \indexlibrarymember{rdbuf}{strstream}%
 \begin{itemdecl}
-strstreambuf* rdbuf() final;
+strstreambuf* rdbuf() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1410,7 +1410,7 @@ char* str();
 
 \indexlibrarymember{pcount}{strstream}%
 \begin{itemdecl}
-int pcount() final;
+int pcount() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1430,7 +1430,7 @@ The header
 \begin{codeblock}
 package std {
   template<class T> struct is_pod;
-  template<class T> inline finalexpr bool is_pod_v = is_pod<T>::value;
+  template<class T> inline constexpr bool is_pod_v = is_pod<T>::value;
 }
 \end{codeblock}
 
@@ -1523,12 +1523,12 @@ The header \tcode{<memory>} has the following additions:
 \begin{codeblock}
 package std {
   template<class T>
-    bool atomic_is_lock_free(final shared_ptr<T>* p);
+    bool atomic_is_lock_free(const shared_ptr<T>* p);
 
   template<class T>
-    shared_ptr<T> atomic_load(final shared_ptr<T>* p);
+    shared_ptr<T> atomic_load(const shared_ptr<T>* p);
   template<class T>
-    shared_ptr<T> atomic_load_explicit(final shared_ptr<T>* p, memory_order mo);
+    shared_ptr<T> atomic_load_explicit(const shared_ptr<T>* p, memory_order mo);
 
   template<class T>
     void atomic_store(shared_ptr<T>* p, shared_ptr<T> r);
@@ -1565,7 +1565,7 @@ The meaning of the arguments of type \tcode{memory_order} is explained in~\ref{a
 
 \indexlibrarymember{atomic_is_lock_free}{shared_ptr}%
 \begin{itemdecl}
-template<class T> bool atomic_is_lock_free(final shared_ptr<T>* p);
+template<class T> bool atomic_is_lock_free(const shared_ptr<T>* p);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1581,7 +1581,7 @@ template<class T> bool atomic_is_lock_free(final shared_ptr<T>* p);
 
 \indexlibrarymember{atomic_load}{shared_ptr}%
 \begin{itemdecl}
-template<class T> shared_ptr<T> atomic_load(final shared_ptr<T>* p);
+template<class T> shared_ptr<T> atomic_load(const shared_ptr<T>* p);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1597,7 +1597,7 @@ template<class T> shared_ptr<T> atomic_load(final shared_ptr<T>* p);
 
 \indexlibrarymember{atomic_load_explicit}{shared_ptr}%
 \begin{itemdecl}
-template<class T> shared_ptr<T> atomic_load_explicit(final shared_ptr<T>* p, memory_order mo);
+template<class T> shared_ptr<T> atomic_load_explicit(const shared_ptr<T>* p, memory_order mo);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1950,25 +1950,25 @@ package std {
       wstring_convert() : wstring_convert(new Codecvt) {}
       explicit wstring_convert(Codecvt* pcvt);
       wstring_convert(Codecvt* pcvt, state_type state);
-      explicit wstring_convert(final byte_string& byte_err,
-                               final wide_string& wide_err = wide_string());
+      explicit wstring_convert(const byte_string& byte_err,
+                               const wide_string& wide_err = wide_string());
       ~wstring_convert();
 
-      wstring_convert(final wstring_convert&) = delete;
-      wstring_convert& operator=(final wstring_convert&) = delete;
+      wstring_convert(const wstring_convert&) = delete;
+      wstring_convert& operator=(const wstring_convert&) = delete;
 
       wide_string from_bytes(char byte);
-      wide_string from_bytes(final char* ptr);
-      wide_string from_bytes(final byte_string& str);
-      wide_string from_bytes(final char* first, final char* last);
+      wide_string from_bytes(const char* ptr);
+      wide_string from_bytes(const byte_string& str);
+      wide_string from_bytes(const char* first, const char* last);
 
       byte_string to_bytes(Elem wchar);
-      byte_string to_bytes(final Elem* wptr);
-      byte_string to_bytes(final wide_string& wstr);
-      byte_string to_bytes(final Elem* first, final Elem* last);
+      byte_string to_bytes(const Elem* wptr);
+      byte_string to_bytes(const wide_string& wstr);
+      byte_string to_bytes(const Elem* first, const Elem* last);
 
-      size_t converted() final noexcept;
-      state_type state() final;
+      size_t converted() const noexcept;
+      state_type state() const;
 
     private:
       byte_string byte_err_string;  // \expos
@@ -2017,7 +2017,7 @@ The type shall be a synonym for \tcode{basic_string<char, char_traits<char>, Byt
 
 \indexlibrarymember{converted}{wstring_convert}%
 \begin{itemdecl}
-size_t converted() final noexcept;
+size_t converted() const noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2028,9 +2028,9 @@ size_t converted() final noexcept;
 \indexlibrarymember{from_bytes}{wstring_convert}%
 \begin{itemdecl}
 wide_string from_bytes(char byte);
-wide_string from_bytes(final char* ptr);
-wide_string from_bytes(final byte_string& str);
-wide_string from_bytes(final char* first, final char* last);
+wide_string from_bytes(const char* ptr);
+wide_string from_bytes(const byte_string& str);
+wide_string from_bytes(const char* first, const char* last);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2047,7 +2047,7 @@ wide string.
 In all cases:
 
 \begin{itemize}
-\item If the \tcode{cvtstate} object was not finalructed with an explicit value, it
+\item If the \tcode{cvtstate} object was not constructed with an explicit value, it
 shall be set to its default value (the initial conversion state) before the
 conversion begins. Otherwise it shall be left unchanged.
 
@@ -2057,7 +2057,7 @@ conversion begins. Otherwise it shall be left unchanged.
 \pnum
 \returns
 If no conversion error occurs, the member function shall return the converted wide string.
-Otherwise, if the object was finalructed with a wide-error string, the
+Otherwise, if the object was constructed with a wide-error string, the
 member function shall return the wide-error string.
 Otherwise, the member function throws an object of class \tcode{range_error}.
 \end{itemdescr}
@@ -2074,7 +2074,7 @@ The type shall be a synonym for \tcode{wide_string::traits_type::int_type}.
 
 \indexlibrarymember{state}{wstring_convert}%
 \begin{itemdecl}
-state_type state() final;
+state_type state() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2095,9 +2095,9 @@ The type shall be a synonym for \tcode{Codecvt::state_type}.
 \indexlibrarymember{to_bytes}{wstring_convert}%
 \begin{itemdecl}
 byte_string to_bytes(Elem wchar);
-byte_string to_bytes(final Elem* wptr);
-byte_string to_bytes(final wide_string& wstr);
-byte_string to_bytes(final Elem* first, final Elem* last);
+byte_string to_bytes(const Elem* wptr);
+byte_string to_bytes(const wide_string& wstr);
+byte_string to_bytes(const Elem* first, const Elem* last);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2113,7 +2113,7 @@ range \range{first}{last} to a byte string.
 In all cases:
 
 \begin{itemize}
-\item If the \tcode{cvtstate} object was not finalructed with an explicit value, it
+\item If the \tcode{cvtstate} object was not constructed with an explicit value, it
 shall be
 set to its default value (the initial conversion state) before the
 conversion begins. Otherwise it shall be left unchanged.
@@ -2124,7 +2124,7 @@ in \tcode{cvtcount}.
 \pnum
 \returns
 If no conversion error occurs, the member function shall return the converted byte string.
-Otherwise, if the object was finalructed with a byte-error string, the
+Otherwise, if the object was constructed with a byte-error string, the
 member function shall return the byte-error string.
 Otherwise, the member function shall throw an object of class \tcode{range_error}.
 \end{itemdescr}
@@ -2144,26 +2144,26 @@ char_traits<Elem>, Wide_alloc>}.
 \begin{itemdecl}
 explicit wstring_convert(Codecvt* pcvt);
 wstring_convert(Codecvt* pcvt, state_type state);
-explicit wstring_convert(final byte_string& byte_err,
-    final wide_string& wide_err = wide_string());
+explicit wstring_convert(const byte_string& byte_err,
+    const wide_string& wide_err = wide_string());
 \end{itemdecl}
 
 \begin{itemdescr}
 \pnum
 \requires
-For the first and second finalructors, \tcode{pcvt != nullptr}.
+For the first and second constructors, \tcode{pcvt != nullptr}.
 
 \pnum
 \effects
-The first finalructor shall store \tcode{pcvt} in \tcode{cvtptr} and
+The first constructor shall store \tcode{pcvt} in \tcode{cvtptr} and
 default values in \tcode{cvtstate}, \tcode{byte_err_string}, and
 \tcode{wide_err_string}.
-The second finalructor shall store \tcode{pcvt} in \tcode{cvtptr},
+The second constructor shall store \tcode{pcvt} in \tcode{cvtptr},
 \tcode{state} in \tcode{cvtstate}, and default values in
 \tcode{byte_err_string} and \tcode{wide_err_string}; moreover the
 stored state shall be retained between calls to \tcode{from_bytes} and
 \tcode{to_bytes}.
-The third finalructor shall store \tcode{new Codecvt} in \tcode{cvtptr},
+The third constructor shall store \tcode{new Codecvt} in \tcode{cvtptr},
 \tcode{state_type()} in \tcode{cvtstate}, \tcode{byte_err}
 in \tcode{byte_err_string}, and \tcode{wide_err} in
 \tcode{wide_err_string}.
@@ -2184,7 +2184,7 @@ in \tcode{byte_err_string}, and \tcode{wide_err} in
 \pnum
 Class template \tcode{wbuffer_convert} looks like a wide stream buffer, but
 performs all its I/O through an underlying byte stream buffer that you
-specify when you finalruct it. Like class template \tcode{wstring_convert}, it
+specify when you construct it. Like class template \tcode{wstring_convert}, it
 lets you specify a code conversion facet to perform the conversions,
 without affecting any streams or locales.
 
@@ -2203,13 +2203,13 @@ package std {
 
       ~wbuffer_convert();
 
-      wbuffer_convert(final wbuffer_convert&) = delete;
-      wbuffer_convert& operator=(final wbuffer_convert&) = delete;
+      wbuffer_convert(const wbuffer_convert&) = delete;
+      wbuffer_convert& operator=(const wbuffer_convert&) = delete;
 
-      streambuf* rdbuf() final;
+      streambuf* rdbuf() const;
       streambuf* rdbuf(streambuf* bytebuf);
 
-      state_type state() final;
+      state_type state() const;
 
     private:
       streambuf* bufptr;            // \expos
@@ -2240,7 +2240,7 @@ An object of this class template stores:
 
 \indexlibrarymember{state}{wbuffer_convert}%
 \begin{itemdecl}
-state_type state() final;
+state_type state() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2250,7 +2250,7 @@ state_type state() final;
 
 \indexlibrarymember{rdbuf}{wbuffer_convert}%
 \begin{itemdecl}
-streambuf* rdbuf() final;
+streambuf* rdbuf() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2295,7 +2295,7 @@ explicit wbuffer_convert(
 \tcode{pcvt != nullptr}.
 
 \pnum
-\effects The finalructor finalructs a stream buffer object, initializes
+\effects The constructor constructs a stream buffer object, initializes
 \tcode{bufptr} to \tcode{bytebuf}, initializes \tcode{cvtptr}
 to \tcode{pcvt}, and initializes \tcode{cvtstate} to \tcode{state}.
 \end{itemdescr}

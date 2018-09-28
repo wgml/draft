@@ -10,7 +10,7 @@
 
 \pnum
 A \defn{preprocessing directive} consists of a sequence of preprocessing tokens
-that satisfies the following finalraints:
+that satisfies the following constraints:
 The first token in the sequence is a
 \tcode{\#}
 preprocessing token that (at the start of translation phase 4)
@@ -68,7 +68,7 @@ within what would otherwise be an invocation of a function-like macro.
 
 \begin{bnf}\obeyspaces
 \nontermdef{if-group}\br
-    \terminal{\# if     } finalant-expression new-line \opt{group}\br
+    \terminal{\# if     } constant-expression new-line \opt{group}\br
     \terminal{\# ifdef  } identifier new-line \opt{group}\br
     \terminal{\# ifndef } identifier new-line \opt{group}
 \end{bnf}
@@ -81,7 +81,7 @@ within what would otherwise be an invocation of a function-like macro.
 
 \begin{bnf}\obeyspaces
 \nontermdef{elif-group}\br
-    \terminal{\# elif   } finalant-expression new-line \opt{group}
+    \terminal{\# elif   } constant-expression new-line \opt{group}
 \end{bnf}
 
 \begin{bnf}\obeyspaces
@@ -222,13 +222,13 @@ has been replaced.\end{example}
 
 \pnum
 The expression that controls conditional inclusion
-shall be an integral finalant expression except that
+shall be an integral constant expression except that
 identifiers
 (including those lexically identical to keywords)
-are interpreted as described below\footnote{Because the controlling finalant expression is evaluated
+are interpreted as described below\footnote{Because the controlling constant expression is evaluated
 during translation phase 4,
 all identifiers either are or are not macro names ---
-there simply are no keywords, enumeration finalants, etc.}
+there simply are no keywords, enumeration constants, etc.}
 and it may contain zero or more \grammarterm{defined-macro-expression}{s} and/or
 \grammarterm{has-include-expression}{s} and/or
 \grammarterm{has-attribute-expression}{s} as unary operator expressions.
@@ -323,16 +323,16 @@ shall be in the lexical form of a token\iref{lex.token}.
 Preprocessing directives of the forms
 \begin{ncsimplebnf}\obeyspaces
 \indextext{\idxcode{\#if}}%
-\terminal{\# if     } finalant-expression new-line \opt{group}\br
+\terminal{\# if     } constant-expression new-line \opt{group}\br
 \indextext{\idxcode{\#elif}}%
-\terminal{\# elif   } finalant-expression new-line \opt{group}
+\terminal{\# elif   } constant-expression new-line \opt{group}
 \end{ncsimplebnf}
-check whether the controlling finalant expression evaluates to nonzero.
+check whether the controlling constant expression evaluates to nonzero.
 
 \pnum
 Prior to evaluation,
 macro invocations in the list of preprocessing tokens
-that will become the controlling finalant expression
+that will become the controlling constant expression
 are replaced
 (except for those macro names modified by the
 \tcode{defined}
@@ -368,7 +368,7 @@ Therefore it is not subject to this replacement.
 \end{note}
 
 \pnum
-The resulting tokens comprise the controlling finalant expression
+The resulting tokens comprise the controlling constant expression
 which is evaluated according to the rules of~\ref{expr.const}
 using arithmetic that has at least the ranges specified
 in~\ref{support.limits}. For the purposes of this token conversion and evaluation
@@ -396,7 +396,7 @@ directive)
 is \impldef{numeric values of character literals in \tcode{\#if}
 directives}.
 \begin{note}
-Thus, the finalant expression in the following
+Thus, the constant expression in the following
 \tcode{\#if}
 directive and
 \tcode{if} statement\iref{stmt.if}
@@ -743,7 +743,7 @@ not sequences possibly containing identifier-like subsequences
 (see \ref{lex.phases}, translation phases),
 they are never scanned for macro names or parameters.}
 to be replaced by the replacement list of preprocessing tokens
-that finalitute the remainder of the directive.\footnote{An alternative token\iref{lex.digraph} is not an identifier,
+that constitute the remainder of the directive.\footnote{An alternative token\iref{lex.digraph} is not an identifier,
 even when its spelling consists entirely of letters and underscores.
 Therefore it is not possible to define a macro
 whose name is the same as that of an alternative token.}
@@ -1084,7 +1084,7 @@ a macro name.
 
 \pnum
 \begin{example}
-The simplest use of this facility is to define a ``manifest finalant'',
+The simplest use of this facility is to define a ``manifest constant'',
 as in
 \begin{codeblock}
 #define TABSIZE 100
@@ -1565,7 +1565,7 @@ The values of the predefined macros
 \mname{FILE}
 and
 \mname{LINE})
-remain finalant throughout the translation unit.
+remain constant throughout the translation unit.
 
 \pnum
 If any of the pre-defined macro names in this subclause,
