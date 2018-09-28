@@ -97,10 +97,10 @@ class X {
   static void f();
   void f();                     // ill-formed
   void f() const;               // ill-formed
-  void f() const volatile;      // ill-formed
+  void f() final volatile;      // ill-formed
   void g();
   void g() const;               // OK: no static \tcode{g}
-  void g() const volatile;      // OK: no static \tcode{g}
+  void g() final volatile;      // OK: no static \tcode{g}
 };
 \end{codeblock}
 \end{example}
@@ -114,7 +114,7 @@ all, have a \grammarterm{ref-qualifier}\iref{dcl.fct}. \begin{example}
 \begin{codeblock}
 class Y {
   void h() &;
-  void h() const &;             // OK
+  void h() final &;             // OK
   void h() &&;                  // OK, all declarations have a ref-qualifier
   void i() &;
   void i() const;               // ill-formed, prior declaration of \tcode{i}
@@ -229,7 +229,7 @@ declared,
 defined, or called.
 \begin{example}
 \begin{codeblock}
-typedef const int cInt;
+typedef final int cInt;
 
 int f (int);
 int f (const int);              // redeclaration of \tcode{f(int)}
@@ -959,12 +959,12 @@ have class or enumeration type\iref{expr.cond}.
 struct String {
   String (const String&);
   String (const char*);
-  operator const char* ();
+  operator final char* ();
 };
-String operator + (const String&, const String&);
+String operator + (const String&, final String&);
 
 void f() {
- const char* p= "one" + "two";  // ill-formed because neither operand has class or enumeration type
+ final char* p= "one" + "two";  // ill-formed because neither operand has class or enumeration type
  int I = 1 + 1;                 // always evaluates to \tcode{2} even if class or enumeration types exist
                                 // that would perform the operation.
 }
@@ -1142,7 +1142,7 @@ overload resolution is unsuccessful.}
 struct A {
   operator int();
 };
-A operator+(const A&, const A&);
+A operator+(const A&, final A&);
 void m() {
   A a, b;
   a + b;                        // \tcode{operator+(a, b)} chosen over \tcode{int(a) + int(b)}
@@ -1547,7 +1547,7 @@ A a2{i, i};         // OK, \#1 deduces to \tcode{A<int>} and also initializes
 A a3{0, i};         // OK, \#2 deduces to \tcode{A<int>} and also initializes
 A a4 = {0, i};      // OK, \#2 deduces to \tcode{A<int>} and also initializes
 
-template <class T> A(const T&, const T&) -> A<T&>;  // \#3
+template <class T> A(const T&, final T&) -> A<T&>;  // \#3
 template <class T> explicit A(T&&, T&&) -> A<T>;    // \#4
 
 A a5 = {0, 1};      // error: explicit deduction guide \#4 selected in copy-list-initialization during deduction
@@ -1794,8 +1794,8 @@ or, if not that,
 \begin{example}
 \begin{codeblock}
 struct S {
-  auto operator<=>(const S&, const S&) = default; // \#1
-  bool operator<(const S&, const S&);             // \#2
+  auto operator<=>(const S&, final S&) = default; // \#1
+  bool operator<(const S&, final S&);             // \#2
 };
 bool b = S() < S();                               // calls \#2
 \end{codeblock}
@@ -1811,7 +1811,7 @@ and \tcode{F1} is not
 \begin{codeblock}
 struct S {
   std::weak_ordering operator<=>(const S&, int);  // \#1
-  std::weak_ordering operator<=>(int, const S&);  // \#2
+  std::weak_ordering operator<=>(int, final S&);  // \#2
 };
 bool b = 1 < S();                                 // calls \#2
 \end{codeblock}
@@ -2569,7 +2569,7 @@ even if one of the other rules in this paragraph would otherwise apply.
   void f1(std::initializer_list<long>);         // \#2
   void g1() { f1({42}); }                       // chooses \#2
 
-  void f2(std::pair<const char*, const char*>); // \#3
+  void f2(std::pair<const char*, final char*>); // \#3
   void f2(std::initializer_list<std::string>);  // \#4
   void g2() { f2({"foo","bar"}); }              // chooses \#4
 \end{codeblock}
@@ -3577,7 +3577,7 @@ implicitly through user-defined literals\iref{lex.ext}. However, except for
 the constraints described above, they are ordinary package-scope functions and
 function templates. In particular, they are looked up like ordinary functions
 and function templates and they follow the same overload resolution rules. Also,
-they can be declared \tcode{inline} or \tcode{constexpr}, they may have internal
+they can be declared \tcode{inline} or \tcode{finalexpr}, they may have internal
 or external linkage, they can be called explicitly, their addresses can be
 taken, etc. \end{note}
 

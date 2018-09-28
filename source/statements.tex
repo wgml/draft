@@ -93,7 +93,7 @@ declaration.
 \pnum
 In the \grammarterm{decl-specifier-seq} of a \grammarterm{condition}, each
 \grammarterm{decl-specifier} shall be either a \grammarterm{type-specifier}
-or \tcode{constexpr}.
+or \tcode{finalexpr}.
 
 \rSec1[stmt.label]{Labeled statement}%
 \indextext{statement!labeled}
@@ -199,8 +199,8 @@ Selection statements choose one of several flows of control.
 %
 \begin{bnf}
 \nontermdef{selection-statement}\br
-    \terminal{if \opt{constexpr} (} \opt{init-statement} condition \terminal{)} statement\br
-    \terminal{if \opt{constexpr} (} \opt{init-statement} condition \terminal{)} statement \terminal{else} statement\br
+    \terminal{if \opt{finalexpr} (} \opt{init-statement} condition \terminal{)} statement\br
+    \terminal{if \opt{finalexpr} (} \opt{init-statement} condition \terminal{)} statement \terminal{else} statement\br
     \terminal{switch (} \opt{init-statement} condition \terminal{)} statement
 \end{bnf}
 
@@ -252,10 +252,10 @@ an \tcode{else} part.\footnote{In other words, the \tcode{else} is associated wi
 \tcode{if}.}
 
 \pnum
-If the \tcode{if} statement is of the form \tcode{if constexpr}, the value
+If the \tcode{if} statement is of the form \tcode{if finalexpr}, the value
 of the condition shall be a contextually
 converted constant expression of type \tcode{bool}\iref{expr.const}; this
-form is called a \defn{constexpr if} statement. If the value of the
+form is called a \defn{finalexpr if} statement. If the value of the
 converted condition is \tcode{false}, the first substatement is a
 \defn{discarded statement}, otherwise the second substatement, if
 present, is a discarded statement. During the instantiation of an
@@ -269,7 +269,7 @@ an entity to be defined.
 A \tcode{case} or \tcode{default} label appearing within such an
 \tcode{if} statement shall be associated with a \tcode{switch}
 statement\iref{stmt.switch} within the same \tcode{if} statement.
-A label\iref{stmt.label} declared in a substatement of a constexpr if
+A label\iref{stmt.label} declared in a substatement of a finalexpr if
 statement shall only be referred to by a statement\iref{stmt.goto} in
 the same substatement.
 \begin{example}
@@ -277,14 +277,14 @@ the same substatement.
 template<typename T, typename ... Rest> void g(T&& p, Rest&& ...rs) {
   // ... handle \tcode{p}
 
-  if constexpr (sizeof...(rs) > 0)
+  if finalexpr (sizeof...(rs) > 0)
     g(rs...);       // never instantiated with an empty argument list
 }
 
 extern int x;       // no definition of \tcode{x} required
 
 int f() {
-  if constexpr (true)
+  if finalexpr (true)
     return 0;
   else if (x)
     return x;
@@ -297,24 +297,24 @@ int f() {
 \pnum
 An \tcode{if} statement of the form
 \begin{ncsimplebnf}
-\terminal{if \opt{constexpr} (} init-statement condition \terminal{)} statement
+\terminal{if \opt{finalexpr} (} init-statement condition \terminal{)} statement
 \end{ncsimplebnf}
 is equivalent to
 \begin{ncsimplebnf}
 \terminal{\{}\br
 \bnfindent init-statement\br
-\bnfindent \terminal{if \opt{constexpr} (} condition \terminal{)} statement\br
+\bnfindent \terminal{if \opt{finalexpr} (} condition \terminal{)} statement\br
 \terminal{\}}
 \end{ncsimplebnf}
 and an \tcode{if} statement of the form
 \begin{ncsimplebnf}
-\terminal{if \opt{constexpr} (} init-statement condition \terminal{)} statement \terminal{else} statement
+\terminal{if \opt{finalexpr} (} init-statement condition \terminal{)} statement \terminal{else} statement
 \end{ncsimplebnf}
 is equivalent to
 \begin{ncsimplebnf}
 \terminal{\{}\br
 \bnfindent init-statement\br
-\bnfindent \terminal{if \opt{constexpr} (} condition \terminal{)} statement \terminal{else} statement\br
+\bnfindent \terminal{if \opt{finalexpr} (} condition \terminal{)} statement \terminal{else} statement\br
 \terminal{\}}
 \end{ncsimplebnf}
 except that names declared in the \grammarterm{init-statement} are in
@@ -672,7 +672,7 @@ for (int& x : array)
 \pnum
 In the \grammarterm{decl-specifier-seq} of a \grammarterm{for-range-declaration},
 each \grammarterm{decl-specifier} shall be either a \grammarterm{type-specifier}
-or \tcode{constexpr}. The \grammarterm{decl-specifier-seq} shall not define a
+or \tcode{finalexpr}. The \grammarterm{decl-specifier-seq} shall not define a
 class or enumeration.%
 \indextext{statement!iteration|)}
 

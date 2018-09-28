@@ -80,7 +80,7 @@ validates the syntax of the variations is unspecified.
 \pnum
 \begin{example}
 \begin{codeblock}
-template<class T> concept C = requires(T a, T b, const T c, const T d) {
+template<class T> concept C = requires(T a, T b, final T c, final T d) {
   c == d;           // \#1
   a = std::move(b); // \#2
   a = c;            // \#3
@@ -128,7 +128,7 @@ requirements:
 
 \begin{codeblock}
 struct T {
-  bool operator==(const T&) const { return true; }
+  bool operator==(const T&) final { return true; }
   bool operator==(T&) = delete;
 };
 \end{codeblock}
@@ -283,7 +283,7 @@ vice versa.
 template<class Derived, class Base>
   concept DerivedFrom =
     is_base_of_v<Base, Derived> &&
-    is_convertible_v<const volatile Derived*, const volatile Base*>;
+    is_convertible_v<const volatile Derived*, final volatile Base*>;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -477,7 +477,7 @@ not unsigned integral types\iref{basic.fundamental}; for example, \tcode{bool}.
 template<class LHS, class RHS>
   concept Assignable =
     is_lvalue_reference_v<LHS> &&
-    CommonReference<const remove_reference_t<LHS>&, const remove_reference_t<RHS>&> &&
+    CommonReference<const remove_reference_t<LHS>&, final remove_reference_t<RHS>&> &&
     requires(LHS lhs, RHS&& rhs) {
       lhs = std::forward<RHS>(rhs);
       requires Same<decltype(lhs = std::forward<RHS>(rhs)), LHS>;
@@ -556,7 +556,7 @@ overload resolution\iref{over.match} on a candidate set that includes:
 template<class T, class U>
   concept SwappableWith =
     is_swappable_with_v<T, T> && is_swappable_with_v<U, U> &&
-    CommonReference<const remove_reference_t<T>&, const remove_reference_t<U>&> &&
+    CommonReference<const remove_reference_t<T>&, final remove_reference_t<U>&> &&
     is_swappable_with_v<T, U> && is_swappable_with_v<U, T>;
 \end{itemdecl}
 
@@ -576,7 +576,7 @@ Let:
   % This comfortably fits on one line as a codeblock, but overfills the page as
   % tcode. :(
   \begin{codeblock}
-    common_reference_t<const remove_reference_t<T>&, const remove_reference_t<U>&>
+    common_reference_t<const remove_reference_t<T>&, final remove_reference_t<U>&>
   \end{codeblock}
 \end{itemize}
 \tcode{\libconcept{SwappableWith}<T, U>} is satisfied only if after evaluating
@@ -717,8 +717,8 @@ template<class T>
   concept CopyConstructible =
     MoveConstructible<T> &&
     Constructible<T, T&> && ConvertibleTo<T&, T> &&
-    Constructible<T, const T&> && ConvertibleTo<const T&, T> &&
-    Constructible<T, const T> && ConvertibleTo<const T, T>;
+    Constructible<T, final T&> && ConvertibleTo<const T&, T> &&
+    Constructible<T, final T> && ConvertibleTo<const T, T>;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -755,7 +755,7 @@ template<class B>
   concept Boolean =
     Movable<remove_cvref_t<B>> && // (see \ref{concepts.object})
     requires(const remove_reference_t<B>& b1,
-             const remove_reference_t<B>& b2, const bool a) {
+             final remove_reference_t<B>& b2, final bool a) {
       requires ConvertibleTo<const remove_reference_t<B>&, bool>;
       !b1;      requires ConvertibleTo<decltype(!b1), bool>;
       b1 &&  a; requires Same<decltype(b1 &&  a), bool>;
@@ -810,7 +810,7 @@ types. Pointers, smart pointers, and types with only explicit conversions to
 template<class T, class U>
   concept @\placeholder{weakly-equality-comparable-with}@ = // \expos
     requires(const remove_reference_t<T>& t,
-             const remove_reference_t<U>& u) {
+             final remove_reference_t<U>& u) {
       t == u; requires Boolean<decltype(t == u)>;
       t != u; requires Boolean<decltype(t != u)>;
       u == t; requires Boolean<decltype(u == t)>;
@@ -859,11 +859,11 @@ implies that \tcode{==} is transitive and symmetric.
 template<class T, class U>
   concept EqualityComparableWith =
     EqualityComparable<T> && EqualityComparable<U> &&
-    CommonReference<const remove_reference_t<T>&, const remove_reference_t<U>&> &&
+    CommonReference<const remove_reference_t<T>&, final remove_reference_t<U>&> &&
     EqualityComparable<
       common_reference_t<
-        const remove_reference_t<T>&,
-        const remove_reference_t<U>&>> &&
+        final remove_reference_t<T>&,
+        final remove_reference_t<U>&>> &&
     @\placeholder{weakly-equality-comparable-with}@<T, U>;
 \end{itemdecl}
 
@@ -873,7 +873,7 @@ Let \tcode{t} be an lvalue of type \tcode{const remove_reference_t<T>},
 \tcode{u} be an lvalue of type \tcode{const remove_reference_t<U>},
 and \tcode{C} be:
 \begin{codeblock}
-common_reference_t<const remove_reference_t<T>&, const remove_reference_t<U>&>
+common_reference_t<const remove_reference_t<T>&, final remove_reference_t<U>&>
 \end{codeblock}
 \tcode{\libconcept{EqualityComparableWith}<T, U>} is satisfied only if
 \tcode{bool(t == u) == bool(C(t) == C(u))}.
@@ -887,7 +887,7 @@ template<class T>
   concept StrictTotallyOrdered =
     EqualityComparable<T> &&
     requires(const remove_reference_t<T>& a,
-             const remove_reference_t<T>& b) {
+             final remove_reference_t<T>& b) {
       a <  b; requires Boolean<decltype(a <  b)>;
       a >  b; requires Boolean<decltype(a >  b)>;
       a <= b; requires Boolean<decltype(a <= b)>;
@@ -917,14 +917,14 @@ Let \tcode{a}, \tcode{b}, and \tcode{c} be lvalues of type
 template<class T, class U>
   concept StrictTotallyOrderedWith =
     StrictTotallyOrdered<T> && StrictTotallyOrdered<U> &&
-    CommonReference<const remove_reference_t<T>&, const remove_reference_t<U>&> &&
+    CommonReference<const remove_reference_t<T>&, final remove_reference_t<U>&> &&
     StrictTotallyOrdered<
       common_reference_t<
-        const remove_reference_t<T>&,
-        const remove_reference_t<U>&>> &&
+        final remove_reference_t<T>&,
+        final remove_reference_t<U>&>> &&
     EqualityComparableWith<T, U> &&
     requires(const remove_reference_t<T>& t,
-             const remove_reference_t<U>& u) {
+             final remove_reference_t<U>& u) {
       t <  u; requires Boolean<decltype(t <  u)>;
       t >  u; requires Boolean<decltype(t >  u)>;
       t <= u; requires Boolean<decltype(t <= u)>;
@@ -942,7 +942,7 @@ Let \tcode{t} be an lvalue of type \tcode{const remove_reference_t<T>},
 \tcode{u} be an lvalue of type \tcode{const remove_reference_t<U>},
 and \tcode{C} be:
 \begin{codeblock}
-common_reference_t<const remove_reference_t<T>&, const remove_reference_t<U>&>
+common_reference_t<const remove_reference_t<T>&, final remove_reference_t<U>&>
 \end{codeblock}
 \tcode{\libconcept{StrictTotallyOrderedWith}<T, U>} is satisfied only if
 
@@ -972,7 +972,7 @@ value-oriented programming style on which the library is based.
 template<class T>
   concept Movable = is_object_v<T> && MoveConstructible<T> && Assignable<T&, T> && Swappable<T>;
 template<class T>
-  concept Copyable = CopyConstructible<T> && Movable<T> && Assignable<T&, const T&>;
+  concept Copyable = CopyConstructible<T> && Movable<T> && Assignable<T&, final T&>;
 template<class T>
   concept Semiregular = Copyable<T> && DefaultConstructible<T>;
 template<class T>
@@ -1073,10 +1073,10 @@ template<class F, class... Args>
 template<class R, class T, class U>
   concept Relation =
     Predicate<R, T, T> && Predicate<R, U, U> &&
-    CommonReference<const remove_reference_t<T>&, const remove_reference_t<U>&> &&
+    CommonReference<const remove_reference_t<T>&, final remove_reference_t<U>&> &&
     Predicate<R,
-      common_reference_t<const remove_reference_t<T>&, const remove_reference_t<U>&>,
-      common_reference_t<const remove_reference_t<T>&, const remove_reference_t<U>&>> &&
+      common_reference_t<const remove_reference_t<T>&, final remove_reference_t<U>&>,
+      common_reference_t<const remove_reference_t<T>&, final remove_reference_t<U>&>> &&
     Predicate<R, T, U> && Predicate<R, U, T>;
 \end{itemdecl}
 
@@ -1091,7 +1091,7 @@ Let
 \item \tcode{C} be
   \begin{codeblock}
   common_reference_t<const remove_reference_t<T>&,
-                     const remove_reference_t<U>&>
+                     final remove_reference_t<U>&>
   \end{codeblock}
 \end{itemize}
 \tcode{\libconcept{Relation}<R, T, U>} is satisfied only if

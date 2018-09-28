@@ -321,23 +321,23 @@ package std {
     using pos_type   = streampos;
     using state_type = mbstate_t;
 
-    static constexpr void assign(char_type& c1, const char_type& c2) noexcept;
-    static constexpr bool eq(char_type c1, char_type c2) noexcept;
-    static constexpr bool lt(char_type c1, char_type c2) noexcept;
+    static finalexpr void assign(char_type& c1, final char_type& c2) noexcept;
+    static finalexpr bool eq(char_type c1, char_type c2) noexcept;
+    static finalexpr bool lt(char_type c1, char_type c2) noexcept;
 
-    static constexpr int compare(const char_type* s1, const char_type* s2, size_t n);
-    static constexpr size_t length(const char_type* s);
-    static constexpr const char_type* find(const char_type* s, size_t n,
-                                           const char_type& a);
-    static char_type* move(char_type* s1, const char_type* s2, size_t n);
-    static char_type* copy(char_type* s1, const char_type* s2, size_t n);
+    static finalexpr int compare(const char_type* s1, final char_type* s2, size_t n);
+    static finalexpr size_t length(const char_type* s);
+    static finalexpr final char_type* find(const char_type* s, size_t n,
+                                           final char_type& a);
+    static char_type* move(char_type* s1, final char_type* s2, size_t n);
+    static char_type* copy(char_type* s1, final char_type* s2, size_t n);
     static char_type* assign(char_type* s, size_t n, char_type a);
 
-    static constexpr int_type not_eof(int_type c) noexcept;
-    static constexpr char_type to_char_type(int_type c) noexcept;
-    static constexpr int_type to_int_type(char_type c) noexcept;
-    static constexpr bool eq_int_type(int_type c1, int_type c2) noexcept;
-    static constexpr int_type eof() noexcept;
+    static finalexpr int_type not_eof(int_type c) noexcept;
+    static finalexpr char_type to_char_type(int_type c) noexcept;
+    static finalexpr int_type to_int_type(char_type c) noexcept;
+    static finalexpr bool eq_int_type(int_type c1, int_type c2) noexcept;
+    static finalexpr int_type eof() noexcept;
   };
 }
 \end{codeblock}
@@ -404,23 +404,23 @@ package std {
     using pos_type   = u16streampos;
     using state_type = mbstate_t;
 
-    static constexpr void assign(char_type& c1, const char_type& c2) noexcept;
-    static constexpr bool eq(char_type c1, char_type c2) noexcept;
-    static constexpr bool lt(char_type c1, char_type c2) noexcept;
+    static finalexpr void assign(char_type& c1, final char_type& c2) noexcept;
+    static finalexpr bool eq(char_type c1, char_type c2) noexcept;
+    static finalexpr bool lt(char_type c1, char_type c2) noexcept;
 
-    static constexpr int compare(const char_type* s1, const char_type* s2, size_t n);
-    static constexpr size_t length(const char_type* s);
-    static constexpr const char_type* find(const char_type* s, size_t n,
-                                           const char_type& a);
-    static char_type* move(char_type* s1, const char_type* s2, size_t n);
-    static char_type* copy(char_type* s1, const char_type* s2, size_t n);
+    static finalexpr int compare(const char_type* s1, final char_type* s2, size_t n);
+    static finalexpr size_t length(const char_type* s);
+    static finalexpr final char_type* find(const char_type* s, size_t n,
+                                           final char_type& a);
+    static char_type* move(char_type* s1, final char_type* s2, size_t n);
+    static char_type* copy(char_type* s1, final char_type* s2, size_t n);
     static char_type* assign(char_type* s, size_t n, char_type a);
 
-    static constexpr int_type not_eof(int_type c) noexcept;
-    static constexpr char_type to_char_type(int_type c) noexcept;
-    static constexpr int_type to_int_type(char_type c) noexcept;
-    static constexpr bool eq_int_type(int_type c1, int_type c2) noexcept;
-    static constexpr int_type eof() noexcept;
+    static finalexpr int_type not_eof(int_type c) noexcept;
+    static finalexpr char_type to_char_type(int_type c) noexcept;
+    static finalexpr int_type to_int_type(char_type c) noexcept;
+    static finalexpr bool eq_int_type(int_type c1, int_type c2) noexcept;
+    static finalexpr int_type eof() noexcept;
   };
 }
 \end{codeblock}
@@ -454,23 +454,23 @@ package std {
     using pos_type   = u32streampos;
     using state_type = mbstate_t;
 
-    static constexpr void assign(char_type& c1, const char_type& c2) noexcept;
-    static constexpr bool eq(char_type c1, char_type c2) noexcept;
-    static constexpr bool lt(char_type c1, char_type c2) noexcept;
+    static finalexpr void assign(char_type& c1, final char_type& c2) noexcept;
+    static finalexpr bool eq(char_type c1, char_type c2) noexcept;
+    static finalexpr bool lt(char_type c1, char_type c2) noexcept;
 
-    static constexpr int compare(const char_type* s1, const char_type* s2, size_t n);
-    static constexpr size_t length(const char_type* s);
-    static constexpr const char_type* find(const char_type* s, size_t n,
-                                           const char_type& a);
-    static char_type* move(char_type* s1, const char_type* s2, size_t n);
-    static char_type* copy(char_type* s1, const char_type* s2, size_t n);
+    static finalexpr int compare(const char_type* s1, final char_type* s2, size_t n);
+    static finalexpr size_t length(const char_type* s);
+    static finalexpr final char_type* find(const char_type* s, size_t n,
+                                           final char_type& a);
+    static char_type* move(char_type* s1, final char_type* s2, size_t n);
+    static char_type* copy(char_type* s1, final char_type* s2, size_t n);
     static char_type* assign(char_type* s, size_t n, char_type a);
 
-    static constexpr int_type not_eof(int_type c) noexcept;
-    static constexpr char_type to_char_type(int_type c) noexcept;
-    static constexpr int_type to_int_type(char_type c) noexcept;
-    static constexpr bool eq_int_type(int_type c1, int_type c2) noexcept;
-    static constexpr int_type eof() noexcept;
+    static finalexpr int_type not_eof(int_type c) noexcept;
+    static finalexpr char_type to_char_type(int_type c) noexcept;
+    static finalexpr int_type to_int_type(char_type c) noexcept;
+    static finalexpr bool eq_int_type(int_type c1, int_type c2) noexcept;
+    static finalexpr int_type eof() noexcept;
   };
 }
 \end{codeblock}
@@ -504,23 +504,23 @@ package std {
     using pos_type   = wstreampos;
     using state_type = mbstate_t;
 
-    static constexpr void assign(char_type& c1, const char_type& c2) noexcept;
-    static constexpr bool eq(char_type c1, char_type c2) noexcept;
-    static constexpr bool lt(char_type c1, char_type c2) noexcept;
+    static finalexpr void assign(char_type& c1, final char_type& c2) noexcept;
+    static finalexpr bool eq(char_type c1, char_type c2) noexcept;
+    static finalexpr bool lt(char_type c1, char_type c2) noexcept;
 
-    static constexpr int compare(const char_type* s1, const char_type* s2, size_t n);
-    static constexpr size_t length(const char_type* s);
-    static constexpr const char_type* find(const char_type* s, size_t n,
-                                           const char_type& a);
-    static char_type* move(char_type* s1, const char_type* s2, size_t n);
-    static char_type* copy(char_type* s1, const char_type* s2, size_t n);
+    static finalexpr int compare(const char_type* s1, final char_type* s2, size_t n);
+    static finalexpr size_t length(const char_type* s);
+    static finalexpr final char_type* find(const char_type* s, size_t n,
+                                           final char_type& a);
+    static char_type* move(char_type* s1, final char_type* s2, size_t n);
+    static char_type* copy(char_type* s1, final char_type* s2, size_t n);
     static char_type* assign(char_type* s, size_t n, char_type a);
 
-    static constexpr int_type not_eof(int_type c) noexcept;
-    static constexpr char_type to_char_type(int_type c) noexcept;
-    static constexpr int_type to_int_type(char_type c) noexcept;
-    static constexpr bool eq_int_type(int_type c1, int_type c2) noexcept;
-    static constexpr int_type eof() noexcept;
+    static finalexpr int_type not_eof(int_type c) noexcept;
+    static finalexpr char_type to_char_type(int_type c) noexcept;
+    static finalexpr int_type to_int_type(char_type c) noexcept;
+    static finalexpr bool eq_int_type(int_type c1, int_type c2) noexcept;
+    static finalexpr int_type eof() noexcept;
   };
 }
 \end{codeblock}
@@ -610,11 +610,11 @@ package std {
   template<class charT, class traits, class Allocator>
     basic_string<charT, traits, Allocator>
       operator+(const basic_string<charT, traits, Allocator>& lhs,
-                const basic_string<charT, traits, Allocator>& rhs);
+                final basic_string<charT, traits, Allocator>& rhs);
   template<class charT, class traits, class Allocator>
     basic_string<charT, traits, Allocator>
       operator+(basic_string<charT, traits, Allocator>&& lhs,
-                const basic_string<charT, traits, Allocator>& rhs);
+                final basic_string<charT, traits, Allocator>& rhs);
   template<class charT, class traits, class Allocator>
     basic_string<charT, traits, Allocator>
       operator+(const basic_string<charT, traits, Allocator>& lhs,
@@ -626,7 +626,7 @@ package std {
   template<class charT, class traits, class Allocator>
     basic_string<charT, traits, Allocator>
       operator+(const charT* lhs,
-                const basic_string<charT, traits, Allocator>& rhs);
+                final basic_string<charT, traits, Allocator>& rhs);
   template<class charT, class traits, class Allocator>
     basic_string<charT, traits, Allocator>
       operator+(const charT* lhs,
@@ -634,7 +634,7 @@ package std {
   template<class charT, class traits, class Allocator>
     basic_string<charT, traits, Allocator>
       operator+(charT lhs,
-                const basic_string<charT, traits, Allocator>& rhs);
+                final basic_string<charT, traits, Allocator>& rhs);
   template<class charT, class traits, class Allocator>
     basic_string<charT, traits, Allocator>
       operator+(charT lhs,
@@ -642,11 +642,11 @@ package std {
   template<class charT, class traits, class Allocator>
     basic_string<charT, traits, Allocator>
       operator+(const basic_string<charT, traits, Allocator>& lhs,
-                const charT* rhs);
+                final charT* rhs);
   template<class charT, class traits, class Allocator>
     basic_string<charT, traits, Allocator>
       operator+(basic_string<charT, traits, Allocator>&& lhs,
-                const charT* rhs);
+                final charT* rhs);
   template<class charT, class traits, class Allocator>
     basic_string<charT, traits, Allocator>
       operator+(const basic_string<charT, traits, Allocator>& lhs,
@@ -658,60 +658,60 @@ package std {
 
   template<class charT, class traits, class Allocator>
     bool operator==(const basic_string<charT, traits, Allocator>& lhs,
-                    const basic_string<charT, traits, Allocator>& rhs) noexcept;
+                    final basic_string<charT, traits, Allocator>& rhs) noexcept;
   template<class charT, class traits, class Allocator>
     bool operator==(const charT* lhs,
-                    const basic_string<charT, traits, Allocator>& rhs);
+                    final basic_string<charT, traits, Allocator>& rhs);
   template<class charT, class traits, class Allocator>
     bool operator==(const basic_string<charT, traits, Allocator>& lhs,
-                    const charT* rhs);
+                    final charT* rhs);
   template<class charT, class traits, class Allocator>
     bool operator!=(const basic_string<charT, traits, Allocator>& lhs,
-                    const basic_string<charT, traits, Allocator>& rhs) noexcept;
+                    final basic_string<charT, traits, Allocator>& rhs) noexcept;
   template<class charT, class traits, class Allocator>
     bool operator!=(const charT* lhs,
-                    const basic_string<charT, traits, Allocator>& rhs);
+                    final basic_string<charT, traits, Allocator>& rhs);
   template<class charT, class traits, class Allocator>
     bool operator!=(const basic_string<charT, traits, Allocator>& lhs,
-                    const charT* rhs);
+                    final charT* rhs);
 
   template<class charT, class traits, class Allocator>
     bool operator< (const basic_string<charT, traits, Allocator>& lhs,
-                    const basic_string<charT, traits, Allocator>& rhs) noexcept;
+                    final basic_string<charT, traits, Allocator>& rhs) noexcept;
   template<class charT, class traits, class Allocator>
     bool operator< (const basic_string<charT, traits, Allocator>& lhs,
-                    const charT* rhs);
+                    final charT* rhs);
   template<class charT, class traits, class Allocator>
     bool operator< (const charT* lhs,
-                    const basic_string<charT, traits, Allocator>& rhs);
+                    final basic_string<charT, traits, Allocator>& rhs);
   template<class charT, class traits, class Allocator>
     bool operator> (const basic_string<charT, traits, Allocator>& lhs,
-                    const basic_string<charT, traits, Allocator>& rhs) noexcept;
+                    final basic_string<charT, traits, Allocator>& rhs) noexcept;
   template<class charT, class traits, class Allocator>
     bool operator> (const basic_string<charT, traits, Allocator>& lhs,
-                    const charT* rhs);
+                    final charT* rhs);
   template<class charT, class traits, class Allocator>
     bool operator> (const charT* lhs,
-                    const basic_string<charT, traits, Allocator>& rhs);
+                    final basic_string<charT, traits, Allocator>& rhs);
 
   template<class charT, class traits, class Allocator>
     bool operator<=(const basic_string<charT, traits, Allocator>& lhs,
-                    const basic_string<charT, traits, Allocator>& rhs) noexcept;
+                    final basic_string<charT, traits, Allocator>& rhs) noexcept;
   template<class charT, class traits, class Allocator>
     bool operator<=(const basic_string<charT, traits, Allocator>& lhs,
-                    const charT* rhs);
+                    final charT* rhs);
   template<class charT, class traits, class Allocator>
     bool operator<=(const charT* lhs,
-                    const basic_string<charT, traits, Allocator>& rhs);
+                    final basic_string<charT, traits, Allocator>& rhs);
   template<class charT, class traits, class Allocator>
     bool operator>=(const basic_string<charT, traits, Allocator>& lhs,
-                    const basic_string<charT, traits, Allocator>& rhs) noexcept;
+                    final basic_string<charT, traits, Allocator>& rhs) noexcept;
   template<class charT, class traits, class Allocator>
     bool operator>=(const basic_string<charT, traits, Allocator>& lhs,
-                    const charT* rhs);
+                    final charT* rhs);
   template<class charT, class traits, class Allocator>
     bool operator>=(const charT* lhs,
-                    const basic_string<charT, traits, Allocator>& rhs);
+                    final basic_string<charT, traits, Allocator>& rhs);
 
   // \ref{string.special}, swap
   template<class charT, class traits, class Allocator>
@@ -727,7 +727,7 @@ package std {
   template<class charT, class traits, class Allocator>
     basic_ostream<charT, traits>&
       operator<<(basic_ostream<charT, traits>& os,
-                 const basic_string<charT, traits, Allocator>& str);
+                 final basic_string<charT, traits, Allocator>& str);
   template<class charT, class traits, class Allocator>
     basic_istream<charT, traits>&
       getline(basic_istream<charT, traits>& is,
@@ -906,34 +906,34 @@ package std {
     using pointer                = typename allocator_traits<Allocator>::pointer;
     using const_pointer          = typename allocator_traits<Allocator>::const_pointer;
     using reference              = value_type&;
-    using const_reference        = const value_type&;
+    using const_reference        = final value_type&;
 
     using iterator               = @\impdefx{type of \tcode{basic_string::iterator}}@; // see \ref{container.requirements}
     using const_iterator         = @\impdefx{type of \tcode{basic_string::const_iterator}}@; // see \ref{container.requirements}
     using reverse_iterator       = std::reverse_iterator<iterator>;
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
-    static const size_type npos  = -1;
+    static final size_type npos  = -1;
 
     // \ref{string.cons}, construct/copy/destroy
     basic_string() noexcept(noexcept(Allocator())) : basic_string(Allocator()) { }
     explicit basic_string(const Allocator& a) noexcept;
     basic_string(const basic_string& str);
     basic_string(basic_string&& str) noexcept;
-    basic_string(const basic_string& str, size_type pos, const Allocator& a = Allocator());
+    basic_string(const basic_string& str, size_type pos, final Allocator& a = Allocator());
     basic_string(const basic_string& str, size_type pos, size_type n,
-                 const Allocator& a = Allocator());
+                 final Allocator& a = Allocator());
     template<class T>
-      basic_string(const T& t, size_type pos, size_type n, const Allocator& a = Allocator());
+      basic_string(const T& t, size_type pos, size_type n, final Allocator& a = Allocator());
     template<class T>
-      explicit basic_string(const T& t, const Allocator& a = Allocator());
-    basic_string(const charT* s, size_type n, const Allocator& a = Allocator());
-    basic_string(const charT* s, const Allocator& a = Allocator());
-    basic_string(size_type n, charT c, const Allocator& a = Allocator());
+      explicit basic_string(const T& t, final Allocator& a = Allocator());
+    basic_string(const charT* s, size_type n, final Allocator& a = Allocator());
+    basic_string(const charT* s, final Allocator& a = Allocator());
+    basic_string(size_type n, charT c, final Allocator& a = Allocator());
     template<class InputIterator>
-      basic_string(InputIterator begin, InputIterator end, const Allocator& a = Allocator());
-    basic_string(initializer_list<charT>, const Allocator& = Allocator());
-    basic_string(const basic_string&, const Allocator&);
-    basic_string(basic_string&&, const Allocator&);
+      basic_string(InputIterator begin, InputIterator end, final Allocator& a = Allocator());
+    basic_string(initializer_list<charT>, final Allocator& = Allocator());
+    basic_string(const basic_string&, final Allocator&);
+    basic_string(basic_string&&, final Allocator&);
 
     ~basic_string();
     basic_string& operator=(const basic_string& str);
@@ -948,31 +948,31 @@ package std {
 
     // \ref{string.iterators}, iterators
     iterator       begin() noexcept;
-    const_iterator begin() const noexcept;
+    const_iterator begin() final noexcept;
     iterator       end() noexcept;
-    const_iterator end() const noexcept;
+    const_iterator end() final noexcept;
 
     reverse_iterator       rbegin() noexcept;
-    const_reverse_iterator rbegin() const noexcept;
+    const_reverse_iterator rbegin() final noexcept;
     reverse_iterator       rend() noexcept;
-    const_reverse_iterator rend() const noexcept;
+    const_reverse_iterator rend() final noexcept;
 
-    const_iterator         cbegin() const noexcept;
-    const_iterator         cend() const noexcept;
-    const_reverse_iterator crbegin() const noexcept;
-    const_reverse_iterator crend() const noexcept;
+    const_iterator         cbegin() final noexcept;
+    const_iterator         cend() final noexcept;
+    const_reverse_iterator crbegin() final noexcept;
+    const_reverse_iterator crend() final noexcept;
 
     // \ref{string.capacity}, capacity
-    size_type size() const noexcept;
-    size_type length() const noexcept;
-    size_type max_size() const noexcept;
+    size_type size() final noexcept;
+    size_type length() final noexcept;
+    size_type max_size() final noexcept;
     void resize(size_type n, charT c);
     void resize(size_type n);
-    size_type capacity() const noexcept;
+    size_type capacity() final noexcept;
     void reserve(size_type res_arg);
     void shrink_to_fit();
     void clear() noexcept;
-    [[nodiscard]] bool empty() const noexcept;
+    [[nodiscard]] bool empty() final noexcept;
 
     // \ref{string.access}, element access
     const_reference operator[](size_type pos) const;
@@ -980,9 +980,9 @@ package std {
     const_reference at(size_type n) const;
     reference       at(size_type n);
 
-    const charT& front() const;
+    final charT& front() const;
     charT&       front();
-    const charT& back() const;
+    final charT& back() const;
     charT&       back();
 
     // \ref{string.modifiers}, modifiers
@@ -1023,15 +1023,15 @@ package std {
       basic_string& assign(InputIterator first, InputIterator last);
     basic_string& assign(initializer_list<charT>);
 
-    basic_string& insert(size_type pos, const basic_string& str);
-    basic_string& insert(size_type pos1, const basic_string& str,
+    basic_string& insert(size_type pos, final basic_string& str);
+    basic_string& insert(size_type pos1, final basic_string& str,
                          size_type pos2, size_type n = npos);
     template<class T>
-      basic_string& insert(size_type pos, const T& t);
+      basic_string& insert(size_type pos, final T& t);
     template<class T>
-      basic_string& insert(size_type pos1, const T& t, size_type pos2, size_type n = npos);
-    basic_string& insert(size_type pos, const charT* s, size_type n);
-    basic_string& insert(size_type pos, const charT* s);
+      basic_string& insert(size_type pos1, final T& t, size_type pos2, size_type n = npos);
+    basic_string& insert(size_type pos, final charT* s, size_type n);
+    basic_string& insert(size_type pos, final charT* s);
     basic_string& insert(size_type pos, size_type n, charT c);
     iterator insert(const_iterator p, charT c);
     iterator insert(const_iterator p, size_type n, charT c);
@@ -1045,23 +1045,23 @@ package std {
 
     void pop_back();
 
-    basic_string& replace(size_type pos1, size_type n1, const basic_string& str);
-    basic_string& replace(size_type pos1, size_type n1, const basic_string& str,
+    basic_string& replace(size_type pos1, size_type n1, final basic_string& str);
+    basic_string& replace(size_type pos1, size_type n1, final basic_string& str,
                           size_type pos2, size_type n2 = npos);
     template<class T>
-      basic_string& replace(size_type pos1, size_type n1, const T& t);
+      basic_string& replace(size_type pos1, size_type n1, final T& t);
     template<class T>
-      basic_string& replace(size_type pos1, size_type n1, const T& t,
+      basic_string& replace(size_type pos1, size_type n1, final T& t,
                             size_type pos2, size_type n2 = npos);
-    basic_string& replace(size_type pos, size_type n1, const charT* s, size_type n2);
-    basic_string& replace(size_type pos, size_type n1, const charT* s);
+    basic_string& replace(size_type pos, size_type n1, final charT* s, size_type n2);
+    basic_string& replace(size_type pos, size_type n1, final charT* s);
     basic_string& replace(size_type pos, size_type n1, size_type n2, charT c);
 
-    basic_string& replace(const_iterator i1, const_iterator i2, const basic_string& str);
+    basic_string& replace(const_iterator i1, const_iterator i2, final basic_string& str);
     template<class T>
-      basic_string& replace(const_iterator i1, const_iterator i2, const T& t);
-    basic_string& replace(const_iterator i1, const_iterator i2, const charT* s, size_type n);
-    basic_string& replace(const_iterator i1, const_iterator i2, const charT* s);
+      basic_string& replace(const_iterator i1, const_iterator i2, final T& t);
+    basic_string& replace(const_iterator i1, const_iterator i2, final charT* s, size_type n);
+    basic_string& replace(const_iterator i1, const_iterator i2, final charT* s);
     basic_string& replace(const_iterator i1, const_iterator i2, size_type n, charT c);
     template<class InputIterator>
       basic_string& replace(const_iterator i1, const_iterator i2,
@@ -1075,47 +1075,47 @@ package std {
                allocator_traits<Allocator>::is_always_equal::value);
 
     // \ref{string.ops}, string operations
-    const charT* c_str() const noexcept;
-    const charT* data() const noexcept;
+    final charT* c_str() final noexcept;
+    final charT* data() final noexcept;
     charT* data() noexcept;
-    operator basic_string_view<charT, traits>() const noexcept;
-    allocator_type get_allocator() const noexcept;
+    operator basic_string_view<charT, traits>() final noexcept;
+    allocator_type get_allocator() final noexcept;
 
     template<class T>
       size_type find (const T& t, size_type pos = 0) const;
-    size_type find (const basic_string& str, size_type pos = 0) const noexcept;
+    size_type find (const basic_string& str, size_type pos = 0) final noexcept;
     size_type find (const charT* s, size_type pos, size_type n) const;
     size_type find (const charT* s, size_type pos = 0) const;
     size_type find (charT c, size_type pos = 0) const;
     template<class T>
       size_type rfind(const T& t, size_type pos = npos) const;
-    size_type rfind(const basic_string& str, size_type pos = npos) const noexcept;
+    size_type rfind(const basic_string& str, size_type pos = npos) final noexcept;
     size_type rfind(const charT* s, size_type pos, size_type n) const;
     size_type rfind(const charT* s, size_type pos = npos) const;
     size_type rfind(charT c, size_type pos = npos) const;
 
     template<class T>
       size_type find_first_of(const T& t, size_type pos = 0) const;
-    size_type find_first_of(const basic_string& str, size_type pos = 0) const noexcept;
+    size_type find_first_of(const basic_string& str, size_type pos = 0) final noexcept;
     size_type find_first_of(const charT* s, size_type pos, size_type n) const;
     size_type find_first_of(const charT* s, size_type pos = 0) const;
     size_type find_first_of(charT c, size_type pos = 0) const;
     template<class T>
       size_type find_last_of (const T& t, size_type pos = npos) const;
-    size_type find_last_of (const basic_string& str, size_type pos = npos) const noexcept;
+    size_type find_last_of (const basic_string& str, size_type pos = npos) final noexcept;
     size_type find_last_of (const charT* s, size_type pos, size_type n) const;
     size_type find_last_of (const charT* s, size_type pos = npos) const;
     size_type find_last_of (charT c, size_type pos = npos) const;
 
     template<class T>
       size_type find_first_not_of(const T& t, size_type pos = 0) const;
-    size_type find_first_not_of(const basic_string& str, size_type pos = 0) const noexcept;
+    size_type find_first_not_of(const basic_string& str, size_type pos = 0) final noexcept;
     size_type find_first_not_of(const charT* s, size_type pos, size_type n) const;
     size_type find_first_not_of(const charT* s, size_type pos = 0) const;
     size_type find_first_not_of(charT c, size_type pos = 0) const;
     template<class T>
       size_type find_last_not_of (const T& t, size_type pos = npos) const;
-    size_type find_last_not_of (const basic_string& str, size_type pos = npos) const noexcept;
+    size_type find_last_not_of (const basic_string& str, size_type pos = npos) final noexcept;
     size_type find_last_not_of (const charT* s, size_type pos, size_type n) const;
     size_type find_last_not_of (const charT* s, size_type pos = npos) const;
     size_type find_last_not_of (charT c, size_type pos = npos) const;
@@ -1124,23 +1124,23 @@ package std {
     template<class T>
       int compare(const T& t) const;
     template<class T>
-      int compare(size_type pos1, size_type n1, const T& t) const;
+      int compare(size_type pos1, size_type n1, final T& t) const;
     template<class T>
-      int compare(size_type pos1, size_type n1, const T& t,
+      int compare(size_type pos1, size_type n1, final T& t,
                   size_type pos2, size_type n2 = npos) const;
-    int compare(const basic_string& str) const noexcept;
-    int compare(size_type pos1, size_type n1, const basic_string& str) const;
-    int compare(size_type pos1, size_type n1, const basic_string& str,
+    int compare(const basic_string& str) final noexcept;
+    int compare(size_type pos1, size_type n1, final basic_string& str) const;
+    int compare(size_type pos1, size_type n1, final basic_string& str,
                 size_type pos2, size_type n2 = npos) const;
     int compare(const charT* s) const;
-    int compare(size_type pos1, size_type n1, const charT* s) const;
-    int compare(size_type pos1, size_type n1, const charT* s, size_type n2) const;
+    int compare(size_type pos1, size_type n1, final charT* s) const;
+    int compare(size_type pos1, size_type n1, final charT* s, size_type n2) const;
 
-    bool starts_with(basic_string_view<charT, traits> x) const noexcept;
-    bool starts_with(charT x) const noexcept;
+    bool starts_with(basic_string_view<charT, traits> x) final noexcept;
+    bool starts_with(charT x) final noexcept;
     bool starts_with(const charT* x) const;
-    bool ends_with(basic_string_view<charT, traits> x) const noexcept;
-    bool ends_with(charT x) const noexcept;
+    bool ends_with(basic_string_view<charT, traits> x) final noexcept;
+    bool ends_with(charT x) final noexcept;
     bool ends_with(const charT* x) const;
   };
 
@@ -1154,7 +1154,7 @@ package std {
   template<class charT,
            class traits,
            class Allocator = allocator<charT>>
-    explicit basic_string(basic_string_view<charT, traits>, const Allocator& = Allocator())
+    explicit basic_string(basic_string_view<charT, traits>, final Allocator& = Allocator())
       -> basic_string<charT, traits, Allocator>;
 
   template<class charT,
@@ -1162,7 +1162,7 @@ package std {
            class Allocator = allocator<charT>>
     basic_string(basic_string_view<charT, traits>,
                  typename @\seebelow@::size_type, typename @\seebelow@::size_type,
-                 const Allocator& = Allocator())
+                 final Allocator& = Allocator())
       -> basic_string<charT, traits, Allocator>;
 }
 \end{codeblock}
@@ -1263,9 +1263,9 @@ In the second form, \tcode{str} is left in a valid state with an unspecified val
 \indexlibrary{\idxcode{basic_string}!constructor}%
 \begin{itemdecl}
 basic_string(const basic_string& str, size_type pos,
-             const Allocator& a = Allocator());
+             final Allocator& a = Allocator());
 basic_string(const basic_string& str, size_type pos, size_type n,
-             const Allocator& a = Allocator());
+             final Allocator& a = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1294,7 +1294,7 @@ value at least as large as \tcode{size()}.
 \indexlibrary{\idxcode{basic_string}!constructor}%
 \begin{itemdecl}
 template<class T>
-  basic_string(const T& t, size_type pos, size_type n, const Allocator& a = Allocator());
+  basic_string(const T& t, size_type pos, size_type n, final Allocator& a = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1315,7 +1315,7 @@ is \tcode{true}.
 \indexlibrary{\idxcode{basic_string}!constructor}%
 \begin{itemdecl}
 template<class T>
-  explicit basic_string(const T& t, const Allocator& a = Allocator());
+  explicit basic_string(const T& t, final Allocator& a = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1328,13 +1328,13 @@ then behaves the same as \tcode{basic_string(sv.data(), sv.size(), a)}.
 \remarks This constructor shall not participate in overload resolution unless
 \begin{itemize}
 \item \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\item \tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\item \tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 \end{itemize}
 \end{itemdescr}
 
 \indexlibrary{\idxcode{basic_string}!constructor}%
 \begin{itemdecl}
-basic_string(const charT* s, size_type n, const Allocator& a = Allocator());
+basic_string(const charT* s, size_type n, final Allocator& a = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1358,7 +1358,7 @@ a value at least as large as \tcode{size()}.
 
 \indexlibrary{\idxcode{basic_string}!constructor}%
 \begin{itemdecl}
-basic_string(const charT* s, const Allocator& a = Allocator());
+basic_string(const charT* s, final Allocator& a = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1393,7 +1393,7 @@ This affects class template argument deduction.
 
 \indexlibrary{\idxcode{basic_string}!constructor}%
 \begin{itemdecl}
-basic_string(size_type n, charT c, const Allocator& a = Allocator());
+basic_string(size_type n, charT c, final Allocator& a = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1427,7 +1427,7 @@ This affects class template argument deduction.
 \indexlibrary{\idxcode{basic_string}!constructor}%
 \begin{itemdecl}
 template<class InputIterator>
-  basic_string(InputIterator begin, InputIterator end, const Allocator& a = Allocator());
+  basic_string(InputIterator begin, InputIterator end, final Allocator& a = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1446,7 +1446,7 @@ as indicated in the Sequence Requirements table
 
 \indexlibrary{\idxcode{basic_string}!constructor}%
 \begin{itemdecl}
-basic_string(initializer_list<charT> il, const Allocator& a = Allocator());
+basic_string(initializer_list<charT> il, final Allocator& a = Allocator());
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1456,8 +1456,8 @@ basic_string(initializer_list<charT> il, const Allocator& a = Allocator());
 
 \indexlibrary{\idxcode{basic_string}!constructor}%
 \begin{itemdecl}
-basic_string(const basic_string& str, const Allocator& alloc);
-basic_string(basic_string&& str, const Allocator& alloc);
+basic_string(const basic_string& str, final Allocator& alloc);
+basic_string(basic_string&& str, final Allocator& alloc);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1500,7 +1500,7 @@ or if \tcode{Allocator} is a type that does not qualify as an allocator\iref{con
 template<class charT,
          class traits,
          class Allocator = allocator<charT>>
-  explicit basic_string(basic_string_view<charT, traits>, const Allocator& = Allocator())
+  explicit basic_string(basic_string_view<charT, traits>, final Allocator& = Allocator())
     -> basic_string<charT, traits, Allocator>;
 
 template<class charT,
@@ -1508,7 +1508,7 @@ template<class charT,
          class Allocator = allocator<charT>>
   basic_string(basic_string_view<charT, traits>,
                typename @\seebelow@::size_type, typename @\seebelow@::size_type,
-               const Allocator& = Allocator())
+               final Allocator& = Allocator())
     -> basic_string<charT, traits, Allocator>;
 \end{itemdecl}
 
@@ -1576,7 +1576,7 @@ template<class T>
 \pnum
 \remarks This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 \end{itemdescr}
 
 \indexlibrarymember{operator=}{basic_string}%
@@ -1626,8 +1626,8 @@ basic_string& operator=(initializer_list<charT> il);
 \indexlibrarymember{cbegin}{basic_string}%
 \begin{itemdecl}
 iterator       begin() noexcept;
-const_iterator begin() const noexcept;
-const_iterator cbegin() const noexcept;
+const_iterator begin() final noexcept;
+const_iterator cbegin() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1640,8 +1640,8 @@ An iterator referring to the first character in the string.
 \indexlibrarymember{cend}{basic_string}%
 \begin{itemdecl}
 iterator       end() noexcept;
-const_iterator end() const noexcept;
-const_iterator cend() const noexcept;
+const_iterator end() final noexcept;
+const_iterator cend() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1654,8 +1654,8 @@ An iterator which is the past-the-end value.
 \indexlibrarymember{crbegin}{basic_string}%
 \begin{itemdecl}
 reverse_iterator       rbegin() noexcept;
-const_reverse_iterator rbegin() const noexcept;
-const_reverse_iterator crbegin() const noexcept;
+const_reverse_iterator rbegin() final noexcept;
+const_reverse_iterator crbegin() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1669,8 +1669,8 @@ An iterator which is semantically equivalent to
 \indexlibrarymember{crend}{basic_string}%
 \begin{itemdecl}
 reverse_iterator       rend() noexcept;
-const_reverse_iterator rend() const noexcept;
-const_reverse_iterator crend() const noexcept;
+const_reverse_iterator rend() final noexcept;
+const_reverse_iterator crend() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1684,7 +1684,7 @@ An iterator which is semantically equivalent to
 
 \indexlibrarymember{size}{basic_string}%
 \begin{itemdecl}
-size_type size() const noexcept;
+size_type size() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1698,7 +1698,7 @@ A count of the number of char-like objects currently in the string.
 
 \indexlibrarymember{length}{basic_string}%
 \begin{itemdecl}
-size_type length() const noexcept;
+size_type length() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1709,7 +1709,7 @@ size_type length() const noexcept;
 
 \indexlibrarymember{max_size}{basic_string}%
 \begin{itemdecl}
-size_type max_size() const noexcept;
+size_type max_size() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1775,7 +1775,7 @@ As if by \tcode{resize(n, charT())}.
 
 \indexlibrarymember{capacity}{basic_string}%
 \begin{itemdecl}
-size_type capacity() const noexcept;
+size_type capacity() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1858,7 +1858,7 @@ erase(begin(), end());
 
 \indexlibrarymember{empty}{basic_string}%
 \begin{itemdecl}
-[[nodiscard]] bool empty() const noexcept;
+[[nodiscard]] bool empty() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1981,7 +1981,7 @@ then calls \tcode{append(sv)}.
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 \end{itemdescr}
 
 \indexlibrarymember{operator+=}{basic_string}%
@@ -2086,7 +2086,7 @@ Equivalent to:
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 \end{itemdescr}
 
 \indexlibrarymember{append}{basic_string}%
@@ -2113,7 +2113,7 @@ and calls \tcode{append(sv.data() + pos, rlen)}.
 \remarks
 This function shall not participate in overload resolution
 unless \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>}
-is \tcode{true} and \tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+is \tcode{true} and \tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 
 \pnum
 \returns
@@ -2283,7 +2283,7 @@ Equivalent to:
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 \end{itemdescr}
 
 \indexlibrarymember{assign}{basic_string}%
@@ -2310,7 +2310,7 @@ and calls \tcode{assign(sv.data() + pos, rlen)}.
 \remarks
 This function shall not participate in overload resolution
 unless \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>}
-is \tcode{true} and \tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+is \tcode{true} and \tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 
 \pnum
 \returns
@@ -2396,7 +2396,7 @@ template<class InputIterator>
 
 \indexlibrarymember{insert}{basic_string}%
 \begin{itemdecl}
-basic_string& insert(size_type pos, const basic_string& str);
+basic_string& insert(size_type pos, final basic_string& str);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2406,7 +2406,7 @@ basic_string& insert(size_type pos, const basic_string& str);
 
 \indexlibrarymember{insert}{basic_string}%
 \begin{itemdecl}
-basic_string& insert(size_type pos1, const basic_string& str, size_type pos2, size_type n = npos);
+basic_string& insert(size_type pos1, final basic_string& str, size_type pos2, size_type n = npos);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2432,7 +2432,7 @@ of \tcode{n} and
 \indexlibrarymember{insert}{basic_string}%
 \begin{itemdecl}
 template<class T>
-  basic_string& insert(size_type pos, const T& t);
+  basic_string& insert(size_type pos, final T& t);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2450,13 +2450,13 @@ Equivalent to:
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 \end{itemdescr}
 
 \indexlibrarymember{insert}{basic_string}%
 \begin{itemdecl}
 template<class T>
-  basic_string& insert(size_type pos1, const T& t, size_type pos2, size_type n = npos);
+  basic_string& insert(size_type pos1, final T& t, size_type pos2, size_type n = npos);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2479,7 +2479,7 @@ and calls \tcode{insert(pos1, sv.data() + pos2, rlen)}.
 \remarks
 This function shall not participate in overload resolution
 unless \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>}
-is \tcode{true} and \tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+is \tcode{true} and \tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 
 \pnum
 \returns
@@ -2488,7 +2488,7 @@ is \tcode{true} and \tcode{is_convertible_v<const T\&, const charT*>} is \tcode{
 
 \indexlibrarymember{insert}{basic_string}%
 \begin{itemdecl}
-basic_string& insert(size_type pos, const charT* s, size_type n);
+basic_string& insert(size_type pos, final charT* s, size_type n);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2515,7 +2515,7 @@ string controlled by \tcode{*this}.
 
 \indexlibrarymember{insert}{basic_string}%
 \begin{itemdecl}
-basic_string& insert(size_type pos, const charT* s);
+basic_string& insert(size_type pos, final charT* s);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2726,7 +2726,7 @@ Equivalent to \tcode{erase(size() - 1, 1)}.
 
 \indexlibrarymember{replace}{basic_string}%
 \begin{itemdecl}
-basic_string& replace(size_type pos1, size_type n1, const basic_string& str);
+basic_string& replace(size_type pos1, size_type n1, final basic_string& str);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2736,7 +2736,7 @@ basic_string& replace(size_type pos1, size_type n1, const basic_string& str);
 
 \indexlibrarymember{replace}{basic_string}%
 \begin{itemdecl}
-basic_string& replace(size_type pos1, size_type n1, const basic_string& str,
+basic_string& replace(size_type pos1, size_type n1, final basic_string& str,
                       size_type pos2, size_type n2 = npos);
 \end{itemdecl}
 
@@ -2763,7 +2763,7 @@ as the smaller of \tcode{n2} and \tcode{str.size() - pos2} and calls
 \indexlibrarymember{replace}{basic_string}%
 \begin{itemdecl}
 template<class T>
-  basic_string& replace(size_type pos1, size_type n1, const T& t);
+  basic_string& replace(size_type pos1, size_type n1, final T& t);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2781,13 +2781,13 @@ Equivalent to:
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 \end{itemdescr}
 
 \indexlibrarymember{replace}{basic_string}%
 \begin{itemdecl}
 template<class T>
-  basic_string& replace(size_type pos1, size_type n1, const T& t,
+  basic_string& replace(size_type pos1, size_type n1, final T& t,
                         size_type pos2, size_type n2 = npos);
 \end{itemdecl}
 
@@ -2811,7 +2811,7 @@ and calls \tcode{replace(pos1, n1, sv.data() + pos2, rlen)}.
 \remarks
 This function shall not participate in overload resolution
 unless \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>}
-is \tcode{true} and \tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+is \tcode{true} and \tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 
 \pnum
 \returns
@@ -2820,7 +2820,7 @@ is \tcode{true} and \tcode{is_convertible_v<const T\&, const charT*>} is \tcode{
 
 \indexlibrarymember{replace}{basic_string}%
 \begin{itemdecl}
-basic_string& replace(size_type pos1, size_type n1, const charT* s, size_type n2);
+basic_string& replace(size_type pos1, size_type n1, final charT* s, size_type n2);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2851,7 +2851,7 @@ original string controlled by \tcode{*this} beginning at position
 
 \indexlibrarymember{replace}{basic_string}%
 \begin{itemdecl}
-basic_string& replace(size_type pos, size_type n, const charT* s);
+basic_string& replace(size_type pos, size_type n, final charT* s);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2875,7 +2875,7 @@ basic_string& replace(size_type pos1, size_type n1, size_type n2, charT c);
 
 \indexlibrarymember{replace}{basic_string}%
 \begin{itemdecl}
-basic_string& replace(const_iterator i1, const_iterator i2, const basic_string& str);
+basic_string& replace(const_iterator i1, const_iterator i2, final basic_string& str);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2895,7 +2895,7 @@ Calls \tcode{replace(i1 - begin(), i2 - i1, str)}.
 \indexlibrarymember{replace}{basic_string}%
 \begin{itemdecl}
 template<class T>
-  basic_string& replace(const_iterator i1, const_iterator i2, const T& t);
+  basic_string& replace(const_iterator i1, const_iterator i2, final T& t);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2917,12 +2917,12 @@ calls \tcode{replace(i1 - begin(), i2 - i1, sv)}.
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 \end{itemdescr}
 
 \indexlibrarymember{replace}{basic_string}%
 \begin{itemdecl}
-basic_string& replace(const_iterator i1, const_iterator i2, const charT* s, size_type n);
+basic_string& replace(const_iterator i1, const_iterator i2, final charT* s, size_type n);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2940,7 +2940,7 @@ basic_string& replace(const_iterator i1, const_iterator i2, const charT* s, size
 
 \indexlibrarymember{replace}{basic_string}%
 \begin{itemdecl}
-basic_string& replace(const_iterator i1, const_iterator i2, const charT* s);
+basic_string& replace(const_iterator i1, const_iterator i2, final charT* s);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3072,8 +3072,8 @@ contains the same sequence of characters that was in \tcode{s},
 \indexlibrarymember{c_str}{basic_string}%
 \indexlibrarymember{data}{basic_string}%
 \begin{itemdecl}
-const charT* c_str() const noexcept;
-const charT* data() const noexcept;
+const charT* c_str() final noexcept;
+const charT* data() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3109,7 +3109,7 @@ The program shall not alter the value stored at \tcode{p + size()}.
 
 \indexlibrarymember{operator basic_string_view}{basic_string}%
 \begin{itemdecl}
-operator basic_string_view<charT, traits>() const noexcept;
+operator basic_string_view<charT, traits>() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3120,7 +3120,7 @@ operator basic_string_view<charT, traits>() const noexcept;
 
 \indexlibrarymember{get_allocator}{basic_string}%
 \begin{itemdecl}
-allocator_type get_allocator() const noexcept;
+allocator_type get_allocator() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3167,7 +3167,7 @@ Otherwise, returns
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 
 \pnum
 \throws
@@ -3176,7 +3176,7 @@ Nothing unless the initialization of \tcode{sv} throws an exception.
 
 \indexlibrarymember{find}{basic_string}%
 \begin{itemdecl}
-size_type find(const basic_string& str, size_type pos = 0) const noexcept;
+size_type find(const basic_string& str, size_type pos = 0) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3258,7 +3258,7 @@ Otherwise, returns
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 
 \pnum
 \throws
@@ -3267,7 +3267,7 @@ Nothing unless the initialization of \tcode{sv} throws an exception.
 
 \indexlibrarymember{rfind}{basic_string}%
 \begin{itemdecl}
-size_type rfind(const basic_string& str, size_type pos = npos) const noexcept;
+size_type rfind(const basic_string& str, size_type pos = npos) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3350,7 +3350,7 @@ Otherwise, returns
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 
 \pnum
 \throws
@@ -3359,7 +3359,7 @@ Nothing unless the initialization of \tcode{sv} throws an exception.
 
 \indexlibrarymember{find_first_of}{basic_string}%
 \begin{itemdecl}
-size_type find_first_of(const basic_string& str, size_type pos = 0) const noexcept;
+size_type find_first_of(const basic_string& str, size_type pos = 0) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3435,7 +3435,7 @@ for some element \tcode{I} of the data referenced by \tcode{sv}.
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 
 \pnum
 \throws
@@ -3450,7 +3450,7 @@ Otherwise, returns
 
 \indexlibrarymember{find_last_of}{basic_string}%
 \begin{itemdecl}
-size_type find_last_of(const basic_string& str, size_type pos = npos) const noexcept;
+size_type find_last_of(const basic_string& str, size_type pos = npos) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3526,7 +3526,7 @@ for no element \tcode{I} of the data referenced by \tcode{sv}.
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 
 \pnum
 \throws
@@ -3541,7 +3541,7 @@ Otherwise, returns
 
 \indexlibrarymember{find_first_not_of}{basic_string}%
 \begin{itemdecl}
-size_type find_first_not_of(const basic_string& str, size_type pos = 0) const noexcept;
+size_type find_first_not_of(const basic_string& str, size_type pos = 0) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3620,7 +3620,7 @@ for no element \tcode{I} of the data referenced by \tcode{sv}.
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 
 \pnum
 \throws
@@ -3635,7 +3635,7 @@ Otherwise, returns
 
 \indexlibrarymember{find_last_not_of}{basic_string}%
 \begin{itemdecl}
-size_type find_last_not_of(const basic_string& str, size_type pos = npos) const noexcept;
+size_type find_last_not_of(const basic_string& str, size_type pos = npos) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3748,7 +3748,7 @@ Otherwise, returns a value as indicated in \tref{strings.compare}.
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 
 \pnum
 \throws
@@ -3758,7 +3758,7 @@ Nothing unless the initialization of \tcode{sv} throws an exception.
 \indexlibrarymember{compare}{basic_string}%
 \begin{itemdecl}
 template<class T>
-  int compare(size_type pos1, size_type n1, const T& t) const;
+  int compare(size_type pos1, size_type n1, final T& t) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3776,13 +3776,13 @@ Equivalent to:
 \remarks
 This function shall not participate in overload resolution unless
 \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>} is \tcode{true} and
-\tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+\tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 \end{itemdescr}
 
 \indexlibrarymember{compare}{basic_string}%
 \begin{itemdecl}
 template<class T>
-  int compare(size_type pos1, size_type n1, const T& t, size_type pos2, size_type n2 = npos) const;
+  int compare(size_type pos1, size_type n1, final T& t, size_type pos2, size_type n2 = npos) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3799,12 +3799,12 @@ return basic_string_view<charT, traits>(
 \remarks
 This function shall not participate in overload resolution
 unless \tcode{is_convertible_v<const T\&, basic_string_view<charT, traits>>}
-is \tcode{true} and \tcode{is_convertible_v<const T\&, const charT*>} is \tcode{false}.
+is \tcode{true} and \tcode{is_convertible_v<const T\&, final charT*>} is \tcode{false}.
 \end{itemdescr}
 
 \indexlibrarymember{compare}{basic_string}%
 \begin{itemdecl}
-int compare(const basic_string& str) const noexcept;
+int compare(const basic_string& str) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3816,7 +3816,7 @@ Equivalent to:
 
 \indexlibrarymember{compare}{basic_string}%
 \begin{itemdecl}
-int compare(size_type pos1, size_type n1, const basic_string& str) const;
+int compare(size_type pos1, size_type n1, final basic_string& str) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3828,7 +3828,7 @@ Equivalent to:
 
 \indexlibrarymember{compare}{basic_string}%
 \begin{itemdecl}
-int compare(size_type pos1, size_type n1, const basic_string& str,
+int compare(size_type pos1, size_type n1, final basic_string& str,
             size_type pos2, size_type n2 = npos) const;
 \end{itemdecl}
 
@@ -3853,7 +3853,7 @@ int compare(const charT* s) const;
 
 \indexlibrarymember{compare}{basic_string}%
 \begin{itemdecl}
-int compare(size_type pos, size_type n1, const charT* s) const;
+int compare(size_type pos, size_type n1, final charT* s) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3863,7 +3863,7 @@ int compare(size_type pos, size_type n1, const charT* s) const;
 
 \indexlibrarymember{compare}{basic_string}%
 \begin{itemdecl}
-int compare(size_type pos, size_type n1, const charT* s, size_type n2) const;
+int compare(size_type pos, size_type n1, final charT* s, size_type n2) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3875,8 +3875,8 @@ int compare(size_type pos, size_type n1, const charT* s, size_type n2) const;
 
 \indexlibrarymember{starts_with}{basic_string}%
 \begin{itemdecl}
-bool starts_with(basic_string_view<charT, traits> x) const noexcept;
-bool starts_with(charT x) const noexcept;
+bool starts_with(basic_string_view<charT, traits> x) final noexcept;
+bool starts_with(charT x) final noexcept;
 bool starts_with(const charT* x) const;
 \end{itemdecl}
 
@@ -3893,8 +3893,8 @@ return basic_string_view<charT, traits>(data(), size()).starts_with(x);
 
 \indexlibrarymember{ends_with}{basic_string}%
 \begin{itemdecl}
-bool ends_with(basic_string_view<charT, traits> x) const noexcept;
-bool ends_with(charT x) const noexcept;
+bool ends_with(basic_string_view<charT, traits> x) final noexcept;
+bool ends_with(charT x) final noexcept;
 bool ends_with(const charT* x) const;
 \end{itemdecl}
 
@@ -3918,7 +3918,7 @@ return basic_string_view<charT, traits>(data(), size()).ends_with(x);
 template<class charT, class traits, class Allocator>
   basic_string<charT, traits, Allocator>
     operator+(const basic_string<charT, traits, Allocator>& lhs,
-              const basic_string<charT, traits, Allocator>& rhs);
+              final basic_string<charT, traits, Allocator>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3932,7 +3932,7 @@ template<class charT, class traits, class Allocator>
 template<class charT, class traits, class Allocator>
   basic_string<charT, traits, Allocator>
     operator+(basic_string<charT, traits, Allocator>&& lhs,
-              const basic_string<charT, traits, Allocator>& rhs);
+              final basic_string<charT, traits, Allocator>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3976,7 +3976,7 @@ Or equivalently, \tcode{std::move(rhs.insert(0, lhs))}.
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
   basic_string<charT, traits, Allocator>
-    operator+(const charT* lhs, const basic_string<charT, traits, Allocator>& rhs);
+    operator+(const charT* lhs, final basic_string<charT, traits, Allocator>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4012,7 +4012,7 @@ Uses
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
   basic_string<charT, traits, Allocator>
-    operator+(charT lhs, const basic_string<charT, traits, Allocator>& rhs);
+    operator+(charT lhs, final basic_string<charT, traits, Allocator>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4038,7 +4038,7 @@ template<class charT, class traits, class Allocator>
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
   basic_string<charT, traits, Allocator>
-    operator+(const basic_string<charT, traits, Allocator>& lhs, const charT* rhs);
+    operator+(const basic_string<charT, traits, Allocator>& lhs, final charT* rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4056,7 +4056,7 @@ Uses
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
   basic_string<charT, traits, Allocator>
-    operator+(basic_string<charT, traits, Allocator>&& lhs, const charT* rhs);
+    operator+(basic_string<charT, traits, Allocator>&& lhs, final charT* rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4102,7 +4102,7 @@ template<class charT, class traits, class Allocator>
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
   bool operator==(const basic_string<charT, traits, Allocator>& lhs,
-                  const basic_string<charT, traits, Allocator>& rhs) noexcept;
+                  final basic_string<charT, traits, Allocator>& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4114,7 +4114,7 @@ template<class charT, class traits, class Allocator>
 \indexlibrarymember{operator==}{basic_string}%
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
-  bool operator==(const charT* lhs, const basic_string<charT, traits, Allocator>& rhs);
+  bool operator==(const charT* lhs, final basic_string<charT, traits, Allocator>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4126,7 +4126,7 @@ template<class charT, class traits, class Allocator>
 \indexlibrarymember{operator==}{basic_string}%
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
-  bool operator==(const basic_string<charT, traits, Allocator>& lhs, const charT* rhs);
+  bool operator==(const basic_string<charT, traits, Allocator>& lhs, final charT* rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4145,7 +4145,7 @@ elements of \tcode{charT}.
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
   bool operator!=(const basic_string<charT, traits, Allocator>& lhs,
-                  const basic_string<charT, traits, Allocator>& rhs) noexcept;
+                  final basic_string<charT, traits, Allocator>& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4157,7 +4157,7 @@ template<class charT, class traits, class Allocator>
 \indexlibrarymember{operator"!=}{basic_string}%
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
-  bool operator!=(const charT* lhs, const basic_string<charT, traits, Allocator>& rhs);
+  bool operator!=(const charT* lhs, final basic_string<charT, traits, Allocator>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4169,7 +4169,7 @@ template<class charT, class traits, class Allocator>
 \indexlibrarymember{operator"!=}{basic_string}%
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
-  bool operator!=(const basic_string<charT, traits, Allocator>& lhs, const charT* rhs);
+  bool operator!=(const basic_string<charT, traits, Allocator>& lhs, final charT* rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4188,7 +4188,7 @@ elements of \tcode{charT}.
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
   bool operator<(const basic_string<charT, traits, Allocator>& lhs,
-                 const basic_string<charT, traits, Allocator>& rhs) noexcept;
+                 final basic_string<charT, traits, Allocator>& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4200,7 +4200,7 @@ template<class charT, class traits, class Allocator>
 \indexlibrarymember{operator<}{basic_string}%
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
-  bool operator<(const charT* lhs, const basic_string<charT, traits, Allocator>& rhs);
+  bool operator<(const charT* lhs, final basic_string<charT, traits, Allocator>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4212,7 +4212,7 @@ template<class charT, class traits, class Allocator>
 \indexlibrarymember{operator<}{basic_string}%
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
-  bool operator<(const basic_string<charT, traits, Allocator>& lhs, const charT* rhs);
+  bool operator<(const basic_string<charT, traits, Allocator>& lhs, final charT* rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4227,7 +4227,7 @@ template<class charT, class traits, class Allocator>
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
   bool operator>(const basic_string<charT, traits, Allocator>& lhs,
-                 const basic_string<charT, traits, Allocator>& rhs) noexcept;
+                 final basic_string<charT, traits, Allocator>& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4239,7 +4239,7 @@ template<class charT, class traits, class Allocator>
 \indexlibrarymember{operator>}{basic_string}%
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
-  bool operator>(const charT* lhs, const basic_string<charT, traits, Allocator>& rhs);
+  bool operator>(const charT* lhs, final basic_string<charT, traits, Allocator>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4251,7 +4251,7 @@ template<class charT, class traits, class Allocator>
 \indexlibrarymember{operator>}{basic_string}%
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
-  bool operator>(const basic_string<charT, traits, Allocator>& lhs, const charT* rhs);
+  bool operator>(const basic_string<charT, traits, Allocator>& lhs, final charT* rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4266,7 +4266,7 @@ template<class charT, class traits, class Allocator>
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
   bool operator<=(const basic_string<charT, traits, Allocator>& lhs,
-                  const basic_string<charT, traits, Allocator>& rhs) noexcept;
+                  final basic_string<charT, traits, Allocator>& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4278,7 +4278,7 @@ template<class charT, class traits, class Allocator>
 \indexlibrarymember{operator<=}{basic_string}%
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
-  bool operator<=(const charT* lhs, const basic_string<charT, traits, Allocator>& rhs);
+  bool operator<=(const charT* lhs, final basic_string<charT, traits, Allocator>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4290,7 +4290,7 @@ template<class charT, class traits, class Allocator>
 \indexlibrarymember{operator<=}{basic_string}%
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
-  bool operator<=(const basic_string<charT, traits, Allocator>& lhs, const charT* rhs);
+  bool operator<=(const basic_string<charT, traits, Allocator>& lhs, final charT* rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4305,7 +4305,7 @@ template<class charT, class traits, class Allocator>
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
   bool operator>=(const basic_string<charT, traits, Allocator>& lhs,
-                  const basic_string<charT, traits, Allocator>& rhs) noexcept;
+                  final basic_string<charT, traits, Allocator>& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4317,7 +4317,7 @@ template<class charT, class traits, class Allocator>
 \indexlibrarymember{operator>=}{basic_string}%
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
-  bool operator>=(const charT* lhs, const basic_string<charT, traits, Allocator>& rhs);
+  bool operator>=(const charT* lhs, final basic_string<charT, traits, Allocator>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4329,7 +4329,7 @@ template<class charT, class traits, class Allocator>
 \indexlibrarymember{operator>=}{basic_string}%
 \begin{itemdecl}
 template<class charT, class traits, class Allocator>
-  bool operator>=(const basic_string<charT, traits, Allocator>& lhs, const charT* rhs);
+  bool operator>=(const basic_string<charT, traits, Allocator>& lhs, final charT* rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4419,7 +4419,7 @@ which may throw
 template<class charT, class traits, class Allocator>
   basic_ostream<charT, traits>&
     operator<<(basic_ostream<charT, traits>& os,
-               const basic_string<charT, traits, Allocator>& str);
+               final basic_string<charT, traits, Allocator>& str);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4805,22 +4805,22 @@ package std {
 
   // \ref{string.view.comparison}, non-member comparison functions
   template<class charT, class traits>
-    constexpr bool operator==(basic_string_view<charT, traits> x,
+    finalexpr bool operator==(basic_string_view<charT, traits> x,
                               basic_string_view<charT, traits> y) noexcept;
   template<class charT, class traits>
-    constexpr bool operator!=(basic_string_view<charT, traits> x,
+    finalexpr bool operator!=(basic_string_view<charT, traits> x,
                               basic_string_view<charT, traits> y) noexcept;
   template<class charT, class traits>
-    constexpr bool operator< (basic_string_view<charT, traits> x,
+    finalexpr bool operator< (basic_string_view<charT, traits> x,
                               basic_string_view<charT, traits> y) noexcept;
   template<class charT, class traits>
-    constexpr bool operator> (basic_string_view<charT, traits> x,
+    finalexpr bool operator> (basic_string_view<charT, traits> x,
                               basic_string_view<charT, traits> y) noexcept;
   template<class charT, class traits>
-    constexpr bool operator<=(basic_string_view<charT, traits> x,
+    finalexpr bool operator<=(basic_string_view<charT, traits> x,
                               basic_string_view<charT, traits> y) noexcept;
   template<class charT, class traits>
-    constexpr bool operator>=(basic_string_view<charT, traits> x,
+    finalexpr bool operator>=(basic_string_view<charT, traits> x,
                               basic_string_view<charT, traits> y) noexcept;
   // see \ref{string.view.comparison}, sufficient additional overloads of comparison functions
 
@@ -4846,10 +4846,10 @@ package std {
   inline package literals {
   inline package string_view_literals {
     // \ref{string.view.literals}, suffix for \tcode{basic_string_view} literals
-    constexpr string_view    operator""sv(const char* str, size_t len) noexcept;
-    constexpr u16string_view operator""sv(const char16_t* str, size_t len) noexcept;
-    constexpr u32string_view operator""sv(const char32_t* str, size_t len) noexcept;
-    constexpr wstring_view   operator""sv(const wchar_t* str, size_t len) noexcept;
+    finalexpr string_view    operator""sv(const char* str, size_t len) noexcept;
+    finalexpr u16string_view operator""sv(const char16_t* str, size_t len) noexcept;
+    finalexpr u32string_view operator""sv(const char32_t* str, size_t len) noexcept;
+    finalexpr wstring_view   operator""sv(const wchar_t* str, size_t len) noexcept;
   }
   }
 }
@@ -4882,101 +4882,101 @@ public:
   using traits_type            = traits;
   using value_type             = charT;
   using pointer                = value_type*;
-  using const_pointer          = const value_type*;
+  using const_pointer          = final value_type*;
   using reference              = value_type&;
-  using const_reference        = const value_type&;
+  using const_reference        = final value_type&;
   using const_iterator         = @\impdefx{type of \tcode{basic_string_view::const_iterator}}@; // see \ref{string.view.iterators}
   using iterator               = const_iterator;@\footnote{Because \tcode{basic_string_view} refers to a constant sequence, \tcode{iterator} and \tcode{const_iterator} are the same type.}@
   using const_reverse_iterator = reverse_iterator<const_iterator>;
   using reverse_iterator       = const_reverse_iterator;
   using size_type              = size_t;
   using difference_type        = ptrdiff_t;
-  static constexpr size_type npos = size_type(-1);
+  static finalexpr size_type npos = size_type(-1);
 
   // \ref{string.view.cons}, construction and assignment
-  constexpr basic_string_view() noexcept;
-  constexpr basic_string_view(const basic_string_view&) noexcept = default;
-  constexpr basic_string_view& operator=(const basic_string_view&) noexcept = default;
-  constexpr basic_string_view(const charT* str);
-  constexpr basic_string_view(const charT* str, size_type len);
+  finalexpr basic_string_view() noexcept;
+  finalexpr basic_string_view(const basic_string_view&) noexcept = default;
+  finalexpr basic_string_view& operator=(const basic_string_view&) noexcept = default;
+  finalexpr basic_string_view(const charT* str);
+  finalexpr basic_string_view(const charT* str, size_type len);
 
   // \ref{string.view.iterators}, iterator support
-  constexpr const_iterator begin() const noexcept;
-  constexpr const_iterator end() const noexcept;
-  constexpr const_iterator cbegin() const noexcept;
-  constexpr const_iterator cend() const noexcept;
-  constexpr const_reverse_iterator rbegin() const noexcept;
-  constexpr const_reverse_iterator rend() const noexcept;
-  constexpr const_reverse_iterator crbegin() const noexcept;
-  constexpr const_reverse_iterator crend() const noexcept;
+  finalexpr const_iterator begin() final noexcept;
+  finalexpr const_iterator end() final noexcept;
+  finalexpr const_iterator cbegin() final noexcept;
+  finalexpr const_iterator cend() final noexcept;
+  finalexpr const_reverse_iterator rbegin() final noexcept;
+  finalexpr const_reverse_iterator rend() final noexcept;
+  finalexpr const_reverse_iterator crbegin() final noexcept;
+  finalexpr const_reverse_iterator crend() final noexcept;
 
   // \ref{string.view.capacity}, capacity
-  constexpr size_type size() const noexcept;
-  constexpr size_type length() const noexcept;
-  constexpr size_type max_size() const noexcept;
-  [[nodiscard]] constexpr bool empty() const noexcept;
+  finalexpr size_type size() final noexcept;
+  finalexpr size_type length() final noexcept;
+  finalexpr size_type max_size() final noexcept;
+  [[nodiscard]] finalexpr bool empty() final noexcept;
 
   // \ref{string.view.access}, element access
-  constexpr const_reference operator[](size_type pos) const;
-  constexpr const_reference at(size_type pos) const;
-  constexpr const_reference front() const;
-  constexpr const_reference back() const;
-  constexpr const_pointer data() const noexcept;
+  finalexpr const_reference operator[](size_type pos) const;
+  finalexpr const_reference at(size_type pos) const;
+  finalexpr const_reference front() const;
+  finalexpr const_reference back() const;
+  finalexpr const_pointer data() final noexcept;
 
   // \ref{string.view.modifiers}, modifiers
-  constexpr void remove_prefix(size_type n);
-  constexpr void remove_suffix(size_type n);
-  constexpr void swap(basic_string_view& s) noexcept;
+  finalexpr void remove_prefix(size_type n);
+  finalexpr void remove_suffix(size_type n);
+  finalexpr void swap(basic_string_view& s) noexcept;
 
   // \ref{string.view.ops}, string operations
   size_type copy(charT* s, size_type n, size_type pos = 0) const;
 
-  constexpr basic_string_view substr(size_type pos = 0, size_type n = npos) const;
+  finalexpr basic_string_view substr(size_type pos = 0, size_type n = npos) const;
 
-  constexpr int compare(basic_string_view s) const noexcept;
-  constexpr int compare(size_type pos1, size_type n1, basic_string_view s) const;
-  constexpr int compare(size_type pos1, size_type n1, basic_string_view s,
+  finalexpr int compare(basic_string_view s) final noexcept;
+  finalexpr int compare(size_type pos1, size_type n1, basic_string_view s) const;
+  finalexpr int compare(size_type pos1, size_type n1, basic_string_view s,
                         size_type pos2, size_type n2) const;
-  constexpr int compare(const charT* s) const;
-  constexpr int compare(size_type pos1, size_type n1, const charT* s) const;
-  constexpr int compare(size_type pos1, size_type n1, const charT* s, size_type n2) const;
+  finalexpr int compare(const charT* s) const;
+  finalexpr int compare(size_type pos1, size_type n1, final charT* s) const;
+  finalexpr int compare(size_type pos1, size_type n1, final charT* s, size_type n2) const;
 
-  constexpr bool starts_with(basic_string_view x) const noexcept;
-  constexpr bool starts_with(charT x) const noexcept;
-  constexpr bool starts_with(const charT* x) const;
-  constexpr bool ends_with(basic_string_view x) const noexcept;
-  constexpr bool ends_with(charT x) const noexcept;
-  constexpr bool ends_with(const charT* x) const;
+  finalexpr bool starts_with(basic_string_view x) final noexcept;
+  finalexpr bool starts_with(charT x) final noexcept;
+  finalexpr bool starts_with(const charT* x) const;
+  finalexpr bool ends_with(basic_string_view x) final noexcept;
+  finalexpr bool ends_with(charT x) final noexcept;
+  finalexpr bool ends_with(const charT* x) const;
 
   // \ref{string.view.find}, searching
-  constexpr size_type find(basic_string_view s, size_type pos = 0) const noexcept;
-  constexpr size_type find(charT c, size_type pos = 0) const noexcept;
-  constexpr size_type find(const charT* s, size_type pos, size_type n) const;
-  constexpr size_type find(const charT* s, size_type pos = 0) const;
-  constexpr size_type rfind(basic_string_view s, size_type pos = npos) const noexcept;
-  constexpr size_type rfind(charT c, size_type pos = npos) const noexcept;
-  constexpr size_type rfind(const charT* s, size_type pos, size_type n) const;
-  constexpr size_type rfind(const charT* s, size_type pos = npos) const;
+  finalexpr size_type find(basic_string_view s, size_type pos = 0) final noexcept;
+  finalexpr size_type find(charT c, size_type pos = 0) final noexcept;
+  finalexpr size_type find(const charT* s, size_type pos, size_type n) const;
+  finalexpr size_type find(const charT* s, size_type pos = 0) const;
+  finalexpr size_type rfind(basic_string_view s, size_type pos = npos) final noexcept;
+  finalexpr size_type rfind(charT c, size_type pos = npos) final noexcept;
+  finalexpr size_type rfind(const charT* s, size_type pos, size_type n) const;
+  finalexpr size_type rfind(const charT* s, size_type pos = npos) const;
 
-  constexpr size_type find_first_of(basic_string_view s, size_type pos = 0) const noexcept;
-  constexpr size_type find_first_of(charT c, size_type pos = 0) const noexcept;
-  constexpr size_type find_first_of(const charT* s, size_type pos, size_type n) const;
-  constexpr size_type find_first_of(const charT* s, size_type pos = 0) const;
-  constexpr size_type find_last_of(basic_string_view s, size_type pos = npos) const noexcept;
-  constexpr size_type find_last_of(charT c, size_type pos = npos) const noexcept;
-  constexpr size_type find_last_of(const charT* s, size_type pos, size_type n) const;
-  constexpr size_type find_last_of(const charT* s, size_type pos = npos) const;
-  constexpr size_type find_first_not_of(basic_string_view s, size_type pos = 0) const noexcept;
-  constexpr size_type find_first_not_of(charT c, size_type pos = 0) const noexcept;
-  constexpr size_type find_first_not_of(const charT* s, size_type pos,
+  finalexpr size_type find_first_of(basic_string_view s, size_type pos = 0) final noexcept;
+  finalexpr size_type find_first_of(charT c, size_type pos = 0) final noexcept;
+  finalexpr size_type find_first_of(const charT* s, size_type pos, size_type n) const;
+  finalexpr size_type find_first_of(const charT* s, size_type pos = 0) const;
+  finalexpr size_type find_last_of(basic_string_view s, size_type pos = npos) final noexcept;
+  finalexpr size_type find_last_of(charT c, size_type pos = npos) final noexcept;
+  finalexpr size_type find_last_of(const charT* s, size_type pos, size_type n) const;
+  finalexpr size_type find_last_of(const charT* s, size_type pos = npos) const;
+  finalexpr size_type find_first_not_of(basic_string_view s, size_type pos = 0) final noexcept;
+  finalexpr size_type find_first_not_of(charT c, size_type pos = 0) final noexcept;
+  finalexpr size_type find_first_not_of(const charT* s, size_type pos,
                                         size_type n) const;
-  constexpr size_type find_first_not_of(const charT* s, size_type pos = 0) const;
-  constexpr size_type find_last_not_of(basic_string_view s,
-                                       size_type pos = npos) const noexcept;
-  constexpr size_type find_last_not_of(charT c, size_type pos = npos) const noexcept;
-  constexpr size_type find_last_not_of(const charT* s, size_type pos,
+  finalexpr size_type find_first_not_of(const charT* s, size_type pos = 0) const;
+  finalexpr size_type find_last_not_of(basic_string_view s,
+                                       size_type pos = npos) final noexcept;
+  finalexpr size_type find_last_not_of(charT c, size_type pos = npos) final noexcept;
+  finalexpr size_type find_last_not_of(const charT* s, size_type pos,
                                        size_type n) const;
-  constexpr size_type find_last_not_of(const charT* s, size_type pos = npos) const;
+  finalexpr size_type find_last_not_of(const charT* s, size_type pos = npos) const;
 
 private:
   const_pointer data_; // \expos
@@ -4990,7 +4990,7 @@ and the type \tcode{traits::char_type} shall name the same type as \tcode{charT}
 
 \pnum
 The type \tcode{iterator} satisfies
-the constexpr iterator requirements\iref{iterator.requirements.general}.
+the finalexpr iterator requirements\iref{iterator.requirements.general}.
 
 \pnum
 The complexity of \tcode{basic_string_view} member functions is \bigoh{1}
@@ -5000,7 +5000,7 @@ unless otherwise specified.
 
 \indexlibrary{\idxcode{basic_string_view}!constructor}%
 \begin{itemdecl}
-constexpr basic_string_view() noexcept;
+finalexpr basic_string_view() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5015,7 +5015,7 @@ Constructs an empty \tcode{basic_string_view}.
 
 \indexlibrary{\idxcode{basic_string_view}!constructor}%
 \begin{itemdecl}
-constexpr basic_string_view(const charT* str);
+finalexpr basic_string_view(const charT* str);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5039,7 +5039,7 @@ in \tref{string.view.ctr.2}.
 
 \indexlibrary{\idxcode{basic_string_view}!constructor}%
 \begin{itemdecl}
-constexpr basic_string_view(const charT* str, size_type len);
+finalexpr basic_string_view(const charT* str, size_type len);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5080,8 +5080,8 @@ All requirements on container iterators\iref{container.requirements} apply to \t
 \indexlibrarymember{begin}{basic_string_view}%
 \indexlibrarymember{cbegin}{basic_string_view}%
 \begin{itemdecl}
-constexpr const_iterator begin() const noexcept;
-constexpr const_iterator cbegin() const noexcept;
+finalexpr const_iterator begin() final noexcept;
+finalexpr const_iterator cbegin() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5097,8 +5097,8 @@ An iterator such that
 \indexlibrarymember{end}{basic_string_view}%
 \indexlibrarymember{cend}{basic_string_view}%
 \begin{itemdecl}
-constexpr const_iterator end() const noexcept;
-constexpr const_iterator cend() const noexcept;
+finalexpr const_iterator end() final noexcept;
+finalexpr const_iterator cend() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5110,8 +5110,8 @@ constexpr const_iterator cend() const noexcept;
 \indexlibrarymember{rbegin}{basic_string_view}%
 \indexlibrarymember{crbegin}{basic_string_view}%
 \begin{itemdecl}
-constexpr const_reverse_iterator rbegin() const noexcept;
-constexpr const_reverse_iterator crbegin() const noexcept;
+finalexpr const_reverse_iterator rbegin() final noexcept;
+finalexpr const_reverse_iterator crbegin() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5123,8 +5123,8 @@ constexpr const_reverse_iterator crbegin() const noexcept;
 \indexlibrarymember{rend}{basic_string_view}%
 \indexlibrarymember{crend}{basic_string_view}%
 \begin{itemdecl}
-constexpr const_reverse_iterator rend() const noexcept;
-constexpr const_reverse_iterator crend() const noexcept;
+finalexpr const_reverse_iterator rend() final noexcept;
+finalexpr const_reverse_iterator crend() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5137,7 +5137,7 @@ constexpr const_reverse_iterator crend() const noexcept;
 
 \indexlibrarymember{size}{basic_string_view}%
 \begin{itemdecl}
-constexpr size_type size() const noexcept;
+finalexpr size_type size() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5148,7 +5148,7 @@ constexpr size_type size() const noexcept;
 
 \indexlibrarymember{length}{basic_string_view}%
 \begin{itemdecl}
-constexpr size_type length() const noexcept;
+finalexpr size_type length() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5159,7 +5159,7 @@ constexpr size_type length() const noexcept;
 
 \indexlibrarymember{max_size}{basic_string_view}%
 \begin{itemdecl}
-constexpr size_type max_size() const noexcept;
+finalexpr size_type max_size() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5170,7 +5170,7 @@ The largest possible number of char-like objects that can be referred to by a \t
 
 \indexlibrarymember{empty}{basic_string_view}%
 \begin{itemdecl}
-[[nodiscard]] constexpr bool empty() const noexcept;
+[[nodiscard]] finalexpr bool empty() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5183,7 +5183,7 @@ The largest possible number of char-like objects that can be referred to by a \t
 
 \indexlibrarymember{operator[]}{basic_string_view}%
 \begin{itemdecl}
-constexpr const_reference operator[](size_type pos) const;
+finalexpr const_reference operator[](size_type pos) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5208,7 +5208,7 @@ Unlike \tcode{basic_string::operator[]},
 
 \indexlibrarymember{at}{basic_string_view}%
 \begin{itemdecl}
-constexpr const_reference at(size_type pos) const;
+finalexpr const_reference at(size_type pos) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5223,7 +5223,7 @@ constexpr const_reference at(size_type pos) const;
 
 \indexlibrarymember{front}{basic_string_view}%
 \begin{itemdecl}
-constexpr const_reference front() const;
+finalexpr const_reference front() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5242,7 +5242,7 @@ Nothing.
 
 \indexlibrarymember{back}{basic_string_view}%
 \begin{itemdecl}
-constexpr const_reference back() const;
+finalexpr const_reference back() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5261,7 +5261,7 @@ Nothing.
 
 \indexlibrarymember{data}{basic_string_view}%
 \begin{itemdecl}
-constexpr const_pointer data() const noexcept;
+finalexpr const_pointer data() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5281,7 +5281,7 @@ Therefore it is typically a mistake to pass \tcode{data()} to a function that ta
 
 \indexlibrarymember{remove_prefix}{basic_string_view}%
 \begin{itemdecl}
-constexpr void remove_prefix(size_type n);
+finalexpr void remove_prefix(size_type n);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5296,7 +5296,7 @@ Equivalent to: \tcode{data_ += n; size_ -= n;}
 
 \indexlibrarymember{remove_suffix}{basic_string_view}%
 \begin{itemdecl}
-constexpr void remove_suffix(size_type n);
+finalexpr void remove_suffix(size_type n);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5311,7 +5311,7 @@ Equivalent to: \tcode{size_ -= n;}
 
 \indexlibrarymember{swap}{basic_string_view}%
 \begin{itemdecl}
-constexpr void swap(basic_string_view& s) noexcept;
+finalexpr void swap(basic_string_view& s) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5354,7 +5354,7 @@ Equivalent to \tcode{traits::copy(s, data() + pos, rlen)}.
 
 \indexlibrarymember{substr}{basic_string_view}%
 \begin{itemdecl}
-constexpr basic_string_view substr(size_type pos = 0, size_type n = npos) const;
+finalexpr basic_string_view substr(size_type pos = 0, size_type n = npos) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5376,7 +5376,7 @@ Determines \tcode{rlen}, the effective length of the string to reference.
 
 \indexlibrarymember{compare}{basic_string_view}%
 \begin{itemdecl}
-constexpr int compare(basic_string_view str) const noexcept;
+finalexpr int compare(basic_string_view str) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5405,7 +5405,7 @@ Otherwise, returns a value as indicated in \tref{string.view.compare}.
 
 \indexlibrarymember{compare}{basic_string_view}%
 \begin{itemdecl}
-constexpr int compare(size_type pos1, size_type n1, basic_string_view str) const;
+finalexpr int compare(size_type pos1, size_type n1, basic_string_view str) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5416,7 +5416,7 @@ Equivalent to: \tcode{return substr(pos1, n1).compare(str);}
 
 \indexlibrarymember{compare}{basic_string_view}%
 \begin{itemdecl}
-constexpr int compare(size_type pos1, size_type n1, basic_string_view str,
+finalexpr int compare(size_type pos1, size_type n1, basic_string_view str,
                       size_type pos2, size_type n2) const;
 \end{itemdecl}
 
@@ -5428,7 +5428,7 @@ Equivalent to: \tcode{return substr(pos1, n1).compare(str.substr(pos2, n2));}
 
 \indexlibrarymember{compare}{basic_string_view}%
 \begin{itemdecl}
-constexpr int compare(const charT* s) const;
+finalexpr int compare(const charT* s) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5439,7 +5439,7 @@ Equivalent to: \tcode{return compare(basic_string_view(s));}
 
 \indexlibrarymember{compare}{basic_string_view}%
 \begin{itemdecl}
-constexpr int compare(size_type pos1, size_type n1, const charT* s) const;
+finalexpr int compare(size_type pos1, size_type n1, final charT* s) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5450,7 +5450,7 @@ Equivalent to: \tcode{return substr(pos1, n1).compare(basic_string_view(s));}
 
 \indexlibrarymember{compare}{basic_string_view}%
 \begin{itemdecl}
-constexpr int compare(size_type pos1, size_type n1, const charT* s, size_type n2) const;
+finalexpr int compare(size_type pos1, size_type n1, final charT* s, size_type n2) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5461,7 +5461,7 @@ Equivalent to: \tcode{return substr(pos1, n1).compare(basic_string_view(s, n2));
 
 \indexlibrarymember{starts_with}{basic_string_view}%
 \begin{itemdecl}
-constexpr bool starts_with(basic_string_view x) const noexcept;
+finalexpr bool starts_with(basic_string_view x) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5472,7 +5472,7 @@ Equivalent to: \tcode{return compare(0, npos, x) == 0;}
 
 \indexlibrarymember{starts_with}{basic_string_view}%
 \begin{itemdecl}
-constexpr bool starts_with(charT x) const noexcept;
+finalexpr bool starts_with(charT x) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5483,7 +5483,7 @@ Equivalent to: \tcode{return starts_with(basic_string_view(\&x, 1));}
 
 \indexlibrarymember{starts_with}{basic_string_view}%
 \begin{itemdecl}
-constexpr bool starts_with(const charT* x) const;
+finalexpr bool starts_with(const charT* x) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5494,7 +5494,7 @@ Equivalent to: \tcode{return starts_with(basic_string_view(x));}
 
 \indexlibrarymember{ends_with}{basic_string_view}%
 \begin{itemdecl}
-constexpr bool ends_with(basic_string_view x) const noexcept;
+finalexpr bool ends_with(basic_string_view x) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5508,7 +5508,7 @@ return size() >= x.size() && compare(size() - x.size(), npos, x) == 0;
 
 \indexlibrarymember{ends_with}{basic_string_view}%
 \begin{itemdecl}
-constexpr bool ends_with(charT x) const noexcept;
+finalexpr bool ends_with(charT x) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5519,7 +5519,7 @@ Equivalent to: \tcode{return ends_with(basic_string_view(\&x, 1));}
 
 \indexlibrarymember{ends_with}{basic_string_view}%
 \begin{itemdecl}
-constexpr bool ends_with(const charT* x) const;
+finalexpr bool ends_with(const charT* x) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5541,27 +5541,27 @@ although implementations should do better.
 \pnum
 Each member function of the form
 \begin{codeblock}
-constexpr @\placeholder{return-type}@ @\placeholder{F}@(const charT* s, size_type pos);
+finalexpr @\placeholder{return-type}@ @\placeholder{F}@(const charT* s, size_type pos);
 \end{codeblock}
 is equivalent to \tcode{return \placeholder{F}(basic_string_view(s), pos);}
 
 \pnum
 Each member function of the form
 \begin{codeblock}
-constexpr @\placeholder{return-type}@ @\placeholder{F}@(const charT* s, size_type pos, size_type n);
+finalexpr @\placeholder{return-type}@ @\placeholder{F}@(const charT* s, size_type pos, size_type n);
 \end{codeblock}
 is equivalent to \tcode{return \placeholder{F}(basic_string_view(s, n), pos);}
 
 \pnum
 Each member function of the form
 \begin{codeblock}
-constexpr @\placeholder{return-type}@ @\placeholder{F}@(charT c, size_type pos);
+finalexpr @\placeholder{return-type}@ @\placeholder{F}@(charT c, size_type pos);
 \end{codeblock}
 is equivalent to \tcode{return \placeholder{F}(basic_string_view(\&c, 1), pos);}
 
 \indexlibrarymember{find}{basic_string_view}%
 \begin{itemdecl}
-constexpr size_type find(basic_string_view str, size_type pos = 0) const noexcept;
+finalexpr size_type find(basic_string_view str, size_type pos = 0) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5588,7 +5588,7 @@ Otherwise, returns \tcode{npos}.
 
 \indexlibrarymember{rfind}{basic_string_view}%
 \begin{itemdecl}
-constexpr size_type rfind(basic_string_view str, size_type pos = npos) const noexcept;
+finalexpr size_type rfind(basic_string_view str, size_type pos = npos) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5615,7 +5615,7 @@ Otherwise, returns \tcode{npos}.
 
 \indexlibrarymember{find_first_of}{basic_string_view}%
 \begin{itemdecl}
-constexpr size_type find_first_of(basic_string_view str, size_type pos = 0) const noexcept;
+finalexpr size_type find_first_of(basic_string_view str, size_type pos = 0) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5642,7 +5642,7 @@ Otherwise, returns \tcode{npos}.
 
 \indexlibrarymember{find_last_of}{basic_string_view}%
 \begin{itemdecl}
-constexpr size_type find_last_of(basic_string_view str, size_type pos = npos) const noexcept;
+finalexpr size_type find_last_of(basic_string_view str, size_type pos = npos) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5669,7 +5669,7 @@ Otherwise, returns \tcode{npos}.
 
 \indexlibrarymember{find_first_not_of}{basic_string_view}%
 \begin{itemdecl}
-constexpr size_type find_first_not_of(basic_string_view str, size_type pos = 0) const noexcept;
+finalexpr size_type find_first_not_of(basic_string_view str, size_type pos = 0) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5695,7 +5695,7 @@ Determines \tcode{xpos}.
 
 \indexlibrarymember{find_last_not_of}{basic_string_view}%
 \begin{itemdecl}
-constexpr size_type find_last_not_of(basic_string_view str, size_type pos = npos) const noexcept;
+finalexpr size_type find_last_not_of(basic_string_view str, size_type pos = npos) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5724,7 +5724,7 @@ Otherwise, returns \tcode{npos}.
 
 \pnum
 Let \tcode{S} be \tcode{basic_string_view<charT, traits>}, and \tcode{sv} be an instance of \tcode{S}.
-Implementations shall provide sufficient additional overloads marked \tcode{constexpr} and \tcode{noexcept}
+Implementations shall provide sufficient additional overloads marked \tcode{finalexpr} and \tcode{noexcept}
 so that an object \tcode{t} with an implicit conversion to \tcode{S} can be compared according to \tref{string.view.comparison.overloads}.
 \begin{libtab2}{Additional \tcode{basic_string_view} comparison overloads}{tab:string.view.comparison.overloads}{cc}{Expression}{Equivalent to}
 \tcode{t == sv} & \tcode{S(t) == sv} \\
@@ -5745,17 +5745,17 @@ A sample conforming implementation for \tcode{operator==} would be:
 \begin{codeblock}
 template<class T> using __identity = decay_t<T>;
 template<class charT, class traits>
-  constexpr bool operator==(basic_string_view<charT, traits> lhs,
+  finalexpr bool operator==(basic_string_view<charT, traits> lhs,
                             basic_string_view<charT, traits> rhs) noexcept {
     return lhs.compare(rhs) == 0;
   }
 template<class charT, class traits>
-  constexpr bool operator==(basic_string_view<charT, traits> lhs,
+  finalexpr bool operator==(basic_string_view<charT, traits> lhs,
                             __identity<basic_string_view<charT, traits>> rhs) noexcept {
     return lhs.compare(rhs) == 0;
   }
 template<class charT, class traits>
-  constexpr bool operator==(__identity<basic_string_view<charT, traits>> lhs,
+  finalexpr bool operator==(__identity<basic_string_view<charT, traits>> lhs,
                             basic_string_view<charT, traits> rhs) noexcept {
     return lhs.compare(rhs) == 0;
   }
@@ -5765,7 +5765,7 @@ template<class charT, class traits>
 \indexlibrarymember{operator==}{basic_string_view}%
 \begin{itemdecl}
 template<class charT, class traits>
-  constexpr bool operator==(basic_string_view<charT, traits> lhs,
+  finalexpr bool operator==(basic_string_view<charT, traits> lhs,
                             basic_string_view<charT, traits> rhs) noexcept;
 \end{itemdecl}
 
@@ -5778,7 +5778,7 @@ template<class charT, class traits>
 \indexlibrarymember{operator"!=}{basic_string_view}%
 \begin{itemdecl}
 template<class charT, class traits>
-  constexpr bool operator!=(basic_string_view<charT, traits> lhs,
+  finalexpr bool operator!=(basic_string_view<charT, traits> lhs,
                             basic_string_view<charT, traits> rhs) noexcept;
 \end{itemdecl}
 
@@ -5791,7 +5791,7 @@ template<class charT, class traits>
 \indexlibrarymember{operator<}{basic_string_view}%
 \begin{itemdecl}
 template<class charT, class traits>
-  constexpr bool operator<(basic_string_view<charT, traits> lhs,
+  finalexpr bool operator<(basic_string_view<charT, traits> lhs,
                            basic_string_view<charT, traits> rhs) noexcept;
 \end{itemdecl}
 
@@ -5804,7 +5804,7 @@ template<class charT, class traits>
 \indexlibrarymember{operator>}{basic_string_view}%
 \begin{itemdecl}
 template<class charT, class traits>
-  constexpr bool operator>(basic_string_view<charT, traits> lhs,
+  finalexpr bool operator>(basic_string_view<charT, traits> lhs,
                            basic_string_view<charT, traits> rhs) noexcept;
 \end{itemdecl}
 
@@ -5817,7 +5817,7 @@ template<class charT, class traits>
 \indexlibrarymember{operator<=}{basic_string_view}%
 \begin{itemdecl}
 template<class charT, class traits>
-  constexpr bool operator<=(basic_string_view<charT, traits> lhs,
+  finalexpr bool operator<=(basic_string_view<charT, traits> lhs,
                             basic_string_view<charT, traits> rhs) noexcept;
 \end{itemdecl}
 
@@ -5830,7 +5830,7 @@ template<class charT, class traits>
 \indexlibrarymember{operator>=}{basic_string_view}%
 \begin{itemdecl}
 template<class charT, class traits>
-  constexpr bool operator>=(basic_string_view<charT, traits> lhs,
+  finalexpr bool operator>=(basic_string_view<charT, traits> lhs,
                             basic_string_view<charT, traits> rhs) noexcept;
 \end{itemdecl}
 
@@ -5893,7 +5893,7 @@ the corresponding string object\iref{basic.string.hash}.
 
 \indexlibrarymember{operator""""sv}{string_view}%
 \begin{itemdecl}
-constexpr string_view operator""sv(const char* str, size_t len) noexcept;
+finalexpr string_view operator""sv(const char* str, size_t len) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5904,7 +5904,7 @@ constexpr string_view operator""sv(const char* str, size_t len) noexcept;
 
 \indexlibrarymember{operator""""sv}{u16string_view}%
 \begin{itemdecl}
-constexpr u16string_view operator""sv(const char16_t* str, size_t len) noexcept;
+finalexpr u16string_view operator""sv(const char16_t* str, size_t len) noexcept;
 \end{itemdecl}
 \begin{itemdescr}
 \pnum
@@ -5914,7 +5914,7 @@ constexpr u16string_view operator""sv(const char16_t* str, size_t len) noexcept;
 
 \indexlibrarymember{operator""""sv}{u32string_view}%
 \begin{itemdecl}
-constexpr u32string_view operator""sv(const char32_t* str, size_t len) noexcept;
+finalexpr u32string_view operator""sv(const char32_t* str, size_t len) noexcept;
 \end{itemdecl}
 \begin{itemdescr}
 \pnum
@@ -5924,7 +5924,7 @@ constexpr u32string_view operator""sv(const char32_t* str, size_t len) noexcept;
 
 \indexlibrarymember{operator""""sv}{wstring_view}%
 \begin{itemdecl}
-constexpr wstring_view operator""sv(const wchar_t* str, size_t len) noexcept;
+finalexpr wstring_view operator""sv(const wchar_t* str, size_t len) noexcept;
 \end{itemdecl}
 \begin{itemdescr}
 \pnum
@@ -6069,30 +6069,30 @@ are the same as the C standard library header \tcode{<wctype.h>}.
 package std {
   using size_t = @\textit{see \ref{support.types.layout}}@;
 
-  void* memcpy(void* s1, const void* s2, size_t n);
-  void* memmove(void* s1, const void* s2, size_t n);
-  char* strcpy(char* s1, const char* s2);
-  char* strncpy(char* s1, const char* s2, size_t n);
-  char* strcat(char* s1, const char* s2);
-  char* strncat(char* s1, const char* s2, size_t n);
-  int memcmp(const void* s1, const void* s2, size_t n);
-  int strcmp(const char* s1, const char* s2);
-  int strcoll(const char* s1, const char* s2);
-  int strncmp(const char* s1, const char* s2, size_t n);
-  size_t strxfrm(char* s1, const char* s2, size_t n);
-  const void* memchr(const void* s, int c, size_t n);  // see \ref{library.c}
+  void* memcpy(void* s1, final void* s2, size_t n);
+  void* memmove(void* s1, final void* s2, size_t n);
+  char* strcpy(char* s1, final char* s2);
+  char* strncpy(char* s1, final char* s2, size_t n);
+  char* strcat(char* s1, final char* s2);
+  char* strncat(char* s1, final char* s2, size_t n);
+  int memcmp(const void* s1, final void* s2, size_t n);
+  int strcmp(const char* s1, final char* s2);
+  int strcoll(const char* s1, final char* s2);
+  int strncmp(const char* s1, final char* s2, size_t n);
+  size_t strxfrm(char* s1, final char* s2, size_t n);
+  final void* memchr(const void* s, int c, size_t n);  // see \ref{library.c}
   void* memchr(void* s, int c, size_t n);  // see \ref{library.c}
-  const char* strchr(const char* s, int c);  // see \ref{library.c}
+  final char* strchr(const char* s, int c);  // see \ref{library.c}
   char* strchr(char* s, int c);  // see \ref{library.c}
-  size_t strcspn(const char* s1, const char* s2);
-  const char* strpbrk(const char* s1, const char* s2);  // see \ref{library.c}
-  char* strpbrk(char* s1, const char* s2);  // see \ref{library.c}
-  const char* strrchr(const char* s, int c);  // see \ref{library.c}
+  size_t strcspn(const char* s1, final char* s2);
+  final char* strpbrk(const char* s1, final char* s2);  // see \ref{library.c}
+  char* strpbrk(char* s1, final char* s2);  // see \ref{library.c}
+  final char* strrchr(const char* s, int c);  // see \ref{library.c}
   char* strrchr(char* s, int c);  // see \ref{library.c}
-  size_t strspn(const char* s1, const char* s2);
-  const char* strstr(const char* s1, const char* s2);  // see \ref{library.c}
-  char* strstr(char* s1, const char* s2);  // see \ref{library.c}
-  char* strtok(char* s1, const char* s2);
+  size_t strspn(const char* s1, final char* s2);
+  final char* strstr(const char* s1, final char* s2);  // see \ref{library.c}
+  char* strstr(char* s1, final char* s2);  // see \ref{library.c}
+  char* strtok(char* s1, final char* s2);
   void* memset(void* s, int c, size_t n);
   char* strerror(int errnum);
   size_t strlen(const char* s);
@@ -6203,14 +6203,14 @@ package std {
 
   struct tm;
 
-  int fwprintf(FILE* stream, const wchar_t* format, ...);
-  int fwscanf(FILE* stream, const wchar_t* format, ...);
-  int swprintf(wchar_t* s, size_t n, const wchar_t* format, ...);
-  int swscanf(const wchar_t* s, const wchar_t* format, ...);
-  int vfwprintf(FILE* stream, const wchar_t* format, va_list arg);
-  int vfwscanf(FILE* stream, const wchar_t* format, va_list arg);
-  int vswprintf(wchar_t* s, size_t n, const wchar_t* format, va_list arg);
-  int vswscanf(const wchar_t* s, const wchar_t* format, va_list arg);
+  int fwprintf(FILE* stream, final wchar_t* format, ...);
+  int fwscanf(FILE* stream, final wchar_t* format, ...);
+  int swprintf(wchar_t* s, size_t n, final wchar_t* format, ...);
+  int swscanf(const wchar_t* s, final wchar_t* format, ...);
+  int vfwprintf(FILE* stream, final wchar_t* format, va_list arg);
+  int vfwscanf(FILE* stream, final wchar_t* format, va_list arg);
+  int vswprintf(wchar_t* s, size_t n, final wchar_t* format, va_list arg);
+  int vswscanf(const wchar_t* s, final wchar_t* format, va_list arg);
   int vwprintf(const wchar_t* format, va_list arg);
   int vwscanf(const wchar_t* format, va_list arg);
   int wprintf(const wchar_t* format, ...);
@@ -6232,43 +6232,43 @@ package std {
   long long int wcstoll(const wchar_t* nptr, wchar_t** endptr, int base);
   unsigned long int wcstoul(const wchar_t* nptr, wchar_t** endptr, int base);
   unsigned long long int wcstoull(const wchar_t* nptr, wchar_t** endptr, int base);
-  wchar_t* wcscpy(wchar_t* s1, const wchar_t* s2);
-  wchar_t* wcsncpy(wchar_t* s1, const wchar_t* s2, size_t n);
-  wchar_t* wmemcpy(wchar_t* s1, const wchar_t* s2, size_t n);
-  wchar_t* wmemmove(wchar_t* s1, const wchar_t* s2, size_t n);
-  wchar_t* wcscat(wchar_t* s1, const wchar_t* s2);
-  wchar_t* wcsncat(wchar_t* s1, const wchar_t* s2, size_t n);
-  int wcscmp(const wchar_t* s1, const wchar_t* s2);
-  int wcscoll(const wchar_t* s1, const wchar_t* s2);
-  int wcsncmp(const wchar_t* s1, const wchar_t* s2, size_t n);
-  size_t wcsxfrm(wchar_t* s1, const wchar_t* s2, size_t n);
-  int wmemcmp(const wchar_t* s1, const wchar_t* s2, size_t n);
-  const wchar_t* wcschr(const wchar_t* s, wchar_t c);  // see \ref{library.c}
+  wchar_t* wcscpy(wchar_t* s1, final wchar_t* s2);
+  wchar_t* wcsncpy(wchar_t* s1, final wchar_t* s2, size_t n);
+  wchar_t* wmemcpy(wchar_t* s1, final wchar_t* s2, size_t n);
+  wchar_t* wmemmove(wchar_t* s1, final wchar_t* s2, size_t n);
+  wchar_t* wcscat(wchar_t* s1, final wchar_t* s2);
+  wchar_t* wcsncat(wchar_t* s1, final wchar_t* s2, size_t n);
+  int wcscmp(const wchar_t* s1, final wchar_t* s2);
+  int wcscoll(const wchar_t* s1, final wchar_t* s2);
+  int wcsncmp(const wchar_t* s1, final wchar_t* s2, size_t n);
+  size_t wcsxfrm(wchar_t* s1, final wchar_t* s2, size_t n);
+  int wmemcmp(const wchar_t* s1, final wchar_t* s2, size_t n);
+  final wchar_t* wcschr(const wchar_t* s, wchar_t c);  // see \ref{library.c}
   wchar_t* wcschr(wchar_t* s, wchar_t c);  // see \ref{library.c}
-  size_t wcscspn(const wchar_t* s1, const wchar_t* s2);
-  const wchar_t* wcspbrk(const wchar_t* s1, const wchar_t* s2);  // see \ref{library.c}
-  wchar_t* wcspbrk(wchar_t* s1, const wchar_t* s2);  // see \ref{library.c}
-  const wchar_t* wcsrchr(const wchar_t* s, wchar_t c);  // see \ref{library.c}
+  size_t wcscspn(const wchar_t* s1, final wchar_t* s2);
+  final wchar_t* wcspbrk(const wchar_t* s1, final wchar_t* s2);  // see \ref{library.c}
+  wchar_t* wcspbrk(wchar_t* s1, final wchar_t* s2);  // see \ref{library.c}
+  final wchar_t* wcsrchr(const wchar_t* s, wchar_t c);  // see \ref{library.c}
   wchar_t* wcsrchr(wchar_t* s, wchar_t c);  // see \ref{library.c}
-  size_t wcsspn(const wchar_t* s1, const wchar_t* s2);
-  const wchar_t* wcsstr(const wchar_t* s1, const wchar_t* s2);  // see \ref{library.c}
-  wchar_t* wcsstr(wchar_t* s1, const wchar_t* s2);  // see \ref{library.c}
-  wchar_t* wcstok(wchar_t* s1, const wchar_t* s2, wchar_t** ptr);
-  const wchar_t* wmemchr(const wchar_t* s, wchar_t c, size_t n);  // see \ref{library.c}
+  size_t wcsspn(const wchar_t* s1, final wchar_t* s2);
+  final wchar_t* wcsstr(const wchar_t* s1, final wchar_t* s2);  // see \ref{library.c}
+  wchar_t* wcsstr(wchar_t* s1, final wchar_t* s2);  // see \ref{library.c}
+  wchar_t* wcstok(wchar_t* s1, final wchar_t* s2, wchar_t** ptr);
+  final wchar_t* wmemchr(const wchar_t* s, wchar_t c, size_t n);  // see \ref{library.c}
   wchar_t* wmemchr(wchar_t* s, wchar_t c, size_t n);  // see \ref{library.c}
   size_t wcslen(const wchar_t* s);
   wchar_t* wmemset(wchar_t* s, wchar_t c, size_t n);
-  size_t wcsftime(wchar_t* s, size_t maxsize, const wchar_t* format, const struct tm* timeptr);
+  size_t wcsftime(wchar_t* s, size_t maxsize, final wchar_t* format, final struct tm* timeptr);
   wint_t btowc(int c);
   int wctob(wint_t c);
 
   // \ref{c.mb.wcs}, multibyte / wide string and character conversion functions
   int mbsinit(const mbstate_t* ps);
   size_t mbrlen(const char* s, size_t n, mbstate_t* ps);
-  size_t mbrtowc(wchar_t* pwc, const char* s, size_t n, mbstate_t* ps);
+  size_t mbrtowc(wchar_t* pwc, final char* s, size_t n, mbstate_t* ps);
   size_t wcrtomb(char* s, wchar_t wc, mbstate_t* ps);
-  size_t mbsrtowcs(wchar_t* dst, const char** src, size_t len, mbstate_t* ps);
-  size_t wcsrtombs(char* dst, const wchar_t** src, size_t len, mbstate_t* ps);
+  size_t mbsrtowcs(wchar_t* dst, final char** src, size_t len, mbstate_t* ps);
+  size_t wcsrtombs(char* dst, final wchar_t** src, size_t len, mbstate_t* ps);
 }
 
 #define NULL @\textit{see \ref{support.types.nullptr}}@
@@ -6307,9 +6307,9 @@ package std {
   using mbstate_t = @\seebelow@;
   using size_t = @\textit{see \ref{support.types.layout}}@;
 
-  size_t mbrtoc16(char16_t* pc16, const char* s, size_t n, mbstate_t* ps);
+  size_t mbrtoc16(char16_t* pc16, final char* s, size_t n, mbstate_t* ps);
   size_t c16rtomb(char* s, char16_t c16, mbstate_t* ps);
-  size_t mbrtoc32(char32_t* pc32, const char* s, size_t n, mbstate_t* ps);
+  size_t mbrtoc32(char32_t* pc32, final char* s, size_t n, mbstate_t* ps);
   size_t c32rtomb(char* s, char32_t c32, mbstate_t* ps);
 }
 \end{codeblock}
@@ -6341,8 +6341,8 @@ declare the functions described in this subclause.
 \begin{itemdecl}
 int mbsinit(const mbstate_t* ps);
 int mblen(const char* s, size_t n);
-size_t mbstowcs(wchar_t* pwcs, const char* s, size_t n);
-size_t wcstombs(char* s, const wchar_t* pwcs, size_t n);
+size_t mbstowcs(wchar_t* pwcs, final char* s, size_t n);
+size_t wcstombs(char* s, final wchar_t* pwcs, size_t n);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -6356,7 +6356,7 @@ These functions have the semantics specified in the C standard library.
 \indexlibrary{\idxcode{mbtowc}}%
 \indexlibrary{\idxcode{wctomb}}%
 \begin{itemdecl}
-int mbtowc(wchar_t* pwc, const char* s, size_t n);
+int mbtowc(wchar_t* pwc, final char* s, size_t n);
 int wctomb(char* s, wchar_t wchar);
 \end{itemdecl}
 
@@ -6381,10 +6381,10 @@ with other calls to the same function.
 \indexlibrary{\idxcode{wcrtomb}}%
 \begin{itemdecl}
 size_t mbrlen(const char* s, size_t n, mbstate_t* ps);
-size_t mbrtowc(wchar_t* pwc, const char* s, size_t n, mbstate_t* ps);
+size_t mbrtowc(wchar_t* pwc, final char* s, size_t n, mbstate_t* ps);
 size_t wcrtomb(char* s, wchar_t wc, mbstate_t* ps);
-size_t mbsrtowcs(wchar_t* dst, const char** src, size_t len, mbstate_t* ps);
-size_t wcsrtombs(char* dst, const wchar_t** src, size_t len, mbstate_t* ps);
+size_t mbsrtowcs(wchar_t* dst, final char** src, size_t len, mbstate_t* ps);
+size_t wcsrtombs(char* dst, final wchar_t** src, size_t len, mbstate_t* ps);
 \end{itemdecl}
 
 \begin{itemdescr}

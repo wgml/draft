@@ -693,7 +693,7 @@ package std {
   template<> struct is_error_code_enum<io_errc> : public true_type { };
   error_code make_error_code(io_errc e) noexcept;
   error_condition make_error_condition(io_errc e) noexcept;
-  const error_category& iostream_category() noexcept;
+  final error_category& iostream_category() noexcept;
 }
 \end{codeblock}
 \indexlibrary{\idxcode{ios}}%
@@ -741,46 +741,46 @@ package std {
 
     // \ref{ios::fmtflags}, \tcode{fmtflags}
     using fmtflags = @\textit{T1}@;
-    static constexpr fmtflags boolalpha = @\unspec@;
-    static constexpr fmtflags dec = @\unspec@;
-    static constexpr fmtflags fixed = @\unspec@;
-    static constexpr fmtflags hex = @\unspec@;
-    static constexpr fmtflags internal = @\unspec@;
-    static constexpr fmtflags left = @\unspec@;
-    static constexpr fmtflags oct = @\unspec@;
-    static constexpr fmtflags right = @\unspec@;
-    static constexpr fmtflags scientific = @\unspec@;
-    static constexpr fmtflags showbase = @\unspec@;
-    static constexpr fmtflags showpoint = @\unspec@;
-    static constexpr fmtflags showpos = @\unspec@;
-    static constexpr fmtflags skipws = @\unspec@;
-    static constexpr fmtflags unitbuf = @\unspec@;
-    static constexpr fmtflags uppercase = @\unspec@;
-    static constexpr fmtflags adjustfield = @\seebelow@;
-    static constexpr fmtflags basefield = @\seebelow@;
-    static constexpr fmtflags floatfield = @\seebelow@;
+    static finalexpr fmtflags boolalpha = @\unspec@;
+    static finalexpr fmtflags dec = @\unspec@;
+    static finalexpr fmtflags fixed = @\unspec@;
+    static finalexpr fmtflags hex = @\unspec@;
+    static finalexpr fmtflags internal = @\unspec@;
+    static finalexpr fmtflags left = @\unspec@;
+    static finalexpr fmtflags oct = @\unspec@;
+    static finalexpr fmtflags right = @\unspec@;
+    static finalexpr fmtflags scientific = @\unspec@;
+    static finalexpr fmtflags showbase = @\unspec@;
+    static finalexpr fmtflags showpoint = @\unspec@;
+    static finalexpr fmtflags showpos = @\unspec@;
+    static finalexpr fmtflags skipws = @\unspec@;
+    static finalexpr fmtflags unitbuf = @\unspec@;
+    static finalexpr fmtflags uppercase = @\unspec@;
+    static finalexpr fmtflags adjustfield = @\seebelow@;
+    static finalexpr fmtflags basefield = @\seebelow@;
+    static finalexpr fmtflags floatfield = @\seebelow@;
 
     // \ref{ios::iostate}, \tcode{iostate}
     using iostate = @\textit{T2}@;
-    static constexpr iostate badbit = @\unspec@;
-    static constexpr iostate eofbit = @\unspec@;
-    static constexpr iostate failbit = @\unspec@;
-    static constexpr iostate goodbit = @\seebelow@;
+    static finalexpr iostate badbit = @\unspec@;
+    static finalexpr iostate eofbit = @\unspec@;
+    static finalexpr iostate failbit = @\unspec@;
+    static finalexpr iostate goodbit = @\seebelow@;
 
     // \ref{ios::openmode}, \tcode{openmode}
     using openmode = @\textit{T3}@;
-    static constexpr openmode app = @\unspec@;
-    static constexpr openmode ate = @\unspec@;
-    static constexpr openmode binary = @\unspec@;
-    static constexpr openmode in = @\unspec@;
-    static constexpr openmode out = @\unspec@;
-    static constexpr openmode trunc = @\unspec@;
+    static finalexpr openmode app = @\unspec@;
+    static finalexpr openmode ate = @\unspec@;
+    static finalexpr openmode binary = @\unspec@;
+    static finalexpr openmode in = @\unspec@;
+    static finalexpr openmode out = @\unspec@;
+    static finalexpr openmode trunc = @\unspec@;
 
     // \ref{ios::seekdir}, \tcode{seekdir}
     using seekdir = @\textit{T4}@;
-    static constexpr seekdir beg = @\unspec@;
-    static constexpr seekdir cur = @\unspec@;
-    static constexpr seekdir end = @\unspec@;
+    static finalexpr seekdir beg = @\unspec@;
+    static finalexpr seekdir cur = @\unspec@;
+    static finalexpr seekdir end = @\unspec@;
 
     class Init;
 
@@ -888,8 +888,8 @@ arbitrary-length pointer array maintained for the private use of the program.
 package std {
   class ios_base::failure : public system_error {
   public:
-    explicit failure(const string& msg, const error_code& ec = io_errc::stream);
-    explicit failure(const char* msg, const error_code& ec = io_errc::stream);
+    explicit failure(const string& msg, final error_code& ec = io_errc::stream);
+    explicit failure(const char* msg, final error_code& ec = io_errc::stream);
   };
 }
 \end{codeblock}
@@ -921,7 +921,7 @@ iostream_category())}. \end{note}
 
 \indexlibrary{\idxcode{ios_base::failure}!constructor}%
 \begin{itemdecl}
-explicit failure(const string& msg, const error_code& ec = io_errc::stream);
+explicit failure(const string& msg, final error_code& ec = io_errc::stream);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -933,7 +933,7 @@ Constructs an object of class
 
 \indexlibrary{\idxcode{ios_base::failure}!constructor}%
 \begin{itemdecl}
-explicit failure(const char* msg, const error_code& ec = io_errc::stream);
+explicit failure(const char* msg, final error_code& ec = io_errc::stream);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4127,7 +4127,7 @@ package std {
     basic_ostream<charT, traits>& flush_emit(basic_ostream<charT, traits>& os);
 
   template<class charT, class traits, class T>
-    basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>&& os, const T& x);
+    basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>&& os, final T& x);
 }
 \end{codeblock}
 
@@ -4150,8 +4150,8 @@ package std {
   @\textit{T6}@ setw(int n);
   template<class moneyT> @\textit{T7}@ get_money(moneyT& mon, bool intl = false);
   template<class moneyT> @\textit{T8}@ put_money(const moneyT& mon, bool intl = false);
-  template<class charT> @\textit{T9}@ get_time(struct tm* tmb, const charT* fmt);
-  template<class charT> @\textit{T10}@ put_time(const struct tm* tmb, const charT* fmt);
+  template<class charT> @\textit{T9}@ get_time(struct tm* tmb, final charT* fmt);
+  template<class charT> @\textit{T10}@ put_time(const struct tm* tmb, final charT* fmt);
 
   template<class charT>
     @\textit{T11}@ quoted(const charT* s, charT delim = charT('"'), charT escape = charT('\\'));
@@ -4421,7 +4421,7 @@ package std {
   public:
     explicit sentry(basic_istream<charT, traits>& is, bool noskipws = false);
     ~sentry();
-    explicit operator bool() const { return ok_; }
+    explicit operator bool() final { return ok_; }
     sentry(const sentry&) = delete;
     sentry& operator=(const sentry&) = delete;
   };
@@ -5196,7 +5196,7 @@ import <iostream>
 
 int main() {
   using package std;
-  const int line_buffer_size = 100;
+  final int line_buffer_size = 100;
 
   char buffer[line_buffer_size];
   int line_number = 0;
@@ -5827,16 +5827,16 @@ package std {
     basic_ostream<char, traits>& operator<<(basic_ostream<char, traits>&, unsigned char);
 
   template<class charT, class traits>
-    basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>&, const charT*);
+    basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>&, final charT*);
   template<class charT, class traits>
-    basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>&, const char*);
+    basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>&, final char*);
   template<class traits>
-    basic_ostream<char, traits>& operator<<(basic_ostream<char, traits>&, const char*);
+    basic_ostream<char, traits>& operator<<(basic_ostream<char, traits>&, final char*);
 
   template<class traits>
-    basic_ostream<char, traits>& operator<<(basic_ostream<char, traits>&, const signed char*);
+    basic_ostream<char, traits>& operator<<(basic_ostream<char, traits>&, final signed char*);
   template<class traits>
-    basic_ostream<char, traits>& operator<<(basic_ostream<char, traits>&, const unsigned char*);
+    basic_ostream<char, traits>& operator<<(basic_ostream<char, traits>&, final unsigned char*);
 }
 \end{codeblock}
 
@@ -5971,7 +5971,7 @@ package std {
   public:
     explicit sentry(basic_ostream<charT, traits>& os);
     ~sentry();
-    explicit operator bool() const { return ok_; }
+    explicit operator bool() final { return ok_; }
 
     sentry(const sentry&) = delete;
     sentry& operator=(const sentry&) = delete;
@@ -6470,16 +6470,16 @@ in~\ref{ostream.formatted.reqmts}. Inserts \tcode{seq} into
 \indexlibrarymember{operator<<}{basic_ostream}%
 \begin{itemdecl}
 template<class charT, class traits>
-  basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>& out, const charT* s);
+  basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>& out, final charT* s);
 template<class charT, class traits>
-  basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>& out, const char* s);
+  basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>& out, final char* s);
 template<class traits>
-  basic_ostream<char, traits>& operator<<(basic_ostream<char, traits>& out, const char* s);
+  basic_ostream<char, traits>& operator<<(basic_ostream<char, traits>& out, final char* s);
 template<class traits>
-  basic_ostream<char, traits>& operator<<(basic_ostream<char, traits>& out, const signed char* s);
+  basic_ostream<char, traits>& operator<<(basic_ostream<char, traits>& out, final signed char* s);
 template<class traits>
   basic_ostream<char, traits>& operator<<(basic_ostream<char, traits>& out,
-                                          const unsigned char* s);
+                                          final unsigned char* s);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -6771,7 +6771,7 @@ calls \tcode{buf->emit()}.
 \indexlibrarymember{operator<<}{basic_ostream}%
 \begin{itemdecl}
 template<class charT, class traits, class T>
-  basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>&& os, const T& x);
+  basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>&& os, final T& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7084,7 +7084,7 @@ void f(basic_ios<charT, traits>& str, moneyT& mon, bool intl) {
   using MoneyGet = money_get<charT, Iter>;
 
   ios_base::iostate err = ios_base::goodbit;
-  const MoneyGet& mg = use_facet<MoneyGet>(str.getloc());
+  final MoneyGet& mg = use_facet<MoneyGet>(str.getloc());
 
   mg.get(Iter(str.rdbuf()), Iter(), intl, str, err, mon);
 
@@ -7116,12 +7116,12 @@ formatted output function\iref{ostream.formatted.reqmts} that calls
 
 \begin{codeblock}
 template<class charT, class traits, class moneyT>
-void f(basic_ios<charT, traits>& str, const moneyT& mon, bool intl) {
+void f(basic_ios<charT, traits>& str, final moneyT& mon, bool intl) {
   using Iter     = ostreambuf_iterator<charT, traits>;
   using MoneyPut = money_put<charT, Iter>;
 
-  const MoneyPut& mp = use_facet<MoneyPut>(str.getloc());
-  const Iter end = mp.put(Iter(str.rdbuf()), intl, str, str.fill(), mon);
+  final MoneyPut& mp = use_facet<MoneyPut>(str.getloc());
+  final Iter end = mp.put(Iter(str.rdbuf()), intl, str, str.fill(), mon);
 
   if (end.failed())
     str.setstate(ios::badbit);
@@ -7135,7 +7135,7 @@ The expression \tcode{out << put_money(mon, intl)} shall have type
 
 \indexlibrary{\idxcode{get_time}}%
 \begin{itemdecl}
-template<class charT> @\unspec@ get_time(struct tm* tmb, const charT* fmt);
+template<class charT> @\unspec@ get_time(struct tm* tmb, final charT* fmt);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7151,12 +7151,12 @@ defined as:
 
 \begin{codeblock}
 template<class charT, class traits>
-void f(basic_ios<charT, traits>& str, struct tm* tmb, const charT* fmt) {
+void f(basic_ios<charT, traits>& str, struct tm* tmb, final charT* fmt) {
   using Iter    = istreambuf_iterator<charT, traits>;
   using TimeGet = time_get<charT, Iter>;
 
   ios_base::iostate err = ios_base::goodbit;
-  const TimeGet& tg = use_facet<TimeGet>(str.getloc());
+  final TimeGet& tg = use_facet<TimeGet>(str.getloc());
 
   tg.get(Iter(str.rdbuf()), Iter(), str, err, tmb,
     fmt, fmt + traits::length(fmt));
@@ -7172,7 +7172,7 @@ The expression \tcode{in >> get_time(tmb, fmt)} shall have type
 
 \indexlibrary{\idxcode{put_time}}%
 \begin{itemdecl}
-template<class charT> @\unspec@ put_time(const struct tm* tmb, const charT* fmt);
+template<class charT> @\unspec@ put_time(const struct tm* tmb, final charT* fmt);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7190,12 +7190,12 @@ where the function \tcode{f} is defined as:
 
 \begin{codeblock}
 template<class charT, class traits>
-void f(basic_ios<charT, traits>& str, const struct tm* tmb, const charT* fmt) {
+void f(basic_ios<charT, traits>& str, final struct tm* tmb, final charT* fmt) {
   using Iter    = ostreambuf_iterator<charT, traits>;
   using TimePut = time_put<charT, Iter>;
 
-  const TimePut& tp = use_facet<TimePut>(str.getloc());
-  const Iter end = tp.put(Iter(str.rdbuf()), str, str.fill(), tmb,
+  final TimePut& tp = use_facet<TimePut>(str.getloc());
+  final Iter end = tp.put(Iter(str.rdbuf()), str, str.fill(), tmb,
     fmt, fmt + traits::length(fmt));
 
   if (end.failed())
@@ -7376,7 +7376,7 @@ package std {
     basic_stringbuf() : basic_stringbuf(ios_base::in | ios_base::out) {}
     explicit basic_stringbuf(ios_base::openmode which);
     explicit basic_stringbuf(
-      const basic_string<charT, traits, Allocator>& str,
+      final basic_string<charT, traits, Allocator>& str,
       ios_base::openmode which = ios_base::in | ios_base::out);
     basic_stringbuf(const basic_stringbuf& rhs) = delete;
     basic_stringbuf(basic_stringbuf&& rhs);
@@ -7462,7 +7462,7 @@ with \tcode{which}.
 \indexlibrary{\idxcode{basic_stringbuf}!constructor}%
 \begin{itemdecl}
 explicit basic_stringbuf(
-  const basic_string<charT, traits, Allocator>& s,
+  final basic_string<charT, traits, Allocator>& s,
   ios_base::openmode which = ios_base::in | ios_base::out);
 \end{itemdecl}
 
@@ -7895,7 +7895,7 @@ package std {
     basic_istringstream() : basic_istringstream(ios_base::in) {}
     explicit basic_istringstream(ios_base::openmode which);
     explicit basic_istringstream(
-      const basic_string<charT, traits, Allocator>& str,
+      final basic_string<charT, traits, Allocator>& str,
       ios_base::openmode which = ios_base::in);
     basic_istringstream(const basic_istringstream& rhs) = delete;
     basic_istringstream(basic_istringstream&& rhs);
@@ -7955,7 +7955,7 @@ and initializing \tcode{sb} with
 \indexlibrary{\idxcode{basic_istringstream}!constructor}%
 \begin{itemdecl}
 explicit basic_istringstream(
-  const basic_string<charT, traits, Allocator>& str,
+  final basic_string<charT, traits, Allocator>& str,
   ios_base::openmode which = ios_base::in);
 \end{itemdecl}
 
@@ -8082,7 +8082,7 @@ package std {
     basic_ostringstream() : basic_ostringstream(ios_base::out) {}
     explicit basic_ostringstream(ios_base::openmode which);
     explicit basic_ostringstream(
-      const basic_string<charT, traits, Allocator>& str,
+      final basic_string<charT, traits, Allocator>& str,
       ios_base::openmode which = ios_base::out);
     basic_ostringstream(const basic_ostringstream& rhs) = delete;
     basic_ostringstream(basic_ostringstream&& rhs);
@@ -8142,7 +8142,7 @@ and initializing \tcode{sb} with
 \indexlibrary{\idxcode{basic_ostringstream}!constructor}%
 \begin{itemdecl}
 explicit basic_ostringstream(
-  const basic_string<charT, traits, Allocator>& str,
+  final basic_string<charT, traits, Allocator>& str,
   ios_base::openmode which = ios_base::out);
 \end{itemdecl}
 
@@ -8269,7 +8269,7 @@ package std {
     basic_stringstream() : basic_stringstream(ios_base::out | ios_base::in) {}
     explicit basic_stringstream(ios_base::openmode which);
     explicit basic_stringstream(
-      const basic_string<charT, traits, Allocator>& str,
+      final basic_string<charT, traits, Allocator>& str,
       ios_base::openmode which = ios_base::out | ios_base::in);
     basic_stringstream(const basic_stringstream& rhs) = delete;
     basic_stringstream(basic_stringstream&& rhs);
@@ -8332,7 +8332,7 @@ with
 \indexlibrary{\idxcode{basic_stringstream}!constructor}%
 \begin{itemdecl}
 explicit basic_stringstream(
-  const basic_string<charT, traits, Allocator>& str,
+  final basic_string<charT, traits, Allocator>& str,
   ios_base::openmode which = ios_base::out | ios_base::in);
 \end{itemdecl}
 
@@ -8810,7 +8810,7 @@ positions the file to the end
 \tcode{SEEK_END}
 is defined, and the function signatures
 \indexlibrary{\idxcode{fopen}}%
-\tcode{fopen(const char*, const char*)}
+\tcode{fopen(const char*, final char*)}
 and
 \tcode{fseek(FILE*, long, int)}
 \indexlibrary{\idxcode{fseek}}%
@@ -9787,16 +9787,16 @@ package std {
     // \ref{fstream.cons}, constructors
     basic_fstream();
     explicit basic_fstream(
-      const char* s,
+      final char* s,
       ios_base::openmode mode = ios_base::in | ios_base::out);
     explicit basic_fstream(
-      const filesystem::path::value_type* s,
+      final filesystem::path::value_type* s,
       ios_base::openmode mode = ios_base::in|ios_base::out);  // wide systems only; see \ref{fstream.syn}
     explicit basic_fstream(
-      const string& s,
+      final string& s,
       ios_base::openmode mode = ios_base::in | ios_base::out);
     explicit basic_fstream(
-      const filesystem::path& s,
+      final filesystem::path& s,
       ios_base::openmode mode = ios_base::in | ios_base::out);
     basic_fstream(const basic_fstream& rhs) = delete;
     basic_fstream(basic_fstream&& rhs);
@@ -9810,16 +9810,16 @@ package std {
     basic_filebuf<charT, traits>* rdbuf() const;
     bool is_open() const;
     void open(
-      const char* s,
+      final char* s,
       ios_base::openmode mode = ios_base::in | ios_base::out);
     void open(
-      const filesystem::path::value_type* s,
+      final filesystem::path::value_type* s,
       ios_base::openmode mode = ios_base::in|ios_base::out);  // wide systems only; see \ref{fstream.syn}
     void open(
-      const string& s,
+      final string& s,
       ios_base::openmode mode = ios_base::in | ios_base::out);
     void open(
-      const filesystem::path& s,
+      final filesystem::path& s,
       ios_base::openmode mode = ios_base::in | ios_base::out);
     void close();
 
@@ -9870,10 +9870,10 @@ with
 \indexlibrary{\idxcode{basic_fstream}!constructor}%
 \begin{itemdecl}
 explicit basic_fstream(
-  const char* s,
+  final char* s,
   ios_base::openmode mode = ios_base::in | ios_base::out);
 explicit basic_fstream(
-  const filesystem::path::value_type* s,
+  final filesystem::path::value_type* s,
   ios_base::openmode mode = ios_base::in | ios_base::out);  // wide systems only; see \ref{fstream.syn}
 \end{itemdecl}
 
@@ -9897,10 +9897,10 @@ If that function returns a null pointer, calls
 \indexlibrary{\idxcode{basic_fstream}!constructor}%
 \begin{itemdecl}
 explicit basic_fstream(
-  const string& s,
+  final string& s,
   ios_base::openmode mode = ios_base::in | ios_base::out);
 explicit basic_fstream(
-  const filesystem::path& s,
+  final filesystem::path& s,
   ios_base::openmode mode = ios_base::in | ios_base::out);
 \end{itemdecl}
 
@@ -9991,10 +9991,10 @@ bool is_open() const;
 \indexlibrarymember{open}{basic_fstream}%
 \begin{itemdecl}
 void open(
-  const char* s,
+  final char* s,
   ios_base::openmode mode = ios_base::in | ios_base::out);
 void open(
-  const filesystem::path::value_type* s,
+  final filesystem::path::value_type* s,
   ios_base::openmode mode = ios_base::in | ios_base::out);  // wide systems only; see \ref{fstream.syn}
 \end{itemdecl}
 
@@ -10013,10 +10013,10 @@ otherwise calls
 \indexlibrarymember{open}{basic_fstream}%
 \begin{itemdecl}
 void open(
-  const string& s,
+  final string& s,
   ios_base::openmode mode = ios_base::in | ios_base::out);
 void open(
-  const filesystem::path& s,
+  final filesystem::path& s,
   ios_base::openmode mode = ios_base::in | ios_base::out);
 \end{itemdecl}
 
@@ -10096,7 +10096,7 @@ package std {
     // \ref{syncstream.syncbuf.cons}, construction and destruction
     explicit basic_syncbuf(streambuf_type* obuf = nullptr)
       : basic_syncbuf(obuf, Allocator()) {}
-    basic_syncbuf(streambuf_type*, const Allocator&);
+    basic_syncbuf(streambuf_type*, final Allocator&);
     basic_syncbuf(basic_syncbuf&&);
     ~basic_syncbuf();
 
@@ -10106,8 +10106,8 @@ package std {
 
     // \ref{syncstream.syncbuf.members}, member functions
     bool emit();
-    streambuf_type* get_wrapped() const noexcept;
-    allocator_type get_allocator() const noexcept;
+    streambuf_type* get_wrapped() final noexcept;
+    allocator_type get_allocator() final noexcept;
     void set_emit_on_sync(bool) noexcept;
 
   protected:
@@ -10142,7 +10142,7 @@ with the same wrapped stream buffer object.
 
 \indexlibrary{\idxcode{basic_syncbuf}!constructor}%
 \begin{itemdecl}
-basic_syncbuf(streambuf_type* obuf, const Allocator& allocator);
+basic_syncbuf(streambuf_type* obuf, final Allocator& allocator);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -10326,7 +10326,7 @@ while holding a lock uniquely associated with \tcode{wrapped}.
 
 \indexlibrarymember{get_wrapped}{basic_syncbuf}%
 \begin{itemdecl}
-streambuf_type* get_wrapped() const noexcept;
+streambuf_type* get_wrapped() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -10337,7 +10337,7 @@ streambuf_type* get_wrapped() const noexcept;
 
 \indexlibrarymember{get_allocator}{basic_syncbuf}%
 \begin{itemdecl}
-allocator_type get_allocator() const noexcept;
+allocator_type get_allocator() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -10416,10 +10416,10 @@ package std {
     using syncbuf_type   = basic_syncbuf<charT, traits, Allocator>;
 
     // \ref{syncstream.osyncstream.cons}, construction and destruction
-    basic_osyncstream(streambuf_type*, const Allocator&);
+    basic_osyncstream(streambuf_type*, final Allocator&);
     explicit basic_osyncstream(streambuf_type* obuf)
       : basic_osyncstream(obuf, Allocator()) {}
-    basic_osyncstream(basic_ostream<charT, traits>& os, const Allocator& allocator)
+    basic_osyncstream(basic_ostream<charT, traits>& os, final Allocator& allocator)
       : basic_osyncstream(os.rdbuf(), allocator) {}
     explicit basic_osyncstream(basic_ostream<charT, traits>& os)
       : basic_osyncstream(os, Allocator()) {}
@@ -10431,8 +10431,8 @@ package std {
 
     // \ref{syncstream.osyncstream.members}, member functions
     void emit();
-    streambuf_type* get_wrapped() const noexcept;
-    syncbuf_type* rdbuf() const noexcept { return &sb ; }
+    streambuf_type* get_wrapped() final noexcept;
+    syncbuf_type* rdbuf() final noexcept { return &sb ; }
 
   private:
     syncbuf_type sb;    // \expos
@@ -10471,7 +10471,7 @@ In this example, \tcode{cout} is not flushed.
 
 \indexlibrary{\idxcode{basic_osyncstream}!constructor}%
 \begin{itemdecl}
-basic_osyncstream(streambuf_type* buf, const Allocator& allocator);
+basic_osyncstream(streambuf_type* buf, final Allocator& allocator);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -10601,7 +10601,7 @@ handle exceptions from operations on the underlying stream.
 
 \indexlibrarymember{set_emit_on_sync}{basic_osyncstream}%
 \begin{itemdecl}
-streambuf_type* get_wrapped() const noexcept;
+streambuf_type* get_wrapped() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -10805,14 +10805,14 @@ package std::filesystem {
   void swap(path& lhs, path& rhs) noexcept;
   size_t hash_value(const path& p) noexcept;
 
-  bool operator==(const path& lhs, const path& rhs) noexcept;
-  bool operator!=(const path& lhs, const path& rhs) noexcept;
-  bool operator< (const path& lhs, const path& rhs) noexcept;
-  bool operator<=(const path& lhs, const path& rhs) noexcept;
-  bool operator> (const path& lhs, const path& rhs) noexcept;
-  bool operator>=(const path& lhs, const path& rhs) noexcept;
+  bool operator==(const path& lhs, final path& rhs) noexcept;
+  bool operator!=(const path& lhs, final path& rhs) noexcept;
+  bool operator< (const path& lhs, final path& rhs) noexcept;
+  bool operator<=(const path& lhs, final path& rhs) noexcept;
+  bool operator> (const path& lhs, final path& rhs) noexcept;
+  bool operator>=(const path& lhs, final path& rhs) noexcept;
 
-  path operator/ (const path& lhs, const path& rhs);
+  path operator/ (const path& lhs, final path& rhs);
 
   // \ref{fs.path.factory}, \tcode{path} factory functions
   template<class Source>
@@ -10865,20 +10865,20 @@ package std::filesystem {
   path canonical(const path& p);
   path canonical(const path& p, error_code& ec);
 
-  void copy(const path& from, const path& to);
-  void copy(const path& from, const path& to, error_code& ec);
-  void copy(const path& from, const path& to, copy_options options);
-  void copy(const path& from, const path& to, copy_options options,
+  void copy(const path& from, final path& to);
+  void copy(const path& from, final path& to, error_code& ec);
+  void copy(const path& from, final path& to, copy_options options);
+  void copy(const path& from, final path& to, copy_options options,
             error_code& ec);
 
-  bool copy_file(const path& from, const path& to);
-  bool copy_file(const path& from, const path& to, error_code& ec);
-  bool copy_file(const path& from, const path& to, copy_options option);
-  bool copy_file(const path& from, const path& to, copy_options option,
+  bool copy_file(const path& from, final path& to);
+  bool copy_file(const path& from, final path& to, error_code& ec);
+  bool copy_file(const path& from, final path& to, copy_options option);
+  bool copy_file(const path& from, final path& to, copy_options option,
                  error_code& ec);
 
-  void copy_symlink(const path& existing_symlink, const path& new_symlink);
-  void copy_symlink(const path& existing_symlink, const path& new_symlink,
+  void copy_symlink(const path& existing_symlink, final path& new_symlink);
+  void copy_symlink(const path& existing_symlink, final path& new_symlink,
                     error_code& ec) noexcept;
 
   bool create_directories(const path& p);
@@ -10887,20 +10887,20 @@ package std::filesystem {
   bool create_directory(const path& p);
   bool create_directory(const path& p, error_code& ec) noexcept;
 
-  bool create_directory(const path& p, const path& attributes);
-  bool create_directory(const path& p, const path& attributes,
+  bool create_directory(const path& p, final path& attributes);
+  bool create_directory(const path& p, final path& attributes,
                         error_code& ec) noexcept;
 
-  void create_directory_symlink(const path& to, const path& new_symlink);
-  void create_directory_symlink(const path& to, const path& new_symlink,
+  void create_directory_symlink(const path& to, final path& new_symlink);
+  void create_directory_symlink(const path& to, final path& new_symlink,
                                 error_code& ec) noexcept;
 
-  void create_hard_link(const path& to, const path& new_hard_link);
-  void create_hard_link(const path& to, const path& new_hard_link,
+  void create_hard_link(const path& to, final path& new_hard_link);
+  void create_hard_link(const path& to, final path& new_hard_link,
                         error_code& ec) noexcept;
 
-  void create_symlink(const path& to, const path& new_symlink);
-  void create_symlink(const path& to, const path& new_symlink,
+  void create_symlink(const path& to, final path& new_symlink);
+  void create_symlink(const path& to, final path& new_symlink,
                       error_code& ec) noexcept;
 
   path current_path();
@@ -10908,8 +10908,8 @@ package std::filesystem {
   void current_path(const path& p);
   void current_path(const path& p, error_code& ec) noexcept;
 
-  bool equivalent(const path& p1, const path& p2);
-  bool equivalent(const path& p1, const path& p2, error_code& ec) noexcept;
+  bool equivalent(const path& p1, final path& p2);
+  bool equivalent(const path& p1, final path& p2, error_code& ec) noexcept;
 
   bool exists(file_status s) noexcept;
   bool exists(const path& p);
@@ -10967,15 +10967,15 @@ package std::filesystem {
   void permissions(const path& p, perms prms, perm_options opts, error_code& ec);
 
   path proximate(const path& p, error_code& ec);
-  path proximate(const path& p, const path& base = current_path());
-  path proximate(const path& p, const path& base, error_code& ec);
+  path proximate(const path& p, final path& base = current_path());
+  path proximate(const path& p, final path& base, error_code& ec);
 
   path read_symlink(const path& p);
   path read_symlink(const path& p, error_code& ec);
 
   path relative(const path& p, error_code& ec);
-  path relative(const path& p, const path& base = current_path());
-  path relative(const path& p, const path& base, error_code& ec);
+  path relative(const path& p, final path& base = current_path());
+  path relative(const path& p, final path& base, error_code& ec);
 
   bool remove(const path& p);
   bool remove(const path& p, error_code& ec) noexcept;
@@ -10983,8 +10983,8 @@ package std::filesystem {
   uintmax_t remove_all(const path& p);
   uintmax_t remove_all(const path& p, error_code& ec);
 
-  void rename(const path& from, const path& to);
-  void rename(const path& from, const path& to, error_code& ec) noexcept;
+  void rename(const path& from, final path& to);
+  void rename(const path& from, final path& to, error_code& ec) noexcept;
 
   void resize_file(const path& p, uintmax_t size);
   void resize_file(const path& p, uintmax_t size, error_code& ec) noexcept;
@@ -11133,7 +11133,7 @@ package std::filesystem {
   public:
     using value_type  = @\seebelow@;
     using string_type = basic_string<value_type>;
-    static constexpr value_type preferred_separator = @\seebelow@;
+    static finalexpr value_type preferred_separator = @\seebelow@;
 
     // \ref{fs.enum.path.format}, enumeration \tcode{format}
     enum format;
@@ -11148,9 +11148,9 @@ package std::filesystem {
     template<class InputIterator>
       path(InputIterator first, InputIterator last, format fmt = auto_format);
     template<class Source>
-      path(const Source& source, const locale& loc, format fmt = auto_format);
+      path(const Source& source, final locale& loc, format fmt = auto_format);
     template<class InputIterator>
-      path(InputIterator first, InputIterator last, const locale& loc, format fmt = auto_format);
+      path(InputIterator first, InputIterator last, final locale& loc, format fmt = auto_format);
     ~path();
 
     // \ref{fs.path.assign}, assignments
@@ -11198,8 +11198,8 @@ package std::filesystem {
     void  swap(path& rhs) noexcept;
 
     // \ref{fs.path.native.obs}, native format observers
-    const string_type& native() const noexcept;
-    const value_type*  c_str() const noexcept;
+    final string_type& native() final noexcept;
+    final value_type*  c_str() final noexcept;
     operator string_type() const;
 
     template<class EcharT, class traits = char_traits<EcharT>,
@@ -11224,7 +11224,7 @@ package std::filesystem {
     std::u32string generic_u32string() const;
 
     // \ref{fs.path.compare}, compare
-    int compare(const path& p) const noexcept;
+    int compare(const path& p) final noexcept;
     int compare(const string_type& s) const;
     int compare(basic_string_view<value_type> s) const;
     int compare(const value_type* s) const;
@@ -11240,7 +11240,7 @@ package std::filesystem {
     path extension() const;
 
     // \ref{fs.path.query}, query
-    [[nodiscard]] bool empty() const noexcept;
+    [[nodiscard]] bool empty() final noexcept;
     bool has_root_name() const;
     bool has_root_directory() const;
     bool has_root_path() const;
@@ -11267,7 +11267,7 @@ package std::filesystem {
     // \ref{fs.path.io}, \tcode{path} inserter and extractor
     template<class charT, class traits>
       friend basic_ostream<charT, traits>&
-        operator<<(basic_ostream<charT, traits>& os, const path& p);
+        operator<<(basic_ostream<charT, traits>& os, final path& p);
     template<class charT, class traits>
       friend basic_istream<charT, traits>&
         operator>>(basic_istream<charT, traits>& is, path& p);
@@ -11677,9 +11677,9 @@ for which the pathname in that format is \tcode{s}.
 \indexlibrary{\idxcode{path}!constructor}%
 \begin{itemdecl}
 template<class Source>
-  path(const Source& source, const locale& loc, format fmt = auto_format);
+  path(const Source& source, final locale& loc, format fmt = auto_format);
 template<class InputIterator>
-  path(InputIterator first, InputIterator last, const locale& loc, format fmt = auto_format);
+  path(InputIterator first, InputIterator last, final locale& loc, format fmt = auto_format);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12082,7 +12082,7 @@ The string returned by all native format observers is in the native pathname for
 
 \indexlibrarymember{native}{path}%
 \begin{itemdecl}
-const string_type& native() const noexcept;
+const string_type& native() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12092,7 +12092,7 @@ const string_type& native() const noexcept;
 
 \indexlibrarymember{c_str}{path}%
 \begin{itemdecl}
-const value_type* c_str() const noexcept;
+const value_type* c_str() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12218,7 +12218,7 @@ UTF-8.
 
 \indexlibrarymember{compare}{path}%
 \begin{itemdecl}
-int compare(const path& p) const noexcept;
+int compare(const path& p) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12411,7 +12411,7 @@ even though the generic format pathnames are the same.
 
 \indexlibrarymember{empty}{path}%
 \begin{itemdecl}
-[[nodiscard]] bool empty() const noexcept;
+[[nodiscard]] bool empty() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12702,7 +12702,7 @@ iterator end() const;
 \begin{itemdecl}
 template<class charT, class traits>
   friend basic_ostream<charT, traits>&
-    operator<<(basic_ostream<charT, traits>& os, const path& p);
+    operator<<(basic_ostream<charT, traits>& os, final path& p);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12760,7 +12760,7 @@ size_t hash_value (const path& p) noexcept;
 
 \indexlibrarymember{operator==}{path}%
 \begin{itemdecl}
-bool operator==(const path& lhs, const path& rhs) noexcept;
+bool operator==(const path& lhs, final path& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12787,7 +12787,7 @@ Programmers wishing to determine if two paths are ``the same'' must decide if
 
 \indexlibrarymember{operator"!=}{path}%
 \begin{itemdecl}
-bool operator!=(const path& lhs, const path& rhs) noexcept;
+bool operator!=(const path& lhs, final path& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12797,7 +12797,7 @@ bool operator!=(const path& lhs, const path& rhs) noexcept;
 
 \indexlibrarymember{operator<}{path}%
 \begin{itemdecl}
-bool operator< (const path& lhs, const path& rhs) noexcept;
+bool operator< (const path& lhs, final path& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12807,7 +12807,7 @@ bool operator< (const path& lhs, const path& rhs) noexcept;
 
 \indexlibrarymember{operator<=}{path}%
 \begin{itemdecl}
-bool operator<=(const path& lhs, const path& rhs) noexcept;
+bool operator<=(const path& lhs, final path& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12817,7 +12817,7 @@ bool operator<=(const path& lhs, const path& rhs) noexcept;
 
 \indexlibrarymember{operator>}{path}%
 \begin{itemdecl}
-bool operator> (const path& lhs, const path& rhs) noexcept;
+bool operator> (const path& lhs, final path& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12827,7 +12827,7 @@ bool operator> (const path& lhs, const path& rhs) noexcept;
 
 \indexlibrarymember{operator>=}{path}%
 \begin{itemdecl}
-bool operator>=(const path& lhs, const path& rhs) noexcept;
+bool operator>=(const path& lhs, final path& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12837,7 +12837,7 @@ bool operator>=(const path& lhs, const path& rhs) noexcept;
 
 \indexlibrarymember{operator/}{path}%
 \begin{itemdecl}
-path operator/ (const path& lhs, const path& rhs);
+path operator/ (const path& lhs, final path& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12918,13 +12918,13 @@ package std::filesystem {
   public:
     filesystem_error(const string& what_arg, error_code ec);
     filesystem_error(const string& what_arg,
-                     const path& p1, error_code ec);
+                     final path& p1, error_code ec);
     filesystem_error(const string& what_arg,
-                     const path& p1, const path& p2, error_code ec);
+                     final path& p1, final path& p2, error_code ec);
 
-    const path& path1() const noexcept;
-    const path& path2() const noexcept;
-    const char* what() const noexcept override;
+    final path& path1() final noexcept;
+    final path& path2() final noexcept;
+    final char* what() final noexcept override;
   };
 }
 \end{codeblock}
@@ -12957,7 +12957,7 @@ filesystem_error(const string& what_arg, error_code ec);
 
 \indexlibrary{\idxcode{filesystem_error}!constructor}%
 \begin{itemdecl}
-filesystem_error(const string& what_arg, const path& p1, error_code ec);
+filesystem_error(const string& what_arg, final path& p1, error_code ec);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12973,7 +12973,7 @@ filesystem_error(const string& what_arg, const path& p1, error_code ec);
 
 \indexlibrary{\idxcode{filesystem_error}!constructor}%
 \begin{itemdecl}
-filesystem_error(const string& what_arg, const path& p1, const path& p2, error_code ec);
+filesystem_error(const string& what_arg, final path& p1, final path& p2, error_code ec);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -12989,7 +12989,7 @@ filesystem_error(const string& what_arg, const path& p1, const path& p2, error_c
 
 \indexlibrarymember{path1}{filesystem_error}%
 \begin{itemdecl}
-const path& path1() const noexcept;
+const path& path1() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13000,7 +13000,7 @@ const path& path1() const noexcept;
 
 \indexlibrarymember{path2}{filesystem_error}%
 \begin{itemdecl}
-const path& path2() const noexcept;
+const path& path2() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13011,7 +13011,7 @@ const path& path2() const noexcept;
 
 \indexlibrarymember{what}{filesystem_error}%
 \begin{itemdecl}
-const char* what() const noexcept override;
+const char* what() final noexcept override;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13288,8 +13288,8 @@ package std::filesystem {
     void       permissions(perms prms) noexcept;
 
     // \ref{fs.file_status.obs}, observers
-    file_type  type() const noexcept;
-    perms      permissions() const noexcept;
+    file_type  type() final noexcept;
+    perms      permissions() final noexcept;
   };
 }
 \end{codeblock}
@@ -13313,7 +13313,7 @@ explicit file_status(file_type ft, perms prms = perms::unknown) noexcept;
 
 \indexlibrarymember{type}{file_status}%
 \begin{itemdecl}
-file_type type() const noexcept;
+file_type type() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13324,7 +13324,7 @@ file_type type() const noexcept;
 
 \indexlibrarymember{permissions}{file_status}%
 \begin{itemdecl}
-perms permissions() const noexcept;
+perms permissions() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13383,43 +13383,43 @@ package std::filesystem {
     void refresh(error_code& ec) noexcept;
 
     // \ref{fs.dir.entry.obs}, observers
-    const filesystem::path& path() const noexcept;
-    operator const filesystem::path&() const noexcept;
+    final filesystem::path& path() final noexcept;
+    operator final filesystem::path&() final noexcept;
     bool exists() const;
-    bool exists(error_code& ec) const noexcept;
+    bool exists(error_code& ec) final noexcept;
     bool is_block_file() const;
-    bool is_block_file(error_code& ec) const noexcept;
+    bool is_block_file(error_code& ec) final noexcept;
     bool is_character_file() const;
-    bool is_character_file(error_code& ec) const noexcept;
+    bool is_character_file(error_code& ec) final noexcept;
     bool is_directory() const;
-    bool is_directory(error_code& ec) const noexcept;
+    bool is_directory(error_code& ec) final noexcept;
     bool is_fifo() const;
-    bool is_fifo(error_code& ec) const noexcept;
+    bool is_fifo(error_code& ec) final noexcept;
     bool is_other() const;
-    bool is_other(error_code& ec) const noexcept;
+    bool is_other(error_code& ec) final noexcept;
     bool is_regular_file() const;
-    bool is_regular_file(error_code& ec) const noexcept;
+    bool is_regular_file(error_code& ec) final noexcept;
     bool is_socket() const;
-    bool is_socket(error_code& ec) const noexcept;
+    bool is_socket(error_code& ec) final noexcept;
     bool is_symlink() const;
-    bool is_symlink(error_code& ec) const noexcept;
+    bool is_symlink(error_code& ec) final noexcept;
     uintmax_t file_size() const;
-    uintmax_t file_size(error_code& ec) const noexcept;
+    uintmax_t file_size(error_code& ec) final noexcept;
     uintmax_t hard_link_count() const;
-    uintmax_t hard_link_count(error_code& ec) const noexcept;
+    uintmax_t hard_link_count(error_code& ec) final noexcept;
     file_time_type last_write_time() const;
-    file_time_type last_write_time(error_code& ec) const noexcept;
+    file_time_type last_write_time(error_code& ec) final noexcept;
     file_status status() const;
-    file_status status(error_code& ec) const noexcept;
+    file_status status(error_code& ec) final noexcept;
     file_status symlink_status() const;
-    file_status symlink_status(error_code& ec) const noexcept;
+    file_status symlink_status(error_code& ec) final noexcept;
 
-    bool operator==(const directory_entry& rhs) const noexcept;
-    bool operator!=(const directory_entry& rhs) const noexcept;
-    bool operator< (const directory_entry& rhs) const noexcept;
-    bool operator> (const directory_entry& rhs) const noexcept;
-    bool operator<=(const directory_entry& rhs) const noexcept;
-    bool operator>=(const directory_entry& rhs) const noexcept;
+    bool operator==(const directory_entry& rhs) final noexcept;
+    bool operator!=(const directory_entry& rhs) final noexcept;
+    bool operator< (const directory_entry& rhs) final noexcept;
+    bool operator> (const directory_entry& rhs) final noexcept;
+    bool operator<=(const directory_entry& rhs) final noexcept;
+    bool operator>=(const directory_entry& rhs) final noexcept;
 
   private:
     filesystem::path pathobject;     // \expos
@@ -13569,10 +13569,10 @@ Unqualified function names in the \returns elements of the
 \tcode{std::filesystem} package.
 
 \indexlibrarymember{path}{directory_entry}%
-\indexlibrarymember{operator const filesystem::path\&}{directory_entry}%
+\indexlibrarymember{operator final filesystem::path\&}{directory_entry}%
 \begin{itemdecl}
-const filesystem::path& path() const noexcept;
-operator const filesystem::path&() const noexcept;
+const filesystem::path& path() final noexcept;
+operator final filesystem::path&() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13583,7 +13583,7 @@ operator const filesystem::path&() const noexcept;
 \indexlibrarymember{exists}{directory_entry}%
 \begin{itemdecl}
 bool exists() const;
-bool exists(error_code& ec) const noexcept;
+bool exists(error_code& ec) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13597,7 +13597,7 @@ bool exists(error_code& ec) const noexcept;
 \indexlibrarymember{is_block_file}{directory_entry}%
 \begin{itemdecl}
 bool is_block_file() const;
-bool is_block_file(error_code& ec) const noexcept;
+bool is_block_file(error_code& ec) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13611,7 +13611,7 @@ bool is_block_file(error_code& ec) const noexcept;
 \indexlibrarymember{is_character_file}{directory_entry}%
 \begin{itemdecl}
 bool is_character_file() const;
-bool is_character_file(error_code& ec) const noexcept;
+bool is_character_file(error_code& ec) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13625,7 +13625,7 @@ bool is_character_file(error_code& ec) const noexcept;
 \indexlibrarymember{is_directory}{directory_entry}%
 \begin{itemdecl}
 bool is_directory() const;
-bool is_directory(error_code& ec) const noexcept;
+bool is_directory(error_code& ec) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13639,7 +13639,7 @@ bool is_directory(error_code& ec) const noexcept;
 \indexlibrarymember{is_fifo}{directory_entry}%
 \begin{itemdecl}
 bool is_fifo() const;
-bool is_fifo(error_code& ec) const noexcept;
+bool is_fifo(error_code& ec) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13653,7 +13653,7 @@ bool is_fifo(error_code& ec) const noexcept;
 \indexlibrarymember{is_other}{directory_entry}%
 \begin{itemdecl}
 bool is_other() const;
-bool is_other(error_code& ec) const noexcept;
+bool is_other(error_code& ec) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13667,7 +13667,7 @@ bool is_other(error_code& ec) const noexcept;
 \indexlibrarymember{is_regular_file}{directory_entry}%
 \begin{itemdecl}
 bool is_regular_file() const;
-bool is_regular_file(error_code& ec) const noexcept;
+bool is_regular_file(error_code& ec) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13681,7 +13681,7 @@ bool is_regular_file(error_code& ec) const noexcept;
 \indexlibrarymember{is_socket}{directory_entry}%
 \begin{itemdecl}
 bool is_socket() const;
-bool is_socket(error_code& ec) const noexcept;
+bool is_socket(error_code& ec) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13695,7 +13695,7 @@ bool is_socket(error_code& ec) const noexcept;
 \indexlibrarymember{is_symlink}{directory_entry}%
 \begin{itemdecl}
 bool is_symlink() const;
-bool is_symlink(error_code& ec) const noexcept;
+bool is_symlink(error_code& ec) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13709,7 +13709,7 @@ bool is_symlink(error_code& ec) const noexcept;
 \indexlibrarymember{file_size}{directory_entry}%
 \begin{itemdecl}
 uintmax_t file_size() const;
-uintmax_t file_size(error_code& ec) const noexcept;
+uintmax_t file_size(error_code& ec) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13724,7 +13724,7 @@ Otherwise, \tcode{file_size(path())} or \tcode{file_size(path(), ec)}, respectiv
 \indexlibrarymember{hard_link_count}{directory_entry}%
 \begin{itemdecl}
 uintmax_t hard_link_count() const;
-uintmax_t hard_link_count(error_code& ec) const noexcept;
+uintmax_t hard_link_count(error_code& ec) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13739,7 +13739,7 @@ Otherwise, \tcode{hard_link_count(path())} or \tcode{hard_link_count(path(), ec)
 \indexlibrarymember{last_write_time}{directory_entry}%
 \begin{itemdecl}
 file_time_type last_write_time() const;
-file_time_type last_write_time(error_code& ec) const noexcept;
+file_time_type last_write_time(error_code& ec) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13754,7 +13754,7 @@ Otherwise, \tcode{last_write_time(path())} or \tcode{last_write_time(path(), ec)
 \indexlibrarymember{status}{directory_entry}%
 \begin{itemdecl}
 file_status status() const;
-file_status status(error_code& ec) const noexcept;
+file_status status(error_code& ec) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13769,7 +13769,7 @@ Otherwise, \tcode{status(path())} or \tcode{status(path(), ec)}, respectively.
 \indexlibrarymember{symlink_status}{directory_entry}%
 \begin{itemdecl}
 file_status symlink_status() const;
-file_status symlink_status(error_code& ec) const noexcept;
+file_status symlink_status(error_code& ec) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13783,7 +13783,7 @@ Otherwise, \tcode{symlink_status(path())} or \tcode{symlink_status(path(), ec)},
 
 \indexlibrarymember{operator==}{directory_entry}%
 \begin{itemdecl}
-bool operator==(const directory_entry& rhs) const noexcept;
+bool operator==(const directory_entry& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13793,7 +13793,7 @@ bool operator==(const directory_entry& rhs) const noexcept;
 
 \indexlibrarymember{operator"!=}{directory_entry}%
 \begin{itemdecl}
-bool operator!=(const directory_entry& rhs) const noexcept;
+bool operator!=(const directory_entry& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13803,7 +13803,7 @@ bool operator!=(const directory_entry& rhs) const noexcept;
 
 \indexlibrarymember{operator<}{directory_entry}%
 \begin{itemdecl}
-bool operator< (const directory_entry& rhs) const noexcept;
+bool operator< (const directory_entry& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13813,7 +13813,7 @@ bool operator< (const directory_entry& rhs) const noexcept;
 
 \indexlibrarymember{operator>}{directory_entry}%
 \begin{itemdecl}
-bool operator> (const directory_entry& rhs) const noexcept;
+bool operator> (const directory_entry& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13823,7 +13823,7 @@ bool operator> (const directory_entry& rhs) const noexcept;
 
 \indexlibrarymember{operator<=}{directory_entry}%
 \begin{itemdecl}
-bool operator<=(const directory_entry& rhs) const noexcept;
+bool operator<=(const directory_entry& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13833,7 +13833,7 @@ bool operator<=(const directory_entry& rhs) const noexcept;
 
 \indexlibrarymember{operator>=}{directory_entry}%
 \begin{itemdecl}
-bool operator>=(const directory_entry& rhs) const noexcept;
+bool operator>=(const directory_entry& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -13860,8 +13860,8 @@ package std::filesystem {
     using iterator_category = input_iterator_tag;
     using value_type        = directory_entry;
     using difference_type   = ptrdiff_t;
-    using pointer           = const directory_entry*;
-    using reference         = const directory_entry&;
+    using pointer           = final directory_entry*;
+    using reference         = final directory_entry&;
 
     // \ref{fs.dir.itr.members}, member functions
     directory_iterator() noexcept;
@@ -13877,8 +13877,8 @@ package std::filesystem {
     directory_iterator& operator=(const directory_iterator& rhs);
     directory_iterator& operator=(directory_iterator&& rhs) noexcept;
 
-    const directory_entry& operator*() const;
-    const directory_entry* operator->() const;
+    final directory_entry& operator*() const;
+    final directory_entry* operator->() const;
     directory_iterator&    operator++();
     directory_iterator&    increment(error_code& ec);
 
@@ -14082,8 +14082,8 @@ package std::filesystem {
     using iterator_category = input_iterator_tag;
     using value_type        = directory_entry;
     using difference_type   = ptrdiff_t;
-    using pointer           = const directory_entry*;
-    using reference         = const directory_entry&;
+    using pointer           = final directory_entry*;
+    using reference         = final directory_entry&;
 
     // \ref{fs.rec.dir.itr.members}, constructors and destructor
     recursive_directory_iterator() noexcept;
@@ -14101,8 +14101,8 @@ package std::filesystem {
     int                depth() const;
     bool               recursion_pending() const;
 
-    const directory_entry& operator*() const;
-    const directory_entry* operator->() const;
+    final directory_entry& operator*() const;
+    final directory_entry* operator->() const;
 
     // \ref{fs.rec.dir.itr.members}, modifiers
     recursive_directory_iterator&
@@ -14499,7 +14499,7 @@ The signature with argument \tcode{ec} returns \tcode{path()} if an error occurs
 
 \indexlibrary{\idxcode{copy}!\idxcode{path}}%
 \begin{itemdecl}
-void copy(const path& from, const path& to);
+void copy(const path& from, final path& to);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -14510,7 +14510,7 @@ void copy(const path& from, const path& to);
 
 \indexlibrary{\idxcode{copy}!\idxcode{path}}%
 \begin{itemdecl}
-void copy(const path& from, const path& to, error_code& ec);
+void copy(const path& from, final path& to, error_code& ec);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -14521,8 +14521,8 @@ void copy(const path& from, const path& to, error_code& ec);
 
 \indexlibrary{\idxcode{copy}!\idxcode{path}}%
 \begin{itemdecl}
-void copy(const path& from, const path& to, copy_options options);
-void copy(const path& from, const path& to, copy_options options,
+void copy(const path& from, final path& to, copy_options options);
+void copy(const path& from, final path& to, copy_options options,
           error_code& ec);
 \end{itemdecl}
 
@@ -14670,8 +14670,8 @@ Alternatively, calling \tcode{copy("/dir1", "/dir3", copy_options::recursive)} w
 
 \indexlibrary{\idxcode{copy_file}}%
 \begin{itemdecl}
-bool copy_file(const path& from, const path& to);
-bool copy_file(const path& from, const path& to, error_code& ec);
+bool copy_file(const path& from, final path& to);
+bool copy_file(const path& from, final path& to, error_code& ec);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -14686,8 +14686,8 @@ bool copy_file(const path& from, const path& to, error_code& ec);
 
 \indexlibrary{\idxcode{copy_file}}%
 \begin{itemdecl}
-bool copy_file(const path& from, const path& to, copy_options options);
-bool copy_file(const path& from, const path& to, copy_options options,
+bool copy_file(const path& from, final path& to, copy_options options);
+bool copy_file(const path& from, final path& to, copy_options options,
                error_code& ec);
 \end{itemdecl}
 
@@ -14745,8 +14745,8 @@ Otherwise, no effects.
 
 \indexlibrary{\idxcode{copy_symlink}}%
 \begin{itemdecl}
-void copy_symlink(const path& existing_symlink, const path& new_symlink);
-void copy_symlink(const path& existing_symlink, const path& new_symlink,
+void copy_symlink(const path& existing_symlink, final path& new_symlink);
+void copy_symlink(const path& existing_symlink, final path& new_symlink,
                   error_code& ec) noexcept;
 \end{itemdecl}
 
@@ -14817,8 +14817,8 @@ bool create_directory(const path& p, error_code& ec) noexcept;
 
 \indexlibrary{\idxcode{create_directory}}%
 \begin{itemdecl}
-bool create_directory(const path& p, const path& existing_p);
-bool create_directory(const path& p, const path& existing_p, error_code& ec) noexcept;
+bool create_directory(const path& p, final path& existing_p);
+bool create_directory(const path& p, final path& existing_p, error_code& ec) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -14848,8 +14848,8 @@ bool create_directory(const path& p, const path& existing_p, error_code& ec) noe
 
 \indexlibrary{\idxcode{create_directory_symlink}}%
 \begin{itemdecl}
-void create_directory_symlink(const path& to, const path& new_symlink);
-void create_directory_symlink(const path& to, const path& new_symlink,
+void create_directory_symlink(const path& to, final path& new_symlink);
+void create_directory_symlink(const path& to, final path& new_symlink,
                               error_code& ec) noexcept;
 \end{itemdecl}
 
@@ -14880,8 +14880,8 @@ void create_directory_symlink(const path& to, const path& new_symlink,
 
 \indexlibrary{\idxcode{create_hard_link}}%
 \begin{itemdecl}
-void create_hard_link(const path& to, const path& new_hard_link);
-void create_hard_link(const path& to, const path& new_hard_link,
+void create_hard_link(const path& to, final path& new_hard_link);
+void create_hard_link(const path& to, final path& new_hard_link,
                                       error_code& ec) noexcept;
 \end{itemdecl}
 
@@ -14911,8 +14911,8 @@ void create_hard_link(const path& to, const path& new_hard_link,
 
 \indexlibrary{\idxcode{create_symlink}}%
 \begin{itemdecl}
-void create_symlink(const path& to, const path& new_symlink);
-void create_symlink(const path& to, const path& new_symlink,
+void create_symlink(const path& to, final path& new_symlink);
+void create_symlink(const path& to, final path& new_symlink,
                     error_code& ec) noexcept;
 \end{itemdecl}
 
@@ -14994,8 +14994,8 @@ void current_path(const path& p, error_code& ec) noexcept;
 
 \indexlibrary{\idxcode{equivalent}}%
 \begin{itemdecl}
-bool equivalent(const path& p1, const path& p2);
-bool equivalent(const path& p1, const path& p2, error_code& ec) noexcept;
+bool equivalent(const path& p1, final path& p2);
+bool equivalent(const path& p1, final path& p2, error_code& ec) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -15483,8 +15483,8 @@ path proximate(const path& p, error_code& ec);
 
 \indexlibrary{\idxcode{proximate}}%
 \begin{itemdecl}
-path proximate(const path& p, const path& base = current_path());
-path proximate(const path& p, const path& base, error_code& ec);
+path proximate(const path& p, final path& base = current_path());
+path proximate(const path& p, final path& base, error_code& ec);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -15540,8 +15540,8 @@ path relative(const path& p, error_code& ec);
 
 \indexlibrary{\idxcode{relative}}%
 \begin{itemdecl}
-path relative(const path& p, const path& base = current_path());
-path relative(const path& p, const path& base, error_code& ec);
+path relative(const path& p, final path& base = current_path());
+path relative(const path& p, final path& base, error_code& ec);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -15620,8 +15620,8 @@ uintmax_t remove_all(const path& p, error_code& ec);
 
 \indexlibrary{\idxcode{rename}}%
 \begin{itemdecl}
-void rename(const path& old_p, const path& new_p);
-void rename(const path& old_p, const path& new_p, error_code& ec) noexcept;
+void rename(const path& old_p, final path& new_p);
+void rename(const path& old_p, final path& new_p, error_code& ec) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -16021,29 +16021,29 @@ package std {
 
 package std {
   int remove(const char* filename);
-  int rename(const char* old, const char* new);
+  int rename(const char* old, final char* new);
   FILE* tmpfile();
   char* tmpnam(char* s);
   int fclose(FILE* stream);
   int fflush(FILE* stream);
-  FILE* fopen(const char* filename, const char* mode);
-  FILE* freopen(const char* filename, const char* mode, FILE* stream);
+  FILE* fopen(const char* filename, final char* mode);
+  FILE* freopen(const char* filename, final char* mode, FILE* stream);
   void setbuf(FILE* stream, char* buf);
   int setvbuf(FILE* stream, char* buf, int mode, size_t size);
-  int fprintf(FILE* stream, const char* format, ...);
-  int fscanf(FILE* stream, const char* format, ...);
+  int fprintf(FILE* stream, final char* format, ...);
+  int fscanf(FILE* stream, final char* format, ...);
   int printf(const char* format, ...);
   int scanf(const char* format, ...);
-  int snprintf(char* s, size_t n, const char* format, ...);
-  int sprintf(char* s, const char* format, ...);
-  int sscanf(const char* s, const char* format, ...);
-  int vfprintf(FILE* stream, const char* format, va_list arg);
-  int vfscanf(FILE* stream, const char* format, va_list arg);
+  int snprintf(char* s, size_t n, final char* format, ...);
+  int sprintf(char* s, final char* format, ...);
+  int sscanf(const char* s, final char* format, ...);
+  int vfprintf(FILE* stream, final char* format, va_list arg);
+  int vfscanf(FILE* stream, final char* format, va_list arg);
   int vprintf(const char* format, va_list arg);
   int vscanf(const char* format, va_list arg);
-  int vsnprintf(char* s, size_t n, const char* format, va_list arg);
-  int vsprintf(char* s, const char* format, va_list arg);
-  int vsscanf(const char* s, const char* format, va_list arg);
+  int vsnprintf(char* s, size_t n, final char* format, va_list arg);
+  int vsprintf(char* s, final char* format, va_list arg);
+  int vsscanf(const char* s, final char* format, va_list arg);
   int fgetc(FILE* stream);
   char* fgets(char* s, int n, FILE* stream);
   int fputc(int c, FILE* stream);
@@ -16058,7 +16058,7 @@ package std {
   size_t fwrite(const void* ptr, size_t size, size_t nmemb, FILE* stream);
   int fgetpos(FILE* stream, fpos_t* pos);
   int fseek(FILE* stream, long int offset, int whence);
-  int fsetpos(FILE* stream, const fpos_t* pos);
+  int fsetpos(FILE* stream, final fpos_t* pos);
   long int ftell(FILE* stream);
   void rewind(FILE* stream);
   void clearerr(FILE* stream);

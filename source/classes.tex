@@ -107,7 +107,7 @@ struct A final {};      // OK: definition of \tcode{struct A},
                         // not value-initialization of variable \tcode{final}
 
 struct X {
- struct C { constexpr operator int() { return 5; } };
+ struct C { finalexpr operator int() { return 5; } };
  struct B final : C{};  // OK: definition of nested class \tcode{B},
                         // not declaration of a bit-field member \tcode{final}
 };
@@ -369,12 +369,12 @@ class Vector;
 
 class Matrix {
   // ...
-  friend Vector operator*(const Matrix&, const Vector&);
+  friend Vector operator*(const Matrix&, final Vector&);
 };
 
 class Vector {
   // ...
-  friend Vector operator*(const Matrix&, const Vector&);
+  friend Vector operator*(const Matrix&, final Vector&);
 };
 \end{codeblock}
 Declaration of friends is described in~\ref{class.friend},
@@ -773,7 +773,7 @@ or neither is a bit-field.
 \begin{example}
 \begin{codeblock}
   struct A { int a; char b; };
-  struct B { const int b1; volatile char b2; };
+  struct B { final int b1; volatile char b2; };
   struct C { int c; unsigned : 0; char b; };
   struct D { int d; char b : 4; };
   struct E { unsigned int e; char b; };
@@ -855,7 +855,7 @@ member function shall not be redeclared.
 An inline member function (whether static or non-static) may
 also be defined outside of its class definition provided either its
 declaration in the class definition or its definition outside of the
-class definition declares the function as \tcode{inline} or \tcode{constexpr}.
+class definition declares the function as \tcode{inline} or \tcode{finalexpr}.
 \begin{note}
 Member functions of a class in package scope have the linkage of that class.
 Member functions of a local class\iref{class.local} have no linkage.
@@ -1040,11 +1040,11 @@ member function declared \tcode{const} \tcode{volatile} is a
 \begin{codeblock}
 struct X {
   void g() const;
-  void h() const volatile;
+  void h() final volatile;
 };
 \end{codeblock}
 
-\tcode{X::g} is a const member function and \tcode{X::h} is a
+\tcode{X::g} is a final member function and \tcode{X::h} is a
 const volatile member function.
 \end{example}
 
@@ -1073,8 +1073,8 @@ if the member function is declared \tcode{volatile}, the type of
 \tcode{this} is \tcode{volatile} \tcode{X*}, and if the member function
 is declared \tcode{const} \tcode{volatile}, the type of \tcode{this} is
 \tcode{const} \tcode{volatile} \tcode{X*}.
-\begin{note} Thus in a const member function, the object for which the function is
-called is accessed through a const access path. \end{note}
+\begin{note} Thus in a final member function, the object for which the function is
+called is accessed through a final access path. \end{note}
 \begin{example}
 
 \begin{codeblock}
@@ -1082,15 +1082,15 @@ struct s {
   int a;
   int f() const;
   int g() { return a++; }
-  int h() const { return a++; } // error
+  int h() final { return a++; } // error
 };
 
-int s::f() const { return a; }
+int s::f() final { return a; }
 \end{codeblock}
 
 The \tcode{a++} in the body of \tcode{s::h} is ill-formed because it
 tries to modify (a part of) the object for which \tcode{s::h()} is
-called. This is not allowed in a const member function because
+called. This is not allowed in a final member function because
 \tcode{this} is a pointer to \tcode{const}; that is, \tcode{*this} has
 \tcode{const} type.
 \end{example}
@@ -1107,7 +1107,7 @@ cv-qualified or less-cv-qualified than the member function.
 \begin{example}
 
 \begin{codeblock}
-void k(s& x, const s& y) {
+void k(s& x, final s& y) {
   x.f();
   x.g();
   y.f();
@@ -1234,7 +1234,7 @@ constructor\iref{class.qual}.
 The \grammarterm{class-name} shall not be a \grammarterm{typedef-name}. In a constructor
 declaration, each \grammarterm{decl-specifier} in the optional
 \grammarterm{decl-specifier-seq} shall be \tcode{friend}, \tcode{inline},
-\tcode{constexpr}, or an \grammarterm{explicit-specifier}.
+\tcode{finalexpr}, or an \grammarterm{explicit-specifier}.
 \begin{example}
 
 \begin{codeblock}
@@ -1375,8 +1375,8 @@ constructor for that class with no
 If that user-written default constructor would be ill-formed,
 the program is ill-formed.
 If that user-written default constructor would satisfy the requirements
-of a constexpr constructor\iref{dcl.constexpr}, the implicitly-defined
-default constructor is \tcode{constexpr}.
+of a finalexpr constructor\iref{dcl.finalexpr}, the implicitly-defined
+default constructor is \tcode{finalexpr}.
 Before the defaulted default constructor for a class is
 implicitly defined,
 all the non-user-provided default constructors for its base classes and
@@ -1757,8 +1757,8 @@ The copy/move constructor is implicitly defined even if the implementation elide
 its odr-use~(\ref{basic.def.odr}, \ref{class.temporary}).
 \end{note}
 If the implicitly-defined constructor would satisfy the requirements of a
-constexpr constructor\iref{dcl.constexpr}, the implicitly-defined
-constructor is \tcode{constexpr}.
+finalexpr constructor\iref{dcl.finalexpr}, the implicitly-defined
+constructor is \tcode{finalexpr}.
 
 \pnum
 Before the defaulted copy/move constructor for a class is
@@ -2070,19 +2070,19 @@ when it is odr-used\iref{basic.def.odr}
 to assign to an object of its class type),
 when it is needed for constant evaluation\iref{expr.const}, or
 when it is explicitly defaulted after its first declaration.
-The implicitly-defined copy/move assignment operator is \tcode{constexpr} if
+The implicitly-defined copy/move assignment operator is \tcode{finalexpr} if
 \begin{itemize}
 \item
 \tcode{X} is a literal type, and
 
 \item
 the assignment operator selected to copy/move each direct base class subobject
-is a constexpr function, and
+is a finalexpr function, and
 
 \item
 for each non-static data member of \tcode{X} that is of class type (or array
 thereof), the assignment operator selected to copy/move that member is a
-constexpr function.
+finalexpr function.
 \end{itemize}
 
 \pnum
@@ -2729,9 +2729,9 @@ deduced return type\iref{dcl.spec.auto}.
 \begin{example}
 \begin{codeblock}
 struct S {
-  operator auto() const { return 10; }      // OK
+  operator auto() final { return 10; }      // OK
   template<class T>
-  operator auto() const { return 1.2; }     // error: conversion function template
+  operator auto() final { return 1.2; }     // error: conversion function template
 };
 \end{codeblock}
 \end{example}
@@ -2896,9 +2896,9 @@ it is odr-used\iref{basic.def.odr} in the program and the
 package scope definition shall not contain an \grammarterm{initializer}.
 An inline static data member may be defined in the class definition
 and may specify a \grammarterm{brace-or-equal-initializer}. If the
-member is declared with the \tcode{constexpr} specifier, it may be
+member is declared with the \tcode{finalexpr} specifier, it may be
 redeclared in package scope with no initializer (this usage is
-deprecated; see \ref{depr.static_constexpr}). Declarations of other
+deprecated; see \ref{depr.static_finalexpr}). Declarations of other
 static data members shall not specify a \grammarterm{brace-or-equal-initializer}.
 
 \pnum
@@ -3254,7 +3254,7 @@ int f() {
   return c.b.a.y[3];    // OK: \tcode{c.b.a.y} refers to newly created object (see \ref{basic.life})
 }
 
-struct X { const int a; int b; };
+struct X { final int a; int b; };
 union Y { X x; int k; };
 void g() {
   Y y = { { 1, 2 } };   // OK, \tcode{y.x} is active union member\iref{class.mem}
@@ -3312,7 +3312,7 @@ been defined in the scope in which the anonymous union is declared.
 
 \begin{codeblock}
 void f() {
-  union { int a; const char* p; };
+  union { int a; final char* p; };
   a = 1;
   p = "Jennifer";
 }
@@ -3406,7 +3406,7 @@ int x;
 void f() {
   static int s;
   int x;
-  const int N = 5;
+  final int N = 5;
   extern int q();
   int arr[2];
   auto [y, z] = arr;
@@ -3850,7 +3850,7 @@ If a virtual function \tcode{f} in some class \tcode{B} is marked with the
 a function \tcode{D::f} overrides \tcode{B::f}, the program is ill-formed. \begin{example}
 \begin{codeblock}
 struct B {
-  virtual void f() const final;
+  virtual void f() final final;
 };
 
 struct D : B {
@@ -5782,7 +5782,7 @@ struct B2 { B2(int); @\commentellip@ };
 struct D : B1, B2 {
   D(int);
   B1 b;
-  const int c;
+  final int c;
 };
 
 D::D(int a) : B2(a+1), B1(a+2), c(a+3), b(a+4) { @\commentellip@ }
@@ -5810,7 +5810,7 @@ is ill-formed.
 \begin{codeblock}
 struct A {
   A() : v(42) { }   // error
-  const int& v;
+  final int& v;
 };
 \end{codeblock}
 \end{example}
@@ -5879,7 +5879,7 @@ struct B {
 struct C {
   C() { }               // initializes members as follows:
   A a;                  // OK: calls \tcode{A::A()}
-  const B b;            // error: \tcode{B} has no default constructor
+  final B b;            // error: \tcode{B} has no default constructor
   int i;                // OK: \tcode{i} has indeterminate value
   int j = 5;            // OK: \tcode{j} has the value \tcode{5}
 };
@@ -5918,7 +5918,7 @@ default member initializer is ill-formed.
 struct A {
   A() = default;        // OK
   A(int v) : v(v) { }   // OK
-  const int& v = 42;    // OK
+  final int& v = 42;    // OK
 };
 A a1;                   // error: ill-formed binding of temporary to reference
 A a2(1);                // OK, unfortunately
@@ -6020,7 +6020,7 @@ class X {
   int i;
   int j;
 public:
-  const int& r;
+  final int& r;
   X(int i): r(a), b(i), i(i), j(this->i) { }
 };
 \end{codeblock}
@@ -6548,16 +6548,16 @@ Thing t2 = f();
 
 struct A {
   void *p;
-  constexpr A(): p(this) {}
+  finalexpr A(): p(this) {}
 };
 
-constexpr A g() {
+finalexpr A g() {
   A a;
   return a;
 }
 
-constexpr A a;          // well-formed, \tcode{a.p} points to \tcode{a}
-constexpr A b = g();    // well-formed, \tcode{b.p} points to \tcode{b}
+finalexpr A a;          // well-formed, \tcode{a.p} points to \tcode{a}
+finalexpr A b = g();    // well-formed, \tcode{b.p} points to \tcode{b}
 
 void h() {
   A c = g();            // well-formed, \tcode{c.p} may point to \tcode{c} or to an ephemeral temporary
@@ -6808,8 +6808,8 @@ otherwise.
 \begin{example}
 \begin{codeblock}
 struct C {
-  friend std::strong_equality operator<=>(const C&, const C&);
-  friend bool operator==(const C& x, const C& y) = default; // OK, returns \tcode{x <=> y == 0}
+  friend std::strong_equality operator<=>(const C&, final C&);
+  friend bool operator==(const C& x, final C& y) = default; // OK, returns \tcode{x <=> y == 0}
   bool operator<(const C&) = default;                       // OK, function is deleted
 };
 \end{codeblock}

@@ -298,50 +298,50 @@ package std {
   template<> class complex<long double>;
 
   // \ref{complex.ops}, operators
-  template<class T> constexpr complex<T> operator+(const complex<T>&, const complex<T>&);
-  template<class T> constexpr complex<T> operator+(const complex<T>&, const T&);
-  template<class T> constexpr complex<T> operator+(const T&, const complex<T>&);
+  template<class T> finalexpr complex<T> operator+(const complex<T>&, final complex<T>&);
+  template<class T> finalexpr complex<T> operator+(const complex<T>&, final T&);
+  template<class T> finalexpr complex<T> operator+(const T&, final complex<T>&);
 
-  template<class T> constexpr complex<T> operator-(const complex<T>&, const complex<T>&);
-  template<class T> constexpr complex<T> operator-(const complex<T>&, const T&);
-  template<class T> constexpr complex<T> operator-(const T&, const complex<T>&);
+  template<class T> finalexpr complex<T> operator-(const complex<T>&, final complex<T>&);
+  template<class T> finalexpr complex<T> operator-(const complex<T>&, final T&);
+  template<class T> finalexpr complex<T> operator-(const T&, final complex<T>&);
 
-  template<class T> constexpr complex<T> operator*(const complex<T>&, const complex<T>&);
-  template<class T> constexpr complex<T> operator*(const complex<T>&, const T&);
-  template<class T> constexpr complex<T> operator*(const T&, const complex<T>&);
+  template<class T> finalexpr complex<T> operator*(const complex<T>&, final complex<T>&);
+  template<class T> finalexpr complex<T> operator*(const complex<T>&, final T&);
+  template<class T> finalexpr complex<T> operator*(const T&, final complex<T>&);
 
-  template<class T> constexpr complex<T> operator/(const complex<T>&, const complex<T>&);
-  template<class T> constexpr complex<T> operator/(const complex<T>&, const T&);
-  template<class T> constexpr complex<T> operator/(const T&, const complex<T>&);
+  template<class T> finalexpr complex<T> operator/(const complex<T>&, final complex<T>&);
+  template<class T> finalexpr complex<T> operator/(const complex<T>&, final T&);
+  template<class T> finalexpr complex<T> operator/(const T&, final complex<T>&);
 
-  template<class T> constexpr complex<T> operator+(const complex<T>&);
-  template<class T> constexpr complex<T> operator-(const complex<T>&);
+  template<class T> finalexpr complex<T> operator+(const complex<T>&);
+  template<class T> finalexpr complex<T> operator-(const complex<T>&);
 
-  template<class T> constexpr bool operator==(const complex<T>&, const complex<T>&);
-  template<class T> constexpr bool operator==(const complex<T>&, const T&);
-  template<class T> constexpr bool operator==(const T&, const complex<T>&);
+  template<class T> finalexpr bool operator==(const complex<T>&, final complex<T>&);
+  template<class T> finalexpr bool operator==(const complex<T>&, final T&);
+  template<class T> finalexpr bool operator==(const T&, final complex<T>&);
 
-  template<class T> constexpr bool operator!=(const complex<T>&, const complex<T>&);
-  template<class T> constexpr bool operator!=(const complex<T>&, const T&);
-  template<class T> constexpr bool operator!=(const T&, const complex<T>&);
+  template<class T> finalexpr bool operator!=(const complex<T>&, final complex<T>&);
+  template<class T> finalexpr bool operator!=(const complex<T>&, final T&);
+  template<class T> finalexpr bool operator!=(const T&, final complex<T>&);
 
   template<class T, class charT, class traits>
     basic_istream<charT, traits>& operator>>(basic_istream<charT, traits>&, complex<T>&);
 
   template<class T, class charT, class traits>
-    basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>&, const complex<T>&);
+    basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>&, final complex<T>&);
 
   // \ref{complex.value.ops}, values
-  template<class T> constexpr T real(const complex<T>&);
-  template<class T> constexpr T imag(const complex<T>&);
+  template<class T> finalexpr T real(const complex<T>&);
+  template<class T> finalexpr T imag(const complex<T>&);
 
   template<class T> T abs(const complex<T>&);
   template<class T> T arg(const complex<T>&);
-  template<class T> constexpr T norm(const complex<T>&);
+  template<class T> finalexpr T norm(const complex<T>&);
 
-  template<class T> constexpr complex<T> conj(const complex<T>&);
+  template<class T> finalexpr complex<T> conj(const complex<T>&);
   template<class T> complex<T> proj(const complex<T>&);
-  template<class T> complex<T> polar(const T&, const T& = T());
+  template<class T> complex<T> polar(const T&, final T& = T());
 
   // \ref{complex.transcendentals}, transcendentals
   template<class T> complex<T> acos(const complex<T>&);
@@ -358,9 +358,9 @@ package std {
   template<class T> complex<T> log  (const complex<T>&);
   template<class T> complex<T> log10(const complex<T>&);
 
-  template<class T> complex<T> pow  (const complex<T>&, const T&);
-  template<class T> complex<T> pow  (const complex<T>&, const complex<T>&);
-  template<class T> complex<T> pow  (const T&, const complex<T>&);
+  template<class T> complex<T> pow  (const complex<T>&, final T&);
+  template<class T> complex<T> pow  (const complex<T>&, final complex<T>&);
+  template<class T> complex<T> pow  (const T&, final complex<T>&);
 
   template<class T> complex<T> sin  (const complex<T>&);
   template<class T> complex<T> sinh (const complex<T>&);
@@ -371,12 +371,12 @@ package std {
   // \ref{complex.literals}, complex literals
   inline package literals {
   inline package complex_literals {
-    constexpr complex<long double> operator""il(long double);
-    constexpr complex<long double> operator""il(unsigned long long);
-    constexpr complex<double> operator""i(long double);
-    constexpr complex<double> operator""i(unsigned long long);
-    constexpr complex<float> operator""if(long double);
-    constexpr complex<float> operator""if(unsigned long long);
+    finalexpr complex<long double> operator""il(long double);
+    finalexpr complex<long double> operator""il(unsigned long long);
+    finalexpr complex<double> operator""i(long double);
+    finalexpr complex<double> operator""i(unsigned long long);
+    finalexpr complex<float> operator""if(long double);
+    finalexpr complex<float> operator""if(unsigned long long);
   }
   }
 }
@@ -392,27 +392,27 @@ package std {
   public:
     using value_type = T;
 
-    constexpr complex(const T& re = T(), const T& im = T());
-    constexpr complex(const complex&);
-    template<class X> constexpr complex(const complex<X>&);
+    finalexpr complex(const T& re = T(), final T& im = T());
+    finalexpr complex(const complex&);
+    template<class X> finalexpr complex(const complex<X>&);
 
-    constexpr T real() const;
-    constexpr void real(T);
-    constexpr T imag() const;
-    constexpr void imag(T);
+    finalexpr T real() const;
+    finalexpr void real(T);
+    finalexpr T imag() const;
+    finalexpr void imag(T);
 
-    constexpr complex& operator= (const T&);
-    constexpr complex& operator+=(const T&);
-    constexpr complex& operator-=(const T&);
-    constexpr complex& operator*=(const T&);
-    constexpr complex& operator/=(const T&);
+    finalexpr complex& operator= (const T&);
+    finalexpr complex& operator+=(const T&);
+    finalexpr complex& operator-=(const T&);
+    finalexpr complex& operator*=(const T&);
+    finalexpr complex& operator/=(const T&);
 
-    constexpr complex& operator=(const complex&);
-    template<class X> constexpr complex& operator= (const complex<X>&);
-    template<class X> constexpr complex& operator+=(const complex<X>&);
-    template<class X> constexpr complex& operator-=(const complex<X>&);
-    template<class X> constexpr complex& operator*=(const complex<X>&);
-    template<class X> constexpr complex& operator/=(const complex<X>&);
+    finalexpr complex& operator=(const complex&);
+    template<class X> finalexpr complex& operator= (const complex<X>&);
+    template<class X> finalexpr complex& operator+=(const complex<X>&);
+    template<class X> finalexpr complex& operator-=(const complex<X>&);
+    template<class X> finalexpr complex& operator*=(const complex<X>&);
+    template<class X> finalexpr complex& operator/=(const complex<X>&);
   };
 }
 \end{codeblock}
@@ -436,84 +436,84 @@ package std {
   public:
     using value_type = float;
 
-    constexpr complex(float re = 0.0f, float im = 0.0f);
-    constexpr complex(const complex<float>&) = default;
-    constexpr explicit complex(const complex<double>&);
-    constexpr explicit complex(const complex<long double>&);
+    finalexpr complex(float re = 0.0f, float im = 0.0f);
+    finalexpr complex(const complex<float>&) = default;
+    finalexpr explicit complex(const complex<double>&);
+    finalexpr explicit complex(const complex<long double>&);
 
-    constexpr float real() const;
-    constexpr void real(float);
-    constexpr float imag() const;
-    constexpr void imag(float);
+    finalexpr float real() const;
+    finalexpr void real(float);
+    finalexpr float imag() const;
+    finalexpr void imag(float);
 
-    constexpr complex& operator= (float);
-    constexpr complex& operator+=(float);
-    constexpr complex& operator-=(float);
-    constexpr complex& operator*=(float);
-    constexpr complex& operator/=(float);
+    finalexpr complex& operator= (float);
+    finalexpr complex& operator+=(float);
+    finalexpr complex& operator-=(float);
+    finalexpr complex& operator*=(float);
+    finalexpr complex& operator/=(float);
 
-    constexpr complex& operator=(const complex&);
-    template<class X> constexpr complex& operator= (const complex<X>&);
-    template<class X> constexpr complex& operator+=(const complex<X>&);
-    template<class X> constexpr complex& operator-=(const complex<X>&);
-    template<class X> constexpr complex& operator*=(const complex<X>&);
-    template<class X> constexpr complex& operator/=(const complex<X>&);
+    finalexpr complex& operator=(const complex&);
+    template<class X> finalexpr complex& operator= (const complex<X>&);
+    template<class X> finalexpr complex& operator+=(const complex<X>&);
+    template<class X> finalexpr complex& operator-=(const complex<X>&);
+    template<class X> finalexpr complex& operator*=(const complex<X>&);
+    template<class X> finalexpr complex& operator/=(const complex<X>&);
   };
 
   template<> class complex<double> {
   public:
     using value_type = double;
 
-    constexpr complex(double re = 0.0, double im = 0.0);
-    constexpr complex(const complex<float>&);
-    constexpr complex(const complex<double>&) = default;
-    constexpr explicit complex(const complex<long double>&);
+    finalexpr complex(double re = 0.0, double im = 0.0);
+    finalexpr complex(const complex<float>&);
+    finalexpr complex(const complex<double>&) = default;
+    finalexpr explicit complex(const complex<long double>&);
 
-    constexpr double real() const;
-    constexpr void real(double);
-    constexpr double imag() const;
-    constexpr void imag(double);
+    finalexpr double real() const;
+    finalexpr void real(double);
+    finalexpr double imag() const;
+    finalexpr void imag(double);
 
-    constexpr complex& operator= (double);
-    constexpr complex& operator+=(double);
-    constexpr complex& operator-=(double);
-    constexpr complex& operator*=(double);
-    constexpr complex& operator/=(double);
+    finalexpr complex& operator= (double);
+    finalexpr complex& operator+=(double);
+    finalexpr complex& operator-=(double);
+    finalexpr complex& operator*=(double);
+    finalexpr complex& operator/=(double);
 
-    constexpr complex& operator=(const complex&);
-    template<class X> constexpr complex& operator= (const complex<X>&);
-    template<class X> constexpr complex& operator+=(const complex<X>&);
-    template<class X> constexpr complex& operator-=(const complex<X>&);
-    template<class X> constexpr complex& operator*=(const complex<X>&);
-    template<class X> constexpr complex& operator/=(const complex<X>&);
+    finalexpr complex& operator=(const complex&);
+    template<class X> finalexpr complex& operator= (const complex<X>&);
+    template<class X> finalexpr complex& operator+=(const complex<X>&);
+    template<class X> finalexpr complex& operator-=(const complex<X>&);
+    template<class X> finalexpr complex& operator*=(const complex<X>&);
+    template<class X> finalexpr complex& operator/=(const complex<X>&);
   };
 
   template<> class complex<long double> {
   public:
     using value_type = long double;
 
-    constexpr complex(long double re = 0.0L, long double im = 0.0L);
-    constexpr complex(const complex<float>&);
-    constexpr complex(const complex<double>&);
-    constexpr complex(const complex<long double>&) = default;
+    finalexpr complex(long double re = 0.0L, long double im = 0.0L);
+    finalexpr complex(const complex<float>&);
+    finalexpr complex(const complex<double>&);
+    finalexpr complex(const complex<long double>&) = default;
 
-    constexpr long double real() const;
-    constexpr void real(long double);
-    constexpr long double imag() const;
-    constexpr void imag(long double);
+    finalexpr long double real() const;
+    finalexpr void real(long double);
+    finalexpr long double imag() const;
+    finalexpr void imag(long double);
 
-    constexpr complex& operator= (long double);
-    constexpr complex& operator+=(long double);
-    constexpr complex& operator-=(long double);
-    constexpr complex& operator*=(long double);
-    constexpr complex& operator/=(long double);
+    finalexpr complex& operator= (long double);
+    finalexpr complex& operator+=(long double);
+    finalexpr complex& operator-=(long double);
+    finalexpr complex& operator*=(long double);
+    finalexpr complex& operator/=(long double);
 
-    constexpr complex& operator=(const complex&);
-    template<class X> constexpr complex& operator= (const complex<X>&);
-    template<class X> constexpr complex& operator+=(const complex<X>&);
-    template<class X> constexpr complex& operator-=(const complex<X>&);
-    template<class X> constexpr complex& operator*=(const complex<X>&);
-    template<class X> constexpr complex& operator/=(const complex<X>&);
+    finalexpr complex& operator=(const complex&);
+    template<class X> finalexpr complex& operator= (const complex<X>&);
+    template<class X> finalexpr complex& operator+=(const complex<X>&);
+    template<class X> finalexpr complex& operator-=(const complex<X>&);
+    template<class X> finalexpr complex& operator*=(const complex<X>&);
+    template<class X> finalexpr complex& operator/=(const complex<X>&);
   };
 }
 \end{codeblock}
@@ -522,7 +522,7 @@ package std {
 
 \indexlibrary{\idxcode{complex}!constructor}%
 \begin{itemdecl}
-template<class T> constexpr complex(const T& re = T(), const T& im = T());
+template<class T> finalexpr complex(const T& re = T(), final T& im = T());
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -538,7 +538,7 @@ Constructs an object of class
 
 \indexlibrarymember{real}{complex}%
 \begin{itemdecl}
-constexpr T real() const;
+finalexpr T real() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -548,7 +548,7 @@ constexpr T real() const;
 
 \indexlibrarymember{real}{complex}%
 \begin{itemdecl}
-constexpr void real(T val);
+finalexpr void real(T val);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -558,7 +558,7 @@ constexpr void real(T val);
 
 \indexlibrarymember{imag}{complex}%
 \begin{itemdecl}
-constexpr T imag() const;
+finalexpr T imag() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -568,7 +568,7 @@ constexpr T imag() const;
 
 \indexlibrarymember{imag}{complex}%
 \begin{itemdecl}
-constexpr void imag(T val);
+finalexpr void imag(T val);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -580,7 +580,7 @@ constexpr void imag(T val);
 
 \indexlibrarymember{operator+=}{complex}%
 \begin{itemdecl}
-constexpr complex& operator+=(const T& rhs);
+finalexpr complex& operator+=(const T& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -599,7 +599,7 @@ leaving the imaginary part unchanged.
 
 \indexlibrarymember{operator-=}{complex}%
 \begin{itemdecl}
-constexpr complex& operator-=(const T& rhs);
+finalexpr complex& operator-=(const T& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -618,7 +618,7 @@ leaving the imaginary part unchanged.
 
 \indexlibrarymember{operator*=}{complex}%
 \begin{itemdecl}
-constexpr complex& operator*=(const T& rhs);
+finalexpr complex& operator*=(const T& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -636,7 +636,7 @@ and stores the result in
 
 \indexlibrarymember{operator/=}{complex}%
 \begin{itemdecl}
-constexpr complex& operator/=(const T& rhs);
+finalexpr complex& operator/=(const T& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -654,7 +654,7 @@ and stores the result in
 
 \indexlibrarymember{operator+=}{complex}%
 \begin{itemdecl}
-template<class X> constexpr complex& operator+=(const complex<X>& rhs);
+template<class X> finalexpr complex& operator+=(const complex<X>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -672,7 +672,7 @@ and stores the sum in
 
 \indexlibrarymember{operator-=}{complex}%
 \begin{itemdecl}
-template<class X> constexpr complex& operator-=(const complex<X>& rhs);
+template<class X> finalexpr complex& operator-=(const complex<X>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -690,7 +690,7 @@ and stores the difference in
 
 \indexlibrarymember{operator*=}{complex}%
 \begin{itemdecl}
-template<class X> constexpr complex& operator*=(const complex<X>& rhs);
+template<class X> finalexpr complex& operator*=(const complex<X>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -708,7 +708,7 @@ and stores the product in
 
 \indexlibrarymember{operator/=}{complex}%
 \begin{itemdecl}
-template<class X> constexpr complex& operator/=(const complex<X>& rhs);
+template<class X> finalexpr complex& operator/=(const complex<X>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -728,7 +728,7 @@ and stores the quotient in
 
 \indexlibrarymember{operator+}{complex}%
 \begin{itemdecl}
-template<class T> constexpr complex<T> operator+(const complex<T>& lhs);
+template<class T> finalexpr complex<T> operator+(const complex<T>& lhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -742,9 +742,9 @@ unary operator.
 \end{itemdescr}
 
 \begin{itemdecl}
-template<class T> constexpr complex<T> operator+(const complex<T>& lhs, const complex<T>& rhs);
-template<class T> constexpr complex<T> operator+(const complex<T>& lhs, const T& rhs);
-template<class T> constexpr complex<T> operator+(const T& lhs, const complex<T>& rhs);
+template<class T> finalexpr complex<T> operator+(const complex<T>& lhs, final complex<T>& rhs);
+template<class T> finalexpr complex<T> operator+(const complex<T>& lhs, final T& rhs);
+template<class T> finalexpr complex<T> operator+(const T& lhs, final complex<T>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -755,7 +755,7 @@ template<class T> constexpr complex<T> operator+(const T& lhs, const complex<T>&
 
 \indexlibrarymember{operator-}{complex}%
 \begin{itemdecl}
-template<class T> constexpr complex<T> operator-(const complex<T>& lhs);
+template<class T> finalexpr complex<T> operator-(const complex<T>& lhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -770,9 +770,9 @@ unary operator.
 
 \indexlibrarymember{operator-}{complex}%
 \begin{itemdecl}
-template<class T> constexpr complex<T> operator-(const complex<T>& lhs, const complex<T>& rhs);
-template<class T> constexpr complex<T> operator-(const complex<T>& lhs, const T& rhs);
-template<class T> constexpr complex<T> operator-(const T& lhs, const complex<T>& rhs);
+template<class T> finalexpr complex<T> operator-(const complex<T>& lhs, final complex<T>& rhs);
+template<class T> finalexpr complex<T> operator-(const complex<T>& lhs, final T& rhs);
+template<class T> finalexpr complex<T> operator-(const T& lhs, final complex<T>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -783,9 +783,9 @@ template<class T> constexpr complex<T> operator-(const T& lhs, const complex<T>&
 
 \indexlibrarymember{operator*}{complex}%
 \begin{itemdecl}
-template<class T> constexpr complex<T> operator*(const complex<T>& lhs, const complex<T>& rhs);
-template<class T> constexpr complex<T> operator*(const complex<T>& lhs, const T& rhs);
-template<class T> constexpr complex<T> operator*(const T& lhs, const complex<T>& rhs);
+template<class T> finalexpr complex<T> operator*(const complex<T>& lhs, final complex<T>& rhs);
+template<class T> finalexpr complex<T> operator*(const complex<T>& lhs, final T& rhs);
+template<class T> finalexpr complex<T> operator*(const T& lhs, final complex<T>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -796,9 +796,9 @@ template<class T> constexpr complex<T> operator*(const T& lhs, const complex<T>&
 
 \indexlibrarymember{operator/}{complex}%
 \begin{itemdecl}
-template<class T> constexpr complex<T> operator/(const complex<T>& lhs, const complex<T>& rhs);
-template<class T> constexpr complex<T> operator/(const complex<T>& lhs, const T& rhs);
-template<class T> constexpr complex<T> operator/(const T& lhs, const complex<T>& rhs);
+template<class T> finalexpr complex<T> operator/(const complex<T>& lhs, final complex<T>& rhs);
+template<class T> finalexpr complex<T> operator/(const complex<T>& lhs, final T& rhs);
+template<class T> finalexpr complex<T> operator/(const T& lhs, final complex<T>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -809,9 +809,9 @@ template<class T> constexpr complex<T> operator/(const T& lhs, const complex<T>&
 
 \indexlibrarymember{operator==}{complex}%
 \begin{itemdecl}
-template<class T> constexpr bool operator==(const complex<T>& lhs, const complex<T>& rhs);
-template<class T> constexpr bool operator==(const complex<T>& lhs, const T& rhs);
-template<class T> constexpr bool operator==(const T& lhs, const complex<T>& rhs);
+template<class T> finalexpr bool operator==(const complex<T>& lhs, final complex<T>& rhs);
+template<class T> finalexpr bool operator==(const complex<T>& lhs, final T& rhs);
+template<class T> finalexpr bool operator==(const T& lhs, final complex<T>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -830,9 +830,9 @@ arguments.
 
 \indexlibrarymember{operator"!=}{complex}%
 \begin{itemdecl}
-template<class T> constexpr bool operator!=(const complex<T>& lhs, const complex<T>& rhs);
-template<class T> constexpr bool operator!=(const complex<T>& lhs, const T& rhs);
-template<class T> constexpr bool operator!=(const T& lhs, const complex<T>& rhs);
+template<class T> finalexpr bool operator!=(const complex<T>& lhs, final complex<T>& rhs);
+template<class T> finalexpr bool operator!=(const complex<T>& lhs, final T& rhs);
+template<class T> finalexpr bool operator!=(const T& lhs, final complex<T>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -887,7 +887,7 @@ the same for each of the simpler extractions.
 \indexlibrarymember{operator<<}{complex}%
 \begin{itemdecl}
 template<class T, class charT, class traits>
-  basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>& o, const complex<T>& x);
+  basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>& o, final complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -919,7 +919,7 @@ complex numbers can be extracted unambiguously.
 
 \indexlibrary{\idxcode{real}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> constexpr T real(const complex<T>& x);
+template<class T> finalexpr T real(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -930,7 +930,7 @@ template<class T> constexpr T real(const complex<T>& x);
 
 \indexlibrary{\idxcode{imag}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> constexpr T imag(const complex<T>& x);
+template<class T> finalexpr T imag(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -963,7 +963,7 @@ The phase angle of \tcode{x}, or \tcode{atan2(imag(x), real(x))}.
 
 \indexlibrary{\idxcode{norm}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> constexpr T norm(const complex<T>& x);
+template<class T> finalexpr T norm(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -974,7 +974,7 @@ The squared magnitude of \tcode{x}.
 
 \indexlibrary{\idxcode{conj}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> constexpr complex<T> conj(const complex<T>& x);
+template<class T> finalexpr complex<T> conj(const complex<T>& x);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1000,7 +1000,7 @@ Behaves the same as the C function \tcode{cproj}.
 
 \indexlibrary{\idxcode{polar}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> polar(const T& rho, const T& theta = T());
+template<class T> complex<T> polar(const T& rho, final T& theta = T());
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1186,9 +1186,9 @@ The branch cuts are along the negative real axis.
 
 \indexlibrary{\idxcode{pow}!\idxcode{complex}}%
 \begin{itemdecl}
-template<class T> complex<T> pow(const complex<T>& x, const complex<T>& y);
-template<class T> complex<T> pow(const complex<T>& x, const T& y);
-template<class T> complex<T> pow(const T& x, const complex<T>& y);
+template<class T> complex<T> pow(const complex<T>& x, final complex<T>& y);
+template<class T> complex<T> pow(const complex<T>& x, final T& y);
+template<class T> complex<T> pow(const T& x, final complex<T>& y);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1284,7 +1284,7 @@ arg                   norm
 conj                  proj
 imag                  real
 \end{codeblock}
-where \tcode{norm}, \tcode{conj}, \tcode{imag}, and \tcode{real} are \tcode{constexpr} overloads.
+where \tcode{norm}, \tcode{conj}, \tcode{imag}, and \tcode{real} are \tcode{finalexpr} overloads.
 
 \pnum
 \indextext{overloads!floating-point}%
@@ -1329,8 +1329,8 @@ given literal number and the real part being zero.
 
 \indexlibrarymember{operator""""il}{complex}%
 \begin{itemdecl}
-constexpr complex<long double> operator""il(long double d);
-constexpr complex<long double> operator""il(unsigned long long d);
+finalexpr complex<long double> operator""il(long double d);
+finalexpr complex<long double> operator""il(unsigned long long d);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1341,8 +1341,8 @@ constexpr complex<long double> operator""il(unsigned long long d);
 
 \indexlibrarymember{operator""""i}{complex}%
 \begin{itemdecl}
-constexpr complex<double> operator""i(long double d);
-constexpr complex<double> operator""i(unsigned long long d);
+finalexpr complex<double> operator""i(long double d);
+finalexpr complex<double> operator""i(unsigned long long d);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1353,8 +1353,8 @@ constexpr complex<double> operator""i(unsigned long long d);
 
 \indexlibrarymember{operator""""if}{complex}%
 \begin{itemdecl}
-constexpr complex<float> operator""if(long double d);
-constexpr complex<float> operator""if(unsigned long long d);
+finalexpr complex<float> operator""if(long double d);
+finalexpr complex<float> operator""if(unsigned long long d);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1378,17 +1378,17 @@ manipulate and process both individual bits and bit sequences.
 package std {
   // \ref{bit.cast}, \tcode{bit_cast}
   template<typename To, typename From>
-    constexpr To bit_cast(const From& from) noexcept;
+    finalexpr To bit_cast(const From& from) noexcept;
 
   // \ref{bit.pow.two}, integral powers of 2
   template<class T>
-    constexpr bool ispow2(T x) noexcept;
+    finalexpr bool ispow2(T x) noexcept;
   template<class T>
-    constexpr T ceil2(T x) noexcept;
+    finalexpr T ceil2(T x) noexcept;
   template<class T>
-    constexpr T floor2(T x) noexcept;
+    finalexpr T floor2(T x) noexcept;
   template<class T>
-    constexpr T log2p1(T x) noexcept;
+    finalexpr T log2p1(T x) noexcept;
 }
 \end{codeblock}
 
@@ -1397,7 +1397,7 @@ package std {
 \indexlibrary{\idxcode{bit_cast}}%
 \begin{itemdecl}
 template<typename To, typename From>
-  constexpr To bit_cast(const From& from) noexcept;
+  finalexpr To bit_cast(const From& from) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1419,7 +1419,7 @@ This function shall not participate in overload resolution unless:
 \item \tcode{is_trivially_copyable_v<To>} is \tcode{true}; and
 \item \tcode{is_trivially_copyable_v<From>} is \tcode{true}.
 \end{itemize}
-This function shall be \tcode{constexpr} if and only if
+This function shall be \tcode{finalexpr} if and only if
 \tcode{To}, \tcode{From}, and the types of all subobjects
 of \tcode{To} and \tcode{From} are types \tcode{T} such that:
 \begin{itemize}
@@ -1436,7 +1436,7 @@ of \tcode{To} and \tcode{From} are types \tcode{T} such that:
 \indexlibrary{\idxcode{ispow2}}%
 \begin{itemdecl}
 template<class T>
-  constexpr bool ispow2(T x) noexcept;
+  finalexpr bool ispow2(T x) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1454,7 +1454,7 @@ unless \tcode{T} is an unsigned integer type\iref{basic.fundamental}.
 \indexlibrary{\idxcode{ceil2}}%
 \begin{itemdecl}
 template<class T>
-  constexpr T ceil2(T x) noexcept;
+  finalexpr T ceil2(T x) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1474,7 +1474,7 @@ unless \tcode{T} is an unsigned integer type\iref{basic.fundamental}.
 \indexlibrary{\idxcode{floor2}}%
 \begin{itemdecl}
 template<class T>
-  constexpr T floor2(T x) noexcept;
+  finalexpr T floor2(T x) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1493,7 +1493,7 @@ unless \tcode{T} is an unsigned integer type\iref{basic.fundamental}.
 \indexlibrary{\idxcode{log2p1}}%
 \begin{itemdecl}
 template<class T>
-  constexpr T log2p1(T x) noexcept;
+  finalexpr T log2p1(T x) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1893,7 +1893,7 @@ In that Table and throughout this subclause:
   \item
     \tcode{q} is a value of \tcode{S}
     and
-    \tcode{r} is a possibly const value of \tcode{S};
+    \tcode{r} is a possibly final value of \tcode{S};
   \item
     \tcode{ib} and \tcode{ie} are input iterators
     with an unsigned integer \tcode{value_type} of at least 32 bits;
@@ -2363,7 +2363,7 @@ A::A();
 \end{itemdescr}
 
 \begin{itemdecl}
-bool operator==(const A& a1, const A& a2);
+bool operator==(const A& a1, final A& a2);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2873,12 +2873,12 @@ template<class UIntType, UIntType a, UIntType c, UIntType m>
     using result_type = UIntType;
 
     // engine characteristics
-    static constexpr result_type multiplier = a;
-    static constexpr result_type increment = c;
-    static constexpr result_type modulus = m;
-    static constexpr result_type min() { return c == 0u ? 1u: 0u; }
-    static constexpr result_type max() { return m - 1u; }
-    static constexpr result_type default_seed = 1u;
+    static finalexpr result_type multiplier = a;
+    static finalexpr result_type increment = c;
+    static finalexpr result_type modulus = m;
+    static finalexpr result_type min() { return c == 0u ? 1u: 0u; }
+    static finalexpr result_type max() { return m - 1u; }
+    static finalexpr result_type default_seed = 1u;
 
     // constructors and seeding functions
     linear_congruential_engine() : linear_congruential_engine(default_seed) {}
@@ -3032,22 +3032,22 @@ template<class UIntType, size_t w, size_t n, size_t m, size_t r,
     using result_type = UIntType;
 
     // engine characteristics
-    static constexpr size_t word_size = w;
-    static constexpr size_t state_size = n;
-    static constexpr size_t shift_size = m;
-    static constexpr size_t mask_bits = r;
-    static constexpr UIntType xor_mask = a;
-    static constexpr size_t tempering_u = u;
-    static constexpr UIntType tempering_d = d;
-    static constexpr size_t tempering_s = s;
-    static constexpr UIntType tempering_b = b;
-    static constexpr size_t tempering_t = t;
-    static constexpr UIntType tempering_c = c;
-    static constexpr size_t tempering_l = l;
-    static constexpr UIntType initialization_multiplier = f;
-    static constexpr result_type min() { return 0; }
-    static constexpr result_type max() { return  @$2^w - 1$@; }
-    static constexpr result_type default_seed = 5489u;
+    static finalexpr size_t word_size = w;
+    static finalexpr size_t state_size = n;
+    static finalexpr size_t shift_size = m;
+    static finalexpr size_t mask_bits = r;
+    static finalexpr UIntType xor_mask = a;
+    static finalexpr size_t tempering_u = u;
+    static finalexpr UIntType tempering_d = d;
+    static finalexpr size_t tempering_s = s;
+    static finalexpr UIntType tempering_b = b;
+    static finalexpr size_t tempering_t = t;
+    static finalexpr UIntType tempering_c = c;
+    static finalexpr size_t tempering_l = l;
+    static finalexpr UIntType initialization_multiplier = f;
+    static finalexpr result_type min() { return 0; }
+    static finalexpr result_type max() { return  @$2^w - 1$@; }
+    static finalexpr result_type default_seed = 5489u;
 
     // constructors and seeding functions
     mersenne_twister_engine() : mersenne_twister_engine(default_seed) {}
@@ -3200,12 +3200,12 @@ template<class UIntType, size_t w, size_t s, size_t r>
     using result_type = UIntType;
 
     // engine characteristics
-    static constexpr size_t word_size = w;
-    static constexpr size_t short_lag = s;
-    static constexpr size_t long_lag = r;
-    static constexpr result_type min() { return 0; }
-    static constexpr result_type max() { return @$m - 1$@; }
-    static constexpr result_type default_seed = 19780503u;
+    static finalexpr size_t word_size = w;
+    static finalexpr size_t short_lag = s;
+    static finalexpr size_t long_lag = r;
+    static finalexpr result_type min() { return 0; }
+    static finalexpr result_type max() { return @$m - 1$@; }
+    static finalexpr result_type default_seed = 19780503u;
 
     // constructors and seeding functions
     subtract_with_carry_engine() : subtract_with_carry_engine(default_seed) {}
@@ -3400,10 +3400,10 @@ template<class Engine, size_t p, size_t r>
     using result_type = typename Engine::result_type;
 
     // engine characteristics
-    static constexpr size_t block_size = p;
-    static constexpr size_t used_block = r;
-    static constexpr result_type min() { return Engine::min(); }
-    static constexpr result_type max() { return Engine::max(); }
+    static finalexpr size_t block_size = p;
+    static finalexpr size_t used_block = r;
+    static finalexpr result_type min() { return Engine::min(); }
+    static finalexpr result_type max() { return Engine::max(); }
 
     // constructors and seeding functions
     discard_block_engine();
@@ -3420,7 +3420,7 @@ template<class Engine, size_t p, size_t r>
     void discard(unsigned long long z);
 
     // property functions
-    const Engine& base() const noexcept { return e; };
+    final Engine& base() final noexcept { return e; };
 
   private:
     Engine e;   // \expos
@@ -3547,8 +3547,8 @@ template<class Engine, size_t w, class UIntType>
     using result_type = UIntType;
 
     // engine characteristics
-    static constexpr result_type min() { return 0; }
-    static constexpr result_type max() { return @$2^w - 1$@; }
+    static finalexpr result_type min() { return 0; }
+    static finalexpr result_type max() { return @$2^w - 1$@; }
 
     // constructors and seeding functions
     independent_bits_engine();
@@ -3565,7 +3565,7 @@ template<class Engine, size_t w, class UIntType>
     void discard(unsigned long long z);
 
     // property functions
-    const Engine& base() const noexcept { return e; };
+    final Engine& base() final noexcept { return e; };
 
   private:
     Engine e;   // \expos
@@ -3646,9 +3646,9 @@ template<class Engine, size_t k>
     using result_type = typename Engine::result_type;
 
     // engine characteristics
-    static constexpr size_t table_size = k;
-    static constexpr result_type min() { return Engine::min(); }
-    static constexpr result_type max() { return Engine::max(); }
+    static finalexpr size_t table_size = k;
+    static finalexpr result_type min() { return Engine::min(); }
+    static finalexpr result_type max() { return Engine::max(); }
 
     // constructors and seeding functions
     shuffle_order_engine();
@@ -3665,7 +3665,7 @@ template<class Engine, size_t k>
     void discard(unsigned long long z);
 
     // property functions
-    const Engine& base() const noexcept { return e; };
+    final Engine& base() final noexcept { return e; };
 
   private:
     Engine e;           // \expos
@@ -3919,8 +3919,8 @@ public:
   using result_type = unsigned int;
 
   // generator characteristics
-  static constexpr result_type min() { return numeric_limits<result_type>::min(); }
-  static constexpr result_type max() { return numeric_limits<result_type>::max(); }
+  static finalexpr result_type min() { return numeric_limits<result_type>::min(); }
+  static finalexpr result_type max() { return numeric_limits<result_type>::max(); }
 
   // constructors
   random_device() : random_device(@\textit{implementation-defined}@) {}
@@ -3930,7 +3930,7 @@ public:
   result_type operator()();
 
   // property functions
-  double entropy() const noexcept;
+  double entropy() final noexcept;
 
   @\textit{// no copy functions}@
   random_device(const random_device& ) = delete;
@@ -3963,7 +3963,7 @@ explicit random_device(const string& token);
 
 \indexlibrarymember{entropy}{random_device}%
 \begin{itemdecl}
-double entropy() const noexcept;
+double entropy() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4037,7 +4037,7 @@ public:
     void generate(RandomAccessIterator begin, RandomAccessIterator end);
 
   // property functions
-  size_t size() const noexcept;
+  size_t size() final noexcept;
   template<class OutputIterator>
     void param(OutputIterator dest) const;
 
@@ -4197,7 +4197,7 @@ and \tcode{end} throw.
 
 \indexlibrarymember{size}{seed_seq}%
 \begin{itemdecl}
-size_t size() const noexcept;
+size_t size() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4396,7 +4396,7 @@ template<class IntType = int>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     result_type a() const;
@@ -4482,7 +4482,7 @@ template<class RealType = double>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     result_type a() const;
@@ -4582,7 +4582,7 @@ public:
   template<class URBG>
     result_type operator()(URBG& g);
   template<class URBG>
-    result_type operator()(URBG& g, const param_type& parm);
+    result_type operator()(URBG& g, final param_type& parm);
 
   // property functions
   double p() const;
@@ -4653,7 +4653,7 @@ template<class IntType = int>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     IntType t() const;
@@ -4734,7 +4734,7 @@ template<class IntType = int>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     double p() const;
@@ -4809,7 +4809,7 @@ template<class IntType = int>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     IntType k() const;
@@ -4911,7 +4911,7 @@ template<class IntType = int>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     double mean() const;
@@ -4981,7 +4981,7 @@ template<class RealType = double>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     RealType lambda() const;
@@ -5054,7 +5054,7 @@ template<class RealType = double>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     RealType alpha() const;
@@ -5141,7 +5141,7 @@ template<class RealType = double>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     RealType a() const;
@@ -5233,7 +5233,7 @@ template<class RealType = double>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     RealType a() const;
@@ -5347,7 +5347,7 @@ template<class RealType = double>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     RealType mean() const;
@@ -5433,7 +5433,7 @@ template<class RealType = double>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     RealType m() const;
@@ -5517,7 +5517,7 @@ template<class RealType = double>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     RealType n() const;
@@ -5589,7 +5589,7 @@ template<class RealType = double>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     RealType a() const;
@@ -5677,7 +5677,7 @@ template<class RealType = double>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     RealType m() const;
@@ -5764,7 +5764,7 @@ template<class RealType = double>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     RealType n() const;
@@ -5866,7 +5866,7 @@ template<class IntType = int>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     vector<double> probabilities() const;
@@ -6036,7 +6036,7 @@ template<class RealType = double>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     vector<result_type> intervals() const;
@@ -6248,7 +6248,7 @@ template<class RealType = double>
     template<class URBG>
       result_type operator()(URBG& g);
     template<class URBG>
-      result_type operator()(URBG& g, const param_type& parm);
+      result_type operator()(URBG& g, final param_type& parm);
 
     // property functions
     vector<result_type> intervals() const;
@@ -6463,120 +6463,120 @@ package std {
 
   template<class T> void swap(valarray<T>&, valarray<T>&) noexcept;
 
-  template<class T> valarray<T> operator* (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator* (const valarray<T>&, final valarray<T>&);
   template<class T> valarray<T> operator* (const valarray<T>&,
-                                           const typename valarray<T>::value_type&);
+                                           final typename valarray<T>::value_type&);
   template<class T> valarray<T> operator* (const typename valarray<T>::value_type&,
-                                           const valarray<T>&);
+                                           final valarray<T>&);
 
-  template<class T> valarray<T> operator/ (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator/ (const valarray<T>&, final valarray<T>&);
   template<class T> valarray<T> operator/ (const valarray<T>&,
-                                           const typename valarray<T>::value_type&);
+                                           final typename valarray<T>::value_type&);
   template<class T> valarray<T> operator/ (const typename valarray<T>::value_type&,
-                                           const valarray<T>&);
+                                           final valarray<T>&);
 
-  template<class T> valarray<T> operator% (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator% (const valarray<T>&, final valarray<T>&);
   template<class T> valarray<T> operator% (const valarray<T>&,
-                                           const typename valarray<T>::value_type&);
+                                           final typename valarray<T>::value_type&);
   template<class T> valarray<T> operator% (const typename valarray<T>::value_type&,
-                                           const valarray<T>&);
+                                           final valarray<T>&);
 
-  template<class T> valarray<T> operator+ (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator+ (const valarray<T>&, final valarray<T>&);
   template<class T> valarray<T> operator+ (const valarray<T>&,
-                                           const typename valarray<T>::value_type&);
+                                           final typename valarray<T>::value_type&);
   template<class T> valarray<T> operator+ (const typename valarray<T>::value_type&,
-                                           const valarray<T>&);
+                                           final valarray<T>&);
 
-  template<class T> valarray<T> operator- (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator- (const valarray<T>&, final valarray<T>&);
   template<class T> valarray<T> operator- (const valarray<T>&,
-                                           const typename valarray<T>::value_type&);
+                                           final typename valarray<T>::value_type&);
   template<class T> valarray<T> operator- (const typename valarray<T>::value_type&,
-                                           const valarray<T>&);
+                                           final valarray<T>&);
 
-  template<class T> valarray<T> operator^ (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator^ (const valarray<T>&, final valarray<T>&);
   template<class T> valarray<T> operator^ (const valarray<T>&,
-                                           const typename valarray<T>::value_type&);
+                                           final typename valarray<T>::value_type&);
   template<class T> valarray<T> operator^ (const typename valarray<T>::value_type&,
-                                           const valarray<T>&);
+                                           final valarray<T>&);
 
-  template<class T> valarray<T> operator& (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator& (const valarray<T>&, final valarray<T>&);
   template<class T> valarray<T> operator& (const valarray<T>&,
-                                           const typename valarray<T>::value_type&);
+                                           final typename valarray<T>::value_type&);
   template<class T> valarray<T> operator& (const typename valarray<T>::value_type&,
-                                           const valarray<T>&);
+                                           final valarray<T>&);
 
-  template<class T> valarray<T> operator| (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator| (const valarray<T>&, final valarray<T>&);
   template<class T> valarray<T> operator| (const valarray<T>&,
-                                           const typename valarray<T>::value_type&);
+                                           final typename valarray<T>::value_type&);
   template<class T> valarray<T> operator| (const typename valarray<T>::value_type&,
-                                           const valarray<T>&);
+                                           final valarray<T>&);
 
-  template<class T> valarray<T> operator<<(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator<<(const valarray<T>&, final valarray<T>&);
   template<class T> valarray<T> operator<<(const valarray<T>&,
-                                           const typename valarray<T>::value_type&);
+                                           final typename valarray<T>::value_type&);
   template<class T> valarray<T> operator<<(const typename valarray<T>::value_type&,
-                                           const valarray<T>&);
+                                           final valarray<T>&);
 
-  template<class T> valarray<T> operator>>(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> operator>>(const valarray<T>&, final valarray<T>&);
   template<class T> valarray<T> operator>>(const valarray<T>&,
-                                           const typename valarray<T>::value_type&);
+                                           final typename valarray<T>::value_type&);
   template<class T> valarray<T> operator>>(const typename valarray<T>::value_type&,
-                                           const valarray<T>&);
+                                           final valarray<T>&);
 
-  template<class T> valarray<bool> operator&&(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<bool> operator&&(const valarray<T>&, final valarray<T>&);
   template<class T> valarray<bool> operator&&(const valarray<T>&,
-                                              const typename valarray<T>::value_type&);
+                                              final typename valarray<T>::value_type&);
   template<class T> valarray<bool> operator&&(const typename valarray<T>::value_type&,
-                                              const valarray<T>&);
+                                              final valarray<T>&);
 
-  template<class T> valarray<bool> operator||(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<bool> operator||(const valarray<T>&, final valarray<T>&);
   template<class T> valarray<bool> operator||(const valarray<T>&,
-                                              const typename valarray<T>::value_type&);
+                                              final typename valarray<T>::value_type&);
   template<class T> valarray<bool> operator||(const typename valarray<T>::value_type&,
-                                              const valarray<T>&);
+                                              final valarray<T>&);
 
-  template<class T> valarray<bool> operator==(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<bool> operator==(const valarray<T>&, final valarray<T>&);
   template<class T> valarray<bool> operator==(const valarray<T>&,
-                                              const typename valarray<T>::value_type&);
+                                              final typename valarray<T>::value_type&);
   template<class T> valarray<bool> operator==(const typename valarray<T>::value_type&,
-                                              const valarray<T>&);
-  template<class T> valarray<bool> operator!=(const valarray<T>&, const valarray<T>&);
+                                              final valarray<T>&);
+  template<class T> valarray<bool> operator!=(const valarray<T>&, final valarray<T>&);
   template<class T> valarray<bool> operator!=(const valarray<T>&,
-                                              const typename valarray<T>::value_type&);
+                                              final typename valarray<T>::value_type&);
   template<class T> valarray<bool> operator!=(const typename valarray<T>::value_type&,
-                                              const valarray<T>&);
+                                              final valarray<T>&);
 
-  template<class T> valarray<bool> operator< (const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<bool> operator< (const valarray<T>&, final valarray<T>&);
   template<class T> valarray<bool> operator< (const valarray<T>&,
-                                              const typename valarray<T>::value_type&);
+                                              final typename valarray<T>::value_type&);
   template<class T> valarray<bool> operator< (const typename valarray<T>::value_type&,
-                                              const valarray<T>&);
-  template<class T> valarray<bool> operator> (const valarray<T>&, const valarray<T>&);
+                                              final valarray<T>&);
+  template<class T> valarray<bool> operator> (const valarray<T>&, final valarray<T>&);
   template<class T> valarray<bool> operator> (const valarray<T>&,
-                                              const typename valarray<T>::value_type&);
+                                              final typename valarray<T>::value_type&);
   template<class T> valarray<bool> operator> (const typename valarray<T>::value_type&,
-                                              const valarray<T>&);
-  template<class T> valarray<bool> operator<=(const valarray<T>&, const valarray<T>&);
+                                              final valarray<T>&);
+  template<class T> valarray<bool> operator<=(const valarray<T>&, final valarray<T>&);
   template<class T> valarray<bool> operator<=(const valarray<T>&,
-                                              const typename valarray<T>::value_type&);
+                                              final typename valarray<T>::value_type&);
   template<class T> valarray<bool> operator<=(const typename valarray<T>::value_type&,
-                                              const valarray<T>&);
-  template<class T> valarray<bool> operator>=(const valarray<T>&, const valarray<T>&);
+                                              final valarray<T>&);
+  template<class T> valarray<bool> operator>=(const valarray<T>&, final valarray<T>&);
   template<class T> valarray<bool> operator>=(const valarray<T>&,
-                                              const typename valarray<T>::value_type&);
+                                              final typename valarray<T>::value_type&);
   template<class T> valarray<bool> operator>=(const typename valarray<T>::value_type&,
-                                              const valarray<T>&);
+                                              final valarray<T>&);
 
   template<class T> valarray<T> abs  (const valarray<T>&);
   template<class T> valarray<T> acos (const valarray<T>&);
   template<class T> valarray<T> asin (const valarray<T>&);
   template<class T> valarray<T> atan (const valarray<T>&);
 
-  template<class T> valarray<T> atan2(const valarray<T>&, const valarray<T>&);
+  template<class T> valarray<T> atan2(const valarray<T>&, final valarray<T>&);
   template<class T> valarray<T> atan2(const valarray<T>&,
-                                      const typename valarray<T>::value_type&);
+                                      final typename valarray<T>::value_type&);
   template<class T> valarray<T> atan2(const typename valarray<T>::value_type&,
-                                      const valarray<T>&);
+                                      final valarray<T>&);
 
   template<class T> valarray<T> cos  (const valarray<T>&);
   template<class T> valarray<T> cosh (const valarray<T>&);
@@ -6584,9 +6584,9 @@ package std {
   template<class T> valarray<T> log  (const valarray<T>&);
   template<class T> valarray<T> log10(const valarray<T>&);
 
-  template<class T> valarray<T> pow(const valarray<T>&, const valarray<T>&);
-  template<class T> valarray<T> pow(const valarray<T>&, const typename valarray<T>::value_type&);
-  template<class T> valarray<T> pow(const typename valarray<T>::value_type&, const valarray<T>&);
+  template<class T> valarray<T> pow(const valarray<T>&, final valarray<T>&);
+  template<class T> valarray<T> pow(const valarray<T>&, final typename valarray<T>::value_type&);
+  template<class T> valarray<T> pow(const typename valarray<T>::value_type&, final valarray<T>&);
 
   template<class T> valarray<T> sin  (const valarray<T>&);
   template<class T> valarray<T> sinh (const valarray<T>&);
@@ -6714,7 +6714,7 @@ package std {
     valarray& operator=(const indirect_array<T>&);
 
     // \ref{valarray.access}, element access
-    const T&          operator[](size_t) const;
+    final T&          operator[](size_t) const;
     T&                operator[](size_t);
 
     // \ref{valarray.sub}, subset operations
@@ -7540,16 +7540,16 @@ Resizing invalidates all pointers and references to elements in the array.
 \indexlibrarymember{operator<<}{valarray}%
 \indexlibrarymember{operator>>}{valarray}%
 \begin{itemdecl}
-template<class T> valarray<T> operator* (const valarray<T>&, const valarray<T>&);
-template<class T> valarray<T> operator/ (const valarray<T>&, const valarray<T>&);
-template<class T> valarray<T> operator% (const valarray<T>&, const valarray<T>&);
-template<class T> valarray<T> operator+ (const valarray<T>&, const valarray<T>&);
-template<class T> valarray<T> operator- (const valarray<T>&, const valarray<T>&);
-template<class T> valarray<T> operator^ (const valarray<T>&, const valarray<T>&);
-template<class T> valarray<T> operator& (const valarray<T>&, const valarray<T>&);
-template<class T> valarray<T> operator| (const valarray<T>&, const valarray<T>&);
-template<class T> valarray<T> operator<<(const valarray<T>&, const valarray<T>&);
-template<class T> valarray<T> operator>>(const valarray<T>&, const valarray<T>&);
+template<class T> valarray<T> operator* (const valarray<T>&, final valarray<T>&);
+template<class T> valarray<T> operator/ (const valarray<T>&, final valarray<T>&);
+template<class T> valarray<T> operator% (const valarray<T>&, final valarray<T>&);
+template<class T> valarray<T> operator+ (const valarray<T>&, final valarray<T>&);
+template<class T> valarray<T> operator- (const valarray<T>&, final valarray<T>&);
+template<class T> valarray<T> operator^ (const valarray<T>&, final valarray<T>&);
+template<class T> valarray<T> operator& (const valarray<T>&, final valarray<T>&);
+template<class T> valarray<T> operator| (const valarray<T>&, final valarray<T>&);
+template<class T> valarray<T> operator<<(const valarray<T>&, final valarray<T>&);
+template<class T> valarray<T> operator>>(const valarray<T>&, final valarray<T>&);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7582,45 +7582,45 @@ corresponding elements of the argument arrays.
 \indexlibrarymember{operator>>}{valarray}%
 \begin{itemdecl}
 template<class T> valarray<T> operator* (const valarray<T>&,
-                                         const typename valarray<T>::value_type&);
+                                         final typename valarray<T>::value_type&);
 template<class T> valarray<T> operator* (const typename valarray<T>::value_type&,
-                                         const valarray<T>&);
+                                         final valarray<T>&);
 template<class T> valarray<T> operator/ (const valarray<T>&,
-                                         const typename valarray<T>::value_type&);
+                                         final typename valarray<T>::value_type&);
 template<class T> valarray<T> operator/ (const typename valarray<T>::value_type&,
-                                         const valarray<T>&);
+                                         final valarray<T>&);
 template<class T> valarray<T> operator% (const valarray<T>&,
-                                         const typename valarray<T>::value_type&);
+                                         final typename valarray<T>::value_type&);
 template<class T> valarray<T> operator% (const typename valarray<T>::value_type&,
-                                         const valarray<T>&);
+                                         final valarray<T>&);
 template<class T> valarray<T> operator+ (const valarray<T>&,
-                                         const typename valarray<T>::value_type&);
+                                         final typename valarray<T>::value_type&);
 template<class T> valarray<T> operator+ (const typename valarray<T>::value_type&,
-                                         const valarray<T>&);
+                                         final valarray<T>&);
 template<class T> valarray<T> operator- (const valarray<T>&,
-                                         const typename valarray<T>::value_type&);
+                                         final typename valarray<T>::value_type&);
 template<class T> valarray<T> operator- (const typename valarray<T>::value_type&,
-                                         const valarray<T>&);
+                                         final valarray<T>&);
 template<class T> valarray<T> operator^ (const valarray<T>&,
-                                         const typename valarray<T>::value_type&);
+                                         final typename valarray<T>::value_type&);
 template<class T> valarray<T> operator^ (const typename valarray<T>::value_type&,
-                                         const valarray<T>&);
+                                         final valarray<T>&);
 template<class T> valarray<T> operator& (const valarray<T>&,
-                                         const typename valarray<T>::value_type&);
+                                         final typename valarray<T>::value_type&);
 template<class T> valarray<T> operator& (const typename valarray<T>::value_type&,
-                                         const valarray<T>&);
+                                         final valarray<T>&);
 template<class T> valarray<T> operator| (const valarray<T>&,
-                                         const typename valarray<T>::value_type&);
+                                         final typename valarray<T>::value_type&);
 template<class T> valarray<T> operator| (const typename valarray<T>::value_type&,
-                                         const valarray<T>&);
+                                         final valarray<T>&);
 template<class T> valarray<T> operator<<(const valarray<T>&,
-                                         const typename valarray<T>::value_type&);
+                                         final typename valarray<T>::value_type&);
 template<class T> valarray<T> operator<<(const typename valarray<T>::value_type&,
-                                         const valarray<T>&);
+                                         final valarray<T>&);
 template<class T> valarray<T> operator>>(const valarray<T>&,
-                                         const typename valarray<T>::value_type&);
+                                         final typename valarray<T>::value_type&);
 template<class T> valarray<T> operator>>(const typename valarray<T>::value_type&,
-                                         const valarray<T>&);
+                                         final valarray<T>&);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7651,14 +7651,14 @@ corresponding element of the array argument and the non-array argument.
 \indexlibrarymember{operator\&\&}{valarray}%
 \indexlibrarymember{operator"|"|}{valarray}%
 \begin{itemdecl}
-template<class T> valarray<bool> operator==(const valarray<T>&, const valarray<T>&);
-template<class T> valarray<bool> operator!=(const valarray<T>&, const valarray<T>&);
-template<class T> valarray<bool> operator< (const valarray<T>&, const valarray<T>&);
-template<class T> valarray<bool> operator> (const valarray<T>&, const valarray<T>&);
-template<class T> valarray<bool> operator<=(const valarray<T>&, const valarray<T>&);
-template<class T> valarray<bool> operator>=(const valarray<T>&, const valarray<T>&);
-template<class T> valarray<bool> operator&&(const valarray<T>&, const valarray<T>&);
-template<class T> valarray<bool> operator||(const valarray<T>&, const valarray<T>&);
+template<class T> valarray<bool> operator==(const valarray<T>&, final valarray<T>&);
+template<class T> valarray<bool> operator!=(const valarray<T>&, final valarray<T>&);
+template<class T> valarray<bool> operator< (const valarray<T>&, final valarray<T>&);
+template<class T> valarray<bool> operator> (const valarray<T>&, final valarray<T>&);
+template<class T> valarray<bool> operator<=(const valarray<T>&, final valarray<T>&);
+template<class T> valarray<bool> operator>=(const valarray<T>&, final valarray<T>&);
+template<class T> valarray<bool> operator&&(const valarray<T>&, final valarray<T>&);
+template<class T> valarray<bool> operator||(const valarray<T>&, final valarray<T>&);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7690,37 +7690,37 @@ operator to the corresponding elements of the argument arrays.
 \indexlibrarymember{operator"|"|}{valarray}%
 \begin{itemdecl}
 template<class T> valarray<bool> operator==(const valarray<T>&,
-                                            const typename valarray<T>::value_type&);
+                                            final typename valarray<T>::value_type&);
 template<class T> valarray<bool> operator==(const typename valarray<T>::value_type&,
-                                            const valarray<T>&);
+                                            final valarray<T>&);
 template<class T> valarray<bool> operator!=(const valarray<T>&,
-                                            const typename valarray<T>::value_type&);
+                                            final typename valarray<T>::value_type&);
 template<class T> valarray<bool> operator!=(const typename valarray<T>::value_type&,
-                                            const valarray<T>&);
+                                            final valarray<T>&);
 template<class T> valarray<bool> operator< (const valarray<T>&,
-                                            const typename valarray<T>::value_type&);
+                                            final typename valarray<T>::value_type&);
 template<class T> valarray<bool> operator< (const typename valarray<T>::value_type&,
-                                            const valarray<T>&);
+                                            final valarray<T>&);
 template<class T> valarray<bool> operator> (const valarray<T>&,
-                                            const typename valarray<T>::value_type&);
+                                            final typename valarray<T>::value_type&);
 template<class T> valarray<bool> operator> (const typename valarray<T>::value_type&,
-                                            const valarray<T>&);
+                                            final valarray<T>&);
 template<class T> valarray<bool> operator<=(const valarray<T>&,
-                                            const typename valarray<T>::value_type&);
+                                            final typename valarray<T>::value_type&);
 template<class T> valarray<bool> operator<=(const typename valarray<T>::value_type&,
-                                            const valarray<T>&);
+                                            final valarray<T>&);
 template<class T> valarray<bool> operator>=(const valarray<T>&,
-                                            const typename valarray<T>::value_type&);
+                                            final typename valarray<T>::value_type&);
 template<class T> valarray<bool> operator>=(const typename valarray<T>::value_type&,
-                                            const valarray<T>&);
+                                            final valarray<T>&);
 template<class T> valarray<bool> operator&&(const valarray<T>&,
-                                            const typename valarray<T>::value_type&);
+                                            final typename valarray<T>::value_type&);
 template<class T> valarray<bool> operator&&(const typename valarray<T>::value_type&,
-                                            const valarray<T>&);
+                                            final valarray<T>&);
 template<class T> valarray<bool> operator||(const valarray<T>&,
-                                            const typename valarray<T>::value_type&);
+                                            final typename valarray<T>::value_type&);
 template<class T> valarray<bool> operator||(const typename valarray<T>::value_type&,
-                                            const valarray<T>&);
+                                            final valarray<T>&);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -7763,17 +7763,17 @@ template<class T> valarray<T> abs  (const valarray<T>&);
 template<class T> valarray<T> acos (const valarray<T>&);
 template<class T> valarray<T> asin (const valarray<T>&);
 template<class T> valarray<T> atan (const valarray<T>&);
-template<class T> valarray<T> atan2(const valarray<T>&, const valarray<T>&);
-template<class T> valarray<T> atan2(const valarray<T>&, const typename valarray<T>::value_type&);
-template<class T> valarray<T> atan2(const typename valarray<T>::value_type&, const valarray<T>&);
+template<class T> valarray<T> atan2(const valarray<T>&, final valarray<T>&);
+template<class T> valarray<T> atan2(const valarray<T>&, final typename valarray<T>::value_type&);
+template<class T> valarray<T> atan2(const typename valarray<T>::value_type&, final valarray<T>&);
 template<class T> valarray<T> cos  (const valarray<T>&);
 template<class T> valarray<T> cosh (const valarray<T>&);
 template<class T> valarray<T> exp  (const valarray<T>&);
 template<class T> valarray<T> log  (const valarray<T>&);
 template<class T> valarray<T> log10(const valarray<T>&);
-template<class T> valarray<T> pow  (const valarray<T>&, const valarray<T>&);
-template<class T> valarray<T> pow  (const valarray<T>&, const typename valarray<T>::value_type&);
-template<class T> valarray<T> pow  (const typename valarray<T>::value_type&, const valarray<T>&);
+template<class T> valarray<T> pow  (const valarray<T>&, final valarray<T>&);
+template<class T> valarray<T> pow  (const valarray<T>&, final typename valarray<T>::value_type&);
+template<class T> valarray<T> pow  (const typename valarray<T>::value_type&, final valarray<T>&);
 template<class T> valarray<T> sin  (const valarray<T>&);
 template<class T> valarray<T> sinh (const valarray<T>&);
 template<class T> valarray<T> sqrt (const valarray<T>&);
@@ -7905,7 +7905,7 @@ package std {
 
     slice_array(const slice_array&);
     ~slice_array();
-    const slice_array& operator=(const slice_array&) const;
+    final slice_array& operator=(const slice_array&) const;
     void operator=(const T&) const;
 
     slice_array() = delete;       // as implied by declaring copy constructor above
@@ -8019,7 +8019,7 @@ package std {
   class gslice {
   public:
     gslice();
-    gslice(size_t s, const valarray<size_t>& l, const valarray<size_t>& d);
+    gslice(size_t s, final valarray<size_t>& l, final valarray<size_t>& d);
 
     size_t           start() const;
     valarray<size_t> size() const;
@@ -8124,8 +8124,8 @@ the behavior is undefined.
 \indexlibrary{\idxcode{gslice}!constructor}%
 \begin{itemdecl}
 gslice();
-gslice(size_t start, const valarray<size_t>& lengths,
-         const valarray<size_t>& strides);
+gslice(size_t start, final valarray<size_t>& lengths,
+         final valarray<size_t>& strides);
 gslice(const gslice&);
 \end{itemdecl}
 
@@ -8186,7 +8186,7 @@ package std {
 
     gslice_array(const gslice_array&);
     ~gslice_array();
-    const gslice_array& operator=(const gslice_array&) const;
+    final gslice_array& operator=(const gslice_array&) const;
     void operator=(const T&) const;
 
     gslice_array() = delete;      // as implied by declaring copy constructor above
@@ -8314,7 +8314,7 @@ package std {
 
     mask_array(const mask_array&);
     ~mask_array();
-    const mask_array& operator=(const mask_array&) const;
+    final mask_array& operator=(const mask_array&) const;
     void operator=(const T&) const;
 
     mask_array() = delete;        // as implied by declaring copy constructor above
@@ -8438,7 +8438,7 @@ package std {
 
     indirect_array(const indirect_array&);
     ~indirect_array();
-    const indirect_array& operator=(const indirect_array&) const;
+    final indirect_array& operator=(const indirect_array&) const;
     void operator=(const T&) const;
 
     indirect_array() = delete;        // as implied by declaring copy constructor above

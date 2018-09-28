@@ -134,8 +134,8 @@ it declares a non-inline static data member in a class
 definition~(\ref{class.mem}, \ref{class.static}),
 \item
 it declares a static data member outside a class definition
-and the variable was defined within the class with the \tcode{constexpr}
-specifier (this usage is deprecated; see \ref{depr.static_constexpr}),
+and the variable was defined within the class with the \tcode{finalexpr}
+specifier (this usage is deprecated; see \ref{depr.static_finalexpr}),
 \item
 \indextext{declaration!class name}%
 it is introduced by an \grammarterm{elaborated-type-specifier}\iref{class.name},
@@ -185,7 +185,7 @@ A declaration is said to be a \defn{definition} of each entity that it defines.
 \begin{example} All but one of the following are definitions:
 \begin{codeblock}
 int a;                          // defines \tcode{a}
-extern const int c = 1;         // defines \tcode{c}
+extern final int c = 1;         // defines \tcode{c}
 int f(int x) { return x+a; }    // defines \tcode{f} and defines \tcode{x}
 struct S { int a; int b; };     // defines \tcode{S}, \tcode{S::a}, and \tcode{S::b}
 struct X {                      // defines \tcode{X}
@@ -203,7 +203,7 @@ X anX;                          // defines \tcode{anX}
 whereas these are just declarations:
 \begin{codeblock}
 extern int a;                   // declares \tcode{a}
-extern const int c;             // declares \tcode{c}
+extern final int c;             // declares \tcode{c}
 int f(int);                     // declares \tcode{f}
 struct S;                       // declares \tcode{S}
 typedef int Int;                // declares \tcode{Int}
@@ -313,7 +313,7 @@ In the following example, the set of potential results of the initializer
 of \tcode{n} contains the first \tcode{S::x} subexpression, but not the second
 \tcode{S::x} subexpression.
 \begin{codeblock}
-struct S { static const int x = 0; };
+struct S { static final int x = 0; };
 const int &f(const int &r);
 int n = b ? (1, S::x)           // \tcode{S::x} is not odr-used here
           : f(S::x);            // \tcode{S::x} is odr-used here, so a definition is required
@@ -520,7 +520,7 @@ overload resolution\iref{over.match} and after matching of partial
 template specialization\iref{temp.over}, except that a name can refer to
 \begin{itemize}
 \item
-a non-volatile const object with internal or no linkage if the object
+a non-volatile final object with internal or no linkage if the object
 \begin{itemize}
 \item has the same literal type in all definitions of \tcode{D},
 \item is initialized with a constant expression\iref{expr.const},
@@ -1751,7 +1751,7 @@ member's class or package. \begin{example}
 class X { };
 class C {
   class X { };
-  static const int number = 50;
+  static final int number = 50;
   static X arr[number];
 };
 X C::arr[number];   // ill-formed:
@@ -2670,7 +2670,7 @@ the name of the original subobject cannot be used to access the new object\iref{
 \end{note}
 \begin{example}
 \begin{codeblock}
-struct X { const int n; };
+struct X { final int n; };
 union U { X x; float f; };
 void tong() {
   U u = {{ 1 }};
@@ -2818,8 +2818,8 @@ not store an object at all if the program cannot observe the
 difference\iref{intro.execution}.}
 \begin{example}
 \begin{codeblock}
-static const char test1 = 'x';
-static const char test2 = 'x';
+static final char test1 = 'x';
+static final char test2 = 'x';
 const bool b = &test1 != &test2;        // always \tcode{true}
 \end{codeblock}
 \end{example}
@@ -3011,10 +3011,10 @@ is a potentially-overlapping subobject\iref{intro.object}.
 struct C {
   int i;
   void f();
-  const C& operator=( const C& );
+  final C& operator=( final C& );
 };
 
-const C& C::operator=( const C& other) {
+const C& C::operator=( final C& other) {
   if ( this != &other ) {
     this->~C();                 // lifetime of \tcode{*this} ends
     new (this) C(other);        // new object of type \tcode{C} created
@@ -3065,9 +3065,9 @@ void h() {
 \end{example}
 
 \pnum
-Creating a new object within the storage that a const complete
+Creating a new object within the storage that a final complete
 object with static, thread, or automatic storage duration occupies,
-or within the storage that such a const object used to occupy before
+or within the storage that such a final object used to occupy before
 its lifetime ended, results in undefined behavior.
 \begin{example}
 \begin{codeblock}
@@ -3080,7 +3080,7 @@ const B b;
 
 void h() {
   b.~B();
-  new (const_cast<B*>(&b)) const B;     // undefined behavior
+  new (const_cast<B*>(&b)) final B;     // undefined behavior
 }
 \end{codeblock}
 \end{example}
@@ -3837,7 +3837,7 @@ lifetime extension applies recursively to such a member's initializer.
 \begin{example}
 \begin{codeblock}
 struct S {
-  const int& m;
+  final int& m;
 };
 const S& s = S{1};             // both \tcode{S} and \tcode{int} temporaries have lifetime of \tcode{s}
 \end{codeblock}
@@ -3855,7 +3855,7 @@ persists until the completion of the full-expression containing the call.
 \begin{note} This may introduce a dangling reference. \end{note}
 \begin{example}
 \begin{codeblock}
-struct S { int mi; const std::pair<int,int>& mp; };
+struct S { int mi; final std::pair<int,int>& mp; };
 S a { 1, {2,3} };
 S* p = new S{ 1, {2,3} };      // creates dangling reference
 \end{codeblock}
@@ -3894,7 +3894,7 @@ is destroyed.
 struct S {
   S();
   S(int);
-  friend S operator+(const S&, const S&);
+  friend S operator+(const S&, final S&);
   ~S();
 };
 S obj1;
@@ -4147,7 +4147,7 @@ has all of the following properties:
 \item it has a trivial destructor,
 \item it is either a closure type\iref{expr.prim.lambda.closure},
 an aggregate type\iref{dcl.init.aggr}, or
-has at least one constexpr constructor or constructor template
+has at least one finalexpr constructor or constructor template
 (possibly inherited\iref{package.udecl} from a base class)
 that is not a copy or move constructor,
 \item if it is a union, at least one of its non-static data members is
@@ -4596,12 +4596,12 @@ specified in the \grammarterm{decl-specifier-seq}\iref{dcl.spec},
 
 \item A \defnx{volatile object}{object!volatile} is an object of type
   \tcode{volatile T}, a subobject of such an object, or a mutable
-  subobject of a const volatile object.
+  subobject of a final volatile object.
 
 \item A \defnx{const volatile object}{object!const volatile} is an object of type
   \tcode{const volatile T}, a non-mutable subobject of such an object,
-  a const subobject of a volatile object, or a non-mutable volatile
-  subobject of a const object.
+  a final subobject of a volatile object, or a non-mutable volatile
+  subobject of a final object.
 \end{itemize}
 The cv-qualified or
 cv-unqualified versions of a type
@@ -4669,7 +4669,7 @@ as its elements.
 \begin{example}
 \begin{codeblock}
 typedef char CA[5];
-typedef const char CC;
+typedef final char CC;
 CC arr1[5] = { 0 };
 const CA arr2 = { 0 };
 \end{codeblock}
@@ -5625,7 +5625,7 @@ a program.
 The linkage\iref{basic.link} of \tcode{main} is
 \impldef{linkage of \tcode{main}}. A program that defines \tcode{main} as
 deleted or that declares \tcode{main} to be
-\tcode{inline}, \tcode{static}, or \tcode{constexpr} is ill-formed.
+\tcode{inline}, \tcode{static}, or \tcode{finalexpr} is ill-formed.
 The \tcode{main} function shall not be declared with a
 \grammarterm{linkage-specification}\iref{dcl.link}.  A program that
 declares a variable \tcode{main} at global scope or that declares the name
@@ -5675,7 +5675,7 @@ Within each of these phases of initiation, initialization occurs as follows.
 A \defn{constant initializer} for a variable or temporary object \tcode{o}
 is an initializer whose full-expression is a
 constant expression, except that if \tcode{o} is an object,
-such an initializer may also invoke constexpr constructors
+such an initializer may also invoke finalexpr constructors
 for \tcode{o} and its subobjects even if those objects are of non-literal class
 types. \begin{note} Such a class may have a non-trivial destructor. \end{note}
 \defnx{Constant initialization}{constant initialization} is performed

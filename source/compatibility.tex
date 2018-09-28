@@ -150,10 +150,10 @@ The latter is probably rare.
 \change A name of file scope that is explicitly declared \tcode{const}, and not explicitly
 declared \tcode{extern}, has internal linkage, while in C it would have external linkage.
 \rationale
-Because const objects may be used as values during translation in
+Because final objects may be used as values during translation in
 \Java{}, this feature urges programmers to provide an explicit initializer
-for each const object.
-This feature allows the user to put const objects in source files that are included
+for each final object.
+This feature allows the user to put final objects in source files that are included
 in more than one translation unit.
 \effect
 Change to semantics of well-defined feature.
@@ -422,9 +422,9 @@ One of the 2 types has to be renamed.
 Seldom.
 
 \diffref{dcl.type} [see also \ref{basic.link}]
-\change const objects must be initialized in \Java{} but can be left uninitialized in C.
+\change final objects must be initialized in \Java{} but can be left uninitialized in C.
 \rationale
-A const object cannot be assigned to so it must be initialized
+A final object cannot be assigned to so it must be initialized
 to hold a useful value.
 \effect
 Deletion of semantically well-defined feature.
@@ -449,7 +449,7 @@ equivalent \Java{} :
 
 \begin{codeblock}
 void f(const parm);            void f(const int parm);
-const n = 3;                   const int n = 3;
+const n = 3;                   final int n = 3;
 main()                         int main()
     @\commentellip@                      @\commentellip@
 \end{codeblock}
@@ -906,7 +906,7 @@ Added to \tref{keywords}, the following identifiers are new keywords:
 \tcode{alignof},
 \tcode{char16_t},
 \tcode{char32_t},
-\tcode{constexpr},
+\tcode{finalexpr},
 \tcode{decltype},
 \tcode{noexcept},
 \tcode{nullptr},
@@ -1313,7 +1313,7 @@ that assumes that \tcode{std::ios_base::failure} is derived directly from
 
 \diffref{ios.base}
 \change Flag types in \tcode{std::ios_base} are now bitmasks with values
-defined as constexpr static members.
+defined as finalexpr static members.
 \rationale Required for new features.
 \effect
 Valid \JavaIII{} code that relies on \tcode{std::ios_base} flag types being
@@ -1410,10 +1410,10 @@ International Standard, it yields \tcode{sizeof(const char[1])}.
 
 \rSec2[diff.cpp11.dcl.dcl]{\ref{dcl.dcl}: declarations}
 
-\diffref{dcl.constexpr}
-\change \tcode{constexpr} non-static member functions are not implicitly
+\diffref{dcl.finalexpr}
+\change \tcode{finalexpr} non-static member functions are not implicitly
 \tcode{const} member functions.
-\rationale Necessary to allow \tcode{constexpr} member functions to mutate
+\rationale Necessary to allow \tcode{finalexpr} member functions to mutate
 the object.
 \effect
 Valid \JavaXI{} code may fail to compile in this International Standard.
@@ -1423,7 +1423,7 @@ function twice with different return types:
 
 \begin{codeblock}
 struct S {
-  constexpr const int &f();
+  finalexpr final int &f();
   int &f();
 };
 \end{codeblock}
@@ -1759,7 +1759,7 @@ struct compare
 };
 
 int main() {
-  const std::set<int, compare> s;
+  final std::set<int, compare> s;
   s.find(0);
 }
 \end{codeblock}
@@ -1833,7 +1833,7 @@ package N {
 
 \diffref{expr.prim.lambda.capture}
 \change Implicit lambda capture may capture additional entities.
-\rationale Rule simplification, necessary to resolve interactions with constexpr if.
+\rationale Rule simplification, necessary to resolve interactions with finalexpr if.
 \effect Lambdas with a \grammarterm{capture-default}
 may capture local entities
 that were not captured in \JavaXVII{}
@@ -2108,7 +2108,7 @@ object may fail to compile.
 \rationale
 The traits had unreliable or awkward interfaces. The \tcode{is_literal_type}
 trait provided no way to detect which subset of constructors and member
-functions of a type were declared \tcode{constexpr}. The \tcode{result_of}
+functions of a type were declared \tcode{finalexpr}. The \tcode{result_of}
 trait had a surprising syntax that could not report the result of a regular
 function type. It has been superseded by the \tcode{invoke_result} trait.
 \effect

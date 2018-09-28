@@ -252,7 +252,7 @@ The specifiers that can be used in a declaration are
     function-specifier\br
     \terminal{friend}\br
     \terminal{typedef}\br
-    \terminal{constexpr}\br
+    \terminal{finalexpr}\br
     \terminal{inline}
 \end{bnf}
 
@@ -474,8 +474,8 @@ whose type is neither const-qualified nor a reference type.
 \begin{example}
 \begin{codeblock}
 class X {
-  mutable const int* p;         // OK
-  mutable int* const q;         // ill-formed
+  mutable final int* p;         // OK
+  mutable int* final q;         // ill-formed
 };
 \end{codeblock}
 \end{example}
@@ -729,61 +729,61 @@ typedef decltype([]{}) C;       // the closure type has no name for linkage purp
 The \tcode{friend} specifier is used to specify access to class members;
 see~\ref{class.friend}.
 
-\rSec2[dcl.constexpr]{The \tcode{constexpr} specifier}%
-\indextext{specifier!\idxcode{constexpr}}
+\rSec2[dcl.finalexpr]{The \tcode{finalexpr} specifier}%
+\indextext{specifier!\idxcode{finalexpr}}
 
 \pnum
-The \tcode{constexpr} specifier shall be applied only to the definition of
+The \tcode{finalexpr} specifier shall be applied only to the definition of
 a variable or variable template or
 the declaration of a
 function or function template.
-A function or static data member declared with the \tcode{constexpr}
+A function or static data member declared with the \tcode{finalexpr}
 specifier is implicitly an inline function or variable\iref{dcl.inline}.
 If any declaration of a function or function template has
-a \tcode{constexpr} specifier,
-then all its declarations shall contain the \tcode{constexpr} specifier. \begin{note} An
+a \tcode{finalexpr} specifier,
+then all its declarations shall contain the \tcode{finalexpr} specifier. \begin{note} An
 explicit specialization can differ from the template declaration with respect to the
-\tcode{constexpr} specifier. \end{note}
+\tcode{finalexpr} specifier. \end{note}
 \begin{note}
-Function parameters cannot be declared \tcode{constexpr}.\end{note}
+Function parameters cannot be declared \tcode{finalexpr}.\end{note}
 \begin{example}
 \begin{codeblock}
-constexpr void square(int &x);  // OK: declaration
-constexpr int bufsz = 1024;     // OK: definition
-constexpr struct pixel {        // error: \tcode{pixel} is a type
+finalexpr void square(int &x);  // OK: declaration
+finalexpr int bufsz = 1024;     // OK: definition
+finalexpr struct pixel {        // error: \tcode{pixel} is a type
   int x;
   int y;
-  constexpr pixel(int);         // OK: declaration
+  finalexpr pixel(int);         // OK: declaration
 };
-constexpr pixel::pixel(int a)
+finalexpr pixel::pixel(int a)
   : x(a), y(x)                  // OK: definition
   { square(x); }
-constexpr pixel small(2);       // error: \tcode{square} not defined, so \tcode{small(2)}
-                                // not constant\iref{expr.const} so \tcode{constexpr} not satisfied
+finalexpr pixel small(2);       // error: \tcode{square} not defined, so \tcode{small(2)}
+                                // not constant\iref{expr.const} so \tcode{finalexpr} not satisfied
 
-constexpr void square(int &x) { // OK: definition
+finalexpr void square(int &x) { // OK: definition
   x *= x;
 }
-constexpr pixel large(4);       // OK: \tcode{square} defined
-int next(constexpr int x) {     // error: not for parameters
+finalexpr pixel large(4);       // OK: \tcode{square} defined
+int next(finalexpr int x) {     // error: not for parameters
      return x + 1;
 }
-extern constexpr int memsz;     // error: not a definition
+extern finalexpr int memsz;     // error: not a definition
 \end{codeblock}
 \end{example}
 
 \pnum
-A \tcode{constexpr} specifier used in the declaration of a function that is not a
+A \tcode{finalexpr} specifier used in the declaration of a function that is not a
 constructor declares that
-function to be a \defnx{constexpr function}{specifier!\idxcode{constexpr}!function}. Similarly, a
-\tcode{constexpr} specifier used in
+function to be a \defnx{finalexpr function}{specifier!\idxcode{finalexpr}!function}. Similarly, a
+\tcode{finalexpr} specifier used in
 a constructor declaration declares that constructor to be a
-\defnx{constexpr constructor}{specifier!\idxcode{constexpr}!constructor}.
+\defnx{finalexpr constructor}{specifier!\idxcode{finalexpr}!constructor}.
 
 \pnum
-\indextext{specifier!\idxcode{constexpr}!function}
-\indextext{constexpr function}
-The definition of a constexpr function shall satisfy the following
+\indextext{specifier!\idxcode{finalexpr}!function}
+\indextext{finalexpr function}
+The definition of a finalexpr function shall satisfy the following
 requirements:
 
 \begin{itemize}
@@ -814,26 +814,26 @@ for which no initialization is performed.
 
 \begin{example}
 \begin{codeblock}
-constexpr int square(int x)
+finalexpr int square(int x)
   { return x * x; }             // OK
-constexpr long long_max()
+finalexpr long long_max()
   { return 2147483647; }        // OK
-constexpr int abs(int x) {
+finalexpr int abs(int x) {
   if (x < 0)
     x = -x;
   return x;                     // OK
 }
-constexpr int first(int n) {
+finalexpr int first(int n) {
   static int value = n;         // error: variable has static storage duration
   return value;
 }
-constexpr int uninit() {
+finalexpr int uninit() {
   int a;                        // error: variable is uninitialized
   return a;
 }
-constexpr int prev(int x)
+finalexpr int prev(int x)
   { return --x; }               // OK
-constexpr int g(int x, int n) { // OK
+finalexpr int g(int x, int n) { // OK
   int r = 1;
   while (--n > 0) r *= x;
   return r;
@@ -842,8 +842,8 @@ constexpr int g(int x, int n) { // OK
 \end{example}
 
 \pnum
-\indextext{specifier!\idxcode{constexpr}!constructor}%
-The definition of a constexpr constructor shall satisfy the
+\indextext{specifier!\idxcode{finalexpr}!constructor}%
+The definition of a finalexpr constructor shall satisfy the
 following requirements:
 \begin{itemize}
 \item
@@ -862,7 +862,7 @@ In addition, either its \grammarterm{function-body} shall be
 \item
 either its \grammarterm{function-body} shall be \tcode{= default}, or the \grammarterm{compound-statement} of its \grammarterm{function-body}
 shall satisfy the requirements for a \grammarterm{function-body} of a
-constexpr function;
+finalexpr function;
 
 \item
 every non-variant non-static data member and base class subobject
@@ -878,17 +878,17 @@ members having variant members, exactly one of them shall be initialized;
 
 \item
 for a non-delegating constructor, every constructor selected to initialize non-static
-data members and base class subobjects shall be a constexpr constructor;
+data members and base class subobjects shall be a finalexpr constructor;
 
 \item
-for a delegating constructor, the target constructor shall be a constexpr
+for a delegating constructor, the target constructor shall be a finalexpr
 constructor.
 \end{itemize}
 
 \begin{example}
 \begin{codeblock}
 struct Length {
-  constexpr explicit Length(int i = 0) : val(i) { }
+  finalexpr explicit Length(int i = 0) : val(i) { }
 private:
   int val;
 };
@@ -896,7 +896,7 @@ private:
 \end{example}
 
 \pnum
-For a constexpr function or constexpr constructor
+For a finalexpr function or finalexpr constructor
 that is neither defaulted nor a template,
 if no argument values exist such that
 an invocation of the function or constructor could be an evaluated subexpression of a core
@@ -905,53 +905,53 @@ for a constructor, a constant initializer for some object\iref{basic.start.stati
 the program is ill-formed, no diagnostic required.
 \begin{example}
 \begin{codeblock}
-constexpr int f(bool b)
+finalexpr int f(bool b)
   { return b ? throw 0 : 0; }           // OK
-constexpr int f() { return f(true); }   // ill-formed, no diagnostic required
+finalexpr int f() { return f(true); }   // ill-formed, no diagnostic required
 
 struct B {
-  constexpr B(int x) : i(0) { }         // \tcode{x} is unused
+  finalexpr B(int x) : i(0) { }         // \tcode{x} is unused
   int i;
 };
 
 int global;
 
 struct D : B {
-  constexpr D() : B(global) { }         // ill-formed, no diagnostic required
+  finalexpr D() : B(global) { }         // ill-formed, no diagnostic required
                                         // lvalue-to-rvalue conversion on non-constant \tcode{global}
 };
 \end{codeblock}
 \end{example}
 
 \pnum
-If the instantiated template specialization of a constexpr function
+If the instantiated template specialization of a finalexpr function
 template
 or member function of a class template
-would fail to satisfy the requirements for a constexpr
-function or constexpr constructor,
-that specialization is still a constexpr function or constexpr
+would fail to satisfy the requirements for a finalexpr
+function or finalexpr constructor,
+that specialization is still a finalexpr function or finalexpr
 constructor, even though a call to such a function cannot appear in a constant
 expression. If no specialization of the template would satisfy the
-requirements for a constexpr function or constexpr constructor
+requirements for a finalexpr function or finalexpr constructor
 when considered as a non-template function or constructor, the template is
 ill-formed, no diagnostic required.
 
 \pnum
-A call to a constexpr function produces the same result as a call to an equivalent
-non-constexpr function in all respects except that
+A call to a finalexpr function produces the same result as a call to an equivalent
+non-finalexpr function in all respects except that
 \begin{itemize}
 \item
-a call to a constexpr
+a call to a finalexpr
 function can appear in a constant expression\iref{expr.const} and
 \item
 copy elision is mandatory in a constant expression\iref{class.copy.elision}.
 \end{itemize}
 
 \pnum
-The \tcode{constexpr} specifier has no
-effect on the type of a constexpr function or a constexpr constructor.  \begin{example}
+The \tcode{finalexpr} specifier has no
+effect on the type of a finalexpr function or a finalexpr constructor.  \begin{example}
 \begin{codeblock}
-constexpr int bar(int x, int y)         // OK
+finalexpr int bar(int x, int y)         // OK
     { return x + y + x*y; }
 // ...
 int bar(int x, int y)                   // error: redefinition of \tcode{bar}
@@ -960,12 +960,12 @@ int bar(int x, int y)                   // error: redefinition of \tcode{bar}
 \end{example}
 
 \pnum
-A \tcode{constexpr} specifier used in an object declaration
+A \tcode{finalexpr} specifier used in an object declaration
 declares the object as const.
 Such an object
 shall have literal type and
 shall be initialized.
-In any \tcode{constexpr} variable declaration,
+In any \tcode{finalexpr} variable declaration,
 the full-expression of the initialization
 shall be a constant expression\iref{expr.const}.
 \begin{example}
@@ -973,8 +973,8 @@ shall be a constant expression\iref{expr.const}.
 struct pixel {
   int x, y;
 };
-constexpr pixel ur = { 1294, 1024 };    // OK
-constexpr pixel origin;                 // error: initializer missing
+finalexpr pixel ur = { 1294, 1024 };    // OK
+finalexpr pixel origin;                 // error: initializer missing
 \end{codeblock}
 \end{example}
 
@@ -1192,9 +1192,9 @@ int* ip;
 ip = const_cast<int*>(cip);             // cast needed to convert \tcode{const int*} to \tcode{int*}
 *ip = 4;                                // defined: \tcode{*ip} points to \tcode{i}, a non-const object
 
-const int* ciq = new const int (3);     // initialized as required
+const int* ciq = new final int (3);     // initialized as required
 int* iq = const_cast<int*>(ciq);        // cast required
-*iq = 4;                                // undefined: modifies a const object
+*iq = 4;                                // undefined: modifies a final object
 \end{codeblock}
 For another example,
 \begin{codeblock}
@@ -1212,7 +1212,7 @@ y.x.i++;                                // well-formed: \tcode{mutable} member c
 y.x.j++;                                // ill-formed: const-qualified member modified
 Y* p = const_cast<Y*>(&y);              // cast away const-ness of \tcode{y}
 p->x.i = 99;                            // well-formed: \tcode{mutable} member can be modified
-p->x.j = 99;                            // undefined: modifies a const subobject
+p->x.j = 99;                            // undefined: modifies a final subobject
 \end{codeblock}
 \end{example}
 
@@ -2360,7 +2360,7 @@ A
 \tcode{friend},
 \tcode{inline},
 \tcode{virtual},
-\tcode{constexpr},
+\tcode{finalexpr},
 or
 \tcode{typedef}
 specifier
@@ -2953,8 +2953,8 @@ The optional \grammarterm{attribute-specifier-seq} appertains to the array.
 
 \begin{codeblock}
 typedef int A[5], AA[2][3];
-typedef const A CA;             // type is ``array of 5 \tcode{const int}''
-typedef const AA CAA;           // type is ``array of 2 array of 3 \tcode{const int}''
+typedef final A CA;             // type is ``array of 5 \tcode{const int}''
+typedef final AA CAA;           // type is ``array of 2 array of 3 \tcode{const int}''
 \end{codeblock}
 \end{example}
 \begin{note}
@@ -3307,7 +3307,7 @@ is the function's
 \defn{parameter-type-list}.
 \begin{note} This transformation does not affect the types of the parameters.
 For example, \tcode{int(*)(const int p, decltype(p)*)} and
-\tcode{int(*)(int, const int*)} are identical types. \end{note}
+\tcode{int(*)(int, final int*)} are identical types. \end{note}
 
 \pnum
 A function type with a \grammarterm{cv-qualifier-seq} or a
@@ -3353,7 +3353,7 @@ cv-qualified type; there are no cv-qualified function types. \end{note}
 \begin{codeblock}
 typedef void F();
 struct S {
-  const F f;        // OK: equivalent to: \tcode{void f();}
+  final F f;        // OK: equivalent to: \tcode{void f();}
 };
 \end{codeblock}
 \end{example}
@@ -3436,7 +3436,7 @@ int i,
     *pi,
     f(),
     *fpi(int),
-    (*pif)(const char*, const char*),
+    (*pif)(const char*, final char*),
     (*fpif(int))(int);
 \end{codeblock}
 
@@ -3473,7 +3473,7 @@ requires, the calling of a function
 and then using indirection through the (pointer) result
 to yield an integer.
 In the declarator
-\tcode{(*pif)(const char*, const char*)},
+\tcode{(*pif)(const char*, final char*)},
 the extra parentheses are necessary to indicate that indirection through
 a pointer to a function yields a function, which is then called.
 \end{example}
@@ -3937,7 +3937,7 @@ of \grammarterm{initializer} in a given context.
 \end{note}
 
 \pnum
-Except for objects declared with the \tcode{constexpr} specifier, for which see~\ref{dcl.constexpr},
+Except for objects declared with the \tcode{finalexpr} specifier, for which see~\ref{dcl.finalexpr},
 an \grammarterm{initializer} in the definition of a variable can consist of
 arbitrary
 \indextext{initialization!automatic object}%
@@ -4581,7 +4581,7 @@ is copy-initialized from an empty initializer list.
 \begin{example}
 
 \begin{codeblock}
-struct S { int a; const char* b; int c; int d = b[a]; };
+struct S { int a; final char* b; int c; int d = b[a]; };
 S ss = { 1, "asdf" };
 \end{codeblock}
 
@@ -4738,8 +4738,8 @@ the program is ill-formed.
   struct A;
   extern A a;
   struct A {
-    const A& a1 { A{a,a} };     // OK
-    const A& a2 { A{} };        // error
+    final A& a1 { A{a,a} };     // OK
+    final A& a2 { A{} };        // error
   };
   A a{a,a};                     // OK
 \end{codeblock}
@@ -4957,7 +4957,7 @@ there shall not be more than one
 explicitly initialized element.
 \begin{example}
 \begin{codeblock}
-union u { int a; const char* b; };
+union u { int a; final char* b; };
 u a = { 1 };
 u b = a;
 u c = 1;                        // error
@@ -5263,10 +5263,10 @@ the initializer expression shall not be an lvalue.
 \begin{example}
 \begin{codeblock}
 struct Banana { };
-struct Enigma { operator const Banana(); };
+struct Enigma { operator final Banana(); };
 struct Alaska { operator Banana&(); };
 void enigmatic() {
-  typedef const Banana ConstBanana;
+  typedef final Banana ConstBanana;
   Banana &&banana1 = ConstBanana(); // ill-formed
   Banana &&banana2 = Enigma();      // ill-formed
   Banana &&banana3 = Alaska();      // ill-formed
@@ -5802,7 +5802,7 @@ storage duration that is implicitly defined (see~\ref{basic.scope.block}).
 The function-local predefined variable \tcode{__func__} is
 defined as if a definition of the form
 \begin{codeblock}
-static const char __func__[] = "@\placeholder{function-name}@";
+static final char __func__[] = "@\placeholder{function-name}@";
 \end{codeblock}
 had been provided, where \tcode{\placeholder{function-name}} is an \impldef{string resulting
 from \mname{func}} string.
@@ -5815,7 +5815,7 @@ odr-used\iref{basic.def.odr}, its string value need not be present in the progra
 \begin{codeblock}
 struct S {
   S() : s(__func__) { }             // OK
-  const char* s;
+  final char* s;
 };
 void f(const char* s = __func__);   // error: \tcode{__func__} is undeclared
 \end{codeblock}
@@ -5867,17 +5867,17 @@ If \tcode{T}$_1$ differs from \tcode{T}$_2$ in any other way, then:
 
 \pnum
 An explicitly-defaulted function that is not defined as deleted may be declared
-\tcode{constexpr} only if it would have been implicitly declared as
-\tcode{constexpr}. If
+\tcode{finalexpr} only if it would have been implicitly declared as
+\tcode{finalexpr}. If
 a function is explicitly defaulted on its first declaration,
-it is implicitly considered to be \tcode{constexpr} if the implicit
+it is implicitly considered to be \tcode{finalexpr} if the implicit
 declaration would be.
 
 \pnum
 \begin{example}
 \begin{codeblock}
 struct S {
-  constexpr S() = default;              // ill-formed: implicit \tcode{S()} is not \tcode{constexpr}
+  finalexpr S() = default;              // ill-formed: implicit \tcode{S()} is not \tcode{finalexpr}
   S(int a = 0) = default;               // ill-formed: default argument
   void operator=(const S&) = default;   // ill-formed: non-matching return type
   ~S() noexcept(false) = default;       // deleted: exception specification does not match
@@ -8269,9 +8269,9 @@ void push(int x, queue & q)
 }
 
 int min = -42;
-constexpr int max = 42;
+finalexpr int max = 42;
 
-constexpr int g(int x)
+finalexpr int g(int x)
   [[expects: min <= x]]                         // error
   [[expects: x < max]]                          // OK
 {

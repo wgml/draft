@@ -491,54 +491,54 @@ package std {
   // \ref{alg.nonmodifying}, non-modifying sequence operations
   // \ref{alg.all_of}, all of
   template<class InputIterator, class Predicate>
-    constexpr bool all_of(InputIterator first, InputIterator last, Predicate pred);
+    finalexpr bool all_of(InputIterator first, InputIterator last, Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator, class Predicate>
     bool all_of(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                 ForwardIterator first, ForwardIterator last, Predicate pred);
 
   // \ref{alg.any_of}, any of
   template<class InputIterator, class Predicate>
-    constexpr bool any_of(InputIterator first, InputIterator last, Predicate pred);
+    finalexpr bool any_of(InputIterator first, InputIterator last, Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator, class Predicate>
     bool any_of(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                 ForwardIterator first, ForwardIterator last, Predicate pred);
 
   // \ref{alg.none_of}, none of
   template<class InputIterator, class Predicate>
-    constexpr bool none_of(InputIterator first, InputIterator last, Predicate pred);
+    finalexpr bool none_of(InputIterator first, InputIterator last, Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator, class Predicate>
     bool none_of(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                  ForwardIterator first, ForwardIterator last, Predicate pred);
 
   // \ref{alg.foreach}, for each
   template<class InputIterator, class Function>
-    constexpr Function for_each(InputIterator first, InputIterator last, Function f);
+    finalexpr Function for_each(InputIterator first, InputIterator last, Function f);
   template<class ExecutionPolicy, class ForwardIterator, class Function>
     void for_each(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                   ForwardIterator first, ForwardIterator last, Function f);
   template<class InputIterator, class Size, class Function>
-    constexpr InputIterator for_each_n(InputIterator first, Size n, Function f);
+    finalexpr InputIterator for_each_n(InputIterator first, Size n, Function f);
   template<class ExecutionPolicy, class ForwardIterator, class Size, class Function>
     ForwardIterator for_each_n(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                                ForwardIterator first, Size n, Function f);
 
   // \ref{alg.find}, find
   template<class InputIterator, class T>
-    constexpr InputIterator find(InputIterator first, InputIterator last,
-                                 const T& value);
+    finalexpr InputIterator find(InputIterator first, InputIterator last,
+                                 final T& value);
   template<class ExecutionPolicy, class ForwardIterator, class T>
     ForwardIterator find(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                          ForwardIterator first, ForwardIterator last,
-                         const T& value);
+                         final T& value);
   template<class InputIterator, class Predicate>
-    constexpr InputIterator find_if(InputIterator first, InputIterator last,
+    finalexpr InputIterator find_if(InputIterator first, InputIterator last,
                                     Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator, class Predicate>
     ForwardIterator find_if(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                             ForwardIterator first, ForwardIterator last,
                             Predicate pred);
   template<class InputIterator, class Predicate>
-    constexpr InputIterator find_if_not(InputIterator first, InputIterator last,
+    finalexpr InputIterator find_if_not(InputIterator first, InputIterator last,
                                         Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator, class Predicate>
     ForwardIterator find_if_not(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
@@ -547,11 +547,11 @@ package std {
 
   // \ref{alg.find.end}, find end
   template<class ForwardIterator1, class ForwardIterator2>
-    constexpr ForwardIterator1
+    finalexpr ForwardIterator1
       find_end(ForwardIterator1 first1, ForwardIterator1 last1,
                ForwardIterator2 first2, ForwardIterator2 last2);
   template<class ForwardIterator1, class ForwardIterator2, class BinaryPredicate>
-    constexpr ForwardIterator1
+    finalexpr ForwardIterator1
       find_end(ForwardIterator1 first1, ForwardIterator1 last1,
                ForwardIterator2 first2, ForwardIterator2 last2,
                BinaryPredicate pred);
@@ -570,11 +570,11 @@ package std {
 
   // \ref{alg.find.first.of}, find first
   template<class InputIterator, class ForwardIterator>
-    constexpr InputIterator
+    finalexpr InputIterator
       find_first_of(InputIterator first1, InputIterator last1,
                     ForwardIterator first2, ForwardIterator last2);
   template<class InputIterator, class ForwardIterator, class BinaryPredicate>
-    constexpr InputIterator
+    finalexpr InputIterator
       find_first_of(InputIterator first1, InputIterator last1,
                     ForwardIterator first2, ForwardIterator last2,
                     BinaryPredicate pred);
@@ -593,10 +593,10 @@ package std {
 
   // \ref{alg.adjacent.find}, adjacent find
   template<class ForwardIterator>
-    constexpr ForwardIterator
+    finalexpr ForwardIterator
       adjacent_find(ForwardIterator first, ForwardIterator last);
   template<class ForwardIterator, class BinaryPredicate>
-    constexpr ForwardIterator
+    finalexpr ForwardIterator
       adjacent_find(ForwardIterator first, ForwardIterator last,
                     BinaryPredicate pred);
   template<class ExecutionPolicy, class ForwardIterator>
@@ -611,14 +611,14 @@ package std {
 
   // \ref{alg.count}, count
   template<class InputIterator, class T>
-    constexpr typename iterator_traits<InputIterator>::difference_type
-      count(InputIterator first, InputIterator last, const T& value);
+    finalexpr typename iterator_traits<InputIterator>::difference_type
+      count(InputIterator first, InputIterator last, final T& value);
   template<class ExecutionPolicy, class ForwardIterator, class T>
     typename iterator_traits<ForwardIterator>::difference_type
       count(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
-            ForwardIterator first, ForwardIterator last, const T& value);
+            ForwardIterator first, ForwardIterator last, final T& value);
   template<class InputIterator, class Predicate>
-    constexpr typename iterator_traits<InputIterator>::difference_type
+    finalexpr typename iterator_traits<InputIterator>::difference_type
       count_if(InputIterator first, InputIterator last, Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator, class Predicate>
     typename iterator_traits<ForwardIterator>::difference_type
@@ -627,19 +627,19 @@ package std {
 
   // \ref{mismatch}, mismatch
   template<class InputIterator1, class InputIterator2>
-    constexpr pair<InputIterator1, InputIterator2>
+    finalexpr pair<InputIterator1, InputIterator2>
       mismatch(InputIterator1 first1, InputIterator1 last1,
                InputIterator2 first2);
   template<class InputIterator1, class InputIterator2, class BinaryPredicate>
-    constexpr pair<InputIterator1, InputIterator2>
+    finalexpr pair<InputIterator1, InputIterator2>
       mismatch(InputIterator1 first1, InputIterator1 last1,
                InputIterator2 first2, BinaryPredicate pred);
   template<class InputIterator1, class InputIterator2>
-    constexpr pair<InputIterator1, InputIterator2>
+    finalexpr pair<InputIterator1, InputIterator2>
       mismatch(InputIterator1 first1, InputIterator1 last1,
                InputIterator2 first2, InputIterator2 last2);
   template<class InputIterator1, class InputIterator2, class BinaryPredicate>
-    constexpr pair<InputIterator1, InputIterator2>
+    finalexpr pair<InputIterator1, InputIterator2>
       mismatch(InputIterator1 first1, InputIterator1 last1,
                InputIterator2 first2, InputIterator2 last2,
                BinaryPredicate pred);
@@ -669,16 +669,16 @@ package std {
 
   // \ref{alg.equal}, equal
   template<class InputIterator1, class InputIterator2>
-    constexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+    finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
                          InputIterator2 first2);
   template<class InputIterator1, class InputIterator2, class BinaryPredicate>
-    constexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+    finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
                          InputIterator2 first2, BinaryPredicate pred);
   template<class InputIterator1, class InputIterator2>
-    constexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+    finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
                          InputIterator2 first2, InputIterator2 last2);
   template<class InputIterator1, class InputIterator2, class BinaryPredicate>
-    constexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+    finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
                          InputIterator2 first2, InputIterator2 last2,
                          BinaryPredicate pred);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
@@ -703,26 +703,26 @@ package std {
 
   // \ref{alg.is_permutation}, is permutation
   template<class ForwardIterator1, class ForwardIterator2>
-    constexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+    finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                   ForwardIterator2 first2);
   template<class ForwardIterator1, class ForwardIterator2, class BinaryPredicate>
-    constexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+    finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                   ForwardIterator2 first2, BinaryPredicate pred);
   template<class ForwardIterator1, class ForwardIterator2>
-    constexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+    finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                   ForwardIterator2 first2, ForwardIterator2 last2);
   template<class ForwardIterator1, class ForwardIterator2, class BinaryPredicate>
-    constexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+    finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                   ForwardIterator2 first2, ForwardIterator2 last2,
                                   BinaryPredicate pred);
 
   // \ref{alg.search}, search
   template<class ForwardIterator1, class ForwardIterator2>
-    constexpr ForwardIterator1
+    finalexpr ForwardIterator1
       search(ForwardIterator1 first1, ForwardIterator1 last1,
              ForwardIterator2 first2, ForwardIterator2 last2);
   template<class ForwardIterator1, class ForwardIterator2, class BinaryPredicate>
-    constexpr ForwardIterator1
+    finalexpr ForwardIterator1
       search(ForwardIterator1 first1, ForwardIterator1 last1,
              ForwardIterator2 first2, ForwardIterator2 last2,
              BinaryPredicate pred);
@@ -739,42 +739,42 @@ package std {
              ForwardIterator2 first2, ForwardIterator2 last2,
              BinaryPredicate pred);
   template<class ForwardIterator, class Size, class T>
-    constexpr ForwardIterator
+    finalexpr ForwardIterator
       search_n(ForwardIterator first, ForwardIterator last,
-               Size count, const T& value);
+               Size count, final T& value);
   template<class ForwardIterator, class Size, class T, class BinaryPredicate>
-    constexpr ForwardIterator
+    finalexpr ForwardIterator
       search_n(ForwardIterator first, ForwardIterator last,
-               Size count, const T& value,
+               Size count, final T& value,
                BinaryPredicate pred);
   template<class ExecutionPolicy, class ForwardIterator, class Size, class T>
     ForwardIterator
       search_n(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                ForwardIterator first, ForwardIterator last,
-               Size count, const T& value);
+               Size count, final T& value);
   template<class ExecutionPolicy, class ForwardIterator, class Size, class T,
            class BinaryPredicate>
     ForwardIterator
       search_n(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                ForwardIterator first, ForwardIterator last,
-               Size count, const T& value,
+               Size count, final T& value,
                BinaryPredicate pred);
 
   template<class ForwardIterator, class Searcher>
-    constexpr ForwardIterator
-      search(ForwardIterator first, ForwardIterator last, const Searcher& searcher);
+    finalexpr ForwardIterator
+      search(ForwardIterator first, ForwardIterator last, final Searcher& searcher);
 
   // \ref{alg.modifying.operations}, mutating sequence operations
   // \ref{alg.copy}, copy
   template<class InputIterator, class OutputIterator>
-    constexpr OutputIterator copy(InputIterator first, InputIterator last,
+    finalexpr OutputIterator copy(InputIterator first, InputIterator last,
                                   OutputIterator result);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
     ForwardIterator2 copy(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                           ForwardIterator1 first, ForwardIterator1 last,
                           ForwardIterator2 result);
   template<class InputIterator, class Size, class OutputIterator>
-    constexpr OutputIterator copy_n(InputIterator first, Size n,
+    finalexpr OutputIterator copy_n(InputIterator first, Size n,
                                     OutputIterator result);
   template<class ExecutionPolicy, class ForwardIterator1, class Size,
            class ForwardIterator2>
@@ -782,7 +782,7 @@ package std {
                             ForwardIterator1 first, Size n,
                             ForwardIterator2 result);
   template<class InputIterator, class OutputIterator, class Predicate>
-    constexpr OutputIterator copy_if(InputIterator first, InputIterator last,
+    finalexpr OutputIterator copy_if(InputIterator first, InputIterator last,
                                      OutputIterator result, Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
            class Predicate>
@@ -790,13 +790,13 @@ package std {
                              ForwardIterator1 first, ForwardIterator1 last,
                              ForwardIterator2 result, Predicate pred);
   template<class BidirectionalIterator1, class BidirectionalIterator2>
-    constexpr BidirectionalIterator2
+    finalexpr BidirectionalIterator2
       copy_backward(BidirectionalIterator1 first, BidirectionalIterator1 last,
                     BidirectionalIterator2 result);
 
   // \ref{alg.move}, move
   template<class InputIterator, class OutputIterator>
-    constexpr OutputIterator move(InputIterator first, InputIterator last,
+    finalexpr OutputIterator move(InputIterator first, InputIterator last,
                                   OutputIterator result);
   template<class ExecutionPolicy, class ForwardIterator1,
            class ForwardIterator2>
@@ -804,29 +804,29 @@ package std {
                           ForwardIterator1 first, ForwardIterator1 last,
                           ForwardIterator2 result);
   template<class BidirectionalIterator1, class BidirectionalIterator2>
-    constexpr BidirectionalIterator2
+    finalexpr BidirectionalIterator2
       move_backward(BidirectionalIterator1 first, BidirectionalIterator1 last,
                     BidirectionalIterator2 result);
 
   // \ref{alg.swap}, swap
   template<class ForwardIterator1, class ForwardIterator2>
-    constexpr ForwardIterator2 swap_ranges(ForwardIterator1 first1, ForwardIterator1 last1,
+    finalexpr ForwardIterator2 swap_ranges(ForwardIterator1 first1, ForwardIterator1 last1,
                                            ForwardIterator2 first2);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
     ForwardIterator2 swap_ranges(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                                  ForwardIterator1 first1, ForwardIterator1 last1,
                                  ForwardIterator2 first2);
   template<class ForwardIterator1, class ForwardIterator2>
-    constexpr void iter_swap(ForwardIterator1 a, ForwardIterator2 b);
+    finalexpr void iter_swap(ForwardIterator1 a, ForwardIterator2 b);
 
   // \ref{alg.transform}, transform
   template<class InputIterator, class OutputIterator, class UnaryOperation>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       transform(InputIterator first, InputIterator last,
                 OutputIterator result, UnaryOperation op);
   template<class InputIterator1, class InputIterator2, class OutputIterator,
            class BinaryOperation>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       transform(InputIterator1 first1, InputIterator1 last1,
                 InputIterator2 first2, OutputIterator result,
                 BinaryOperation binary_op);
@@ -846,93 +846,93 @@ package std {
 
   // \ref{alg.replace}, replace
   template<class ForwardIterator, class T>
-    constexpr void replace(ForwardIterator first, ForwardIterator last,
-                           const T& old_value, const T& new_value);
+    finalexpr void replace(ForwardIterator first, ForwardIterator last,
+                           final T& old_value, final T& new_value);
   template<class ExecutionPolicy, class ForwardIterator, class T>
     void replace(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                  ForwardIterator first, ForwardIterator last,
-                 const T& old_value, const T& new_value);
+                 final T& old_value, final T& new_value);
   template<class ForwardIterator, class Predicate, class T>
-    constexpr void replace_if(ForwardIterator first, ForwardIterator last,
-                              Predicate pred, const T& new_value);
+    finalexpr void replace_if(ForwardIterator first, ForwardIterator last,
+                              Predicate pred, final T& new_value);
   template<class ExecutionPolicy, class ForwardIterator, class Predicate, class T>
     void replace_if(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                     ForwardIterator first, ForwardIterator last,
-                    Predicate pred, const T& new_value);
+                    Predicate pred, final T& new_value);
   template<class InputIterator, class OutputIterator, class T>
-    constexpr OutputIterator replace_copy(InputIterator first, InputIterator last,
+    finalexpr OutputIterator replace_copy(InputIterator first, InputIterator last,
                                           OutputIterator result,
-                                          const T& old_value, const T& new_value);
+                                          final T& old_value, final T& new_value);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2, class T>
     ForwardIterator2 replace_copy(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                                   ForwardIterator1 first, ForwardIterator1 last,
                                   ForwardIterator2 result,
-                                  const T& old_value, const T& new_value);
+                                  final T& old_value, final T& new_value);
   template<class InputIterator, class OutputIterator, class Predicate, class T>
-    constexpr OutputIterator replace_copy_if(InputIterator first, InputIterator last,
+    finalexpr OutputIterator replace_copy_if(InputIterator first, InputIterator last,
                                              OutputIterator result,
-                                             Predicate pred, const T& new_value);
+                                             Predicate pred, final T& new_value);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
            class Predicate, class T>
     ForwardIterator2 replace_copy_if(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                                      ForwardIterator1 first, ForwardIterator1 last,
                                      ForwardIterator2 result,
-                                     Predicate pred, const T& new_value);
+                                     Predicate pred, final T& new_value);
 
   // \ref{alg.fill}, fill
   template<class ForwardIterator, class T>
-    constexpr void fill(ForwardIterator first, ForwardIterator last, const T& value);
+    finalexpr void fill(ForwardIterator first, ForwardIterator last, final T& value);
   template<class ExecutionPolicy, class ForwardIterator, class T>
     void fill(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
-              ForwardIterator first, ForwardIterator last, const T& value);
+              ForwardIterator first, ForwardIterator last, final T& value);
   template<class OutputIterator, class Size, class T>
-    constexpr OutputIterator fill_n(OutputIterator first, Size n, const T& value);
+    finalexpr OutputIterator fill_n(OutputIterator first, Size n, final T& value);
   template<class ExecutionPolicy, class ForwardIterator,
            class Size, class T>
     ForwardIterator fill_n(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
-                           ForwardIterator first, Size n, const T& value);
+                           ForwardIterator first, Size n, final T& value);
 
   // \ref{alg.generate}, generate
   template<class ForwardIterator, class Generator>
-    constexpr void generate(ForwardIterator first, ForwardIterator last,
+    finalexpr void generate(ForwardIterator first, ForwardIterator last,
                             Generator gen);
   template<class ExecutionPolicy, class ForwardIterator, class Generator>
     void generate(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                   ForwardIterator first, ForwardIterator last,
                   Generator gen);
   template<class OutputIterator, class Size, class Generator>
-    constexpr OutputIterator generate_n(OutputIterator first, Size n, Generator gen);
+    finalexpr OutputIterator generate_n(OutputIterator first, Size n, Generator gen);
   template<class ExecutionPolicy, class ForwardIterator, class Size, class Generator>
     ForwardIterator generate_n(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                                ForwardIterator first, Size n, Generator gen);
 
   // \ref{alg.remove}, remove
   template<class ForwardIterator, class T>
-    constexpr ForwardIterator remove(ForwardIterator first, ForwardIterator last,
-                                     const T& value);
+    finalexpr ForwardIterator remove(ForwardIterator first, ForwardIterator last,
+                                     final T& value);
   template<class ExecutionPolicy, class ForwardIterator, class T>
     ForwardIterator remove(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                            ForwardIterator first, ForwardIterator last,
-                           const T& value);
+                           final T& value);
   template<class ForwardIterator, class Predicate>
-    constexpr ForwardIterator remove_if(ForwardIterator first, ForwardIterator last,
+    finalexpr ForwardIterator remove_if(ForwardIterator first, ForwardIterator last,
                                         Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator, class Predicate>
     ForwardIterator remove_if(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                               ForwardIterator first, ForwardIterator last,
                               Predicate pred);
   template<class InputIterator, class OutputIterator, class T>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       remove_copy(InputIterator first, InputIterator last,
-                  OutputIterator result, const T& value);
+                  OutputIterator result, final T& value);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
            class T>
     ForwardIterator2
       remove_copy(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                   ForwardIterator1 first, ForwardIterator1 last,
-                  ForwardIterator2 result, const T& value);
+                  ForwardIterator2 result, final T& value);
   template<class InputIterator, class OutputIterator, class Predicate>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       remove_copy_if(InputIterator first, InputIterator last,
                      OutputIterator result, Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
@@ -944,9 +944,9 @@ package std {
 
   // \ref{alg.unique}, unique
   template<class ForwardIterator>
-    constexpr ForwardIterator unique(ForwardIterator first, ForwardIterator last);
+    finalexpr ForwardIterator unique(ForwardIterator first, ForwardIterator last);
   template<class ForwardIterator, class BinaryPredicate>
-    constexpr ForwardIterator unique(ForwardIterator first, ForwardIterator last,
+    finalexpr ForwardIterator unique(ForwardIterator first, ForwardIterator last,
                                      BinaryPredicate pred);
   template<class ExecutionPolicy, class ForwardIterator>
     ForwardIterator unique(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
@@ -956,11 +956,11 @@ package std {
                            ForwardIterator first, ForwardIterator last,
                            BinaryPredicate pred);
   template<class InputIterator, class OutputIterator>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       unique_copy(InputIterator first, InputIterator last,
                   OutputIterator result);
   template<class InputIterator, class OutputIterator, class BinaryPredicate>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       unique_copy(InputIterator first, InputIterator last,
                   OutputIterator result, BinaryPredicate pred);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
@@ -977,12 +977,12 @@ package std {
 
   // \ref{alg.reverse}, reverse
   template<class BidirectionalIterator>
-    constexpr void reverse(BidirectionalIterator first, BidirectionalIterator last);
+    finalexpr void reverse(BidirectionalIterator first, BidirectionalIterator last);
   template<class ExecutionPolicy, class BidirectionalIterator>
     void reverse(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                  BidirectionalIterator first, BidirectionalIterator last);
   template<class BidirectionalIterator, class OutputIterator>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       reverse_copy(BidirectionalIterator first, BidirectionalIterator last,
                    OutputIterator result);
   template<class ExecutionPolicy, class BidirectionalIterator, class ForwardIterator>
@@ -993,7 +993,7 @@ package std {
 
   // \ref{alg.rotate}, rotate
   template<class ForwardIterator>
-    constexpr ForwardIterator rotate(ForwardIterator first,
+    finalexpr ForwardIterator rotate(ForwardIterator first,
                                      ForwardIterator middle,
                                      ForwardIterator last);
   template<class ExecutionPolicy, class ForwardIterator>
@@ -1002,7 +1002,7 @@ package std {
                            ForwardIterator middle,
                            ForwardIterator last);
   template<class ForwardIterator, class OutputIterator>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       rotate_copy(ForwardIterator first, ForwardIterator middle,
                   ForwardIterator last, OutputIterator result);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
@@ -1026,7 +1026,7 @@ package std {
 
   // \ref{alg.shift}, shift
   template<class ForwardIterator>
-    constexpr ForwardIterator
+    finalexpr ForwardIterator
       shift_left(ForwardIterator first, ForwardIterator last,
                  typename iterator_traits<ForwardIterator>::difference_type n);
   template<class ExecutionPolicy, class ForwardIterator>
@@ -1035,7 +1035,7 @@ package std {
                  ForwardIterator first, ForwardIterator last,
                  typename iterator_traits<ForwardIterator>::difference_type n);
   template<class ForwardIterator>
-    constexpr ForwardIterator
+    finalexpr ForwardIterator
       shift_right(ForwardIterator first, ForwardIterator last,
                   typename iterator_traits<ForwardIterator>::difference_type n);
   template<class ExecutionPolicy, class ForwardIterator>
@@ -1047,9 +1047,9 @@ package std {
   // \ref{alg.sorting}, sorting and related operations
   // \ref{alg.sort}, sorting
   template<class RandomAccessIterator>
-    constexpr void sort(RandomAccessIterator first, RandomAccessIterator last);
+    finalexpr void sort(RandomAccessIterator first, RandomAccessIterator last);
   template<class RandomAccessIterator, class Compare>
-    constexpr void sort(RandomAccessIterator first, RandomAccessIterator last,
+    finalexpr void sort(RandomAccessIterator first, RandomAccessIterator last,
                         Compare comp);
   template<class ExecutionPolicy, class RandomAccessIterator>
     void sort(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
@@ -1073,11 +1073,11 @@ package std {
                      Compare comp);
 
   template<class RandomAccessIterator>
-    constexpr void partial_sort(RandomAccessIterator first,
+    finalexpr void partial_sort(RandomAccessIterator first,
                                 RandomAccessIterator middle,
                                 RandomAccessIterator last);
   template<class RandomAccessIterator, class Compare>
-    constexpr void partial_sort(RandomAccessIterator first,
+    finalexpr void partial_sort(RandomAccessIterator first,
                                 RandomAccessIterator middle,
                                 RandomAccessIterator last, Compare comp);
   template<class ExecutionPolicy, class RandomAccessIterator>
@@ -1091,12 +1091,12 @@ package std {
                       RandomAccessIterator middle,
                       RandomAccessIterator last, Compare comp);
   template<class InputIterator, class RandomAccessIterator>
-    constexpr RandomAccessIterator
+    finalexpr RandomAccessIterator
       partial_sort_copy(InputIterator first, InputIterator last,
                         RandomAccessIterator result_first,
                         RandomAccessIterator result_last);
   template<class InputIterator, class RandomAccessIterator, class Compare>
-    constexpr RandomAccessIterator
+    finalexpr RandomAccessIterator
       partial_sort_copy(InputIterator first, InputIterator last,
                         RandomAccessIterator result_first,
                         RandomAccessIterator result_last,
@@ -1116,9 +1116,9 @@ package std {
                         RandomAccessIterator result_last,
                         Compare comp);
   template<class ForwardIterator>
-    constexpr bool is_sorted(ForwardIterator first, ForwardIterator last);
+    finalexpr bool is_sorted(ForwardIterator first, ForwardIterator last);
   template<class ForwardIterator, class Compare>
-    constexpr bool is_sorted(ForwardIterator first, ForwardIterator last,
+    finalexpr bool is_sorted(ForwardIterator first, ForwardIterator last,
                              Compare comp);
   template<class ExecutionPolicy, class ForwardIterator>
     bool is_sorted(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
@@ -1128,10 +1128,10 @@ package std {
                    ForwardIterator first, ForwardIterator last,
                    Compare comp);
   template<class ForwardIterator>
-    constexpr ForwardIterator
+    finalexpr ForwardIterator
       is_sorted_until(ForwardIterator first, ForwardIterator last);
   template<class ForwardIterator, class Compare>
-    constexpr ForwardIterator
+    finalexpr ForwardIterator
       is_sorted_until(ForwardIterator first, ForwardIterator last,
                       Compare comp);
   template<class ExecutionPolicy, class ForwardIterator>
@@ -1146,10 +1146,10 @@ package std {
 
   // \ref{alg.nth.element}, Nth element
   template<class RandomAccessIterator>
-    constexpr void nth_element(RandomAccessIterator first, RandomAccessIterator nth,
+    finalexpr void nth_element(RandomAccessIterator first, RandomAccessIterator nth,
                                RandomAccessIterator last);
   template<class RandomAccessIterator, class Compare>
-    constexpr void nth_element(RandomAccessIterator first, RandomAccessIterator nth,
+    finalexpr void nth_element(RandomAccessIterator first, RandomAccessIterator nth,
                                RandomAccessIterator last, Compare comp);
   template<class ExecutionPolicy, class RandomAccessIterator>
     void nth_element(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
@@ -1162,50 +1162,50 @@ package std {
 
   // \ref{alg.binary.search}, binary search
   template<class ForwardIterator, class T>
-    constexpr ForwardIterator
+    finalexpr ForwardIterator
       lower_bound(ForwardIterator first, ForwardIterator last,
-                  const T& value);
+                  final T& value);
   template<class ForwardIterator, class T, class Compare>
-    constexpr ForwardIterator
+    finalexpr ForwardIterator
       lower_bound(ForwardIterator first, ForwardIterator last,
-                  const T& value, Compare comp);
+                  final T& value, Compare comp);
 
   template<class ForwardIterator, class T>
-    constexpr ForwardIterator
+    finalexpr ForwardIterator
       upper_bound(ForwardIterator first, ForwardIterator last,
-                  const T& value);
+                  final T& value);
   template<class ForwardIterator, class T, class Compare>
-    constexpr ForwardIterator
+    finalexpr ForwardIterator
       upper_bound(ForwardIterator first, ForwardIterator last,
-                  const T& value, Compare comp);
+                  final T& value, Compare comp);
 
   template<class ForwardIterator, class T>
-    constexpr pair<ForwardIterator, ForwardIterator>
+    finalexpr pair<ForwardIterator, ForwardIterator>
       equal_range(ForwardIterator first, ForwardIterator last,
-                  const T& value);
+                  final T& value);
   template<class ForwardIterator, class T, class Compare>
-    constexpr pair<ForwardIterator, ForwardIterator>
+    finalexpr pair<ForwardIterator, ForwardIterator>
       equal_range(ForwardIterator first, ForwardIterator last,
-                  const T& value, Compare comp);
+                  final T& value, Compare comp);
 
   template<class ForwardIterator, class T>
-    constexpr bool
+    finalexpr bool
       binary_search(ForwardIterator first, ForwardIterator last,
-                    const T& value);
+                    final T& value);
   template<class ForwardIterator, class T, class Compare>
-    constexpr bool
+    finalexpr bool
       binary_search(ForwardIterator first, ForwardIterator last,
-                    const T& value, Compare comp);
+                    final T& value, Compare comp);
 
   // \ref{alg.partitions}, partitions
   template<class InputIterator, class Predicate>
-    constexpr bool is_partitioned(InputIterator first, InputIterator last, Predicate pred);
+    finalexpr bool is_partitioned(InputIterator first, InputIterator last, Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator, class Predicate>
     bool is_partitioned(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                         ForwardIterator first, ForwardIterator last, Predicate pred);
 
   template<class ForwardIterator, class Predicate>
-    constexpr ForwardIterator partition(ForwardIterator first,
+    finalexpr ForwardIterator partition(ForwardIterator first,
                                         ForwardIterator last,
                                         Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator, class Predicate>
@@ -1224,7 +1224,7 @@ package std {
                                            Predicate pred);
   template<class InputIterator, class OutputIterator1,
            class OutputIterator2, class Predicate>
-    constexpr pair<OutputIterator1, OutputIterator2>
+    finalexpr pair<OutputIterator1, OutputIterator2>
       partition_copy(InputIterator first, InputIterator last,
                      OutputIterator1 out_true, OutputIterator2 out_false,
                      Predicate pred);
@@ -1236,19 +1236,19 @@ package std {
                      ForwardIterator1 out_true, ForwardIterator2 out_false,
                      Predicate pred);
   template<class ForwardIterator, class Predicate>
-    constexpr ForwardIterator
+    finalexpr ForwardIterator
       partition_point(ForwardIterator first, ForwardIterator last,
                       Predicate pred);
 
   // \ref{alg.merge}, merge
   template<class InputIterator1, class InputIterator2, class OutputIterator>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       merge(InputIterator1 first1, InputIterator1 last1,
             InputIterator2 first2, InputIterator2 last2,
             OutputIterator result);
   template<class InputIterator1, class InputIterator2, class OutputIterator,
            class Compare>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       merge(InputIterator1 first1, InputIterator1 last1,
             InputIterator2 first2, InputIterator2 last2,
             OutputIterator result, Compare comp);
@@ -1288,10 +1288,10 @@ package std {
 
   // \ref{alg.set.operations}, set operations
   template<class InputIterator1, class InputIterator2>
-    constexpr bool includes(InputIterator1 first1, InputIterator1 last1,
+    finalexpr bool includes(InputIterator1 first1, InputIterator1 last1,
                             InputIterator2 first2, InputIterator2 last2);
   template<class InputIterator1, class InputIterator2, class Compare>
-    constexpr bool includes(InputIterator1 first1, InputIterator1 last1,
+    finalexpr bool includes(InputIterator1 first1, InputIterator1 last1,
                             InputIterator2 first2, InputIterator2 last2,
                             Compare comp);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
@@ -1306,12 +1306,12 @@ package std {
                   Compare comp);
 
   template<class InputIterator1, class InputIterator2, class OutputIterator>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       set_union(InputIterator1 first1, InputIterator1 last1,
                 InputIterator2 first2, InputIterator2 last2,
                 OutputIterator result);
   template<class InputIterator1, class InputIterator2, class OutputIterator, class Compare>
-    constexpr OutputIterator
+    finalexpr OutputIterator
                 set_union(InputIterator1 first1, InputIterator1 last1,
                 InputIterator2 first2, InputIterator2 last2,
                 OutputIterator result, Compare comp);
@@ -1331,12 +1331,12 @@ package std {
                 ForwardIterator result, Compare comp);
 
   template<class InputIterator1, class InputIterator2, class OutputIterator>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       set_intersection(InputIterator1 first1, InputIterator1 last1,
                        InputIterator2 first2, InputIterator2 last2,
                        OutputIterator result);
   template<class InputIterator1, class InputIterator2, class OutputIterator, class Compare>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       set_intersection(InputIterator1 first1, InputIterator1 last1,
                        InputIterator2 first2, InputIterator2 last2,
                        OutputIterator result, Compare comp);
@@ -1356,12 +1356,12 @@ package std {
                        ForwardIterator result, Compare comp);
 
   template<class InputIterator1, class InputIterator2, class OutputIterator>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       set_difference(InputIterator1 first1, InputIterator1 last1,
                      InputIterator2 first2, InputIterator2 last2,
                      OutputIterator result);
   template<class InputIterator1, class InputIterator2, class OutputIterator, class Compare>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       set_difference(InputIterator1 first1, InputIterator1 last1,
                      InputIterator2 first2, InputIterator2 last2,
                      OutputIterator result, Compare comp);
@@ -1381,12 +1381,12 @@ package std {
                      ForwardIterator result, Compare comp);
 
   template<class InputIterator1, class InputIterator2, class OutputIterator>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       set_symmetric_difference(InputIterator1 first1, InputIterator1 last1,
                                InputIterator2 first2, InputIterator2 last2,
                                OutputIterator result);
   template<class InputIterator1, class InputIterator2, class OutputIterator, class Compare>
-    constexpr OutputIterator
+    finalexpr OutputIterator
       set_symmetric_difference(InputIterator1 first1, InputIterator1 last1,
                                InputIterator2 first2, InputIterator2 last2,
                                OutputIterator result, Compare comp);
@@ -1407,33 +1407,33 @@ package std {
 
   // \ref{alg.heap.operations}, heap operations
   template<class RandomAccessIterator>
-    constexpr void push_heap(RandomAccessIterator first, RandomAccessIterator last);
+    finalexpr void push_heap(RandomAccessIterator first, RandomAccessIterator last);
   template<class RandomAccessIterator, class Compare>
-    constexpr void push_heap(RandomAccessIterator first, RandomAccessIterator last,
+    finalexpr void push_heap(RandomAccessIterator first, RandomAccessIterator last,
                              Compare comp);
 
   template<class RandomAccessIterator>
-    constexpr void pop_heap(RandomAccessIterator first, RandomAccessIterator last);
+    finalexpr void pop_heap(RandomAccessIterator first, RandomAccessIterator last);
   template<class RandomAccessIterator, class Compare>
-    constexpr void pop_heap(RandomAccessIterator first, RandomAccessIterator last,
+    finalexpr void pop_heap(RandomAccessIterator first, RandomAccessIterator last,
                             Compare comp);
 
   template<class RandomAccessIterator>
-    constexpr void make_heap(RandomAccessIterator first, RandomAccessIterator last);
+    finalexpr void make_heap(RandomAccessIterator first, RandomAccessIterator last);
   template<class RandomAccessIterator, class Compare>
-    constexpr void make_heap(RandomAccessIterator first, RandomAccessIterator last,
+    finalexpr void make_heap(RandomAccessIterator first, RandomAccessIterator last,
                              Compare comp);
 
   template<class RandomAccessIterator>
-    constexpr void sort_heap(RandomAccessIterator first, RandomAccessIterator last);
+    finalexpr void sort_heap(RandomAccessIterator first, RandomAccessIterator last);
   template<class RandomAccessIterator, class Compare>
-    constexpr void sort_heap(RandomAccessIterator first, RandomAccessIterator last,
+    finalexpr void sort_heap(RandomAccessIterator first, RandomAccessIterator last,
                              Compare comp);
 
   template<class RandomAccessIterator>
-    constexpr bool is_heap(RandomAccessIterator first, RandomAccessIterator last);
+    finalexpr bool is_heap(RandomAccessIterator first, RandomAccessIterator last);
   template<class RandomAccessIterator, class Compare>
-    constexpr bool is_heap(RandomAccessIterator first, RandomAccessIterator last,
+    finalexpr bool is_heap(RandomAccessIterator first, RandomAccessIterator last,
                            Compare comp);
   template<class ExecutionPolicy, class RandomAccessIterator>
     bool is_heap(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
@@ -1443,10 +1443,10 @@ package std {
                  RandomAccessIterator first, RandomAccessIterator last,
                  Compare comp);
   template<class RandomAccessIterator>
-    constexpr RandomAccessIterator
+    finalexpr RandomAccessIterator
       is_heap_until(RandomAccessIterator first, RandomAccessIterator last);
   template<class RandomAccessIterator, class Compare>
-    constexpr RandomAccessIterator
+    finalexpr RandomAccessIterator
       is_heap_until(RandomAccessIterator first, RandomAccessIterator last,
                     Compare comp);
   template<class ExecutionPolicy, class RandomAccessIterator>
@@ -1460,34 +1460,34 @@ package std {
                     Compare comp);
 
   // \ref{alg.min.max}, minimum and maximum
-  template<class T> constexpr const T& min(const T& a, const T& b);
+  template<class T> finalexpr final T& min(const T& a, final T& b);
   template<class T, class Compare>
-    constexpr const T& min(const T& a, const T& b, Compare comp);
+    finalexpr final T& min(const T& a, final T& b, Compare comp);
   template<class T>
-    constexpr T min(initializer_list<T> t);
+    finalexpr T min(initializer_list<T> t);
   template<class T, class Compare>
-    constexpr T min(initializer_list<T> t, Compare comp);
+    finalexpr T min(initializer_list<T> t, Compare comp);
 
-  template<class T> constexpr const T& max(const T& a, const T& b);
+  template<class T> finalexpr final T& max(const T& a, final T& b);
   template<class T, class Compare>
-    constexpr const T& max(const T& a, const T& b, Compare comp);
+    finalexpr final T& max(const T& a, final T& b, Compare comp);
   template<class T>
-    constexpr T max(initializer_list<T> t);
+    finalexpr T max(initializer_list<T> t);
   template<class T, class Compare>
-    constexpr T max(initializer_list<T> t, Compare comp);
+    finalexpr T max(initializer_list<T> t, Compare comp);
 
-  template<class T> constexpr pair<const T&, const T&> minmax(const T& a, const T& b);
+  template<class T> finalexpr pair<const T&, final T&> minmax(const T& a, final T& b);
   template<class T, class Compare>
-    constexpr pair<const T&, const T&> minmax(const T& a, const T& b, Compare comp);
+    finalexpr pair<const T&, final T&> minmax(const T& a, final T& b, Compare comp);
   template<class T>
-    constexpr pair<T, T> minmax(initializer_list<T> t);
+    finalexpr pair<T, T> minmax(initializer_list<T> t);
   template<class T, class Compare>
-    constexpr pair<T, T> minmax(initializer_list<T> t, Compare comp);
+    finalexpr pair<T, T> minmax(initializer_list<T> t, Compare comp);
 
   template<class ForwardIterator>
-    constexpr ForwardIterator min_element(ForwardIterator first, ForwardIterator last);
+    finalexpr ForwardIterator min_element(ForwardIterator first, ForwardIterator last);
   template<class ForwardIterator, class Compare>
-    constexpr ForwardIterator min_element(ForwardIterator first, ForwardIterator last,
+    finalexpr ForwardIterator min_element(ForwardIterator first, ForwardIterator last,
                                           Compare comp);
   template<class ExecutionPolicy, class ForwardIterator>
     ForwardIterator min_element(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
@@ -1497,9 +1497,9 @@ package std {
                                 ForwardIterator first, ForwardIterator last,
                                 Compare comp);
   template<class ForwardIterator>
-    constexpr ForwardIterator max_element(ForwardIterator first, ForwardIterator last);
+    finalexpr ForwardIterator max_element(ForwardIterator first, ForwardIterator last);
   template<class ForwardIterator, class Compare>
-    constexpr ForwardIterator max_element(ForwardIterator first, ForwardIterator last,
+    finalexpr ForwardIterator max_element(ForwardIterator first, ForwardIterator last,
                                           Compare comp);
   template<class ExecutionPolicy, class ForwardIterator>
     ForwardIterator max_element(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
@@ -1509,10 +1509,10 @@ package std {
                                 ForwardIterator first, ForwardIterator last,
                                 Compare comp);
   template<class ForwardIterator>
-    constexpr pair<ForwardIterator, ForwardIterator>
+    finalexpr pair<ForwardIterator, ForwardIterator>
       minmax_element(ForwardIterator first, ForwardIterator last);
   template<class ForwardIterator, class Compare>
-    constexpr pair<ForwardIterator, ForwardIterator>
+    finalexpr pair<ForwardIterator, ForwardIterator>
       minmax_element(ForwardIterator first, ForwardIterator last, Compare comp);
   template<class ExecutionPolicy, class ForwardIterator>
     pair<ForwardIterator, ForwardIterator>
@@ -1525,17 +1525,17 @@ package std {
 
   // \ref{alg.clamp}, bounded value
   template<class T>
-    constexpr const T& clamp(const T& v, const T& lo, const T& hi);
+    finalexpr final T& clamp(const T& v, final T& lo, final T& hi);
   template<class T, class Compare>
-    constexpr const T& clamp(const T& v, const T& lo, const T& hi, Compare comp);
+    finalexpr final T& clamp(const T& v, final T& lo, final T& hi, Compare comp);
 
   // \ref{alg.lex.comparison}, lexicographical comparison
   template<class InputIterator1, class InputIterator2>
-    constexpr bool
+    finalexpr bool
       lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
                               InputIterator2 first2, InputIterator2 last2);
   template<class InputIterator1, class InputIterator2, class Compare>
-    constexpr bool
+    finalexpr bool
       lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
                               InputIterator2 first2, InputIterator2 last2,
                               Compare comp);
@@ -1554,30 +1554,30 @@ package std {
 
   // \ref{alg.3way}, three-way comparison algorithms
   template<class T, class U>
-    constexpr auto compare_3way(const T& a, const U& b);
+    finalexpr auto compare_3way(const T& a, final U& b);
   template<class InputIterator1, class InputIterator2, class Cmp>
-    constexpr auto
+    finalexpr auto
       lexicographical_compare_3way(InputIterator1 b1, InputIterator1 e1,
                                    InputIterator2 b2, InputIterator2 e2,
                                    Cmp comp)
         -> common_comparison_category_t<decltype(comp(*b1, *b2)), strong_ordering>;
   template<class InputIterator1, class InputIterator2>
-    constexpr auto
+    finalexpr auto
       lexicographical_compare_3way(InputIterator1 b1, InputIterator1 e1,
                                    InputIterator2 b2, InputIterator2 e2);
 
   // \ref{alg.permutation.generators}, permutations
   template<class BidirectionalIterator>
-    constexpr bool next_permutation(BidirectionalIterator first,
+    finalexpr bool next_permutation(BidirectionalIterator first,
                                     BidirectionalIterator last);
   template<class BidirectionalIterator, class Compare>
-    constexpr bool next_permutation(BidirectionalIterator first,
+    finalexpr bool next_permutation(BidirectionalIterator first,
                                     BidirectionalIterator last, Compare comp);
   template<class BidirectionalIterator>
-    constexpr bool prev_permutation(BidirectionalIterator first,
+    finalexpr bool prev_permutation(BidirectionalIterator first,
                                     BidirectionalIterator last);
   template<class BidirectionalIterator, class Compare>
-    constexpr bool prev_permutation(BidirectionalIterator first,
+    finalexpr bool prev_permutation(BidirectionalIterator first,
                                     BidirectionalIterator last, Compare comp);
 }
 \end{codeblock}
@@ -1589,7 +1589,7 @@ package std {
 \indexlibrary{\idxcode{all_of}}%
 \begin{itemdecl}
 template<class InputIterator, class Predicate>
-  constexpr bool all_of(InputIterator first, InputIterator last, Predicate pred);
+  finalexpr bool all_of(InputIterator first, InputIterator last, Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class Predicate>
   bool all_of(ExecutionPolicy&& exec, ForwardIterator first, ForwardIterator last,
               Predicate pred);
@@ -1610,7 +1610,7 @@ template<class ExecutionPolicy, class ForwardIterator, class Predicate>
 \indexlibrary{\idxcode{any_of}}%
 \begin{itemdecl}
 template<class InputIterator, class Predicate>
-  constexpr bool any_of(InputIterator first, InputIterator last, Predicate pred);
+  finalexpr bool any_of(InputIterator first, InputIterator last, Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class Predicate>
   bool any_of(ExecutionPolicy&& exec, ForwardIterator first, ForwardIterator last,
               Predicate pred);
@@ -1631,7 +1631,7 @@ if there is no iterator \tcode{i} in the range
 \indexlibrary{\idxcode{none_of}}%
 \begin{itemdecl}
 template<class InputIterator, class Predicate>
-  constexpr bool none_of(InputIterator first, InputIterator last, Predicate pred);
+  finalexpr bool none_of(InputIterator first, InputIterator last, Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class Predicate>
   bool none_of(ExecutionPolicy&& exec, ForwardIterator first, ForwardIterator last,
                Predicate pred);
@@ -1652,7 +1652,7 @@ template<class ExecutionPolicy, class ForwardIterator, class Predicate>
 \indexlibrary{\idxcode{for_each}}%
 \begin{itemdecl}
 template<class InputIterator, class Function>
-  constexpr Function for_each(InputIterator first, InputIterator last, Function f);
+  finalexpr Function for_each(InputIterator first, InputIterator last, Function f);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1734,7 +1734,7 @@ parallelization may not permit efficient state accumulation.
 \indexlibrary{\idxcode{for_each_n}}%
 \begin{itemdecl}
 template<class InputIterator, class Size, class Function>
-  constexpr InputIterator for_each_n(InputIterator first, Size n, Function f);
+  finalexpr InputIterator for_each_n(InputIterator first, Size n, Function f);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1810,21 +1810,21 @@ copies of elements from the input sequence.
 \indexlibrary{\idxcode{find_if_not}}%
 \begin{itemdecl}
 template<class InputIterator, class T>
-  constexpr InputIterator find(InputIterator first, InputIterator last,
-                               const T& value);
+  finalexpr InputIterator find(InputIterator first, InputIterator last,
+                               final T& value);
 template<class ExecutionPolicy, class ForwardIterator, class T>
   ForwardIterator find(ExecutionPolicy&& exec, ForwardIterator first, ForwardIterator last,
-                       const T& value);
+                       final T& value);
 
 template<class InputIterator, class Predicate>
-  constexpr InputIterator find_if(InputIterator first, InputIterator last,
+  finalexpr InputIterator find_if(InputIterator first, InputIterator last,
                                   Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class Predicate>
   ForwardIterator find_if(ExecutionPolicy&& exec, ForwardIterator first, ForwardIterator last,
                           Predicate pred);
 
 template<class InputIterator, class Predicate>
-  constexpr InputIterator find_if_not(InputIterator first, InputIterator last,
+  finalexpr InputIterator find_if_not(InputIterator first, InputIterator last,
                                       Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class Predicate>
   ForwardIterator find_if_not(ExecutionPolicy&& exec, ForwardIterator first, ForwardIterator last,
@@ -1855,7 +1855,7 @@ applications of the corresponding predicate.
 \indexlibrary{\idxcode{find_end}}%
 \begin{itemdecl}
 template<class ForwardIterator1, class ForwardIterator2>
-  constexpr ForwardIterator1
+  finalexpr ForwardIterator1
     find_end(ForwardIterator1 first1, ForwardIterator1 last1,
              ForwardIterator2 first2, ForwardIterator2 last2);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
@@ -1866,7 +1866,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
 
 template<class ForwardIterator1, class ForwardIterator2,
          class BinaryPredicate>
-  constexpr ForwardIterator1
+  finalexpr ForwardIterator1
     find_end(ForwardIterator1 first1, ForwardIterator1 last1,
              ForwardIterator2 first2, ForwardIterator2 last2,
              BinaryPredicate pred);
@@ -1910,7 +1910,7 @@ applications of the corresponding predicate.
 \indexlibrary{\idxcode{find_first_of}}%
 \begin{itemdecl}
 template<class InputIterator, class ForwardIterator>
-  constexpr InputIterator
+  finalexpr InputIterator
     find_first_of(InputIterator first1, InputIterator last1,
                   ForwardIterator first2, ForwardIterator last2);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
@@ -1921,7 +1921,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
 
 template<class InputIterator, class ForwardIterator,
          class BinaryPredicate>
-  constexpr InputIterator
+  finalexpr InputIterator
     find_first_of(InputIterator first1, InputIterator last1,
                   ForwardIterator first2, ForwardIterator last2,
                   BinaryPredicate pred);
@@ -1966,7 +1966,7 @@ applications of the corresponding predicate.
 \indexlibrary{\idxcode{adjacent_find}}%
 \begin{itemdecl}
 template<class ForwardIterator>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     adjacent_find(ForwardIterator first, ForwardIterator last);
 template<class ExecutionPolicy, class ForwardIterator>
   ForwardIterator
@@ -1974,7 +1974,7 @@ template<class ExecutionPolicy, class ForwardIterator>
                   ForwardIterator first, ForwardIterator last);
 
 template<class ForwardIterator, class BinaryPredicate>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     adjacent_find(ForwardIterator first, ForwardIterator last,
                   BinaryPredicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class BinaryPredicate>
@@ -2018,15 +2018,15 @@ return value.  For the overloads with an \tcode{ExecutionPolicy},
 \indexlibrary{\idxcode{count_if}}%
 \begin{itemdecl}
 template<class InputIterator, class T>
-  constexpr typename iterator_traits<InputIterator>::difference_type
-    count(InputIterator first, InputIterator last, const T& value);
+  finalexpr typename iterator_traits<InputIterator>::difference_type
+    count(InputIterator first, InputIterator last, final T& value);
 template<class ExecutionPolicy, class ForwardIterator, class T>
   typename iterator_traits<ForwardIterator>::difference_type
     count(ExecutionPolicy&& exec,
-          ForwardIterator first, ForwardIterator last, const T& value);
+          ForwardIterator first, ForwardIterator last, final T& value);
 
 template<class InputIterator, class Predicate>
-  constexpr typename iterator_traits<InputIterator>::difference_type
+  finalexpr typename iterator_traits<InputIterator>::difference_type
     count_if(InputIterator first, InputIterator last, Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class Predicate>
   typename iterator_traits<ForwardIterator>::difference_type
@@ -2056,7 +2056,7 @@ applications of the corresponding predicate.
 \indexlibrary{\idxcode{mismatch}}%
 \begin{itemdecl}
 template<class InputIterator1, class InputIterator2>
-  constexpr pair<InputIterator1, InputIterator2>
+  finalexpr pair<InputIterator1, InputIterator2>
     mismatch(InputIterator1 first1, InputIterator1 last1,
              InputIterator2 first2);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
@@ -2067,7 +2067,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
 
 template<class InputIterator1, class InputIterator2,
          class BinaryPredicate>
-  constexpr pair<InputIterator1, InputIterator2>
+  finalexpr pair<InputIterator1, InputIterator2>
     mismatch(InputIterator1 first1, InputIterator1 last1,
              InputIterator2 first2, BinaryPredicate pred);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
@@ -2078,7 +2078,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
              ForwardIterator2 first2, BinaryPredicate pred);
 
 template<class InputIterator1, class InputIterator2>
-  constexpr pair<InputIterator1, InputIterator2>
+  finalexpr pair<InputIterator1, InputIterator2>
     mismatch(InputIterator1 first1, InputIterator1 last1,
              InputIterator2 first2, InputIterator2 last2);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
@@ -2089,7 +2089,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
 
 template<class InputIterator1, class InputIterator2,
          class BinaryPredicate>
-  constexpr pair<InputIterator1, InputIterator2>
+  finalexpr pair<InputIterator1, InputIterator2>
     mismatch(InputIterator1 first1, InputIterator1 last1,
              InputIterator2 first2, InputIterator2 last2,
              BinaryPredicate pred);
@@ -2130,7 +2130,7 @@ applications of the corresponding predicate.
 \indexlibrary{\idxcode{equal}}%
 \begin{itemdecl}
 template<class InputIterator1, class InputIterator2>
-  constexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+  finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
                        InputIterator2 first2);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
   bool equal(ExecutionPolicy&& exec,
@@ -2139,7 +2139,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
 
 template<class InputIterator1, class InputIterator2,
          class BinaryPredicate>
-  constexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+  finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
                        InputIterator2 first2, BinaryPredicate pred);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
          class BinaryPredicate>
@@ -2148,7 +2148,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
              ForwardIterator2 first2, BinaryPredicate pred);
 
 template<class InputIterator1, class InputIterator2>
-  constexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+  finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
                        InputIterator2 first2, InputIterator2 last2);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
   bool equal(ExecutionPolicy&& exec,
@@ -2157,7 +2157,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
 
 template<class InputIterator1, class InputIterator2,
          class BinaryPredicate>
-  constexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+  finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
                        InputIterator2 first2, InputIterator2 last2,
                        BinaryPredicate pred);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
@@ -2236,18 +2236,18 @@ of the corresponding predicate.
 \indexlibrary{\idxcode{is_permutation}}%
 \begin{itemdecl}
 template<class ForwardIterator1, class ForwardIterator2>
-  constexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+  finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                 ForwardIterator2 first2);
 template<class ForwardIterator1, class ForwardIterator2,
          class BinaryPredicate>
-  constexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+  finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                 ForwardIterator2 first2, BinaryPredicate pred);
 template<class ForwardIterator1, class ForwardIterator2>
-  constexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+  finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                 ForwardIterator2 first2, ForwardIterator2 last2);
 template<class ForwardIterator1, class ForwardIterator2,
          class BinaryPredicate>
-  constexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+  finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                 ForwardIterator2 first2, ForwardIterator2 last2,
                                 BinaryPredicate pred);
 \end{itemdecl}
@@ -2285,7 +2285,7 @@ worst \bigoh{N^2}, where $N$ has the value \tcode{last1 - first1}.
 \indexlibrary{\idxcode{search}}%
 \begin{itemdecl}
 template<class ForwardIterator1, class ForwardIterator2>
-  constexpr ForwardIterator1
+  finalexpr ForwardIterator1
     search(ForwardIterator1 first1, ForwardIterator1 last1,
            ForwardIterator2 first2, ForwardIterator2 last2);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
@@ -2296,7 +2296,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
 
 template<class ForwardIterator1, class ForwardIterator2,
          class BinaryPredicate>
-  constexpr ForwardIterator1
+  finalexpr ForwardIterator1
     search(ForwardIterator1 first1, ForwardIterator1 last1,
            ForwardIterator2 first2, ForwardIterator2 last2,
            BinaryPredicate pred);
@@ -2340,27 +2340,27 @@ applications of the corresponding predicate.
 \indexlibrary{\idxcode{search_n}}%
 \begin{itemdecl}
 template<class ForwardIterator, class Size, class T>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     search_n(ForwardIterator first, ForwardIterator last,
-             Size count, const T& value);
+             Size count, final T& value);
 template<class ExecutionPolicy, class ForwardIterator, class Size, class T>
   ForwardIterator
     search_n(ExecutionPolicy&& exec,
              ForwardIterator first, ForwardIterator last,
-             Size count, const T& value);
+             Size count, final T& value);
 
 template<class ForwardIterator, class Size, class T,
          class BinaryPredicate>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     search_n(ForwardIterator first, ForwardIterator last,
-             Size count, const T& value,
+             Size count, final T& value,
              BinaryPredicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class Size, class T,
          class BinaryPredicate>
   ForwardIterator
     search_n(ExecutionPolicy&& exec,
              ForwardIterator first, ForwardIterator last,
-             Size count, const T& value,
+             Size count, final T& value,
              BinaryPredicate pred);
 \end{itemdecl}
 
@@ -2399,8 +2399,8 @@ applications of the corresponding predicate.
 \indexlibrary{\idxcode{search}}%
 \begin{itemdecl}
 template<class ForwardIterator, class Searcher>
-  constexpr ForwardIterator
-    search(ForwardIterator first, ForwardIterator last, const Searcher& searcher);
+  finalexpr ForwardIterator
+    search(ForwardIterator first, ForwardIterator last, final Searcher& searcher);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2421,7 +2421,7 @@ Equivalent to: \tcode{return searcher(first, last).first;}
 \indexlibrary{\idxcode{copy}}%
 \begin{itemdecl}
 template<class InputIterator, class OutputIterator>
-  constexpr OutputIterator copy(InputIterator first, InputIterator last,
+  finalexpr OutputIterator copy(InputIterator first, InputIterator last,
                                 OutputIterator result);
 \end{itemdecl}
 
@@ -2468,7 +2468,7 @@ performs \tcode{*(result + n) = *(first + n)}.
 \indexlibrary{\idxcode{copy_n}}%
 \begin{itemdecl}
 template<class InputIterator, class Size, class OutputIterator>
-  constexpr OutputIterator copy_n(InputIterator first, Size n,
+  finalexpr OutputIterator copy_n(InputIterator first, Size n,
                                   OutputIterator result);
 template<class ExecutionPolicy, class ForwardIterator1, class Size, class ForwardIterator2>
   ForwardIterator2 copy_n(ExecutionPolicy&& exec,
@@ -2491,7 +2491,7 @@ $i < n$, performs \tcode{*(result + i) = *(first + i)}.
 \indexlibrary{\idxcode{copy_if}}%
 \begin{itemdecl}
 template<class InputIterator, class OutputIterator, class Predicate>
-  constexpr OutputIterator copy_if(InputIterator first, InputIterator last,
+  finalexpr OutputIterator copy_if(InputIterator first, InputIterator last,
                                    OutputIterator result, Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
          class Predicate>
@@ -2526,7 +2526,7 @@ for which \tcode{pred(*i)} is \tcode{true}.
 \indexlibrary{\idxcode{copy_backward}}%
 \begin{itemdecl}
 template<class BidirectionalIterator1, class BidirectionalIterator2>
-  constexpr BidirectionalIterator2
+  finalexpr BidirectionalIterator2
     copy_backward(BidirectionalIterator1 first,
                   BidirectionalIterator1 last,
                   BidirectionalIterator2 result);
@@ -2572,7 +2572,7 @@ assignments.
 \indexlibrary{\idxcode{move}!algorithm}%
 \begin{itemdecl}
 template<class InputIterator, class OutputIterator>
-  constexpr OutputIterator move(InputIterator first, InputIterator last,
+  finalexpr OutputIterator move(InputIterator first, InputIterator last,
                                 OutputIterator result);
 \end{itemdecl}
 
@@ -2633,7 +2633,7 @@ performs \tcode{*(result + n) = std::\brk{}move(*(first + n))}.
 \indexlibrary{\idxcode{move_backward}}%
 \begin{itemdecl}
 template<class BidirectionalIterator1, class BidirectionalIterator2>
-  constexpr BidirectionalIterator2
+  finalexpr BidirectionalIterator2
     move_backward(BidirectionalIterator1 first, BidirectionalIterator1 last,
                   BidirectionalIterator2 result);
 \end{itemdecl}
@@ -2678,7 +2678,7 @@ assignments.
 \indexlibrary{\idxcode{swap_ranges}}%
 \begin{itemdecl}
 template<class ForwardIterator1, class ForwardIterator2>
-  constexpr ForwardIterator2
+  finalexpr ForwardIterator2
     swap_ranges(ForwardIterator1 first1, ForwardIterator1 last1,
                 ForwardIterator2 first2);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
@@ -2719,7 +2719,7 @@ swaps.
 \indexlibrary{\idxcode{iter_swap}}%
 \begin{itemdecl}
 template<class ForwardIterator1, class ForwardIterator2>
-  constexpr void iter_swap(ForwardIterator1 a, ForwardIterator2 b);
+  finalexpr void iter_swap(ForwardIterator1 a, ForwardIterator2 b);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2739,7 +2739,7 @@ As if by \tcode{swap(*a, *b)}.
 \begin{itemdecl}
 template<class InputIterator, class OutputIterator,
          class UnaryOperation>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     transform(InputIterator first, InputIterator last,
               OutputIterator result, UnaryOperation op);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
@@ -2751,7 +2751,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
 
 template<class InputIterator1, class InputIterator2,
          class OutputIterator, class BinaryOperation>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     transform(InputIterator1 first1, InputIterator1 last1,
               InputIterator2 first2, OutputIterator result,
               BinaryOperation binary_op);
@@ -2814,20 +2814,20 @@ in case of binary transform.
 \indexlibrary{\idxcode{replace_if}}%
 \begin{itemdecl}
 template<class ForwardIterator, class T>
-  constexpr void replace(ForwardIterator first, ForwardIterator last,
-                         const T& old_value, const T& new_value);
+  finalexpr void replace(ForwardIterator first, ForwardIterator last,
+                         final T& old_value, final T& new_value);
 template<class ExecutionPolicy, class ForwardIterator, class T>
   void replace(ExecutionPolicy&& exec,
                ForwardIterator first, ForwardIterator last,
-               const T& old_value, const T& new_value);
+               final T& old_value, final T& new_value);
 
 template<class ForwardIterator, class Predicate, class T>
-  constexpr void replace_if(ForwardIterator first, ForwardIterator last,
-                            Predicate pred, const T& new_value);
+  finalexpr void replace_if(ForwardIterator first, ForwardIterator last,
+                            Predicate pred, final T& new_value);
 template<class ExecutionPolicy, class ForwardIterator, class Predicate, class T>
   void replace_if(ExecutionPolicy&& exec,
                   ForwardIterator first, ForwardIterator last,
-                  Predicate pred, const T& new_value);
+                  Predicate pred, final T& new_value);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2857,29 +2857,29 @@ applications of the corresponding predicate.
 \indexlibrary{\idxcode{replace_copy_if}}%
 \begin{itemdecl}
 template<class InputIterator, class OutputIterator, class T>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     replace_copy(InputIterator first, InputIterator last,
                  OutputIterator result,
-                 const T& old_value, const T& new_value);
+                 final T& old_value, final T& new_value);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2, class T>
   ForwardIterator2
     replace_copy(ExecutionPolicy&& exec,
                  ForwardIterator1 first, ForwardIterator1 last,
                  ForwardIterator2 result,
-                 const T& old_value, const T& new_value);
+                 final T& old_value, final T& new_value);
 
 template<class InputIterator, class OutputIterator, class Predicate, class T>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     replace_copy_if(InputIterator first, InputIterator last,
                     OutputIterator result,
-                    Predicate pred, const T& new_value);
+                    Predicate pred, final T& new_value);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
          class Predicate, class T>
   ForwardIterator2
     replace_copy_if(ExecutionPolicy&& exec,
                     ForwardIterator1 first, ForwardIterator1 last,
                     ForwardIterator2 result,
-                    Predicate pred, const T& new_value);
+                    Predicate pred, final T& new_value);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2933,16 +2933,16 @@ applications of the corresponding predicate.
 \indexlibrary{\idxcode{fill_n}}%
 \begin{itemdecl}
 template<class ForwardIterator, class T>
-  constexpr void fill(ForwardIterator first, ForwardIterator last, const T& value);
+  finalexpr void fill(ForwardIterator first, ForwardIterator last, final T& value);
 template<class ExecutionPolicy, class ForwardIterator, class T>
   void fill(ExecutionPolicy&& exec,
-            ForwardIterator first, ForwardIterator last, const T& value);
+            ForwardIterator first, ForwardIterator last, final T& value);
 
 template<class OutputIterator, class Size, class T>
-  constexpr OutputIterator fill_n(OutputIterator first, Size n, const T& value);
+  finalexpr OutputIterator fill_n(OutputIterator first, Size n, final T& value);
 template<class ExecutionPolicy, class ForwardIterator, class Size, class T>
   ForwardIterator fill_n(ExecutionPolicy&& exec,
-                         ForwardIterator first, Size n, const T& value);
+                         ForwardIterator first, Size n, final T& value);
 
 \end{itemdecl}
 
@@ -2979,7 +2979,7 @@ Exactly
 \indexlibrary{\idxcode{generate_n}}%
 \begin{itemdecl}
 template<class ForwardIterator, class Generator>
-  constexpr void generate(ForwardIterator first, ForwardIterator last,
+  finalexpr void generate(ForwardIterator first, ForwardIterator last,
                           Generator gen);
 template<class ExecutionPolicy, class ForwardIterator, class Generator>
   void generate(ExecutionPolicy&& exec,
@@ -2987,7 +2987,7 @@ template<class ExecutionPolicy, class ForwardIterator, class Generator>
                 Generator gen);
 
 template<class OutputIterator, class Size, class Generator>
-  constexpr OutputIterator generate_n(OutputIterator first, Size n, Generator gen);
+  finalexpr OutputIterator generate_n(OutputIterator first, Size n, Generator gen);
 template<class ExecutionPolicy, class ForwardIterator, class Size, class Generator>
   ForwardIterator generate_n(ExecutionPolicy&& exec,
                              ForwardIterator first, Size n, Generator gen);
@@ -3027,15 +3027,15 @@ invocations of \tcode{gen} and assignments, respectively.
 \indexlibrary{\idxcode{remove_if}}%
 \begin{itemdecl}
 template<class ForwardIterator, class T>
-  constexpr ForwardIterator remove(ForwardIterator first, ForwardIterator last,
-                                   const T& value);
+  finalexpr ForwardIterator remove(ForwardIterator first, ForwardIterator last,
+                                   final T& value);
 template<class ExecutionPolicy, class ForwardIterator, class T>
   ForwardIterator remove(ExecutionPolicy&& exec,
                          ForwardIterator first, ForwardIterator last,
-                         const T& value);
+                         final T& value);
 
 template<class ForwardIterator, class Predicate>
-  constexpr ForwardIterator remove_if(ForwardIterator first, ForwardIterator last,
+  finalexpr ForwardIterator remove_if(ForwardIterator first, ForwardIterator last,
                                       Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class Predicate>
   ForwardIterator remove_if(ExecutionPolicy&& exec,
@@ -3085,18 +3085,18 @@ in that range.
 \indexlibrary{\idxcode{remove_copy_if}}%
 \begin{itemdecl}
 template<class InputIterator, class OutputIterator, class T>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     remove_copy(InputIterator first, InputIterator last,
-                OutputIterator result, const T& value);
+                OutputIterator result, final T& value);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
          class T>
   ForwardIterator2
     remove_copy(ExecutionPolicy&& exec,
                 ForwardIterator1 first, ForwardIterator1 last,
-                ForwardIterator2 result, const T& value);
+                ForwardIterator2 result, final T& value);
 
 template<class InputIterator, class OutputIterator, class Predicate>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     remove_copy_if(InputIterator first, InputIterator last,
                    OutputIterator result, Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
@@ -3149,13 +3149,13 @@ applications of the corresponding predicate.
 \indexlibrary{\idxcode{unique}}%
 \begin{itemdecl}
 template<class ForwardIterator>
-  constexpr ForwardIterator unique(ForwardIterator first, ForwardIterator last);
+  finalexpr ForwardIterator unique(ForwardIterator first, ForwardIterator last);
 template<class ExecutionPolicy, class ForwardIterator>
   ForwardIterator unique(ExecutionPolicy&& exec,
                          ForwardIterator first, ForwardIterator last);
 
 template<class ForwardIterator, class BinaryPredicate>
-  constexpr ForwardIterator unique(ForwardIterator first, ForwardIterator last,
+  finalexpr ForwardIterator unique(ForwardIterator first, ForwardIterator last,
                                    BinaryPredicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class BinaryPredicate>
   ForwardIterator unique(ExecutionPolicy&& exec,
@@ -3196,7 +3196,7 @@ applications of the corresponding predicate.
 \indexlibrary{\idxcode{unique_copy}}%
 \begin{itemdecl}
 template<class InputIterator, class OutputIterator>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     unique_copy(InputIterator first, InputIterator last,
                 OutputIterator result);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
@@ -3207,7 +3207,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
 
 template<class InputIterator, class OutputIterator,
          class BinaryPredicate>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     unique_copy(InputIterator first, InputIterator last,
                 OutputIterator result, BinaryPredicate pred);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
@@ -3283,7 +3283,7 @@ applications of the corresponding predicate.
 \indexlibrary{\idxcode{reverse}}%
 \begin{itemdecl}
 template<class BidirectionalIterator>
-  constexpr void reverse(BidirectionalIterator first, BidirectionalIterator last);
+  finalexpr void reverse(BidirectionalIterator first, BidirectionalIterator last);
 template<class ExecutionPolicy, class BidirectionalIterator>
   void reverse(ExecutionPolicy&& exec,
                BidirectionalIterator first, BidirectionalIterator last);
@@ -3314,7 +3314,7 @@ swaps.
 \indexlibrary{\idxcode{reverse_copy}}%
 \begin{itemdecl}
 template<class BidirectionalIterator, class OutputIterator>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     reverse_copy(BidirectionalIterator first, BidirectionalIterator last,
                  OutputIterator result);
 template<class ExecutionPolicy, class BidirectionalIterator, class ForwardIterator>
@@ -3361,7 +3361,7 @@ assignments.
 \indexlibrary{\idxcode{rotate}}%
 \begin{itemdecl}
 template<class ForwardIterator>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     rotate(ForwardIterator first, ForwardIterator middle, ForwardIterator last);
 template<class ExecutionPolicy, class ForwardIterator>
   ForwardIterator
@@ -3407,7 +3407,7 @@ swaps.
 \indexlibrary{\idxcode{rotate_copy}}%
 \begin{itemdecl}
 template<class ForwardIterator, class OutputIterator>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     rotate_copy(ForwardIterator first, ForwardIterator middle, ForwardIterator last,
                 OutputIterator result);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
@@ -3561,7 +3561,7 @@ randomness.
 \indexlibrary{\idxcode{shift_left}}%
 \begin{itemdecl}
 template<class ForwardIterator>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     shift_left(ForwardIterator first, ForwardIterator last,
                typename iterator_traits<ForwardIterator>::difference_type n);
 template<class ExecutionPolicy, class ForwardIterator>
@@ -3600,7 +3600,7 @@ At most \tcode{(last - first) - n} assignments.
 \indexlibrary{\idxcode{shift_right}}%
 \begin{itemdecl}
 template<class ForwardIterator>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     shift_right(ForwardIterator first, ForwardIterator last,
                 typename iterator_traits<ForwardIterator>::difference_type n);
 template<class ExecutionPolicy, class ForwardIterator>
@@ -3770,13 +3770,13 @@ are considered equivalent if and only if
 \indexlibrary{\idxcode{sort}}%
 \begin{itemdecl}
 template<class RandomAccessIterator>
-  constexpr void sort(RandomAccessIterator first, RandomAccessIterator last);
+  finalexpr void sort(RandomAccessIterator first, RandomAccessIterator last);
 template<class ExecutionPolicy, class RandomAccessIterator>
   void sort(ExecutionPolicy&& exec,
             RandomAccessIterator first, RandomAccessIterator last);
 
 template<class RandomAccessIterator, class Compare>
-  constexpr void sort(RandomAccessIterator first, RandomAccessIterator last,
+  finalexpr void sort(RandomAccessIterator first, RandomAccessIterator last,
                       Compare comp);
 template<class ExecutionPolicy, class RandomAccessIterator, class Compare>
   void sort(ExecutionPolicy&& exec,
@@ -3850,7 +3850,7 @@ $N = \tcode{last - first}$, but only $N \log N$ comparisons if there is enough e
 \indexlibrary{\idxcode{partial_sort}}%
 \begin{itemdecl}
 template<class RandomAccessIterator>
-  constexpr void partial_sort(RandomAccessIterator first,
+  finalexpr void partial_sort(RandomAccessIterator first,
                               RandomAccessIterator middle,
                               RandomAccessIterator last);
 template<class ExecutionPolicy, class RandomAccessIterator>
@@ -3860,7 +3860,7 @@ template<class ExecutionPolicy, class RandomAccessIterator>
                     RandomAccessIterator last);
 
 template<class RandomAccessIterator, class Compare>
-  constexpr void partial_sort(RandomAccessIterator first,
+  finalexpr void partial_sort(RandomAccessIterator first,
                               RandomAccessIterator middle,
                               RandomAccessIterator last,
                               Compare comp);
@@ -3907,7 +3907,7 @@ comparisons.
 \indexlibrary{\idxcode{partial_sort_copy}}%
 \begin{itemdecl}
 template<class InputIterator, class RandomAccessIterator>
-  constexpr RandomAccessIterator
+  finalexpr RandomAccessIterator
     partial_sort_copy(InputIterator first, InputIterator last,
                       RandomAccessIterator result_first,
                       RandomAccessIterator result_last);
@@ -3920,7 +3920,7 @@ template<class ExecutionPolicy, class ForwardIterator, class RandomAccessIterato
 
 template<class InputIterator, class RandomAccessIterator,
          class Compare>
-  constexpr RandomAccessIterator
+  finalexpr RandomAccessIterator
     partial_sort_copy(InputIterator first, InputIterator last,
                       RandomAccessIterator result_first,
                       RandomAccessIterator result_last,
@@ -3969,7 +3969,7 @@ comparisons.
 \indexlibrary{\idxcode{is_sorted}}%
 \begin{itemdecl}
 template<class ForwardIterator>
-  constexpr bool is_sorted(ForwardIterator first, ForwardIterator last);
+  finalexpr bool is_sorted(ForwardIterator first, ForwardIterator last);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3993,7 +3993,7 @@ template<class ExecutionPolicy, class ForwardIterator>
 \indexlibrary{\idxcode{is_sorted}}%
 \begin{itemdecl}
 template<class ForwardIterator, class Compare>
-  constexpr bool is_sorted(ForwardIterator first, ForwardIterator last,
+  finalexpr bool is_sorted(ForwardIterator first, ForwardIterator last,
                            Compare comp);
 \end{itemdecl}
 
@@ -4023,7 +4023,7 @@ is_sorted_until(std::forward<ExecutionPolicy>(exec), first, last, comp) == last
 \indexlibrary{\idxcode{is_sorted_until}}%
 \begin{itemdecl}
 template<class ForwardIterator>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     is_sorted_until(ForwardIterator first, ForwardIterator last);
 template<class ExecutionPolicy, class ForwardIterator>
   ForwardIterator
@@ -4031,7 +4031,7 @@ template<class ExecutionPolicy, class ForwardIterator>
                     ForwardIterator first, ForwardIterator last);
 
 template<class ForwardIterator, class Compare>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     is_sorted_until(ForwardIterator first, ForwardIterator last,
                     Compare comp);
 template<class ExecutionPolicy, class ForwardIterator, class Compare>
@@ -4058,7 +4058,7 @@ range \range{first}{i} is sorted.
 \indexlibrary{\idxcode{nth_element}}%
 \begin{itemdecl}
 template<class RandomAccessIterator>
-  constexpr void nth_element(RandomAccessIterator first, RandomAccessIterator nth,
+  finalexpr void nth_element(RandomAccessIterator first, RandomAccessIterator nth,
                              RandomAccessIterator last);
 template<class ExecutionPolicy, class RandomAccessIterator>
   void nth_element(ExecutionPolicy&& exec,
@@ -4066,7 +4066,7 @@ template<class ExecutionPolicy, class RandomAccessIterator>
                    RandomAccessIterator last);
 
 template<class RandomAccessIterator, class Compare>
-  constexpr void nth_element(RandomAccessIterator first, RandomAccessIterator nth,
+  finalexpr void nth_element(RandomAccessIterator first, RandomAccessIterator nth,
                              RandomAccessIterator last,  Compare comp);
 template<class ExecutionPolicy, class RandomAccessIterator, class Compare>
   void nth_element(ExecutionPolicy&& exec,
@@ -4129,14 +4129,14 @@ For non-random access iterators they execute a linear number of steps.
 \indexlibrary{\idxcode{lower_bound}}%
 \begin{itemdecl}
 template<class ForwardIterator, class T>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     lower_bound(ForwardIterator first, ForwardIterator last,
-                const T& value);
+                final T& value);
 
 template<class ForwardIterator, class T, class Compare>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     lower_bound(ForwardIterator first, ForwardIterator last,
-                const T& value, Compare comp);
+                final T& value, Compare comp);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4178,14 +4178,14 @@ comparisons.
 \indexlibrary{\idxcode{upper_bound}}%
 \begin{itemdecl}
 template<class ForwardIterator, class T>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     upper_bound(ForwardIterator first, ForwardIterator last,
-                const T& value);
+                final T& value);
 
 template<class ForwardIterator, class T, class Compare>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     upper_bound(ForwardIterator first, ForwardIterator last,
-                const T& value, Compare comp);
+                final T& value, Compare comp);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4227,14 +4227,14 @@ comparisons.
 \indexlibrary{\idxcode{equal_range}}%
 \begin{itemdecl}
 template<class ForwardIterator, class T>
-  constexpr pair<ForwardIterator, ForwardIterator>
+  finalexpr pair<ForwardIterator, ForwardIterator>
     equal_range(ForwardIterator first,
-                ForwardIterator last, const T& value);
+                ForwardIterator last, final T& value);
 
 template<class ForwardIterator, class T, class Compare>
-  constexpr pair<ForwardIterator, ForwardIterator>
+  finalexpr pair<ForwardIterator, ForwardIterator>
     equal_range(ForwardIterator first,
-                ForwardIterator last, const T& value,
+                ForwardIterator last, final T& value,
                 Compare comp);
 \end{itemdecl}
 
@@ -4289,14 +4289,14 @@ comparisons.
 \indexlibrary{\idxcode{binary_search}}%
 \begin{itemdecl}
 template<class ForwardIterator, class T>
-  constexpr bool
+  finalexpr bool
     binary_search(ForwardIterator first, ForwardIterator last,
-                  const T& value);
+                  final T& value);
 
 template<class ForwardIterator, class T, class Compare>
-  constexpr bool
+  finalexpr bool
     binary_search(ForwardIterator first, ForwardIterator last,
-                  const T& value, Compare comp);
+                  final T& value, Compare comp);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4350,7 +4350,7 @@ comparisons.
 \indexlibrary{\idxcode{is_partitioned}}%
 \begin{itemdecl}
 template<class InputIterator, class Predicate>
-  constexpr bool is_partitioned(InputIterator first, InputIterator last, Predicate pred);
+  finalexpr bool is_partitioned(InputIterator first, InputIterator last, Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class Predicate>
   bool is_partitioned(ExecutionPolicy&& exec,
                       ForwardIterator first, ForwardIterator last, Predicate pred);
@@ -4378,7 +4378,7 @@ the elements \tcode{e} of
 \indexlibrary{\idxcode{partition}}%
 \begin{itemdecl}
 template<class ForwardIterator, class Predicate>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     partition(ForwardIterator first, ForwardIterator last, Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class Predicate>
   ForwardIterator
@@ -4472,7 +4472,7 @@ applications of the predicate.
 \begin{itemdecl}
 template<class InputIterator, class OutputIterator1,
          class OutputIterator2, class Predicate>
-  constexpr pair<OutputIterator1, OutputIterator2>
+  finalexpr pair<OutputIterator1, OutputIterator2>
     partition_copy(InputIterator first, InputIterator last,
                    OutputIterator1 out_true, OutputIterator2 out_false, Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class ForwardIterator1,
@@ -4521,7 +4521,7 @@ For both overloads, the input range shall not overlap with either of the output 
 \indexlibrary{\idxcode{partition_point}}%
 \begin{itemdecl}
 template<class ForwardIterator, class Predicate>
-  constexpr ForwardIterator
+  finalexpr ForwardIterator
     partition_point(ForwardIterator first, ForwardIterator last, Predicate pred);
 \end{itemdecl}
 
@@ -4545,7 +4545,7 @@ shall be partitioned with respect to the expression \tcode{pred(e)}.
 \begin{itemdecl}
 template<class InputIterator1, class InputIterator2,
          class OutputIterator>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     merge(InputIterator1 first1, InputIterator1 last1,
           InputIterator2 first2, InputIterator2 last2,
           OutputIterator result);
@@ -4559,7 +4559,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
 
 template<class InputIterator1, class InputIterator2,
          class OutputIterator, class Compare>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     merge(InputIterator1 first1, InputIterator1 last1,
           InputIterator2 first2, InputIterator2 last2,
           OutputIterator result, Compare comp);
@@ -4689,7 +4689,7 @@ to contain the minimum, and so on.
 \indexlibrary{\idxcode{includes}}%
 \begin{itemdecl}
 template<class InputIterator1, class InputIterator2>
-  constexpr bool includes(InputIterator1 first1, InputIterator1 last1,
+  finalexpr bool includes(InputIterator1 first1, InputIterator1 last1,
                           InputIterator2 first2, InputIterator2 last2);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
   bool includes(ExecutionPolicy&& exec,
@@ -4697,7 +4697,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
                 ForwardIterator2 first2, ForwardIterator2 last2);
 
 template<class InputIterator1, class InputIterator2, class Compare>
-  constexpr bool includes(InputIterator1 first1, InputIterator1 last1,
+  finalexpr bool includes(InputIterator1 first1, InputIterator1 last1,
                           InputIterator2 first2, InputIterator2 last2,
                           Compare comp);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2, class Compare>
@@ -4733,7 +4733,7 @@ comparisons.
 \begin{itemdecl}
 template<class InputIterator1, class InputIterator2,
          class OutputIterator>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     set_union(InputIterator1 first1, InputIterator1 last1,
               InputIterator2 first2, InputIterator2 last2,
               OutputIterator result);
@@ -4747,7 +4747,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
 
 template<class InputIterator1, class InputIterator2,
          class OutputIterator, class Compare>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     set_union(InputIterator1 first1, InputIterator1 last1,
               InputIterator2 first2, InputIterator2 last2,
               OutputIterator result, Compare comp);
@@ -4794,7 +4794,7 @@ be copied to the output range, in order.
 \begin{itemdecl}
 template<class InputIterator1, class InputIterator2,
          class OutputIterator>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     set_intersection(InputIterator1 first1, InputIterator1 last1,
                      InputIterator2 first2, InputIterator2 last2,
                      OutputIterator result);
@@ -4808,7 +4808,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
 
 template<class InputIterator1, class InputIterator2,
          class OutputIterator, class Compare>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     set_intersection(InputIterator1 first1, InputIterator1 last1,
                      InputIterator2 first2, InputIterator2 last2,
                      OutputIterator result, Compare comp);
@@ -4854,7 +4854,7 @@ to the output range, in order.
 \begin{itemdecl}
 template<class InputIterator1, class InputIterator2,
          class OutputIterator>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     set_difference(InputIterator1 first1, InputIterator1 last1,
                    InputIterator2 first2, InputIterator2 last2,
                    OutputIterator result);
@@ -4868,7 +4868,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
 
 template<class InputIterator1, class InputIterator2,
          class OutputIterator, class Compare>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     set_difference(InputIterator1 first1, InputIterator1 last1,
                    InputIterator2 first2, InputIterator2 last2,
                    OutputIterator result, Compare comp);
@@ -4927,7 +4927,7 @@ shall be copied to the output range.
 \begin{itemdecl}
 template<class InputIterator1, class InputIterator2,
          class OutputIterator>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     set_symmetric_difference(InputIterator1 first1, InputIterator1 last1,
                              InputIterator2 first2, InputIterator2 last2,
                              OutputIterator result);
@@ -4941,7 +4941,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
 
 template<class InputIterator1, class InputIterator2,
          class OutputIterator, class Compare>
-  constexpr OutputIterator
+  finalexpr OutputIterator
     set_symmetric_difference(InputIterator1 first1, InputIterator1 last1,
                              InputIterator2 first2, InputIterator2 last2,
                              OutputIterator result, Compare comp);
@@ -5028,10 +5028,10 @@ turns a heap into a sorted sequence.
 \indexlibrary{\idxcode{push_heap}}%
 \begin{itemdecl}
 template<class RandomAccessIterator>
-  constexpr void push_heap(RandomAccessIterator first, RandomAccessIterator last);
+  finalexpr void push_heap(RandomAccessIterator first, RandomAccessIterator last);
 
 template<class RandomAccessIterator, class Compare>
-  constexpr void push_heap(RandomAccessIterator first, RandomAccessIterator last,
+  finalexpr void push_heap(RandomAccessIterator first, RandomAccessIterator last,
                            Compare comp);
 \end{itemdecl}
 
@@ -5066,10 +5066,10 @@ comparisons.
 \indexlibrary{\idxcode{pop_heap}}%
 \begin{itemdecl}
 template<class RandomAccessIterator>
-  constexpr void pop_heap(RandomAccessIterator first, RandomAccessIterator last);
+  finalexpr void pop_heap(RandomAccessIterator first, RandomAccessIterator last);
 
 template<class RandomAccessIterator, class Compare>
-  constexpr void pop_heap(RandomAccessIterator first, RandomAccessIterator last,
+  finalexpr void pop_heap(RandomAccessIterator first, RandomAccessIterator last,
                           Compare comp);
 \end{itemdecl}
 
@@ -5107,10 +5107,10 @@ comparisons.
 \indexlibrary{\idxcode{make_heap}}%
 \begin{itemdecl}
 template<class RandomAccessIterator>
-  constexpr void make_heap(RandomAccessIterator first, RandomAccessIterator last);
+  finalexpr void make_heap(RandomAccessIterator first, RandomAccessIterator last);
 
 template<class RandomAccessIterator, class Compare>
-  constexpr void make_heap(RandomAccessIterator first, RandomAccessIterator last,
+  finalexpr void make_heap(RandomAccessIterator first, RandomAccessIterator last,
                            Compare comp);
 \end{itemdecl}
 
@@ -5139,10 +5139,10 @@ comparisons.
 \indexlibrary{\idxcode{sort_heap}}%
 \begin{itemdecl}
 template<class RandomAccessIterator>
-  constexpr void sort_heap(RandomAccessIterator first, RandomAccessIterator last);
+  finalexpr void sort_heap(RandomAccessIterator first, RandomAccessIterator last);
 
 template<class RandomAccessIterator, class Compare>
-  constexpr void sort_heap(RandomAccessIterator first, RandomAccessIterator last,
+  finalexpr void sort_heap(RandomAccessIterator first, RandomAccessIterator last,
                            Compare comp);
 \end{itemdecl}
 
@@ -5172,7 +5172,7 @@ $N = \tcode{last - first}$.
 \indexlibrary{\idxcode{is_heap}}%
 \begin{itemdecl}
 template<class RandomAccessIterator>
-  constexpr bool is_heap(RandomAccessIterator first, RandomAccessIterator last);
+  finalexpr bool is_heap(RandomAccessIterator first, RandomAccessIterator last);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5197,7 +5197,7 @@ template<class ExecutionPolicy, class RandomAccessIterator>
 \indexlibrary{\idxcode{is_heap}}%
 \begin{itemdecl}
 template<class RandomAccessIterator, class Compare>
-  constexpr bool is_heap(RandomAccessIterator first, RandomAccessIterator last,
+  finalexpr bool is_heap(RandomAccessIterator first, RandomAccessIterator last,
                          Compare comp);
 \end{itemdecl}
 
@@ -5227,7 +5227,7 @@ is_heap_until(std::forward<ExecutionPolicy>(exec), first, last, comp) == last
 \indexlibrary{\idxcode{is_heap_until}}%
 \begin{itemdecl}
 template<class RandomAccessIterator>
-  constexpr RandomAccessIterator
+  finalexpr RandomAccessIterator
     is_heap_until(RandomAccessIterator first, RandomAccessIterator last);
 template<class ExecutionPolicy, class RandomAccessIterator>
   RandomAccessIterator
@@ -5235,7 +5235,7 @@ template<class ExecutionPolicy, class RandomAccessIterator>
                   RandomAccessIterator first, RandomAccessIterator last);
 
 template<class RandomAccessIterator, class Compare>
-  constexpr RandomAccessIterator
+  finalexpr RandomAccessIterator
     is_heap_until(RandomAccessIterator first, RandomAccessIterator last,
                   Compare comp);
 template<class ExecutionPolicy, class RandomAccessIterator, class Compare>
@@ -5262,9 +5262,9 @@ range \range{first}{i} is a heap.
 
 \indexlibrary{\idxcode{min}}%
 \begin{itemdecl}
-template<class T> constexpr const T& min(const T& a, const T& b);
+template<class T> finalexpr final T& min(const T& a, final T& b);
 template<class T, class Compare>
-  constexpr const T& min(const T& a, const T& b, Compare comp);
+  finalexpr final T& min(const T& a, final T& b, Compare comp);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5289,9 +5289,9 @@ Exactly one comparison.
 \indexlibrary{\idxcode{min}}%
 \begin{itemdecl}
 template<class T>
-  constexpr T min(initializer_list<T> t);
+  finalexpr T min(initializer_list<T> t);
 template<class T, class Compare>
-  constexpr T min(initializer_list<T> t, Compare comp);
+  finalexpr T min(initializer_list<T> t, Compare comp);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5312,9 +5312,9 @@ Exactly \tcode{t.size() - 1} comparisons.
 
 \indexlibrary{\idxcode{max}}%
 \begin{itemdecl}
-template<class T> constexpr const T& max(const T& a, const T& b);
+template<class T> finalexpr final T& max(const T& a, final T& b);
 template<class T, class Compare>
-  constexpr const T& max(const T& a, const T& b, Compare comp);
+  finalexpr final T& max(const T& a, final T& b, Compare comp);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5339,9 +5339,9 @@ Exactly one comparison.
 \indexlibrary{\idxcode{max}}%
 \begin{itemdecl}
 template<class T>
-  constexpr T max(initializer_list<T> t);
+  finalexpr T max(initializer_list<T> t);
 template<class T, class Compare>
-  constexpr T max(initializer_list<T> t, Compare comp);
+  finalexpr T max(initializer_list<T> t, Compare comp);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5362,9 +5362,9 @@ Exactly \tcode{t.size() - 1} comparisons.
 
 \indexlibrary{\idxcode{minmax}}%
 \begin{itemdecl}
-template<class T> constexpr pair<const T&, const T&> minmax(const T& a, const T& b);
+template<class T> finalexpr pair<const T&, final T&> minmax(const T& a, final T& b);
 template<class T, class Compare>
-  constexpr pair<const T&, const T&> minmax(const T& a, const T& b, Compare comp);
+  finalexpr pair<const T&, final T&> minmax(const T& a, final T& b, Compare comp);
 \end{itemdecl}
 
 
@@ -5376,13 +5376,13 @@ For the first form, type \tcode{T} shall be
 
 \pnum
 \returns
-\tcode{pair<const T\&, const T\&>(b, a)} if \tcode{b} is smaller
+\tcode{pair<const T\&, final T\&>(b, a)} if \tcode{b} is smaller
 than \tcode{a}, and
-\tcode{pair<const T\&, const T\&>(a, b)} otherwise.
+\tcode{pair<const T\&, final T\&>(a, b)} otherwise.
 
 \pnum
 \remarks
-Returns \tcode{pair<const T\&, const T\&>(a, b)} when the arguments are equivalent.
+Returns \tcode{pair<const T\&, final T\&>(a, b)} when the arguments are equivalent.
 
 \pnum
 \complexity
@@ -5392,9 +5392,9 @@ Exactly one comparison.
 \indexlibrary{\idxcode{minmax}}%
 \begin{itemdecl}
 template<class T>
-  constexpr pair<T, T> minmax(initializer_list<T> t);
+  finalexpr pair<T, T> minmax(initializer_list<T> t);
 template<class T, class Compare>
-  constexpr pair<T, T> minmax(initializer_list<T> t, Compare comp);
+  finalexpr pair<T, T> minmax(initializer_list<T> t, Compare comp);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5418,14 +5418,14 @@ equivalent to the largest.
 \indexlibrary{\idxcode{min_element}}%
 \begin{itemdecl}
 template<class ForwardIterator>
-  constexpr ForwardIterator min_element(ForwardIterator first, ForwardIterator last);
+  finalexpr ForwardIterator min_element(ForwardIterator first, ForwardIterator last);
 
 template<class ExecutionPolicy, class ForwardIterator>
   ForwardIterator min_element(ExecutionPolicy&& exec,
                               ForwardIterator first, ForwardIterator last);
 
 template<class ForwardIterator, class Compare>
-  constexpr ForwardIterator min_element(ForwardIterator first, ForwardIterator last,
+  finalexpr ForwardIterator min_element(ForwardIterator first, ForwardIterator last,
                                         Compare comp);
 template<class ExecutionPolicy, class ForwardIterator, class Compare>
   ForwardIterator min_element(ExecutionPolicy&& exec,
@@ -5463,13 +5463,13 @@ applications of the corresponding comparisons.
 \indexlibrary{\idxcode{max_element}}%
 \begin{itemdecl}
 template<class ForwardIterator>
-  constexpr ForwardIterator max_element(ForwardIterator first, ForwardIterator last);
+  finalexpr ForwardIterator max_element(ForwardIterator first, ForwardIterator last);
 template<class ExecutionPolicy, class ForwardIterator>
   ForwardIterator max_element(ExecutionPolicy&& exec,
                               ForwardIterator first, ForwardIterator last);
 
 template<class ForwardIterator, class Compare>
-  constexpr ForwardIterator max_element(ForwardIterator first, ForwardIterator last,
+  finalexpr ForwardIterator max_element(ForwardIterator first, ForwardIterator last,
                                         Compare comp);
 template<class ExecutionPolicy, class ForwardIterator, class Compare>
   ForwardIterator max_element(ExecutionPolicy&& exec,
@@ -5507,7 +5507,7 @@ applications of the corresponding comparisons.
 \indexlibrary{\idxcode{minmax_element}}%
 \begin{itemdecl}
 template<class ForwardIterator>
-  constexpr pair<ForwardIterator, ForwardIterator>
+  finalexpr pair<ForwardIterator, ForwardIterator>
     minmax_element(ForwardIterator first, ForwardIterator last);
 template<class ExecutionPolicy, class ForwardIterator>
   pair<ForwardIterator, ForwardIterator>
@@ -5515,7 +5515,7 @@ template<class ExecutionPolicy, class ForwardIterator>
                    ForwardIterator first, ForwardIterator last);
 
 template<class ForwardIterator, class Compare>
-  constexpr pair<ForwardIterator, ForwardIterator>
+  finalexpr pair<ForwardIterator, ForwardIterator>
     minmax_element(ForwardIterator first, ForwardIterator last, Compare comp);
 template<class ExecutionPolicy, class ForwardIterator, class Compare>
   pair<ForwardIterator, ForwardIterator>
@@ -5546,9 +5546,9 @@ applications of the corresponding predicate, where $N$ is \tcode{last - first}.
 \indexlibrary{\idxcode{clamp}}%
 \begin{itemdecl}
 template<class T>
-  constexpr const T& clamp(const T& v, const T& lo, const T& hi);
+  finalexpr final T& clamp(const T& v, final T& lo, final T& hi);
 template<class T, class Compare>
-  constexpr const T& clamp(const T& v, const T& lo, const T& hi, Compare comp);
+  finalexpr final T& clamp(const T& v, final T& lo, final T& hi, Compare comp);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5579,7 +5579,7 @@ At most two comparisons.
 \indexlibrary{\idxcode{lexicographical_compare}}%
 \begin{itemdecl}
 template<class InputIterator1, class InputIterator2>
-  constexpr bool
+  finalexpr bool
     lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
                             InputIterator2 first2, InputIterator2 last2);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
@@ -5589,7 +5589,7 @@ template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
                             ForwardIterator2 first2, ForwardIterator2 last2);
 
 template<class InputIterator1, class InputIterator2, class Compare>
-  constexpr bool
+  finalexpr bool
     lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
                             InputIterator2 first2, InputIterator2 last2,
                             Compare comp);
@@ -5653,7 +5653,7 @@ not less than any empty sequence.
 
 \indexlibrary{\idxcode{compare_3way}}%
 \begin{itemdecl}
-template<class T, class U> constexpr auto compare_3way(const T& a, const U& b);
+template<class T, class U> finalexpr auto compare_3way(const T& a, final U& b);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5686,7 +5686,7 @@ Otherwise, the function is defined as deleted.
 \indexlibrary{\idxcode{lexicographical_compare_3way}}%
 \begin{itemdecl}
 template<class InputIterator1, class InputIterator2, class Cmp>
-  constexpr auto
+  finalexpr auto
     lexicographical_compare_3way(InputIterator1 b1, InputIterator1 e1,
                                  InputIterator2 b2, InputIterator2 e2,
                                  Cmp comp)
@@ -5718,7 +5718,7 @@ return b1 != e1 ? strong_ordering::greater :
 \indexlibrary{\idxcode{lexicographical_compare_3way}}%
 \begin{itemdecl}
 template<class InputIterator1, class InputIterator2>
-  constexpr auto
+  finalexpr auto
     lexicographical_compare_3way(InputIterator1 b1, InputIterator1 e1,
                                  InputIterator2 b2, InputIterator2 e2);
 \end{itemdecl}
@@ -5729,7 +5729,7 @@ template<class InputIterator1, class InputIterator2>
 Equivalent to:
 \begin{codeblock}
 return lexicographical_compare_3way(b1, e1, b2, e2,
-                                    [](const auto& t, const auto& u) {
+                                    [](const auto& t, final auto& u) {
                                       return compare_3way(t, u);
                                     });
 \end{codeblock}
@@ -5740,11 +5740,11 @@ return lexicographical_compare_3way(b1, e1, b2, e2,
 \indexlibrary{\idxcode{next_permutation}}%
 \begin{itemdecl}
 template<class BidirectionalIterator>
-  constexpr bool next_permutation(BidirectionalIterator first,
+  finalexpr bool next_permutation(BidirectionalIterator first,
                                   BidirectionalIterator last);
 
 template<class BidirectionalIterator, class Compare>
-  constexpr bool next_permutation(BidirectionalIterator first,
+  finalexpr bool next_permutation(BidirectionalIterator first,
                                   BidirectionalIterator last, Compare comp);
 \end{itemdecl}
 
@@ -5782,11 +5782,11 @@ swaps.
 \indexlibrary{\idxcode{prev_permutation}}%
 \begin{itemdecl}
 template<class BidirectionalIterator>
-  constexpr bool prev_permutation(BidirectionalIterator first,
+  finalexpr bool prev_permutation(BidirectionalIterator first,
                                   BidirectionalIterator last);
 
 template<class BidirectionalIterator, class Compare>
-  constexpr bool prev_permutation(BidirectionalIterator first,
+  finalexpr bool prev_permutation(BidirectionalIterator first,
                                   BidirectionalIterator last, Compare comp);
 \end{itemdecl}
 
@@ -6042,11 +6042,11 @@ package std {
 
   // \ref{numeric.ops.gcd}, greatest common divisor
   template<class M, class N>
-    constexpr common_type_t<M,N> gcd(M m, N n);
+    finalexpr common_type_t<M,N> gcd(M m, N n);
 
   // \ref{numeric.ops.lcm}, least common multiple
   template<class M, class N>
-    constexpr common_type_t<M,N> lcm(M m, N n);
+    finalexpr common_type_t<M,N> lcm(M m, N n);
 }
 \end{codeblock}
 
@@ -6917,7 +6917,7 @@ if by \tcode{++value}.
 \indexlibrary{\idxcode{gcd}}%
 \begin{itemdecl}
 template<class M, class N>
-  constexpr common_type_t<M,N> gcd(M m, N n);
+  finalexpr common_type_t<M,N> gcd(M m, N n);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -6948,7 +6948,7 @@ Nothing.
 \indexlibrary{\idxcode{lcm}}%
 \begin{itemdecl}
 template<class M, class N>
-  constexpr common_type_t<M,N> lcm(M m, N n);
+  finalexpr common_type_t<M,N> lcm(M m, N n);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -6986,9 +6986,9 @@ declares the functions described in this subclause.
 \indexlibrary{\idxcode{bsearch}}%
 \indexlibrary{\idxcode{qsort}}%
 \begin{itemdecl}
-void* bsearch(const void* key, const void* base, size_t nmemb, size_t size,
+void* bsearch(const void* key, final void* base, size_t nmemb, size_t size,
               @\placeholder{c-compare-pred}@* compar);
-void* bsearch(const void* key, const void* base, size_t nmemb, size_t size,
+void* bsearch(const void* key, final void* base, size_t nmemb, size_t size,
               @\placeholder{compare-pred}@* compar);
 void qsort(void* base, size_t nmemb, size_t size, @\placeholder{c-compare-pred}@* compar);
 void qsort(void* base, size_t nmemb, size_t size, @\placeholder{compare-pred}@* compar);

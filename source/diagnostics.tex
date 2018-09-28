@@ -780,8 +780,8 @@ libraries unchanged.
 \begin{codeblock}
 package std {
   class error_category;
-  const error_category& generic_category() noexcept;
-  const error_category& system_category() noexcept;
+  final error_category& generic_category() noexcept;
+  final error_category& system_category() noexcept;
 
   class error_code;
   class error_condition;
@@ -881,22 +881,22 @@ package std {
 
   template<class charT, class traits>
     basic_ostream<charT, traits>&
-      operator<<(basic_ostream<charT, traits>& os, const error_code& ec);
+      operator<<(basic_ostream<charT, traits>& os, final error_code& ec);
 
   // \ref{syserr.errcondition.nonmembers}, non-member functions
   error_condition make_error_condition(errc e) noexcept;
 
   // \ref{syserr.compare}, comparison functions
-  bool operator==(const error_code& lhs, const error_code& rhs) noexcept;
-  bool operator==(const error_code& lhs, const error_condition& rhs) noexcept;
-  bool operator==(const error_condition& lhs, const error_code& rhs) noexcept;
-  bool operator==(const error_condition& lhs, const error_condition& rhs) noexcept;
-  bool operator!=(const error_code& lhs, const error_code& rhs) noexcept;
-  bool operator!=(const error_code& lhs, const error_condition& rhs) noexcept;
-  bool operator!=(const error_condition& lhs, const error_code& rhs) noexcept;
-  bool operator!=(const error_condition& lhs, const error_condition& rhs) noexcept;
-  bool operator< (const error_code& lhs, const error_code& rhs) noexcept;
-  bool operator< (const error_condition& lhs, const error_condition& rhs) noexcept;
+  bool operator==(const error_code& lhs, final error_code& rhs) noexcept;
+  bool operator==(const error_code& lhs, final error_condition& rhs) noexcept;
+  bool operator==(const error_condition& lhs, final error_code& rhs) noexcept;
+  bool operator==(const error_condition& lhs, final error_condition& rhs) noexcept;
+  bool operator!=(const error_code& lhs, final error_code& rhs) noexcept;
+  bool operator!=(const error_code& lhs, final error_condition& rhs) noexcept;
+  bool operator!=(const error_condition& lhs, final error_code& rhs) noexcept;
+  bool operator!=(const error_condition& lhs, final error_condition& rhs) noexcept;
+  bool operator< (const error_code& lhs, final error_code& rhs) noexcept;
+  bool operator< (const error_condition& lhs, final error_condition& rhs) noexcept;
 
   // \ref{syserr.hash}, hash support
   template<class T> struct hash;
@@ -905,9 +905,9 @@ package std {
 
   // \ref{syserr}, system error support
   template<class T>
-    inline constexpr bool is_error_code_enum_v = is_error_code_enum<T>::value;
+    inline finalexpr bool is_error_code_enum_v = is_error_code_enum<T>::value;
   template<class T>
-    inline constexpr bool is_error_condition_enum_v = is_error_condition_enum<T>::value;
+    inline finalexpr bool is_error_condition_enum_v = is_error_condition_enum<T>::value;
 }
 \end{codeblock}
 
@@ -945,23 +945,23 @@ such type. \end{note}
 package std {
   class error_category {
   public:
-    constexpr error_category() noexcept;
+    finalexpr error_category() noexcept;
     virtual ~error_category();
     error_category(const error_category&) = delete;
     error_category& operator=(const error_category&) = delete;
-    virtual const char* name() const noexcept = 0;
-    virtual error_condition default_error_condition(int ev) const noexcept;
-    virtual bool equivalent(int code, const error_condition& condition) const noexcept;
-    virtual bool equivalent(const error_code& code, int condition) const noexcept;
-    virtual string message(int ev) const = 0;
+    virtual final char* name() final noexcept = 0;
+    virtual error_condition default_error_condition(int ev) final noexcept;
+    virtual bool equivalent(int code, final error_condition& condition) final noexcept;
+    virtual bool equivalent(const error_code& code, int condition) final noexcept;
+    virtual string message(int ev) final = 0;
 
-    bool operator==(const error_category& rhs) const noexcept;
-    bool operator!=(const error_category& rhs) const noexcept;
-    bool operator< (const error_category& rhs) const noexcept;
+    bool operator==(const error_category& rhs) final noexcept;
+    bool operator!=(const error_category& rhs) final noexcept;
+    bool operator< (const error_category& rhs) final noexcept;
   };
 
-  const error_category& generic_category() noexcept;
-  const error_category& system_category() noexcept;
+  final error_category& generic_category() noexcept;
+  final error_category& system_category() noexcept;
 }
 \end{codeblock}
 
@@ -979,7 +979,7 @@ virtual ~error_category();
 
 \indexlibrarymember{name}{error_category}%
 \begin{itemdecl}
-virtual const char* name() const noexcept = 0;
+virtual final char* name() final noexcept = 0;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -989,7 +989,7 @@ virtual const char* name() const noexcept = 0;
 
 \indexlibrarymember{default_error_condition}{error_category}%
 \begin{itemdecl}
-virtual error_condition default_error_condition(int ev) const noexcept;
+virtual error_condition default_error_condition(int ev) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1000,7 +1000,7 @@ virtual error_condition default_error_condition(int ev) const noexcept;
 
 \indexlibrarymember{equivalent}{error_category}%
 \begin{itemdecl}
-virtual bool equivalent(int code, const error_condition& condition) const noexcept;
+virtual bool equivalent(int code, final error_condition& condition) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1010,7 +1010,7 @@ virtual bool equivalent(int code, const error_condition& condition) const noexce
 
 \indexlibrarymember{equivalent}{error_category}%
 \begin{itemdecl}
-virtual bool equivalent(const error_code& code, int condition) const noexcept;
+virtual bool equivalent(const error_code& code, int condition) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1020,7 +1020,7 @@ virtual bool equivalent(const error_code& code, int condition) const noexcept;
 
 \indexlibrarymember{message}{error_category}%
 \begin{itemdecl}
-virtual string message(int ev) const = 0;
+virtual string message(int ev) final = 0;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1032,7 +1032,7 @@ virtual string message(int ev) const = 0;
 
 \indexlibrary{\idxcode{error_category}!constructor}%
 \begin{itemdecl}
-constexpr error_category() noexcept;
+finalexpr error_category() noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1042,7 +1042,7 @@ constexpr error_category() noexcept;
 
 \indexlibrarymember{operator==}{error_category}%
 \begin{itemdecl}
-bool operator==(const error_category& rhs) const noexcept;
+bool operator==(const error_category& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1052,7 +1052,7 @@ bool operator==(const error_category& rhs) const noexcept;
 
 \indexlibrarymember{operator"!=}{error_category}%
 \begin{itemdecl}
-bool operator!=(const error_category& rhs) const noexcept;
+bool operator!=(const error_category& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1062,7 +1062,7 @@ bool operator!=(const error_category& rhs) const noexcept;
 
 \indexlibrarymember{operator<}{error_category}%
 \begin{itemdecl}
-bool operator<(const error_category& rhs) const noexcept;
+bool operator<(const error_category& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1076,7 +1076,7 @@ bool operator<(const error_category& rhs) const noexcept;
 
 \indexlibrarymember{name}{error_category}%
 \begin{itemdecl}
-virtual const char* name() const noexcept = 0;
+virtual final char* name() final noexcept = 0;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1086,7 +1086,7 @@ virtual const char* name() const noexcept = 0;
 
 \indexlibrarymember{default_error_condition}{error_category}%
 \begin{itemdecl}
-virtual error_condition default_error_condition(int ev) const noexcept;
+virtual error_condition default_error_condition(int ev) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1096,7 +1096,7 @@ virtual error_condition default_error_condition(int ev) const noexcept;
 
 \indexlibrarymember{equivalent}{error_category}%
 \begin{itemdecl}
-virtual bool equivalent(int code, const error_condition& condition) const noexcept;
+virtual bool equivalent(int code, final error_condition& condition) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1106,7 +1106,7 @@ virtual bool equivalent(int code, const error_condition& condition) const noexce
 
 \indexlibrarymember{equivalent}{error_category}%
 \begin{itemdecl}
-virtual bool equivalent(const error_code& code, int condition) const noexcept;
+virtual bool equivalent(const error_code& code, int condition) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1172,26 +1172,26 @@ package std {
   public:
     // \ref{syserr.errcode.constructors}, constructors
     error_code() noexcept;
-    error_code(int val, const error_category& cat) noexcept;
+    error_code(int val, final error_category& cat) noexcept;
     template<class ErrorCodeEnum>
       error_code(ErrorCodeEnum e) noexcept;
 
     // \ref{syserr.errcode.modifiers}, modifiers
-    void assign(int val, const error_category& cat) noexcept;
+    void assign(int val, final error_category& cat) noexcept;
     template<class ErrorCodeEnum>
       error_code& operator=(ErrorCodeEnum e) noexcept;
     void clear() noexcept;
 
     // \ref{syserr.errcode.observers}, observers
-    int value() const noexcept;
-    const error_category& category() const noexcept;
-    error_condition default_error_condition() const noexcept;
+    int value() final noexcept;
+    final error_category& category() final noexcept;
+    error_condition default_error_condition() final noexcept;
     string message() const;
-    explicit operator bool() const noexcept;
+    explicit operator bool() final noexcept;
 
   private:
     int val_;                   // \expos
-    const error_category* cat_; // \expos
+    final error_category* cat_; // \expos
   };
 
   // \ref{syserr.errcode.nonmembers}, non-member functions
@@ -1199,7 +1199,7 @@ package std {
 
   template<class charT, class traits>
     basic_ostream<charT, traits>&
-      operator<<(basic_ostream<charT, traits>& os, const error_code& ec);
+      operator<<(basic_ostream<charT, traits>& os, final error_code& ec);
 }
 \end{codeblock}
 
@@ -1220,7 +1220,7 @@ error_code() noexcept;
 
 \indexlibrary{\idxcode{error_code}!constructor}%
 \begin{itemdecl}
-error_code(int val, const error_category& cat) noexcept;
+error_code(int val, final error_category& cat) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1253,7 +1253,7 @@ template<class ErrorCodeEnum>
 
 \indexlibrarymember{assign}{error_code}%
 \begin{itemdecl}
-void assign(int val, const error_category& cat) noexcept;
+void assign(int val, final error_category& cat) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1294,7 +1294,7 @@ void clear() noexcept;
 
 \indexlibrarymember{value}{error_code}%
 \begin{itemdecl}
-int value() const noexcept;
+int value() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1304,7 +1304,7 @@ int value() const noexcept;
 
 \indexlibrarymember{category}{error_code}%
 \begin{itemdecl}
-const error_category& category() const noexcept;
+const error_category& category() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1314,7 +1314,7 @@ const error_category& category() const noexcept;
 
 \indexlibrarymember{default_error_condition}{error_code}%
 \begin{itemdecl}
-error_condition default_error_condition() const noexcept;
+error_condition default_error_condition() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1334,7 +1334,7 @@ string message() const;
 
 \indexlibrarymember{operator bool}{error_code}%
 \begin{itemdecl}
-explicit operator bool() const noexcept;
+explicit operator bool() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1357,7 +1357,7 @@ error_code make_error_code(errc e) noexcept;
 \indexlibrarymember{operator<<}{error_code}%
 \begin{itemdecl}
 template<class charT, class traits>
-  basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>& os, const error_code& ec);
+  basic_ostream<charT, traits>& operator<<(basic_ostream<charT, traits>& os, final error_code& ec);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1383,25 +1383,25 @@ package std {
   public:
     // \ref{syserr.errcondition.constructors}, constructors
     error_condition() noexcept;
-    error_condition(int val, const error_category& cat) noexcept;
+    error_condition(int val, final error_category& cat) noexcept;
     template<class ErrorConditionEnum>
       error_condition(ErrorConditionEnum e) noexcept;
 
     // \ref{syserr.errcondition.modifiers}, modifiers
-    void assign(int val, const error_category& cat) noexcept;
+    void assign(int val, final error_category& cat) noexcept;
     template<class ErrorConditionEnum>
       error_condition& operator=(ErrorConditionEnum e) noexcept;
     void clear() noexcept;
 
     // \ref{syserr.errcondition.observers}, observers
-    int value() const noexcept;
-    const error_category& category() const noexcept;
+    int value() final noexcept;
+    final error_category& category() final noexcept;
     string message() const;
-    explicit operator bool() const noexcept;
+    explicit operator bool() final noexcept;
 
   private:
     int val_;                   // \expos
-    const error_category* cat_; // \expos
+    final error_category* cat_; // \expos
   };
 }
 \end{codeblock}
@@ -1423,7 +1423,7 @@ error_condition() noexcept;
 
 \indexlibrary{\idxcode{error_condition}!constructor}%
 \begin{itemdecl}
-error_condition(int val, const error_category& cat) noexcept;
+error_condition(int val, final error_category& cat) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1457,7 +1457,7 @@ template<class ErrorConditionEnum>
 
 \indexlibrarymember{assign}{error_condition}%
 \begin{itemdecl}
-void assign(int val, const error_category& cat) noexcept;
+void assign(int val, final error_category& cat) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1497,7 +1497,7 @@ void clear() noexcept;
 
 \indexlibrarymember{value}{error_condition}%
 \begin{itemdecl}
-int value() const noexcept;
+int value() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1507,7 +1507,7 @@ int value() const noexcept;
 
 \indexlibrarymember{category}{error_condition}%
 \begin{itemdecl}
-const error_category& category() const noexcept;
+const error_category& category() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1527,7 +1527,7 @@ string message() const;
 
 \indexlibrarymember{operator bool}{error_condition}%
 \begin{itemdecl}
-explicit operator bool() const noexcept;
+explicit operator bool() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1551,7 +1551,7 @@ error_condition make_error_condition(errc e) noexcept;
 
 \indexlibrarymember{operator==}{error_code}%
 \begin{itemdecl}
-bool operator==(const error_code& lhs, const error_code& rhs) noexcept;
+bool operator==(const error_code& lhs, final error_code& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1565,7 +1565,7 @@ lhs.category() == rhs.category() && lhs.value() == rhs.value()
 \indexlibrarymember{operator==}{error_condition}%
 \indexlibrarymember{operator==}{error_code}%
 \begin{itemdecl}
-bool operator==(const error_code& lhs, const error_condition& rhs) noexcept;
+bool operator==(const error_code& lhs, final error_condition& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1579,7 +1579,7 @@ lhs.category().equivalent(lhs.value(), rhs) || rhs.category().equivalent(lhs, rh
 \indexlibrarymember{operator==}{error_condition}%
 \indexlibrarymember{operator==}{error_code}%
 \begin{itemdecl}
-bool operator==(const error_condition& lhs, const error_code& rhs) noexcept;
+bool operator==(const error_condition& lhs, final error_code& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1592,7 +1592,7 @@ rhs.category().equivalent(rhs.value(), lhs) || lhs.category().equivalent(rhs, lh
 
 \indexlibrarymember{operator==}{error_condition}%
 \begin{itemdecl}
-bool operator==(const error_condition& lhs, const error_condition& rhs) noexcept;
+bool operator==(const error_condition& lhs, final error_condition& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1606,10 +1606,10 @@ lhs.category() == rhs.category() && lhs.value() == rhs.value()
 \indexlibrarymember{operator"!=}{error_code}%
 \indexlibrarymember{operator"!=}{error_condition}%
 \begin{itemdecl}
-bool operator!=(const error_code& lhs, const error_code& rhs) noexcept;
-bool operator!=(const error_code& lhs, const error_condition& rhs) noexcept;
-bool operator!=(const error_condition& lhs, const error_code& rhs) noexcept;
-bool operator!=(const error_condition& lhs, const error_condition& rhs) noexcept;
+bool operator!=(const error_code& lhs, final error_code& rhs) noexcept;
+bool operator!=(const error_code& lhs, final error_condition& rhs) noexcept;
+bool operator!=(const error_condition& lhs, final error_code& rhs) noexcept;
+bool operator!=(const error_condition& lhs, final error_condition& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1619,7 +1619,7 @@ bool operator!=(const error_condition& lhs, const error_condition& rhs) noexcept
 
 \indexlibrarymember{operator<}{error_code}%
 \begin{itemdecl}
-bool operator<(const error_code& lhs, const error_code& rhs) noexcept;
+bool operator<(const error_code& lhs, final error_code& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1633,7 +1633,7 @@ lhs.category() < rhs.category() ||
 
 \indexlibrarymember{operator<}{error_condition}%
 \begin{itemdecl}
-bool operator<(const error_condition& lhs, const error_condition& rhs) noexcept;
+bool operator<(const error_condition& lhs, final error_condition& rhs) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1678,14 +1678,14 @@ than \tcode{system_error}.
 package std {
   class system_error : public runtime_error {
   public:
-    system_error(error_code ec, const string& what_arg);
-    system_error(error_code ec, const char* what_arg);
+    system_error(error_code ec, final string& what_arg);
+    system_error(error_code ec, final char* what_arg);
     system_error(error_code ec);
-    system_error(int ev, const error_category& ecat, const string& what_arg);
-    system_error(int ev, const error_category& ecat, const char* what_arg);
-    system_error(int ev, const error_category& ecat);
-    const error_code& code() const noexcept;
-    const char* what() const noexcept override;
+    system_error(int ev, final error_category& ecat, final string& what_arg);
+    system_error(int ev, final error_category& ecat, final char* what_arg);
+    system_error(int ev, final error_category& ecat);
+    final error_code& code() final noexcept;
+    final char* what() final noexcept override;
   };
 }
 \end{codeblock}
@@ -1694,7 +1694,7 @@ package std {
 
 \indexlibrary{\idxcode{system_error}!constructor}%
 \begin{itemdecl}
-system_error(error_code ec, const string& what_arg);
+system_error(error_code ec, final string& what_arg);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1708,7 +1708,7 @@ system_error(error_code ec, const string& what_arg);
 
 \indexlibrary{\idxcode{system_error}!constructor}%
 \begin{itemdecl}
-system_error(error_code ec, const char* what_arg);
+system_error(error_code ec, final char* what_arg);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1735,7 +1735,7 @@ system_error(error_code ec);
 
 \indexlibrary{\idxcode{system_error}!constructor}%
 \begin{itemdecl}
-system_error(int ev, const error_category& ecat, const string& what_arg);
+system_error(int ev, final error_category& ecat, final string& what_arg);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1749,7 +1749,7 @@ system_error(int ev, const error_category& ecat, const string& what_arg);
 
 \indexlibrary{\idxcode{system_error}!constructor}%
 \begin{itemdecl}
-system_error(int ev, const error_category& ecat, const char* what_arg);
+system_error(int ev, final error_category& ecat, final char* what_arg);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1763,7 +1763,7 @@ system_error(int ev, const error_category& ecat, const char* what_arg);
 
 \indexlibrary{\idxcode{system_error}!constructor}%
 \begin{itemdecl}
-system_error(int ev, const error_category& ecat);
+system_error(int ev, final error_category& ecat);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1776,7 +1776,7 @@ system_error(int ev, const error_category& ecat);
 
 \indexlibrarymember{code}{system_error}%
 \begin{itemdecl}
-const error_code& code() const noexcept;
+const error_code& code() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1787,7 +1787,7 @@ as appropriate.
 
 \indexlibrarymember{what}{system_error}%
 \begin{itemdecl}
-const char* what() const noexcept override;
+const char* what() final noexcept override;
 \end{itemdecl}
 
 \begin{itemdescr}

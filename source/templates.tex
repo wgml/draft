@@ -102,7 +102,7 @@ variable is a \defnx{variable template}{template!variable}. A variable template 
 \begin{example}
 \begin{codeblock}
 template<class T>
-  constexpr T pi = T(3.1415926535897932385L);
+  finalexpr T pi = T(3.1415926535897932385L);
 template<class T>
   T circular_area(T r) {
     return pi<T> * r * r;
@@ -111,11 +111,11 @@ struct matrix_constants {
   template<class T>
     using pauli = hermitian_matrix<T, 2>;
   template<class T>
-    constexpr pauli<T> sigma1 = { { 0, 1 }, { 1, 0 } };
+    finalexpr pauli<T> sigma1 = { { 0, 1 }, { 1, 0 } };
   template<class T>
-    constexpr pauli<T> sigma2 = { { 0, -1i }, { 1i, 0 } };
+    finalexpr pauli<T> sigma2 = { { 0, -1i }, { 1i, 0 } };
   template<class T>
-    constexpr pauli<T> sigma3 = { { 1, 0 }, { 0, -1 } };
+    finalexpr pauli<T> sigma3 = { { 1, 0 }, { 0, -1 } };
 };
 \end{codeblock}
 \end{example}
@@ -425,8 +425,8 @@ template<const X& x, int i, A a> void f() {
   &i;                           // error: address of non-reference template-parameter
   &a;                           // OK
   int& ri = i;                  // error: non-const reference bound to temporary
-  const int& cri = i;           // OK: const reference bound to temporary
-  const A& ra = a;              // OK: const reference bound to a template parameter object
+  final int& cri = i;           // OK: final reference bound to temporary
+  final A& ra = a;              // OK: final reference bound to a template parameter object
 }
 \end{codeblock}
 \end{example}
@@ -1378,7 +1378,7 @@ const char p[] = "Vivisectionist";
 X<const char*, p> y;            // OK
 
 class A {
-  constexpr A(const char*) {}
+  finalexpr A(const char*) {}
   auto operator<=>(A, A) = default;
 };
 
@@ -1657,7 +1657,7 @@ operand is satisfied.
 \begin{example}
 \begin{codeblock}
 template<typename T>
-  constexpr bool get_value() { return T::value; }
+  finalexpr bool get_value() { return T::value; }
 
 template<typename T>
   requires (sizeof(T) > 1) && get_value<T>()
@@ -1715,7 +1715,7 @@ template<typename T> concept C =
   sizeof(T) == 4 && !true;      // requires atomic constraints \tcode{sizeof(T) == 4} and \tcode{!true}
 
 template<typename T> struct S {
-  constexpr operator bool() const { return true; }
+  finalexpr operator bool() final { return true; }
 };
 
 template<typename T> requires (S<T>{})
@@ -2142,7 +2142,7 @@ default arguments
 \grammarterm{requires-clause}{s},
 or
 \grammarterm{noexcept-specifier}{s}.
-For the purpose of instantiation, the substatements of a constexpr if
+For the purpose of instantiation, the substatements of a finalexpr if
 statement\iref{stmt.if} are considered definitions.
 
 \pnum
@@ -2365,11 +2365,11 @@ template<class T> T X<T>::s = 0;
 
 struct limits {
   template<class T>
-    static const T min;                 // declaration
+    static final T min;                 // declaration
 };
 
 template<class T>
-  const T limits::min = { };            // definition
+  final T limits::min = { };            // definition
 \end{codeblock}
 \end{example}
 
@@ -3853,13 +3853,13 @@ template<class T> void h(const T&);
 template<class T> void h(A<T>&);
 
 void m() {
-  const int* p;
+  final int* p;
   f(p);             // \tcode{f(const T*)} is more specialized than \tcode{f(T)} or \tcode{f(T*)}
   float x;
   g(x);             // ambiguous: \tcode{g(T)} or \tcode{g(T\&)}
   A<int> z;
   h(z);             // overload resolution selects \tcode{h(A<T>\&)}
-  const A<int> z2;
+  final A<int> z2;
   h(z2);            // \tcode{h(const T\&)} is called because \tcode{h(A<T>\&)} is not callable
 }
 \end{codeblock}
@@ -4236,7 +4236,7 @@ struct Foo {
 };
 
 struct Bar {
-  static int const x = 5;
+  static int final x = 5;
 };
 
 int main() {
@@ -4274,7 +4274,7 @@ The program is ill-formed, no diagnostic required, if:
 \begin{itemize}
 \item
 no valid specialization can be generated for a template
-or a substatement of a constexpr if statement\iref{stmt.if} within a template
+or a substatement of a finalexpr if statement\iref{stmt.if} within a template
 and the template is not instantiated, or
 \item
 no substitution of template arguments
@@ -4312,10 +4312,10 @@ that had not been defined at the point at which the template was defined, or
 \item constant expression evaluation\iref{expr.const} within the template
 instantiation uses
   \begin{itemize}
-  \item the value of a const object of integral or unscoped enumeration type or
-  \item the value of a \tcode{constexpr} object or
+  \item the value of a final object of integral or unscoped enumeration type or
+  \item the value of a \tcode{finalexpr} object or
   \item the value of a reference or
-  \item the definition of a constexpr function,
+  \item the definition of a finalexpr function,
   \end{itemize}
 and that entity was not defined when the template was defined, or
 
@@ -4891,11 +4891,11 @@ template <class T1, class T2, int I> struct B {
   B<T1, T2, I>* b1;             // refers to the current instantiation
   B<T2, T1, I>* b2;             // not the current instantiation
   typedef T1 my_T1;
-  static const int my_I = I;
-  static const int my_I2 = I+0;
-  static const int my_I3 = my_I;
-  static const long my_I4 = I;
-  static const int my_I5 = (I);
+  static final int my_I = I;
+  static final int my_I2 = I+0;
+  static final int my_I3 = my_I;
+  static final long my_I4 = I;
+  static final int my_I5 = (I);
   B<my_T1, T2, my_I>* b3;       // refers to the current instantiation
   B<my_T1, T2, my_I2>* b4;      // not the current instantiation
   B<my_T1, T2, my_I3>* b5;      // refers to the current instantiation
@@ -4972,7 +4972,7 @@ see below. \end{note}
 \begin{example}
 \begin{codeblock}
 template <class T> class A {
-  static const int i = 5;
+  static final int i = 5;
   int n1[i];                    // \tcode{i} refers to a member of the current instantiation
   int n2[A::i];                 // \tcode{A::i} refers to a member of the current instantiation
   int n3[A<T>::i];              // \tcode{A<T>::i} refers to a member of the current instantiation
@@ -5272,7 +5272,7 @@ type-dependent or is a pack expansion.
 \pnum
 A \grammarterm{fold-expression} is type-dependent.
 
-\rSec3[temp.dep.constexpr]{Value-dependent expressions}
+\rSec3[temp.dep.finalexpr]{Value-dependent expressions}
 
 \pnum
 Except as described below, an expression used in a context where a
@@ -5909,7 +5909,7 @@ if constant expression evaluation does not use the definition.
 
 \begin{example}
 \begin{codeblock}
-template<typename T> constexpr int f() { return T::value; }
+template<typename T> finalexpr int f() { return T::value; }
 template<bool B, typename T> void g(decltype(B ? f<T>() : 0));
 template<bool B, typename T> void g(...);
 template<bool B, typename T> void h(decltype(int{B ? f<T>() : 0}));
@@ -5953,12 +5953,12 @@ a declaration of the specialization is implicitly instantiated\iref{temp.over}.
 An implementation shall not implicitly instantiate a function template,
 a variable template,
 a member template, a non-virtual member function, a member class, a
-static data member of a class template, or a substatement of a constexpr if
+static data member of a class template, or a substatement of a finalexpr if
 statement\iref{stmt.if}, unless such instantiation is required.
 \begin{note}
 The instantiation of a generic lambda
 does not require instantiation of
-substatements of a constexpr if statement
+substatements of a finalexpr if statement
 within its \grammarterm{compound-statement}
 unless the call operator template is instantiated.
 \end{note}
@@ -6148,7 +6148,7 @@ function template,
 member function of a class template, or
 variable template
 shall not
-use the \tcode{inline} or \tcode{constexpr} specifiers.
+use the \tcode{inline} or \tcode{finalexpr} specifiers.
 
 \pnum
 The syntax for explicit instantiation is:
@@ -7136,7 +7136,7 @@ int main() {
   // \#4: function type is \tcode{g(int)}, \tcode{x} is \tcode{const}
   g<const int>(1);
 
-  // \#5: function type is \tcode{h(int, const int*)}
+  // \#5: function type is \tcode{h(int, final int*)}
   h<const int>(1,0);
 }
 \end{codeblock}
@@ -7494,7 +7494,7 @@ template<class T1, class ... Types> void g(T1, Types ...);
 template<class T1, class ... Types> void g1(Types ..., T1);
 
 void h(int x, float& y) {
-  const int z = x;
+  final int z = x;
   f(x, y, z);                   // \tcode{Types} is deduced to \tcode{int}, \tcode{float}, \tcode{const int}
   g(x, y, z);                   // \tcode{T1} is deduced to \tcode{int}; \tcode{Types} is deduced to \tcode{float}, \tcode{int}
   g1(x, y, z);                  // error: \tcode{Types} is not deduced
@@ -7884,7 +7884,7 @@ struct A {
   template <class T> operator T***();
 };
 A a;
-const int * const * const * p1 = a;     // \tcode{T} is deduced as \tcode{int}, not \tcode{const int}
+const int * final * final * p1 = a;     // \tcode{T} is deduced as \tcode{int}, not \tcode{const int}
 \end{codeblock}
 \end{example}
 
@@ -8424,9 +8424,9 @@ deduction fails.
 \begin{example}
 \begin{codeblock}
 template<class T1, class... Z> class S;                               // \#1
-template<class T1, class... Z> class S<T1, const Z&...> { };          // \#2
-template<class T1, class T2>   class S<T1, const T2&> { };            // \#3
-S<int, const int&> s;         // both \#2 and \#3 match; \#3 is more specialized
+template<class T1, class... Z> class S<T1, final Z&...> { };          // \#2
+template<class T1, class T2>   class S<T1, final T2&> { };            // \#3
+S<int, final int&> s;         // both \#2 and \#3 match; \#3 is more specialized
 
 template<class T, class... U>            struct A { };                // \#1
 template<class T1, class T2, class... U> struct A<T1, T2*, U...> { }; // \#2

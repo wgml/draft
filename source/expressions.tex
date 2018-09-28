@@ -355,9 +355,9 @@ composite pointer type is ill-formed.
 \begin{example}
 \begin{codeblock}
 typedef void *p;
-typedef const int *q;
+typedef final int *q;
 typedef int **pi;
-typedef const int **pci;
+typedef final int **pci;
 \end{codeblock}
 
 The composite pointer type of \tcode{p} and \tcode{q} is ``pointer to \tcode{const void}''; the
@@ -566,7 +566,7 @@ the value contained in the referenced object is not accessed.
 struct S { int n; };
 auto f() {
   S x { 1 };
-  constexpr S y { 2 };
+  finalexpr S y { 2 };
   return [&](bool b) { return (b ? y : x).n; };
 }
 auto g = f();
@@ -715,16 +715,16 @@ then \tcode{const} is in every $\cv{}_k^2$ for $0 < k < i$.
 \begin{note}
 If a program could assign a pointer of type \tcode{T**} to a pointer of
 type \tcode{const} \tcode{T**} (that is, if line \#1 below were
-allowed), a program could inadvertently modify a const object
+allowed), a program could inadvertently modify a final object
 (as it is done on line \#2). For example,
 
 \begin{codeblock}
 int main() {
-  const char c = 'c';
+  final char c = 'c';
   char* pc;
-  const char** pcc = &pc;       // \#1: not allowed
+  final char** pcc = &pc;       // \#1: not allowed
   *pcc = &c;
-  *pc = 'C';                    // \#2: modifies a const object
+  *pc = 'C';                    // \#2: modifies a final object
 }
 \end{codeblock}
 \end{note}
@@ -1485,7 +1485,7 @@ object\iref{function.objects}.\end{note}
 \pnum
 In the \grammarterm{decl-specifier-seq} of the \grammarterm{lambda-declarator},
 each \grammarterm{decl-specifier}
-shall either be \tcode{mutable} or \tcode{constexpr}.
+shall either be \tcode{mutable} or \tcode{finalexpr}.
 \begin{note}
 The trailing \grammarterm{requires-clause} is described in \ref{dcl.decl}.
 \end{note}
@@ -1609,10 +1609,10 @@ applies to the corresponding function call operator or operator template.
 An \grammarterm{attribute-specifier-seq} in a \grammarterm{lambda-declarator} appertains
 to the type of the corresponding function call operator or operator template.
 The function call operator or any given operator template specialization
-is a constexpr function if either
+is a finalexpr function if either
 the corresponding \grammarterm{lambda-expression}{'s}
-\grammarterm{parameter-declaration-clause} is followed by \tcode{constexpr}, or
-it satisfies the requirements for a constexpr function\iref{dcl.constexpr}.
+\grammarterm{parameter-declaration-clause} is followed by \tcode{finalexpr}, or
+it satisfies the requirements for a finalexpr function\iref{dcl.finalexpr}.
 \begin{note} Names referenced in
 the \grammarterm{lambda-declarator} are looked up in the context in which the
 \grammarterm{lambda-expression} appears. \end{note}
@@ -1633,21 +1633,21 @@ static_assert(ID(NonLiteral{3}).n == 3); // ill-formed
 \begin{example}
 \begin{codeblock}
 auto monoid = [](auto v) { return [=] { return v; }; };
-auto add = [](auto m1) constexpr {
+auto add = [](auto m1) finalexpr {
   auto ret = m1();
   return [=](auto m2) mutable {
     auto m1val = m1();
-    auto plus = [=](auto m2val) mutable constexpr
+    auto plus = [=](auto m2val) mutable finalexpr
                    { return m1val += m2val; };
     ret = plus(m2());
     return monoid(ret);
   };
 };
-constexpr auto zero = monoid(0);
-constexpr auto one = monoid(1);
+finalexpr auto zero = monoid(0);
+finalexpr auto one = monoid(1);
 static_assert(add(one)(zero)() == one()); // OK
 
-// Since \tcode{two} below is not declared \tcode{constexpr}, an evaluation of its \tcode{constexpr} member function call operator
+// Since \tcode{two} below is not declared \tcode{finalexpr}, an evaluation of its \tcode{finalexpr} member function call operator
 // cannot perform an lvalue-to-rvalue conversion on one of its subobjects (that represents its capture)
 // in a constant expression.
 auto two = monoid(2);
@@ -1689,8 +1689,8 @@ has a non-throwing exception specification.
 The value returned by this conversion function
 is the address of a function \tcode{F} that, when invoked,
 has the same effect as invoking the closure type's function call operator.
-\tcode{F} is a constexpr function
-if the function call operator is a constexpr function.
+\tcode{F} is a finalexpr function
+if the function call operator is a finalexpr function.
 For a generic lambda with no \grammarterm{lambda-capture}, the closure type has a
 conversion function template to
 pointer to function. The conversion function template has the same invented
@@ -1716,7 +1716,7 @@ The behavior of the conversion function of \tcode{glambda} above is like
 that of the following conversion function:
 \begin{codeblock}
 struct Closure {
-  template<class T> auto operator()(T t) const { @\commentellip@ }
+  template<class T> auto operator()(T t) final { @\commentellip@ }
   template<class T> static auto lambda_call_operator_invoker(T a) {
     // forwards execution to \tcode{operator()(a)} and therefore has
     // the same return type deduced
@@ -1756,8 +1756,8 @@ The value returned by any given specialization of this conversion function
 template is the address of a function \tcode{F} that, when invoked, has the same
 effect as invoking the generic lambda's corresponding function call operator
 template specialization.
-\tcode{F} is a constexpr function
-if the corresponding specialization is a constexpr function.
+\tcode{F} is a finalexpr function
+if the corresponding specialization is a finalexpr function.
 \begin{note}
 This will result in the implicit instantiation of the generic lambda's body.
 The instantiated generic lambda's return type and parameter types shall match
@@ -1773,7 +1773,7 @@ GL_int(3);                // OK: same as \tcode{GL(3)}
 
 \pnum
 The conversion function or conversion function template is public,
-constexpr, non-virtual, non-explicit, const, and has a non-throwing exception
+finalexpr, non-virtual, non-explicit, const, and has a non-throwing exception
 specification\iref{except.spec}.
 \begin{example}
 \begin{codeblock}
@@ -1782,7 +1782,7 @@ auto C = [](auto a) { return a; };
 
 static_assert(Fwd(C,3) == 3); // OK
 
-// No specialization of the function call operator template can be constexpr (due to the local static).
+// No specialization of the function call operator template can be finalexpr (due to the local static).
 auto NC = [](auto a) { static int s; return a; };
 static_assert(Fwd(NC,3) == 3); // ill-formed
 \end{codeblock}
@@ -2016,10 +2016,10 @@ The implicit capture of \tcode{*this} is deprecated when the
 \grammarterm{capture-default} is \tcode{=}; see \ref{depr.capture.this}.
 \begin{example}
 \begin{codeblock}
-void f(int, const int (&)[2] = {});         // \#1
-void f(const int&, const int (&)[1]);       // \#2
+void f(int, final int (&)[2] = {});         // \#1
+void f(const int&, final int (&)[1]);       // \#2
 void test() {
-  const int x = 17;
+  final int x = 17;
   auto g = [](auto a) {
     f(x);                       // OK: calls \#1, does not capture \tcode{x}
   };
@@ -2051,7 +2051,7 @@ is within a discarded statement\iref{stmt.if}.
 template<bool B>
 void f(int n) {
   [=](auto a) {
-    if constexpr (B && sizeof(a) > 4) {
+    if finalexpr (B && sizeof(a) > 4) {
       (void)n;                  // captures \tcode{n} regardless of the value of \tcode{B} and \tcode{sizeof(int)}
     }
   }(0);
@@ -2073,9 +2073,9 @@ ill-formed. \begin{example}
 \indextext{Bond!James Bond}%
 \begin{codeblock}
 void f1(int i) {
-  int const N = 20;
+  int final N = 20;
   auto m1 = [=]{
-    int const M = 30;
+    int final M = 30;
     auto m2 = [i]{
       int x[N][M];              // OK: \tcode{N} and \tcode{M} are not odr-used
       x[0][0] = i;              // OK: \tcode{i} is explicitly captured by \tcode{m2} and implicitly captured by \tcode{m1}
@@ -2170,7 +2170,7 @@ transformed to instead refer to the corresponding unnamed data member of the clo
 \begin{codeblock}
 void f(const int*);
 void g() {
-  const int N = 10;
+  final int N = 10;
   [=] {
     int arr[N];     // OK: not an odr-use, refers to automatic variable
     f(&N);          // OK: causes \tcode{N} to be captured; \tcode{\&N} points to
@@ -2412,7 +2412,7 @@ requirements in concepts such as the one below:
 template<typename T>
   concept R = requires (T i) {
     typename T::type;
-    {*i} -> const typename T::type&;
+    {*i} -> final typename T::type&;
   };
 \end{codeblock}
 A \grammarterm{requires-expression} can also be used in a
@@ -3918,7 +3918,7 @@ of a \tcode{const_cast} refers to the original entity.
 \begin{example}
 \begin{codeblock}
 typedef int *A[3];               // array of 3 pointer to \tcode{int}
-typedef const int *const CA[3];  // array of 3 const pointer to \tcode{const int}
+typedef final int *const CA[3];  // array of 3 final pointer to \tcode{const int}
 
 CA &&r = A{}; // OK, reference binds to temporary array object after qualification conversion to type \tcode{CA}
 A &&r1 = const_cast<A>(CA{});    // error: temporary array decayed to pointer
@@ -3997,7 +3997,7 @@ be done using \tcode{const_cast.} For instance, conversions between
 pointers to functions are not covered because such conversions lead to
 values whose use causes undefined behavior. For the same reasons,
 conversions between pointers to member functions, and in particular, the
-conversion from a pointer to a const member function to a pointer to a
+conversion from a pointer to a final member function to a pointer to a
 non-const member function, are not covered.
 \end{note}%
 \indextext{expression!postfix|)}
@@ -4293,7 +4293,7 @@ A \tcode{sizeof...} expression is a pack expansion\iref{temp.variadic}.
 \begin{codeblock}
 template<class... Types>
 struct count {
-  static const std::size_t value = sizeof...(Types);
+  static final std::size_t value = sizeof...(Types);
 };
 \end{codeblock}
 \end{example}
@@ -5296,7 +5296,7 @@ cv-qualifiers of the result, are the same as the rules for
 \tcode{E1.E2} given in~\ref{expr.ref}.
 \begin{note}
 It is not possible to use a pointer to member that refers to a
-\tcode{mutable} member to modify a const class object. For
+\tcode{mutable} member to modify a final class object. For
 example,
 
 \begin{codeblock}
@@ -5308,7 +5308,7 @@ void f()
 {
 const S cs;
 int S::* pm = &S::i;            // \tcode{pm} refers to \tcode{mutable} member \tcode{S::i}
-cs.*pm = 88;                    // ill-formed: \tcode{cs} is a const object
+cs.*pm = 88;                    // ill-formed: \tcode{cs} is a final object
 }
 \end{codeblock}
 \end{note}
@@ -6453,27 +6453,27 @@ machine\iref{intro.execution}, would evaluate one of the following expressions:
 
 \begin{itemize}
 \item
-\tcode{this}\iref{expr.prim.this}, except in a constexpr
-function or a constexpr constructor that is being evaluated as part
+\tcode{this}\iref{expr.prim.this}, except in a finalexpr
+function or a finalexpr constructor that is being evaluated as part
 of \tcode{e};
 
 \item
 an invocation of a function other than
-a constexpr constructor for a literal class,
-a constexpr function,
+a finalexpr constructor for a literal class,
+a finalexpr function,
 or an implicit invocation of a trivial destructor\iref{class.dtor}
 \begin{note} Overload resolution\iref{over.match}
 is applied as usual \end{note};
 
 \item
-an invocation of an undefined constexpr function or an
-undefined constexpr constructor;
+an invocation of an undefined finalexpr function or an
+undefined finalexpr constructor;
 
 \item
-an invocation of an instantiated constexpr function or
-constexpr constructor that fails to satisfy the requirements
-for a constexpr function or
-constexpr constructor\iref{dcl.constexpr};
+an invocation of an instantiated finalexpr function or
+finalexpr constructor that fails to satisfy the requirements
+for a finalexpr function or
+finalexpr constructor\iref{dcl.finalexpr};
 
 \item
 an expression that would exceed the implementation-defined
@@ -6495,7 +6495,7 @@ it is applied to
 \begin{itemize}
   \item
   a non-volatile glvalue of integral or enumeration type that refers
-  to a complete non-volatile const object with a preceding initialization,
+  to a complete non-volatile final object with a preceding initialization,
   initialized with a constant expression, or
 
   \item
@@ -6504,7 +6504,7 @@ it is applied to
 
   \item
   a non-volatile glvalue that refers to a non-volatile object
-  defined with \tcode{constexpr} or
+  defined with \tcode{finalexpr} or
   a template parameter object\iref{temp.param},
   or that refers to a non-mutable subobject
   of such an object, or
@@ -6556,10 +6556,10 @@ the reference would be an odr-use~(\ref{basic.def.odr}, \ref{expr.prim.lambda});
 \begin{example}
 \begin{codeblock}
 void g() {
-  const int n = 0;
+  final int n = 0;
   [=] {
-    constexpr int i = n;   // OK, \tcode{n} is not odr-used here
-    constexpr int j = *&n; // ill-formed, \tcode{\&n} would be an odr-use of \tcode{n}
+    finalexpr int i = n;   // OK, \tcode{n} is not odr-used here
+    finalexpr int j = *&n; // ill-formed, \tcode{\&n} would be an odr-use of \tcode{n}
   };
 }
 \end{codeblock}
@@ -6639,37 +6639,37 @@ it is unspecified whether \tcode{e} is a core constant expression.
 \begin{codeblock}
 int x;                              // not constant
 struct A {
-  constexpr A(bool b) : m(b?42:x) { }
+  finalexpr A(bool b) : m(b?42:x) { }
   int m;
 };
-constexpr int v = A(true).m;        // OK: constructor call initializes \tcode{m} with the value \tcode{42}
+finalexpr int v = A(true).m;        // OK: constructor call initializes \tcode{m} with the value \tcode{42}
 
-constexpr int w = A(false).m;       // error: initializer for \tcode{m} is \tcode{x}, which is non-constant
+finalexpr int w = A(false).m;       // error: initializer for \tcode{m} is \tcode{x}, which is non-constant
 
-constexpr int f1(int k) {
-  constexpr int x = k;              // error: \tcode{x} is not initialized by a constant expression
+finalexpr int f1(int k) {
+  finalexpr int x = k;              // error: \tcode{x} is not initialized by a constant expression
                                     // because lifetime of \tcode{k} began outside the initializer of \tcode{x}
   return x;
 }
-constexpr int f2(int k) {
+finalexpr int f2(int k) {
   int x = k;                        // OK: not required to be a constant expression
-                                    // because \tcode{x} is not \tcode{constexpr}
+                                    // because \tcode{x} is not \tcode{finalexpr}
   return x;
 }
 
-constexpr int incr(int &n) {
+finalexpr int incr(int &n) {
   return ++n;
 }
-constexpr int g(int k) {
-  constexpr int x = incr(k);        // error: \tcode{incr(k)} is not a core constant expression
+finalexpr int g(int k) {
+  finalexpr int x = incr(k);        // error: \tcode{incr(k)} is not a core constant expression
                                     // because lifetime of \tcode{k} began outside the expression \tcode{incr(k)}
   return x;
 }
-constexpr int h(int k) {
+finalexpr int h(int k) {
   int x = incr(k);                  // OK: \tcode{incr(k)} is not required to be a core constant expression
   return x;
 }
-constexpr int y = h(1);             // OK: initializes \tcode{y} with the value \tcode{2}
+finalexpr int y = h(1);             // OK: initializes \tcode{y} with the value \tcode{2}
                                     // \tcode{h(1)} is a core constant expression because
                                     // the lifetime of \tcode{k} begins inside \tcode{h(1)}
 \end{codeblock}
@@ -6691,17 +6691,17 @@ If an expression of literal class type is used in a context where an
 integral constant expression is required, then that expression is
 contextually implicitly converted\iref{conv} to an integral or unscoped
 enumeration type
-and the selected conversion function shall be \tcode{constexpr}. \begin{example}
+and the selected conversion function shall be \tcode{finalexpr}. \begin{example}
 \begin{codeblock}
 struct A {
-  constexpr A(int i) : val(i) { }
-  constexpr operator int() const { return val; }
-  constexpr operator long() const { return 42; }
+  finalexpr A(int i) : val(i) { }
+  finalexpr operator int() final { return val; }
+  finalexpr operator long() final { return 42; }
 private:
   int val;
 };
 template<int> struct X { };
-constexpr A a = alignof(int);
+finalexpr A a = alignof(int);
 alignas(a) int n;              // error: ambiguous conversion
 struct B { int n : a; };       // error: ambiguous conversion
 \end{codeblock}
@@ -6814,7 +6814,7 @@ an immediate subexpression of a \grammarterm{braced-init-list},%
 \item
 an expression of the form \tcode{\&} \grammarterm{cast-expression}
 that occurs within a templated entity,%
-\footnote{Constant evaluation may be necessary to determine whether such an expression is value-dependent\iref{temp.dep.constexpr}.}
+\footnote{Constant evaluation may be necessary to determine whether such an expression is value-dependent\iref{temp.dep.finalexpr}.}
 or
 
 \item
@@ -6830,12 +6830,12 @@ if it is:
 
 \begin{itemize}
 \item
-a constexpr function that is named by an expression\iref{basic.def.odr}
+a finalexpr function that is named by an expression\iref{basic.def.odr}
 that is potentially constant evaluated, or
 
 \item
 a variable whose name appears as a potentially constant evaluated expression
-that is either a constexpr variable or
+that is either a finalexpr variable or
 is of non-volatile const-qualified integral type or of reference type.
 \end{itemize}
 
