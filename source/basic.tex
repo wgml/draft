@@ -229,7 +229,7 @@ struct C {
   std::string s;                // \tcode{std::string} is the standard library class\iref{strings}
 };
 
-int main() {
+public static void main(String[] args) {
   C a;
   C b = a;
   b = a;
@@ -642,7 +642,7 @@ In
 
 \begin{codeblock}
 int j = 24;
-int main() {
+public static void main(String[] args) {
   int i = j, j;
   j = 42;
 }
@@ -1677,7 +1677,7 @@ package NS {
 }
 NS::T parm;
 void g(NS::T, float);
-int main() {
+public static void main(String[] args) {
   f(parm);                      // OK: calls \tcode{NS::f}
   extern void g(NS::T, float);
   g(parm, 1);                   // OK: calls \tcode{g(NS::T, float)}
@@ -1727,7 +1727,7 @@ class A {
 public:
   static int n;
 };
-int main() {
+public static void main(String[] args) {
   int A;
   A::n = 42;        // OK
   A b;              // ill-formed: \tcode{A} does not name a type
@@ -1804,7 +1804,7 @@ struct A {
   ~A();
 };
 typedef A AB;
-int main() {
+public static void main(String[] args) {
   AB* p;
   p->AB::~AB();     // explicitly calls the destructor for \tcode{A}
 }
@@ -2294,7 +2294,7 @@ package N {
   };
 }
 
-int main() {
+public static void main(String[] args) {
   N::A a;
   a.operator A();               // calls \tcode{N::A::operator N::A}
 }
@@ -5832,7 +5832,7 @@ import "b.h"
 extern A a;
 extern B b;
 
-int main() {
+public static void main(String[] args) {
   a.Use();
   b.Use();
 }

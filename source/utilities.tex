@@ -10516,7 +10516,7 @@ a \tcode{shared_ptr} instance pointing to \tcode{*this}.
 \begin{codeblock}
 struct X: public enable_shared_from_this<X> { };
 
-int main() {
+public static void main(String[] args) {
   shared_ptr<X> p(new X);
   shared_ptr<X> q = p->shared_from_this();
   assert(p == q);

@@ -342,7 +342,7 @@ struct C {
   }
 };
 
-int main() {
+public static void main(String[] args) {
   try {
     throw C();      // calls \tcode{std::terminate} if construction of the handler's
                     // \grammarterm{exception-declaration} object is not elided\iref{class.copy.elision}

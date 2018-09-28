@@ -4347,7 +4347,7 @@ struct C: public A, public B { };       // S(x,C) = \{ invalid, \{ \tcode{A} in 
 struct D: public virtual C { };         // S(x,D) = S(x,C)
 struct E: public virtual C { char x; }; // S(x,E) = \{ \{ \tcode{E::x} \}, \{ \tcode{E} \} \}
 struct F: public D, public E { };       // S(x,F) = S(x,E)
-int main() {
+public static void main(String[] args) {
   F f;
   f.x = 0;                              // OK, lookup finds \tcode{E::x}
 }

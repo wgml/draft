@@ -2465,7 +2465,7 @@ template <class T> struct A {
 template <> void A<int>::f(int) { }                 // non-template member function
 template <> template <> void A<int>::f<>(int) { }   // member function template specialization
 
-int main() {
+public static void main(String[] args) {
   A<char> ac;
   ac.f(1);                                          // non-template
   ac.f('c');                                        // template
@@ -2519,7 +2519,7 @@ template <class T> A::operator T*(){ return 0; }
 template <> A::operator char*(){ return 0; }        // specialization
 template A::operator void*();                       // explicit instantiation
 
-int main() {
+public static void main(String[] args) {
   A a;
   int* ip;
   ip = a.operator int*();       // explicit call to template operator \tcode{A::operator int*()}
@@ -3463,7 +3463,7 @@ template<class T> void A<T,2>::g() { }
 // explicit specialization
 template<> void A<char,2>::h() { }
 
-int main() {
+public static void main(String[] args) {
   A<char,0> a0;
   A<char,2> a2;
   a0.f();           // OK, uses definition of primary template's member
@@ -3825,7 +3825,7 @@ template<class T, class R> int operator*(T&, R&);   // \#2
 // The declaration of \tcode{B::operator*} is transformed into the equivalent of
 // \tcode{template<class R> int operator*(B<A>\&, R\&);}\quad\quad\quad// \#1a
 
-int main() {
+public static void main(String[] args) {
   A a;
   B<A> b;
   b * a;                                            // calls \#1a
@@ -3880,7 +3880,7 @@ template<class T> void g(T*, ...);                      // \#4
 
 \end{codeblock}
 \begin{codeblock}
-int main() {
+public static void main(String[] args) {
   int* ip;
   f(ip);                                                // calls \#2
   g(ip);                                                // calls \#4
@@ -4239,7 +4239,7 @@ struct Bar {
   static int final x = 5;
 };
 
-int main() {
+public static void main(String[] args) {
   f<Bar>(1);        // OK
   f<Foo>(1);        // error: \tcode{Foo::x} is a type
 }
@@ -7123,7 +7123,7 @@ template <class T> void f(T t);
 template <class X> void g(const X x);
 template <class Z> void h(Z, Z*);
 
-int main() {
+public static void main(String[] args) {
   // \#1: function type is \tcode{f(int)}, \tcode{t} is non \tcode{const}
   f<int>(1);
 
@@ -7355,7 +7355,7 @@ struct D {
   typedef int TT;
 };
 
-int main() {
+public static void main(String[] args) {
   // Deduction fails in each of these cases:
   f<A>(0);          // \tcode{A} does not contain a member \tcode{Y}
   f<B>(0);          // The \tcode{Y} member of \tcode{B} is not a type
@@ -7729,7 +7729,7 @@ will be checked during overload resolution.
   template <class T> typename Z<T>::xx f(void *, T);    // \#1
   template <class T> void f(int, T);                    // \#2
   struct A {} a;
-  int main() {
+  public static void main(String[] args) {
     f(1, a);        // OK, deduction fails for \#1 because there is no conversion from \tcode{int} to \tcode{void*}
   }
 \end{codeblock}

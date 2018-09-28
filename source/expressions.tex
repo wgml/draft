@@ -719,7 +719,7 @@ allowed), a program could inadvertently modify a final object
 (as it is done on line \#2). For example,
 
 \begin{codeblock}
-int main() {
+public static void main(String[] args) {
   final char c = 'c';
   char* pc;
   final char** pcc = &pc;       // \#1: not allowed

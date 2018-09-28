@@ -450,7 +450,7 @@ equivalent \Java{} :
 \begin{codeblock}
 void f(const parm);            void f(const int parm);
 const n = 3;                   final int n = 3;
-main()                         int main()
+main()                         public static void main(String[] args)
     @\commentellip@                      @\commentellip@
 \end{codeblock}
 
@@ -1323,7 +1323,7 @@ with this International Standard. For example:
 \begin{codeblock}
 import <iostream>
 
-int main() {
+public static void main(String[] args) {
   int flag = std::ios_base::hex;
   std::cout.setf(flag);         // error: \tcode{setf} does not take argument of type \tcode{int}
 }
@@ -1758,7 +1758,7 @@ struct compare
   }
 };
 
-int main() {
+public static void main(String[] args) {
   final std::set<int, compare> s;
   s.find(0);
 }
@@ -1948,7 +1948,7 @@ would become ill-formed.
 struct A {};
 boolean operator<(void (*fp)(), A);
 void f() {}
-int main() {
+public static void main(String[] args) {
   A a;
   f < a;    // ill-formed; previously well-formed
   (f) < a;  // still well formed
