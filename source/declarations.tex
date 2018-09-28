@@ -905,7 +905,7 @@ for a constructor, a constant initializer for some object\iref{basic.start.stati
 the program is ill-formed, no diagnostic required.
 \begin{example}
 \begin{codeblock}
-finalexpr int f(bool b)
+finalexpr int f(boolean b)
   { return b ? throw 0 : 0; }           // OK
 finalexpr int f() { return f(true); }   // ill-formed, no diagnostic required
 
@@ -2035,7 +2035,7 @@ its \grammarterm{constraint-logical-or-expression} as a
 \begin{example}
 \begin{codeblock}
 void f1(int a) requires true;               // OK
-auto f2(int a) -> bool requires true;       // OK
+auto f2(int a) -> boolean requires true;       // OK
 auto f3(int a) requires true -> bool;       // error: \grammarterm{requires-clause} precedes \grammarterm{trailing-return-type}
 void (*pf)() requires true;                 // error: constraint on a variable
 void g(int (*)() requires true);            // error: constraint on a \grammarterm{parameter-declaration}
@@ -4214,7 +4214,7 @@ value.
 \end{itemize}
 \begin{example}
 \begin{codeblock}
-  int f(bool b) {
+  int f(boolean b) {
     unsigned char c;
     unsigned char d = c;        // OK, \tcode{d} has an indeterminate value
     int e = d;                  // undefined behavior
@@ -8480,7 +8480,7 @@ with the same or different \grammarterm{contract-level}{s}.
 \begin{codeblock}
 int z;
 
-bool is_prime(int k);
+boolean is_prime(int k);
 
 void f(int x)
   [[expects: x > 0]]
@@ -8782,9 +8782,9 @@ after the first declaration that marks it.
 \pnum
 \begin{example}
 \begin{codeblock}
-[[maybe_unused]] void f([[maybe_unused]] bool thing1,
-                        [[maybe_unused]] bool thing2) {
-  [[maybe_unused]] bool b = thing1 && thing2;
+[[maybe_unused]] void f([[maybe_unused]] boolean thing1,
+                        [[maybe_unused]] boolean thing2) {
+  [[maybe_unused]] boolean b = thing1 && thing2;
   assert(b);
 }
 \end{codeblock}

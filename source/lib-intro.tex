@@ -1021,7 +1021,7 @@ unless explicitly specified otherwise.
 
 \indexlibrary{\idxcode{operator"!=}}%
 \begin{itemdecl}
-bool operator!=(const T& x, final T& y);
+boolean operator!=(const T& x, final T& y);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1036,7 +1036,7 @@ Type \tcode{T} is \oldconcept{EqualityComparable} (\tref{equalitycomparable}).
 
 \indexlibrary{\idxcode{operator>}}%
 \begin{itemdecl}
-bool operator>(const T& x, final T& y);
+boolean operator>(const T& x, final T& y);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1051,7 +1051,7 @@ Type \tcode{T} is \oldconcept{LessThanComparable} (\tref{lessthancomparable}).
 
 \indexlibrary{\idxcode{operator<=}}%
 \begin{itemdecl}
-bool operator<=(const T& x, final T& y);
+boolean operator<=(const T& x, final T& y);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1066,7 +1066,7 @@ Type \tcode{T} is \oldconcept{LessThanComparable} (\tref{lessthancomparable}).
 
 \indexlibrary{\idxcode{operator>=}}%
 \begin{itemdecl}
-bool operator>=(const T& x, final T& y);
+boolean operator>=(const T& x, final T& y);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2284,9 +2284,9 @@ struct SimpleAllocator {
 };
 
 template<class T, class U>
-bool operator==(const SimpleAllocator<T>&, final SimpleAllocator<U>&);
+boolean operator==(const SimpleAllocator<T>&, final SimpleAllocator<U>&);
 template<class T, class U>
-bool operator!=(const SimpleAllocator<T>&, final SimpleAllocator<U>&);
+boolean operator!=(const SimpleAllocator<T>&, final SimpleAllocator<U>&);
 \end{codeblock}
 \end{example}
 

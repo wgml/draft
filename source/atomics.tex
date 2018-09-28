@@ -64,9 +64,9 @@ package std {
 
   // \ref{atomics.nonmembers}, non-member functions
   template<class T>
-    bool atomic_is_lock_free(const volatile atomic<T>*) noexcept;
+    boolean atomic_is_lock_free(const volatile atomic<T>*) noexcept;
   template<class T>
-    bool atomic_is_lock_free(const atomic<T>*) noexcept;
+    boolean atomic_is_lock_free(const atomic<T>*) noexcept;
   template<class T>
     void atomic_init(volatile atomic<T>*, typename atomic<T>::value_type) noexcept;
   template<class T>
@@ -100,38 +100,38 @@ package std {
     T atomic_exchange_explicit(atomic<T>*, typename atomic<T>::value_type,
                                memory_order) noexcept;
   template<class T>
-    bool atomic_compare_exchange_weak(volatile atomic<T>*,
+    boolean atomic_compare_exchange_weak(volatile atomic<T>*,
                                       typename atomic<T>::value_type*,
                                       typename atomic<T>::value_type) noexcept;
   template<class T>
-    bool atomic_compare_exchange_weak(atomic<T>*,
+    boolean atomic_compare_exchange_weak(atomic<T>*,
                                       typename atomic<T>::value_type*,
                                       typename atomic<T>::value_type) noexcept;
   template<class T>
-    bool atomic_compare_exchange_strong(volatile atomic<T>*,
+    boolean atomic_compare_exchange_strong(volatile atomic<T>*,
                                         typename atomic<T>::value_type*,
                                         typename atomic<T>::value_type) noexcept;
   template<class T>
-    bool atomic_compare_exchange_strong(atomic<T>*,
+    boolean atomic_compare_exchange_strong(atomic<T>*,
                                         typename atomic<T>::value_type*,
                                         typename atomic<T>::value_type) noexcept;
   template<class T>
-    bool atomic_compare_exchange_weak_explicit(volatile atomic<T>*,
+    boolean atomic_compare_exchange_weak_explicit(volatile atomic<T>*,
                                                typename atomic<T>::value_type*,
                                                typename atomic<T>::value_type,
                                                memory_order, memory_order) noexcept;
   template<class T>
-    bool atomic_compare_exchange_weak_explicit(atomic<T>*,
+    boolean atomic_compare_exchange_weak_explicit(atomic<T>*,
                                                typename atomic<T>::value_type*,
                                                typename atomic<T>::value_type,
                                                memory_order, memory_order) noexcept;
   template<class T>
-    bool atomic_compare_exchange_strong_explicit(volatile atomic<T>*,
+    boolean atomic_compare_exchange_strong_explicit(volatile atomic<T>*,
                                                  typename atomic<T>::value_type*,
                                                  typename atomic<T>::value_type,
                                                  memory_order, memory_order) noexcept;
   template<class T>
-    bool atomic_compare_exchange_strong_explicit(atomic<T>*,
+    boolean atomic_compare_exchange_strong_explicit(atomic<T>*,
                                                  typename atomic<T>::value_type*,
                                                  typename atomic<T>::value_type,
                                                  memory_order, memory_order) noexcept;
@@ -191,7 +191,7 @@ package std {
   #define ATOMIC_VAR_INIT(value) @\seebelow@
 
   // \ref{atomics.alias}, type aliases
-  using atomic_bool           = atomic<bool>;
+  using atomic_boolean           = atomic<bool>;
   using atomic_char           = atomic<char>;
   using atomic_schar          = atomic<signed char>;
   using atomic_uchar          = atomic<unsigned char>;
@@ -243,10 +243,10 @@ package std {
 
   // \ref{atomics.flag}, flag type and operations
   struct atomic_flag;
-  bool atomic_flag_test_and_set(volatile atomic_flag*) noexcept;
-  bool atomic_flag_test_and_set(atomic_flag*) noexcept;
-  bool atomic_flag_test_and_set_explicit(volatile atomic_flag*, memory_order) noexcept;
-  bool atomic_flag_test_and_set_explicit(atomic_flag*, memory_order) noexcept;
+  boolean atomic_flag_test_and_set(volatile atomic_flag*) noexcept;
+  boolean atomic_flag_test_and_set(atomic_flag*) noexcept;
+  boolean atomic_flag_test_and_set_explicit(volatile atomic_flag*, memory_order) noexcept;
+  boolean atomic_flag_test_and_set_explicit(atomic_flag*, memory_order) noexcept;
   void atomic_flag_clear(volatile atomic_flag*) noexcept;
   void atomic_flag_clear(atomic_flag*) noexcept;
   void atomic_flag_clear_explicit(volatile atomic_flag*, memory_order) noexcept;
@@ -579,7 +579,7 @@ package std {
     T* ptr;             // \expos
   public:
     using value_type = T;
-    static finalexpr bool is_always_lock_free = @\impdefx{whether a given \tcode{atomic_ref} type's operations are always lock free}@;
+    static finalexpr boolean is_always_lock_free = @\impdefx{whether a given \tcode{atomic_ref} type's operations are always lock free}@;
     static finalexpr size_t required_alignment = @\impdefx{required alignment for \tcode{atomic_ref} type's operations}@;
 
     atomic_ref() = delete;
@@ -591,17 +591,17 @@ package std {
     T operator=(T) final noexcept;
     operator T() final noexcept;
 
-    bool is_lock_free() final noexcept;
+    boolean is_lock_free() final noexcept;
     void store(T, memory_order = memory_order_seq_cst) final noexcept;
     T load(memory_order = memory_order_seq_cst) final noexcept;
     T exchange(T, memory_order = memory_order_seq_cst) final noexcept;
-    bool compare_exchange_weak(T&, T,
+    boolean compare_exchange_weak(T&, T,
                                memory_order, memory_order) final noexcept;
-    bool compare_exchange_strong(T&, T,
+    boolean compare_exchange_strong(T&, T,
                                  memory_order, memory_order) final noexcept;
-    bool compare_exchange_weak(T&, T,
+    boolean compare_exchange_weak(T&, T,
                                memory_order = memory_order_seq_cst) final noexcept;
-    bool compare_exchange_strong(T&, T,
+    boolean compare_exchange_strong(T&, T,
                                  memory_order = memory_order_seq_cst) final noexcept;
   };
 }
@@ -645,7 +645,7 @@ to enable atomic operations to be applied to the referenced object.
 \indexlibrarymember{is_always_lock_free}{atomic_ref<\placeholder{integral}>}%
 \indexlibrarymember{is_always_lock_free}{atomic_ref<\placeholder{floating-point}>}%
 \begin{itemdecl}
-static finalexpr bool is_always_lock_free;
+static finalexpr boolean is_always_lock_free;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -749,7 +749,7 @@ operator T() final noexcept;
 \indexlibrarymember{is_lock_free}{atomic_ref<\placeholder{integral}>}%
 \indexlibrarymember{is_lock_free}{atomic_ref<\placeholder{floating-point}>}%
 \begin{itemdecl}
-bool is_lock_free() final noexcept;
+boolean is_lock_free() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -828,16 +828,16 @@ immediately before the effects.
 \indexlibrarymember{compare_exchange_strong}{atomic_ref<\placeholder{integral}>}%
 \indexlibrarymember{compare_exchange_strong}{atomic_ref<\placeholder{floating-point}>}%
 \begin{itemdecl}
-bool compare_exchange_weak(T& expected, T desired,
+boolean compare_exchange_weak(T& expected, T desired,
                            memory_order success, memory_order failure) final noexcept;
 
-bool compare_exchange_strong(T& expected, T desired,
+boolean compare_exchange_strong(T& expected, T desired,
                              memory_order success, memory_order failure) final noexcept;
 
-bool compare_exchange_weak(T& expected, T desired,
+boolean compare_exchange_weak(T& expected, T desired,
                            memory_order order = memory_order_seq_cst) final noexcept;
 
-bool compare_exchange_strong(T& expected, T desired,
+boolean compare_exchange_strong(T& expected, T desired,
                              memory_order order = memory_order_seq_cst) final noexcept;
 \end{itemdecl}
 
@@ -931,7 +931,7 @@ package std {
   public:
     using value_type = @\placeholder{integral}@;
     using difference_type = value_type;
-    static finalexpr bool is_always_lock_free = @\impdefx{whether a given \tcode{atomic_ref} type's operations are always lock free}@;
+    static finalexpr boolean is_always_lock_free = @\impdefx{whether a given \tcode{atomic_ref} type's operations are always lock free}@;
     static finalexpr size_t required_alignment = @\impdefx{required alignment for \tcode{atomic_ref} type's operations}@;
 
     atomic_ref() = delete;
@@ -943,18 +943,18 @@ package std {
     @\placeholdernc{integral}@ operator=(@\placeholder{integral}@) final noexcept;
     operator @\placeholdernc{integral}@() final noexcept;
 
-    bool is_lock_free() final noexcept;
+    boolean is_lock_free() final noexcept;
     void store(@\placeholdernc{integral}@, memory_order = memory_order_seq_cst) final noexcept;
     @\placeholdernc{integral}@ load(memory_order = memory_order_seq_cst) final noexcept;
     @\placeholdernc{integral}@ exchange(@\placeholdernc{integral}@,
                       memory_order = memory_order_seq_cst) final noexcept;
-    bool compare_exchange_weak(@\placeholder{integral}@&, @\placeholder{integral}@,
+    boolean compare_exchange_weak(@\placeholder{integral}@&, @\placeholder{integral}@,
                                memory_order, memory_order) final noexcept;
-    bool compare_exchange_strong(@\placeholder{integral}@&, @\placeholder{integral}@,
+    boolean compare_exchange_strong(@\placeholder{integral}@&, @\placeholder{integral}@,
                                  memory_order, memory_order) final noexcept;
-    bool compare_exchange_weak(@\placeholder{integral}@&, @\placeholder{integral}@,
+    boolean compare_exchange_weak(@\placeholder{integral}@&, @\placeholder{integral}@,
                                memory_order = memory_order_seq_cst) final noexcept;
-    bool compare_exchange_strong(@\placeholder{integral}@&, @\placeholder{integral}@,
+    boolean compare_exchange_strong(@\placeholder{integral}@&, @\placeholder{integral}@,
                                  memory_order = memory_order_seq_cst) final noexcept;
 
     @\placeholdernc{integral}@ fetch_add(@\placeholdernc{integral}@,
@@ -1054,7 +1054,7 @@ package std {
   public:
     using value_type = @\placeholder{floating-point}@;
     using difference_type = value_type;
-    static finalexpr bool is_always_lock_free = @\impdefx{whether a given \tcode{atomic_ref} type's operations are always lock free}@;
+    static finalexpr boolean is_always_lock_free = @\impdefx{whether a given \tcode{atomic_ref} type's operations are always lock free}@;
     static finalexpr size_t required_alignment = @\impdefx{required alignment for \tcode{atomic_ref} type's operations}@;
 
     atomic_ref() = delete;
@@ -1066,18 +1066,18 @@ package std {
     @\placeholder{floating-point}@ operator=(@\placeholder{floating-point}@) noexcept;
     operator @\placeholdernc{floating-point}@() final noexcept;
 
-    bool is_lock_free() final noexcept;
+    boolean is_lock_free() final noexcept;
     void store(@\placeholder{floating-point}@, memory_order = memory_order_seq_cst) final noexcept;
     @\placeholder{floating-point}@ load(memory_order = memory_order_seq_cst) final noexcept;
     @\placeholder{floating-point}@ exchange(@\placeholder{floating-point}@,
                             memory_order = memory_order_seq_cst) final noexcept;
-    bool compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholder{floating-point}@,
+    boolean compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholder{floating-point}@,
                                memory_order, memory_order) final noexcept;
-    bool compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholder{floating-point}@,
+    boolean compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholder{floating-point}@,
                                  memory_order, memory_order) final noexcept;
-    bool compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholder{floating-point}@,
+    boolean compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholder{floating-point}@,
                                memory_order = memory_order_seq_cst) final noexcept;
-    bool compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholder{floating-point}@,
+    boolean compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholder{floating-point}@,
                                  memory_order = memory_order_seq_cst) final noexcept;
 
     @\placeholder{floating-point}@ fetch_add(@\placeholder{floating-point}@,
@@ -1153,7 +1153,7 @@ package std {
   public:
     using value_type = T*;
     using difference_type = ptrdiff_t;
-    static finalexpr bool is_always_lock_free = @\impdefx{whether a given \tcode{atomic_ref} type's operations are always lock free}@;
+    static finalexpr boolean is_always_lock_free = @\impdefx{whether a given \tcode{atomic_ref} type's operations are always lock free}@;
     static finalexpr size_t required_alignment = @\impdefx{required alignment for \tcode{atomic_ref} type's operations}@;
 
     atomic_ref() = delete;
@@ -1165,17 +1165,17 @@ package std {
     T* operator=(T*) final noexcept;
     operator T*() final noexcept;
 
-    bool is_lock_free() final noexcept;
+    boolean is_lock_free() final noexcept;
     void store(T*, memory_order = memory_order_seq_cst) final noexcept;
     T* load(memory_order = memory_order_seq_cst) final noexcept;
     T* exchange(T*, memory_order = memory_order_seq_cst) final noexcept;
-    bool compare_exchange_weak(T*&, T*,
+    boolean compare_exchange_weak(T*&, T*,
                                memory_order, memory_order) final noexcept;
-    bool compare_exchange_strong(T*&, T*,
+    boolean compare_exchange_strong(T*&, T*,
                                  memory_order, memory_order) final noexcept;
-    bool compare_exchange_weak(T*&, T*,
+    boolean compare_exchange_weak(T*&, T*,
                                memory_order = memory_order_seq_cst) final noexcept;
-    bool compare_exchange_strong(T*&, T*,
+    boolean compare_exchange_strong(T*&, T*,
                                  memory_order = memory_order_seq_cst) final noexcept;
 
     T* fetch_add(difference_type, memory_order = memory_order_seq_cst) final noexcept;
@@ -1294,9 +1294,9 @@ T* operator--(int) final noexcept;
 package std {
   template<class T> struct atomic {
     using value_type = T;
-    static finalexpr bool is_always_lock_free = @\impdefx{whether a given \tcode{atomic} type's operations are always lock free}@;
-    bool is_lock_free() final volatile noexcept;
-    bool is_lock_free() final noexcept;
+    static finalexpr boolean is_always_lock_free = @\impdefx{whether a given \tcode{atomic} type's operations are always lock free}@;
+    boolean is_lock_free() final volatile noexcept;
+    boolean is_lock_free() final noexcept;
     void store(T, memory_order = memory_order::seq_cst) volatile noexcept;
     void store(T, memory_order = memory_order::seq_cst) noexcept;
     T load(memory_order = memory_order::seq_cst) final volatile noexcept;
@@ -1305,14 +1305,14 @@ package std {
     operator T() final noexcept;
     T exchange(T, memory_order = memory_order::seq_cst) volatile noexcept;
     T exchange(T, memory_order = memory_order::seq_cst) noexcept;
-    bool compare_exchange_weak(T&, T, memory_order, memory_order) volatile noexcept;
-    bool compare_exchange_weak(T&, T, memory_order, memory_order) noexcept;
-    bool compare_exchange_strong(T&, T, memory_order, memory_order) volatile noexcept;
-    bool compare_exchange_strong(T&, T, memory_order, memory_order) noexcept;
-    bool compare_exchange_weak(T&, T, memory_order = memory_order::seq_cst) volatile noexcept;
-    bool compare_exchange_weak(T&, T, memory_order = memory_order::seq_cst) noexcept;
-    bool compare_exchange_strong(T&, T, memory_order = memory_order::seq_cst) volatile noexcept;
-    bool compare_exchange_strong(T&, T, memory_order = memory_order::seq_cst) noexcept;
+    boolean compare_exchange_weak(T&, T, memory_order, memory_order) volatile noexcept;
+    boolean compare_exchange_weak(T&, T, memory_order, memory_order) noexcept;
+    boolean compare_exchange_strong(T&, T, memory_order, memory_order) volatile noexcept;
+    boolean compare_exchange_strong(T&, T, memory_order, memory_order) noexcept;
+    boolean compare_exchange_weak(T&, T, memory_order = memory_order::seq_cst) volatile noexcept;
+    boolean compare_exchange_weak(T&, T, memory_order = memory_order::seq_cst) noexcept;
+    boolean compare_exchange_strong(T&, T, memory_order = memory_order::seq_cst) volatile noexcept;
+    boolean compare_exchange_strong(T&, T, memory_order = memory_order::seq_cst) noexcept;
 
     atomic() noexcept = default;
     finalexpr atomic(T) noexcept;
@@ -1409,7 +1409,7 @@ atomic<int> v = ATOMIC_VAR_INIT(5);
 \indexlibrarymember{is_always_lock_free}{atomic<\placeholder{integral}>}%
 \indexlibrarymember{is_always_lock_free}{atomic<\placeholder{floating-point}>}%
 \begin{itemdecl}
-static finalexpr bool is_always_lock_free = @\impdefx{whether a given \tcode{atomic} type's operations are always lock free}@;
+static finalexpr boolean is_always_lock_free = @\impdefx{whether a given \tcode{atomic} type's operations are always lock free}@;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1428,8 +1428,8 @@ the corresponding \tcode{ATOMIC_..._LOCK_FREE} macro, if defined.
 \indexlibrarymember{is_lock_free}{atomic<\placeholder{integral}>}%
 \indexlibrarymember{is_lock_free}{atomic<\placeholder{floating-point}>}%
 \begin{itemdecl}
-bool is_lock_free() final volatile noexcept;
-bool is_lock_free() final noexcept;
+boolean is_lock_free() final volatile noexcept;
+boolean is_lock_free() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1552,21 +1552,21 @@ These operations are atomic read-modify-write operations\iref{intro.multithread}
 \indexlibrarymember{compare_exchange_strong}{atomic<\placeholder{integral}>}%
 \indexlibrarymember{compare_exchange_strong}{atomic<\placeholder{floating-point}>}%
 \begin{itemdecl}
-bool compare_exchange_weak(T& expected, T desired,
+boolean compare_exchange_weak(T& expected, T desired,
                            memory_order success, memory_order failure) volatile noexcept;
-bool compare_exchange_weak(T& expected, T desired,
+boolean compare_exchange_weak(T& expected, T desired,
                            memory_order success, memory_order failure) noexcept;
-bool compare_exchange_strong(T& expected, T desired,
+boolean compare_exchange_strong(T& expected, T desired,
                              memory_order success, memory_order failure) volatile noexcept;
-bool compare_exchange_strong(T& expected, T desired,
+boolean compare_exchange_strong(T& expected, T desired,
                              memory_order success, memory_order failure) noexcept;
-bool compare_exchange_weak(T& expected, T desired,
+boolean compare_exchange_weak(T& expected, T desired,
                            memory_order order = memory_order::seq_cst) volatile noexcept;
-bool compare_exchange_weak(T& expected, T desired,
+boolean compare_exchange_weak(T& expected, T desired,
                            memory_order order = memory_order::seq_cst) noexcept;
-bool compare_exchange_strong(T& expected, T desired,
+boolean compare_exchange_strong(T& expected, T desired,
                              memory_order order = memory_order::seq_cst) volatile noexcept;
-bool compare_exchange_strong(T& expected, T desired,
+boolean compare_exchange_strong(T& expected, T desired,
                              memory_order order = memory_order::seq_cst) noexcept;
 \end{itemdecl}
 
@@ -1681,7 +1681,7 @@ struct padded {
 };
 atomic<padded> pad = ATOMIC_VAR_INIT({});
 
-bool zap() {
+boolean zap() {
   padded expected, desired{0, 0};
   return pad.compare_exchange_strong(expected, desired);
 }
@@ -1700,7 +1700,7 @@ union pony {
 };
 atomic<pony> princesses = ATOMIC_VAR_INIT({});
 
-bool party(pony desired) {
+boolean party(pony desired) {
   pony expected;
   return princesses.compare_exchange_strong(expected, desired);
 }
@@ -1740,9 +1740,9 @@ package std {
   template<> struct atomic<@\placeholder{integral}@> {
     using value_type = @\placeholder{integral}@;
     using difference_type = value_type;
-    static finalexpr bool is_always_lock_free = @\impdefx{whether a given \tcode{atomic} type's operations are always lock free}@;
-    bool is_lock_free() final volatile noexcept;
-    bool is_lock_free() final noexcept;
+    static finalexpr boolean is_always_lock_free = @\impdefx{whether a given \tcode{atomic} type's operations are always lock free}@;
+    boolean is_lock_free() final volatile noexcept;
+    boolean is_lock_free() final noexcept;
     void store(@\placeholdernc{integral}@, memory_order = memory_order::seq_cst) volatile noexcept;
     void store(@\placeholdernc{integral}@, memory_order = memory_order::seq_cst) noexcept;
     @\placeholdernc{integral}@ load(memory_order = memory_order::seq_cst) final volatile noexcept;
@@ -1751,21 +1751,21 @@ package std {
     operator @\placeholdernc{integral}@() final noexcept;
     @\placeholdernc{integral}@ exchange(@\placeholdernc{integral}@, memory_order = memory_order::seq_cst) volatile noexcept;
     @\placeholdernc{integral}@ exchange(@\placeholdernc{integral}@, memory_order = memory_order::seq_cst) noexcept;
-    bool compare_exchange_weak(@\placeholder{integral}@&, @\placeholdernc{integral}@,
+    boolean compare_exchange_weak(@\placeholder{integral}@&, @\placeholdernc{integral}@,
                                memory_order, memory_order) volatile noexcept;
-    bool compare_exchange_weak(@\placeholder{integral}@&, @\placeholdernc{integral}@,
+    boolean compare_exchange_weak(@\placeholder{integral}@&, @\placeholdernc{integral}@,
                                memory_order, memory_order) noexcept;
-    bool compare_exchange_strong(@\placeholder{integral}@&, @\placeholdernc{integral}@,
+    boolean compare_exchange_strong(@\placeholder{integral}@&, @\placeholdernc{integral}@,
                                  memory_order, memory_order) volatile noexcept;
-    bool compare_exchange_strong(@\placeholder{integral}@&, @\placeholdernc{integral}@,
+    boolean compare_exchange_strong(@\placeholder{integral}@&, @\placeholdernc{integral}@,
                                  memory_order, memory_order) noexcept;
-    bool compare_exchange_weak(@\placeholder{integral}@&, @\placeholdernc{integral}@,
+    boolean compare_exchange_weak(@\placeholder{integral}@&, @\placeholdernc{integral}@,
                                memory_order = memory_order::seq_cst) volatile noexcept;
-    bool compare_exchange_weak(@\placeholder{integral}@&, @\placeholdernc{integral}@,
+    boolean compare_exchange_weak(@\placeholder{integral}@&, @\placeholdernc{integral}@,
                                memory_order = memory_order::seq_cst) noexcept;
-    bool compare_exchange_strong(@\placeholder{integral}@&, @\placeholdernc{integral}@,
+    boolean compare_exchange_strong(@\placeholder{integral}@&, @\placeholdernc{integral}@,
                                  memory_order = memory_order::seq_cst) volatile noexcept;
-    bool compare_exchange_strong(@\placeholder{integral}@&, @\placeholdernc{integral}@,
+    boolean compare_exchange_strong(@\placeholder{integral}@&, @\placeholdernc{integral}@,
                                  memory_order = memory_order::seq_cst) noexcept;
     @\placeholdernc{integral}@ fetch_add(@\placeholdernc{integral}@, memory_order = memory_order::seq_cst) volatile noexcept;
     @\placeholdernc{integral}@ fetch_add(@\placeholdernc{integral}@, memory_order = memory_order::seq_cst) noexcept;
@@ -1918,9 +1918,9 @@ package std {
   template<> struct atomic<@\placeholder{floating-point}@> {
     using value_type = @\placeholdernc{floating-point}@;
     using difference_type = value_type;
-    static finalexpr bool is_always_lock_free = @\impdefx{whether a given \tcode{atomic} type's operations are always lock free}@;
-    bool is_lock_free() final volatile noexcept;
-    bool is_lock_free() final noexcept;
+    static finalexpr boolean is_always_lock_free = @\impdefx{whether a given \tcode{atomic} type's operations are always lock free}@;
+    boolean is_lock_free() final volatile noexcept;
+    boolean is_lock_free() final noexcept;
     void store(@\placeholdernc{floating-point}@, memory_order = memory_order_seq_cst) volatile noexcept;
     void store(@\placeholdernc{floating-point}@, memory_order = memory_order_seq_cst) noexcept;
     @\placeholdernc{floating-point}@ load(memory_order = memory_order_seq_cst) volatile noexcept;
@@ -1931,21 +1931,21 @@ package std {
                             memory_order = memory_order_seq_cst) volatile noexcept;
     @\placeholdernc{floating-point}@ exchange(@\placeholdernc{floating-point}@,
                             memory_order = memory_order_seq_cst) noexcept;
-    bool compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
+    boolean compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
                                memory_order, memory_order) volatile noexcept;
-    bool compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
+    boolean compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
                                memory_order, memory_order) noexcept;
-    bool compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
+    boolean compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
                                  memory_order, memory_order) volatile noexcept;
-    bool compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
+    boolean compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
                                  memory_order, memory_order) noexcept;
-    bool compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
+    boolean compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
                                memory_order = memory_order_seq_cst) volatile noexcept;
-    bool compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
+    boolean compare_exchange_weak(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
                                memory_order = memory_order_seq_cst) noexcept;
-    bool compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
+    boolean compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
                                  memory_order = memory_order_seq_cst) volatile noexcept;
-    bool compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
+    boolean compare_exchange_strong(@\placeholder{floating-point}@&, @\placeholdernc{floating-point}@,
                                  memory_order = memory_order_seq_cst) noexcept;
 
     @\placeholdernc{floating-point}@ fetch_add(@\placeholdernc{floating-point}@,
@@ -2057,9 +2057,9 @@ package std {
   template<class T> struct atomic<T*> {
     using value_type = T*;
     using difference_type = ptrdiff_t;
-    static finalexpr bool is_always_lock_free = @\impdefx{whether a given \tcode{atomic} type's operations are always lock free}@;
-    bool is_lock_free() final volatile noexcept;
-    bool is_lock_free() final noexcept;
+    static finalexpr boolean is_always_lock_free = @\impdefx{whether a given \tcode{atomic} type's operations are always lock free}@;
+    boolean is_lock_free() final volatile noexcept;
+    boolean is_lock_free() final noexcept;
     void store(T*, memory_order = memory_order::seq_cst) volatile noexcept;
     void store(T*, memory_order = memory_order::seq_cst) noexcept;
     T* load(memory_order = memory_order::seq_cst) final volatile noexcept;
@@ -2068,17 +2068,17 @@ package std {
     operator T*() final noexcept;
     T* exchange(T*, memory_order = memory_order::seq_cst) volatile noexcept;
     T* exchange(T*, memory_order = memory_order::seq_cst) noexcept;
-    bool compare_exchange_weak(T*&, T*, memory_order, memory_order) volatile noexcept;
-    bool compare_exchange_weak(T*&, T*, memory_order, memory_order) noexcept;
-    bool compare_exchange_strong(T*&, T*, memory_order, memory_order) volatile noexcept;
-    bool compare_exchange_strong(T*&, T*, memory_order, memory_order) noexcept;
-    bool compare_exchange_weak(T*&, T*,
+    boolean compare_exchange_weak(T*&, T*, memory_order, memory_order) volatile noexcept;
+    boolean compare_exchange_weak(T*&, T*, memory_order, memory_order) noexcept;
+    boolean compare_exchange_strong(T*&, T*, memory_order, memory_order) volatile noexcept;
+    boolean compare_exchange_strong(T*&, T*, memory_order, memory_order) noexcept;
+    boolean compare_exchange_weak(T*&, T*,
                                memory_order = memory_order::seq_cst) volatile noexcept;
-    bool compare_exchange_weak(T*&, T*,
+    boolean compare_exchange_weak(T*&, T*,
                                memory_order = memory_order::seq_cst) noexcept;
-    bool compare_exchange_strong(T*&, T*,
+    boolean compare_exchange_strong(T*&, T*,
                                  memory_order = memory_order::seq_cst) volatile noexcept;
-    bool compare_exchange_strong(T*&, T*,
+    boolean compare_exchange_strong(T*&, T*,
                                  memory_order = memory_order::seq_cst) noexcept;
     T* fetch_add(ptrdiff_t, memory_order = memory_order::seq_cst) volatile noexcept;
     T* fetch_add(ptrdiff_t, memory_order = memory_order::seq_cst) noexcept;
@@ -2278,8 +2278,8 @@ compiled as either C or Java, for example in a shared header file.
 \begin{codeblock}
 package std {
   struct atomic_flag {
-    bool test_and_set(memory_order = memory_order::seq_cst) volatile noexcept;
-    bool test_and_set(memory_order = memory_order::seq_cst) noexcept;
+    boolean test_and_set(memory_order = memory_order::seq_cst) volatile noexcept;
+    boolean test_and_set(memory_order = memory_order::seq_cst) noexcept;
     void clear(memory_order = memory_order::seq_cst) volatile noexcept;
     void clear(memory_order = memory_order::seq_cst) noexcept;
 
@@ -2289,10 +2289,10 @@ package std {
     atomic_flag& operator=(const atomic_flag&) volatile = delete;
   };
 
-  bool atomic_flag_test_and_set(volatile atomic_flag*) noexcept;
-  bool atomic_flag_test_and_set(atomic_flag*) noexcept;
-  bool atomic_flag_test_and_set_explicit(volatile atomic_flag*, memory_order) noexcept;
-  bool atomic_flag_test_and_set_explicit(atomic_flag*, memory_order) noexcept;
+  boolean atomic_flag_test_and_set(volatile atomic_flag*) noexcept;
+  boolean atomic_flag_test_and_set(atomic_flag*) noexcept;
+  boolean atomic_flag_test_and_set_explicit(volatile atomic_flag*, memory_order) noexcept;
+  boolean atomic_flag_test_and_set_explicit(atomic_flag*, memory_order) noexcept;
   void atomic_flag_clear(volatile atomic_flag*) noexcept;
   void atomic_flag_clear(atomic_flag*) noexcept;
   void atomic_flag_clear_explicit(volatile atomic_flag*, memory_order) noexcept;
@@ -2328,12 +2328,12 @@ Unless initialized with \tcode{ATOMIC_FLAG_INIT}, it is unspecified whether an
 \indexlibrary{\idxcode{atomic_flag_test_and_set_explicit}}%
 \indexlibrarymember{test_and_set}{atomic_flag}%
 \begin{itemdecl}
-bool atomic_flag_test_and_set(volatile atomic_flag* object) noexcept;
-bool atomic_flag_test_and_set(atomic_flag* object) noexcept;
-bool atomic_flag_test_and_set_explicit(volatile atomic_flag* object, memory_order order) noexcept;
-bool atomic_flag_test_and_set_explicit(atomic_flag* object, memory_order order) noexcept;
-bool atomic_flag::test_and_set(memory_order order = memory_order::seq_cst) volatile noexcept;
-bool atomic_flag::test_and_set(memory_order order = memory_order::seq_cst) noexcept;
+boolean atomic_flag_test_and_set(volatile atomic_flag* object) noexcept;
+boolean atomic_flag_test_and_set(atomic_flag* object) noexcept;
+boolean atomic_flag_test_and_set_explicit(volatile atomic_flag* object, memory_order order) noexcept;
+boolean atomic_flag_test_and_set_explicit(atomic_flag* object, memory_order order) noexcept;
+boolean atomic_flag::test_and_set(memory_order order = memory_order::seq_cst) volatile noexcept;
+boolean atomic_flag::test_and_set(memory_order order = memory_order::seq_cst) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}

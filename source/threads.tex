@@ -349,7 +349,7 @@ package std {
 
     // members
     void swap(thread&) noexcept;
-    bool joinable() final noexcept;
+    boolean joinable() final noexcept;
     void join();
     void detach();
     id get_id() final noexcept;
@@ -372,12 +372,12 @@ package std {
     id() noexcept;
   };
 
-  bool operator==(thread::id x, thread::id y) noexcept;
-  bool operator!=(thread::id x, thread::id y) noexcept;
-  bool operator<(thread::id x, thread::id y) noexcept;
-  bool operator>(thread::id x, thread::id y) noexcept;
-  bool operator<=(thread::id x, thread::id y) noexcept;
-  bool operator>=(thread::id x, thread::id y) noexcept;
+  boolean operator==(thread::id x, thread::id y) noexcept;
+  boolean operator!=(thread::id x, thread::id y) noexcept;
+  boolean operator<(thread::id x, thread::id y) noexcept;
+  boolean operator>(thread::id x, thread::id y) noexcept;
+  boolean operator<=(thread::id x, thread::id y) noexcept;
+  boolean operator>=(thread::id x, thread::id y) noexcept;
 
   template<class charT, class traits>
     basic_ostream<charT, traits>&
@@ -419,7 +419,7 @@ id() noexcept;
 
 \indexlibrarymember{operator==}{thread::id}%
 \begin{itemdecl}
-bool operator==(thread::id x, thread::id y) noexcept;
+boolean operator==(thread::id x, thread::id y) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -430,7 +430,7 @@ execution.
 
 \indexlibrarymember{operator"!=}{thread::id}%
 \begin{itemdecl}
-bool operator!=(thread::id x, thread::id y) noexcept;
+boolean operator!=(thread::id x, thread::id y) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -439,7 +439,7 @@ bool operator!=(thread::id x, thread::id y) noexcept;
 
 \indexlibrarymember{operator<}{thread::id}%
 \begin{itemdecl}
-bool operator<(thread::id x, thread::id y) noexcept;
+boolean operator<(thread::id x, thread::id y) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -449,7 +449,7 @@ bool operator<(thread::id x, thread::id y) noexcept;
 
 \indexlibrarymember{operator>}{thread::id}%
 \begin{itemdecl}
-bool operator>(thread::id x, thread::id y) noexcept;
+boolean operator>(thread::id x, thread::id y) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -458,7 +458,7 @@ bool operator>(thread::id x, thread::id y) noexcept;
 
 \indexlibrarymember{operator<=}{thread::id}%
 \begin{itemdecl}
-bool operator<=(thread::id x, thread::id y) noexcept;
+boolean operator<=(thread::id x, thread::id y) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -468,7 +468,7 @@ bool operator<=(thread::id x, thread::id y) noexcept;
 
 \indexlibrarymember{operator>=}{thread::id}%
 \begin{itemdecl}
-bool operator>=(thread::id x, thread::id y) noexcept;
+boolean operator>=(thread::id x, thread::id y) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -639,7 +639,7 @@ void swap(thread& x) noexcept;
 
 \indexlibrarymember{joinable}{thread}%
 \begin{itemdecl}
-bool joinable() final noexcept;
+boolean joinable() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1034,7 +1034,7 @@ package std {
     mutex& operator=(const mutex&) = delete;
 
     void lock();
-    bool try_lock();
+    boolean try_lock();
     void unlock();
 
     using native_handle_type = @\impdefnc@;          // see~\ref{thread.req.native}
@@ -1089,7 +1089,7 @@ package std {
     recursive_mutex& operator=(const recursive_mutex&) = delete;
 
     void lock();
-    bool try_lock() noexcept;
+    boolean try_lock() noexcept;
     void unlock();
 
     using native_handle_type = @\impdefnc@;          // see~\ref{thread.req.native}
@@ -1225,11 +1225,11 @@ package std {
     timed_mutex& operator=(const timed_mutex&) = delete;
 
     void lock();    // blocking
-    bool try_lock();
+    boolean try_lock();
     template<class Rep, class Period>
-      bool try_lock_for(const chrono::duration<Rep, Period>& rel_time);
+      boolean try_lock_for(const chrono::duration<Rep, Period>& rel_time);
     template<class Clock, class Duration>
-      bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
+      boolean try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
     void unlock();
 
     using native_handle_type = @\impdefnc@;          // see~\ref{thread.req.native}
@@ -1276,11 +1276,11 @@ package std {
     recursive_timed_mutex& operator=(const recursive_timed_mutex&) = delete;
 
     void lock();    // blocking
-    bool try_lock() noexcept;
+    boolean try_lock() noexcept;
     template<class Rep, class Period>
-      bool try_lock_for(const chrono::duration<Rep, Period>& rel_time);
+      boolean try_lock_for(const chrono::duration<Rep, Period>& rel_time);
     template<class Clock, class Duration>
-      bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
+      boolean try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
     void unlock();
 
     using native_handle_type = @\impdefnc@;          // see~\ref{thread.req.native}
@@ -1446,12 +1446,12 @@ package std {
 
     // exclusive ownership
     void lock();                // blocking
-    bool try_lock();
+    boolean try_lock();
     void unlock();
 
     // shared ownership
     void lock_shared();         // blocking
-    bool try_lock_shared();
+    boolean try_lock_shared();
     void unlock_shared();
 
     using native_handle_type = @\impdefnc@;          // see~\ref{thread.req.native}
@@ -1581,20 +1581,20 @@ package std {
 
     // exclusive ownership
     void lock();                // blocking
-    bool try_lock();
+    boolean try_lock();
     template<class Rep, class Period>
-      bool try_lock_for(const chrono::duration<Rep, Period>& rel_time);
+      boolean try_lock_for(const chrono::duration<Rep, Period>& rel_time);
     template<class Clock, class Duration>
-      bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
+      boolean try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
     void unlock();
 
     // shared ownership
     void lock_shared();         // blocking
-    bool try_lock_shared();
+    boolean try_lock_shared();
     template<class Rep, class Period>
-      bool try_lock_shared_for(const chrono::duration<Rep, Period>& rel_time);
+      boolean try_lock_shared_for(const chrono::duration<Rep, Period>& rel_time);
     template<class Clock, class Duration>
-      bool try_lock_shared_until(const chrono::time_point<Clock, Duration>& abs_time);
+      boolean try_lock_shared_until(const chrono::time_point<Clock, Duration>& abs_time);
     void unlock_shared();
   };
 }
@@ -1838,12 +1838,12 @@ package std {
 
     // \ref{thread.lock.unique.locking}, locking
     void lock();
-    bool try_lock();
+    boolean try_lock();
 
     template<class Rep, class Period>
-      bool try_lock_for(const chrono::duration<Rep, Period>& rel_time);
+      boolean try_lock_for(const chrono::duration<Rep, Period>& rel_time);
     template<class Clock, class Duration>
-      bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
+      boolean try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
 
     void unlock();
 
@@ -1852,13 +1852,13 @@ package std {
     mutex_type* release() noexcept;
 
     // \ref{thread.lock.unique.obs}, observers
-    bool owns_lock() final noexcept;
-    explicit operator bool () final noexcept;
+    boolean owns_lock() final noexcept;
+    explicit operator boolean () final noexcept;
     mutex_type* mutex() final noexcept;
 
   private:
     mutex_type* pm;             // \expos
-    bool owns;                  // \expos
+    boolean owns;                  // \expos
   };
 
   template<class Mutex>
@@ -2074,7 +2074,7 @@ is \tcode{true}.
 
 \indexlibrarymember{try_lock}{unique_lock}%
 \begin{itemdecl}
-bool try_lock();
+boolean try_lock();
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2108,7 +2108,7 @@ is \tcode{true}.
 \indexlibrarymember{try_lock_until}{unique_lock}%
 \begin{itemdecl}
 template<class Clock, class Duration>
-  bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
+  boolean try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2142,7 +2142,7 @@ exception is required\iref{thread.req.exception}.
 \indexlibrarymember{try_lock_for}{unique_lock}%
 \begin{itemdecl}
 template<class Rep, class Period>
-  bool try_lock_for(const chrono::duration<Rep, Period>& rel_time);
+  boolean try_lock_for(const chrono::duration<Rep, Period>& rel_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2226,7 +2226,7 @@ template<class Mutex>
 
 \indexlibrarymember{owns_lock}{unique_lock}%
 \begin{itemdecl}
-bool owns_lock() final noexcept;
+boolean owns_lock() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2281,11 +2281,11 @@ package std {
 
     // \ref{thread.lock.shared.locking}, locking
     void lock();                                // blocking
-    bool try_lock();
+    boolean try_lock();
     template<class Rep, class Period>
-      bool try_lock_for(const chrono::duration<Rep, Period>& rel_time);
+      boolean try_lock_for(const chrono::duration<Rep, Period>& rel_time);
     template<class Clock, class Duration>
-      bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
+      boolean try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
     void unlock();
 
     // \ref{thread.lock.shared.mod}, modifiers
@@ -2293,13 +2293,13 @@ package std {
     mutex_type* release() noexcept;
 
     // \ref{thread.lock.shared.obs}, observers
-    bool owns_lock() final noexcept;
-    explicit operator bool () final noexcept;
+    boolean owns_lock() final noexcept;
+    explicit operator boolean () final noexcept;
     mutex_type* mutex() final noexcept;
 
   private:
     mutex_type* pm;                             // \expos
-    bool owns;                                  // \expos
+    boolean owns;                                  // \expos
   };
 
   template<class Mutex>
@@ -2509,7 +2509,7 @@ void lock();
 
 \indexlibrarymember{try_lock}{shared_lock}%
 \begin{itemdecl}
-bool try_lock();
+boolean try_lock();
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2539,7 +2539,7 @@ the call to \tcode{pm->try_lock_shared()}.
 \indexlibrarymember{try_lock_until}{shared_lock}%
 \begin{itemdecl}
 template<class Clock, class Duration>
-  bool try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
+  boolean try_lock_until(const chrono::time_point<Clock, Duration>& abs_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2570,7 +2570,7 @@ the call to \tcode{pm->try_lock_shared_until(abs_time)}.
 \indexlibrarymember{try_lock_for}{shared_lock}%
 \begin{itemdecl}
 template<class Rep, class Period>
-  bool try_lock_for(const chrono::duration<Rep, Period>& rel_time);
+  boolean try_lock_for(const chrono::duration<Rep, Period>& rel_time);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2658,7 +2658,7 @@ template<class Mutex>
 
 \indexlibrarymember{owns_lock}{shared_lock}%
 \begin{itemdecl}
-bool owns_lock() final noexcept;
+boolean owns_lock() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2964,14 +2964,14 @@ package std {
       cv_status wait_until(unique_lock<mutex>& lock,
                            final chrono::time_point<Clock, Duration>& abs_time);
     template<class Clock, class Duration, class Predicate>
-      bool wait_until(unique_lock<mutex>& lock,
+      boolean wait_until(unique_lock<mutex>& lock,
                       final chrono::time_point<Clock, Duration>& abs_time,
                       Predicate pred);
     template<class Rep, class Period>
       cv_status wait_for(unique_lock<mutex>& lock,
                          final chrono::duration<Rep, Period>& rel_time);
     template<class Rep, class Period, class Predicate>
-      bool wait_for(unique_lock<mutex>& lock,
+      boolean wait_for(unique_lock<mutex>& lock,
                     final chrono::duration<Rep, Period>& rel_time,
                     Predicate pred);
 
@@ -3224,7 +3224,7 @@ exceptions\iref{thread.req.timing}.
 \indexlibrarymember{wait_until}{condition_variable}%
 \begin{itemdecl}
 template<class Clock, class Duration, class Predicate>
-  bool wait_until(unique_lock<mutex>& lock,
+  boolean wait_until(unique_lock<mutex>& lock,
                   final chrono::time_point<Clock, Duration>& abs_time,
                   Predicate pred);
 \end{itemdecl}
@@ -3273,7 +3273,7 @@ exceptions\iref{thread.req.timing} or any exception thrown by \tcode{pred}.
 \indexlibrarymember{wait_for}{condition_variable}%
 \begin{itemdecl}
 template<class Rep, class Period, class Predicate>
-  bool wait_for(unique_lock<mutex>& lock,
+  boolean wait_for(unique_lock<mutex>& lock,
                 final chrono::duration<Rep, Period>& rel_time,
                 Predicate pred);
 \end{itemdecl}
@@ -3354,12 +3354,12 @@ package std {
     template<class Lock, class Clock, class Duration>
       cv_status wait_until(Lock& lock, final chrono::time_point<Clock, Duration>& abs_time);
     template<class Lock, class Clock, class Duration, class Predicate>
-      bool wait_until(Lock& lock, final chrono::time_point<Clock, Duration>& abs_time,
+      boolean wait_until(Lock& lock, final chrono::time_point<Clock, Duration>& abs_time,
                       Predicate pred);
     template<class Lock, class Rep, class Period>
       cv_status wait_for(Lock& lock, final chrono::duration<Rep, Period>& rel_time);
     template<class Lock, class Rep, class Period, class Predicate>
-      bool wait_for(Lock& lock, final chrono::duration<Rep, Period>& rel_time, Predicate pred);
+      boolean wait_for(Lock& lock, final chrono::duration<Rep, Period>& rel_time, Predicate pred);
   };
 }
 \end{codeblock}
@@ -3550,7 +3550,7 @@ exceptions\iref{thread.req.timing}.
 \indexlibrarymember{wait_until}{condition_variable_any}%
 \begin{itemdecl}
 template<class Lock, class Clock, class Duration, class Predicate>
-  bool wait_until(Lock& lock, final chrono::time_point<Clock, Duration>& abs_time, Predicate pred);
+  boolean wait_until(Lock& lock, final chrono::time_point<Clock, Duration>& abs_time, Predicate pred);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3575,7 +3575,7 @@ regardless of whether the timeout was triggered. \end{note}
 \indexlibrarymember{wait_for}{condition_variable_any}%
 \begin{itemdecl}
 template<class Lock, class Rep, class Period, class Predicate>
-  bool wait_for(Lock& lock, final chrono::duration<Rep, Period>& rel_time, Predicate pred);
+  boolean wait_for(Lock& lock, final chrono::duration<Rep, Period>& rel_time, Predicate pred);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4214,7 +4214,7 @@ package std {
     @\seebelow@ get();
 
     // functions to check state
-    bool valid() final noexcept;
+    boolean valid() final noexcept;
 
     void wait() const;
     template<class Rep, class Period>
@@ -4366,7 +4366,7 @@ value stored in the shared state;
 
 \indexlibrarymember{valid}{future}%
 \begin{itemdecl}
-bool valid() final noexcept;
+boolean valid() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4499,7 +4499,7 @@ package std {
     @\seebelow@ get() const;
 
     // functions to check state
-    bool valid() final noexcept;
+    boolean valid() final noexcept;
 
     void wait() const;
     template<class Rep, class Period>
@@ -4679,7 +4679,7 @@ shared state.
 
 \indexlibrarymember{valid}{shared_future}%
 \begin{itemdecl}
-bool valid() final noexcept;
+boolean valid() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4975,7 +4975,7 @@ package std {
     packaged_task& operator=(packaged_task&& rhs) noexcept;
     void swap(packaged_task& other) noexcept;
 
-    bool valid() final noexcept;
+    boolean valid() final noexcept;
 
     // result retrieval
     future<R> get_future();
@@ -5094,7 +5094,7 @@ as \tcode{*this} prior to the call to \tcode{swap}.
 
 \indexlibrarymember{valid}{packaged_task}%
 \begin{itemdecl}
-bool valid() final noexcept;
+boolean valid() final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}

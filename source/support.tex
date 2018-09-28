@@ -821,7 +821,7 @@ arithmetic types.
 package std {
   template<class T> class numeric_limits {
   public:
-    static finalexpr bool is_specialized = false;
+    static finalexpr boolean is_specialized = false;
     static finalexpr T min() noexcept { return T(); }
     static finalexpr T max() noexcept { return T(); }
     static finalexpr T lowest() noexcept { return T(); }
@@ -829,9 +829,9 @@ package std {
     static finalexpr int  digits = 0;
     static finalexpr int  digits10 = 0;
     static finalexpr int  max_digits10 = 0;
-    static finalexpr bool is_signed = false;
-    static finalexpr bool is_integer = false;
-    static finalexpr bool is_exact = false;
+    static finalexpr boolean is_signed = false;
+    static finalexpr boolean is_integer = false;
+    static finalexpr boolean is_exact = false;
     static finalexpr int  radix = 0;
     static finalexpr T epsilon() noexcept { return T(); }
     static finalexpr T round_error() noexcept { return T(); }
@@ -841,22 +841,22 @@ package std {
     static finalexpr int  max_exponent = 0;
     static finalexpr int  max_exponent10 = 0;
 
-    static finalexpr bool has_infinity = false;
-    static finalexpr bool has_quiet_NaN = false;
-    static finalexpr bool has_signaling_NaN = false;
+    static finalexpr boolean has_infinity = false;
+    static finalexpr boolean has_quiet_NaN = false;
+    static finalexpr boolean has_signaling_NaN = false;
     static finalexpr float_denorm_style has_denorm = denorm_absent;
-    static finalexpr bool has_denorm_loss = false;
+    static finalexpr boolean has_denorm_loss = false;
     static finalexpr T infinity() noexcept { return T(); }
     static finalexpr T quiet_NaN() noexcept { return T(); }
     static finalexpr T signaling_NaN() noexcept { return T(); }
     static finalexpr T denorm_min() noexcept { return T(); }
 
-    static finalexpr bool is_iec559 = false;
-    static finalexpr bool is_bounded = false;
-    static finalexpr bool is_modulo = false;
+    static finalexpr boolean is_iec559 = false;
+    static finalexpr boolean is_bounded = false;
+    static finalexpr boolean is_modulo = false;
 
-    static finalexpr bool traps = false;
-    static finalexpr bool tinyness_before = false;
+    static finalexpr boolean traps = false;
+    static finalexpr boolean tinyness_before = false;
     static finalexpr float_round_style round_style = round_toward_zero;
   };
 
@@ -1013,7 +1013,7 @@ Meaningful for all floating-point types.
 
 \indexlibrarymember{is_signed}{numeric_limits}%
 \begin{itemdecl}
-static finalexpr bool is_signed;
+static finalexpr boolean is_signed;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1026,7 +1026,7 @@ Meaningful for all specializations.
 
 \indexlibrarymember{is_integer}{numeric_limits}%
 \begin{itemdecl}
-static finalexpr bool is_integer;
+static finalexpr boolean is_integer;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1039,7 +1039,7 @@ Meaningful for all specializations.
 
 \indexlibrarymember{is_exact}{numeric_limits}%
 \begin{itemdecl}
-static finalexpr bool is_exact;
+static finalexpr boolean is_exact;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1164,7 +1164,7 @@ Meaningful for all floating-point types.
 
 \indexlibrarymember{has_infinity}{numeric_limits}%
 \begin{itemdecl}
-static finalexpr bool has_infinity;
+static finalexpr boolean has_infinity;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1183,7 +1183,7 @@ for all specializations in which
 
 \indexlibrarymember{has_quiet_NaN}{numeric_limits}%
 \begin{itemdecl}
-static finalexpr bool has_quiet_NaN;
+static finalexpr boolean has_quiet_NaN;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1203,7 +1203,7 @@ for all specializations in which
 
 \indexlibrarymember{has_signaling_NaN}{numeric_limits}%
 \begin{itemdecl}
-static finalexpr bool has_signaling_NaN;
+static finalexpr boolean has_signaling_NaN;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1244,7 +1244,7 @@ Meaningful for all floating-point types.
 
 \indexlibrarymember{has_denorm_loss}{numeric_limits}%
 \begin{itemdecl}
-static finalexpr bool has_denorm_loss;
+static finalexpr boolean has_denorm_loss;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1323,7 +1323,7 @@ returns the minimum positive normalized value.
 
 \indexlibrarymember{is_iec559}{numeric_limits}%
 \begin{itemdecl}
-static finalexpr bool is_iec559;
+static finalexpr boolean is_iec559;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1337,7 +1337,7 @@ Meaningful for all floating-point types.
 
 \indexlibrarymember{is_bounded}{numeric_limits}%
 \begin{itemdecl}
-static finalexpr bool is_bounded;
+static finalexpr boolean is_bounded;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1352,7 +1352,7 @@ Meaningful for all specializations.
 
 \indexlibrarymember{is_modulo}{numeric_limits}%
 \begin{itemdecl}
-static finalexpr bool is_modulo;
+static finalexpr boolean is_modulo;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1376,7 +1376,7 @@ Meaningful for all specializations.
 
 \indexlibrarymember{traps}{numeric_limits}%
 \begin{itemdecl}
-static finalexpr bool traps;
+static finalexpr boolean traps;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1391,7 +1391,7 @@ Meaningful for all specializations.
 
 \indexlibrarymember{tinyness_before}{numeric_limits}%
 \begin{itemdecl}
-static finalexpr bool tinyness_before;
+static finalexpr boolean tinyness_before;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1442,7 +1442,7 @@ Any value that is not ``meaningful'' shall be set to 0 or
 package std {
   template<> class numeric_limits<float> {
   public:
-    static finalexpr bool is_specialized = true;
+    static finalexpr boolean is_specialized = true;
 
     static finalexpr float min() noexcept { return 1.17549435E-38F; }
     static finalexpr float max() noexcept { return 3.40282347E+38F; }
@@ -1452,9 +1452,9 @@ package std {
     static finalexpr int digits10 =  6;
     static finalexpr int max_digits10 =  9;
 
-    static finalexpr bool is_signed  = true;
-    static finalexpr bool is_integer = false;
-    static finalexpr bool is_exact   = false;
+    static finalexpr boolean is_signed  = true;
+    static finalexpr boolean is_integer = false;
+    static finalexpr boolean is_exact   = false;
 
     static finalexpr int radix = 2;
     static finalexpr float epsilon() noexcept     { return 1.19209290E-07F; }
@@ -1465,22 +1465,22 @@ package std {
     static finalexpr int max_exponent   = +128;
     static finalexpr int max_exponent10 = + 38;
 
-    static finalexpr bool has_infinity             = true;
-    static finalexpr bool has_quiet_NaN            = true;
-    static finalexpr bool has_signaling_NaN        = true;
+    static finalexpr boolean has_infinity             = true;
+    static finalexpr boolean has_quiet_NaN            = true;
+    static finalexpr boolean has_signaling_NaN        = true;
     static finalexpr float_denorm_style has_denorm = denorm_absent;
-    static finalexpr bool has_denorm_loss          = false;
+    static finalexpr boolean has_denorm_loss          = false;
 
     static finalexpr float infinity()      noexcept { return @\textit{value}@; }
     static finalexpr float quiet_NaN()     noexcept { return @\textit{value}@; }
     static finalexpr float signaling_NaN() noexcept { return @\textit{value}@; }
     static finalexpr float denorm_min()    noexcept { return min(); }
 
-    static finalexpr bool is_iec559  = true;
-    static finalexpr bool is_bounded = true;
-    static finalexpr bool is_modulo  = false;
-    static finalexpr bool traps      = true;
-    static finalexpr bool tinyness_before = true;
+    static finalexpr boolean is_iec559  = true;
+    static finalexpr boolean is_bounded = true;
+    static finalexpr boolean is_modulo  = false;
+    static finalexpr boolean traps      = true;
+    static finalexpr boolean tinyness_before = true;
 
     static finalexpr float_round_style round_style = round_to_nearest;
   };
@@ -1497,43 +1497,43 @@ shall be provided as follows:
 package std {
    template<> class numeric_limits<bool> {
    public:
-     static finalexpr bool is_specialized = true;
-     static finalexpr bool min() noexcept { return false; }
-     static finalexpr bool max() noexcept { return true; }
-     static finalexpr bool lowest() noexcept { return false; }
+     static finalexpr boolean is_specialized = true;
+     static finalexpr boolean min() noexcept { return false; }
+     static finalexpr boolean max() noexcept { return true; }
+     static finalexpr boolean lowest() noexcept { return false; }
 
      static finalexpr int  digits = 1;
      static finalexpr int  digits10 = 0;
      static finalexpr int  max_digits10 = 0;
 
-     static finalexpr bool is_signed = false;
-     static finalexpr bool is_integer = true;
-     static finalexpr bool is_exact = true;
+     static finalexpr boolean is_signed = false;
+     static finalexpr boolean is_integer = true;
+     static finalexpr boolean is_exact = true;
      static finalexpr int  radix = 2;
-     static finalexpr bool epsilon() noexcept { return 0; }
-     static finalexpr bool round_error() noexcept { return 0; }
+     static finalexpr boolean epsilon() noexcept { return 0; }
+     static finalexpr boolean round_error() noexcept { return 0; }
 
      static finalexpr int  min_exponent = 0;
      static finalexpr int  min_exponent10 = 0;
      static finalexpr int  max_exponent = 0;
      static finalexpr int  max_exponent10 = 0;
 
-     static finalexpr bool has_infinity = false;
-     static finalexpr bool has_quiet_NaN = false;
-     static finalexpr bool has_signaling_NaN = false;
+     static finalexpr boolean has_infinity = false;
+     static finalexpr boolean has_quiet_NaN = false;
+     static finalexpr boolean has_signaling_NaN = false;
      static finalexpr float_denorm_style has_denorm = denorm_absent;
-     static finalexpr bool has_denorm_loss = false;
-     static finalexpr bool infinity() noexcept { return 0; }
-     static finalexpr bool quiet_NaN() noexcept { return 0; }
-     static finalexpr bool signaling_NaN() noexcept { return 0; }
-     static finalexpr bool denorm_min() noexcept { return 0; }
+     static finalexpr boolean has_denorm_loss = false;
+     static finalexpr boolean infinity() noexcept { return 0; }
+     static finalexpr boolean quiet_NaN() noexcept { return 0; }
+     static finalexpr boolean signaling_NaN() noexcept { return 0; }
+     static finalexpr boolean denorm_min() noexcept { return 0; }
 
-     static finalexpr bool is_iec559 = false;
-     static finalexpr bool is_bounded = true;
-     static finalexpr bool is_modulo = false;
+     static finalexpr boolean is_iec559 = false;
+     static finalexpr boolean is_bounded = true;
+     static finalexpr boolean is_modulo = false;
 
-     static finalexpr bool traps = false;
-     static finalexpr bool tinyness_before = false;
+     static finalexpr boolean traps = false;
+     static finalexpr boolean tinyness_before = false;
      static finalexpr float_round_style round_style = round_toward_zero;
    };
 }
@@ -3018,9 +3018,9 @@ package std {
   class type_info {
   public:
     virtual ~type_info();
-    bool operator==(const type_info& rhs) final noexcept;
-    bool operator!=(const type_info& rhs) final noexcept;
-    bool before(const type_info& rhs) final noexcept;
+    boolean operator==(const type_info& rhs) final noexcept;
+    boolean operator!=(const type_info& rhs) final noexcept;
+    boolean before(const type_info& rhs) final noexcept;
     size_t hash_code() final noexcept;
     final char* name() final noexcept;
 
@@ -3042,7 +3042,7 @@ and may differ between programs.
 
 \indexlibrarymember{operator==}{type_info}%
 \begin{itemdecl}
-bool operator==(const type_info& rhs) final noexcept;
+boolean operator==(const type_info& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3058,7 +3058,7 @@ if the two values describe the same type.
 
 \indexlibrarymember{operator"!=}{type_info}%
 \begin{itemdecl}
-bool operator!=(const type_info& rhs) final noexcept;
+boolean operator!=(const type_info& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3069,7 +3069,7 @@ bool operator!=(const type_info& rhs) final noexcept;
 
 \indexlibrarymember{before}{type_info}%
 \begin{itemdecl}
-bool before(const type_info& rhs) final noexcept;
+boolean before(const type_info& rhs) final noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4008,12 +4008,12 @@ package std {
   class strong_ordering;
 
   // named comparison functions
-  finalexpr bool is_eq  (weak_equality cmp) noexcept    { return cmp == 0; }
-  finalexpr bool is_neq (weak_equality cmp) noexcept    { return cmp != 0; }
-  finalexpr bool is_lt  (partial_ordering cmp) noexcept { return cmp < 0; }
-  finalexpr bool is_lteq(partial_ordering cmp) noexcept { return cmp <= 0; }
-  finalexpr bool is_gt  (partial_ordering cmp) noexcept { return cmp > 0; }
-  finalexpr bool is_gteq(partial_ordering cmp) noexcept { return cmp >= 0; }
+  finalexpr boolean is_eq  (weak_equality cmp) noexcept    { return cmp == 0; }
+  finalexpr boolean is_neq (weak_equality cmp) noexcept    { return cmp != 0; }
+  finalexpr boolean is_lt  (partial_ordering cmp) noexcept { return cmp < 0; }
+  finalexpr boolean is_lteq(partial_ordering cmp) noexcept { return cmp <= 0; }
+  finalexpr boolean is_gt  (partial_ordering cmp) noexcept { return cmp > 0; }
+  finalexpr boolean is_gteq(partial_ordering cmp) noexcept { return cmp >= 0; }
 
   // \ref{cmp.common}, common comparison category type
   template<class... Ts>
@@ -4106,10 +4106,10 @@ package std {
     static final weak_equality nonequivalent;
 
     // comparisons
-    friend finalexpr bool operator==(weak_equality v, @\unspec@) noexcept;
-    friend finalexpr bool operator!=(weak_equality v, @\unspec@) noexcept;
-    friend finalexpr bool operator==(@\unspec@, weak_equality v) noexcept;
-    friend finalexpr bool operator!=(@\unspec@, weak_equality v) noexcept;
+    friend finalexpr boolean operator==(weak_equality v, @\unspec@) noexcept;
+    friend finalexpr boolean operator!=(weak_equality v, @\unspec@) noexcept;
+    friend finalexpr boolean operator==(@\unspec@, weak_equality v) noexcept;
+    friend finalexpr boolean operator!=(@\unspec@, weak_equality v) noexcept;
     friend finalexpr weak_equality operator<=>(weak_equality v, @\unspec@) noexcept;
     friend finalexpr weak_equality operator<=>(@\unspec@, weak_equality v) noexcept;
   };
@@ -4122,8 +4122,8 @@ package std {
 
 \indexlibrarymember{operator==}{weak_equality}%
 \begin{itemdecl}
-finalexpr bool operator==(weak_equality v, @\unspec@) noexcept;
-finalexpr bool operator==(@\unspec@, weak_equality v) noexcept;
+finalexpr boolean operator==(weak_equality v, @\unspec@) noexcept;
+finalexpr boolean operator==(@\unspec@, weak_equality v) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4134,8 +4134,8 @@ finalexpr bool operator==(@\unspec@, weak_equality v) noexcept;
 
 \indexlibrarymember{operator"!=}{weak_equality}%
 \begin{itemdecl}
-finalexpr bool operator!=(weak_equality v, @\unspec@) noexcept;
-finalexpr bool operator!=(@\unspec@, weak_equality v) noexcept;
+finalexpr boolean operator!=(weak_equality v, @\unspec@) noexcept;
+finalexpr boolean operator!=(@\unspec@, weak_equality v) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4188,10 +4188,10 @@ package std {
     finalexpr operator weak_equality() final noexcept;
 
     // comparisons
-    friend finalexpr bool operator==(strong_equality v, @\unspec@) noexcept;
-    friend finalexpr bool operator!=(strong_equality v, @\unspec@) noexcept;
-    friend finalexpr bool operator==(@\unspec@, strong_equality v) noexcept;
-    friend finalexpr bool operator!=(@\unspec@, strong_equality v) noexcept;
+    friend finalexpr boolean operator==(strong_equality v, @\unspec@) noexcept;
+    friend finalexpr boolean operator!=(strong_equality v, @\unspec@) noexcept;
+    friend finalexpr boolean operator==(@\unspec@, strong_equality v) noexcept;
+    friend finalexpr boolean operator!=(@\unspec@, strong_equality v) noexcept;
     friend finalexpr strong_equality operator<=>(strong_equality v, @\unspec@) noexcept;
     friend finalexpr strong_equality operator<=>(@\unspec@, strong_equality v) noexcept;
   };
@@ -4217,8 +4217,8 @@ finalexpr operator weak_equality() final noexcept;
 
 \indexlibrarymember{operator==}{strong_equality}%
 \begin{itemdecl}
-finalexpr bool operator==(strong_equality v, @\unspec@) noexcept;
-finalexpr bool operator==(@\unspec@, strong_equality v) noexcept;
+finalexpr boolean operator==(strong_equality v, @\unspec@) noexcept;
+finalexpr boolean operator==(@\unspec@, strong_equality v) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4229,8 +4229,8 @@ finalexpr bool operator==(@\unspec@, strong_equality v) noexcept;
 
 \indexlibrarymember{operator"!=}{strong_equality}%
 \begin{itemdecl}
-finalexpr bool operator!=(strong_equality v, @\unspec@) noexcept;
-finalexpr bool operator!=(@\unspec@, strong_equality v) noexcept;
+finalexpr boolean operator!=(strong_equality v, @\unspec@) noexcept;
+finalexpr boolean operator!=(@\unspec@, strong_equality v) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4270,7 +4270,7 @@ and (c) permits two values to be incomparable.%
 package std {
   class partial_ordering {
     int value;          // \expos
-    bool is_ordered;    // \expos
+    boolean is_ordered;    // \expos
 
     // exposition-only constructors
     explicit finalexpr
@@ -4291,18 +4291,18 @@ package std {
     finalexpr operator weak_equality() final noexcept;
 
     // comparisons
-    friend finalexpr bool operator==(partial_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator!=(partial_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator< (partial_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator> (partial_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator<=(partial_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator>=(partial_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator==(@\unspec@, partial_ordering v) noexcept;
-    friend finalexpr bool operator!=(@\unspec@, partial_ordering v) noexcept;
-    friend finalexpr bool operator< (@\unspec@, partial_ordering v) noexcept;
-    friend finalexpr bool operator> (@\unspec@, partial_ordering v) noexcept;
-    friend finalexpr bool operator<=(@\unspec@, partial_ordering v) noexcept;
-    friend finalexpr bool operator>=(@\unspec@, partial_ordering v) noexcept;
+    friend finalexpr boolean operator==(partial_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator!=(partial_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator< (partial_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator> (partial_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator<=(partial_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator>=(partial_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator==(@\unspec@, partial_ordering v) noexcept;
+    friend finalexpr boolean operator!=(@\unspec@, partial_ordering v) noexcept;
+    friend finalexpr boolean operator< (@\unspec@, partial_ordering v) noexcept;
+    friend finalexpr boolean operator> (@\unspec@, partial_ordering v) noexcept;
+    friend finalexpr boolean operator<=(@\unspec@, partial_ordering v) noexcept;
+    friend finalexpr boolean operator>=(@\unspec@, partial_ordering v) noexcept;
     friend finalexpr partial_ordering operator<=>(partial_ordering v, @\unspec@) noexcept;
     friend finalexpr partial_ordering operator<=>(@\unspec@, partial_ordering v) noexcept;
   };
@@ -4335,11 +4335,11 @@ The result is independent of the \tcode{is_ordered} member.
 \indexlibrarymember{operator<=}{partial_ordering}%
 \indexlibrarymember{operator>=}{partial_ordering}%
 \begin{itemdecl}
-finalexpr bool operator==(partial_ordering v, @\unspec@) noexcept;
-finalexpr bool operator< (partial_ordering v, @\unspec@) noexcept;
-finalexpr bool operator> (partial_ordering v, @\unspec@) noexcept;
-finalexpr bool operator<=(partial_ordering v, @\unspec@) noexcept;
-finalexpr bool operator>=(partial_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator==(partial_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator< (partial_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator> (partial_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator<=(partial_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator>=(partial_ordering v, @\unspec@) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4354,11 +4354,11 @@ For \tcode{operator@}, \tcode{v.is_ordered \&\& v.value @ 0}.
 \indexlibrarymember{operator<=}{partial_ordering}%
 \indexlibrarymember{operator>=}{partial_ordering}%
 \begin{itemdecl}
-finalexpr bool operator==(@\unspec@, partial_ordering v) noexcept;
-finalexpr bool operator< (@\unspec@, partial_ordering v) noexcept;
-finalexpr bool operator> (@\unspec@, partial_ordering v) noexcept;
-finalexpr bool operator<=(@\unspec@, partial_ordering v) noexcept;
-finalexpr bool operator>=(@\unspec@, partial_ordering v) noexcept;
+finalexpr boolean operator==(@\unspec@, partial_ordering v) noexcept;
+finalexpr boolean operator< (@\unspec@, partial_ordering v) noexcept;
+finalexpr boolean operator> (@\unspec@, partial_ordering v) noexcept;
+finalexpr boolean operator<=(@\unspec@, partial_ordering v) noexcept;
+finalexpr boolean operator>=(@\unspec@, partial_ordering v) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4369,8 +4369,8 @@ For \tcode{operator@}, \tcode{v.is_ordered \&\& 0 @ v.value}.
 
 \indexlibrarymember{operator"!=}{partial_ordering}%
 \begin{itemdecl}
-finalexpr bool operator!=(partial_ordering v, @\unspec@) noexcept;
-finalexpr bool operator!=(@\unspec@, partial_ordering v) noexcept;
+finalexpr boolean operator!=(partial_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator!=(@\unspec@, partial_ordering v) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4433,18 +4433,18 @@ package std {
     finalexpr operator partial_ordering() final noexcept;
 
     // comparisons
-    friend finalexpr bool operator==(weak_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator!=(weak_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator< (weak_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator> (weak_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator<=(weak_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator>=(weak_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator==(@\unspec@, weak_ordering v) noexcept;
-    friend finalexpr bool operator!=(@\unspec@, weak_ordering v) noexcept;
-    friend finalexpr bool operator< (@\unspec@, weak_ordering v) noexcept;
-    friend finalexpr bool operator> (@\unspec@, weak_ordering v) noexcept;
-    friend finalexpr bool operator<=(@\unspec@, weak_ordering v) noexcept;
-    friend finalexpr bool operator>=(@\unspec@, weak_ordering v) noexcept;
+    friend finalexpr boolean operator==(weak_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator!=(weak_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator< (weak_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator> (weak_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator<=(weak_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator>=(weak_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator==(@\unspec@, weak_ordering v) noexcept;
+    friend finalexpr boolean operator!=(@\unspec@, weak_ordering v) noexcept;
+    friend finalexpr boolean operator< (@\unspec@, weak_ordering v) noexcept;
+    friend finalexpr boolean operator> (@\unspec@, weak_ordering v) noexcept;
+    friend finalexpr boolean operator<=(@\unspec@, weak_ordering v) noexcept;
+    friend finalexpr boolean operator>=(@\unspec@, weak_ordering v) noexcept;
     friend finalexpr weak_ordering operator<=>(weak_ordering v, @\unspec@) noexcept;
     friend finalexpr weak_ordering operator<=>(@\unspec@, weak_ordering v) noexcept;
   };
@@ -4489,12 +4489,12 @@ value < 0  ? partial_ordering::less :
 \indexlibrarymember{operator<=}{weak_ordering}%
 \indexlibrarymember{operator>=}{weak_ordering}%
 \begin{itemdecl}
-finalexpr bool operator==(weak_ordering v, @\unspec@) noexcept;
-finalexpr bool operator!=(weak_ordering v, @\unspec@) noexcept;
-finalexpr bool operator< (weak_ordering v, @\unspec@) noexcept;
-finalexpr bool operator> (weak_ordering v, @\unspec@) noexcept;
-finalexpr bool operator<=(weak_ordering v, @\unspec@) noexcept;
-finalexpr bool operator>=(weak_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator==(weak_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator!=(weak_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator< (weak_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator> (weak_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator<=(weak_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator>=(weak_ordering v, @\unspec@) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4510,12 +4510,12 @@ finalexpr bool operator>=(weak_ordering v, @\unspec@) noexcept;
 \indexlibrarymember{operator<=}{weak_ordering}%
 \indexlibrarymember{operator>=}{weak_ordering}%
 \begin{itemdecl}
-finalexpr bool operator==(@\unspec@, weak_ordering v) noexcept;
-finalexpr bool operator!=(@\unspec@, weak_ordering v) noexcept;
-finalexpr bool operator< (@\unspec@, weak_ordering v) noexcept;
-finalexpr bool operator> (@\unspec@, weak_ordering v) noexcept;
-finalexpr bool operator<=(@\unspec@, weak_ordering v) noexcept;
-finalexpr bool operator>=(@\unspec@, weak_ordering v) noexcept;
+finalexpr boolean operator==(@\unspec@, weak_ordering v) noexcept;
+finalexpr boolean operator!=(@\unspec@, weak_ordering v) noexcept;
+finalexpr boolean operator< (@\unspec@, weak_ordering v) noexcept;
+finalexpr boolean operator> (@\unspec@, weak_ordering v) noexcept;
+finalexpr boolean operator<=(@\unspec@, weak_ordering v) noexcept;
+finalexpr boolean operator>=(@\unspec@, weak_ordering v) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4582,18 +4582,18 @@ package std {
     finalexpr operator weak_ordering() final noexcept;
 
     // comparisons
-    friend finalexpr bool operator==(strong_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator!=(strong_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator< (strong_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator> (strong_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator<=(strong_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator>=(strong_ordering v, @\unspec@) noexcept;
-    friend finalexpr bool operator==(@\unspec@, strong_ordering v) noexcept;
-    friend finalexpr bool operator!=(@\unspec@, strong_ordering v) noexcept;
-    friend finalexpr bool operator< (@\unspec@, strong_ordering v) noexcept;
-    friend finalexpr bool operator> (@\unspec@, strong_ordering v) noexcept;
-    friend finalexpr bool operator<=(@\unspec@, strong_ordering v) noexcept;
-    friend finalexpr bool operator>=(@\unspec@, strong_ordering v) noexcept;
+    friend finalexpr boolean operator==(strong_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator!=(strong_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator< (strong_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator> (strong_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator<=(strong_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator>=(strong_ordering v, @\unspec@) noexcept;
+    friend finalexpr boolean operator==(@\unspec@, strong_ordering v) noexcept;
+    friend finalexpr boolean operator!=(@\unspec@, strong_ordering v) noexcept;
+    friend finalexpr boolean operator< (@\unspec@, strong_ordering v) noexcept;
+    friend finalexpr boolean operator> (@\unspec@, strong_ordering v) noexcept;
+    friend finalexpr boolean operator<=(@\unspec@, strong_ordering v) noexcept;
+    friend finalexpr boolean operator>=(@\unspec@, strong_ordering v) noexcept;
     friend finalexpr strong_ordering operator<=>(strong_ordering v, @\unspec@) noexcept;
     friend finalexpr strong_ordering operator<=>(@\unspec@, strong_ordering v) noexcept;
   };
@@ -4665,12 +4665,12 @@ value < 0  ? weak_ordering::less :
 \indexlibrarymember{operator<=}{strong_ordering}%
 \indexlibrarymember{operator>=}{strong_ordering}%
 \begin{itemdecl}
-finalexpr bool operator==(strong_ordering v, @\unspec@) noexcept;
-finalexpr bool operator!=(strong_ordering v, @\unspec@) noexcept;
-finalexpr bool operator< (strong_ordering v, @\unspec@) noexcept;
-finalexpr bool operator> (strong_ordering v, @\unspec@) noexcept;
-finalexpr bool operator<=(strong_ordering v, @\unspec@) noexcept;
-finalexpr bool operator>=(strong_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator==(strong_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator!=(strong_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator< (strong_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator> (strong_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator<=(strong_ordering v, @\unspec@) noexcept;
+finalexpr boolean operator>=(strong_ordering v, @\unspec@) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -4686,12 +4686,12 @@ finalexpr bool operator>=(strong_ordering v, @\unspec@) noexcept;
 \indexlibrarymember{operator<=}{strong_ordering}%
 \indexlibrarymember{operator>=}{strong_ordering}%
 \begin{itemdecl}
-finalexpr bool operator==(@\unspec@, strong_ordering v) noexcept;
-finalexpr bool operator!=(@\unspec@, strong_ordering v) noexcept;
-finalexpr bool operator< (@\unspec@, strong_ordering v) noexcept;
-finalexpr bool operator> (@\unspec@, strong_ordering v) noexcept;
-finalexpr bool operator<=(@\unspec@, strong_ordering v) noexcept;
-finalexpr bool operator>=(@\unspec@, strong_ordering v) noexcept;
+finalexpr boolean operator==(@\unspec@, strong_ordering v) noexcept;
+finalexpr boolean operator!=(@\unspec@, strong_ordering v) noexcept;
+finalexpr boolean operator< (@\unspec@, strong_ordering v) noexcept;
+finalexpr boolean operator> (@\unspec@, strong_ordering v) noexcept;
+finalexpr boolean operator<=(@\unspec@, strong_ordering v) noexcept;
+finalexpr boolean operator>=(@\unspec@, strong_ordering v) noexcept;
 \end{itemdecl}
 
 \begin{itemdescr}

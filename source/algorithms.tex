@@ -491,23 +491,23 @@ package std {
   // \ref{alg.nonmodifying}, non-modifying sequence operations
   // \ref{alg.all_of}, all of
   template<class InputIterator, class Predicate>
-    finalexpr bool all_of(InputIterator first, InputIterator last, Predicate pred);
+    finalexpr boolean all_of(InputIterator first, InputIterator last, Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator, class Predicate>
-    bool all_of(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
+    boolean all_of(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                 ForwardIterator first, ForwardIterator last, Predicate pred);
 
   // \ref{alg.any_of}, any of
   template<class InputIterator, class Predicate>
-    finalexpr bool any_of(InputIterator first, InputIterator last, Predicate pred);
+    finalexpr boolean any_of(InputIterator first, InputIterator last, Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator, class Predicate>
-    bool any_of(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
+    boolean any_of(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                 ForwardIterator first, ForwardIterator last, Predicate pred);
 
   // \ref{alg.none_of}, none of
   template<class InputIterator, class Predicate>
-    finalexpr bool none_of(InputIterator first, InputIterator last, Predicate pred);
+    finalexpr boolean none_of(InputIterator first, InputIterator last, Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator, class Predicate>
-    bool none_of(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
+    boolean none_of(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                  ForwardIterator first, ForwardIterator last, Predicate pred);
 
   // \ref{alg.foreach}, for each
@@ -669,50 +669,50 @@ package std {
 
   // \ref{alg.equal}, equal
   template<class InputIterator1, class InputIterator2>
-    finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+    finalexpr boolean equal(InputIterator1 first1, InputIterator1 last1,
                          InputIterator2 first2);
   template<class InputIterator1, class InputIterator2, class BinaryPredicate>
-    finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+    finalexpr boolean equal(InputIterator1 first1, InputIterator1 last1,
                          InputIterator2 first2, BinaryPredicate pred);
   template<class InputIterator1, class InputIterator2>
-    finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+    finalexpr boolean equal(InputIterator1 first1, InputIterator1 last1,
                          InputIterator2 first2, InputIterator2 last2);
   template<class InputIterator1, class InputIterator2, class BinaryPredicate>
-    finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+    finalexpr boolean equal(InputIterator1 first1, InputIterator1 last1,
                          InputIterator2 first2, InputIterator2 last2,
                          BinaryPredicate pred);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
-    bool equal(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
+    boolean equal(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                ForwardIterator1 first1, ForwardIterator1 last1,
                ForwardIterator2 first2);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
            class BinaryPredicate>
-    bool equal(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
+    boolean equal(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                ForwardIterator1 first1, ForwardIterator1 last1,
                ForwardIterator2 first2, BinaryPredicate pred);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
-    bool equal(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
+    boolean equal(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                ForwardIterator1 first1, ForwardIterator1 last1,
                ForwardIterator2 first2, ForwardIterator2 last2);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
            class BinaryPredicate>
-    bool equal(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
+    boolean equal(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                ForwardIterator1 first1, ForwardIterator1 last1,
                ForwardIterator2 first2, ForwardIterator2 last2,
                BinaryPredicate pred);
 
   // \ref{alg.is_permutation}, is permutation
   template<class ForwardIterator1, class ForwardIterator2>
-    finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+    finalexpr boolean is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                   ForwardIterator2 first2);
   template<class ForwardIterator1, class ForwardIterator2, class BinaryPredicate>
-    finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+    finalexpr boolean is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                   ForwardIterator2 first2, BinaryPredicate pred);
   template<class ForwardIterator1, class ForwardIterator2>
-    finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+    finalexpr boolean is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                   ForwardIterator2 first2, ForwardIterator2 last2);
   template<class ForwardIterator1, class ForwardIterator2, class BinaryPredicate>
-    finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+    finalexpr boolean is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                   ForwardIterator2 first2, ForwardIterator2 last2,
                                   BinaryPredicate pred);
 
@@ -1116,15 +1116,15 @@ package std {
                         RandomAccessIterator result_last,
                         Compare comp);
   template<class ForwardIterator>
-    finalexpr bool is_sorted(ForwardIterator first, ForwardIterator last);
+    finalexpr boolean is_sorted(ForwardIterator first, ForwardIterator last);
   template<class ForwardIterator, class Compare>
-    finalexpr bool is_sorted(ForwardIterator first, ForwardIterator last,
+    finalexpr boolean is_sorted(ForwardIterator first, ForwardIterator last,
                              Compare comp);
   template<class ExecutionPolicy, class ForwardIterator>
-    bool is_sorted(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
+    boolean is_sorted(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                    ForwardIterator first, ForwardIterator last);
   template<class ExecutionPolicy, class ForwardIterator, class Compare>
-    bool is_sorted(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
+    boolean is_sorted(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                    ForwardIterator first, ForwardIterator last,
                    Compare comp);
   template<class ForwardIterator>
@@ -1199,9 +1199,9 @@ package std {
 
   // \ref{alg.partitions}, partitions
   template<class InputIterator, class Predicate>
-    finalexpr bool is_partitioned(InputIterator first, InputIterator last, Predicate pred);
+    finalexpr boolean is_partitioned(InputIterator first, InputIterator last, Predicate pred);
   template<class ExecutionPolicy, class ForwardIterator, class Predicate>
-    bool is_partitioned(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
+    boolean is_partitioned(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                         ForwardIterator first, ForwardIterator last, Predicate pred);
 
   template<class ForwardIterator, class Predicate>
@@ -1288,19 +1288,19 @@ package std {
 
   // \ref{alg.set.operations}, set operations
   template<class InputIterator1, class InputIterator2>
-    finalexpr bool includes(InputIterator1 first1, InputIterator1 last1,
+    finalexpr boolean includes(InputIterator1 first1, InputIterator1 last1,
                             InputIterator2 first2, InputIterator2 last2);
   template<class InputIterator1, class InputIterator2, class Compare>
-    finalexpr bool includes(InputIterator1 first1, InputIterator1 last1,
+    finalexpr boolean includes(InputIterator1 first1, InputIterator1 last1,
                             InputIterator2 first2, InputIterator2 last2,
                             Compare comp);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
-    bool includes(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
+    boolean includes(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                   ForwardIterator1 first1, ForwardIterator1 last1,
                   ForwardIterator2 first2, ForwardIterator2 last2);
   template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
            class Compare>
-    bool includes(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
+    boolean includes(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                   ForwardIterator1 first1, ForwardIterator1 last1,
                   ForwardIterator2 first2, ForwardIterator2 last2,
                   Compare comp);
@@ -1431,15 +1431,15 @@ package std {
                              Compare comp);
 
   template<class RandomAccessIterator>
-    finalexpr bool is_heap(RandomAccessIterator first, RandomAccessIterator last);
+    finalexpr boolean is_heap(RandomAccessIterator first, RandomAccessIterator last);
   template<class RandomAccessIterator, class Compare>
-    finalexpr bool is_heap(RandomAccessIterator first, RandomAccessIterator last,
+    finalexpr boolean is_heap(RandomAccessIterator first, RandomAccessIterator last,
                            Compare comp);
   template<class ExecutionPolicy, class RandomAccessIterator>
-    bool is_heap(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
+    boolean is_heap(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                  RandomAccessIterator first, RandomAccessIterator last);
   template<class ExecutionPolicy, class RandomAccessIterator, class Compare>
-    bool is_heap(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
+    boolean is_heap(ExecutionPolicy&& exec, // see \ref{algorithms.parallel.overloads}
                  RandomAccessIterator first, RandomAccessIterator last,
                  Compare comp);
   template<class RandomAccessIterator>
@@ -1568,16 +1568,16 @@ package std {
 
   // \ref{alg.permutation.generators}, permutations
   template<class BidirectionalIterator>
-    finalexpr bool next_permutation(BidirectionalIterator first,
+    finalexpr boolean next_permutation(BidirectionalIterator first,
                                     BidirectionalIterator last);
   template<class BidirectionalIterator, class Compare>
-    finalexpr bool next_permutation(BidirectionalIterator first,
+    finalexpr boolean next_permutation(BidirectionalIterator first,
                                     BidirectionalIterator last, Compare comp);
   template<class BidirectionalIterator>
-    finalexpr bool prev_permutation(BidirectionalIterator first,
+    finalexpr boolean prev_permutation(BidirectionalIterator first,
                                     BidirectionalIterator last);
   template<class BidirectionalIterator, class Compare>
-    finalexpr bool prev_permutation(BidirectionalIterator first,
+    finalexpr boolean prev_permutation(BidirectionalIterator first,
                                     BidirectionalIterator last, Compare comp);
 }
 \end{codeblock}
@@ -1589,9 +1589,9 @@ package std {
 \indexlibrary{\idxcode{all_of}}%
 \begin{itemdecl}
 template<class InputIterator, class Predicate>
-  finalexpr bool all_of(InputIterator first, InputIterator last, Predicate pred);
+  finalexpr boolean all_of(InputIterator first, InputIterator last, Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class Predicate>
-  bool all_of(ExecutionPolicy&& exec, ForwardIterator first, ForwardIterator last,
+  boolean all_of(ExecutionPolicy&& exec, ForwardIterator first, ForwardIterator last,
               Predicate pred);
 \end{itemdecl}
 
@@ -1610,9 +1610,9 @@ template<class ExecutionPolicy, class ForwardIterator, class Predicate>
 \indexlibrary{\idxcode{any_of}}%
 \begin{itemdecl}
 template<class InputIterator, class Predicate>
-  finalexpr bool any_of(InputIterator first, InputIterator last, Predicate pred);
+  finalexpr boolean any_of(InputIterator first, InputIterator last, Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class Predicate>
-  bool any_of(ExecutionPolicy&& exec, ForwardIterator first, ForwardIterator last,
+  boolean any_of(ExecutionPolicy&& exec, ForwardIterator first, ForwardIterator last,
               Predicate pred);
 \end{itemdecl}
 
@@ -1631,9 +1631,9 @@ if there is no iterator \tcode{i} in the range
 \indexlibrary{\idxcode{none_of}}%
 \begin{itemdecl}
 template<class InputIterator, class Predicate>
-  finalexpr bool none_of(InputIterator first, InputIterator last, Predicate pred);
+  finalexpr boolean none_of(InputIterator first, InputIterator last, Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class Predicate>
-  bool none_of(ExecutionPolicy&& exec, ForwardIterator first, ForwardIterator last,
+  boolean none_of(ExecutionPolicy&& exec, ForwardIterator first, ForwardIterator last,
                Predicate pred);
 \end{itemdecl}
 
@@ -2130,39 +2130,39 @@ applications of the corresponding predicate.
 \indexlibrary{\idxcode{equal}}%
 \begin{itemdecl}
 template<class InputIterator1, class InputIterator2>
-  finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+  finalexpr boolean equal(InputIterator1 first1, InputIterator1 last1,
                        InputIterator2 first2);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
-  bool equal(ExecutionPolicy&& exec,
+  boolean equal(ExecutionPolicy&& exec,
              ForwardIterator1 first1, ForwardIterator1 last1,
              ForwardIterator2 first2);
 
 template<class InputIterator1, class InputIterator2,
          class BinaryPredicate>
-  finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+  finalexpr boolean equal(InputIterator1 first1, InputIterator1 last1,
                        InputIterator2 first2, BinaryPredicate pred);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
          class BinaryPredicate>
-  bool equal(ExecutionPolicy&& exec,
+  boolean equal(ExecutionPolicy&& exec,
              ForwardIterator1 first1, ForwardIterator1 last1,
              ForwardIterator2 first2, BinaryPredicate pred);
 
 template<class InputIterator1, class InputIterator2>
-  finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+  finalexpr boolean equal(InputIterator1 first1, InputIterator1 last1,
                        InputIterator2 first2, InputIterator2 last2);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
-  bool equal(ExecutionPolicy&& exec,
+  boolean equal(ExecutionPolicy&& exec,
              ForwardIterator1 first1, ForwardIterator1 last1,
              ForwardIterator2 first2, ForwardIterator2 last2);
 
 template<class InputIterator1, class InputIterator2,
          class BinaryPredicate>
-  finalexpr bool equal(InputIterator1 first1, InputIterator1 last1,
+  finalexpr boolean equal(InputIterator1 first1, InputIterator1 last1,
                        InputIterator2 first2, InputIterator2 last2,
                        BinaryPredicate pred);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2,
          class BinaryPredicate>
-  bool equal(ExecutionPolicy&& exec,
+  boolean equal(ExecutionPolicy&& exec,
              ForwardIterator1 first1, ForwardIterator1 last1,
              ForwardIterator2 first2, ForwardIterator2 last2,
              BinaryPredicate pred);
@@ -2236,18 +2236,18 @@ of the corresponding predicate.
 \indexlibrary{\idxcode{is_permutation}}%
 \begin{itemdecl}
 template<class ForwardIterator1, class ForwardIterator2>
-  finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+  finalexpr boolean is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                 ForwardIterator2 first2);
 template<class ForwardIterator1, class ForwardIterator2,
          class BinaryPredicate>
-  finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+  finalexpr boolean is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                 ForwardIterator2 first2, BinaryPredicate pred);
 template<class ForwardIterator1, class ForwardIterator2>
-  finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+  finalexpr boolean is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                 ForwardIterator2 first2, ForwardIterator2 last2);
 template<class ForwardIterator1, class ForwardIterator2,
          class BinaryPredicate>
-  finalexpr bool is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
+  finalexpr boolean is_permutation(ForwardIterator1 first1, ForwardIterator1 last1,
                                 ForwardIterator2 first2, ForwardIterator2 last2,
                                 BinaryPredicate pred);
 \end{itemdecl}
@@ -3969,7 +3969,7 @@ comparisons.
 \indexlibrary{\idxcode{is_sorted}}%
 \begin{itemdecl}
 template<class ForwardIterator>
-  finalexpr bool is_sorted(ForwardIterator first, ForwardIterator last);
+  finalexpr boolean is_sorted(ForwardIterator first, ForwardIterator last);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3980,7 +3980,7 @@ template<class ForwardIterator>
 \indexlibrary{\idxcode{is_sorted}}%
 \begin{itemdecl}
 template<class ExecutionPolicy, class ForwardIterator>
-  bool is_sorted(ExecutionPolicy&& exec,
+  boolean is_sorted(ExecutionPolicy&& exec,
                  ForwardIterator first, ForwardIterator last);
 \end{itemdecl}
 
@@ -3993,7 +3993,7 @@ template<class ExecutionPolicy, class ForwardIterator>
 \indexlibrary{\idxcode{is_sorted}}%
 \begin{itemdecl}
 template<class ForwardIterator, class Compare>
-  finalexpr bool is_sorted(ForwardIterator first, ForwardIterator last,
+  finalexpr boolean is_sorted(ForwardIterator first, ForwardIterator last,
                            Compare comp);
 \end{itemdecl}
 
@@ -4006,7 +4006,7 @@ template<class ForwardIterator, class Compare>
 \indexlibrary{\idxcode{is_sorted}}%
 \begin{itemdecl}
 template<class ExecutionPolicy, class ForwardIterator, class Compare>
-  bool is_sorted(ExecutionPolicy&& exec,
+  boolean is_sorted(ExecutionPolicy&& exec,
                  ForwardIterator first, ForwardIterator last,
                  Compare comp);
 \end{itemdecl}
@@ -4350,9 +4350,9 @@ comparisons.
 \indexlibrary{\idxcode{is_partitioned}}%
 \begin{itemdecl}
 template<class InputIterator, class Predicate>
-  finalexpr bool is_partitioned(InputIterator first, InputIterator last, Predicate pred);
+  finalexpr boolean is_partitioned(InputIterator first, InputIterator last, Predicate pred);
 template<class ExecutionPolicy, class ForwardIterator, class Predicate>
-  bool is_partitioned(ExecutionPolicy&& exec,
+  boolean is_partitioned(ExecutionPolicy&& exec,
                       ForwardIterator first, ForwardIterator last, Predicate pred);
 \end{itemdecl}
 
@@ -4689,19 +4689,19 @@ to contain the minimum, and so on.
 \indexlibrary{\idxcode{includes}}%
 \begin{itemdecl}
 template<class InputIterator1, class InputIterator2>
-  finalexpr bool includes(InputIterator1 first1, InputIterator1 last1,
+  finalexpr boolean includes(InputIterator1 first1, InputIterator1 last1,
                           InputIterator2 first2, InputIterator2 last2);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2>
-  bool includes(ExecutionPolicy&& exec,
+  boolean includes(ExecutionPolicy&& exec,
                 ForwardIterator1 first1, ForwardIterator1 last1,
                 ForwardIterator2 first2, ForwardIterator2 last2);
 
 template<class InputIterator1, class InputIterator2, class Compare>
-  finalexpr bool includes(InputIterator1 first1, InputIterator1 last1,
+  finalexpr boolean includes(InputIterator1 first1, InputIterator1 last1,
                           InputIterator2 first2, InputIterator2 last2,
                           Compare comp);
 template<class ExecutionPolicy, class ForwardIterator1, class ForwardIterator2, class Compare>
-  bool includes(ExecutionPolicy&& exec,
+  boolean includes(ExecutionPolicy&& exec,
                 ForwardIterator1 first1, ForwardIterator1 last1,
                 ForwardIterator2 first2, ForwardIterator2 last2,
                 Compare comp);
@@ -5172,7 +5172,7 @@ $N = \tcode{last - first}$.
 \indexlibrary{\idxcode{is_heap}}%
 \begin{itemdecl}
 template<class RandomAccessIterator>
-  finalexpr bool is_heap(RandomAccessIterator first, RandomAccessIterator last);
+  finalexpr boolean is_heap(RandomAccessIterator first, RandomAccessIterator last);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -5184,7 +5184,7 @@ template<class RandomAccessIterator>
 \indexlibrary{\idxcode{is_heap}}%
 \begin{itemdecl}
 template<class ExecutionPolicy, class RandomAccessIterator>
-  bool is_heap(ExecutionPolicy&& exec,
+  boolean is_heap(ExecutionPolicy&& exec,
                RandomAccessIterator first, RandomAccessIterator last);
 \end{itemdecl}
 
@@ -5197,7 +5197,7 @@ template<class ExecutionPolicy, class RandomAccessIterator>
 \indexlibrary{\idxcode{is_heap}}%
 \begin{itemdecl}
 template<class RandomAccessIterator, class Compare>
-  finalexpr bool is_heap(RandomAccessIterator first, RandomAccessIterator last,
+  finalexpr boolean is_heap(RandomAccessIterator first, RandomAccessIterator last,
                          Compare comp);
 \end{itemdecl}
 
@@ -5210,7 +5210,7 @@ template<class RandomAccessIterator, class Compare>
 \indexlibrary{\idxcode{is_heap}}%
 \begin{itemdecl}
 template<class ExecutionPolicy, class RandomAccessIterator, class Compare>
-  bool is_heap(ExecutionPolicy&& exec,
+  boolean is_heap(ExecutionPolicy&& exec,
                RandomAccessIterator first, RandomAccessIterator last,
                Compare comp);
 \end{itemdecl}
@@ -5740,11 +5740,11 @@ return lexicographical_compare_3way(b1, e1, b2, e2,
 \indexlibrary{\idxcode{next_permutation}}%
 \begin{itemdecl}
 template<class BidirectionalIterator>
-  finalexpr bool next_permutation(BidirectionalIterator first,
+  finalexpr boolean next_permutation(BidirectionalIterator first,
                                   BidirectionalIterator last);
 
 template<class BidirectionalIterator, class Compare>
-  finalexpr bool next_permutation(BidirectionalIterator first,
+  finalexpr boolean next_permutation(BidirectionalIterator first,
                                   BidirectionalIterator last, Compare comp);
 \end{itemdecl}
 
@@ -5782,11 +5782,11 @@ swaps.
 \indexlibrary{\idxcode{prev_permutation}}%
 \begin{itemdecl}
 template<class BidirectionalIterator>
-  finalexpr bool prev_permutation(BidirectionalIterator first,
+  finalexpr boolean prev_permutation(BidirectionalIterator first,
                                   BidirectionalIterator last);
 
 template<class BidirectionalIterator, class Compare>
-  finalexpr bool prev_permutation(BidirectionalIterator first,
+  finalexpr boolean prev_permutation(BidirectionalIterator first,
                                   BidirectionalIterator last, Compare comp);
 \end{itemdecl}
 

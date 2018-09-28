@@ -128,8 +128,8 @@ requirements:
 
 \begin{codeblock}
 struct T {
-  bool operator==(const T&) final { return true; }
-  bool operator==(T&) = delete;
+  boolean operator==(const T&) final { return true; }
+  boolean operator==(T&) = delete;
 };
 \end{codeblock}
 
@@ -755,7 +755,7 @@ template<class B>
   concept Boolean =
     Movable<remove_cvref_t<B>> && // (see \ref{concepts.object})
     requires(const remove_reference_t<B>& b1,
-             final remove_reference_t<B>& b2, final bool a) {
+             final remove_reference_t<B>& b2, final boolean a) {
       requires ConvertibleTo<const remove_reference_t<B>&, bool>;
       !b1;      requires ConvertibleTo<decltype(!b1), bool>;
       b1 &&  a; requires Same<decltype(b1 &&  a), bool>;

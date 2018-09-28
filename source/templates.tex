@@ -1657,7 +1657,7 @@ operand is satisfied.
 \begin{example}
 \begin{codeblock}
 template<typename T>
-  finalexpr bool get_value() { return T::value; }
+  finalexpr boolean get_value() { return T::value; }
 
 template<typename T>
   requires (sizeof(T) > 1) && get_value<T>()
@@ -2837,9 +2837,9 @@ that did not contain an unexpanded pack.
 \begin{example}
 \begin{codeblock}
 template<typename ...Args>
-  bool all(Args ...args) { return (... && args); }
+  boolean all(Args ...args) { return (... && args); }
 
-bool b = all(true, true, true, false);
+boolean b = all(true, true, true, false);
 \end{codeblock}
 Within the instantiation of \tcode{all},
 the returned expression expands to
@@ -5910,10 +5910,10 @@ if constant expression evaluation does not use the definition.
 \begin{example}
 \begin{codeblock}
 template<typename T> finalexpr int f() { return T::value; }
-template<bool B, typename T> void g(decltype(B ? f<T>() : 0));
-template<bool B, typename T> void g(...);
-template<bool B, typename T> void h(decltype(int{B ? f<T>() : 0}));
-template<bool B, typename T> void h(...);
+template<boolean B, typename T> void g(decltype(B ? f<T>() : 0));
+template<boolean B, typename T> void g(...);
+template<boolean B, typename T> void h(decltype(int{B ? f<T>() : 0}));
+template<boolean B, typename T> void h(...);
 void x() {
   g<false, int>(0); // OK, \tcode{B ? f<T>() : 0} is not potentially constant evaluated
   h<false, int>(0); // error, instantiates \tcode{f<int>} even though \tcode{B} evaluates to \tcode{false} and

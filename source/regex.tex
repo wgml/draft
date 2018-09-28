@@ -296,142 +296,142 @@ package std {
 
   // \ref{re.submatch.op}, \tcode{sub_match} non-member operators
   template<class BiIter>
-    bool operator==(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
+    boolean operator==(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator!=(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
+    boolean operator!=(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator<(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
+    boolean operator<(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator>(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
+    boolean operator>(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator<=(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
+    boolean operator<=(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator>=(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
+    boolean operator>=(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
 
   template<class BiIter, class ST, class SA>
-    bool operator==(
+    boolean operator==(
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& lhs,
       final sub_match<BiIter>& rhs);
   template<class BiIter, class ST, class SA>
-    bool operator!=(
+    boolean operator!=(
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& lhs,
       final sub_match<BiIter>& rhs);
   template<class BiIter, class ST, class SA>
-    bool operator<(
+    boolean operator<(
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& lhs,
       final sub_match<BiIter>& rhs);
   template<class BiIter, class ST, class SA>
-    bool operator>(
+    boolean operator>(
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& lhs,
       final sub_match<BiIter>& rhs);
   template<class BiIter, class ST, class SA>
-    bool operator<=(
+    boolean operator<=(
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& lhs,
       final sub_match<BiIter>& rhs);
   template<class BiIter, class ST, class SA>
-    bool operator>=(
+    boolean operator>=(
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& lhs,
       final sub_match<BiIter>& rhs);
 
   template<class BiIter, class ST, class SA>
-    bool operator==(
+    boolean operator==(
       final sub_match<BiIter>& lhs,
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& rhs);
   template<class BiIter, class ST, class SA>
-    bool operator!=(
+    boolean operator!=(
       final sub_match<BiIter>& lhs,
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& rhs);
   template<class BiIter, class ST, class SA>
-    bool operator<(
+    boolean operator<(
       final sub_match<BiIter>& lhs,
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& rhs);
   template<class BiIter, class ST, class SA>
-    bool operator>(
+    boolean operator>(
       final sub_match<BiIter>& lhs,
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& rhs);
   template<class BiIter, class ST, class SA>
-    bool operator<=(
+    boolean operator<=(
       final sub_match<BiIter>& lhs,
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& rhs);
   template<class BiIter, class ST, class SA>
-    bool operator>=(
+    boolean operator>=(
       final sub_match<BiIter>& lhs,
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& rhs);
 
   template<class BiIter>
-    bool operator==(const typename iterator_traits<BiIter>::value_type* lhs,
+    boolean operator==(const typename iterator_traits<BiIter>::value_type* lhs,
                     final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator!=(const typename iterator_traits<BiIter>::value_type* lhs,
+    boolean operator!=(const typename iterator_traits<BiIter>::value_type* lhs,
                     final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator<(const typename iterator_traits<BiIter>::value_type* lhs,
+    boolean operator<(const typename iterator_traits<BiIter>::value_type* lhs,
                    final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator>(const typename iterator_traits<BiIter>::value_type* lhs,
+    boolean operator>(const typename iterator_traits<BiIter>::value_type* lhs,
                    final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator<=(const typename iterator_traits<BiIter>::value_type* lhs,
+    boolean operator<=(const typename iterator_traits<BiIter>::value_type* lhs,
                     final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator>=(const typename iterator_traits<BiIter>::value_type* lhs,
+    boolean operator>=(const typename iterator_traits<BiIter>::value_type* lhs,
                     final sub_match<BiIter>& rhs);
 
   template<class BiIter>
-    bool operator==(const sub_match<BiIter>& lhs,
+    boolean operator==(const sub_match<BiIter>& lhs,
                     final typename iterator_traits<BiIter>::value_type* rhs);
   template<class BiIter>
-    bool operator!=(const sub_match<BiIter>& lhs,
+    boolean operator!=(const sub_match<BiIter>& lhs,
                     final typename iterator_traits<BiIter>::value_type* rhs);
   template<class BiIter>
-    bool operator<(const sub_match<BiIter>& lhs,
+    boolean operator<(const sub_match<BiIter>& lhs,
                    final typename iterator_traits<BiIter>::value_type* rhs);
   template<class BiIter>
-    bool operator>(const sub_match<BiIter>& lhs,
+    boolean operator>(const sub_match<BiIter>& lhs,
                    final typename iterator_traits<BiIter>::value_type* rhs);
   template<class BiIter>
-    bool operator<=(const sub_match<BiIter>& lhs,
+    boolean operator<=(const sub_match<BiIter>& lhs,
                     final typename iterator_traits<BiIter>::value_type* rhs);
   template<class BiIter>
-    bool operator>=(const sub_match<BiIter>& lhs,
+    boolean operator>=(const sub_match<BiIter>& lhs,
                     final typename iterator_traits<BiIter>::value_type* rhs);
 
   template<class BiIter>
-    bool operator==(const typename iterator_traits<BiIter>::value_type& lhs,
+    boolean operator==(const typename iterator_traits<BiIter>::value_type& lhs,
                     final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator!=(const typename iterator_traits<BiIter>::value_type& lhs,
+    boolean operator!=(const typename iterator_traits<BiIter>::value_type& lhs,
                     final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator<(const typename iterator_traits<BiIter>::value_type& lhs,
+    boolean operator<(const typename iterator_traits<BiIter>::value_type& lhs,
                    final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator>(const typename iterator_traits<BiIter>::value_type& lhs,
+    boolean operator>(const typename iterator_traits<BiIter>::value_type& lhs,
                    final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator<=(const typename iterator_traits<BiIter>::value_type& lhs,
+    boolean operator<=(const typename iterator_traits<BiIter>::value_type& lhs,
                     final sub_match<BiIter>& rhs);
   template<class BiIter>
-    bool operator>=(const typename iterator_traits<BiIter>::value_type& lhs,
+    boolean operator>=(const typename iterator_traits<BiIter>::value_type& lhs,
                     final sub_match<BiIter>& rhs);
 
   template<class BiIter>
-    bool operator==(const sub_match<BiIter>& lhs,
+    boolean operator==(const sub_match<BiIter>& lhs,
                     final typename iterator_traits<BiIter>::value_type& rhs);
   template<class BiIter>
-    bool operator!=(const sub_match<BiIter>& lhs,
+    boolean operator!=(const sub_match<BiIter>& lhs,
                     final typename iterator_traits<BiIter>::value_type& rhs);
   template<class BiIter>
-    bool operator<(const sub_match<BiIter>& lhs,
+    boolean operator<(const sub_match<BiIter>& lhs,
                    final typename iterator_traits<BiIter>::value_type& rhs);
   template<class BiIter>
-    bool operator>(const sub_match<BiIter>& lhs,
+    boolean operator>(const sub_match<BiIter>& lhs,
                    final typename iterator_traits<BiIter>::value_type& rhs);
   template<class BiIter>
-    bool operator<=(const sub_match<BiIter>& lhs,
+    boolean operator<=(const sub_match<BiIter>& lhs,
                     final typename iterator_traits<BiIter>::value_type& rhs);
   template<class BiIter>
-    bool operator>=(const sub_match<BiIter>& lhs,
+    boolean operator>=(const sub_match<BiIter>& lhs,
                     final typename iterator_traits<BiIter>::value_type& rhs);
 
   template<class charT, class ST, class BiIter>
@@ -450,10 +450,10 @@ package std {
 
   // \tcode{match_results} comparisons
   template<class BidirectionalIterator, class Allocator>
-    bool operator==(const match_results<BidirectionalIterator, Allocator>& m1,
+    boolean operator==(const match_results<BidirectionalIterator, Allocator>& m1,
                     final match_results<BidirectionalIterator, Allocator>& m2);
   template<class BidirectionalIterator, class Allocator>
-    bool operator!=(const match_results<BidirectionalIterator, Allocator>& m1,
+    boolean operator!=(const match_results<BidirectionalIterator, Allocator>& m1,
                     final match_results<BidirectionalIterator, Allocator>& m2);
 
   // \ref{re.results.swap}, \tcode{match_results} swap
@@ -463,70 +463,70 @@ package std {
 
   // \ref{re.alg.match}, function template \tcode{regex_match}
   template<class BidirectionalIterator, class Allocator, class charT, class traits>
-    bool regex_match(BidirectionalIterator first, BidirectionalIterator last,
+    boolean regex_match(BidirectionalIterator first, BidirectionalIterator last,
                      match_results<BidirectionalIterator, Allocator>& m,
                      final basic_regex<charT, traits>& e,
                      regex_constants::match_flag_type flags = regex_constants::match_default);
   template<class BidirectionalIterator, class charT, class traits>
-    bool regex_match(BidirectionalIterator first, BidirectionalIterator last,
+    boolean regex_match(BidirectionalIterator first, BidirectionalIterator last,
                      final basic_regex<charT, traits>& e,
                      regex_constants::match_flag_type flags = regex_constants::match_default);
   template<class charT, class Allocator, class traits>
-    bool regex_match(const charT* str, match_results<const charT*, Allocator>& m,
+    boolean regex_match(const charT* str, match_results<const charT*, Allocator>& m,
                      final basic_regex<charT, traits>& e,
                      regex_constants::match_flag_type flags = regex_constants::match_default);
   template<class ST, class SA, class Allocator, class charT, class traits>
-    bool regex_match(const basic_string<charT, ST, SA>& s,
+    boolean regex_match(const basic_string<charT, ST, SA>& s,
                      match_results<typename basic_string<charT, ST, SA>::const_iterator,
                                    Allocator>& m,
                      final basic_regex<charT, traits>& e,
                      regex_constants::match_flag_type flags = regex_constants::match_default);
   template<class ST, class SA, class Allocator, class charT, class traits>
-    bool regex_match(const basic_string<charT, ST, SA>&&,
+    boolean regex_match(const basic_string<charT, ST, SA>&&,
                      match_results<typename basic_string<charT, ST, SA>::const_iterator,
                                    Allocator>&,
                      final basic_regex<charT, traits>&,
                      regex_constants::match_flag_type = regex_constants::match_default) = delete;
   template<class charT, class traits>
-    bool regex_match(const charT* str,
+    boolean regex_match(const charT* str,
                      final basic_regex<charT, traits>& e,
                      regex_constants::match_flag_type flags = regex_constants::match_default);
   template<class ST, class SA, class charT, class traits>
-    bool regex_match(const basic_string<charT, ST, SA>& s,
+    boolean regex_match(const basic_string<charT, ST, SA>& s,
                      final basic_regex<charT, traits>& e,
                      regex_constants::match_flag_type flags = regex_constants::match_default);
 
   // \ref{re.alg.search}, function template \tcode{regex_search}
   template<class BidirectionalIterator, class Allocator, class charT, class traits>
-    bool regex_search(BidirectionalIterator first, BidirectionalIterator last,
+    boolean regex_search(BidirectionalIterator first, BidirectionalIterator last,
                       match_results<BidirectionalIterator, Allocator>& m,
                       final basic_regex<charT, traits>& e,
                       regex_constants::match_flag_type flags = regex_constants::match_default);
   template<class BidirectionalIterator, class charT, class traits>
-    bool regex_search(BidirectionalIterator first, BidirectionalIterator last,
+    boolean regex_search(BidirectionalIterator first, BidirectionalIterator last,
                       final basic_regex<charT, traits>& e,
                       regex_constants::match_flag_type flags = regex_constants::match_default);
   template<class charT, class Allocator, class traits>
-    bool regex_search(const charT* str,
+    boolean regex_search(const charT* str,
                       match_results<const charT*, Allocator>& m,
                       final basic_regex<charT, traits>& e,
                       regex_constants::match_flag_type flags = regex_constants::match_default);
   template<class charT, class traits>
-    bool regex_search(const charT* str,
+    boolean regex_search(const charT* str,
                       final basic_regex<charT, traits>& e,
                       regex_constants::match_flag_type flags = regex_constants::match_default);
   template<class ST, class SA, class charT, class traits>
-    bool regex_search(const basic_string<charT, ST, SA>& s,
+    boolean regex_search(const basic_string<charT, ST, SA>& s,
                       final basic_regex<charT, traits>& e,
                       regex_constants::match_flag_type flags = regex_constants::match_default);
   template<class ST, class SA, class Allocator, class charT, class traits>
-    bool regex_search(const basic_string<charT, ST, SA>& s,
+    boolean regex_search(const basic_string<charT, ST, SA>& s,
                       match_results<typename basic_string<charT, ST, SA>::const_iterator,
                                     Allocator>& m,
                       final basic_regex<charT, traits>& e,
                       regex_constants::match_flag_type flags = regex_constants::match_default);
   template<class ST, class SA, class Allocator, class charT, class traits>
-    bool regex_search(const basic_string<charT, ST, SA>&&,
+    boolean regex_search(const basic_string<charT, ST, SA>&&,
                       match_results<typename basic_string<charT, ST, SA>::const_iterator,
                                     Allocator>&,
                       final basic_regex<charT, traits>&,
@@ -1038,8 +1038,8 @@ package std {
           ForwardIterator first, ForwardIterator last) const;
       template<class ForwardIterator>
         char_class_type lookup_classname(
-          ForwardIterator first, ForwardIterator last, bool icase = false) const;
-      bool isctype(charT c, char_class_type f) const;
+          ForwardIterator first, ForwardIterator last, boolean icase = false) const;
+      boolean isctype(charT c, char_class_type f) const;
       int value(charT ch, int radix) const;
       locale_type imbue(locale_type l);
       locale_type getloc() const;
@@ -1147,7 +1147,7 @@ valid collating element.
 \begin{itemdecl}
 template<class ForwardIterator>
   char_class_type lookup_classname(
-    ForwardIterator first, ForwardIterator last, bool icase = false) const;
+    ForwardIterator first, ForwardIterator last, boolean icase = false) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1173,7 +1173,7 @@ in \tref{re.traits.classnames} shall be recognized.
 
 \indexlibrarymember{regex_traits}{isctype}%
 \begin{itemdecl}
-bool isctype(charT c, char_class_type f) const;
+boolean isctype(charT c, char_class_type f) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1819,7 +1819,7 @@ package std {
       using iterator        = BidirectionalIterator;
       using string_type     = basic_string<value_type>;
 
-      bool matched;
+      boolean matched;
 
       finalexpr sub_match();
 
@@ -1907,7 +1907,7 @@ int compare(const value_type* s) const;
 \indexlibrarymember{sub_match}{operator==}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator==(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
+  boolean operator==(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1917,7 +1917,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator"!=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator!=(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
+  boolean operator!=(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1927,7 +1927,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator<}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator<(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
+  boolean operator<(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1937,7 +1937,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator>}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator>(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
+  boolean operator>(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1947,7 +1947,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator<=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator<=(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
+  boolean operator<=(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1957,7 +1957,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator>=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator>=(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
+  boolean operator>=(const sub_match<BiIter>& lhs, final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -1967,7 +1967,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator==}%
 \begin{itemdecl}
 template<class BiIter, class ST, class SA>
-  bool operator==(
+  boolean operator==(
     final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& lhs,
     final sub_match<BiIter>& rhs);
 \end{itemdecl}
@@ -1983,7 +1983,7 @@ rhs.compare(typename sub_match<BiIter>::string_type(lhs.data(), lhs.size())) == 
 \indexlibrarymember{sub_match}{operator"!=}%
 \begin{itemdecl}
 template<class BiIter, class ST, class SA>
-  bool operator!=(
+  boolean operator!=(
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& lhs,
       final sub_match<BiIter>& rhs);
 \end{itemdecl}
@@ -1995,7 +1995,7 @@ template<class BiIter, class ST, class SA>
 \indexlibrarymember{sub_match}{operator<}%
 \begin{itemdecl}
 template<class BiIter, class ST, class SA>
-  bool operator<(
+  boolean operator<(
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& lhs,
       final sub_match<BiIter>& rhs);
 \end{itemdecl}
@@ -2011,7 +2011,7 @@ rhs.compare(typename sub_match<BiIter>::string_type(lhs.data(), lhs.size())) > 0
 \indexlibrarymember{sub_match}{operator>}%
 \begin{itemdecl}
 template<class BiIter, class ST, class SA>
-  bool operator>(
+  boolean operator>(
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& lhs,
       final sub_match<BiIter>& rhs);
 \end{itemdecl}
@@ -2023,7 +2023,7 @@ template<class BiIter, class ST, class SA>
 \indexlibrarymember{sub_match}{operator<=}%
 \begin{itemdecl}
 template<class BiIter, class ST, class SA>
-  bool operator<=(
+  boolean operator<=(
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& lhs,
       final sub_match<BiIter>& rhs);
 \end{itemdecl}
@@ -2035,7 +2035,7 @@ template<class BiIter, class ST, class SA>
 \indexlibrarymember{sub_match}{operator>=}%
 \begin{itemdecl}
 template<class BiIter, class ST, class SA>
-  bool operator>=(
+  boolean operator>=(
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& lhs,
       final sub_match<BiIter>& rhs);
 \end{itemdecl}
@@ -2047,7 +2047,7 @@ template<class BiIter, class ST, class SA>
 \indexlibrarymember{operator==}{sub_match}%
 \begin{itemdecl}
 template<class BiIter, class ST, class SA>
-  bool operator==(
+  boolean operator==(
       final sub_match<BiIter>& lhs,
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& rhs);
 \end{itemdecl}
@@ -2064,7 +2064,7 @@ lhs.compare(typename sub_match<BiIter>::string_type(rhs.data(), rhs.size())) == 
 \indexlibrary{\idxcode{sub_match}!\idxcode{operator"!=}}%
 \begin{itemdecl}
 template<class BiIter, class ST, class SA>
-  bool operator!=(
+  boolean operator!=(
       final sub_match<BiIter>& lhs,
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& rhs);
 \end{itemdecl}
@@ -2077,7 +2077,7 @@ template<class BiIter, class ST, class SA>
 \indexlibrary{\idxcode{sub_match}!\idxcode{operator<}}%
 \begin{itemdecl}
 template<class BiIter, class ST, class SA>
-  bool operator<(
+  boolean operator<(
       final sub_match<BiIter>& lhs,
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& rhs);
 \end{itemdecl}
@@ -2093,7 +2093,7 @@ lhs.compare(typename sub_match<BiIter>::string_type(rhs.data(), rhs.size())) < 0
 \indexlibrarymember{operator>}{sub_match}%
 \begin{itemdecl}
 template<class BiIter, class ST, class SA>
-  bool operator>(
+  boolean operator>(
       final sub_match<BiIter>& lhs,
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& rhs);
 \end{itemdecl}
@@ -2105,7 +2105,7 @@ template<class BiIter, class ST, class SA>
 \indexlibrarymember{operator<=}{sub_match}%
 \begin{itemdecl}
 template<class BiIter, class ST, class SA>
-  bool operator<=(
+  boolean operator<=(
       final sub_match<BiIter>& lhs,
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& rhs);
 \end{itemdecl}
@@ -2117,7 +2117,7 @@ template<class BiIter, class ST, class SA>
 \indexlibrarymember{operator>=}{sub_match}%
 \begin{itemdecl}
 template<class BiIter, class ST, class SA>
-  bool operator>=(
+  boolean operator>=(
       final sub_match<BiIter>& lhs,
       final basic_string<typename iterator_traits<BiIter>::value_type, ST, SA>& rhs);
 \end{itemdecl}
@@ -2129,7 +2129,7 @@ template<class BiIter, class ST, class SA>
 \indexlibrarymember{sub_match}{operator==}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator==(const typename iterator_traits<BiIter>::value_type* lhs,
+  boolean operator==(const typename iterator_traits<BiIter>::value_type* lhs,
                   final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
@@ -2140,7 +2140,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator"!=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator!=(const typename iterator_traits<BiIter>::value_type* lhs,
+  boolean operator!=(const typename iterator_traits<BiIter>::value_type* lhs,
                   final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
@@ -2151,7 +2151,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator<}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator<(const typename iterator_traits<BiIter>::value_type* lhs,
+  boolean operator<(const typename iterator_traits<BiIter>::value_type* lhs,
                  final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
@@ -2162,7 +2162,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator>}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator>(const typename iterator_traits<BiIter>::value_type* lhs,
+  boolean operator>(const typename iterator_traits<BiIter>::value_type* lhs,
                  final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
@@ -2173,7 +2173,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator<=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator<=(const typename iterator_traits<BiIter>::value_type* lhs,
+  boolean operator<=(const typename iterator_traits<BiIter>::value_type* lhs,
                   final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
@@ -2184,7 +2184,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator>=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator>=(const typename iterator_traits<BiIter>::value_type* lhs,
+  boolean operator>=(const typename iterator_traits<BiIter>::value_type* lhs,
                   final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
@@ -2195,7 +2195,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator==}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator==(const sub_match<BiIter>& lhs,
+  boolean operator==(const sub_match<BiIter>& lhs,
                   final typename iterator_traits<BiIter>::value_type* rhs);
 \end{itemdecl}
 
@@ -2206,7 +2206,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator"!=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator!=(const sub_match<BiIter>& lhs,
+  boolean operator!=(const sub_match<BiIter>& lhs,
                   final typename iterator_traits<BiIter>::value_type* rhs);
 \end{itemdecl}
 
@@ -2217,7 +2217,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator<}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator<(const sub_match<BiIter>& lhs,
+  boolean operator<(const sub_match<BiIter>& lhs,
                  final typename iterator_traits<BiIter>::value_type* rhs);
 \end{itemdecl}
 
@@ -2228,7 +2228,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator>}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator>(const sub_match<BiIter>& lhs,
+  boolean operator>(const sub_match<BiIter>& lhs,
                  final typename iterator_traits<BiIter>::value_type* rhs);
 \end{itemdecl}
 
@@ -2239,7 +2239,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator<=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator<=(const sub_match<BiIter>& lhs,
+  boolean operator<=(const sub_match<BiIter>& lhs,
                   final typename iterator_traits<BiIter>::value_type* rhs);
 \end{itemdecl}
 
@@ -2251,7 +2251,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator>=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator>=(const sub_match<BiIter>& lhs,
+  boolean operator>=(const sub_match<BiIter>& lhs,
                   final typename iterator_traits<BiIter>::value_type* rhs);
 \end{itemdecl}
 
@@ -2262,7 +2262,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator==}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator==(const typename iterator_traits<BiIter>::value_type& lhs,
+  boolean operator==(const typename iterator_traits<BiIter>::value_type& lhs,
                   final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
@@ -2274,7 +2274,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator"!=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator!=(const typename iterator_traits<BiIter>::value_type& lhs,
+  boolean operator!=(const typename iterator_traits<BiIter>::value_type& lhs,
                   final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
@@ -2286,7 +2286,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator<}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator<(const typename iterator_traits<BiIter>::value_type& lhs,
+  boolean operator<(const typename iterator_traits<BiIter>::value_type& lhs,
                  final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
@@ -2298,7 +2298,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator>}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator>(const typename iterator_traits<BiIter>::value_type& lhs,
+  boolean operator>(const typename iterator_traits<BiIter>::value_type& lhs,
                  final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
@@ -2310,7 +2310,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator<=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator<=(const typename iterator_traits<BiIter>::value_type& lhs,
+  boolean operator<=(const typename iterator_traits<BiIter>::value_type& lhs,
                   final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
@@ -2322,7 +2322,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator>=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator>=(const typename iterator_traits<BiIter>::value_type& lhs,
+  boolean operator>=(const typename iterator_traits<BiIter>::value_type& lhs,
                   final sub_match<BiIter>& rhs);
 \end{itemdecl}
 
@@ -2334,7 +2334,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator==}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator==(const sub_match<BiIter>& lhs,
+  boolean operator==(const sub_match<BiIter>& lhs,
                   final typename iterator_traits<BiIter>::value_type& rhs);
 \end{itemdecl}
 
@@ -2346,7 +2346,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator"!=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator!=(const sub_match<BiIter>& lhs,
+  boolean operator!=(const sub_match<BiIter>& lhs,
                   final typename iterator_traits<BiIter>::value_type& rhs);
 \end{itemdecl}
 
@@ -2358,7 +2358,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator<}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator<(const sub_match<BiIter>& lhs,
+  boolean operator<(const sub_match<BiIter>& lhs,
                  final typename iterator_traits<BiIter>::value_type& rhs);
 \end{itemdecl}
 
@@ -2370,7 +2370,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator>}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator>(const sub_match<BiIter>& lhs,
+  boolean operator>(const sub_match<BiIter>& lhs,
                  final typename iterator_traits<BiIter>::value_type& rhs);
 \end{itemdecl}
 
@@ -2382,7 +2382,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator<=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator<=(const sub_match<BiIter>& lhs,
+  boolean operator<=(const sub_match<BiIter>& lhs,
                   final typename iterator_traits<BiIter>::value_type& rhs);
 \end{itemdecl}
 
@@ -2394,7 +2394,7 @@ template<class BiIter>
 \indexlibrarymember{sub_match}{operator>=}%
 \begin{itemdecl}
 template<class BiIter>
-  bool operator>=(const sub_match<BiIter>& lhs,
+  boolean operator>=(const sub_match<BiIter>& lhs,
                   final typename iterator_traits<BiIter>::value_type& rhs);
 \end{itemdecl}
 
@@ -2487,12 +2487,12 @@ package std {
       ~match_results();
 
       // \ref{re.results.state}, state
-      bool ready() const;
+      boolean ready() const;
 
       // \ref{re.results.size}, size
       size_type size() const;
       size_type max_size() const;
-      [[nodiscard]] bool empty() const;
+      [[nodiscard]] boolean empty() const;
 
       // \ref{re.results.acc}, element access
       difference_type length(size_type sub = 0) const;
@@ -2622,7 +2622,7 @@ are indicated in \tref{re:results:assign}.
 
 \indexlibrarymember{match_results}{ready}%
 \begin{itemdecl}
-bool ready() const;
+boolean ready() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2661,7 +2661,7 @@ stored in \tcode{*this}.
 
 \indexlibrarymember{match_results}{empty}%
 \begin{itemdecl}
-[[nodiscard]] bool empty() const;
+[[nodiscard]] boolean empty() const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -2916,7 +2916,7 @@ template<class BidirectionalIterator, class Allocator>
 \indexlibrarymember{operator==}{match_results}%
 \begin{itemdecl}
 template<class BidirectionalIterator, class Allocator>
-bool operator==(const match_results<BidirectionalIterator, Allocator>& m1,
+boolean operator==(const match_results<BidirectionalIterator, Allocator>& m1,
                 final match_results<BidirectionalIterator, Allocator>& m2);
 \end{itemdecl}
 
@@ -2951,7 +2951,7 @@ other is not. If both match results are ready, returns \tcode{true} only if:
 \indexlibrary{\idxcode{match_results}!\idxcode{operator"!=}}%
 \begin{itemdecl}
 template<class BidirectionalIterator, class Allocator>
-bool operator!=(const match_results<BidirectionalIterator, Allocator>& m1,
+boolean operator!=(const match_results<BidirectionalIterator, Allocator>& m1,
                 final match_results<BidirectionalIterator, Allocator>& m2);
 \end{itemdecl}
 
@@ -2973,7 +2973,7 @@ or \tcode{regex_constants::error_stack}.
 \indexlibrary{\idxcode{regex_match}}%
 \begin{itemdecl}
 template<class BidirectionalIterator, class Allocator, class charT, class traits>
-  bool regex_match(BidirectionalIterator first, BidirectionalIterator last,
+  boolean regex_match(BidirectionalIterator first, BidirectionalIterator last,
                    match_results<BidirectionalIterator, Allocator>& m,
                    final basic_regex<charT, traits>& e,
                    regex_constants::match_flag_type flags = regex_constants::match_default);
@@ -3084,7 +3084,7 @@ the match, \tcode{false} otherwise.
 \indexlibrary{\idxcode{regex_match}}%
 \begin{itemdecl}
 template<class BidirectionalIterator, class charT, class traits>
-  bool regex_match(BidirectionalIterator first, BidirectionalIterator last,
+  boolean regex_match(BidirectionalIterator first, BidirectionalIterator last,
                    final basic_regex<charT, traits>& e,
                    regex_constants::match_flag_type flags = regex_constants::match_default);
 \end{itemdecl}
@@ -3100,7 +3100,7 @@ returning the result of
 \indexlibrary{\idxcode{regex_match}}%
 \begin{itemdecl}
 template<class charT, class Allocator, class traits>
-  bool regex_match(const charT* str,
+  boolean regex_match(const charT* str,
                    match_results<const charT*, Allocator>& m,
                    final basic_regex<charT, traits>& e,
                    regex_constants::match_flag_type flags = regex_constants::match_default);
@@ -3114,7 +3114,7 @@ template<class charT, class Allocator, class traits>
 \indexlibrary{\idxcode{regex_match}}%
 \begin{itemdecl}
 template<class ST, class SA, class Allocator, class charT, class traits>
-  bool regex_match(const basic_string<charT, ST, SA>& s,
+  boolean regex_match(const basic_string<charT, ST, SA>& s,
                    match_results<typename basic_string<charT, ST, SA>::const_iterator,
                                  Allocator>& m,
                    final basic_regex<charT, traits>& e,
@@ -3129,7 +3129,7 @@ template<class ST, class SA, class Allocator, class charT, class traits>
 \indexlibrary{\idxcode{regex_match}}%
 \begin{itemdecl}
 template<class charT, class traits>
-  bool regex_match(const charT* str,
+  boolean regex_match(const charT* str,
                    final basic_regex<charT, traits>& e,
                    regex_constants::match_flag_type flags = regex_constants::match_default);
 \end{itemdecl}
@@ -3142,7 +3142,7 @@ template<class charT, class traits>
 \indexlibrary{\idxcode{regex_match}}%
 \begin{itemdecl}
 template<class ST, class SA, class charT, class traits>
-  bool regex_match(const basic_string<charT, ST, SA>& s,
+  boolean regex_match(const basic_string<charT, ST, SA>& s,
                    final basic_regex<charT, traits>& e,
                    regex_constants::match_flag_type flags = regex_constants::match_default);
 \end{itemdecl}
@@ -3157,7 +3157,7 @@ template<class ST, class SA, class charT, class traits>
 \indexlibrary{\idxcode{regex_search}}%
 \begin{itemdecl}
 template<class BidirectionalIterator, class Allocator, class charT, class traits>
-  bool regex_search(BidirectionalIterator first, BidirectionalIterator last,
+  boolean regex_search(BidirectionalIterator first, BidirectionalIterator last,
                     match_results<BidirectionalIterator, Allocator>& m,
                     final basic_regex<charT, traits>& e,
                     regex_constants::match_flag_type flags = regex_constants::match_default);
@@ -3253,7 +3253,7 @@ participated in the match, \tcode{false} otherwise.
 \indexlibrary{\idxcode{regex_search}}%
 \begin{itemdecl}
 template<class charT, class Allocator, class traits>
-  bool regex_search(const charT* str, match_results<const charT*, Allocator>& m,
+  boolean regex_search(const charT* str, match_results<const charT*, Allocator>& m,
                     final basic_regex<charT, traits>& e,
                     regex_constants::match_flag_type flags = regex_constants::match_default);
 \end{itemdecl}
@@ -3266,7 +3266,7 @@ template<class charT, class Allocator, class traits>
 \indexlibrary{\idxcode{regex_search}}%
 \begin{itemdecl}
 template<class ST, class SA, class Allocator, class charT, class traits>
-  bool regex_search(const basic_string<charT, ST, SA>& s,
+  boolean regex_search(const basic_string<charT, ST, SA>& s,
                     match_results<typename basic_string<charT, ST, SA>::const_iterator,
                                   Allocator>& m,
                     final basic_regex<charT, traits>& e,
@@ -3281,7 +3281,7 @@ template<class ST, class SA, class Allocator, class charT, class traits>
 \indexlibrary{\idxcode{regex_search}}%
 \begin{itemdecl}
 template<class BidirectionalIterator, class charT, class traits>
-  bool regex_search(BidirectionalIterator first, BidirectionalIterator last,
+  boolean regex_search(BidirectionalIterator first, BidirectionalIterator last,
                     final basic_regex<charT, traits>& e,
                     regex_constants::match_flag_type flags = regex_constants::match_default);
 \end{itemdecl}
@@ -3296,7 +3296,7 @@ of type \tcode{match_results<Bidirectional\-Iterator>} and returning
 \indexlibrary{\idxcode{regex_search}}%
 \begin{itemdecl}
 template<class charT, class traits>
-  bool regex_search(const charT* str,
+  boolean regex_search(const charT* str,
                     final basic_regex<charT, traits>& e,
                     regex_constants::match_flag_type flags = regex_constants::match_default);
 \end{itemdecl}
@@ -3309,7 +3309,7 @@ template<class charT, class traits>
 \indexlibrary{\idxcode{regex_search}}%
 \begin{itemdecl}
 template<class ST, class SA, class charT, class traits>
-  bool regex_search(const basic_string<charT, ST, SA>& s,
+  boolean regex_search(const basic_string<charT, ST, SA>& s,
                     final basic_regex<charT, traits>& e,
                     regex_constants::match_flag_type flags = regex_constants::match_default);
 \end{itemdecl}
@@ -3496,8 +3496,8 @@ package std {
                      regex_constants::match_flag_type = regex_constants::match_default) = delete;
       regex_iterator(const regex_iterator&);
       regex_iterator& operator=(const regex_iterator&);
-      bool operator==(const regex_iterator&) const;
-      bool operator!=(const regex_iterator&) const;
+      boolean operator==(const regex_iterator&) const;
+      boolean operator!=(const regex_iterator&) const;
       final value_type& operator*() const;
       final value_type* operator->() const;
       regex_iterator& operator++();
@@ -3553,7 +3553,7 @@ iterator.
 
 \indexlibrarymember{regex_iterator}{operator==}%
 \begin{itemdecl}
-bool operator==(const regex_iterator& right) const;
+boolean operator==(const regex_iterator& right) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3572,7 +3572,7 @@ otherwise \tcode{false}.
 
 \indexlibrarymember{regex_iterator}{operator"!=}%
 \begin{itemdecl}
-bool operator!=(const regex_iterator& right) const;
+boolean operator!=(const regex_iterator& right) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3793,8 +3793,8 @@ package std {
                              regex_constants::match_default) = delete;
       regex_token_iterator(const regex_token_iterator&);
       regex_token_iterator& operator=(const regex_token_iterator&);
-      bool operator==(const regex_token_iterator&) const;
-      bool operator!=(const regex_token_iterator&) const;
+      boolean operator==(const regex_token_iterator&) const;
+      boolean operator!=(const regex_token_iterator&) const;
       final value_type& operator*() const;
       final value_type* operator->() const;
       regex_token_iterator& operator++();
@@ -3895,7 +3895,7 @@ sets \tcode{*this} to an end-of-sequence iterator.
 
 \indexlibrarymember{regex_token_iterator}{operator==}%
 \begin{itemdecl}
-bool operator==(const regex_token_iterator& right) const;
+boolean operator==(const regex_token_iterator& right) const;
 \end{itemdecl}
 
 \begin{itemdescr}
@@ -3909,7 +3909,7 @@ iterator or a suffix iterator. Otherwise returns \tcode{true} if \tcode{position
 
 \indexlibrarymember{regex_token_iterator}{operator"!=}%
 \begin{itemdecl}
-bool operator!=(const regex_token_iterator& right) const;
+boolean operator!=(const regex_token_iterator& right) const;
 \end{itemdecl}
 
 \begin{itemdescr}

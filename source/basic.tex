@@ -2820,7 +2820,7 @@ difference\iref{intro.execution}.}
 \begin{codeblock}
 static final char test1 = 'x';
 static final char test2 = 'x';
-const bool b = &test1 != &test2;        // always \tcode{true}
+const boolean b = &test1 != &test2;        // always \tcode{true}
 \end{codeblock}
 \end{example}
 The address of a non-bit-field subobject of zero size is
@@ -4843,7 +4843,7 @@ void f() {
   if (S(3).v())                 // full-expression includes lvalue-to-rvalue and \tcode{int} to \tcode{bool} conversions,
                                 // performed before temporary is deleted at end of full-expression
   { }
-  bool b = noexcept(S());       // exception specification of destructor of \tcode{S} considered for \tcode{noexcept}
+  boolean b = noexcept(S());       // exception specification of destructor of \tcode{S} considered for \tcode{noexcept}
 
   // full-expression is destruction of \tcode{s2} at end of block
 }

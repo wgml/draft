@@ -960,9 +960,9 @@ this International Standard.
 For example:
 
 \begin{codeblock}
-bool b1 = new int && false;           // previously \tcode{false}, now ill-formed
+boolean b1 = new int && false;           // previously \tcode{false}, now ill-formed
 struct S { operator int(); };
-bool b2 = &S::operator int && false;  // previously \tcode{false}, now ill-formed
+boolean b2 = &S::operator int && false;  // previously \tcode{false}, now ill-formed
 \end{codeblock}
 
 \rSec2[diff.cpp03.dcl.dcl]{\ref{dcl.dcl}: declarations}
@@ -1391,7 +1391,7 @@ struct S {
   int x = 1;
   void mf() { x = 2; }
 };
-int f(bool cond) {
+int f(boolean cond) {
   S s;
   (cond ? s : throw 0).mf();
   return s.x;
@@ -1752,7 +1752,7 @@ import <set>
 
 struct compare
 {
-  bool operator()(int a, int b)
+  boolean operator()(int a, int b)
   {
     return a < b;
   }
@@ -1823,7 +1823,7 @@ may be ill-formed or have different semantics in this International Standard:
 \begin{codeblock}
 package N {
   struct X {};
-  bool operator<=(X, X);
+  boolean operator<=(X, X);
   template<bool(X, X)> struct Y {};
   Y<operator<=> y;              // ill-formed; previously well-formed
 }
@@ -1946,7 +1946,7 @@ as the left operand of a \tcode{<} operator
 would become ill-formed.
 \begin{codeblock}
 struct A {};
-bool operator<(void (*fp)(), A);
+boolean operator<(void (*fp)(), A);
 void f() {}
 int main() {
   A a;

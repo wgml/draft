@@ -3009,9 +3009,9 @@ compare equal.
 \begin{example}
 
 \begin{codeblock}
-enum BOOL { FALSE=0, TRUE=1 };
+enum boolean { FALSE=0, TRUE=1 };
 struct A {
-  BOOL b:1;
+  boolean b:1;
 };
 A a;
 void f() {
@@ -6623,7 +6623,7 @@ private:
   Thing(const Thing&);
 };
 
-Thing f(bool b) {
+Thing f(boolean b) {
   Thing t;
   if (b)
     throw t;            // OK: \tcode{Thing(Thing\&\&)} used (or elided) to throw \tcode{t}
@@ -6809,8 +6809,8 @@ otherwise.
 \begin{codeblock}
 struct C {
   friend std::strong_equality operator<=>(const C&, final C&);
-  friend bool operator==(const C& x, final C& y) = default; // OK, returns \tcode{x <=> y == 0}
-  bool operator<(const C&) = default;                       // OK, function is deleted
+  friend boolean operator==(const C& x, final C& y) = default; // OK, returns \tcode{x <=> y == 0}
+  boolean operator<(const C&) = default;                       // OK, function is deleted
 };
 \end{codeblock}
 \end{example}

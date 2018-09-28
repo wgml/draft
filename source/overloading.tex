@@ -1795,9 +1795,9 @@ or, if not that,
 \begin{codeblock}
 struct S {
   auto operator<=>(const S&, final S&) = default; // \#1
-  bool operator<(const S&, final S&);             // \#2
+  boolean operator<(const S&, final S&);             // \#2
 };
-bool b = S() < S();                               // calls \#2
+boolean b = S() < S();                               // calls \#2
 \end{codeblock}
 \end{example}
 or, if not that,
@@ -1813,7 +1813,7 @@ struct S {
   std::weak_ordering operator<=>(const S&, int);  // \#1
   std::weak_ordering operator<=>(int, final S&);  // \#2
 };
-bool b = 1 < S();                                 // calls \#2
+boolean b = 1 < S();                                 // calls \#2
 \end{codeblock}
 \end{example}
 or, if not that
@@ -3781,12 +3781,12 @@ there exist candidate operator functions of the form
 @\placeholder{LR}@      operator/(@\placeholder{L}@, @\placeholder{R}@);
 @\placeholder{LR}@      operator+(@\placeholder{L}@, @\placeholder{R}@);
 @\placeholder{LR}@      operator-(@\placeholder{L}@, @\placeholder{R}@);
-bool    operator==(@\placeholder{L}@, @\placeholder{R}@);
-bool    operator!=(@\placeholder{L}@, @\placeholder{R}@);
-bool    operator<(@\placeholder{L}@, @\placeholder{R}@);
-bool    operator>(@\placeholder{L}@, @\placeholder{R}@);
-bool    operator<=(@\placeholder{L}@, @\placeholder{R}@);
-bool    operator>=(@\placeholder{L}@, @\placeholder{R}@);
+boolean    operator==(@\placeholder{L}@, @\placeholder{R}@);
+boolean    operator!=(@\placeholder{L}@, @\placeholder{R}@);
+boolean    operator<(@\placeholder{L}@, @\placeholder{R}@);
+boolean    operator>(@\placeholder{L}@, @\placeholder{R}@);
+boolean    operator<=(@\placeholder{L}@, @\placeholder{R}@);
+boolean    operator>=(@\placeholder{L}@, @\placeholder{R}@);
 \end{codeblock}
 
 where
@@ -3843,12 +3843,12 @@ For every \tcode{\placeholder{T}}, where \tcode{\placeholder{T}} is an enumerati
 there exist candidate operator functions of the form
 
 \begin{codeblock}
-bool    operator==(@\placeholder{T}@, @\placeholder{T}@);
-bool    operator!=(@\placeholder{T}@, @\placeholder{T}@);
-bool    operator<(@\placeholder{T}@, @\placeholder{T}@);
-bool    operator>(@\placeholder{T}@, @\placeholder{T}@);
-bool    operator<=(@\placeholder{T}@, @\placeholder{T}@);
-bool    operator>=(@\placeholder{T}@, @\placeholder{T}@);
+boolean    operator==(@\placeholder{T}@, @\placeholder{T}@);
+boolean    operator!=(@\placeholder{T}@, @\placeholder{T}@);
+boolean    operator<(@\placeholder{T}@, @\placeholder{T}@);
+boolean    operator>(@\placeholder{T}@, @\placeholder{T}@);
+boolean    operator<=(@\placeholder{T}@, @\placeholder{T}@);
+boolean    operator>=(@\placeholder{T}@, @\placeholder{T}@);
 @\placeholdernc{R}@       operator<=>(@\placeholder{T}@, @\placeholder{T}@);
 \end{codeblock}
 
@@ -3860,8 +3860,8 @@ is a pointer-to-member type or \tcode{std::nullptr_t},
 there exist candidate operator functions of the form
 
 \begin{codeblock}
-bool                 operator==(@\placeholder{T}@, @\placeholder{T}@);
-bool                 operator!=(@\placeholder{T}@, @\placeholder{T}@);
+boolean                 operator==(@\placeholder{T}@, @\placeholder{T}@);
+boolean                 operator!=(@\placeholder{T}@, @\placeholder{T}@);
 std::strong_equality operator<=>(@\placeholder{T}@, @\placeholder{T}@);
 \end{codeblock}
 
@@ -3970,9 +3970,9 @@ there exist candidate operator functions of the form
 There also exist candidate operator functions of the form
 
 \begin{codeblock}
-bool    operator!(bool);
-bool    operator&&(bool, bool);
-bool    operator||(bool, bool);
+boolean    operator!(bool);
+boolean    operator&&(bool, bool);
+boolean    operator||(bool, bool);
 \end{codeblock}
 
 \pnum
